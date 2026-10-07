@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The twelfth increment adds transactional texture reload, preserving shared handles
-and working images when any replacement fails validation or upload.
+The thirteenth increment adds configurable letter-key bindings, a Controls page,
+conflict validation, and saved bindings with migration from older settings files.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -227,7 +227,26 @@ payload per transaction. Candidates temporarily coexist with the old resources.
 See [texture reload contracts](docs/FORMATS.md#texture-reload) for memory and lifetime
 details. File watching and background loading remain unimplemented.
 
+## Keyboard controls
+
+Open **F1 → Controls**, select an action, then press a letter **A–Z**. Ten actions
+can be rebound: movement in four directions, pause, restart, interact, mute, music
+volume and effects volume. A letter can belong to only one action. Conflicts and
+non-letter keys leave the current binding unchanged; choose another letter or
+press Escape to cancel. Restore Defaults restores the original letter bindings.
+Changes apply immediately; on-screen hints follow the selected keys. Preferences
+save when settings close or the game exits normally.
+
+Arrow keys, Space, Tab, Enter, Escape, Shift, zoom/page keys and function keys stay
+fixed so menus remain accessible. Held keys are suppressed until released after a
+binding change. Focus loss cancels an active capture. These are unshifted letter
+symbols in X11 keyboard group zero, not physical scan codes or modifier chords.
+Mouse actions and arbitrary-key rebinding remain future work.
+
 ## Saved data
+
+Settings use ECFG v2; ECFG v1 files load with default letter bindings and are
+upgraded on the next preference save.
 
 Settings: `$XDG_CONFIG_HOME/feature_lab/settings.ecfg`, falling back to
 `$HOME/.config/feature_lab/settings.ecfg`. Slots: `$XDG_STATE_HOME/feature_lab/slot-N.esav`,
@@ -253,6 +272,12 @@ Current checkpoints use ESAV v2 to include alarm state. ESAV v1 checkpoints are
 rejected without changing the current game; version migration is not implemented. Checksums detect accidental corruption.
 
 ## Tests
+
+The six-case bindings suite checks transactional conflicts, raw press consumption,
+v1 migration/v2 round trips, malformed bindings, capture/cancel/defaults and menu
+layout bounds. Native tests exercise rebound aliases, held-key suppression,
+invalid-table retention and mapping notifications; GPU tests draw both settings
+pages at small and large viewport sizes.
 
 The eight-case texture reload suite checks shared-handle pixel updates, dimensions,
 alpha/filter/wrap behavior, atomic invalid-batch rejection, active-pass rejection,
@@ -347,3 +372,9 @@ cmake --install build/release --prefix "$PWD/build/package"
 
 This uses the host system libraries and driver. It is not a portable Linux package
 or a promise of compatibility with distributions older than the build host.
+
+## Repository workflow
+
+Develop new features on a dedicated branch. Run the relevant tests, commit the
+completed feature, and merge it into `main` after validation. Push both the feature
+branch and updated `main` to the GitHub remote.

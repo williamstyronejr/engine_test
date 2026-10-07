@@ -1,7 +1,7 @@
 # Implementation status
 
-The twelfth increment adds transactional texture reload with shared-handle
-preservation, coordinated CPU/GPU publication, and failure recovery in Feature Lab. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
+The thirteenth increment adds configurable letter-key bindings, a Controls page,
+and persisted settings with backward-compatible loading. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
 ## Delivered
 
@@ -51,7 +51,7 @@ entire plan feature ID when required subfeatures are still absent.
 | ID | Status | Current evidence | Still required |
 | --- | --- | --- | --- |
 | F01 | Partial | `graphics`, `platform_events`, `platform_no_display`, visible startup/resize | Manual minimize/fullscreen/scaling matrix and visible-window focus checks |
-| F02 | Partial | CPU edge/focus/capture tests; native key-repeat/alias/pointer/wheel/focus tests; modal gameplay routing | Rebinding, configurable mouse actions, keymap-change support |
+| F02 | Partial | CPU edge/focus/capture tests; native key-repeat/alias/pointer/wheel/focus tests; modal gameplay routing; ten configurable letter actions, conflict/capture/persistence tests; mapping notification refresh | Configurable mouse actions, arbitrary keys/chords and keyboard group switching |
 | F03 | Partial | Camera round trips, transform hierarchy tests, clamped follow/zoom, GPU world/HUD projection checks | Parented rotating/scaled example decorations and broader manual camera validation |
 | F04 | Partial | GPU pixel/order/color/atlas/culling/batch rollover tests, animated atlas sprites; shared-handle transactional texture reload tests | Richer sampling controls; live reload, assets, UV flips and scene layers now implemented |
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
@@ -113,7 +113,7 @@ not a controlled 1080p benchmark or a GPU/full-frame performance guarantee.
   No voice-stealing, streaming, or automatic device reconnection is implemented.
 - The static collision API assumes positive player extents and no initial overlap.
   It resolves X then Y; it is not a general rigid-body solver or arbitrary-shape CCD.
-- Keyboard bindings are fixed and captured at startup. Fullscreen/VSync are requests
+- Ten letter-key bindings are configurable; non-letter controls remain fixed. Fullscreen/VSync are requests
   to the window system; compositor behavior is not guaranteed by a successful call.
 - Bitmap text is an uppercase subset. Diagnostic strings and screenshot capture
   allocate; a whole-engine allocation-free guarantee has not been established.
@@ -543,6 +543,38 @@ images, old CPU readers survive publication, and repeated full-capacity reloads
 retire old OpenGL objects. Validation does not force a real driver out-of-memory
 condition or establish a whole-engine memory/performance budget.
 
+## Added in the thirteenth increment
+
+- Validated, unique letter-key bindings for ten actions, with atomic assignment,
+  held-key suppression, alias aggregation, and X11 mapping-notification refresh.
+- F1 Controls page with capture, conflict feedback, cancellation, restore defaults,
+  responsive layout and modal gameplay isolation. Gameplay prompts reflect current
+  bindings; fixed navigation remains available.
+- ECFG v2 persists bindings; v1 loads existing audio/VSync plus default bindings and
+  upgrades on the next preference save. Checkpoints retain ESAV v2.
+- Six CPU cases plus expanded native/GPU checks. No additional runtime libraries.
+
+## Thirteenth-increment validation (2026-10-07)
+
+All nineteen CTest groups pass in GCC debug/release, Clang debug and native
+AddressSanitizer/UndefinedBehaviorSanitizer builds, with no hardware skips. Six
+new CPU cases cover bindings and settings migration; native events cover changed
+bindings, aliases, held-key suppression, invalid-table retention and synthetic
+mapping notifications. Both settings pages render at 320×240, 640×480 and 1280×720.
+The sanitizer audio transport group initially hit its ten-second timeout while
+compilers and visible validation runs competed for resources; its isolated rerun
+passed in 2.80 seconds. No sanitizer error was reported. Strict warnings, formatting
+and diff whitespace checks pass.
+
+Two installed release runs from `/tmp` each rendered 1,500 frames. Native pointer
+and keyboard events opened Controls, attempted a conflicting binding, assigned Q
+to Move Left, closed settings to save, and reopened the page. The second process
+loaded the same 72-byte ECFG v2 file and displayed Q without another edit. Captures
+of both runs were inspected, including the updated movement hint. Gameplay remained
+paused while the menu was open. User settings were isolated under `build/`; no
+system keyboard configuration was changed. These runs are interaction checks, not
+controlled performance measurements.
+
 ## Current scope
 
 The component model remains bounded to optional sprite/collider records. Tilemaps
@@ -553,5 +585,5 @@ for limits, rendering conventions, and lifetimes.
 
 ## Next increment
 
-Add configurable keyboard bindings with conflict validation, persisted settings,
-and native/CPU tests plus a Feature Lab rebinding workflow (F02).
+Add a title screen and explicit new-game/continue workflow, with transactional
+scene transitions and Feature Lab coverage (F07/F11).

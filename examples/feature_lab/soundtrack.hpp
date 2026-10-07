@@ -110,11 +110,13 @@ class Soundtrack {
                 emitter_ = game.location(node.entity);
         });
     }
-    std::string status() const {
+    std::string status(const engine::KeyBindings& bindings = {}) const {
         if (!output_)
             return "AUDIO OFF";
-        return std::string(settings_.muted ? "M MUTED" : "M SOUND ON") + " / N MUSIC " +
-               std::to_string(static_cast<int>(settings_.music * 100)) + " / B EFFECTS " +
+        return bindings.key_name(engine::Key::mute) + (settings_.muted ? " MUTED" : " SOUND ON") +
+               " / " + bindings.key_name(engine::Key::music_volume) + " MUSIC " +
+               std::to_string(static_cast<int>(settings_.music * 100)) + " / " +
+               bindings.key_name(engine::Key::effects_volume) + " EFFECTS " +
                std::to_string(static_cast<int>(settings_.effects * 100));
     }
     AudioSettings settings() const { return settings_; }

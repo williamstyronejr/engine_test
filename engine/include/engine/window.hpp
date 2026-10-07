@@ -1,5 +1,5 @@
 #pragma once
-#include "engine/input.hpp"
+#include "engine/bindings.hpp"
 #include <memory>
 #include <string_view>
 
@@ -12,6 +12,8 @@ class Window {
     Window(const Window&) = delete;
     Window& operator=(const Window&) = delete;
     bool poll(Input& input);
+    // Main thread; validates before publication and suppresses held keys until release.
+    void set_bindings(const KeyBindings& bindings, Input& input);
     void present();
     bool set_vsync(bool enabled);
     void toggle_fullscreen();

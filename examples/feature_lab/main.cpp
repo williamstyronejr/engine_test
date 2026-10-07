@@ -32,7 +32,7 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
           const feature_lab::Soundtrack& soundtrack,
           const feature_lab::CollisionVisuals& collision_visuals,
           const feature_lab::Diagnostics& diagnostics, const feature_lab::ShaderTools& shaders,
-          bool settings_open) {
+          bool settings_open, const KeyBindings& bindings) {
     const auto extent = camera.extent(width, height) * 0.5F;
     const Rect view{camera.center - extent, camera.center + extent};
     const auto& map = game.map.data();
@@ -72,7 +72,7 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
     }
     while (layer < map.layers.size())
         draw_layer();
-    collision_visuals.draw(r, game, alpha);
+    collision_visuals.draw(r, game, alpha, bindings);
     diagnostics.draw_world(r, game, camera, width, height);
     const auto goal = game.location(game.exit);
     r.text(goal + Vec2{-0.7F, 1.4F}, 0.045F, game.door_open ? "EXIT OPEN" : "LOCKED", cyan);
@@ -84,7 +84,7 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
     };
     r.quad({w * 0.5F, -48 * scale}, {w, 96 * scale}, {0.008F, 0.018F, 0.03F, 0.96F});
     label(24, 16, 4, "FEATURE LAB", white);
-    label(25, 58, 1.7F, "12 / TRANSACTIONAL TEXTURE RELOAD", cyan);
+    label(25, 58, 1.7F, "13 / CONFIGURABLE KEYBOARD CONTROLS", cyan);
     const float right = w / scale - 360;
     label(right, 18, 1.8F,
           "CORES  " + std::to_string(game.count()) + " / " + std::to_string(game.total()), cyan);
@@ -95,9 +95,13 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
           white);
     r.quad({w * 0.5F, -h + 43 * scale}, {w, 86 * scale}, {0.008F, 0.018F, 0.03F, 0.96F});
     const float bottom = h / scale - 73;
-    label(24, bottom, 1.55F, "WASD / ARROWS  MOVE    +/-  ZOOM    SPACE  PAUSE    R  RESTART",
+    label(24, bottom, 1.55F,
+          bindings.key_name(Key::up) + bindings.key_name(Key::left) + bindings.key_name(Key::down) +
+              bindings.key_name(Key::right) + " / ARROWS  MOVE    +/-  ZOOM    SPACE  PAUSE",
           white);
-    label(24, bottom + 24, 1.4F, "E SWITCH  F1 SETTINGS  F2 STATS  F3 SHAPES  F10 STEP  ESC QUIT",
+    label(24, bottom + 24, 1.4F,
+          bindings.key_name(Key::interact) +
+              " SWITCH  F1 SETTINGS  F2 STATS  F3 SHAPES  F10 STEP  ESC QUIT",
           muted);
     label(24, bottom + 46, 1.4F,
           "VISIBLE TILES " + std::to_string(visible.tiles) + " / " +
@@ -114,14 +118,16 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
               (game.alarm_disabled ? "DISABLED" : "ACTIVE") + "    GRID PAIRS " +
               std::to_string(game.collisions.stats().candidate_pairs),
           cyan);
-    label(24, bottom - 22, 1.3F, soundtrack.status(), cyan);
+    label(24, bottom - 22, 1.3F, soundtrack.status(bindings), cyan);
     overlays.draw(r, game, width, height);
     if (!settings_open && (game.won || (game.paused && !diagnostics.controls.visible))) {
         r.quad({w * 0.5F, -h * 0.5F}, {650 * scale, 150 * scale}, {0.008F, 0.014F, 0.022F, 0.96F});
         label(w / scale * 0.5F - (game.won ? 240 : 90), h / scale * 0.5F - 35, 3,
               game.won ? "FACILITY COMPLETE" : "PAUSED", cyan);
         label(w / scale * 0.5F - 140, h / scale * 0.5F + 20, 1.5F,
-              game.won ? "PRESS R TO PLAY AGAIN" : "SPACE RESUME / F10 STEP", white);
+              game.won ? "PRESS " + bindings.key_name(Key::restart) + " TO PLAY AGAIN"
+                       : "SPACE RESUME / F10 STEP",
+              white);
     }
 }
 int verify(const AssetRoot& assets) {
@@ -225,9 +231,11 @@ int main(int argc, char** argv) {
             } else if (arg == "--screenshot" && i + 1 < argc)
                 screenshot = argv[++i];
             else if (arg == "--help") {
-                std::cout << "Feature Lab: WASD/arrows move, +/- zoom, Space pause, R restart, F11 "
+                std::cout << "Feature Lab defaults: WASD/arrows move, +/- zoom, Space pause, R "
+                             "restart, F11 "
                              "fullscreen, PageUp/PageDown scroll status, M mute, N/B music/effects "
-                             "volume, E nearby alarm switch, F1 settings, F2 diagnostics, F3 debug "
+                             "volume, E nearby alarm switch, F1 settings/rebind controls, F2 "
+                             "diagnostics, F3 debug "
                              "shapes, "
                              "F5 reload shaders, F6 shader failure demo, F7 reload textures, "
                              "F8 texture failure demo, F10 single step while "
@@ -306,8 +314,10 @@ int main(int argc, char** argv) {
             soundtrack.restored(game);
         feature_lab::Replay replay;
         Input input;
+        window.set_bindings(config.bindings, input);
         feature_lab::Settings settings;
         settings.audio = config.audio;
+        settings.bindings = config.bindings;
         settings.notice = persistence_notice;
         settings.vsync = vsync;
         settings.vsync_available = vsync_available;
@@ -362,6 +372,12 @@ int main(int argc, char** argv) {
                 const bool was_open = settings.opened();
                 const auto menu = settings.update(game, physical, window.width(), window.height(),
                                                   soundtrack.enabled());
+                if (menu.bindings_changed) {
+                    window.set_bindings(settings.bindings, input);
+                    config.bindings = settings.bindings;
+                    config_dirty = true;
+                    std::cout << "[bindings] updated" << '\n';
+                }
                 const auto& controls = menu.gameplay;
                 overlays.input(controls);
                 diagnostics.controls.update(controls);
@@ -444,7 +460,8 @@ int main(int argc, char** argv) {
             overlays.render_minimap(renderer, game, window.width(), window.height(), batch.alpha);
             renderer.begin(window.width(), window.height(), camera);
             draw(renderer, game, textures, batch.alpha, window.width(), window.height(), camera,
-                 overlays, soundtrack, collision_visuals, diagnostics, shaders, settings.opened());
+                 overlays, soundtrack, collision_visuals, diagnostics, shaders, settings.opened(),
+                 settings.bindings);
             diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
             settings.draw(renderer, window.width(), window.height());
             renderer.end();

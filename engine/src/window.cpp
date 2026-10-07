@@ -28,29 +28,20 @@ bool extension(std::string_view list, std::string_view name) {
     }
     return false;
 }
-std::optional<Key> key_for(KeySym key) {
+std::optional<Key> key_for(KeySym key, const KeyBindings& bindings) {
+    if (key >= XK_a && key <= XK_z)
+        return bindings.action(static_cast<std::uint32_t>(key));
     switch (key) {
-    case XK_a:
-    case XK_A:
     case XK_Left:
         return Key::left;
-    case XK_d:
-    case XK_D:
     case XK_Right:
         return Key::right;
-    case XK_w:
-    case XK_W:
     case XK_Up:
         return Key::up;
-    case XK_s:
-    case XK_S:
     case XK_Down:
         return Key::down;
     case XK_space:
         return Key::space;
-    case XK_e:
-    case XK_E:
-        return Key::interact;
     case XK_F1:
         return Key::settings;
     case XK_F2:
@@ -76,12 +67,6 @@ std::optional<Key> key_for(KeySym key) {
     case XK_Return:
     case XK_KP_Enter:
         return Key::accept;
-    case XK_p:
-    case XK_P:
-        return Key::pause;
-    case XK_r:
-    case XK_R:
-        return Key::restart;
     case XK_Escape:
         return Key::escape;
     case XK_equal:
@@ -94,15 +79,6 @@ std::optional<Key> key_for(KeySym key) {
         return Key::panel_up;
     case XK_Page_Down:
         return Key::panel_down;
-    case XK_m:
-    case XK_M:
-        return Key::mute;
-    case XK_n:
-    case XK_N:
-        return Key::music_volume;
-    case XK_b:
-    case XK_B:
-        return Key::effects_volume;
     case XK_F11:
         return Key::fullscreen;
     default:
@@ -118,8 +94,18 @@ struct Window::Impl {
     Atom close_atom{};
     int width{}, height{};
     bool mapped{}, closing{};
-    std::array<bool, 256> physical{};
+    KeyBindings configured;
+    std::array<bool, 256> physical{}, blocked{};
+    std::array<KeySym, 256> symbols{};
     std::array<std::optional<Key>, 256> bindings{};
+    void rebuild_keys() {
+        for (std::size_t i = 8; i < bindings.size(); ++i) {
+            symbols[i] = XkbKeycodeToKeysym(display, static_cast<KeyCode>(i), 0, 0);
+            if (symbols[i] >= XK_A && symbols[i] <= XK_Z)
+                symbols[i] += XK_a - XK_A;
+            bindings[i] = key_for(symbols[i], configured);
+        }
+    }
     ~Impl() {
         if (!display)
             return;
@@ -201,8 +187,7 @@ Window::Window(int width, int height, std::string_view title_text, bool visible)
     title(title_text);
     Bool repeat_supported{};
     XkbSetDetectableAutoRepeat(p.display, True, &repeat_supported);
-    for (std::size_t i = 8; i < p.bindings.size(); ++i)
-        p.bindings[i] = key_for(XkbKeycodeToKeysym(p.display, static_cast<KeyCode>(i), 0, 0));
+    p.rebuild_keys();
     auto create = reinterpret_cast<PFNGLXCREATECONTEXTATTRIBSARBPROC>(
         glXGetProcAddressARB(reinterpret_cast<const GLubyte*>("glXCreateContextAttribsARB")));
     const char* extensions = glXQueryExtensionsString(p.display, screen);
@@ -250,6 +235,14 @@ bool Window::poll(Input& input) {
         XEvent e{};
         XNextEvent(p.display, &e);
         switch (e.type) {
+        case MappingNotify:
+            if (e.xmapping.request == MappingKeyboard || e.xmapping.request == MappingModifier) {
+                XRefreshKeyboardMapping(&e.xmapping);
+                p.rebuild_keys();
+                p.blocked = p.physical;
+                input.release_all();
+            }
+            break;
         case ClientMessage:
             if (e.xclient.message_type == XInternAtom(p.display, "WM_PROTOCOLS", False) &&
                 static_cast<Atom>(e.xclient.data.l[0]) == p.close_atom)
@@ -266,10 +259,12 @@ bool Window::poll(Input& input) {
             p.mapped = false;
             input.release_all();
             p.physical.fill(false);
+            p.blocked.fill(false);
             break;
         case FocusOut:
             input.release_all();
             p.physical.fill(false);
+            p.blocked.fill(false);
             break;
         case MotionNotify:
             input.move_pointer({static_cast<float>(e.xmotion.x), static_cast<float>(e.xmotion.y)},
@@ -307,11 +302,16 @@ bool Window::poll(Input& input) {
             const auto code = static_cast<std::size_t>(e.xkey.keycode);
             if (code >= p.physical.size())
                 break;
-            p.physical[code] = e.type == KeyPress;
+            const bool down_event = e.type == KeyPress;
+            if (down_event && !p.physical[code] && !p.blocked[code])
+                input.press_symbol(static_cast<std::uint32_t>(p.symbols[code]));
+            p.physical[code] = down_event;
+            if (!down_event)
+                p.blocked[code] = false;
             if (const auto key = p.bindings[code]) {
                 bool down = false;
                 for (std::size_t i = 0; i < p.physical.size(); ++i)
-                    if (p.bindings[i] == key && p.physical[i])
+                    if (p.bindings[i] == key && p.physical[i] && !p.blocked[i])
                         down = true;
                 input.set(*key, down);
             }
@@ -322,6 +322,16 @@ bool Window::poll(Input& input) {
         }
     }
     return !p.closing;
+}
+void Window::set_bindings(const KeyBindings& bindings, Input& input) {
+    bindings.validate();
+    auto& p = *impl_;
+    if (p.configured == bindings)
+        return;
+    p.configured = bindings;
+    p.rebuild_keys();
+    p.blocked = p.physical;
+    input.release_all();
 }
 void Window::present() {
     glXSwapBuffers(impl_->display, impl_->window);

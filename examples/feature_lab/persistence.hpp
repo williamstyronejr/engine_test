@@ -6,26 +6,39 @@ namespace feature_lab {
 struct Configuration {
     AudioSettings audio;
     bool vsync{true};
+    engine::KeyBindings bindings{};
     bool operator==(const Configuration&) const = default;
 };
 inline void validate(Configuration config) {
+    config.bindings.validate();
     for (float value : {config.audio.master, config.audio.music, config.audio.effects})
         if (!std::isfinite(value) || value < 0 || value > 1)
             throw std::runtime_error("Configuration gain outside [0,1]");
 }
 inline std::vector<std::uint8_t> encode_config(Configuration config) {
     validate(config);
-    engine::binary::Writer out("ECFG");
+    engine::binary::Writer out("ECFG", 2);
     out.f32(config.audio.master);
     out.f32(config.audio.music);
     out.f32(config.audio.effects);
     out.u32(config.audio.muted);
     out.u32(config.vsync);
+    for (const auto symbol : config.bindings.letters)
+        out.u32(symbol);
     return engine::seal_record(out.take());
 }
 inline Configuration decode_config(std::span<const std::uint8_t> bytes) {
-    engine::binary::Reader in(engine::open_record(bytes), "ECFG");
+    const auto payload = engine::open_record(bytes);
+    if (payload.size() < 8)
+        throw std::runtime_error("Truncated configuration");
+    const auto version = static_cast<std::uint32_t>(payload[4]);
+    if (version != 1 && version != 2)
+        throw std::runtime_error("Unsupported configuration version");
+    engine::binary::Reader in(payload, "ECFG", version);
     Configuration config{{in.f32(), in.f32(), in.f32(), in.boolean()}, in.boolean()};
+    if (version == 2)
+        for (auto& symbol : config.bindings.letters)
+            symbol = in.u32();
     in.finish();
     validate(config);
     return config;

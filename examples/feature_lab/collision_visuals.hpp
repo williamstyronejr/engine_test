@@ -1,4 +1,5 @@
 #pragma once
+#include "engine/bindings.hpp"
 #include "engine/renderer.hpp"
 #include "game.hpp"
 
@@ -19,7 +20,8 @@ class CollisionVisuals {
             }
         disk_ = renderer.upload(disk);
     }
-    void draw(engine::Renderer& r, const Game& game, float alpha) const {
+    void draw(engine::Renderer& r, const Game& game, float alpha,
+              const engine::KeyBindings& bindings = {}) const {
         using namespace engine;
         const Color red{1, 0.12F, 0.07F, 1}, green{0.05F, 0.9F, 0.5F, 1};
         const auto center = game.alarm_position();
@@ -27,7 +29,8 @@ class CollisionVisuals {
         r.sprite(disk_, Transform::from(center, 0, {1.4F, 1.4F}),
                  game.alarm_disabled ? green : red);
         r.quad(Game::switch_position, {0.8F, 0.8F}, game.alarm_disabled ? green : red);
-        r.text(Game::switch_position + Vec2{-1.4F, 1}, 0.035F, "E / ALARM SWITCH", green);
+        r.text(Game::switch_position + Vec2{-1.4F, 1}, 0.035F,
+               bindings.key_name(Key::interact) + " / ALARM SWITCH", green);
         r.text(center + Vec2{0.9F, 0.2F}, 0.035F, game.alarm_disabled ? "SAFE" : "ALARM",
                game.alarm_disabled ? green : red);
         if (game.alarm_touching) {
