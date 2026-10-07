@@ -46,7 +46,7 @@ inline Configuration decode_config(std::span<const std::uint8_t> bytes) {
 inline std::vector<std::uint8_t> encode_checkpoint(const Checkpoint& state) {
     if (state.collected_ids.size() > 64)
         throw std::invalid_argument("Checkpoint core limit exceeded");
-    engine::binary::Writer out("ESAV", 2);
+    engine::binary::Writer out("ESAV", 3);
     for (auto part : state.content)
         out.u32(part);
     out.f32(state.position.x);
@@ -69,10 +69,16 @@ inline std::vector<std::uint8_t> encode_checkpoint(const Checkpoint& state) {
     }
     out.u64(state.alarm_entries);
     out.u32(state.alarm_disabled);
+    out.u64(state.random_seed);
+    out.u64(state.random_state);
     return engine::seal_record(out.take());
 }
 inline Checkpoint decode_checkpoint(std::span<const std::uint8_t> bytes) {
-    engine::binary::Reader in(engine::open_record(bytes), "ESAV", 2);
+    const auto payload = engine::open_record(bytes);
+    const auto version = static_cast<std::uint32_t>(payload[4]);
+    if (version != 2 && version != 3)
+        throw std::runtime_error("Unsupported checkpoint version");
+    engine::binary::Reader in(payload, "ESAV", version);
     Checkpoint state;
     for (auto& part : state.content)
         part = in.u32();
@@ -95,6 +101,14 @@ inline Checkpoint decode_checkpoint(std::span<const std::uint8_t> bytes) {
     }
     state.alarm_entries = in.u64();
     state.alarm_disabled = in.boolean();
+    if (version == 3) {
+        state.random_seed = in.u64();
+        state.random_state = in.u64();
+    } else {
+        engine::Random random(state.random_seed);
+        random.advance(state.ticks / 60);
+        state.random_state = random.state();
+    }
     in.finish();
     return state;
 }

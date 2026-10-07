@@ -5,6 +5,7 @@
 #include "engine/collision_world.hpp"
 #include "engine/input.hpp"
 #include "engine/persistence.hpp"
+#include "engine/random.hpp"
 #include "engine/scene.hpp"
 #include "engine/tilemap.hpp"
 #include <algorithm>
@@ -25,6 +26,7 @@ struct Checkpoint {
     std::array<engine::AnimationState, 4> animations;
     std::uint64_t alarm_entries{};
     bool alarm_disabled{};
+    std::uint64_t random_seed{1}, random_state{1};
 };
 struct Game {
     engine::TileMap map;
@@ -39,6 +41,8 @@ struct Game {
     std::vector<std::uint64_t> core_ids;
     std::uint64_t ticks{};
     bool paused{}, won{}, door_started{}, door_open{};
+    std::uint64_t random_seed{1};
+    engine::Random random;
     unsigned door_completions{};
     float camera_height{14};
     engine::CollisionWorld collisions;
@@ -102,6 +106,8 @@ struct Game {
         if ((paused && !single_step) || won)
             return 0;
         ++ticks;
+        if (ticks % 60 == 0)
+            random.next();
         camera_height = std::clamp(
             camera_height + (static_cast<float>(engine::button(input, engine::Key::zoom_out).held) -
                              static_cast<float>(engine::button(input, engine::Key::zoom_in).held)) *
@@ -176,6 +182,8 @@ struct Game {
                          {},
                          {player_animation.snapshot(), core_animation.snapshot(),
                           machine_animation.snapshot(), door_animation.snapshot()}};
+        state.random_seed = random_seed;
+        state.random_state = random.state();
         state.alarm_entries = alarm_entries;
         state.alarm_disabled = alarm_disabled;
         for (std::size_t i = 0; i < collected.size(); ++i)
@@ -200,6 +208,8 @@ struct Game {
         position = previous = candidate.position;
         camera_height = candidate.camera_height;
         ticks = candidate.ticks;
+        random_seed = candidate.random_seed;
+        random = candidate.random;
         paused = candidate.paused;
         won = candidate.won;
         door_started = candidate.door_started;
@@ -319,6 +329,8 @@ struct Game {
         world.set_transform(player, transform);
         camera_height = state.camera_height;
         ticks = state.ticks;
+        random_seed = state.random_seed;
+        random.restore(state.random_state);
         paused = state.paused;
         won = state.won;
         door_started = state.door_started;
@@ -400,6 +412,7 @@ struct Game {
                 throw std::runtime_error("Player starts inside a static collider");
         collected.assign(keys.size(), false);
         ticks = 0;
+        random.restore(random_seed);
         paused = false;
         won = false;
         alarm_entries = 0;

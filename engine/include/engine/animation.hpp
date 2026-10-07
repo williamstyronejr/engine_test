@@ -43,6 +43,7 @@ class AnimationPlayer {
     void play(std::string_view name, bool restart = true);
     void pause(bool paused) { paused_ = paused; }
     bool paused() const { return paused_; }
+    std::uint64_t position() const { return position_; }
     bool finished() const;
     std::size_t frame_index() const;
     Rect uv() const;

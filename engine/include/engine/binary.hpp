@@ -51,6 +51,12 @@ class Reader {
     }
     std::int32_t i32() { return std::bit_cast<std::int32_t>(u32()); }
     float f32() { return std::bit_cast<float>(u32()); }
+    std::span<const std::uint8_t> bytes(std::size_t count) {
+        require(count);
+        const auto result = bytes_.subspan(offset_, count);
+        offset_ += count;
+        return result;
+    }
     std::string string(std::size_t limit) {
         const auto size = u32();
         if (size > limit)
@@ -94,6 +100,9 @@ class Writer {
         u32(static_cast<std::uint32_t>(value.size()));
         for (char c : value)
             bytes_.push_back(static_cast<std::uint8_t>(c));
+    }
+    void bytes(std::span<const std::uint8_t> value) {
+        bytes_.insert(bytes_.end(), value.begin(), value.end());
     }
     std::vector<std::uint8_t> take() { return std::move(bytes_); }
 

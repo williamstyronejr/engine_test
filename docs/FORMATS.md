@@ -496,10 +496,10 @@ keep capture open; Escape/focus loss cancels it and F1 closes settings. Gameplay
 remains paused and captured throughout. Valid edits apply immediately; preferences
 persist on settings close or normal exit.
 
-## Persistence: ECFG v2 and ESAV v2
+## Persistence: ECFG v2 and ESAV v3
 
 All integers are little-endian, floats are IEEE binary32, and booleans are u32 0/1.
-Files begin with four-byte magic and u32 version (ECFG 2, ESAV 2), ending with a u32 CRC32 of all
+Files begin with four-byte magic and u32 version (ECFG 2, ESAV 3), ending with a u32 CRC32 of all
 preceding bytes (reflected polynomial 0xEDB88320, initial/final XOR 0xFFFFFFFF).
 The envelope is 12..65,536 bytes; parsers reject wrong type/version, excess counts,
 truncation, trailing bytes, invalid booleans, and checksum mismatches. CRC detects
@@ -512,7 +512,7 @@ and u32 VSync, followed by ten u32 letter symbols in the binding order above.
 Gains must be finite within [0,1]; bindings must be unique lowercase ASCII letters.
 Total ECFG v2 size is 72 bytes including CRC. Legacy ECFG v1 is 32 bytes, omits the
 bindings and loads with defaults; the next preference save writes v2. Other versions
-are rejected. ESAV checkpoint bytes and compatibility are unchanged.
+are rejected. Checkpoint compatibility is described below.
 Startup uses defaults on malformed/inaccessible configuration, logs the reason,
 and shows a notice. No automatic repair overwrites the file. Changed preferences
 are written on panel close or normal application exit. Crashes before that boundary
@@ -531,6 +531,7 @@ ESAV payload after the header, in order:
 | Collected cores | u32 count (0..64), then u64 persistent IDs |
 | Four animation records | Player, cores, machine, door; each u32 name length + bytes (at most 80), u64 tick position, u32 paused |
 | Alarm state | u64 entry count, u32 disabled; appended in ESAV v2 |
+| Random state | u64 initial seed, u64 current SplitMix64 state; appended in ESAV v3 |
 
 Animation snapshots validate clip existence and tick range before replacement.
 Loop positions are less than clip duration; non-loop positions may equal duration
@@ -538,7 +539,8 @@ for completed playback. Restoring a finished clip never emits another completion
 event. Entity pointers, transient handles, GL objects, audio voice tickets, and the
 scripted driver's waypoint are not serialized. Audio sample cursors are not saved.
 
-ESAV v1 is rejected; no automatic migration is performed. Alarm count is bounded
+ESAV v2 loads with seed 1 and random state advanced by floor(ticks / 60). Subsequent
+saves write v3. ESAV v1 remains unsupported. Alarm count is bounded
 to twice the tick count, and patrol position is derived from the saved tick count.
 Restoration primes contact history to prevent a duplicate trigger enter.
 
@@ -864,4 +866,74 @@ New/Continue reset replay and panel scroll and rebuild audio playback without ol
 one-shot events; Resume continues existing voices. The title's Tab/Enter/pointer
 input is captured, including the transition tick, and held actions remain blocked
 until physical release. At most one scene command is applied per fixed tick.
-Settings and save schemas are unchanged (ECFG v2 and ESAV v2).
+The title-flow increment did not change the persistence schemas. Current schemas
+are ECFG v2 and ESAV v3.
+
+
+## Replay files: ERPL v1
+
+All fields are little-endian and packed without padding. Feature Lab owns this
+schema and its simulation rules; `engine::Random`, binary readers and atomic
+storage are reusable engine utilities.
+
+| Field | Encoding |
+| --- | --- |
+| Magic/version | Four bytes ERPL, u32 1 |
+| Simulation rules | u32 1; unknown values rejected |
+| Command count | u32, 0..36,000 |
+| Initial checkpoint | u32 byte count, then a complete CRC-protected ESAV record (at most 64 KiB) |
+| Each command | u64 pre-update game tick; u32 held, pressed, released masks; u64 post-update state hash (28 bytes total) |
+| Envelope CRC | u32 CRC32 over every preceding byte |
+
+Maximum file size is 1 MiB. The envelope APIs accept an explicit size limit for
+ERPL; their default and UserStorage limits remain 64 KiB. Counts and complete
+payload length are checked before command allocation. Unknown versions, rules,
+mask bits, invalid tick range, checksum failures, truncation and trailing data
+fail before playback. The embedded checkpoint is semantically/content-validated
+by staged Game::restore before replacing the active game.
+
+Command vector offset is the zero-based, monotonically increasing fixed-step
+index. Game ticks can repeat during pause or reset on restart, so each command
+also stores its pre-update game tick. Bits 0..10 map to left, right, up, down,
+zoom in, zoom out, pause, space, restart, single step and interact. Native key codes
+and Key enum ordinals are not serialized. Pressed/released edges may both be set
+on a short tap with held=false. Menu, pointer, audio and renderer actions are not
+recorded. Every Game::update call in a recording contributes a command, including
+paused or already-won steps. Menus and save loads are disabled while recording or
+playing back so no unrecorded state transitions occur.
+
+ReplayRecorder reserves all command storage at startup. Its per-step path packs
+input, runs the game, and hashes mutable simulation state without allocations for
+recording/hashing. Game systems retain their own existing storage behavior.
+FNV-1a-64 uses offset 14695981039346656037 and multiplier 1099511628211. Values are
+encoded as little-endian u64 (including zero-extended binary32 position/camera
+bits and booleans), in this order: x, y, camera height, ticks, paused, won,
+door started/open/completion count, alarm entries/disabled/touching, seed, random
+state, core count, each core's persistent ID/collected flag, then each animation's
+clip byte length/raw bytes/tick position/paused flag (player, core, machine, door).
+Previous interpolated position, derived collision caches, transient handles,
+textures, GPU timings and audio cursors are excluded. This is a deterministic
+regression checksum, not a security or collision-proof identity.
+
+Playback checks the tick before update and hash after update. On divergence it
+reports the command index and stops; post-update divergence does not roll back the
+failed step. CPU verification completes all commands; interactive playback may
+stop early at Escape/frame limit. Empty files restore their checkpoint and finish
+without simulation. Recordings are atomically saved only on normal exit; capacity
+ends the session with a valid complete recording rather than dropping inputs.
+
+`engine::Random` implements the [SplitMix64 algorithm](https://prng.di.unimi.it/splitmix64.c)
+with a single u64 state, all seeds valid. `next()` increments modulo 2^64 by
+0x9e3779b97f4a7c15, then mixes with xor-shifts 30/27/31 and multipliers
+0xbf58476d1ce4e5b9 and 0x94d049bb133111eb. `advance(n)` skips n draws in constant
+time; `value()` mixes the current state without advancing. This is for deterministic
+simulation, not cryptography. Feature Lab advances once per 60 active simulation
+ticks; the top eight output bits modulate machine brightness. Restart restores the
+initial seed; checkpoints retain both seed and current state, even if a consumer
+has advanced the generator independently. No third-party library is linked.
+
+The rules version must change when input semantics, simulation behavior or hash
+layout becomes incompatible. Content fingerprints reject a changed facility.
+Exact floating-point hashes are tested in supported local builds; compatibility
+across arbitrary machines, compiler flags or future physics implementations is not
+a guarantee. Renderer/audio nondeterminism has no effect on simulation playback.

@@ -8,6 +8,7 @@
 #include "game.hpp"
 #include "overlays.hpp"
 #include "persistence.hpp"
+#include "replay_file.hpp"
 #include "scene_flow_draw.hpp"
 #include "settings_draw.hpp"
 #include "shader_tools.hpp"
@@ -19,6 +20,7 @@
 #include <cmath>
 #include <iostream>
 #include <memory>
+#include <optional>
 #include <stdexcept>
 #include <string>
 #include <thread>
@@ -33,7 +35,8 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
           const feature_lab::Soundtrack& soundtrack,
           const feature_lab::CollisionVisuals& collision_visuals,
           const feature_lab::Diagnostics& diagnostics, const feature_lab::ShaderTools& shaders,
-          bool settings_open, const KeyBindings& bindings) {
+          bool settings_open, const KeyBindings& bindings, std::string_view replay_status,
+          bool replay_session, bool playing_replay) {
     const auto extent = camera.extent(width, height) * 0.5F;
     const Rect view{camera.center - extent, camera.center + extent};
     const auto& map = game.map.data();
@@ -68,8 +71,11 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
             uv = game.machine_animation.uv();
         else if (node.tag == "exit")
             uv = game.door_animation.uv();
+        const float indicator = node.tag == "machine"
+                                    ? 0.5F + static_cast<float>(game.random.value() >> 56) / 510.0F
+                                    : 1.0F;
         r.sprite(textures.at(sprite.texture).gpu, model * Transform::from({}, 0, sprite.size),
-                 {sprite.r, sprite.g, sprite.b, sprite.a}, uv);
+                 {sprite.r * indicator, sprite.g * indicator, sprite.b * indicator, sprite.a}, uv);
     }
     while (layer < map.layers.size())
         draw_layer();
@@ -85,7 +91,7 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
     };
     r.quad({w * 0.5F, -48 * scale}, {w, 96 * scale}, {0.008F, 0.018F, 0.03F, 0.96F});
     label(24, 16, 4, "FEATURE LAB", white);
-    label(25, 58, 1.7F, "14 / TITLE AND SCENE TRANSITIONS", cyan);
+    label(25, 58, 1.7F, replay_status, cyan);
     const float right = w / scale - 360;
     label(right, 18, 1.8F,
           "CORES  " + std::to_string(game.count()) + " / " + std::to_string(game.total()), cyan);
@@ -97,12 +103,18 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
     r.quad({w * 0.5F, -h + 43 * scale}, {w, 86 * scale}, {0.008F, 0.018F, 0.03F, 0.96F});
     const float bottom = h / scale - 73;
     label(24, bottom, 1.55F,
-          bindings.key_name(Key::up) + bindings.key_name(Key::left) + bindings.key_name(Key::down) +
-              bindings.key_name(Key::right) + " / ARROWS  MOVE    +/-  ZOOM    SPACE  PAUSE",
+          playing_replay ? "RECORDED GAMEPLAY / LIVE MOVEMENT AND PAUSE DISABLED"
+                         : bindings.key_name(Key::up) + bindings.key_name(Key::left) +
+                               bindings.key_name(Key::down) + bindings.key_name(Key::right) +
+                               " / ARROWS  MOVE    +/-  ZOOM    SPACE  PAUSE",
           white);
     label(24, bottom + 24, 1.4F,
-          bindings.key_name(Key::interact) +
-              " SWITCH  F1 SETTINGS  F2 STATS  F3 SHAPES  F10 STEP  ESC QUIT",
+          playing_replay
+              ? "INPUT FROM REPLAY  F11 FULLSCREEN  ESC EXIT"
+              : bindings.key_name(Key::interact) +
+                    (replay_session
+                         ? " SWITCH  F1 LOCKED  F10 STEP  ESC SAVE REPLAY"
+                         : " SWITCH  F1 SETTINGS  F2 STATS  F3 SHAPES  F10 STEP  ESC QUIT"),
           muted);
     label(24, bottom + 46, 1.4F,
           "VISIBLE TILES " + std::to_string(visible.tiles) + " / " +
@@ -126,8 +138,9 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
         label(w / scale * 0.5F - (game.won ? 240 : 90), h / scale * 0.5F - 35, 3,
               game.won ? "FACILITY COMPLETE" : "PAUSED", cyan);
         label(w / scale * 0.5F - 140, h / scale * 0.5F + 20, 1.5F,
-              game.won ? "PRESS " + bindings.key_name(Key::restart) + " TO PLAY AGAIN"
-                       : "SPACE RESUME / F10 STEP",
+              playing_replay ? "RECORDED STATE / ESC EXIT"
+              : game.won     ? "PRESS " + bindings.key_name(Key::restart) + " TO PLAY AGAIN"
+                             : "SPACE RESUME / F10 STEP",
               white);
     }
 }
@@ -180,7 +193,8 @@ int main(int argc, char** argv) {
         int frame_limit = 0;
         unsigned load_slot = 0, save_slot = 0;
         bool vsync_override = false;
-        std::string user_directory;
+        std::string user_directory, record_path, playback_path, verify_path;
+        std::optional<std::uint64_t> seed;
         bool audio_enabled = true, scripted = false, verification = false, vsync = true;
         std::string screenshot, asset_directory;
         bool shader_error_demo = false, texture_error_demo = false, direct_play = false;
@@ -189,7 +203,21 @@ int main(int argc, char** argv) {
             const std::string_view arg(argv[i]);
             if (arg == "--assets" && i + 1 < argc)
                 asset_directory = argv[++i];
-            else if (arg == "--user-data" && i + 1 < argc)
+            else if (arg == "--record-replay" && i + 1 < argc)
+                record_path = argv[++i];
+            else if (arg == "--replay" && i + 1 < argc)
+                playback_path = argv[++i];
+            else if (arg == "--verify-replay" && i + 1 < argc)
+                verify_path = argv[++i];
+            else if (arg == "--seed" && i + 1 < argc) {
+                const std::string_view value(argv[++i]);
+                std::uint64_t parsed{};
+                const auto [end, error] =
+                    std::from_chars(value.data(), value.data() + value.size(), parsed);
+                if (error != std::errc{} || end != value.data() + value.size())
+                    throw std::invalid_argument("--seed requires an unsigned 64-bit integer");
+                seed = parsed;
+            } else if (arg == "--user-data" && i + 1 < argc)
                 user_directory = argv[++i];
             else if ((arg == "--load-slot" || arg == "--save-slot") && i + 1 < argc) {
                 const std::string_view value(argv[++i]);
@@ -248,19 +276,47 @@ int main(int argc, char** argv) {
                              "--no-vsync --screenshot FILE.ppm --assets DIRECTORY "
                              "--missing-texture-demo --settings-demo --diagnostics-demo "
                              "--shader-error-demo --texture-error-demo --user-data DIRECTORY "
-                             "--load-slot 1..3 --save-slot 1..3 (on exit)\n";
+                             "--load-slot 1..3 --save-slot 1..3 (on exit)\n"
+                             "--seed UINT64 --record-replay FILE.erpl --replay FILE.erpl "
+                             "--verify-replay FILE.erpl (CPU only). Replay modes disable F1; "
+                             "Escape ends recording/playback.\n";
                 return 0;
             } else
                 throw std::invalid_argument("Unknown/incomplete option: " + std::string(arg));
         }
+        const int replay_modes = static_cast<int>(!record_path.empty()) +
+                                 static_cast<int>(!playback_path.empty()) +
+                                 static_cast<int>(!verify_path.empty());
+        const bool playing_file = !playback_path.empty() || !verify_path.empty();
+        if (replay_modes > 1 || (replay_modes && (settings_demo || verification)) ||
+            (playing_file && (seed || load_slot || scripted)) || (seed && load_slot))
+            throw std::invalid_argument("Conflicting replay/seed/startup options");
         const AssetRoot assets = AssetRoot::discover(asset_directory);
         if (verification)
             return verify(assets);
         auto game = feature_lab::load_game(assets);
-        feature_lab::SceneFlow flow(game,
-                                    !(direct_play || scripted || load_slot || save_slot ||
-                                      settings_demo || diagnostics_demo || missing_texture_demo ||
-                                      shader_error_demo || texture_error_demo));
+        if (seed) {
+            game.random_seed = *seed;
+            game.random.restore(*seed);
+        }
+        std::optional<feature_lab::ReplayFile> playback;
+        std::size_t playback_index = 0;
+        if (playing_file) {
+            playback = feature_lab::read_replay(verify_path.empty() ? playback_path : verify_path);
+            game.restore(playback->initial);
+            if (!verify_path.empty()) {
+                for (; playback_index < playback->commands.size(); ++playback_index)
+                    feature_lab::playback_step(game, *playback, playback_index);
+                std::cout << "[replay] verified commands=" << playback_index
+                          << " ticks=" << game.ticks << " hash=" << feature_lab::replay_hash(game)
+                          << '\n';
+                return 0;
+            }
+        }
+        feature_lab::SceneFlow flow(game, !(replay_modes || direct_play || scripted || load_slot ||
+                                            save_slot || settings_demo || diagnostics_demo ||
+                                            missing_texture_demo || shader_error_demo ||
+                                            texture_error_demo));
         std::unique_ptr<UserStorage> storage;
         feature_lab::Configuration config;
         std::string persistence_notice;
@@ -282,7 +338,10 @@ int main(int argc, char** argv) {
             std::cout << "[persistence] loaded slot=" << load_slot << " ticks=" << game.ticks
                       << '\n';
         }
-        if (!screenshot.empty() && frame_limit == 0)
+        std::optional<feature_lab::ReplayRecorder> recorder;
+        if (!record_path.empty())
+            recorder.emplace(game);
+        if (!screenshot.empty() && frame_limit == 0 && !playback)
             frame_limit = 120;
         Window window(1280, 720, "Feature Lab | Linux 2D Engine");
         const bool vsync_available = window.set_vsync(vsync);
@@ -319,7 +378,7 @@ int main(int argc, char** argv) {
         feature_lab::Soundtrack soundtrack(assets, audio_enabled, "default", config.audio,
                                            game.paused);
         soundtrack.locate_emitter(game);
-        if (load_slot)
+        if (load_slot || playback)
             soundtrack.restored(game);
         feature_lab::Replay replay;
         Input input;
@@ -364,18 +423,45 @@ int main(int argc, char** argv) {
             auto batch = clock.advance(elapsed);
             unsigned simulation_steps = 0;
             last = now;
-            if (!scripted)
+            if (!scripted && !playback)
                 dropped += batch.dropped;
-            if (scripted && !window.drawable()) {
+            if ((scripted || playback) && !window.drawable()) {
                 std::this_thread::sleep_for(std::chrono::milliseconds(10));
                 continue;
             }
-            if (scripted) {
+            if (scripted || playback) {
                 batch.steps = 1;
                 batch.alpha = 1;
             }
             for (int step = 0; step < batch.steps; ++step) {
-                const auto routed = flow.update(game, input.consume(), window.width(),
+                auto physical_input = input.consume();
+                if (recorder || playback) {
+                    // A replay is one uninterrupted game session. Menus and slot loads
+                    // alter state outside Game::update and are unavailable in this mode.
+                    physical_input[static_cast<std::size_t>(Key::settings)] = {};
+                    if (button(physical_input, Key::escape).pressed) {
+                        running = false;
+                        break;
+                    }
+                }
+                if (playback) {
+                    if (button(physical_input, Key::fullscreen).pressed)
+                        window.toggle_fullscreen();
+                    if (playback_index == playback->commands.size()) {
+                        running = false;
+                        break;
+                    }
+                    const auto ticks_before = game.ticks;
+                    const auto controls = playback->commands[playback_index].input();
+                    const int picked =
+                        feature_lab::playback_step(game, *playback, playback_index++);
+                    simulation_steps += static_cast<unsigned>(game.ticks > ticks_before);
+                    soundtrack.update(game, controls, picked);
+                    if (playback_index == playback->commands.size())
+                        running = false;
+                    continue;
+                }
+                const auto routed = flow.update(game, physical_input, window.width(),
                                                 window.height(), storage.get());
                 if (routed.quit) {
                     running = false;
@@ -474,7 +560,8 @@ int main(int argc, char** argv) {
                     }
                 }
                 const auto ticks_before = game.ticks;
-                const int picked = game.update(gameplay);
+                const int picked =
+                    recorder ? recorder->step(game, gameplay) : game.update(gameplay);
                 if (game.ticks > ticks_before)
                     ++simulation_steps;
                 soundtrack.update(game, controls, picked);
@@ -485,6 +572,10 @@ int main(int argc, char** argv) {
                 }
                 if (was_open && !settings.opened())
                     persist_config();
+                if (recorder && recorder->full()) {
+                    running = false; // Save a complete bounded recording on normal shutdown.
+                    break;
+                }
             }
             if (!window.drawable()) {
                 std::this_thread::sleep_for(std::chrono::milliseconds(10));
@@ -503,7 +594,13 @@ int main(int argc, char** argv) {
             } else {
                 draw(renderer, game, textures, batch.alpha, window.width(), window.height(), camera,
                      overlays, soundtrack, collision_visuals, diagnostics, shaders,
-                     settings.opened(), settings.bindings);
+                     settings.opened(), settings.bindings,
+                     recorder ? "15 / RECORD " + std::to_string(recorder->file().commands.size()) +
+                                    " / 36000"
+                     : playback ? "15 / REPLAY " + std::to_string(playback_index) + " / " +
+                                      std::to_string(playback->commands.size())
+                                : "15 / SEEDED REPLAY FILES",
+                     recorder.has_value() || playback.has_value(), playback.has_value());
                 diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
                 settings.draw(renderer, window.width(), window.height());
             }
@@ -518,7 +615,8 @@ int main(int argc, char** argv) {
                                simulation_steps);
             if (frames > 30 && sample_count < cpu_samples.size())
                 cpu_samples[sample_count++] = cpu_ms;
-            if (!screenshot.empty() && frames == static_cast<std::size_t>(frame_limit))
+            if (!screenshot.empty() &&
+                (!running || frames == static_cast<std::size_t>(frame_limit)))
                 renderer.screenshot(screenshot);
             window.present();
             if (!renderer.healthy())
@@ -540,6 +638,15 @@ int main(int argc, char** argv) {
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
         }
         persist_config();
+        if (recorder) {
+            feature_lab::write_replay(record_path, recorder->file());
+            std::cout << "[replay] saved commands=" << recorder->file().commands.size()
+                      << " seed=" << recorder->file().initial.random_seed << '\n';
+        }
+        if (playback)
+            std::cout << "[replay] played commands=" << playback_index << "/"
+                      << playback->commands.size() << " hash=" << feature_lab::replay_hash(game)
+                      << '\n';
         if (save_slot) {
             if (!storage)
                 throw std::runtime_error("User storage unavailable");

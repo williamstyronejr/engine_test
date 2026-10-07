@@ -6,8 +6,10 @@ namespace engine {
 // CRC32 detects accidental corruption, not malicious modification.
 std::uint32_t crc32(std::span<const std::uint8_t> bytes);
 constexpr std::size_t max_record_bytes = 64 * 1024;
-std::vector<std::uint8_t> seal_record(std::vector<std::uint8_t> payload);
-std::span<const std::uint8_t> open_record(std::span<const std::uint8_t> bytes);
+std::vector<std::uint8_t> seal_record(std::vector<std::uint8_t> payload,
+                                      std::size_t limit = max_record_bytes);
+std::span<const std::uint8_t> open_record(std::span<const std::uint8_t> bytes,
+                                          std::size_t limit = max_record_bytes);
 struct UserPaths {
     std::filesystem::path config, state;
     static UserPaths discover(const std::filesystem::path& override_root = {});
