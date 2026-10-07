@@ -1,7 +1,7 @@
 # Implementation status
 
-The fourteenth increment adds a title screen, explicit new-game/continue/resume
-commands, and transactional replacement of the facility world. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
+The fifteenth increment adds bounded replay files, deterministic playback checks,
+and persisted seeded random state. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
 ## Delivered
 
@@ -62,8 +62,8 @@ entire plan feature ID when required subfeatures are still absent.
 | F10 | Partial | PCM16 WAV assets/resampling, loops, voice controls, gain ramps, master/music/effects controls, stereo emitter, null-device soundtrack/restart/failure tests | Physical disconnect/recovery testing and audible-output checks |
 | F11 | Partial | Bitmap text, clipped status panel, buttons/checkboxes/sliders, keyboard/pointer navigation, bounded layout, modal settings and title screen; `ui`, scene-flow and GPU pixel tests | Broader text fixtures and manual navigation checks |
 | F12 | Implemented (v1) | Live minimap, clipped scrolling panel; seven GPU cases for pixels, alpha composition, clipping, resizing, resource limits and example integration | Optional multisampling, HDR and post-processing |
-| F13 | Partial | Clock conservation/catch-up tests, F10 paused stepping, full stepped replay/state equivalence, modal capture and checkpoint tests | Replay-file format and random-state serialization |
-| F14 | Implemented (v1) | Versioned scene/checkpoint/config formats; three-slot UI; CRC, bounds and semantic checks; unchanged live game on failed load; interrupted-process write tests | Optional version migration and power-loss/filesystem fault testing |
+| F13 | Implemented (v1) | Clock/catch-up, paused stepping, ERPL recording/playback, per-command state checks, seeded random state, save migration and full-game replay tests | Cross-machine float determinism and replaying menu/audio/render commands are outside v1 |
+| F14 | Implemented (v1) | Versioned scene/checkpoint/config formats; three-slot UI; CRC, bounds and semantic checks; unchanged live game on failed load; interrupted-process write tests | Power-loss/filesystem fault testing and content migration |
 | F15 | Partial | Console errors, GL callback, F2 rolling timing/counter overlay, F3 collision/camera outlines, target accounting, CPU percentiles, shader reload/failure recovery, GPU pixel/interface/lifetime tests, bounded asynchronous GPU timing with sample age/skips | Broader manual fault scenarios and profiling coverage |
 | F16 | Partial | Audio/GPU lifetime tests; install includes scene, map, animations, textures and WAV sounds | Aggregate resource accounting, stress arena, portable packaging, broader hardware checks |
 
@@ -620,7 +620,44 @@ are single-sample sRGB RGBA8 color buffers. No external libraries were added.
 Transitions between different authored levels and several other planned systems remain unfinished. See [format/API contracts](FORMATS.md)
 for limits, rendering conventions, and lifetimes.
 
+## Added in the fifteenth increment
+
+- In-house SplitMix64 state with known-sequence tests, checkpoint ESAV v3 storage,
+  v2 migration, seeded machine indicators and restart behavior.
+- Bounded ERPL v1 files: initial checkpoint, logical input edges and held state,
+  pre-update ticks and allocation-free per-command simulation hashes.
+- CLI human/scripted recording, visual playback and CPU-only verification; content,
+  rule and state mismatch reporting; normal-exit atomic writes and capacity stop.
+- Eight CPU replay cases covering the complete game, paused starts, restart/step,
+  corruption, incompatible content/rules, limits and unchanged files on failed writes.
+
+## Fifteenth-increment validation (2026-10-07)
+
+All twenty-one CTest groups pass in GCC debug/release, Clang debug and native
+AddressSanitizer/UndefinedBehaviorSanitizer builds, without hardware skips.
+The new replay group contains eight cases. After the final playback help-text
+adjustment, gameplay/no-display checks were repeated in all four builds. Both
+installed replay files verify in all four builds with identical per-command and
+final hashes. Strict compiler warnings, formatting and diff whitespace checks pass.
+
+An installed release recording from `/tmp` produced 1,600 commands in a 45,010-byte
+ERPL file, finished at tick 1,381 with three cores and one door completion, and
+verified with DISPLAY unset. Installed visual playback produced a byte-identical
+ESAV checkpoint. A 170-command native X11 input recording exercised movement,
+F1 suppression, pause, F10 step, resume, restart, interact and Escape-to-save. Its
+playback checkpoint was also byte-identical. Both recording and playback captures
+were inspected. The replay HUD labels live gameplay input as disabled. A further native-input
+playback run ignored movement, restart, pause, F1 and F10 and retained the same
+final checkpoint. The final capture was inspected after updating playback hints.
+
+A valid-CRC file with an altered state hash fails at command zero. Conflicting
+replay options and invalid/overflowing seeds fail before opening a display.
+Visible runs used isolated user-data paths and disabled audio; existing null-device
+checks cover audio transport. These are functional checks performed alongside
+build work, not controlled performance measurements. Cross-machine determinism,
+audio/render-command replay and menu recording remain outside this increment.
+
 ## Next increment
 
-Add a versioned tick-indexed replay-file format with seeded random-state support,
-validation and deterministic playback tests (F13).
+Add a reproducible Feature Lab stress arena and resource-growth checks (F16), with
+workload counts and benchmark output to measure rendering/simulation limits.

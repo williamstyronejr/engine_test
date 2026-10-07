@@ -12,16 +12,16 @@ std::uint32_t crc32(std::span<const std::uint8_t> bytes) {
     }
     return ~crc;
 }
-std::vector<std::uint8_t> seal_record(std::vector<std::uint8_t> payload) {
-    if (payload.size() < 8 || payload.size() > max_record_bytes - 4)
+std::vector<std::uint8_t> seal_record(std::vector<std::uint8_t> payload, std::size_t limit) {
+    if (limit < 12 || payload.size() < 8 || payload.size() > limit - 4)
         throw std::invalid_argument("Persistence record size outside bounds");
     const auto crc = crc32(payload);
     for (unsigned i = 0; i < 4; ++i)
         payload.push_back(static_cast<std::uint8_t>(crc >> (i * 8)));
     return payload;
 }
-std::span<const std::uint8_t> open_record(std::span<const std::uint8_t> bytes) {
-    if (bytes.size() < 12 || bytes.size() > max_record_bytes)
+std::span<const std::uint8_t> open_record(std::span<const std::uint8_t> bytes, std::size_t limit) {
+    if (bytes.size() < 12 || bytes.size() > limit)
         throw std::runtime_error("Invalid persistence record size");
     const auto payload = bytes.first(bytes.size() - 4);
     std::uint32_t expected{};

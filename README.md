@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The fourteenth increment adds a title screen, New Game, Continue from a save slot,
-and Resume Session, with validated world replacement and retained state on failure.
+The fifteenth increment adds replay recording, deterministic playback verification,
+and saved random state. Title/New Game/Continue/Resume remain available in normal play.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -283,11 +283,50 @@ Slots are 1..3. `--load-slot` restores before rendering and disables scripted dr
 its failure exits with diagnostics. `--save-slot` writes on normal exit. `--no-vsync`
 is a session override; it does not overwrite saved VSync unless changed in the menu.
 Bad settings use defaults and remain untouched unless you change preferences.
-Save compatibility requires the same authored scene, map, and animation data;
-Current checkpoints use ESAV v2 to include alarm state. ESAV v1 checkpoints are
-rejected without changing the current game; version migration is not implemented. Checksums detect accidental corruption.
+Save compatibility requires the same authored scene, map, and animation data.
+Current checkpoints use ESAV v3 with alarm and random state. ESAV v2 migrates with
+the default seed; ESAV v1 remains unsupported. Checksums detect accidental corruption.
+
+## Replay files and random state
+
+Record a complete example run, verify it without a display or audio device, then
+watch the recorded inputs:
+
+```sh
+./build/debug/feature_lab --scripted --seed 42 --frames 1600 --no-audio \
+  --user-data build/replay-user --record-replay build/example.erpl
+./build/debug/feature_lab --verify-replay build/example.erpl
+./build/debug/feature_lab --replay build/example.erpl --no-audio \
+  --user-data build/replay-user
+```
+
+Omit `--scripted` and `--frames` to record human play; Escape ends and saves the
+recording. `--load-slot` can supply its starting checkpoint. `--seed` accepts an
+unsigned 64-bit decimal integer (default 1) and cannot accompany a loaded save or
+replay. Machines change indicator brightness once per simulated second using the
+saved sequence. Pause freezes it, single-step advances it, and restart resets it.
+
+Record/playback starts directly in gameplay. F1 and in-session slot operations are
+unavailable in these modes. Playback ignores live gameplay keys; Escape exits and
+F11 still toggles fullscreen. Each file command advances one rendered frame during
+playback; VSync controls viewing speed. Playback exits at EOF, or earlier with
+`--frames`/Escape. The verifier checks every command without rendering. A mismatch
+reports the zero-based command index and exits unsuccessfully.
+
+Files contain an initial checkpoint, tick-indexed logical inputs and per-step state
+hashes. They are bounded to 36,000 commands (ten minutes at 60 fixed steps/second,
+including paused steps) and 1 MiB. Reaching the limit ends the session and saves it.
+Writes are atomic on clean exit; a crash loses the current in-memory recording.
+The destination parent must exist. Matching content and simulation rules are
+required; determinism across arbitrary architectures/compiler floating-point modes
+is not promised. Audio, rendering and menu actions are outside replay state.
+See [ERPL contracts](docs/FORMATS.md#replay-files-erpl-v1).
 
 ## Tests
+
+The eight-case `replay_files` group checks seeded reference sequences, save migration,
+full-game record/decode/playback, paused starts, short taps, stepping, restart,
+content/state divergence, malformed files, recording limits and atomic file storage.
 
 The six-case scene-flow suite covers new/continue/resume, empty/corrupt/invalid
 checkpoints, failed replacement during scene iteration, input capture, menu return,
