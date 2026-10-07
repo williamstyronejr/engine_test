@@ -1,0 +1,16 @@
+scene 1
+entity 1 "Facility" "group" 0 0 0 0 1 1
+entity 20 "Player" "player" 1 -27 -10 0 1 1
+sprite 20 "textures/actors.etex" 0.899999976 0.949999988 1 1 1 1 30
+entity 21 "Exit door" "exit" 1 28 -10 0 1 1
+sprite 21 "textures/actors.etex" 2.4000001 1.79999995 1 1 1 1 10
+entity 30 "Core" "core" 1 -22 8 0 1 1
+sprite 30 "textures/actors.etex" 0.899999976 0.899999976 1 1 1 1 20
+entity 31 "Core" "core" 1 0 -9 0 1 1
+sprite 31 "textures/actors.etex" 0.899999976 0.899999976 1 1 1 1 20
+entity 32 "Core" "core" 1 22 8 0 1 1
+sprite 32 "textures/actors.etex" 0.899999976 0.899999976 1 1 1 1 20
+entity 40 "Ventilation" "machine" 1 0 9 0 1 1
+sprite 40 "textures/actors.etex" 2.5 2.5 1 1 1 1 10
+collider 40 1 1
+end

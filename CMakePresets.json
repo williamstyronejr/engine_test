@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {"name":"debug", "generator":"Ninja", "binaryDir":"${sourceDir}/build/debug", "cacheVariables":{"CMAKE_BUILD_TYPE":"Debug"}},
+    {"name":"release", "inherits":"debug", "binaryDir":"${sourceDir}/build/release", "cacheVariables":{"CMAKE_BUILD_TYPE":"Release"}},
+    {"name":"sanitize", "inherits":"debug", "binaryDir":"${sourceDir}/build/sanitize", "cacheVariables":{"ENGINE_SANITIZERS":"ON", "ENGINE_BUILD_PLATFORM":"OFF"}},
+    {"name":"clang", "inherits":"debug", "binaryDir":"${sourceDir}/build/clang", "cacheVariables":{"CMAKE_CXX_COMPILER":"clang++"}}
+  ],
+  "buildPresets": [{"name":"debug","configurePreset":"debug"},{"name":"release","configurePreset":"release"},{"name":"sanitize","configurePreset":"sanitize"},{"name":"clang","configurePreset":"clang"}],
+  "testPresets": [{"name":"debug","configurePreset":"debug","output":{"outputOnFailure":true}},{"name":"release","configurePreset":"release","output":{"outputOnFailure":true}},{"name":"sanitize","configurePreset":"sanitize","output":{"outputOnFailure":true}},{"name":"clang","configurePreset":"clang","output":{"outputOnFailure":true}}]
+}
+
