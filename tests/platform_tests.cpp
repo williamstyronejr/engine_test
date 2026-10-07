@@ -59,6 +59,63 @@ int main() {
             XSync(display, False);
             window.poll(input);
         };
+        // Changing a binding while held must not generate a new action or raw press.
+        send_key(XK_q, true);
+        check(input.consume().pressed_symbol == 'q', "Unbound raw press missing");
+        engine::KeyBindings configured;
+        configured.assign(2, 'q');
+        window.set_bindings(configured, input);
+        input.consume();
+        send_key(XK_q, true);
+        auto rebound = input.consume();
+        check(!engine::button(rebound, engine::Key::up).held && !rebound.pressed_symbol,
+              "Held rebind generated input");
+        send_key(XK_q, false);
+        input.consume();
+        send_key(XK_q, true);
+        rebound = input.consume();
+        check(engine::button(rebound, engine::Key::up).pressed && rebound.pressed_symbol == 'q',
+              "Rebound press missing");
+        send_key(XK_Up, true);
+        send_key(XK_q, false);
+        check(engine::button(input.consume(), engine::Key::up).held,
+              "Rebound alias released early");
+        send_key(XK_Up, false);
+        input.consume();
+        send_key(XK_w, true);
+        check(!engine::button(input.consume(), engine::Key::up).held, "Old binding still active");
+        send_key(XK_w, false);
+        input.consume();
+        auto invalid = configured;
+        invalid.letters[0] = 'q';
+        bool rejected = false;
+        try {
+            window.set_bindings(invalid, input);
+        } catch (const std::invalid_argument&) {
+            rejected = true;
+        }
+        check(rejected, "Conflicting native configuration accepted");
+        send_key(XK_q, true);
+        check(engine::button(input.consume(), engine::Key::up).held,
+              "Rejected table replaced live bindings");
+        // A mapping notification cancels held input without modifying the desktop keymap.
+        XEvent mapping{};
+        mapping.xmapping.type = MappingNotify;
+        mapping.xmapping.display = display;
+        mapping.xmapping.window = native;
+        mapping.xmapping.request = MappingKeyboard;
+        mapping.xmapping.first_keycode = 8;
+        mapping.xmapping.count = 248;
+        check(XSendEvent(display, native, False, 0, &mapping), "Mapping event send failed");
+        XSync(display, False);
+        window.poll(input);
+        check(input.consume().canceled, "Mapping change did not cancel input");
+        send_key(XK_q, true);
+        check(!engine::button(input.consume(), engine::Key::up).held,
+              "Mapping change leaked held input");
+        send_key(XK_q, false);
+        window.set_bindings({}, input);
+        input.consume();
         send_key(XK_w, true);
         check(engine::button(input.consume(), engine::Key::up).pressed, "Native key press missing");
         send_key(XK_w, true);

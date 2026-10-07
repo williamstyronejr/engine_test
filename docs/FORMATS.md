@@ -471,10 +471,35 @@ mute restores the chosen master gain on unmute. Configuration persists audio gai
 mute, and requested VSync; fullscreen remains session-local.
 `--settings-demo` opens the same panel at startup for visual inspection.
 
-## Persistence: ECFG v1 and ESAV v2
+## Keyboard bindings
+
+`KeyBindings` stores ten unique lowercase ASCII letter symbols in stable order:
+left, right, up, down, pause, restart, interact, mute, music volume, effects volume.
+`assign` and `validate` reject duplicate/out-of-range symbols before publication.
+Defaults are A/D/W/S/P/R/E/M/N/B. Fixed non-letter aliases remain available.
+
+`Window::set_bindings` validates the complete table before replacing its cached
+keycode mapping, cancels queued input, and suppresses physically held keys until
+release. Multiple keycodes for an action are aggregated; releasing one alias does
+not release another. MappingKeyboard/MappingModifier notifications refresh the
+X11 mapping with the same cancellation policy. Symbols use unshifted group zero;
+runtime group switching, physical scan codes and modifier chords are not supported.
+
+`InputFrame::pressed_symbol` carries the first fresh native press per consumed
+frame, or zero. Additional presses in that interval are ignored for capture. Repeat
+does not generate a fresh symbol. Focus loss clears it; modal routing removes it
+from gameplay. This bounded field is for binding capture, not text input.
+
+Feature Lab exposes ten binding buttons, Restore Defaults and Back in F1 Controls.
+Activation starts capture on a subsequent input frame. Conflicts/unsupported keys
+keep capture open; Escape/focus loss cancels it and F1 closes settings. Gameplay
+remains paused and captured throughout. Valid edits apply immediately; preferences
+persist on settings close or normal exit.
+
+## Persistence: ECFG v2 and ESAV v2
 
 All integers are little-endian, floats are IEEE binary32, and booleans are u32 0/1.
-Files begin with four-byte magic and u32 version (ECFG 1, ESAV 2), ending with a u32 CRC32 of all
+Files begin with four-byte magic and u32 version (ECFG 2, ESAV 2), ending with a u32 CRC32 of all
 preceding bytes (reflected polynomial 0xEDB88320, initial/final XOR 0xFFFFFFFF).
 The envelope is 12..65,536 bytes; parsers reject wrong type/version, excess counts,
 truncation, trailing bytes, invalid booleans, and checksum mismatches. CRC detects
@@ -483,7 +508,11 @@ public in `engine/binary.hpp`; envelope and storage APIs are in `engine/persiste
 Schemas below belong to Feature Lab; the engine storage layer is schema-agnostic.
 
 ECFG payload after the header is three f32 gains (master, music, effects), u32 mute,
-and u32 VSync. Gains must be finite within [0,1]. Total file size is 32 bytes.
+and u32 VSync, followed by ten u32 letter symbols in the binding order above.
+Gains must be finite within [0,1]; bindings must be unique lowercase ASCII letters.
+Total ECFG v2 size is 72 bytes including CRC. Legacy ECFG v1 is 32 bytes, omits the
+bindings and loads with defaults; the next preference save writes v2. Other versions
+are rejected. ESAV checkpoint bytes and compatibility are unchanged.
 Startup uses defaults on malformed/inaccessible configuration, logs the reason,
 and shows a notice. No automatic repair overwrites the file. Changed preferences
 are written on panel close or normal application exit. Crashes before that boundary

@@ -1,4 +1,5 @@
 #pragma once
+#include "engine/bindings.hpp"
 #include "engine/ui.hpp"
 #include "game.hpp"
 
@@ -11,7 +12,7 @@ struct AudioSettings {
 struct SettingsStep {
     engine::InputFrame gameplay{};
     bool captured{}, restart{}, quit{}, fullscreen{}, audio_changed{}, vsync_changed{}, save{},
-        load{};
+        load{}, bindings_changed{};
 };
 class Settings {
   public:
@@ -27,8 +28,13 @@ class Settings {
         quit,
         slot,
         save,
-        load
+        load,
+        controls,
+        controls_back,
+        defaults,
+        binding_first = 100
     };
+    engine::KeyBindings bindings;
     AudioSettings audio;
     unsigned selected_slot{1};
     std::string notice;
@@ -40,13 +46,18 @@ class Settings {
     }
     bool vsync{true}, vsync_available{true};
     bool opened() const { return open_; }
+    bool controls_opened() const { return controls_; }
+    bool capturing_binding() const { return capture_.has_value(); }
     const engine::Ui& ui() const { return ui_; }
     // Owns modal pause state; closing restores the pause state from before opening.
     SettingsStep update(Game& game, const engine::InputFrame& input, int width, int height,
                         bool audio_available) {
         SettingsStep result;
         const bool was_open = open_;
-        if (engine::button(input, engine::Key::settings).pressed) {
+        if (capture_ && (input.canceled || engine::button(input, engine::Key::escape).pressed)) {
+            capture_.reset();
+            notice = "BINDING CANCELED";
+        } else if (engine::button(input, engine::Key::settings).pressed) {
             if (open_)
                 close(game);
             else {
@@ -61,55 +72,94 @@ class Settings {
         else if (open_) {
             if (width != width_ || height != height_ || audio_available != audio_available_)
                 rebuild(width, height, audio_available);
-            const auto actions = ui_.update(input);
-            for (const auto action : actions.events()) {
-                switch (action.id) {
-                case slot:
-                    selected_slot = selected_slot % 3 + 1;
-                    notice.clear();
-                    rebuild(width, height, audio_available);
-                    break;
-                case save:
-                    result.save = true;
-                    break;
-                case load:
-                    result.load = true;
-                    break;
-                case resume:
-                    close(game);
-                    break;
-                case restart:
-                    close(game);
-                    result.restart = true;
-                    break;
-                case quit:
-                    result.quit = true;
-                    break;
-                case fullscreen:
-                    result.fullscreen = true;
-                    break;
-                case master:
-                    audio.master = action.value;
-                    result.audio_changed = true;
-                    break;
-                case music:
-                    audio.music = action.value;
-                    result.audio_changed = true;
-                    break;
-                case effects:
-                    audio.effects = action.value;
-                    result.audio_changed = true;
-                    break;
-                case mute:
-                    audio.muted = action.value != 0;
-                    result.audio_changed = true;
-                    break;
-                case sync:
-                    vsync = action.value != 0;
-                    result.vsync_changed = true;
-                    break;
-                default:
-                    break;
+            if (capture_) {
+                if (input.pressed_symbol) {
+                    try {
+                        bindings.assign(*capture_, input.pressed_symbol);
+                        capture_.reset();
+                        notice = "BINDING UPDATED - SAVED ON CLOSE";
+                        result.bindings_changed = true;
+                        rebuild(width, height, audio_available);
+                    } catch (const std::exception& error) {
+                        notice = error.what();
+                    }
+                }
+            } else {
+                const auto actions = ui_.update(input);
+                for (const auto action : actions.events()) {
+                    if (action.id >= binding_first &&
+                        action.id < binding_first + bindings.letters.size()) {
+                        capture_ = action.id - binding_first;
+                        notice = "PRESS A LETTER A-Z / ESC CANCEL";
+                        ui_.reset_interaction();
+                        break;
+                    }
+                    switch (action.id) {
+                    case controls:
+                        controls_ = true;
+                        notice.clear();
+                        rebuild(width, height, audio_available);
+                        ui_.reset_interaction();
+                        break;
+                    case controls_back:
+                        controls_ = false;
+                        notice.clear();
+                        rebuild(width, height, audio_available);
+                        ui_.reset_interaction();
+                        break;
+                    case defaults:
+                        bindings = {};
+                        result.bindings_changed = true;
+                        notice = "DEFAULT BINDINGS RESTORED";
+                        rebuild(width, height, audio_available);
+                        break;
+                    case slot:
+                        selected_slot = selected_slot % 3 + 1;
+                        notice.clear();
+                        rebuild(width, height, audio_available);
+                        break;
+                    case save:
+                        result.save = true;
+                        break;
+                    case load:
+                        result.load = true;
+                        break;
+                    case resume:
+                        close(game);
+                        break;
+                    case restart:
+                        close(game);
+                        result.restart = true;
+                        break;
+                    case quit:
+                        result.quit = true;
+                        break;
+                    case fullscreen:
+                        result.fullscreen = true;
+                        break;
+                    case master:
+                        audio.master = action.value;
+                        result.audio_changed = true;
+                        break;
+                    case music:
+                        audio.music = action.value;
+                        result.audio_changed = true;
+                        break;
+                    case effects:
+                        audio.effects = action.value;
+                        result.audio_changed = true;
+                        break;
+                    case mute:
+                        audio.muted = action.value != 0;
+                        result.audio_changed = true;
+                        break;
+                    case sync:
+                        vsync = action.value != 0;
+                        result.vsync_changed = true;
+                        break;
+                    default:
+                        break;
+                    }
                 }
             }
         }
@@ -129,6 +179,8 @@ class Settings {
   private:
     void close(Game& game) {
         open_ = false;
+        controls_ = false;
+        capture_.reset();
         game.paused = previous_pause_;
     }
     void rebuild(int width, int height, bool audio_available) {
@@ -145,7 +197,24 @@ class Settings {
         UiColumn column(
             {{left + 20 * scale, top + 72 * scale}, {left + 460 * scale, top + 672 * scale}},
             8 * scale);
+        if (controls_) {
+            std::vector<UiWidget> widgets;
+            widgets.reserve(bindings.letters.size() + 2);
+            for (std::size_t i = 0; i < bindings.letters.size(); ++i)
+                widgets.push_back({static_cast<UiId>(binding_first + i), UiKind::button,
+                                   column.next(38 * scale), bindings.label(i)});
+            widgets.push_back(
+                {defaults, UiKind::button, column.next(42 * scale), "RESTORE DEFAULTS"});
+            widgets.push_back(
+                {controls_back, UiKind::button, column.next(42 * scale), "BACK TO SETTINGS"});
+            ui_.layout(panel_, widgets);
+            return;
+        }
         const auto resume_bounds = column.next(42 * scale);
+        const Rect quit_bounds{{left + 20 * scale, top + 514 * scale},
+                               {left + 236 * scale, top + 556 * scale}};
+        const Rect controls_bounds{{left + 244 * scale, top + 514 * scale},
+                                   {left + 460 * scale, top + 556 * scale}};
         // Save controls follow the existing controls in both layout and focus order.
         const Rect slot_bounds{{left + 20 * scale, top + 572 * scale},
                                {left + 460 * scale, top + 614 * scale}};
@@ -169,13 +238,16 @@ class Settings {
                      vsync_available},
             UiWidget{fullscreen, UiKind::button, column.next(42 * scale), "TOGGLE FULLSCREEN"},
             UiWidget{restart, UiKind::button, column.next(42 * scale), "RESTART GAME"},
-            UiWidget{quit, UiKind::button, column.next(42 * scale), "QUIT"},
+            UiWidget{quit, UiKind::button, quit_bounds, "QUIT"},
+            UiWidget{controls, UiKind::button, controls_bounds, "CONTROLS"},
             UiWidget{slot, UiKind::button, slot_bounds,
                      "SLOT " + std::to_string(selected_slot) + " / 3 - CHANGE"},
             UiWidget{save, UiKind::button, save_bounds, "SAVE"},
             UiWidget{load, UiKind::button, load_bounds, "LOAD"}};
         ui_.layout(panel_, widgets);
     }
+    std::optional<std::size_t> capture_;
+    bool controls_{};
     engine::Ui ui_;
     engine::InputGate gate_;
     engine::Rect panel_{};

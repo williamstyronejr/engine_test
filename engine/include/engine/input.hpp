@@ -47,6 +47,7 @@ struct PointerFrame {
     bool inside{};
 };
 struct InputFrame : std::array<Button, static_cast<std::size_t>(Key::count)> {
+    std::uint32_t pressed_symbol{}; // First fresh native key press this tick; zero means none.
     PointerFrame pointer;
     bool canceled{};
 };
@@ -62,6 +63,8 @@ class InputGate {
             if (capture_keyboard || blocked_[i])
                 input[i] = {};
         }
+        if (capture_keyboard)
+            input.pressed_symbol = 0;
         if (!input.pointer.primary.held || input.pointer.primary.released)
             pointer_blocked_ = false;
         if (capture_pointer)
@@ -92,6 +95,10 @@ class Input {
         else
             b.released = true;
     }
+    void press_symbol(std::uint32_t symbol) {
+        if (!state_.pressed_symbol)
+            state_.pressed_symbol = symbol;
+    }
     void move_pointer(Vec2 position, bool inside = true) {
         if (!std::isfinite(position.x) || !std::isfinite(position.y))
             throw std::invalid_argument("Nonfinite pointer position");
@@ -117,6 +124,7 @@ class Input {
     }
     void leave_pointer() { state_.pointer.inside = false; }
     void release_all() {
+        state_.pressed_symbol = 0;
         for (auto& b : state_) {
             b.released = b.held;
             b.held = false;
@@ -129,6 +137,7 @@ class Input {
     }
     InputFrame consume() {
         const auto result = state_;
+        state_.pressed_symbol = 0;
         for (auto& b : state_) {
             b.pressed = false;
             b.released = false;

@@ -288,16 +288,35 @@ TEST(settings_render_at_small_and_large_sizes) {
     open[static_cast<std::size_t>(Key::settings)].pressed = true;
     settings.update(game, open, 640, 480, true);
     const auto target = renderer.create_target(640, 480);
-    for (const auto size :
-         {RenderTargetSize{640, 480}, RenderTargetSize{320, 240}, RenderTargetSize{1280, 720}}) {
-        renderer.resize_target(target, size.width, size.height);
-        settings.update(game, {}, size.width, size.height, true);
-        renderer.begin(target, {{0, 0}, 2}, {0, 0, 0, 1});
-        settings.draw(renderer, size.width, size.height);
-        renderer.end();
-        CHECK(renderer.pixel(size.width / 2, size.height / 2)[2] > 20);
-        CHECK(renderer.stats().quads > 100 && renderer.healthy());
+    const auto render_sizes = [&] {
+        for (const auto size : {RenderTargetSize{640, 480}, RenderTargetSize{320, 240},
+                                RenderTargetSize{1280, 720}}) {
+            renderer.resize_target(target, size.width, size.height);
+            settings.update(game, {}, size.width, size.height, true);
+            renderer.begin(target, {{0, 0}, 2}, {0, 0, 0, 1});
+            settings.draw(renderer, size.width, size.height);
+            renderer.end();
+            CHECK(renderer.pixel(size.width / 2, size.height / 2)[2] > 20);
+            CHECK(renderer.stats().quads > 100 && renderer.healthy());
+        }
+    };
+    render_sizes();
+    settings.update(game, {}, 640, 480, true);
+    // Exercise the new controls page through the same pointer workflow as the game.
+    for (const auto& widget : settings.ui().widgets()) {
+        if (widget.id != feature_lab::Settings::controls)
+            continue;
+        const auto point = (widget.bounds.min + widget.bounds.max) * 0.5F;
+        Input pointer;
+        pointer.move_pointer(point);
+        pointer.set_primary(true);
+        settings.update(game, pointer.consume(), 640, 480, true);
+        pointer.set_primary(false);
+        settings.update(game, pointer.consume(), 640, 480, true);
+        break; // The layout was replaced; do not advance the old iterator.
     }
+    CHECK(settings.controls_opened());
+    render_sizes();
 }
 TEST(collision_station_draws_circle_and_switch_state) {
     Window window(320, 240, "Collision station", false);
