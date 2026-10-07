@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The thirteenth increment adds configurable letter-key bindings, a Controls page,
-conflict validation, and saved bindings with migration from older settings files.
+The fourteenth increment adds a title screen, New Game, Continue from a save slot,
+and Resume Session, with validated world replacement and retained state on failure.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -56,6 +56,22 @@ ctest --test-dir build/sanitize-platform --output-on-failure
 ```
 
 ## Play
+
+Normal launch opens the title screen. Use **Tab / Enter** or click:
+
+- **New Game** starts a fresh facility without overwriting saves.
+- **Continue Saved Game** loads the selected slot (1–3). Empty or invalid saves
+  show an error and preserve the current session.
+- **Resume Session** returns to the game retained in memory; it becomes available
+  after starting or loading a game.
+
+Use **F1 → Title** during gameplay to return here. The session and audio pause until
+resumed; previously paused games stay paused. Gameplay settings remain available
+through F1 in the game. Escape quits from the title screen.
+
+`--play` skips the title. Scripted runs, explicit load/save-slot commands and the
+existing feature-demo flags also start directly in gameplay for reproducible tests.
+
 
 Move the cyan robot through the facility, collect three gold cores, then reach the
 exit after its door opens. Machinery and pickups loop through atlas animations;
@@ -272,6 +288,12 @@ Current checkpoints use ESAV v2 to include alarm state. ESAV v1 checkpoints are
 rejected without changing the current game; version migration is not implemented. Checksums detect accidental corruption.
 
 ## Tests
+
+The six-case scene-flow suite covers new/continue/resume, empty/corrupt/invalid
+checkpoints, failed replacement during scene iteration, input capture, menu return,
+and layout bounds. GPU checks render the title at four viewport sizes while
+repeated transitions keep resource counts stable. A null-device audio case checks
+initial pause and resume without duplicate voices.
 
 The six-case bindings suite checks transactional conflicts, raw press consumption,
 v1 migration/v2 round trips, malformed bindings, capture/cancel/defaults and menu

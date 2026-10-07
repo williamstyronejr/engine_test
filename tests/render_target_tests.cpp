@@ -1,6 +1,7 @@
 #include "../examples/feature_lab/collision_visuals.hpp"
 #include "../examples/feature_lab/diagnostics.hpp"
 #include "../examples/feature_lab/overlays.hpp"
+#include "../examples/feature_lab/scene_flow_draw.hpp"
 #include "../examples/feature_lab/settings_draw.hpp"
 #include "engine/renderer.hpp"
 #include "engine/window.hpp"
@@ -317,6 +318,28 @@ TEST(settings_render_at_small_and_large_sizes) {
     }
     CHECK(settings.controls_opened());
     render_sizes();
+}
+TEST(title_renders_before_simulation_and_reuses_gpu_resources) {
+    Window window(640, 480, "Title flow", false);
+    Renderer renderer;
+    auto game = feature_lab::load_game(AssetRoot(TEST_ASSET_ROOT));
+    feature_lab::SceneFlow flow(game, true);
+    const auto target = renderer.create_target(640, 480);
+    for (const auto size : {RenderTargetSize{320, 240}, RenderTargetSize{640, 480},
+                            RenderTargetSize{1280, 720}, RenderTargetSize{1050, 1360}}) {
+        renderer.resize_target(target, size.width, size.height);
+        for (int cycle = 0; cycle < 3; ++cycle) {
+            flow.prepare(size.width, size.height, true);
+            renderer.begin(target, {{0, 0}, 2});
+            flow.draw(renderer, size.width, size.height);
+            renderer.end();
+            CHECK(renderer.pixel(size.width / 2, size.height / 2)[2] > 20);
+            CHECK(renderer.stats().quads > 100 && renderer.healthy());
+            CHECK(renderer.live_targets() == 1 && renderer.live_textures() == 0);
+            flow.start_new(game);
+            flow.enter_title(game);
+        }
+    }
 }
 TEST(collision_station_draws_circle_and_switch_state) {
     Window window(320, 240, "Collision station", false);

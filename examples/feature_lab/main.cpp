@@ -8,6 +8,7 @@
 #include "game.hpp"
 #include "overlays.hpp"
 #include "persistence.hpp"
+#include "scene_flow_draw.hpp"
 #include "settings_draw.hpp"
 #include "shader_tools.hpp"
 #include "soundtrack.hpp"
@@ -84,7 +85,7 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
     };
     r.quad({w * 0.5F, -48 * scale}, {w, 96 * scale}, {0.008F, 0.018F, 0.03F, 0.96F});
     label(24, 16, 4, "FEATURE LAB", white);
-    label(25, 58, 1.7F, "13 / CONFIGURABLE KEYBOARD CONTROLS", cyan);
+    label(25, 58, 1.7F, "14 / TITLE AND SCENE TRANSITIONS", cyan);
     const float right = w / scale - 360;
     label(right, 18, 1.8F,
           "CORES  " + std::to_string(game.count()) + " / " + std::to_string(game.total()), cyan);
@@ -182,7 +183,7 @@ int main(int argc, char** argv) {
         std::string user_directory;
         bool audio_enabled = true, scripted = false, verification = false, vsync = true;
         std::string screenshot, asset_directory;
-        bool shader_error_demo = false, texture_error_demo = false;
+        bool shader_error_demo = false, texture_error_demo = false, direct_play = false;
         bool missing_texture_demo = false, settings_demo = false, diagnostics_demo = false;
         for (int i = 1; i < argc; ++i) {
             const std::string_view arg(argv[i]);
@@ -212,6 +213,8 @@ int main(int argc, char** argv) {
                 shader_error_demo = true;
             else if (arg == "--texture-error-demo")
                 texture_error_demo = true;
+            else if (arg == "--play")
+                direct_play = true;
             else if (arg == "--verify")
                 verification = true;
             else if (arg == "--no-audio")
@@ -240,7 +243,8 @@ int main(int argc, char** argv) {
                              "F5 reload shaders, F6 shader failure demo, F7 reload textures, "
                              "F8 texture failure demo, F10 single step while "
                              "paused, Escape close settings/quit.\n"
-                             "--verify (CPU gameplay test) --scripted --frames N --no-audio "
+                             "--play (skip title) --verify (CPU gameplay test) --scripted --frames "
+                             "N --no-audio "
                              "--no-vsync --screenshot FILE.ppm --assets DIRECTORY "
                              "--missing-texture-demo --settings-demo --diagnostics-demo "
                              "--shader-error-demo --texture-error-demo --user-data DIRECTORY "
@@ -253,6 +257,10 @@ int main(int argc, char** argv) {
         if (verification)
             return verify(assets);
         auto game = feature_lab::load_game(assets);
+        feature_lab::SceneFlow flow(game,
+                                    !(direct_play || scripted || load_slot || save_slot ||
+                                      settings_demo || diagnostics_demo || missing_texture_demo ||
+                                      shader_error_demo || texture_error_demo));
         std::unique_ptr<UserStorage> storage;
         feature_lab::Configuration config;
         std::string persistence_notice;
@@ -308,7 +316,8 @@ int main(int argc, char** argv) {
             textures.reload(renderer, true);
         std::cout << "[assets] " << assets.directory() << " entities=" << game.world.size()
                   << " GPU textures=" << renderer.live_textures() << '\n';
-        feature_lab::Soundtrack soundtrack(assets, audio_enabled, "default", config.audio);
+        feature_lab::Soundtrack soundtrack(assets, audio_enabled, "default", config.audio,
+                                           game.paused);
         soundtrack.locate_emitter(game);
         if (load_slot)
             soundtrack.restored(game);
@@ -366,7 +375,27 @@ int main(int argc, char** argv) {
                 batch.alpha = 1;
             }
             for (int step = 0; step < batch.steps; ++step) {
-                const auto physical = input.consume();
+                const auto routed = flow.update(game, input.consume(), window.width(),
+                                                window.height(), storage.get());
+                if (routed.quit) {
+                    running = false;
+                    break;
+                }
+                if (routed.transitioned) {
+                    if (routed.replaced) {
+                        soundtrack.restored(game);
+                        replay = feature_lab::Replay{};
+                        scripted = false;
+                        overlays.reset();
+                    } else {
+                        soundtrack.update(game, {}, 0);
+                    }
+                    std::cout << "[scene] gameplay ticks=" << game.ticks << '\n';
+                    continue;
+                }
+                if (flow.title_open())
+                    continue;
+                const auto physical = routed.gameplay;
                 if (!settings.opened())
                     settings.audio = soundtrack.settings();
                 const bool was_open = settings.opened();
@@ -377,6 +406,13 @@ int main(int argc, char** argv) {
                     config.bindings = settings.bindings;
                     config_dirty = true;
                     std::cout << "[bindings] updated" << '\n';
+                }
+                if (menu.title) {
+                    flow.enter_title(game);
+                    soundtrack.update(game, {}, 0);
+                    persist_config();
+                    std::cout << "[scene] title ticks=" << game.ticks << '\n';
+                    continue;
                 }
                 const auto& controls = menu.gameplay;
                 overlays.input(controls);
@@ -457,13 +493,20 @@ int main(int argc, char** argv) {
             diagnostics.collect_gpu(gpu_timer, frames + 1);
             gpu_timer.begin(frames + 1);
             const auto camera = game.camera(window.width(), window.height(), batch.alpha);
-            overlays.render_minimap(renderer, game, window.width(), window.height(), batch.alpha);
+            if (!flow.title_open())
+                overlays.render_minimap(renderer, game, window.width(), window.height(),
+                                        batch.alpha);
             renderer.begin(window.width(), window.height(), camera);
-            draw(renderer, game, textures, batch.alpha, window.width(), window.height(), camera,
-                 overlays, soundtrack, collision_visuals, diagnostics, shaders, settings.opened(),
-                 settings.bindings);
-            diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
-            settings.draw(renderer, window.width(), window.height());
+            if (flow.title_open()) {
+                flow.prepare(window.width(), window.height(), storage != nullptr);
+                flow.draw(renderer, window.width(), window.height());
+            } else {
+                draw(renderer, game, textures, batch.alpha, window.width(), window.height(), camera,
+                     overlays, soundtrack, collision_visuals, diagnostics, shaders,
+                     settings.opened(), settings.bindings);
+                diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
+                settings.draw(renderer, window.width(), window.height());
+            }
             renderer.end();
             gpu_timer.end();
             ++frames;
@@ -500,7 +543,9 @@ int main(int argc, char** argv) {
         if (save_slot) {
             if (!storage)
                 throw std::runtime_error("User storage unavailable");
-            feature_lab::save_slot(*storage, save_slot, game, settings.gameplay_paused(game));
+            feature_lab::save_slot(
+                *storage, save_slot, game,
+                (flow.title_open() ? flow.gameplay_paused(game) : settings.gameplay_paused(game)));
             std::cout << "[persistence] saved slot=" << save_slot << " ticks=" << game.ticks
                       << '\n';
         }
@@ -508,6 +553,7 @@ int main(int argc, char** argv) {
                   << " door_completions=" << game.door_completions << " collected=" << game.count()
                   << " dropped_seconds=" << dropped << " window_draws=" << renderer.stats().draws
                   << " minimap_draws=" << overlays.minimap_stats().draws
+                  << " scene=" << (flow.title_open() ? "title" : "gameplay")
                   << " texture_revision=" << textures.revision()
                   << " texture_applied=" << textures.applied()
                   << " shader_revision=" << renderer.shader_revision()
