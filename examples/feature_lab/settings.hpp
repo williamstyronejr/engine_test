@@ -12,7 +12,7 @@ struct AudioSettings {
 struct SettingsStep {
     engine::InputFrame gameplay{};
     bool captured{}, restart{}, quit{}, fullscreen{}, audio_changed{}, vsync_changed{}, save{},
-        load{}, bindings_changed{};
+        load{}, bindings_changed{}, title{};
 };
 class Settings {
   public:
@@ -32,6 +32,7 @@ class Settings {
         controls,
         controls_back,
         defaults,
+        title,
         binding_first = 100
     };
     engine::KeyBindings bindings;
@@ -131,6 +132,10 @@ class Settings {
                         close(game);
                         result.restart = true;
                         break;
+                    case title:
+                        close(game);
+                        result.title = true;
+                        break;
                     case quit:
                         result.quit = true;
                         break;
@@ -220,9 +225,13 @@ class Settings {
                                {left + 460 * scale, top + 614 * scale}};
         const Rect actions_bounds{{left + 20 * scale, top + 622 * scale},
                                   {left + 460 * scale, top + 664 * scale}};
-        const float middle = (actions_bounds.min.x + actions_bounds.max.x) * 0.5F;
+        const float third = (actions_bounds.max.x - actions_bounds.min.x) / 3;
+        const float middle = actions_bounds.min.x + third;
         const Rect save_bounds{actions_bounds.min, {middle - 4 * scale, actions_bounds.max.y}};
-        const Rect load_bounds{{middle + 4 * scale, actions_bounds.min.y}, actions_bounds.max};
+        const Rect load_bounds{{middle + 4 * scale, actions_bounds.min.y},
+                               {middle + third - 4 * scale, actions_bounds.max.y}};
+        const Rect title_bounds{{middle + third + 4 * scale, actions_bounds.min.y},
+                                actions_bounds.max};
         const std::array widgets{
             UiWidget{resume, UiKind::button, resume_bounds, "RESUME"},
 
@@ -243,7 +252,8 @@ class Settings {
             UiWidget{slot, UiKind::button, slot_bounds,
                      "SLOT " + std::to_string(selected_slot) + " / 3 - CHANGE"},
             UiWidget{save, UiKind::button, save_bounds, "SAVE"},
-            UiWidget{load, UiKind::button, load_bounds, "LOAD"}};
+            UiWidget{load, UiKind::button, load_bounds, "LOAD"},
+            UiWidget{title, UiKind::button, title_bounds, "TITLE"}};
         ui_.layout(panel_, widgets);
     }
     std::optional<std::size_t> capture_;

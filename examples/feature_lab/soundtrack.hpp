@@ -8,7 +8,7 @@ namespace feature_lab {
 class Soundtrack {
   public:
     Soundtrack(const engine::AssetRoot& assets, bool enabled, std::string_view device = "default",
-               AudioSettings initial = {})
+               AudioSettings initial = {}, bool initially_paused = false)
         : settings_(initial) {
         for (const float gain : {initial.master, initial.music, initial.effects})
             if (!std::isfinite(gain) || gain < 0 || gain > 1)
@@ -22,6 +22,11 @@ class Soundtrack {
             for (std::size_t i = 0; i < keys.size(); ++i)
                 sounds_[i] = output_->register_sound(engine::decode_wav(
                     assets.read(keys[i], engine::SoundData::max_file_bytes), keys[i]));
+            if (initially_paused) {
+                require(output_->pause_group(engine::AudioGroup::music, true));
+                require(output_->pause_group(engine::AudioGroup::effects, true));
+                paused_ = true;
+            }
             start_loops();
         } catch (const std::exception& error) {
             disable(error.what());

@@ -834,3 +834,34 @@ cmake --build --preset debug
 
 This overwrites the generated sample files. Ordinary builds only stage the existing
 files; they never regenerate or overwrite authored source content.
+
+## Title and gameplay transitions
+
+Feature Lab's `SceneFlow` owns the title/gameplay state, an initial checkpoint,
+selected continue slot and input gate. It uses the already-loaded facility scene,
+map and animation data; title transitions do not read new authored content or
+replace GPU textures/targets. This is a two-screen example workflow, not a generic
+multi-level streaming system.
+
+Normal startup enters the title with no resumable session. `--play`, `--scripted`,
+explicit load/save-slot options and existing demo flags enter gameplay directly.
+`--verify` remains CPU-only. Both screens share renderer resources. The title skips
+world/minimap rendering and simulation; its layout is prepared before the first
+render even if no fixed tick has elapsed. Gameplay audio groups start paused on
+title startup and retain their voices across Title/Resume.
+
+New Game restores a startup checkpoint through `Game::restore`. Continue strictly
+reads/decodes the chosen ESAV slot before that same staged restore. All game-state
+validation finishes before the world is replaced; successful replacements invalidate
+old entity handles. Failure retains the title, previous world, handles and pause
+state and reports a visible notice plus console detail. Saves are never overwritten
+by these actions. Continue availability indicates usable storage, not a verified
+save; empty/corrupt slots can be retried or another slot selected.
+
+F1 Title closes settings and preserves the underlying gameplay pause state before
+suspending the session. Resume preserves entity handles and restores that state.
+New/Continue reset replay and panel scroll and rebuild audio playback without old
+one-shot events; Resume continues existing voices. The title's Tab/Enter/pointer
+input is captured, including the transition tick, and held actions remain blocked
+until physical release. At most one scene command is applied per fixed tick.
+Settings and save schemas are unchanged (ECFG v2 and ESAV v2).

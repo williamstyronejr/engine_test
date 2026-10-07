@@ -1,7 +1,7 @@
 # Implementation status
 
-The thirteenth increment adds configurable letter-key bindings, a Controls page,
-and persisted settings with backward-compatible loading. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
+The fourteenth increment adds a title screen, explicit new-game/continue/resume
+commands, and transactional replacement of the facility world. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
 ## Delivered
 
@@ -56,11 +56,11 @@ entire plan feature ID when required subfeatures are still absent.
 | F04 | Partial | GPU pixel/order/color/atlas/culling/batch rollover tests, animated atlas sprites; shared-handle transactional texture reload tests | Richer sampling controls; live reload, assets, UV flips and scene layers now implemented |
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
 | F06 | Implemented (v1) | EANI reader/writer; exact frame timing, loops, pause/restart, large advances; animated player/machine/door with exactly-once completion | Optional frame callbacks and richer animation types |
-| F07 | Partial | Handle/compaction/hierarchy tests, scene round trips, deferred core deletion and restart | Extensible component pools, multi-scene transition workflow |
+| F07 | Partial | Handle/compaction/hierarchy tests, scene round trips, deferred core deletion and restart; title/gameplay transitions with staged new/continue and in-memory resume | Extensible component pools, transitions between different authored levels |
 | F08 | Partial | ETEX/ETMP/EANI/WAV readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, bounded shader files and transactional shader/texture reload | Further asset types and file watching |
 | F09 | Implemented (v1) | Swept player boxes; box/circle contacts; moving-body grid vs brute force; reciprocal filters; trigger history; overlap/segment queries; alarm/switch and restore tests | Rigid-body dynamics, rotating shapes and moving-body CCD are outside initial scope |
 | F10 | Partial | PCM16 WAV assets/resampling, loops, voice controls, gain ramps, master/music/effects controls, stereo emitter, null-device soundtrack/restart/failure tests | Physical disconnect/recovery testing and audible-output checks |
-| F11 | Partial | Bitmap text, clipped status panel, buttons/checkboxes/sliders, keyboard/pointer navigation, bounded layout, modal settings; `ui` and GPU pixel tests | Dedicated title screen, broader text fixtures and manual navigation checks |
+| F11 | Partial | Bitmap text, clipped status panel, buttons/checkboxes/sliders, keyboard/pointer navigation, bounded layout, modal settings and title screen; `ui`, scene-flow and GPU pixel tests | Broader text fixtures and manual navigation checks |
 | F12 | Implemented (v1) | Live minimap, clipped scrolling panel; seven GPU cases for pixels, alpha composition, clipping, resizing, resource limits and example integration | Optional multisampling, HDR and post-processing |
 | F13 | Partial | Clock conservation/catch-up tests, F10 paused stepping, full stepped replay/state equivalence, modal capture and checkpoint tests | Replay-file format and random-state serialization |
 | F14 | Implemented (v1) | Versioned scene/checkpoint/config formats; three-slot UI; CRC, bounds and semantic checks; unchanged live game on failed load; interrupted-process write tests | Optional version migration and power-loss/filesystem fault testing |
@@ -575,15 +575,52 @@ paused while the menu was open. User settings were isolated under `build/`; no
 system keyboard configuration was changed. These runs are interaction checks, not
 controlled performance measurements.
 
+## Added in the fourteenth increment
+
+- Default title screen with New Game, Continue from a chosen save slot, Resume
+  Session and Quit. F1 Title suspends the active session with its pause state intact.
+- New/Continue validate and stage world replacement before changing live state;
+  failure retains session and entity handles. Resume retains the same world.
+- Shared graphics resources, no world/minimap drawing or simulation on the title,
+  initially paused audio and no duplicate voices on resume. Existing automated/demo
+  modes still start in gameplay; `--play` explicitly bypasses the title.
+- Six CPU transition cases, a GPU title/layout/lifetime case and an audio pause/resume
+  case. No new runtime dependencies or persistence-format changes.
+
+## Fourteenth-increment validation (2026-10-07)
+
+All twenty CTest groups pass in GCC debug/release, Clang debug and native
+AddressSanitizer/UndefinedBehaviorSanitizer builds, without hardware skips. After
+shortening a clipped slot-selector label, the scene-flow and GPU rendering groups
+were checked again on the final code in all three non-sanitized configurations;
+the full sanitizer run also uses the final code. Formatting, strict warnings and
+diff whitespace checks pass.
+
+An eight-frame installed run rendered the title before gameplay, with zero ticks
+and no minimap draws. Its final capture was inspected. A 2,400-frame native-input
+run from `/tmp` exercised New Game, save slot 1, return to title, failed Continue
+from an empty slot, successful Continue from slot 1, Resume Session, another New
+Game, and return to title. The saved file remained byte-identical throughout the
+load/resume/new-game operations. Four gameplay entries and four title returns were
+recorded; new games began at tick zero and Continue restored the saved tick six.
+
+A separate installed scripted run bypassed the title as intended, rendered 1,600
+frames and completed the game at tick 1,381 with three cores and one door completion.
+Visible runs used isolated user-data directories and disabled audio; the null-device
+suite separately verifies initially paused audio and resume without duplicate voices.
+GPU checks cover title rendering at 320×240, 640×480, 1280×720 and 1050×1360 and
+stable resource counts across repeated transitions. These are functional checks,
+not controlled performance measurements or arbitrary authored-level transitions.
+
 ## Current scope
 
 The component model remains bounded to optional sprite/collider records. Tilemaps
 are immutable; atlas grids are regular and clips use tick durations. Render targets
 are single-sample sRGB RGBA8 color buffers. No external libraries were added.
-Richer scene workflows and several other planned systems remain unfinished. See [format/API contracts](FORMATS.md)
+Transitions between different authored levels and several other planned systems remain unfinished. See [format/API contracts](FORMATS.md)
 for limits, rendering conventions, and lifetimes.
 
 ## Next increment
 
-Add a title screen and explicit new-game/continue workflow, with transactional
-scene transitions and Feature Lab coverage (F07/F11).
+Add a versioned tick-indexed replay-file format with seeded random-state support,
+validation and deterministic playback tests (F13).

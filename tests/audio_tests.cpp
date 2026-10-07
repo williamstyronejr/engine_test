@@ -173,6 +173,26 @@ TEST(single_step_keeps_audio_groups_paused_until_resume) {
     eventually([&] { return track.stats().completed == 1; });
     CHECK(track.enabled() && track.stats().queue_rejections == 0);
 }
+TEST(title_audio_starts_paused_and_resumes_without_duplicate_voices) {
+    const AssetRoot assets(TEST_ASSET_ROOT);
+    auto game = feature_lab::load_game(assets);
+    game.paused = true;
+    feature_lab::Soundtrack track(assets, true, "null", {}, true);
+    track.update(game, {}, 1);
+    eventually([&] { return track.stats().started == 3; });
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    CHECK(track.stats().completed == 0 && track.stats().active_voices == 3);
+    game.paused = false;
+    track.update(game, {}, 0);
+    eventually([&] { return track.stats().completed == 1; });
+    for (int i = 0; i < 8; ++i) {
+        game.paused = true;
+        track.update(game, {}, 0);
+        game.paused = false;
+        track.update(game, {}, 0);
+    }
+    CHECK(track.enabled() && track.stats().started == 3 && track.stats().queue_rejections == 0);
+}
 TEST(missing_audio_device_is_rejected) {
     rejects([] { AudioOutput bad("engine_test_intentionally_missing_device"); });
     const AssetRoot assets(TEST_ASSET_ROOT);

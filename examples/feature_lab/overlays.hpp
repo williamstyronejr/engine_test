@@ -21,6 +21,7 @@ class Overlays {
         game.map.append_colliders(game.map.bounds(), walls_);
         walls_.insert(walls_.end(), game.walls.begin(), game.walls.end());
     }
+    void reset() { scroll_ = 0; }
     void input(const engine::InputFrame& frame) {
         using namespace engine;
         scroll_ = std::clamp(scroll_ + (static_cast<float>(button(frame, Key::panel_down).held) -
