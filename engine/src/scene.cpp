@@ -175,17 +175,7 @@ void Scene::set_collider(Entity e, Collider c) {
     mutable_node(e).collider = c;
 }
 Transform Scene::world_transform(Entity e) const {
-    Transform result;
-    for (auto p = e; p; p = get(p).parent) {
-        const auto& t = get(p).local;
-        result = Transform::from(t.position, t.rotation, t.scale) * result;
-    }
-    if (!valid(e))
-        throw std::invalid_argument("Invalid entity transform request");
-    for (float value : {result.a, result.b, result.c, result.d, result.x, result.y})
-        if (!std::isfinite(value) || std::abs(value) > 1e12F)
-            throw std::runtime_error("World transform exceeds numeric limits");
-    return result;
+    return sampled_world_transform(e, [](const SceneNode& node) { return node.local; });
 }
 void Scene::destroy(Entity e) {
     require_mutable();

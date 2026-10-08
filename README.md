@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The seventeenth increment adds relocatable release archives, payload checksums,
-host dependency inventories and installed-package smoke tests.
+The eighteenth increment adds a parented rotation/scale gallery, interpolated
+local-pose sampling and broader camera/transform validation.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -188,6 +188,30 @@ remaining paused. A held key does not repeat. Pause and restart take precedence
 when pressed with step; completed games cannot advance. Audio stays paused and
 new stepped gameplay cues wait for resume. Settings capture all debug/step controls
 until release. Diagnostics are session-only and do not change checkpoint formats.
+
+## Transform gallery and camera
+
+Near the spawn point, at world (-27, -4), a cyan arm rotates once every 240
+simulation ticks. Its checker panel inherits the rotation, uses a mirrored X axis,
+and pulses with nonuniform scale; a small orange satellite inherits both parents.
+The hierarchy preserves shear rather than decomposing world matrices back to
+rotation and scale. Walk upward from spawn to inspect it, use +/- to zoom, and F3
+to see the camera bounds. The camera follows the interpolated player and clamps to
+the map; a viewport wider than the map centers that axis.
+
+Space freezes the gallery, F10 advances one tick while paused, and R resets it.
+Motion derives from ticks and authored local transforms, with fractional-tick
+render sampling, so saving/loading and replay reconstruct the same poses without
+extra save fields. Load and paused stepping snap to the current pose. Rendering
+does not modify scene transforms or consume random state. Decoration subtrees
+cannot contain gameplay entities or colliders.
+
+The updated scene changes the content fingerprint: saves/replays from older scene
+content are rejected by the existing content check. ESAV/ERPL formats are unchanged.
+`transforms` covers numeric hierarchy/camera references, wraparound, pause/step,
+restore/restart, replay and invalid content. `render_targets` checks mirrored and
+sheared texture pixels through rotation, zoom and viewport changes, plus partially
+visible rotated-sprite culling.
 
 ## Shader development
 

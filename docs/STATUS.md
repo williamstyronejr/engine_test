@@ -1,7 +1,7 @@
 # Implementation status
 
-The seventeenth increment adds relocatable release archives, dependency inventories
-and extracted-package verification. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
+The eighteenth increment adds a parented transform gallery, sampled local poses
+and broader camera/transform validation. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
 ## Delivered
 
@@ -52,7 +52,7 @@ entire plan feature ID when required subfeatures are still absent.
 | --- | --- | --- | --- |
 | F01 | Partial | `graphics`, `platform_events`, `platform_no_display`, visible startup/resize | Manual minimize/fullscreen/scaling matrix and visible-window focus checks |
 | F02 | Partial | CPU edge/focus/capture tests; native key-repeat/alias/pointer/wheel/focus tests; modal gameplay routing; ten configurable letter actions, conflict/capture/persistence tests; mapping notification refresh | Configurable mouse actions, arbitrary keys/chords and keyboard group switching |
-| F03 | Partial | Camera round trips, transform hierarchy tests, clamped follow/zoom, GPU world/HUD projection checks | Parented rotating/scaled example decorations and broader manual camera validation |
+| F03 | Implemented (v1) | Parented rotating/scaled/mirrored gallery; sampled affine hierarchy; camera corner/aspect/follow/zoom checkpoints; pause/step/save/replay pose tests; GPU shear/mirror/culling/resize pixels | Broader manual camera and display matrix; transform caching is optional |
 | F04 | Partial | GPU pixel/order/color/atlas/culling/batch rollover tests, animated atlas sprites; shared-handle transactional texture reload tests | Richer sampling controls; live reload, assets, UV flips and scene layers now implemented |
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
 | F06 | Implemented (v1) | EANI reader/writer; exact frame timing, loops, pause/restart, large advances; animated player/machine/door with exactly-once completion | Optional frame callbacks and richer animation types |
@@ -743,7 +743,48 @@ libraries. They do not establish cross-distribution compatibility or audible
 physical-device output. No engine runtime code changed in this increment.
 See [packaging contracts](PACKAGING.md) for scratch directories and test commands.
 
+## Added in the eighteenth increment
+
+- Read-only local-pose sampling through a scene hierarchy, preserving full affine
+  composition, shear and mirrored axes without per-sample allocation.
+- Authored four-node transform station near spawn: rotating nonuniformly scaled
+  arm, mirrored pulsing checker panel and inherited satellite. Motion derives from
+  bounded simulation tick phase and interpolates locally before world composition.
+- Pause/step/restart/save/replay integration with snapped restore/step poses and
+  validation preventing gameplay/collision entities beneath animated decorations.
+- Camera numeric-domain checks and safer aspect scaling; expanded camera corner,
+  resize/aspect, map clamp, zoom and transform reference tests.
+- GPU pixel checks for the authored hierarchy at multiple phases/zooms/aspects and
+  a rotated sprite whose center is outside the view but whose geometry is visible.
+- Updated asset generator and authored scene. Existing save/replay formats remain
+  unchanged; old scene content is rejected by the established fingerprint check.
+
+## Eighteenth-increment validation (2026-10-08)
+
+GCC Debug passes all 26 CTest groups, Release all 29 (including extracted-package
+CPU/OpenGL fixtures), and the CPU ASan/UBSan configuration all 16. The final
+full-turn normalization change was then checked with the complete Release suite,
+the Debug/Clang transform and render-target groups, and the sanitizer transform
+group. There were no test skips or sanitizer findings.
+
+The new CPU group contains seven cases covering hand-computed hierarchy points,
+read-only sampling and invalid input, camera corners/aspects/clamping/zoom, inherited
+orbit/scale/mirror/shear, full-turn continuity and exact restore equivalence,
+pause/step/restart/large-tick restore, replay poses at three interpolation fractions,
+and rejection of colliders/gameplay nodes under visual animation. Two added GPU
+cases extend render_targets to 15 cases: the authored mirrored/sheared panel is
+sampled at five tick checkpoints, two zoom levels and three viewport shapes; a
+partially visible rotated hierarchy remains rendered while an offscreen one culls.
+
+Native replay-driven captures at normal and close zoom were visually inspected on
+the existing Intel/Mesa OpenGL 4.6 XWayland session. The station label was moved
+clear of the rotating panel. The C++ asset generator reproduces the checked-in
+scene exactly. Full scripted gameplay and packaged replay verification still
+complete at tick 1,381. Captures/tests use isolated temporary user data and no
+physical audio device. These are functional checks, not performance baselines or
+a broader manual display/focus test matrix.
+
 ## Next increment
 
-Add parented rotating/scaled example decorations and broader camera/transform
-validation (F03), with deterministic simulation and rendering checks.
+Add explicit texture filtering/wrapping controls with atlas-edge tests and a
+Feature Lab sampling demonstration (F04).

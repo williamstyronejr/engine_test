@@ -222,6 +222,24 @@ int main(int argc, char** argv) {
             add(id++, "Core", "core", p, {0.9F, 0.9F}, 20);
         const auto machine = add(40, "Ventilation", "machine", {0, 9}, {2.5F, 2.5F}, 10);
         scene.set_collider(machine, {{1, 1}});
+        // Visual hierarchy: nonuniform parent scale + rotated child produces shear.
+        // Negative child X scale demonstrates a mirrored texture, with a third-level satellite.
+        const auto hub = scene.create(49, "Transform station hub", "decoration");
+        scene.set_parent(hub, group);
+        scene.set_transform(hub, {{-27, -4}, 0, {1, 1}});
+        scene.set_sprite(hub, {"textures/white.etex", {0.3F, 0.3F}, 1, 0.65F, 0.1F, 1, 12});
+        const auto rotor = scene.create(50, "Rotating arm", "rotor");
+        scene.set_parent(rotor, hub);
+        scene.set_transform(rotor, {{}, 0, {1.25F, 0.8F}});
+        scene.set_sprite(rotor, {"textures/white.etex", {2.8F, 0.12F}, 0.05F, 0.7F, 0.55F, 1, 8});
+        const auto pulse = scene.create(51, "Mirrored scaling panel", "pulse");
+        scene.set_parent(pulse, rotor);
+        scene.set_transform(pulse, {{1.4F, 0}, 0.785398163F, {-0.8F, 1}});
+        scene.set_sprite(pulse, {"textures/checker.etex", {0.7F, 0.7F}, 0.1F, 0.8F, 1, 1, 9});
+        const auto satellite = scene.create(52, "Inherited satellite", "decoration");
+        scene.set_parent(satellite, pulse);
+        scene.set_transform(satellite, {{0.7F, 0.4F}, -0.3F, {1, 1}});
+        scene.set_sprite(satellite, {"textures/white.etex", {0.2F, 0.3F}, 1, 0.4F, 0.06F, 1, 10});
         root.write_text("facility.scene", engine::serialize_scene(scene));
         std::cout << "Wrote " << scene.size()
                   << " entities, 64x32 three-layer map, five animation clips, atlases and four WAV "

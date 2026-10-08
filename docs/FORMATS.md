@@ -169,7 +169,12 @@ bounded initial component model, not a general extensible ECS. `get` returns a
 borrowed reference: structural changes can invalidate references, but valid entity
 handles remain usable. Reparenting preserves the local transform, not world space.
 World transforms are computed from the ancestor chain; dirty-transform caching is
-not implemented yet.
+not implemented yet. `sampled_world_transform(entity, callback)` accepts a pure
+local-pose sampler returning `LocalTransform` for each node from child through root.
+It composes complete affine matrices, preserving inherited shear and negative
+scale. The sampler must not mutate the scene. Sampling allocates no storage and
+leaves authored local transforms unchanged; invalid handles and nonfinite or
+out-of-range final matrices are rejected, as with `world_transform`.
 
 `each` forbids immediate scene mutation. Queue deletions with `defer_destroy`, then
 call `flush` outside iteration. Deleting a parent removes its subtree. Repeated
@@ -269,6 +274,11 @@ No arbitrary frame callbacks or interpolated/skeletal animation are provided.
 not clear the framebuffer or reset frame statistics and is valid only between
 `begin` and `end`. Feature Lab uses a clamped player-following world camera, then
 switches to pixel coordinates for a fixed HUD. +/- changes world-camera height.
+Camera screen coordinates have a top-left origin and downward Y; world coordinates
+have upward Y. Conversion uses continuous viewport coordinates (0..width, 0..height),
+not pixel-center indices. Extents reject nonpositive dimensions/heights, nonfinite
+centers and overflowing/underflowing horizontal extents. The aspect ratio is
+computed before scaling to avoid an unnecessary intermediate overflow.
 
 ## Offscreen render targets
 
@@ -812,13 +822,28 @@ retains its waypoint while paused. Diagnostics are not serialized.
 machine. `facility.etmp` stores the 64×32 facility in three layers (floor, structure,
 overhead pipes), with 6144 total cells. `facility.eani` defines idle, walking,
 core pulse, machinery, and one-shot door clips. `tiles.etex` and `actors.etex` are
-shared atlases; the generator also retains the earlier white/checker fixtures.
+shared atlases; the white/checker textures also supply the transform gallery.
 `sounds/pickup.wav`, `music.wav`, `machine.wav`, and `door.wav` supply in-house
 procedural audio, serialized as ordinary WAV files. Music is stereo; effects are mono.
 
-The example recognizes `player`, `exit`, `core`, and `machine` tags. Animated
-sprites must use the animation set's texture. Static collider records and solid
-tiles block the player. The exit has a game-owned barrier until its 32-tick opening
+The example recognizes `player`, `exit`, `core`, and `machine` gameplay tags.
+`rotor` and `pulse` tags add visual-only procedural local poses: a 240-tick turn
+and sinusoidal X/Y scale multipliers (1 ± 0.25 and 1 ± 0.2 respectively).
+Descendants inherit these sampled poses. Animated decoration subtrees reject
+colliders and gameplay tags so rendered motion cannot diverge from collision or
+pickup positions. Authored transforms remain unchanged; runtime `world_transform`
+still reports the authored pose. Use `Game::render_transform` for the visual pose.
+The transient previous tick is reset on restore/restart/paused step; fractional
+render interpolation samples the bounded phase before composing the hierarchy,
+avoiding matrix interpolation shrinkage or a full-turn wrap discontinuity.
+Render alpha must be finite and in [0,1]. Integer-tick wrap phases are canonicalized
+so a restored pose matches the live pose exactly even at a full turn.
+Pose state derives from existing simulation ticks and content, so no ESAV/ERPL
+fields or replay hash fields are added. The new scene fingerprint intentionally
+rejects old-content checkpoints and replays.
+
+Gameplay sprites with atlas animation must use the animation set's texture. Static
+collider records and solid tiles block the player. The exit has a game-owned barrier until its 32-tick opening
 clip emits completion, after all three cores are collected. Restart reconstructs
 the scene, invalidates old handles, and resets animation, camera, and door state.
 
