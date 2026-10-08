@@ -59,6 +59,8 @@ class Scene {
     void destroy(Entity entity); // Removes subtree. Structural mutation only outside each().
     void defer_destroy(Entity entity);
     void flush();
+    // Reserved vector payload bytes; excludes allocator overhead and string/hash storage.
+    std::size_t buffer_bytes() const;
     std::size_t size() const { return nodes_.size(); }
     template <class F> void each(F&& function) const {
         ++iteration_depth_;

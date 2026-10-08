@@ -36,6 +36,9 @@ struct ShaderReloadResult {
     std::uint64_t revision{}; // Unchanged on failure; starts at 1 for the built-in program.
     std::string diagnostics;  // Bounded compiler/linker warnings or failure details.
 };
+struct GraphicsInfo {
+    std::string vendor, device, version;
+};
 struct RenderStats {
     std::size_t quads{}, culled{}, draws{};
 };
@@ -79,6 +82,9 @@ class Renderer {
     void replace_textures(std::span<const TextureReplacement> replacements);
     void release(TextureHandle texture);
     std::size_t live_textures() const;
+    // Uploaded RGBA8 payload only; excludes built-in atlas, targets and driver overhead.
+    std::size_t texture_bytes() const;
+    GraphicsInfo graphics_info() const;
     void sprite(TextureHandle texture, Transform model, Color color = {},
                 Rect uv = {{0, 0}, {1, 1}});
     void text(Vec2 top_left, float pixel_size, std::string_view value, Color color);

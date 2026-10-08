@@ -937,3 +937,16 @@ layout becomes incompatible. Content fingerprints reject a changed facility.
 Exact floating-point hashes are tested in supported local builds; compatibility
 across arbitrary machines, compiler flags or future physics implementations is not
 a guarantee. Renderer/audio nondeterminism has no effect on simulation playback.
+
+
+## Stress workload and resource accounting
+
+The versioned stress workload and JSON report contract are documented in
+[benchmarks/README.md](../benchmarks/README.md). `Scene`, `TileMap` and
+`CollisionWorld::buffer_bytes()` expose tracked reserved buffer payloads with
+explicit exclusions. `Renderer::texture_bytes()` counts uploaded RGBA8 payloads,
+including dimensions changed through transactional replacement. Failed replacement
+leaves both images and byte counts unchanged; release returns their counts to zero.
+Built-in rendering storage and target bytes are separate. `graphics_info()` reads
+GL vendor/device/version from the owning current context. These methods add no
+external dependency and do not change content, save or replay schemas.

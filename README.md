@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The fifteenth increment adds replay recording, deterministic playback verification,
-and saved random state. Title/New Game/Continue/Resume remain available in normal play.
+The sixteenth increment adds a configurable stress arena, CPU-only benchmark,
+JSON performance reports and repeated load/unload resource checks.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -322,7 +322,28 @@ required; determinism across arbitrary architectures/compiler floating-point mod
 is not promised. Audio, rendering and menu actions are outside replay state.
 See [ERPL contracts](docs/FORMATS.md#replay-files-erpl-v1).
 
+## Stress arena and benchmark reports
+
+```sh
+./build/release/feature_lab --stress --width 1920 --height 1080 \
+  --frames 600 --warmup 60 --cycles 3 --report build/stress.json
+./build/release/stress_bench --frames 600 --warmup 60 --cycles 3 \
+  --report build/stress-cpu.json
+```
+
+The arena independently scales sprites, tiles, scene nodes, collision density and
+offline mixer voices. It repeats complete load/measure/unload cycles and checks
+tracked resources for growth. Reports include warmup-excluded median/p95/p99 CPU
+and GPU timings, hardware/build metadata, workload counts, checksum and memory
+observations. `--stress --help` lists options; Escape aborts. This mode does not
+modify saves or settings. See [workloads, report fields and measurement limits](benchmarks/README.md).
+
 ## Tests
+
+Stress tests cover deterministic workloads, all capacity limits, dense collision
+results, allocation-free steady CPU updates, repeated CPU/GPU teardown, batching,
+culling, texture-byte accounting and JSON report validation.
+
 
 The eight-case `replay_files` group checks seeded reference sequences, save migration,
 full-game record/decode/playback, paused starts, short taps, stepping, restart,

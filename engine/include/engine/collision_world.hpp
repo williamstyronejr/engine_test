@@ -67,6 +67,8 @@ class CollisionWorld {
     std::span<const Body2D> bodies() const { return bodies_; }
     std::span<const Contact2D> contacts() const { return contacts_; }
     std::span<const TriggerEvent> events() const { return events_; }
+    // Reserved vector payload bytes; excludes allocator overhead and string/hash storage.
+    std::size_t buffer_bytes() const;
     CollisionStats stats() const { return stats_; }
     void query(Shape2D shape, std::vector<std::uint64_t>& output, QueryFilter filter = {}) const;
     std::optional<SegmentHit> segment(Vec2 start, Vec2 end, QueryFilter filter = {}) const;

@@ -1,7 +1,7 @@
 # Implementation status
 
-The fifteenth increment adds bounded replay files, deterministic playback checks,
-and persisted seeded random state. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
+The sixteenth increment adds a configurable stress arena, benchmark reports and
+repeated load/unload resource checks. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
 ## Delivered
 
@@ -65,7 +65,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F13 | Implemented (v1) | Clock/catch-up, paused stepping, ERPL recording/playback, per-command state checks, seeded random state, save migration and full-game replay tests | Cross-machine float determinism and replaying menu/audio/render commands are outside v1 |
 | F14 | Implemented (v1) | Versioned scene/checkpoint/config formats; three-slot UI; CRC, bounds and semantic checks; unchanged live game on failed load; interrupted-process write tests | Power-loss/filesystem fault testing and content migration |
 | F15 | Partial | Console errors, GL callback, F2 rolling timing/counter overlay, F3 collision/camera outlines, target accounting, CPU percentiles, shader reload/failure recovery, GPU pixel/interface/lifetime tests, bounded asynchronous GPU timing with sample age/skips | Broader manual fault scenarios and profiling coverage |
-| F16 | Partial | Audio/GPU lifetime tests; install includes scene, map, animations, textures and WAV sounds | Aggregate resource accounting, stress arena, portable packaging, broader hardware checks |
+| F16 | Partial | Configurable stress arena, CPU/GPU repeated teardown checks, allocation-free steady CPU tests, tracked buffer/texture/target bytes, JSON benchmarks and installed CPU runner | Full allocator/driver accounting, portable packaging and broader hardware/manual checks |
 
 ## Initial validation environment
 
@@ -657,7 +657,45 @@ checks cover audio transport. These are functional checks performed alongside
 build work, not controlled performance measurements. Cross-machine determinism,
 audio/render-command replay and menu recording remain outside this increment.
 
+## Added in the sixteenth increment
+
+- Configurable, deterministic sprite/tile/entity/collision/mixer workloads with
+  independent counts, capacity rejection, per-cycle warmup and repeated teardown.
+- Visible `--stress` mode with a fixed offscreen resolution and a CPU-only
+  `stress_bench` executable. Both install and need no authored asset files.
+- JSON workload/build/hardware metadata, mean/median/p95/p99/max timings, async GPU
+  timing status, workload counters, final checksum and bounded storage observations.
+- Reserved CPU buffer and uploaded texture-byte accounting; stable loaded resources
+  and return-to-baseline GPU teardown checks; RSS reported separately without a leak claim.
+- Six CPU cases, structured report validation and two GPU cases. CPU allocation
+  instrumentation verifies zero allocations during steady simulation/mixing and
+  baseline live allocation blocks after eight arena lifetimes; GPU tests repeat twelve lifetimes.
+
+## Sixteenth-increment validation (2026-10-08)
+
+All twenty-four CTest groups pass in GCC debug/release, Clang debug and native
+AddressSanitizer/UndefinedBehaviorSanitizer builds, without hardware skips. The
+stress groups were repeated in debug/release after final JSON escaping and HUD
+counter adjustments; Clang and sanitizer suites already include those adjustments.
+Formatting, strict warnings and diff whitespace checks pass.
+
+Installed release runs from `/tmp` exercise all maximum workload counts together:
+65,536 sprites, 65,536 occupied tiles, 4,096 entities, 256 overlapping bodies and
+16 mixer voices. Each measured pass reports exactly 114,688 quads, 16,384 culled
+sprites, 28 batches and 32,640 contacts. Resources remain stable across two cycles.
+The maximum-workload capture and a default-size smoke capture were inspected.
+A native Escape event produces a nonzero exit, incomplete JSON report and clean
+resource teardown. Invalid workload counts and conflicting gameplay options fail
+before opening a display.
+
+Installed `stress_bench` and `feature_lab --stress --cpu-only` run with DISPLAY
+unset and produce matching checksums for identical workloads. A separate release
+configuration with ENGINE_BUILD_PLATFORM=OFF builds and runs `stress_bench`
+without platform targets. Visible validation does not open an audio device or
+read/write game settings. Maximum-workload smoke runs are functional checks,
+not performance baselines. See [benchmark contracts](../benchmarks/README.md).
+
 ## Next increment
 
-Add a reproducible Feature Lab stress arena and resource-growth checks (F16), with
-workload counts and benchmark output to measure rendering/simulation limits.
+Add relocatable release packaging and a clean installed-package smoke test (F16),
+including the game, CPU benchmark, assets and usage/compatibility documentation.
