@@ -44,6 +44,8 @@ class TileMap {
     explicit TileMap(TileMapData data);
     const TileMapData& data() const { return data_; }
     Rect bounds() const;
+    // Reserved vector payload bytes; excludes allocator overhead and string/hash storage.
+    std::size_t buffer_bytes() const;
     std::size_t solid_cells() const { return solid_count_; }
     std::size_t chunk_count() const { return chunks_.size(); }
     bool solid(std::uint32_t x, std::uint32_t y) const;

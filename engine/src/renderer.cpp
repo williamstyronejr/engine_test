@@ -149,6 +149,7 @@ struct Renderer::Impl {
     struct TextureSlot {
         GLuint object{};
         std::uint64_t serial{};
+        std::size_t bytes{};
     };
     std::array<TextureSlot, max_textures> textures{};
     struct TargetSlot {
@@ -605,7 +606,7 @@ TextureHandle Renderer::upload(const TextureData& data) {
     if (!serial)
         throw std::overflow_error("Texture handle serial exhausted");
     const auto object = p.allocate_texture(data);
-    p.textures[index] = {object, serial};
+    p.textures[index] = {object, serial, data.rgba.size()};
     return {static_cast<std::uint32_t>(index), serial};
 }
 void Renderer::replace_textures(std::span<const TextureReplacement> replacements) {
@@ -638,8 +639,11 @@ void Renderer::replace_textures(std::span<const TextureReplacement> replacements
     for (std::size_t i = 0; i < replacements.size(); ++i)
         candidates.objects[i] = p.allocate_texture(replacements[i].data);
     // No throwing work during publication. RAII now retires the previous objects.
-    for (std::size_t i = 0; i < replacements.size(); ++i)
-        std::swap(p.textures[replacements[i].handle.slot].object, candidates.objects[i]);
+    for (std::size_t i = 0; i < replacements.size(); ++i) {
+        auto& slot = p.textures[replacements[i].handle.slot];
+        std::swap(slot.object, candidates.objects[i]);
+        slot.bytes = replacements[i].data.rgba.size();
+    }
 }
 void Renderer::release(TextureHandle texture) {
     auto& p = *impl_;
@@ -653,6 +657,20 @@ std::size_t Renderer::live_textures() const {
     return static_cast<std::size_t>(
         std::count_if(impl_->textures.begin(), impl_->textures.end(),
                       [](const auto& slot) { return slot.object != 0; }));
+}
+std::size_t Renderer::texture_bytes() const {
+    std::size_t bytes = 0;
+    for (const auto& slot : impl_->textures)
+        bytes += slot.bytes;
+    return bytes;
+}
+GraphicsInfo Renderer::graphics_info() const {
+    const auto read = [&](GLenum name) {
+        const auto* value = impl_->gl.GetString(name);
+        return value ? std::string(reinterpret_cast<const char*>(value))
+                     : std::string("unavailable");
+    };
+    return {read(GL_VENDOR), read(GL_RENDERER), read(GL_VERSION)};
 }
 void Renderer::sprite(TextureHandle texture, Transform model, Color color, Rect uv) {
     impl_->submit(model, color, uv, impl_->texture_object(texture));

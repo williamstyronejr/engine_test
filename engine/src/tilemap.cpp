@@ -5,6 +5,16 @@
 #include <limits>
 
 namespace engine {
+std::size_t TileMap::buffer_bytes() const {
+    std::size_t bytes = data_.palette.capacity() * sizeof(TileDefinition) +
+                        data_.layers.capacity() * sizeof(TileLayer) + chunks_.capacity() +
+                        solids_.capacity() +
+                        (x_edges_.capacity() + y_edges_.capacity()) * sizeof(float);
+    for (const auto& layer : data_.layers)
+        bytes += layer.cells.capacity() * sizeof(std::uint16_t);
+    return bytes;
+}
+
 namespace {
 std::size_t cell_count(std::uint32_t width, std::uint32_t height, std::size_t layers) {
     if (!width || !height || width > 1024 || height > 1024 || !layers || layers > 8)

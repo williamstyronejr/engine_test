@@ -1,0 +1,7 @@
+#pragma once
+namespace feature_lab {
+inline constexpr auto stress_build_revision = R"build(@STRESS_REVISION@)build";
+inline constexpr auto stress_build_compiler = R"build(@CMAKE_CXX_COMPILER_ID@ @CMAKE_CXX_COMPILER_VERSION@)build";
+inline constexpr auto stress_build_configuration = R"build(@CMAKE_BUILD_TYPE@)build";
+inline constexpr auto stress_build_flags = R"build(@STRESS_FLAGS@)build";
+}

@@ -4,6 +4,15 @@
 #include <tuple>
 
 namespace engine {
+std::size_t CollisionWorld::buffer_bytes() const {
+    return (bodies_.capacity() + pending_.capacity()) * sizeof(Body2D) +
+           cells_.capacity() * sizeof(Cell) +
+           (contacts_.capacity() + next_contacts_.capacity() + active_.capacity() +
+            next_active_.capacity()) *
+               sizeof(Contact2D) +
+           (events_.capacity() + next_events_.capacity()) * sizeof(TriggerEvent) + sizeof(seen_);
+}
+
 namespace {
 void point_valid(Vec2 p) {
     if (!std::isfinite(p.x) || !std::isfinite(p.y) || std::abs(p.x) > 100000 ||

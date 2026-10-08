@@ -12,6 +12,11 @@
 #include <utility>
 
 namespace engine {
+std::size_t Scene::buffer_bytes() const {
+    return slots_.capacity() * sizeof(Slot) + nodes_.capacity() * sizeof(SceneNode) +
+           pending_.capacity() * sizeof(Entity);
+}
+
 namespace {
 // Identity only, never gameplay state. Distinguishes handles from separate/reloaded worlds.
 std::uint64_t new_domain() {

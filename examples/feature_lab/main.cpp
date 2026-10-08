@@ -13,6 +13,7 @@
 #include "settings_draw.hpp"
 #include "shader_tools.hpp"
 #include "soundtrack.hpp"
+#include "stress_benchmark.hpp"
 #include "texture_assets.hpp"
 #include <array>
 #include <charconv>
@@ -190,6 +191,9 @@ int verify(const AssetRoot& assets) {
 } // namespace
 int main(int argc, char** argv) {
     try {
+        for (int i = 1; i < argc; ++i)
+            if (std::string_view(argv[i]) == "--stress")
+                return feature_lab::run_stress_mode(argc, argv);
         int frame_limit = 0;
         unsigned load_slot = 0, save_slot = 0;
         bool vsync_override = false;
@@ -279,7 +283,8 @@ int main(int argc, char** argv) {
                              "--load-slot 1..3 --save-slot 1..3 (on exit)\n"
                              "--seed UINT64 --record-replay FILE.erpl --replay FILE.erpl "
                              "--verify-replay FILE.erpl (CPU only). Replay modes disable F1; "
-                             "Escape ends recording/playback.\n";
+                             "Escape ends recording/playback.\n"
+                             "--stress --help (configurable arena and benchmark reports)\n";
                 return 0;
             } else
                 throw std::invalid_argument("Unknown/incomplete option: " + std::string(arg));
