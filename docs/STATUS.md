@@ -1,7 +1,7 @@
 # Implementation status
 
-The sixteenth increment adds a configurable stress arena, benchmark reports and
-repeated load/unload resource checks. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
+The seventeenth increment adds relocatable release archives, dependency inventories
+and extracted-package verification. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
 ## Delivered
 
@@ -65,7 +65,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F13 | Implemented (v1) | Clock/catch-up, paused stepping, ERPL recording/playback, per-command state checks, seeded random state, save migration and full-game replay tests | Cross-machine float determinism and replaying menu/audio/render commands are outside v1 |
 | F14 | Implemented (v1) | Versioned scene/checkpoint/config formats; three-slot UI; CRC, bounds and semantic checks; unchanged live game on failed load; interrupted-process write tests | Power-loss/filesystem fault testing and content migration |
 | F15 | Partial | Console errors, GL callback, F2 rolling timing/counter overlay, F3 collision/camera outlines, target accounting, CPU percentiles, shader reload/failure recovery, GPU pixel/interface/lifetime tests, bounded asynchronous GPU timing with sample age/skips | Broader manual fault scenarios and profiling coverage |
-| F16 | Partial | Configurable stress arena, CPU/GPU repeated teardown checks, allocation-free steady CPU tests, tracked buffer/texture/target bytes, JSON benchmarks and installed CPU runner | Full allocator/driver accounting, portable packaging and broader hardware/manual checks |
+| F16 | Partial | Configurable stress arena, CPU/GPU repeated teardown checks, allocation-free steady CPU tests, tracked buffer/texture/target bytes, JSON benchmarks, installed CPU runner and hashed relocatable archives with CPU/OpenGL smoke tests | Full allocator/driver accounting and broader hardware/manual checks |
 
 ## Initial validation environment
 
@@ -704,7 +704,46 @@ The frame p99 exceeds the provisional 16.7 ms target. All runs retain stable
 tracked resources; RSS is observed separately. Complete metadata and report files
 are in [the benchmark reference measurements](../benchmarks/README.md#initial-reference-measurements-2026-10-08).
 
+## Added in the seventeenth increment
+
+- Native Release archive target containing both executables, all authored assets,
+  usage/API/coverage/benchmark documentation, build provenance and direct/transitive
+  build-host library requirements. System/driver libraries remain host-managed.
+- Per-file SHA-256 manifest and archive checksum sidecar; package creation validates
+  an extracted directory moved to a path containing spaces before publication.
+- CPU smoke checks outside source/build trees: complete gameplay verification,
+  standalone/game CPU benchmark equivalence, symlink launch, invalid CWD assets,
+  missing-package-assets failure and explicit asset override.
+- Manifest integrity cases plus Release packaging/relocation/OpenGL CTest fixtures.
+  Visible smoke completes the game, saves/verifies a replay and exercises stress
+  resource stability, using isolated user data and leaving the package unchanged.
+- No engine runtime or persistence-format change. Relocation on compatible Linux
+  hosts is distinct from bundling a cross-distribution runtime.
+
+## Seventeenth-increment validation (2026-10-08)
+
+GCC Release passes all 28 CTest groups, including the manifest cases and three
+packaging fixtures, with no skips. A fresh out-of-source Clang Release build with
+BUILD_TESTING=OFF also creates its archive and passes mandatory relocated CPU
+checks. The separate packaged Clang OpenGL game/replay/stress smoke passes.
+Debug packaging is rejected before staging. GNU sha256sum independently validates
+the GCC archive sidecar.
+
+Extracted packages run from paths containing spaces under /tmp, outside source
+and build trees, with invalid current-directory assets and loader overrides
+removed. The game collects all three cores, completes the exit, saves slot 1 and
+records 1,600 replay commands; headless verification reaches tick 1,381. The
+packaged stress run completes eight measured frames across two cycles with stable
+resources. GCC game-completion and stress captures were visually inspected.
+Payload manifests still match after execution. Corrupted archive bytes, changed
+payloads and unlisted files are rejected.
+
+These checks use the existing PC's XWayland/OpenGL driver and compatible system
+libraries. They do not establish cross-distribution compatibility or audible
+physical-device output. No engine runtime code changed in this increment.
+See [packaging contracts](PACKAGING.md) for scratch directories and test commands.
+
 ## Next increment
 
-Add relocatable release packaging and a clean installed-package smoke test (F16),
-including the game, CPU benchmark, assets and usage/compatibility documentation.
+Add parented rotating/scaled example decorations and broader camera/transform
+validation (F03), with deterministic simulation and rendering checks.

@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The sixteenth increment adds a configurable stress arena, CPU-only benchmark,
-JSON performance reports and repeated load/unload resource checks.
+The seventeenth increment adds relocatable release archives, payload checksums,
+host dependency inventories and installed-package smoke tests.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -444,16 +444,26 @@ Invalid scenes, maps, and animations are fatal with source diagnostics; missing 
 broken textures produce an error and a magenta fallback. F7 provides coordinated
 CPU/GPU texture reload. Interactive scene reload and a file watcher are not implemented.
 
-The install target includes the scene, map, animations, textures, and WAV sounds:
-
+The install target includes both executables, assets and documentation:
 
 ```sh
 cmake --install build/release --prefix "$PWD/build/package"
 ./build/package/bin/feature_lab
 ```
 
-This uses the host system libraries and driver. It is not a portable Linux package
-or a promise of compatibility with distributions older than the build host.
+Build an archive that can be moved to another directory on a compatible Linux host:
+
+```sh
+cmake --preset release
+cmake --build --preset release --target release_package -j2
+ctest --preset release -L packaging --output-on-failure
+```
+
+The `.tar.gz` and checksum sidecar appear in `build/release/dist/`. Packaging checks
+an extracted, relocated copy before publishing the archive. Release CTest also
+runs a packaged OpenGL gameplay/replay/stress smoke test when a display is present.
+System libraries and drivers remain host-provided; older distributions are not
+automatically compatible. See [package contents, tests and compatibility](docs/PACKAGING.md).
 
 ## Repository workflow
 
