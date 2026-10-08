@@ -1,0 +1,18 @@
+{
+  "schema":"feature_lab_stress_v1","workload_version":1,"mode":"cpu","label":"intel-i5-4300u-mixer-2026-10-08","complete":true,"resources_stable":true,
+  "build":{"revision":"86d5f8c","compiler":"GNU 16.2.1","configuration":"Release","flags":" -O3 -DNDEBUG; C++20; sanitizers=OFF"},
+  "machine":{"cpu":" Intel(R) Core(TM) i5-4300U CPU @ 1.90GHz","system":"Linux 7.2.5-3-omarchy x86_64","gl_vendor":"","gl_device":"","gl_version":""},
+  "workload":{"sprites":0,"tiles":0,"entities":0,"bodies":0,"voices":16,"dense":false,"seed":"1","width":1280,"height":720,"warmup_per_cycle":60,"frames_per_cycle":600,"cycles":3},
+  "run":{"completed_cycles":3,"measured_frames":1800,"checksum":"2702582662783159900","window_width":0,"window_height":0,"vsync_requested":false,"vsync_disable_accepted":false,"audio_device":false,"capture_requested":false},
+  "totals":{"quads":0,"culled":0,"draws":0,"visible_tiles":0,"collision_candidates":0,"contacts":0},
+  "memory":{"tracked_cpu_buffer_bytes":7878696,"report_buffer_bytes":72024,"rss_start":4030464,"rss_end":4542464,"rss_peak_at_cycle_boundary":4567040,"peak_uploaded_textures":0,"peak_uploaded_texture_bytes":0,"peak_targets":0,"peak_target_bytes":0},
+  "gpu_queries":{"supported":false,"submitted":0,"completed":0,"pending":0,"skipped":0,"invalid":0},
+  "milliseconds":{
+    "load":{"samples":3,"mean":0.260804,"median":0.221996,"p95":0.221996,"p99":0.221996,"max":0.3952},
+    "simulation":{"samples":1800,"mean":0.000320058889,"median":0.000206,"p95":0.000764,"p99":0.001031,"max":0.011809},
+    "mixer":{"samples":1800,"mean":0.190230704,"median":0.171751,"p95":0.265094,"p99":0.291185,"max":0.401464},
+    "render_submit":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0},
+    "frame":{"samples":1800,"mean":0.190550763,"median":0.171945,"p95":0.266067,"p99":0.291604,"max":0.40205},
+    "gpu_render":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0}
+  }
+}

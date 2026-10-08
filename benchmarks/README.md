@@ -133,3 +133,46 @@ Source identity is captured when CMake configures: short Git HEAD plus `-dirty`
 for tracked modifications, or `unknown` without Git. Reconfigure after changing
 revisions. Untracked files are not included in that marker; version the workload
 before publishing a baseline. `--label TEXT` adds a bounded, JSON-escaped run label.
+
+## Initial reference measurements: 2026-10-08
+
+These baselines were collected from committed source `86d5f8c`, GCC 16.2.1 `-O3
+-DNDEBUG`, on the testing Intel i5-4300U / HD Graphics 4400 PC, Mesa OpenGL 4.6
+26.2.2. Compilation and automated tests had finished before these runs. Each uses
+three cycles, 60 warmup steps per cycle and 600 measured steps per cycle (1,800
+samples), without screenshots. The desktop compositor remained active.
+
+| Report | Interval | Median ms | p95 ms | p99 ms |
+| --- | --- | ---: | ---: | ---: |
+| [Combined 1080p](baselines/2026-10-08-combined.json) | Frame including preview/HUD/present | 3.786 | 8.875 | 17.981 |
+| Same report | CPU offscreen render submission | 1.954 | 3.082 | 4.588 |
+| Same report | GPU offscreen rendering | 1.513 | 1.692 | 1.741 |
+| [256 dense bodies](baselines/2026-10-08-collision.json) | Collision simulation | 2.394 | 6.186 | 8.159 |
+| [16 mixer voices](baselines/2026-10-08-mixer.json) | Offline audio block | 0.172 | 0.265 | 0.291 |
+
+The combined workload uses the default counts and a 1920×1080 offscreen target;
+the window manager gave the preview a 1050×1360 window. VSync disable was accepted.
+One final GPU measurement remained pending, so GPU percentiles contain 1,799
+samples rather than 1,800. The frame p99 exceeds the provisional 16.7 ms target;
+these results do not establish consistently paced 60 FPS. The report separates
+GPU workload time from complete preview/presentation frame time.
+
+All three runs completed every cycle with stable resources and matching per-cycle
+checksums. The combined run tracked 8,072,232 CPU buffer bytes, 72,024 report-buffer
+bytes, one 16-byte uploaded texture and one 8,294,400-byte target. Its observed RSS
+rose from 51,994,624 to 55,193,600 bytes despite logical resource teardown returning
+to baseline; driver/allocator retention is outside the tracked-payload assertion.
+
+Reproduce the CPU isolates by setting unrelated counts to zero:
+
+```sh
+./build/release/stress_bench --sprites 0 --tiles 0 --entities 0 --bodies 256 \
+  --dense --voices 0 --frames 600 --warmup 60 --cycles 3 --report build/dense.json
+./build/release/stress_bench --sprites 0 --tiles 0 --entities 0 --bodies 0 \
+  --voices 16 --frames 600 --warmup 60 --cycles 3 --report build/mixer.json
+```
+
+These are initial comparison baselines, not CI timing thresholds or a promise for
+other hardware. Repeat under comparable conditions before attributing a timing
+change to engine code; structural counts, capacity failures and resource checks
+remain deterministic test gates.

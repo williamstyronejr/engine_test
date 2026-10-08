@@ -695,6 +695,15 @@ without platform targets. Visible validation does not open an audio device or
 read/write game settings. Maximum-workload smoke runs are functional checks,
 not performance baselines. See [benchmark contracts](../benchmarks/README.md).
 
+Three release baselines were collected after builds/tests finished, using source
+`86d5f8c`: combined 1920×1080, 256 overlapping collision bodies and 16 mixer voices.
+Each completes 1,800 measured steps across three fresh cycles. The combined frame
+median/p95/p99 is 3.786/8.875/17.981 ms; offscreen GPU median/p95/p99 is
+1.513/1.692/1.741 ms from 1,799 samples, with one result still pending at shutdown.
+The frame p99 exceeds the provisional 16.7 ms target. All runs retain stable
+tracked resources; RSS is observed separately. Complete metadata and report files
+are in [the benchmark reference measurements](../benchmarks/README.md#initial-reference-measurements-2026-10-08).
+
 ## Next increment
 
 Add relocatable release packaging and a clean installed-package smoke test (F16),
