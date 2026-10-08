@@ -59,12 +59,9 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
         const auto& sprite = *node.sprite;
         while (layer < map.layers.size() && map.layers[layer].order <= sprite.layer)
             draw_layer();
-        auto model = game.world.world_transform(entity);
+        const auto model = game.render_transform(entity, alpha);
         Rect uv{{0, 0}, {1, 1}};
         if (node.tag == "player") {
-            const auto p = lerp(game.previous, game.position, alpha);
-            model.x = p.x;
-            model.y = p.y;
             uv = game.player_animation.uv();
         } else if (node.tag == "core")
             uv = game.core_animation.uv();
@@ -77,6 +74,8 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
                                     : 1.0F;
         r.sprite(textures.at(sprite.texture).gpu, model * Transform::from({}, 0, sprite.size),
                  {sprite.r * indicator, sprite.g * indicator, sprite.b * indicator, sprite.a}, uv);
+        if (node.tag == "rotor")
+            r.text({model.x - 1.8F, model.y + 2.7F}, 0.025F, "ROTATE / SCALE / PARENT", cyan);
     }
     while (layer < map.layers.size())
         draw_layer();

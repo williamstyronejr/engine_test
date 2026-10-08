@@ -1,4 +1,5 @@
 #pragma once
+#include "decorations.hpp"
 #include "engine/animation.hpp"
 #include "engine/assets.hpp"
 #include "engine/collision.hpp"
@@ -40,6 +41,7 @@ struct Game {
     std::vector<bool> collected;
     std::vector<std::uint64_t> core_ids;
     std::uint64_t ticks{};
+    std::uint64_t previous_ticks{}; // Transient presentation state; snapped on load/step/restart.
     bool paused{}, won{}, door_started{}, door_open{};
     std::uint64_t random_seed{1};
     engine::Random random;
@@ -91,6 +93,20 @@ struct Game {
         const auto t = world.world_transform(entity);
         return {t.x, t.y};
     }
+    engine::Transform render_transform(engine::Entity entity, float alpha) const {
+        if (!std::isfinite(alpha) || alpha < 0 || alpha > 1)
+            throw std::invalid_argument("Render interpolation must be in [0,1]");
+        float phase = static_cast<float>(previous_ticks % 240) +
+                      static_cast<float>(ticks - previous_ticks) * alpha;
+        if (phase >= 240)
+            phase -= 240; // Canonical wrap: live and restored integer-tick poses are identical.
+        return world.sampled_world_transform(entity, [&](const engine::SceneNode& node) {
+            auto pose = decoration_pose(node, phase);
+            if (node.entity == player)
+                pose.position = engine::lerp(previous, position, alpha);
+            return pose;
+        });
+    }
     int update(const engine::InputFrame& input) {
         if (engine::button(input, engine::Key::restart).pressed) {
             restart();
@@ -103,6 +119,7 @@ struct Game {
         if (toggle_pause)
             paused = !paused;
         previous = position;
+        previous_ticks = ticks;
         if ((paused && !single_step) || won)
             return 0;
         ++ticks;
@@ -161,6 +178,8 @@ struct Game {
             won = true;
         if (paused)
             previous = position; // A stepped state must remain visible at any render alpha.
+        if (paused || won)
+            previous_ticks = ticks;
         return picked;
     }
 
@@ -208,6 +227,7 @@ struct Game {
         position = previous = candidate.position;
         camera_height = candidate.camera_height;
         ticks = candidate.ticks;
+        previous_ticks = ticks;
         random_seed = candidate.random_seed;
         random = candidate.random;
         paused = candidate.paused;
@@ -341,6 +361,7 @@ struct Game {
     }
     void restart() {
         world = engine::parse_scene(initial_, "facility.scene");
+        validate_decorations(world);
         walls.clear();
         keys.clear();
         core_ids.clear();
@@ -412,6 +433,7 @@ struct Game {
                 throw std::runtime_error("Player starts inside a static collider");
         collected.assign(keys.size(), false);
         ticks = 0;
+        previous_ticks = 0;
         random.restore(random_seed);
         paused = false;
         won = false;

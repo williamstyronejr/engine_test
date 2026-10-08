@@ -56,6 +56,21 @@ class Scene {
     void set_sprite(Entity entity, Sprite sprite);
     void set_collider(Entity entity, Collider collider);
     Transform world_transform(Entity entity) const;
+    // Sample local poses without mutating the scene (for interpolated/procedural rendering).
+    // The callback must not mutate the scene and returns one LocalTransform per ancestor.
+    template <class Sample>
+    Transform sampled_world_transform(Entity entity, Sample&& sample) const {
+        get(entity); // Reject null, stale and foreign handles before invoking the callback.
+        Transform result;
+        for (auto p = entity; p; p = get(p).parent) {
+            const auto t = sample(get(p));
+            result = Transform::from(t.position, t.rotation, t.scale) * result;
+        }
+        for (float value : {result.a, result.b, result.c, result.d, result.x, result.y})
+            if (!std::isfinite(value) || std::abs(value) > 1e12F)
+                throw std::runtime_error("World transform exceeds numeric limits");
+        return result;
+    }
     void destroy(Entity entity); // Removes subtree. Structural mutation only outside each().
     void defer_destroy(Entity entity);
     void flush();

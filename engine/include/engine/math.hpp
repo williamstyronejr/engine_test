@@ -27,9 +27,14 @@ struct Camera {
     Vec2 center{};
     float height{18.0F};
     Vec2 extent(int width, int pixels_high) const {
-        if (width <= 0 || pixels_high <= 0 || !std::isfinite(height) || height <= 0)
+        if (width <= 0 || pixels_high <= 0 || !std::isfinite(height) || height <= 0 ||
+            !std::isfinite(center.x) || !std::isfinite(center.y))
             throw std::invalid_argument("Invalid camera viewport or height");
-        return {height * static_cast<float>(width) / static_cast<float>(pixels_high), height};
+        const float horizontal =
+            height * (static_cast<float>(width) / static_cast<float>(pixels_high));
+        if (!std::isfinite(horizontal) || horizontal <= 0)
+            throw std::invalid_argument("Camera extent exceeds numeric limits");
+        return {horizontal, height};
     }
     Vec2 screen_to_world(Vec2 p, int width, int pixels_high) const {
         const auto size = extent(width, pixels_high);

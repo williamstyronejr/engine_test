@@ -10,6 +10,7 @@
 #include <filesystem>
 #include <fstream>
 #include <limits>
+#include <numbers>
 #include <unistd.h>
 
 namespace {
@@ -428,6 +429,65 @@ TEST(diagnostics_overlay_sizes_toggles_and_resources) {
         renderer.release(target);
         CHECK(renderer.live_targets() == 0 && renderer.target_bytes() == 0);
     }
+    CHECK(renderer.healthy());
+}
+TEST(hierarchical_decoration_pixels_across_camera_zoom_and_resize) {
+    Window window(64, 64, "Hierarchy pixels", false);
+    Renderer renderer;
+    const auto target = renderer.create_target(256, 128);
+    const auto texture = renderer.upload({2, 1, {255, 0, 0, 255, 0, 0, 255, 255}});
+    auto game = feature_lab::load_game(AssetRoot(TEST_ASSET_ROOT));
+    const auto entity = game.world.find(51);
+    for (unsigned tick : {0U, 60U, 120U, 239U, 240U}) {
+        while (game.ticks < tick)
+            game.update({});
+        for (const auto [width, height] :
+             std::array<std::array<int, 2>, 3>{{{256, 128}, {128, 256}, {192, 192}}}) {
+            renderer.resize_target(target, width, height);
+            for (float zoom : {5.0F, 8.0F}) {
+                const auto model = game.render_transform(entity, 0.5F) *
+                                   Transform::from({}, 0, game.world.get(entity).sprite->size);
+                const Camera camera{{model.x - 0.3F, model.y + 0.15F}, zoom};
+                renderer.begin(target, camera, {0, 0, 0, 1});
+                renderer.sprite(texture, model);
+                renderer.end();
+                for (float x : {-0.25F, 0.25F}) {
+                    const auto screen = camera.world_to_screen(model.apply({x, 0}), width, height);
+                    const auto pixel = renderer.pixel(static_cast<int>(screen.x),
+                                                      height - 1 - static_cast<int>(screen.y));
+                    // Negative scale reverses winding; inherited nonuniform scale produces shear.
+                    CHECK(pixel[x < 0 ? 0 : 2] > 250);
+                    CHECK(pixel[x < 0 ? 2 : 0] < 3 && pixel[1] < 3);
+                }
+                CHECK(renderer.pixel(0, 0)[0] < 3);
+                CHECK(renderer.stats().quads == 1 && renderer.stats().culled == 0);
+            }
+        }
+    }
+    renderer.release(texture);
+    renderer.release(target);
+    CHECK(renderer.live_textures() == 0 && renderer.live_targets() == 0);
+    CHECK(renderer.healthy());
+}
+TEST(transformed_culling_keeps_partially_visible_rotated_sprite) {
+    Window window(64, 64, "Rotated culling", false);
+    Renderer renderer;
+    const auto target = renderer.create_target(128, 128);
+    const auto texture = renderer.upload({1, 1, {255, 255, 255, 255}});
+    const Camera camera{{}, 8};
+    Scene scene;
+    const auto parent = scene.create(1, "parent"), child = scene.create(2, "child");
+    scene.set_parent(child, parent);
+    scene.set_transform(parent, {{4.5F, 0}, std::numbers::pi_v<float> / 4, {2, 1}});
+    scene.set_transform(child, {{}, 0, {2, 1}});
+    renderer.begin(target, camera, {0, 0, 0, 1});
+    renderer.sprite(texture, scene.world_transform(child));
+    scene.set_transform(parent, {{8, 0}, std::numbers::pi_v<float> / 4, {2, 1}});
+    renderer.sprite(texture, scene.world_transform(child));
+    renderer.end();
+    const auto screen = camera.world_to_screen({3.6F, -0.9F}, 128, 128);
+    CHECK(renderer.pixel(static_cast<int>(screen.x), 127 - static_cast<int>(screen.y))[0] > 250);
+    CHECK(renderer.stats().quads == 1 && renderer.stats().culled == 1);
     CHECK(renderer.healthy());
 }
 TEST(target_count_limit_and_stale_handles) {
