@@ -1,6 +1,7 @@
 #pragma once
 #include "engine/assets.hpp"
 #include "engine/math.hpp"
+#include "engine/sampling.hpp"
 #include <array>
 #include <cstddef>
 #include <memory>
@@ -76,7 +77,10 @@ class Renderer {
     void quad(Vec2 center, Vec2 size, Color color, float angle = 0, bool checker = false);
     static constexpr std::size_t max_textures = 64;
     static constexpr std::size_t max_texture_reload_bytes = 64 * 1024 * 1024;
-    TextureHandle upload(const TextureData& texture);
+    TextureHandle upload(const TextureData& texture, TextureSampling sampling = {});
+    // Between passes only; shared by every sprite using this handle and retained on reload.
+    void set_sampling(TextureHandle texture, TextureSampling sampling);
+    TextureSampling sampling(TextureHandle texture) const;
     // Between passes only. Validate/allocate all candidates before publishing any;
     // preserves handles and previous images on failure. Empty batches are no-ops.
     void replace_textures(std::span<const TextureReplacement> replacements);
@@ -85,6 +89,8 @@ class Renderer {
     // Uploaded RGBA8 payload only; excludes built-in atlas, targets and driver overhead.
     std::size_t texture_bytes() const;
     GraphicsInfo graphics_info() const;
+    static constexpr float max_texture_uv = 16384;
+    // Finite UVs in [-max_texture_uv,max_texture_uv]; wrap/clamp applies to the whole image.
     void sprite(TextureHandle texture, Transform model, Color color = {},
                 Rect uv = {{0, 0}, {1, 1}});
     void text(Vec2 top_left, float pixel_size, std::string_view value, Color color);

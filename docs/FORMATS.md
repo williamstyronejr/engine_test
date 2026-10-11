@@ -62,9 +62,36 @@ CPU cache reload does not automatically replace an existing GPU upload; the
 coordinated Feature Lab workflow below publishes both together.
 
 `Renderer::sprite` accepts an affine transform of a centered unit quad, linear tint,
-and a normalized UV rectangle. Reversed UV endpoints flip the image. Filtering is
-currently nearest-neighbor with clamp-to-edge. The built-in atlas remains available
-for plain quads, text, and diagnostics.
+and a UV rectangle. Reversed UV endpoints flip the image. Uploaded sprites accept
+finite UV components in [-16384,16384], including negative/repeated ranges. The
+built-in atlas remains available for plain quads, text, and diagnostics.
+
+## Texture sampling
+
+`upload(data, TextureSampling)` selects independent `min`/`mag` filters (`nearest`
+or `linear`) and `u`/`v` wrapping (`clamp` or `repeat`). All defaults remain nearest
+and clamp-to-edge. `sampling(handle)` returns the current descriptor;
+`set_sampling(handle, descriptor)` changes it only between render passes on the
+owning context/thread. Changes affect all consumers sharing the handle. Invalid
+enums/handles and in-pass changes throw before flushing or altering queued draws.
+The setter restores the previous GL texture binding; a GL failure restores the
+previous descriptor's parameters. No upload or per-draw sampler allocation occurs.
+
+Minification and magnification use the base image only: there are no mipmaps,
+anisotropic filters, border colors or mirrored-repeat modes in this API. Repeat
+wraps the entire image; it does not repeat an atlas cell. Use a separate texture
+for an independently repeating tile. Nearest and linear modes retain the existing
+sRGB decode, straight-alpha image and linear blending contracts. Transparent
+texels should carry suitable edge RGB to avoid colored fringes when filtered.
+
+Sampling state is per uploaded handle and survives coordinated image replacement,
+including dimension changes. Recycled handles start with upload's supplied/default
+state. Mixed modes in one pass use distinct handles; existing texture-change
+flushes preserve sprite order. Built-in glyph/checker and render-target textures
+keep fixed nearest/clamp sampling, and target_sprite UVs remain within [0,1].
+
+The mappings use standard OpenGL [texture filtering and wrapping rules](https://wikis.khronos.org/opengl/Sampler_Object).
+`TextureSampling` is runtime state and adds no fields to ETEX or scene files.
 
 ## Texture reload
 
@@ -76,8 +103,9 @@ be live, unique and owned by this renderer. The batch is bounded to 64 entries a
 a pass throw even if empty, without flushing pending geometry.
 
 All handles, ETEX dimensions, payload sizes and aggregate bounds are checked before
-allocation; each upload also checks the driver dimension limit. Candidate objects use sRGB RGBA8, nearest filtering and
-clamp-to-edge. Old images stay installed until every upload succeeds. Publication
+allocation; each upload also checks the driver dimension limit. Candidate objects
+use sRGB RGBA8 and retain each live handle's sampling descriptor. Old images stay
+installed until every upload succeeds. Publication
 swaps object IDs without changing handle slots/serials, then deletes old objects.
 Failures throw and delete staged objects without publishing any replacement.
 Replacement needs no spare handle slots and does not change `live_textures()`.
@@ -188,8 +216,15 @@ Both formats embed a texture key and a regular atlas grid. Grid dimensions are
 1..256 each; the texture's pixel dimensions must be divisible by the grid. Atlas
 cells are zero-based, left to right, **bottom row first**, matching ETEX pixels.
 `atlas_uv` calculates a cell's normalized rectangle. Nearest-neighbor sampling
-avoids interpolation across adjacent cells. Atlas packing, arbitrary rectangles,
-and per-frame pivots are not implemented.
+avoids interpolation across adjacent cells. For base-level linear filtering,
+`atlas_uv_inset(cell, columns, rows, width, height)` maps the quad to the cell's
+outer texel centers, half a texel inside every edge. It validates the grid, cell,
+image divisibility and 4096-pixel image limit. A one-texel cell collapses to a
+constant UV. This prevents neighbor bleeding but slightly changes edge-texel
+coverage; it is not padding/extrusion or a solution for mipmapped atlases.
+Recompute the inset if a reloaded atlas changes dimensions. Existing tile and
+animation helpers retain full-cell UVs and nearest sampling. Atlas packing,
+arbitrary rectangles and per-frame pivots are not implemented.
 
 ## ETMP tilemap
 

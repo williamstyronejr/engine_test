@@ -1,7 +1,7 @@
 # Implementation status
 
-The eighteenth increment adds a parented transform gallery, sampled local poses
-and broader camera/transform validation. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
+The nineteenth increment adds texture filtering/wrapping controls, atlas-safe
+linear UVs and a sampling gallery. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
 ## Delivered
 
@@ -53,7 +53,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F01 | Partial | `graphics`, `platform_events`, `platform_no_display`, visible startup/resize | Manual minimize/fullscreen/scaling matrix and visible-window focus checks |
 | F02 | Partial | CPU edge/focus/capture tests; native key-repeat/alias/pointer/wheel/focus tests; modal gameplay routing; ten configurable letter actions, conflict/capture/persistence tests; mapping notification refresh | Configurable mouse actions, arbitrary keys/chords and keyboard group switching |
 | F03 | Implemented (v1) | Parented rotating/scaled/mirrored gallery; sampled affine hierarchy; camera corner/aspect/follow/zoom checkpoints; pause/step/save/replay pose tests; GPU shear/mirror/culling/resize pixels | Broader manual camera and display matrix; transform caching is optional |
-| F04 | Partial | GPU pixel/order/color/atlas/culling/batch rollover tests, animated atlas sprites; shared-handle transactional texture reload tests | Richer sampling controls; live reload, assets, UV flips and scene layers now implemented |
+| F04 | Implemented (v1) | GPU pixel/order/color/atlas/culling/batch tests; animated/parented sprites; transactional reload; independent nearest/linear min/mag filters and clamp/repeat axes; atlas inset and sampling gallery | Optional mipmaps, anisotropy and atlas-cell repetition |
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
 | F06 | Implemented (v1) | EANI reader/writer; exact frame timing, loops, pause/restart, large advances; animated player/machine/door with exactly-once completion | Optional frame callbacks and richer animation types |
 | F07 | Partial | Handle/compaction/hierarchy tests, scene round trips, deferred core deletion and restart; title/gameplay transitions with staged new/continue and in-memory resume | Extensible component pools, transitions between different authored levels |
@@ -784,7 +784,45 @@ complete at tick 1,381. Captures/tests use isolated temporary user data and no
 physical audio device. These are functional checks, not performance baselines or
 a broader manual display/focus test matrix.
 
+## Added in the nineteenth increment
+
+- Per-upload sampling descriptors and between-pass updates/queries. Minification
+  and magnification select nearest/linear independently; U/V select clamp/repeat.
+  Defaults and built-in/render-target sampling remain nearest/clamp.
+- Bounded negative/repeating sprite UVs, existing flips/order/batching preserved,
+  and sampling state retained by atomic texture replacement and reset on slot reuse.
+- Validated texel-center atlas rectangles for base-level linear filtering, including
+  one-texel cells; this does not add mipmaps or atlas-cell wrapping.
+- Four procedural comparison panels near spawn showing all filter/wrap combinations
+  without per-frame uploads/state changes. Renderer-owned textures live for the
+  session; partial initialization cleans up if capacity is exhausted.
+- CPU descriptor/atlas tests and native OpenGL sampling/reload/lifetime tests.
+  No asset content, simulation, save/replay or shader-interface changes.
+
+## Nineteenth-increment validation (2026-10-11)
+
+GCC Release passes all 30 CTest groups, including the extracted-package CPU/OpenGL
+fixtures. GCC Debug passes all 27 groups. The focused tile_animation and
+texture_sampling groups also pass with Clang and with native-platform ASan/UBSan;
+no sanitizer findings or skipped tests were reported.
+
+Seven new GPU cases check independent minification/magnification, sRGB interpolation
+and alpha, clamp/repeat on both axes (including negative/flipped UVs and seams),
+atlas neighbor bleeding and inset recovery, GL binding preservation, rejected
+state changes without disturbing pending batches, painter order, descriptor/pixel
+preservation through failed and resized reloads, stale/recycled handles, and
+partial gallery initialization cleanup. The CPU atlas suite adds descriptor/grid/
+dimension validation and exact one-texel inset bounds.
+
+The gallery's rendered pixels distinguish the configured modes. Repeated draws
+retain four textures/64 payload bytes and use exactly five batches when fully
+visible (four images, then all labels). Native captures at normal and close zoom
+were inspected; the layer-5 gallery leaves the player visible when positioned over
+a panel. Scripted gameplay, replay verification and package relocation still pass.
+No physical audio or broader hardware/display matrix was exercised, and these
+functional checks do not constitute new performance baselines.
+
 ## Next increment
 
-Add explicit texture filtering/wrapping controls with atlas-edge tests and a
-Feature Lab sampling demonstration (F04).
+Add configurable mouse-button actions with persistence and native event tests
+(F02).
