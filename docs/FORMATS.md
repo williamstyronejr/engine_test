@@ -518,9 +518,9 @@ mute, and requested VSync; fullscreen remains session-local.
 
 ## Keyboard and mouse bindings
 
-`KeyBindings::symbols` stores ten unique input symbols in stable action order:
+`KeyBindings::symbols` and `modifier_masks` store ten bindings in stable action order:
 left, right, up, down, pause, restart, interact, mute, music volume, effects volume.
-`assign` and `validate` reject duplicate/out-of-range symbols before publication.
+`assign` and `validate` reject unsupported symbols/masks and conflicts before publication.
 Defaults are A/D/W/S/P/R/E/M/N/B. Supported keyboard symbols are lowercase
 ASCII `a`–`z`, digits `0`–`9`, and the following stable X11 symbols. The CPU core
 does not depend on Xlib; its allowlist and labels are in `bindings.hpp`.
@@ -534,8 +534,8 @@ does not depend on Xlib; its allowlist and labels are in `bindings.hpp`.
 
 Other keyboard symbols are rejected, including uppercase/shifted symbols, keypad,
 modifiers and international/media keys. Fixed arrow/menu/page/zoom controls and
-F1/F2/F3/F5/F6/F7/F8/F10/F11 cannot be reassigned. Shift does not select another
-binding: the unshifted group-zero symbol is used (Shift+1 activates 1).
+F1/F2/F3/F5/F6/F7/F8/F10/F11 cannot be reassigned, even with modifiers. The
+unshifted group-zero base symbol is used (Shift+1 uses symbol 1).
 
 Mouse symbols are 0x20000001 left, 0x20000002 middle, 0x20000003 right,
 0x20000004 side 1, 0x20000005 side 2. X11 maps native buttons 1/2/3/8/9 to these
@@ -549,12 +549,35 @@ until release, including primary UI clicks. Keyboard and mouse sources for an
 action are aggregated; releasing one alias does not release another.
 MappingKeyboard/MappingModifier notifications refresh the X11 mapping with the
 same cancellation policy. Keyboard symbols use unshifted group zero;
-runtime group switching, physical scan codes and modifier chords are not supported.
+runtime group switching and physical scan codes are not supported.
+
+Modifier masks use Shift=1, Ctrl=2, Alt=4; only bits 0–2 are valid. Zero means no
+required modifiers. Left/right Shift, Control and Alt keysyms contribute to the
+same bit; Caps Lock, Num Lock, Super and AltGr are not chord modifiers. Only observed,
+unblocked physical modifier presses participate. Focus loss clears them, and
+rebinding/mapping changes suppress held modifiers until release and a fresh press.
+
+Identical symbol/mask pairs conflict. For a shared symbol, each mask must be a
+subset or superset of every other mask. Thus E/Ctrl+E/Ctrl+Shift+E is valid, while
+Ctrl+E/Shift+E is rejected transactionally. A fresh trigger chooses the matching
+binding with the largest number of required modifiers. Extra modifiers are
+permitted; a zero-mask binding remains a fallback. Fixed keyboard aliases bypass
+chord lookup and remain accessible with any modifiers.
+
+The selected action is latched per physical key/button until its release. Modifier
+changes or repeat events never activate or switch held triggers. A base pressed
+before its required modifiers must be released and pressed again. Aggregation of
+latched keyboard and mouse aliases prevents one release from canceling another.
+This event-driven path uses fixed arrays and no allocations.
+
+Labels prefix C+ (Ctrl), S+ (Shift), A+ (Alt) in that order; for example C+S+E or
+A+RMB. Button text scales down to fit long chord labels, preserving the layout.
 
 `InputFrame::pressed_symbol` carries the first fresh native press per consumed
 frame (key or supported mouse button), or zero. Additional presses in that interval
-are ignored for capture. Repeat does not generate a fresh symbol. Focus loss clears it; modal routing removes it
-from gameplay. This bounded field is for binding capture, not text input.
+are ignored for capture. `pressed_modifiers` snapshots the mask for that same
+press. Modifier-only presses do not occupy the capture slot; repeat generates no
+fresh capture. Consumption, focus loss and modal routing clear both fields. This bounded field is for binding capture, not text input.
 `InputGate::route` takes logical-action capture (regardless of device) and UI-pointer
 capture separately. Both are enabled for modal gameplay routing. Pointer-only
 capture also clears raw mouse symbols; it does not suppress mapped logical actions.
@@ -566,10 +589,10 @@ keep capture open; Escape/focus loss cancels it and F1 closes settings. Gameplay
 remains paused and captured throughout. Valid edits apply immediately; preferences
 persist on settings close or normal exit.
 
-## Persistence: ECFG v4 and ESAV v3
+## Persistence: ECFG v5 and ESAV v3
 
 All integers are little-endian, floats are IEEE binary32, and booleans are u32 0/1.
-Files begin with four-byte magic and u32 version (ECFG 4, ESAV 3), ending with a u32 CRC32 of all
+Files begin with four-byte magic and u32 version (ECFG 5, ESAV 3), ending with a u32 CRC32 of all
 preceding bytes (reflected polynomial 0xEDB88320, initial/final XOR 0xFFFFFFFF).
 The envelope is 12..65,536 bytes; parsers reject wrong type/version, excess counts,
 truncation, trailing bytes, invalid booleans, and checksum mismatches. CRC detects
@@ -578,14 +601,18 @@ public in `engine/binary.hpp`; envelope and storage APIs are in `engine/persiste
 Schemas below belong to Feature Lab; the engine storage layer is schema-agnostic.
 
 ECFG payload after the header is three f32 gains (master, music, effects), u32 mute,
-and u32 VSync, followed by ten u32 input symbols in the binding order above.
-Gains must be finite within [0,1]; bindings must be unique supported symbols.
-Total ECFG v4 size is 72 bytes including CRC. Legacy ECFG v1 is 32 bytes, omits the
-bindings and loads with defaults. ECFG v2 is 72 bytes and retains strict lowercase
+and u32 VSync, followed by ten u32 input symbols in the binding order above, then
+ten u32 modifier masks in the same order. Symbols begin at byte 28, masks at byte
+68, and CRC at byte 108. Gains must be finite within [0,1]; bindings must satisfy
+the symbol, mask and conflict rules above. Total ECFG v5 size is 112 bytes.
+Legacy ECFG v1 is 32 bytes, omits bindings and loads with defaults. ECFG v2 is 72 bytes and retains strict lowercase
 letter validation. ECFG v3 has the same size and permits only letters and mouse
 symbols. Legacy validation is retained before migration; newer keyboard symbols
 in v2/v3 records are rejected even with a valid checksum. Existing assignments
-are preserved, and the next preference save writes v4. Other versions are rejected. Checkpoint compatibility is described below.
+are preserved. ECFG v4 is 72 bytes and supports extended keys. All older schemas
+load with zero modifier masks and retain their unique-symbol rule; the next
+preference save writes v5. Other versions are rejected. Checkpoint compatibility
+is described below.
 Startup uses defaults on malformed/inaccessible configuration, logs the reason,
 and shows a notice. No automatic repair overwrites the file. Changed preferences
 are written on panel close or normal application exit. Crashes before that boundary
@@ -955,7 +982,7 @@ one-shot events; Resume continues existing voices. The title's Tab/Enter/pointer
 input is captured, including the transition tick, and held actions remain blocked
 until physical release. At most one scene command is applied per fixed tick.
 The title-flow increment did not change the persistence schemas. Current schemas
-are ECFG v4 and ESAV v3.
+are ECFG v5 and ESAV v3.
 
 
 ## Replay files: ERPL v1
