@@ -29,7 +29,7 @@ bool extension(std::string_view list, std::string_view name) {
     return false;
 }
 std::optional<Key> key_for(KeySym key, const KeyBindings& bindings) {
-    if (key >= XK_a && key <= XK_z)
+    if (key <= 0xffffffffUL && is_bindable_keyboard_symbol(static_cast<std::uint32_t>(key)))
         return bindings.action(static_cast<std::uint32_t>(key));
     switch (key) {
     case XK_Left:

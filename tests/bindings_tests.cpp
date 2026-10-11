@@ -39,6 +39,58 @@ TEST(mouse_bindings_are_unique_and_have_readable_names) {
     bindings.assign(0, 'a');
     CHECK(!bindings.action(mouse_symbol(MouseButton::left)));
 }
+TEST(extended_keyboard_symbols_labels_and_conflicts) {
+    KeyBindings bindings;
+    for (std::uint32_t symbol = '0'; symbol <= '9'; ++symbol) {
+        bindings.assign(6, symbol);
+        CHECK(bindings.action(symbol) == Key::interact);
+        CHECK(bindings.key_name(Key::interact) == std::string(1, static_cast<char>(symbol)));
+    }
+    const std::array<NamedBindingSymbol, 17> expected{{{'`', "GRAVE"},
+                                                       {'[', "LBRK"},
+                                                       {']', "RBRK"},
+                                                       {'\\', "BSLS"},
+                                                       {';', "SEMI"},
+                                                       {'\'', "APOS"},
+                                                       {',', "COMMA"},
+                                                       {'.', "DOT"},
+                                                       {'/', "SLASH"},
+                                                       {0xff08, "BKSP"},
+                                                       {0xff50, "HOME"},
+                                                       {0xff57, "END"},
+                                                       {0xff63, "INS"},
+                                                       {0xffff, "DEL"},
+                                                       {0xffc1, "F4"},
+                                                       {0xffc6, "F9"},
+                                                       {0xffc9, "F12"}}};
+    for (const auto& entry : expected) {
+        bindings.assign(6, entry.symbol);
+        CHECK(bindings.action(entry.symbol) == Key::interact);
+        CHECK(bindings.label(6) == "INTERACT : " + std::string(entry.name));
+        const auto before = bindings;
+        rejects([&] { bindings.assign(0, entry.symbol); });
+        CHECK(bindings == before);
+        Configuration config;
+        config.bindings = bindings;
+        CHECK(decode_config(encode_config(config)) == config);
+    }
+}
+TEST(reserved_and_unsupported_keyboard_symbols_stay_unbindable) {
+    KeyBindings bindings;
+    const auto before = bindings;
+    // Navigation, zoom, diagnostics and modifiers must remain accessible.
+    for (const auto symbol :
+         {0U,          0x20U,       0x2bU,   0x2dU,   0x3dU,      0x5fU,   0xff1bU, 0xff09U,
+          0xfe20U,     0xff0dU,     0xff8dU, 0xff51U, 0xff52U,    0xff53U, 0xff54U, 0xff55U,
+          0xff56U,     0xffbeU,     0xffbfU, 0xffc0U, 0xffc2U,    0xffc3U, 0xffc4U, 0xffc5U,
+          0xffc7U,     0xffc8U,     0xffe1U, 0xffe2U, 0xffe3U,    0xffe9U, 0xffebU, 0xffb1U,
+          0x1008ff12U, 0x010003b1U, 0x41U,   0x21U,   0xffffffffU}) {
+        CHECK(!is_bindable_keyboard_symbol(symbol));
+        rejects([&] { bindings.assign(6, symbol); });
+        rejects([&] { KeyBindings::symbol_name(symbol); });
+        CHECK(bindings == before);
+    }
+}
 TEST(raw_press_queue_cancellation_and_modal_capture) {
     Input input;
     input.press_symbol('q');
@@ -62,7 +114,7 @@ TEST(raw_press_queue_cancellation_and_modal_capture) {
     CHECK(input.consume().pressed_symbol == mouse_symbol(MouseButton::left));
     CHECK(!input.consume().pressed_symbol);
 }
-TEST(configuration_v3_roundtrip_and_legacy_migration) {
+TEST(configuration_v4_roundtrip_and_legacy_migration) {
     Configuration config;
     config.bindings.assign(0, 'q');
     auto bytes = encode_config(config);
@@ -88,6 +140,19 @@ TEST(configuration_v3_roundtrip_and_legacy_migration) {
     invalid[4] = 2; // v2 remains strictly letters, even with a valid checksum.
     rejects([&] { decode_config(seal_record(invalid)); });
     invalid[4] = 3;
+    CHECK(decode_config(seal_record(invalid)) == config);
+    for (const auto symbol : {static_cast<std::uint32_t>('1'), 0xff50U, 0xffc9U}) {
+        auto extended = config;
+        extended.bindings.assign(0, symbol);
+        const auto encoded = encode_config(extended);
+        CHECK(encoded[4] == 4 && decode_config(encoded) == extended);
+        auto old_schema = std::vector<std::uint8_t>(encoded.begin(), encoded.end() - 4);
+        old_schema[4] = 3;
+        rejects([&] { decode_config(seal_record(old_schema)); });
+        old_schema[4] = 2;
+        rejects([&] { decode_config(seal_record(old_schema)); });
+    }
+    invalid[4] = 4;
     invalid[28 + 6 * 4] = 6; // Unknown mouse symbol.
     rejects([&] { decode_config(seal_record(invalid)); });
     invalid[28 + 6 * 4] = 3;
@@ -156,6 +221,24 @@ TEST(settings_rebind_conflicts_capture_defaults_and_close) {
     CHECK(!m.settings.controls_opened() && m.settings.opened());
     m.click(Settings::resume);
     CHECK(!m.settings.opened() && !m.game.paused);
+}
+TEST(settings_capture_extended_keys_rejects_reserved_and_restores_defaults) {
+    Menu m;
+    for (const auto symbol :
+         {static_cast<std::uint32_t>('1'), static_cast<std::uint32_t>('['), 0xff08U, 0xffc9U}) {
+        m.click(Settings::binding_first + 6);
+        InputFrame frame{};
+        frame.pressed_symbol = 0xffbe; // Reserved F1 symbol; no toggle action in this CPU fixture.
+        CHECK(!m.update(frame).bindings_changed && m.settings.capturing_binding());
+        CHECK(m.settings.notice == "KEY RESERVED OR UNSUPPORTED");
+        frame.pressed_symbol = symbol;
+        const auto result = m.update(frame);
+        CHECK(result.bindings_changed && !m.settings.capturing_binding());
+        CHECK(!result.gameplay.pressed_symbol &&
+              m.settings.bindings.action(symbol) == Key::interact);
+    }
+    CHECK(m.click(Settings::defaults).bindings_changed);
+    CHECK(m.settings.bindings == KeyBindings{});
 }
 TEST(mouse_capture_conflicts_and_held_actions_do_not_escape_the_menu) {
     Menu m;

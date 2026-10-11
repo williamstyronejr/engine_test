@@ -21,7 +21,7 @@ inline void Settings::draw(engine::Renderer& renderer, int width, int height) co
                   {0.65F, 0.75F, 0.8F, 1});
     engine::draw_ui(renderer, ui_);
     renderer.text({panel_.min.x + 20 * scale_, -panel_.max.y + 26 * scale_}, 1.2F * scale_,
-                  controls_ ? "ARROWS / SPACE / FUNCTION KEYS STAY FIXED"
+                  controls_ ? "ARROWS / SPACE / F1 / ESC STAY FIXED"
                             : "TAB FOCUS / ARROWS ADJUST / ENTER / ESC CLOSE",
                   {0.65F, 0.75F, 0.8F, 1});
 }

@@ -38,8 +38,8 @@ three cores and reach the exit. Default controls: WASD/arrows move, +/- zoom,
 Space pauses, R restarts, E interacts with the alarm switch, F1 opens settings,
 F2 shows diagnostics, F3 shows collision shapes, F10 steps while paused, F11
 requests fullscreen and Escape closes settings or quits. F5/F7 reload shaders/
-textures. F6/F8 demonstrate failed reload recovery. Letter and mouse bindings can
-be changed in settings. `--help` lists command-line options.
+textures. F6/F8 demonstrate failed reload recovery. Keyboard and mouse bindings can
+be changed in settings, including digits, punctuation, Home/End and F4/F9/F12. `--help` lists command-line options.
 
 ```sh
 ./bin/feature_lab --no-audio
