@@ -118,8 +118,8 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
     const float bottom = h / scale - 73;
     label(24, bottom, 1.55F,
           playing_replay ? "RECORDED GAMEPLAY / LIVE MOVEMENT AND PAUSE DISABLED"
-                         : bindings.key_name(Key::up) + bindings.key_name(Key::left) +
-                               bindings.key_name(Key::down) + bindings.key_name(Key::right) +
+                         : bindings.key_name(Key::up) + "/" + bindings.key_name(Key::left) + "/" +
+                               bindings.key_name(Key::down) + "/" + bindings.key_name(Key::right) +
                                " / ARROWS  MOVE    +/-  ZOOM    SPACE  PAUSE",
           white);
     label(24, bottom + 24, 1.4F,

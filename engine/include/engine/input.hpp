@@ -37,6 +37,14 @@ enum class Key : std::size_t {
     texture_error,
     count
 };
+// Stable engine symbols, outside the X11 KeySym range. Never persist native button IDs.
+enum class MouseButton : std::uint32_t { left = 0x20000001, middle, right, side1, side2 };
+inline constexpr std::uint32_t mouse_symbol(MouseButton button) {
+    return static_cast<std::uint32_t>(button);
+}
+inline constexpr bool is_mouse_symbol(std::uint32_t symbol) {
+    return symbol >= mouse_symbol(MouseButton::left) && symbol <= mouse_symbol(MouseButton::side2);
+}
 struct Button {
     bool held{}, pressed{}, released{};
 };
@@ -47,23 +55,25 @@ struct PointerFrame {
     bool inside{};
 };
 struct InputFrame : std::array<Button, static_cast<std::size_t>(Key::count)> {
-    std::uint32_t pressed_symbol{}; // First fresh native key press this tick; zero means none.
+    std::uint32_t
+        pressed_symbol{}; // First fresh native key/button press this tick; zero means none.
     PointerFrame pointer;
     bool canceled{};
 };
+// Logical actions (from any device) and UI pointer capture are independent.
 // Suppresses captured input and held buttons until a physical release is observed.
 class InputGate {
   public:
-    InputFrame route(InputFrame input, bool capture_keyboard, bool capture_pointer) {
+    InputFrame route(InputFrame input, bool capture_actions, bool capture_pointer) {
         for (std::size_t i = 0; i < input.size(); ++i) {
             if (!input[i].held || input[i].released)
                 blocked_[i] = false;
-            if (capture_keyboard)
+            if (capture_actions)
                 blocked_[i] = input[i].held;
-            if (capture_keyboard || blocked_[i])
+            if (capture_actions || blocked_[i])
                 input[i] = {};
         }
-        if (capture_keyboard)
+        if (capture_actions || (capture_pointer && is_mouse_symbol(input.pressed_symbol)))
             input.pressed_symbol = 0;
         if (!input.pointer.primary.held || input.pointer.primary.released)
             pointer_blocked_ = false;
