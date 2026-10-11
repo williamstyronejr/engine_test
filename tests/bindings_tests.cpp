@@ -83,13 +83,48 @@ TEST(reserved_and_unsupported_keyboard_symbols_stay_unbindable) {
          {0U,          0x20U,       0x2bU,   0x2dU,   0x3dU,      0x5fU,   0xff1bU, 0xff09U,
           0xfe20U,     0xff0dU,     0xff8dU, 0xff51U, 0xff52U,    0xff53U, 0xff54U, 0xff55U,
           0xff56U,     0xffbeU,     0xffbfU, 0xffc0U, 0xffc2U,    0xffc3U, 0xffc4U, 0xffc5U,
-          0xffc7U,     0xffc8U,     0xffe1U, 0xffe2U, 0xffe3U,    0xffe9U, 0xffebU, 0xffb1U,
+          0xffc7U,     0xffc8U,     0xffe1U, 0xffe2U, 0xffe3U,    0xffe9U, 0xffebU, 0xff7fU,
           0x1008ff12U, 0x010003b1U, 0x41U,   0x21U,   0xffffffffU}) {
         CHECK(!is_bindable_keyboard_symbol(symbol));
         rejects([&] { bindings.assign(6, symbol); });
         rejects([&] { KeyBindings::symbol_name(symbol); });
         CHECK(bindings == before);
     }
+}
+TEST(keypad_identity_names_and_normalization) {
+    const std::array<std::uint32_t, 10> aliases{0xff9e, 0xff9c, 0xff99, 0xff9b, 0xff96,
+                                                0xff9d, 0xff98, 0xff95, 0xff97, 0xff9a};
+    KeyBindings b;
+    for (std::uint32_t i = 0; i < 10; ++i) {
+        const auto symbol = 0xffb0 + i;
+        CHECK(canonical_keypad_symbol(aliases[i]) == symbol);
+        CHECK(canonical_keypad_symbol(symbol) == symbol);
+        b.assign(0, '0' + i);
+        b.assign(1, symbol);
+        CHECK(b.action('0' + i) == Key::left && b.action(symbol) == Key::right);
+        CHECK(b.key_name(Key::right) == "KP" + std::to_string(i));
+        rejects([&] { b.assign(2, aliases[i]); }); // Stored tables require canonical symbols.
+    }
+    CHECK(canonical_keypad_symbol(0xff9f) == 0xffae);
+    CHECK(canonical_keypad_symbol(0xffac) == 0xffae);
+    const std::array<NamedBindingSymbol, 6> operators{{{0xffae, "KPDOT"},
+                                                       {0xffaa, "KPMUL"},
+                                                       {0xffab, "KP+"},
+                                                       {0xffad, "KP-"},
+                                                       {0xffaf, "KP/"},
+                                                       {0xffbd, "KPEQ"}}};
+    for (const auto& entry : operators) {
+        b.assign(6, entry.symbol, modifiers::all);
+        CHECK(b.key_name(Key::interact) == "C+S+A+" + std::string(entry.name));
+        Configuration config;
+        config.bindings = b;
+        CHECK(decode_config(encode_config(config)) == config);
+        rejects([&] { b.assign(2, entry.symbol, modifiers::all); });
+    }
+    for (const auto symbol : {0xff51U, 0xff50U, 0xff8dU, 0xff7fU, 0x31U})
+        CHECK(canonical_keypad_symbol(symbol) == symbol);
+    rejects([&] { b.assign(6, 0xff8d); });
+    rejects([&] { b.assign(6, 0xffac); });
 }
 TEST(raw_press_queue_cancellation_and_modal_capture) {
     Input input;
@@ -114,11 +149,11 @@ TEST(raw_press_queue_cancellation_and_modal_capture) {
     CHECK(input.consume().pressed_symbol == mouse_symbol(MouseButton::left));
     CHECK(!input.consume().pressed_symbol);
 }
-TEST(configuration_v5_roundtrip_and_legacy_migration) {
+TEST(configuration_v6_roundtrip_and_legacy_migration) {
     Configuration config;
     config.bindings.assign(0, 'q');
     auto bytes = encode_config(config);
-    CHECK(bytes.size() == 112 && bytes[4] == 5 && decode_config(bytes) == config);
+    CHECK(bytes.size() == 112 && bytes[4] == 6 && decode_config(bytes) == config);
     binary::Writer legacy("ECFG");
     legacy.f32(0.5F);
     legacy.f32(0.25F);
@@ -145,6 +180,18 @@ TEST(configuration_v5_roundtrip_and_legacy_migration) {
     config.bindings.assign(6, 'e'); // Plain + chord sharing a base is valid in v5.
     CHECK(decode_config(encode_config(config)) == config);
     rejects([&] { decode_config(old_record(config, 4)); }); // Old duplicate rule retained.
+    auto previous = encode_config(config);
+    previous.resize(previous.size() - 4);
+    previous[4] = 5;
+    CHECK(decode_config(seal_record(previous)) == config); // Preserve existing chords.
+    auto keypad = config;
+    keypad.bindings.assign(0, 0xffb1, modifiers::control);
+    CHECK(decode_config(encode_config(keypad)) == keypad);
+    auto invalid_legacy = encode_config(keypad);
+    invalid_legacy.resize(invalid_legacy.size() - 4);
+    invalid_legacy[4] = 5;
+    rejects([&] { decode_config(seal_record(invalid_legacy)); });
+    rejects([&] { decode_config(old_record(keypad, 4)); });
     auto payload = encode_config(config);
     payload.resize(payload.size() - 4);
     payload[68] = 8; // Unsupported modifier bit, valid CRC.
@@ -274,6 +321,21 @@ TEST(settings_capture_extended_keys_rejects_reserved_and_restores_defaults) {
     }
     CHECK(m.click(Settings::defaults).bindings_changed);
     CHECK(m.settings.bindings == KeyBindings{});
+}
+TEST(settings_capture_keypad_chords_and_restore_defaults) {
+    Menu m;
+    m.click(Settings::binding_first + 6);
+    InputFrame f{};
+    f.pressed_symbol = 0xffb1;
+    f.pressed_modifiers = modifiers::control;
+    CHECK(m.update(f).bindings_changed);
+    CHECK(m.settings.bindings.key_name(Key::interact) == "C+KP1");
+    m.click(Settings::binding_first);
+    CHECK(!m.update(f).bindings_changed && m.settings.capturing_binding());
+    f.pressed_symbol = '1'; // Main-row key is separate from keypad 1.
+    CHECK(m.update(f).bindings_changed);
+    CHECK(m.settings.bindings.key_name(Key::left) == "C+1");
+    CHECK(m.click(Settings::defaults).bindings_changed && m.settings.bindings == KeyBindings{});
 }
 TEST(settings_capture_chords_and_conflicts) {
     Menu m;

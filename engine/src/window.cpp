@@ -103,7 +103,8 @@ struct Window::Impl {
         bindings.fill(std::nullopt);
         mouse_bindings.fill(std::nullopt);
         for (std::size_t i = 8; i < bindings.size(); ++i) {
-            symbols[i] = XkbKeycodeToKeysym(display, static_cast<KeyCode>(i), 0, 0);
+            symbols[i] = canonical_keypad_symbol(static_cast<std::uint32_t>(
+                XkbKeycodeToKeysym(display, static_cast<KeyCode>(i), 0, 0)));
             if (symbols[i] >= XK_A && symbols[i] <= XK_Z)
                 symbols[i] += XK_a - XK_A;
         }
@@ -351,7 +352,7 @@ bool Window::poll(Input& input) {
             if (down_event && !p.physical[code] && !p.blocked[code]) {
                 const auto symbol = static_cast<std::uint32_t>(p.symbols[code]);
                 const auto mask = p.held_modifiers();
-                if (!modifier_for_symbol(symbol))
+                if (!modifier_for_symbol(symbol) && symbol != XK_Num_Lock)
                     input.press_symbol(symbol, mask);
                 p.bindings[code] = fixed_key_for(p.symbols[code]);
                 if (!p.bindings[code])

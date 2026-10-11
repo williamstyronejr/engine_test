@@ -38,11 +38,64 @@ inline constexpr std::array<NamedBindingSymbol, 17> named_binding_symbols{
      {0xffc1, "F4"},
      {0xffc6, "F9"},
      {0xffc9, "F12"}}};
+inline constexpr std::array<NamedBindingSymbol, 16> keypad_binding_symbols{{{0xffb0, "KP0"},
+                                                                            {0xffb1, "KP1"},
+                                                                            {0xffb2, "KP2"},
+                                                                            {0xffb3, "KP3"},
+                                                                            {0xffb4, "KP4"},
+                                                                            {0xffb5, "KP5"},
+                                                                            {0xffb6, "KP6"},
+                                                                            {0xffb7, "KP7"},
+                                                                            {0xffb8, "KP8"},
+                                                                            {0xffb9, "KP9"},
+                                                                            {0xffae, "KPDOT"},
+                                                                            {0xffaa, "KPMUL"},
+                                                                            {0xffab, "KP+"},
+                                                                            {0xffad, "KP-"},
+                                                                            {0xffaf, "KP/"},
+                                                                            {0xffbd, "KPEQ"}}};
+inline constexpr bool is_keypad_symbol(std::uint32_t symbol) {
+    for (const auto& entry : keypad_binding_symbols)
+        if (entry.symbol == symbol)
+            return true;
+    return false;
+}
+// Normalize group-zero keypad navigation/decimal aliases before capture and lookup.
+// Lock state never changes the persisted identity; non-keypad keys stay distinct.
+inline constexpr std::uint32_t canonical_keypad_symbol(std::uint32_t symbol) {
+    switch (symbol) {
+    case 0xff9e:
+        return 0xffb0; // KP_Insert -> KP_0
+    case 0xff9c:
+        return 0xffb1; // KP_End -> KP_1
+    case 0xff99:
+        return 0xffb2; // KP_Down -> KP_2
+    case 0xff9b:
+        return 0xffb3; // KP_Next -> KP_3
+    case 0xff96:
+        return 0xffb4; // KP_Left -> KP_4
+    case 0xff9d:
+        return 0xffb5; // KP_Begin -> KP_5
+    case 0xff98:
+        return 0xffb6; // KP_Right -> KP_6
+    case 0xff95:
+        return 0xffb7; // KP_Home -> KP_7
+    case 0xff97:
+        return 0xffb8; // KP_Up -> KP_8
+    case 0xff9a:
+        return 0xffb9; // KP_Prior -> KP_9
+    case 0xff9f:
+    case 0xffac:
+        return 0xffae; // KP_Delete / separator -> decimal key
+    default:
+        return symbol;
+    }
+}
 inline constexpr bool is_letter_symbol(std::uint32_t symbol) {
     return symbol >= 'a' && symbol <= 'z';
 }
 inline constexpr bool is_bindable_keyboard_symbol(std::uint32_t symbol) {
-    if (is_letter_symbol(symbol) || (symbol >= '0' && symbol <= '9'))
+    if (is_letter_symbol(symbol) || (symbol >= '0' && symbol <= '9') || is_keypad_symbol(symbol))
         return true;
     for (const auto& entry : named_binding_symbols)
         if (entry.symbol == symbol)
@@ -103,6 +156,9 @@ struct KeyBindings {
         if (symbol >= '0' && symbol <= '9')
             return std::string(1, static_cast<char>(symbol));
         for (const auto& entry : named_binding_symbols)
+            if (entry.symbol == symbol)
+                return std::string(entry.name);
+        for (const auto& entry : keypad_binding_symbols)
             if (entry.symbol == symbol)
                 return std::string(entry.name);
         throw std::invalid_argument("Invalid binding symbol");

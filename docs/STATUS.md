@@ -1,7 +1,7 @@
 # Implementation status
 
-The twenty-second increment adds keyboard/mouse modifier chords, deterministic
-press handling and settings migration. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
+The twenty-third increment adds keypad bindings, Num Lock-independent input
+identities and settings migration. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
 ## Delivered
 
@@ -51,7 +51,7 @@ entire plan feature ID when required subfeatures are still absent.
 | ID | Status | Current evidence | Still required |
 | --- | --- | --- | --- |
 | F01 | Partial | `graphics`, `platform_events`, `platform_no_display`, visible startup/resize | Manual minimize/fullscreen/scaling matrix and visible-window focus checks |
-| F02 | Partial | CPU edge/focus/capture tests; native key-repeat/alias/pointer/wheel/focus tests; modal gameplay routing; ten configurable keyboard/mouse actions, conflict/capture/persistence tests; mixed-device aliases, modifier chords and mapping notification refresh | Keypad/international symbols and keyboard group switching |
+| F02 | Partial | CPU edge/focus/capture tests; native key-repeat/alias/pointer/wheel/focus tests; modal gameplay routing; ten configurable keyboard/mouse actions, conflict/capture/persistence tests; mixed-device aliases, modifier chords, keypad identities and mapping notification refresh | International symbols and keyboard group switching |
 | F03 | Implemented (v1) | Parented rotating/scaled/mirrored gallery; sampled affine hierarchy; camera corner/aspect/follow/zoom checkpoints; pause/step/save/replay pose tests; GPU shear/mirror/culling/resize pixels | Broader manual camera and display matrix; transform caching is optional |
 | F04 | Implemented (v1) | GPU pixel/order/color/atlas/culling/batch tests; animated/parented sprites; transactional reload; independent nearest/linear min/mag filters and clamp/repeat axes; atlas inset and sampling gallery | Optional mipmaps, anisotropy and atlas-cell repetition |
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
@@ -925,7 +925,42 @@ HUD hints show chords; relaunch retained all assignments without another edit.
 The checks used injected X11 events, not a broader physical keyboard/layout matrix.
 No new performance baseline or physical audio test was taken.
 
+## Added in the twenty-third increment
+
+- Sixteen canonical keypad bindings: digits 0–9, decimal/separator, add, subtract,
+  multiply, divide and equal. These are distinct from main-row keys and support
+  existing Ctrl/Shift/Alt chords, readable labels and conflict rules.
+- Keypad navigation aliases normalize before capture and lookup. Num Lock and
+  Caps Lock do not change the binding, including during a held key. Locale
+  separator shares the decimal identity. Num Lock never occupies capture, and
+  keypad Enter remains fixed menu activation.
+- ECFG v6 retains the 112-byte schema, accepts canonical keypad symbols and loads
+  v1–v5 preferences under their original validation rules. Save/replay formats,
+  asset content and dependencies are unchanged.
+- CPU normalization, distinct-key, label, migration and menu cases; four new native
+  cases exercise keypad lock states, aliases, chords, remapping and focus recovery.
+
+## Twenty-third-increment validation (2026-10-11)
+
+GCC Debug and Release each pass all 28 runtime CTest groups without skips. Focused
+bindings, persistence, UI, platform_events and platform_chords groups also pass
+with Clang and native-platform ASan/UBSan (driver leak detection disabled).
+
+The binding suite now has sixteen CPU cases; the native chord/keypad suite has
+ten. Native cases exercise all 16 canonical keypad symbols and 11 navigation
+aliases under injected Num Lock/Caps Lock/Shift state masks, including lock-state
+changes during repeat/release. Separate physical modifier events test actual chord
+selection. Main-row separation, fixed navigation/Enter aliases, capture, held
+rebinding and focus recovery pass. CPU cases cover locale separator normalization;
+no physical locale-specific keypad or global desktop lock state was changed.
+
+Two isolated Feature Lab launches captured and restored main-row 1, KP1, Ctrl+KP1,
+Ctrl+Shift+Alt+KPDOT and KPMUL. An injected Num Lock press left capture open. The
+112-byte ECFG v6 file retained the expected canonical symbols and masks across
+relaunch. Both 1050x1360 captures were inspected: labels fit and the HUD distinguishes
+main-row/keypad input. No new performance baseline or physical audio test was taken.
+
 ## Next increment
 
-Add keypad bindings with Num Lock-independent behavior and native input tests
-(F02).
+Support keyboard-group changes with active-layout mapping and held-input
+cancellation (F02).
