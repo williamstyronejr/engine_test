@@ -531,11 +531,27 @@ does not depend on Xlib; its allowlist and labels are in `bindings.hpp`.
 | Semicolon, apostrophe, comma, period, slash | 0x3b, 0x27, 0x2c, 0x2e, 0x2f | SEMI, APOS, COMMA, DOT, SLASH |
 | Backspace, Home, End, Insert, Delete | 0xff08, 0xff50, 0xff57, 0xff63, 0xffff | BKSP, HOME, END, INS, DEL |
 | F4, F9, F12 | 0xffc1, 0xffc6, 0xffc9 | F4, F9, F12 |
+| Keypad 0–9 | 0xffb0–0xffb9 | KP0–KP9 |
+| Keypad decimal, multiply, add, subtract, divide, equal | 0xffae, 0xffaa, 0xffab, 0xffad, 0xffaf, 0xffbd | KPDOT, KPMUL, KP+, KP-, KP/, KPEQ |
 
-Other keyboard symbols are rejected, including uppercase/shifted symbols, keypad,
+Other keyboard symbols are rejected, including uppercase/shifted symbols,
 modifiers and international/media keys. Fixed arrow/menu/page/zoom controls and
 F1/F2/F3/F5/F6/F7/F8/F10/F11 cannot be reassigned, even with modifiers. The
 unshifted group-zero base symbol is used (Shift+1 uses symbol 1).
+
+`canonical_keypad_symbol` normalizes the native group-zero keypad symbols before
+capture and lookup. KP_Insert/End/Down/Next/Left/Begin/Right/Home/Up/Prior map to
+KP_0/1/2/3/4/5/6/7/8/9. KP_Delete and KP_Separator map to KP_Decimal. Canonical
+symbols pass through unchanged. Dedicated arrows/navigation and main-row digits
+remain distinct. Assignment and persisted records accept only canonical symbols;
+raw keypad navigation aliases are rejected to prevent duplicate identities.
+
+The backend uses cached group-zero keycodes rather than lock-dependent text
+translation. Num Lock (including changes during a hold) and Caps Lock do not
+change keypad identity or modifier masks; Shift still participates in chords.
+Decimal and locale separator share one bindable identity. KP_Enter remains fixed
+menu activation, and Num_Lock presses never occupy the raw capture slot. Keypad
+PF keys, keypad Space/Tab and other specialized symbols remain unsupported.
 
 Mouse symbols are 0x20000001 left, 0x20000002 middle, 0x20000003 right,
 0x20000004 side 1, 0x20000005 side 2. X11 maps native buttons 1/2/3/8/9 to these
@@ -589,10 +605,10 @@ keep capture open; Escape/focus loss cancels it and F1 closes settings. Gameplay
 remains paused and captured throughout. Valid edits apply immediately; preferences
 persist on settings close or normal exit.
 
-## Persistence: ECFG v5 and ESAV v3
+## Persistence: ECFG v6 and ESAV v3
 
 All integers are little-endian, floats are IEEE binary32, and booleans are u32 0/1.
-Files begin with four-byte magic and u32 version (ECFG 5, ESAV 3), ending with a u32 CRC32 of all
+Files begin with four-byte magic and u32 version (ECFG 6, ESAV 3), ending with a u32 CRC32 of all
 preceding bytes (reflected polynomial 0xEDB88320, initial/final XOR 0xFFFFFFFF).
 The envelope is 12..65,536 bytes; parsers reject wrong type/version, excess counts,
 truncation, trailing bytes, invalid booleans, and checksum mismatches. CRC detects
@@ -604,14 +620,16 @@ ECFG payload after the header is three f32 gains (master, music, effects), u32 m
 and u32 VSync, followed by ten u32 input symbols in the binding order above, then
 ten u32 modifier masks in the same order. Symbols begin at byte 28, masks at byte
 68, and CRC at byte 108. Gains must be finite within [0,1]; bindings must satisfy
-the symbol, mask and conflict rules above. Total ECFG v5 size is 112 bytes.
+the symbol, mask and conflict rules above. Total ECFG v6 size is 112 bytes.
 Legacy ECFG v1 is 32 bytes, omits bindings and loads with defaults. ECFG v2 is 72 bytes and retains strict lowercase
 letter validation. ECFG v3 has the same size and permits only letters and mouse
 symbols. Legacy validation is retained before migration; newer keyboard symbols
 in v2/v3 records are rejected even with a valid checksum. Existing assignments
 are preserved. ECFG v4 is 72 bytes and supports extended keys. All older schemas
-load with zero modifier masks and retain their unique-symbol rule; the next
-preference save writes v5. Other versions are rejected. Checkpoint compatibility
+before v5 load with zero modifier masks and retain their unique-symbol rule.
+ECFG v5 is 112 bytes and preserves existing chords. Versions 1–5 reject keypad
+bindings even with valid checksums; only v6 permits canonical keypad symbols.
+The next preference save writes v6. Other versions are rejected. Checkpoint compatibility
 is described below.
 Startup uses defaults on malformed/inaccessible configuration, logs the reason,
 and shows a notice. No automatic repair overwrites the file. Changed preferences
@@ -982,7 +1000,7 @@ one-shot events; Resume continues existing voices. The title's Tab/Enter/pointer
 input is captured, including the transition tick, and held actions remain blocked
 until physical release. At most one scene command is applied per fixed tick.
 The title-flow increment did not change the persistence schemas. Current schemas
-are ECFG v5 and ESAV v3.
+are ECFG v6 and ESAV v3.
 
 
 ## Replay files: ERPL v1

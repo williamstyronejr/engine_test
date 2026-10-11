@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The twenty-second increment adds Ctrl/Shift/Alt chords for keyboard and mouse
-bindings, deterministic press handling, and backward-compatible settings migration.
+The twenty-third increment adds keypad bindings with Num Lock-independent
+identities, chord support, and backward-compatible settings migration.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -292,7 +292,8 @@ details. File watching and background loading remain unimplemented.
 
 Open **F1 → Controls**, select an action, then press a supported key or mouse
 button, optionally holding Ctrl, Shift and/or Alt first. Keyboard choices include
-A–Z, 0–9, common punctuation, Backspace, Insert/Delete, Home/End, and F4/F9/F12.
+A–Z, 0–9, common punctuation, Backspace, Insert/Delete, Home/End, F4/F9/F12,
+and keypad digits, decimal and arithmetic keys.
 Ten actions can be rebound: movement in four directions, pause, restart,
 interact, mute, music volume and effects volume. Supported buttons are left (LMB),
 middle (MMB), right (RMB), and two side buttons (SIDE1/SIDE2, X11 buttons 8/9).
@@ -308,8 +309,16 @@ operates menus even when bound to gameplay. Held keys/buttons are suppressed unt
 change, and modal menus capture gameplay. Focus loss cancels capture. Keyboard
 bindings use unshifted X11 group zero: Shift+1 uses the base symbol 1.
 Supported punctuation: grave, brackets, backslash, semicolon, apostrophe, comma,
-period and slash. Minus/equal remain zoom controls. Keypad keys, other international
+period and slash. Main-row minus/equal remain zoom controls. Other international
 symbols and group switching are not configurable yet.
+
+Keypad digits use **KP0–KP9**, separate from the number row. Decimal/separator uses
+**KPDOT**; arithmetic keys use **KP+**, **KP-**, **KPMUL**, **KP/** and **KPEQ**.
+Num Lock on/off selects the same binding. Keypad navigation aliases (such as End
+on keypad 1) become keypad digits, without affecting dedicated navigation keys.
+Num Lock does not consume capture; keypad Enter remains fixed menu activation.
+To test this, bind Interact to KP1, toggle Num Lock, and use keypad 1 at the alarm
+switch in either state. Ctrl/Shift/Alt chords work with keypad keys too.
 
 Chord labels use **C+** for Ctrl, **S+** for Shift and **A+** for Alt. Modifier keys
 alone keep capture open. For bindings sharing a base key/button, the required
@@ -337,10 +346,10 @@ movement active until both are released. Reopen Controls to restore defaults.
 
 ## Saved data
 
-Settings use ECFG v5. ECFG v1 loads defaults, v2 preserves letters, v3 preserves
-letter/mouse bindings, and v4 preserves extended keys. Older bindings load with no
-required modifiers and upgrade on the next preference save. Saves and replays are
-unchanged.
+Settings use ECFG v6. ECFG v1 loads defaults, v2 preserves letters, v3 preserves
+letter/mouse bindings, v4 preserves extended keys, and v5 preserves chords.
+v1–v4 load with no required modifiers. All older versions upgrade on the next
+preference save. Saves and replays are unchanged.
 
 Settings: `$XDG_CONFIG_HOME/feature_lab/settings.ecfg`, falling back to
 `$HOME/.config/feature_lab/settings.ecfg`. Slots: `$XDG_STATE_HOME/feature_lab/slot-N.esav`,
@@ -433,19 +442,21 @@ and layout bounds. GPU checks render the title at four viewport sizes while
 repeated transitions keep resource counts stable. A null-device audio case checks
 initial pause and resume without duplicate voices.
 
-The fourteen-case bindings suite checks keyboard/mouse conflicts, named symbols,
-reserved-key rejection, v1–v4 migration and v5 round trips, malformed bindings,
+The sixteen-case bindings suite checks keyboard/mouse conflicts, named symbols,
+reserved-key rejection, v1–v5 migration and v6 round trips, malformed bindings,
 ordered raw press consumption, capture/cancel/defaults, held-button modal
 suppression and layout bounds. Native tests exercise
 all 27 new keyboard symbols and five mouse buttons, unshifted capture, aliases,
 duplicate events, fast clicks, held remapping, focus recovery, ignored wheel/
-unsupported buttons and mapping
-notifications. GPU tests draw both settings pages at small and large viewports.
+unsupported buttons and mapping notifications. GPU tests draw both settings pages at small and large viewports.
 
-The six-case native chord suite checks all modifier masks, press-time selection,
+The ten-case native chord/keypad suite checks all modifier masks, press-time selection,
 modifier release order, repeat suppression, left/right Ctrl/Shift, mouse chords,
 fixed aliases, focus/mapping cancellation, held rebinds and atomic capture. CPU
 cases additionally check nested conflict rules and settings capture/defaults.
+Keypad cases cover all 16 canonical symbols plus 11 navigation aliases, lock-state
+event masks, main-row separation, chords, Num Lock capture and fixed keypad Enter.
+Locale separator normalization is covered in CPU tests.
 
 The eight-case texture reload suite checks shared-handle pixel updates, dimensions,
 alpha/filter/wrap behavior, atomic invalid-batch rejection, active-pass rejection,

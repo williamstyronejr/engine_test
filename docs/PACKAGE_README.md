@@ -41,7 +41,8 @@ requests fullscreen and Escape closes settings or quits. F5/F7 reload shaders/
 textures. F6/F8 demonstrate failed reload recovery. Keyboard and mouse bindings can
 be changed in settings, including digits, punctuation, Home/End and F4/F9/F12.
 Hold Ctrl/Shift/Alt before a key or mouse button to capture a chord. Labels use
-C+/S+/A+ for these modifiers. `--help` lists command-line options.
+C+/S+/A+ for these modifiers. Keypad digits/operators can also be bound; Num Lock
+does not change their bindings. Keypad Enter stays reserved for menu activation. `--help` lists command-line options.
 
 ```sh
 ./bin/feature_lab --no-audio

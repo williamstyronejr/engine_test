@@ -39,7 +39,7 @@ struct Native {
         XSync(display.get(), False);
         window.poll(input);
     }
-    void key(KeySym symbol, bool down) {
+    void key(KeySym symbol, bool down, unsigned int state = 0) {
         XEvent e{};
         e.xkey.type = down ? KeyPress : KeyRelease;
         e.xkey.display = display.get();
@@ -47,7 +47,22 @@ struct Native {
         e.xkey.keycode = XKeysymToKeycode(display.get(), symbol);
         CHECK(e.xkey.keycode != 0);
         e.xkey.same_screen = True;
+        e.xkey.state = state;
         send(e, down ? KeyPressMask : KeyReleaseMask);
+    }
+    unsigned int num_lock_mask() const {
+        std::unique_ptr<XModifierKeymap, decltype(&XFreeModifiermap)> mapping(
+            XGetModifierMapping(display.get()), &XFreeModifiermap);
+        CHECK(mapping != nullptr);
+        const auto code = XKeysymToKeycode(display.get(), XK_Num_Lock);
+        CHECK(code != 0);
+        unsigned int mask = 0;
+        for (int modifier = 0; modifier < 8; ++modifier)
+            for (int slot = 0; slot < mapping->max_keypermod; ++slot)
+                if (mapping->modifiermap[modifier * mapping->max_keypermod + slot] == code)
+                    mask |= 1U << modifier;
+        CHECK(mask != 0);
+        return mask;
     }
     void mouse(unsigned code, bool down) {
         XEvent e{};
@@ -229,6 +244,129 @@ TEST(capture_pairs_first_trigger_with_modifiers_and_fixed_keys_stay_accessible) 
     n.key(XK_F1, true);
     f = n.input.consume();
     CHECK(button(f, Key::settings).pressed && f.pressed_modifiers == modifiers::shift);
+}
+TEST(keypad_symbols_are_stable_across_lock_states) {
+    Native n;
+    const auto num = n.num_lock_mask();
+    const std::array<std::pair<KeySym, KeySym>, 27> keys{{{XK_KP_0, XK_KP_0},
+                                                          {XK_KP_1, XK_KP_1},
+                                                          {XK_KP_2, XK_KP_2},
+                                                          {XK_KP_3, XK_KP_3},
+                                                          {XK_KP_4, XK_KP_4},
+                                                          {XK_KP_5, XK_KP_5},
+                                                          {XK_KP_6, XK_KP_6},
+                                                          {XK_KP_7, XK_KP_7},
+                                                          {XK_KP_8, XK_KP_8},
+                                                          {XK_KP_9, XK_KP_9},
+                                                          {XK_KP_Decimal, XK_KP_Decimal},
+                                                          {XK_KP_Add, XK_KP_Add},
+                                                          {XK_KP_Subtract, XK_KP_Subtract},
+                                                          {XK_KP_Multiply, XK_KP_Multiply},
+                                                          {XK_KP_Divide, XK_KP_Divide},
+                                                          {XK_KP_Equal, XK_KP_Equal},
+                                                          {XK_KP_Insert, XK_KP_0},
+                                                          {XK_KP_End, XK_KP_1},
+                                                          {XK_KP_Down, XK_KP_2},
+                                                          {XK_KP_Next, XK_KP_3},
+                                                          {XK_KP_Left, XK_KP_4},
+                                                          {XK_KP_Begin, XK_KP_5},
+                                                          {XK_KP_Right, XK_KP_6},
+                                                          {XK_KP_Home, XK_KP_7},
+                                                          {XK_KP_Up, XK_KP_8},
+                                                          {XK_KP_Prior, XK_KP_9},
+                                                          {XK_KP_Delete, XK_KP_Decimal}}};
+    for (const auto& [native, canonical] : keys) {
+        KeyBindings b;
+        b.assign(6, static_cast<std::uint32_t>(canonical));
+        n.configure(b);
+        for (const auto state : {0U, num, num | LockMask | ShiftMask}) {
+            n.key(native, true, state);
+            auto f = n.input.consume();
+            CHECK(f.pressed_symbol == canonical && !f.pressed_modifiers);
+            CHECK(button(f, Key::interact).pressed);
+            n.key(native, true, state ^ num); // Lock change + repeat cannot reactivate.
+            f = n.input.consume();
+            CHECK(button(f, Key::interact).held && !button(f, Key::interact).pressed &&
+                  !f.pressed_symbol);
+            n.key(native, false, state ^ num);
+            CHECK(button(n.input.consume(), Key::interact).released);
+        }
+    }
+}
+TEST(keypad_digits_operators_and_fixed_aliases_are_distinct) {
+    Native n;
+    KeyBindings b;
+    b.assign(0, '1');
+    b.assign(1, XK_KP_1);
+    b.assign(6, XK_KP_Add);
+    n.configure(b);
+    n.key(XK_1, true);
+    n.key(XK_KP_End, true);
+    auto f = n.input.consume();
+    CHECK(button(f, Key::left).held && button(f, Key::right).held);
+    n.key(XK_1, false);
+    f = n.input.consume();
+    CHECK(button(f, Key::left).released && button(f, Key::right).held);
+    n.key(XK_Right, true);
+    n.key(XK_KP_End, false);
+    CHECK(button(n.input.consume(), Key::right).held);
+    n.key(XK_Right, false);
+    CHECK(button(n.input.consume(), Key::right).released);
+    n.key(XK_KP_Add, true);
+    n.key(XK_KP_Add, false);
+    f = n.input.consume();
+    CHECK(button(f, Key::interact).pressed && button(f, Key::interact).released);
+    CHECK(!button(f, Key::zoom_in).pressed);
+    n.key(XK_equal, true);
+    f = n.input.consume();
+    CHECK(button(f, Key::zoom_in).pressed && !button(f, Key::interact).pressed);
+}
+TEST(keypad_chords_hold_remapping_and_focus_recover) {
+    Native n;
+    const auto num = n.num_lock_mask();
+    KeyBindings b;
+    b.assign(6, XK_KP_1, modifiers::shift | modifiers::control);
+    n.configure(b);
+    n.key(XK_Shift_L, true);
+    n.key(XK_Control_L, true);
+    n.key(XK_KP_End, true, num);
+    auto f = n.input.consume();
+    CHECK(f.pressed_symbol == XK_KP_1 &&
+          f.pressed_modifiers == (modifiers::shift | modifiers::control));
+    CHECK(button(f, Key::interact).pressed);
+    n.key(XK_Shift_L, false);
+    n.key(XK_Control_L, false);
+    n.key(XK_KP_End, true, 0);
+    CHECK(button(n.input.consume(), Key::interact).held);
+    b.assign(6, 'e');
+    b.assign(0, XK_KP_1);
+    n.configure(b);
+    n.key(XK_KP_End, true, num);
+    CHECK(!button(n.input.consume(), Key::left).held);
+    n.key(XK_KP_End, false);
+    n.key(XK_KP_End, true);
+    CHECK(button(n.input.consume(), Key::left).pressed);
+    n.cancel(false);
+    f = n.input.consume();
+    CHECK(f.canceled && !button(f, Key::left).held);
+    n.key(XK_KP_End, false);
+    n.key(XK_KP_End, true, num);
+    CHECK(button(n.input.consume(), Key::left).pressed);
+}
+TEST(num_lock_does_not_consume_capture_and_keypad_enter_stays_fixed) {
+    Native n;
+    n.key(XK_Num_Lock, true);
+    n.key(XK_Num_Lock, false);
+    CHECK(!n.input.consume().pressed_symbol);
+    n.key(XK_KP_Home, true, n.num_lock_mask());
+    CHECK(n.input.consume().pressed_symbol == XK_KP_7);
+    n.key(XK_KP_Home, false);
+    n.key(XK_KP_Enter, true);
+    n.key(XK_Return, true);
+    n.key(XK_KP_Enter, false);
+    CHECK(button(n.input.consume(), Key::accept).held);
+    n.key(XK_Return, false);
+    CHECK(button(n.input.consume(), Key::accept).released);
 }
 } // namespace
 int main() {
