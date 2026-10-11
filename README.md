@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The nineteenth increment adds per-texture filtering/wrapping controls, atlas-safe
-linear UVs and a four-panel sampling comparison in Feature Lab.
+The twentieth increment adds configurable mouse-button actions, native input
+regressions, and backward-compatible settings migration.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -288,26 +288,34 @@ payload per transaction. Candidates temporarily coexist with the old resources.
 See [texture reload contracts](docs/FORMATS.md#texture-reload) for memory and lifetime
 details. File watching and background loading remain unimplemented.
 
-## Keyboard controls
+## Keyboard and mouse controls
 
-Open **F1 → Controls**, select an action, then press a letter **A–Z**. Ten actions
-can be rebound: movement in four directions, pause, restart, interact, mute, music
-volume and effects volume. A letter can belong to only one action. Conflicts and
-non-letter keys leave the current binding unchanged; choose another letter or
-press Escape to cancel. Restore Defaults restores the original letter bindings.
-Changes apply immediately; on-screen hints follow the selected keys. Preferences
-save when settings close or the game exits normally.
+Open **F1 → Controls**, select an action, then press a letter **A–Z** or a mouse
+button. Ten actions can be rebound: movement in four directions, pause, restart,
+interact, mute, music volume and effects volume. Supported buttons are left (LMB),
+middle (MMB), right (RMB), and two side buttons (SIDE1/SIDE2, X11 buttons 8/9).
+Wheel input remains scrolling. Each action has one configurable input; assigning
+a mouse button replaces its letter, and no input can belong to two actions.
+Conflicts and unsupported keys leave capture open; Escape cancels it.
+Restore Defaults restores A/D/W/S/P/R/E/M/N/B. Hints follow the selected input.
+Changes apply immediately and save when settings close or the game exits normally.
 
 Arrow keys, Space, Tab, Enter, Escape, Shift, zoom/page keys and function keys stay
-fixed so menus remain accessible. Held keys are suppressed until released after a
-binding change. Focus loss cancels an active capture. These are unshifted letter
-symbols in X11 keyboard group zero, not physical scan codes or modifier chords.
-Mouse actions and arbitrary-key rebinding remain future work.
+fixed so menus remain accessible. Left-click still operates menus even when bound
+to gameplay. Held keys/buttons are suppressed until released after a binding
+change, and modal menus capture gameplay. Focus loss cancels capture. Letter keys
+use unshifted X11 group zero. Arbitrary keys, chords and group switching remain
+future work.
+
+To exercise mouse input in Feature Lab, bind **Interact** to RMB, close settings,
+and right-click at the alarm switch. Bind a movement direction to a mouse button
+to test holding it alongside the matching arrow key; releasing either input keeps
+movement active until both are released. Reopen Controls to restore defaults.
 
 ## Saved data
 
-Settings use ECFG v2; ECFG v1 files load with default letter bindings and are
-upgraded on the next preference save.
+Settings use ECFG v3. ECFG v1 loads default bindings; v2 preserves customized
+letters. Both upgrade on the next preference save. Saves and replays are unchanged.
 
 Settings: `$XDG_CONFIG_HOME/feature_lab/settings.ecfg`, falling back to
 `$HOME/.config/feature_lab/settings.ecfg`. Slots: `$XDG_STATE_HOME/feature_lab/slot-N.esav`,
@@ -400,11 +408,12 @@ and layout bounds. GPU checks render the title at four viewport sizes while
 repeated transitions keep resource counts stable. A null-device audio case checks
 initial pause and resume without duplicate voices.
 
-The six-case bindings suite checks transactional conflicts, raw press consumption,
-v1 migration/v2 round trips, malformed bindings, capture/cancel/defaults and menu
-layout bounds. Native tests exercise rebound aliases, held-key suppression,
-invalid-table retention and mapping notifications; GPU tests draw both settings
-pages at small and large viewport sizes.
+The eight-case bindings suite checks keyboard/mouse conflicts, ordered raw press
+consumption, v1/v2 migration and v3 round trips, malformed bindings, capture/cancel/
+defaults, held-button modal suppression and layout bounds. Native tests exercise
+all five mouse buttons, mixed keyboard/mouse aliases, duplicate events, fast clicks,
+held remapping, focus recovery, ignored wheel/unsupported buttons and mapping
+notifications. GPU tests draw both settings pages at small and large viewports.
 
 The eight-case texture reload suite checks shared-handle pixel updates, dimensions,
 alpha/filter/wrap behavior, atomic invalid-batch rejection, active-pass rejection,

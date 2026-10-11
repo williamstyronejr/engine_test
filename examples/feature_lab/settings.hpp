@@ -89,9 +89,9 @@ class Settings {
                 const auto actions = ui_.update(input);
                 for (const auto action : actions.events()) {
                     if (action.id >= binding_first &&
-                        action.id < binding_first + bindings.letters.size()) {
+                        action.id < binding_first + bindings.symbols.size()) {
                         capture_ = action.id - binding_first;
-                        notice = "PRESS A LETTER A-Z / ESC CANCEL";
+                        notice = "PRESS A-Z OR MOUSE / ESC CANCEL";
                         ui_.reset_interaction();
                         break;
                     }
@@ -204,8 +204,8 @@ class Settings {
             8 * scale);
         if (controls_) {
             std::vector<UiWidget> widgets;
-            widgets.reserve(bindings.letters.size() + 2);
-            for (std::size_t i = 0; i < bindings.letters.size(); ++i)
+            widgets.reserve(bindings.symbols.size() + 2);
+            for (std::size_t i = 0; i < bindings.symbols.size(); ++i)
                 widgets.push_back({static_cast<UiId>(binding_first + i), UiKind::button,
                                    column.next(38 * scale), bindings.label(i)});
             widgets.push_back(

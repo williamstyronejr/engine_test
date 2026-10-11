@@ -21,6 +21,24 @@ TEST(binding_assignment_is_validated_and_transactional) {
     bindings.assign(0, 'q'); // Assigning the current letter is valid.
     bindings.validate();
 }
+TEST(mouse_bindings_are_unique_and_have_readable_names) {
+    KeyBindings bindings;
+    const std::array buttons{MouseButton::left, MouseButton::middle, MouseButton::right,
+                             MouseButton::side1, MouseButton::side2};
+    for (std::size_t i = 0; i < buttons.size(); ++i) {
+        bindings.assign(i, mouse_symbol(buttons[i]));
+        CHECK(bindings.action(mouse_symbol(buttons[i])) == bindable_actions[i]);
+    }
+    CHECK(bindings.label(0) == "MOVE LEFT : LMB");
+    CHECK(bindings.key_name(Key::up) == "RMB");
+    const auto before = bindings;
+    rejects([&] { bindings.assign(6, mouse_symbol(MouseButton::right)); });
+    for (const auto invalid : {0x20000000U, 0x20000006U, 0xffffffffU, 4U, 5U})
+        rejects([&] { bindings.assign(6, invalid); });
+    CHECK(bindings == before);
+    bindings.assign(0, 'a');
+    CHECK(!bindings.action(mouse_symbol(MouseButton::left)));
+}
 TEST(raw_press_queue_cancellation_and_modal_capture) {
     Input input;
     input.press_symbol('q');
@@ -35,8 +53,16 @@ TEST(raw_press_queue_cancellation_and_modal_capture) {
     frame.pressed_symbol = 'q';
     CHECK(gate.route(frame, true, false).pressed_symbol == 0);
     CHECK(gate.route(frame, false, false).pressed_symbol == 'q');
+    frame.pressed_symbol = mouse_symbol(MouseButton::right);
+    CHECK(gate.route(frame, false, true).pressed_symbol == 0);
+    CHECK(gate.route(frame, true, false).pressed_symbol == 0);
+    CHECK(gate.route(frame, false, false).pressed_symbol == mouse_symbol(MouseButton::right));
+    input.press_symbol(mouse_symbol(MouseButton::left));
+    input.press_symbol('q');
+    CHECK(input.consume().pressed_symbol == mouse_symbol(MouseButton::left));
+    CHECK(!input.consume().pressed_symbol);
 }
-TEST(configuration_v2_roundtrip_and_v1_defaults) {
+TEST(configuration_v3_roundtrip_and_legacy_migration) {
     Configuration config;
     config.bindings.assign(0, 'q');
     auto bytes = encode_config(config);
@@ -51,6 +77,22 @@ TEST(configuration_v2_roundtrip_and_v1_defaults) {
     CHECK(restored.audio.master == 0.5F && restored.audio.muted && !restored.vsync);
     CHECK(restored.bindings == KeyBindings{});
     CHECK(decode_config(encode_config(restored)) == restored);
+    auto legacy_v2 = std::vector<std::uint8_t>(bytes.begin(), bytes.end() - 4);
+    legacy_v2[4] = 2;
+    CHECK(decode_config(seal_record(legacy_v2)) == config);
+    config.bindings.assign(6, mouse_symbol(MouseButton::right));
+    CHECK(decode_config(encode_config(config)) == config);
+    const auto mouse_bytes = encode_config(config);
+    auto mouse_payload = open_record(mouse_bytes);
+    auto invalid = std::vector<std::uint8_t>(mouse_payload.begin(), mouse_payload.end());
+    invalid[4] = 2; // v2 remains strictly letters, even with a valid checksum.
+    rejects([&] { decode_config(seal_record(invalid)); });
+    invalid[4] = 3;
+    invalid[28 + 6 * 4] = 6; // Unknown mouse symbol.
+    rejects([&] { decode_config(seal_record(invalid)); });
+    invalid[28 + 6 * 4] = 3;
+    std::copy_n(invalid.begin() + 28 + 6 * 4, 4, invalid.begin() + 28);
+    rejects([&] { decode_config(seal_record(invalid)); });
     bytes[28] = 'd'; // Duplicate right binding with a valid checksum.
     auto payload = std::vector<std::uint8_t>(bytes.begin(), bytes.end() - 4);
     rejects([&] { decode_config(seal_record(payload)); });
@@ -99,7 +141,7 @@ TEST(settings_rebind_conflicts_capture_defaults_and_close) {
     frame.pressed_symbol = 'w';
     CHECK(!m.update(frame).bindings_changed);
     CHECK(m.settings.bindings == KeyBindings{} && m.settings.capturing_binding());
-    CHECK(m.settings.notice == "KEY ALREADY ASSIGNED");
+    CHECK(m.settings.notice == "INPUT ALREADY ASSIGNED");
     frame.pressed_symbol = 0xff0d; // Fixed Enter cannot be reassigned.
     CHECK(!m.update(frame).bindings_changed && m.settings.capturing_binding());
     frame.pressed_symbol = 'q';
@@ -114,6 +156,37 @@ TEST(settings_rebind_conflicts_capture_defaults_and_close) {
     CHECK(!m.settings.controls_opened() && m.settings.opened());
     m.click(Settings::resume);
     CHECK(!m.settings.opened() && !m.game.paused);
+}
+TEST(mouse_capture_conflicts_and_held_actions_do_not_escape_the_menu) {
+    Menu m;
+    m.click(Settings::binding_first + 6);
+    CHECK(m.settings.capturing_binding()); // Opening click is never the binding.
+    InputFrame frame{};
+    frame.pressed_symbol = mouse_symbol(MouseButton::right);
+    CHECK(m.update(frame).bindings_changed);
+    CHECK(m.settings.bindings.key_name(Key::interact) == "RMB");
+    m.click(Settings::binding_first);
+    CHECK(!m.update(frame).bindings_changed && m.settings.capturing_binding());
+    frame.pressed_symbol = mouse_symbol(MouseButton::left);
+    frame.pointer.primary = {true, true, false};
+    frame[static_cast<std::size_t>(Key::left)] = {true, true, false};
+    CHECK(m.update(frame).bindings_changed);
+    frame.pressed_symbol = 0;
+    frame.pointer.primary.pressed = false;
+    frame[static_cast<std::size_t>(Key::left)].pressed = false;
+    frame[static_cast<std::size_t>(Key::settings)].pressed = true;
+    CHECK(!button(m.update(frame).gameplay, Key::left).held);
+    CHECK(!m.settings.opened());
+    frame[static_cast<std::size_t>(Key::settings)] = {};
+    CHECK(!button(m.update(frame).gameplay, Key::left).held);
+    CHECK(!m.update(frame).gameplay.pointer.primary.held);
+    frame.pointer.primary = {false, false, true};
+    frame[static_cast<std::size_t>(Key::left)] = {false, false, true};
+    m.update(frame);
+    frame.pointer.primary = {true, true, false};
+    frame[static_cast<std::size_t>(Key::left)] = {true, true, false};
+    const auto fresh = m.update(frame);
+    CHECK(button(fresh.gameplay, Key::left).pressed && fresh.gameplay.pointer.primary.pressed);
 }
 TEST(binding_capture_cancel_focus_loss_and_keyboard_activation) {
     Menu m;

@@ -87,7 +87,7 @@ int main() {
         send_key(XK_w, false);
         input.consume();
         auto invalid = configured;
-        invalid.letters[0] = 'q';
+        invalid.symbols[0] = 'q';
         bool rejected = false;
         try {
             window.set_bindings(invalid, input);
@@ -191,6 +191,95 @@ int main() {
         send_button(Button4, true, 28, 30);
         send_button(Button4, false, 28, 30);
         check(input.consume().pointer.wheel == 1, "Native scroll mapping failed");
+        // All supported buttons map to actions; wheel/unknown buttons never become bindings.
+        for (const auto [native_button, symbol] : {std::pair{1U, engine::MouseButton::left},
+                                                   {2U, engine::MouseButton::middle},
+                                                   {3U, engine::MouseButton::right},
+                                                   {8U, engine::MouseButton::side1},
+                                                   {9U, engine::MouseButton::side2}}) {
+            configured = {};
+            configured.assign(2, engine::mouse_symbol(symbol));
+            window.set_bindings(configured, input);
+            input.consume();
+            send_button(native_button, true, 20, 20);
+            auto frame = input.consume();
+            check(engine::button(frame, engine::Key::up).pressed &&
+                      frame.pressed_symbol == engine::mouse_symbol(symbol),
+                  "Mouse binding press missing");
+            send_button(native_button, true, 20, 20);
+            frame = input.consume();
+            check(!engine::button(frame, engine::Key::up).pressed && !frame.pressed_symbol,
+                  "Duplicate mouse down generated a press");
+            send_key(XK_Up, true);
+            input.consume();
+            send_button(native_button, false, 20, 20);
+            frame = input.consume();
+            check(engine::button(frame, engine::Key::up).held &&
+                      !engine::button(frame, engine::Key::up).released,
+                  "Mouse release canceled held keyboard alias");
+            send_button(native_button, true, 20, 20);
+            input.consume();
+            send_key(XK_Up, false);
+            frame = input.consume();
+            check(engine::button(frame, engine::Key::up).held &&
+                      !engine::button(frame, engine::Key::up).released,
+                  "Keyboard release canceled held mouse alias");
+            // Remapping a held mouse suppresses raw capture, gameplay and primary UI input.
+            configured.assign(2, 'w');
+            configured.assign(6, engine::mouse_symbol(symbol));
+            window.set_bindings(configured, input);
+            check(input.consume().canceled, "Mouse rebind did not cancel input");
+            send_button(native_button, true, 20, 20);
+            frame = input.consume();
+            check(!engine::button(frame, engine::Key::interact).held && !frame.pressed_symbol &&
+                      !frame.pointer.primary.held,
+                  "Held mouse rebind leaked input");
+            send_button(native_button, false, 20, 20);
+            frame = input.consume();
+            check(!frame.pointer.primary.released, "Rebind release synthesized UI click");
+            send_button(native_button, true, 20, 20);
+            send_button(native_button, false, 20, 20);
+            frame = input.consume();
+            const auto& action = engine::button(frame, engine::Key::interact);
+            check(action.pressed && action.released && !action.held,
+                  "Fast bound mouse click lost action edges");
+        }
+        for (unsigned int unsupported : {4U, 5U, 6U, 7U, 10U, 255U}) {
+            send_button(unsupported, true, 20, 20);
+            send_button(unsupported, false, 20, 20);
+            check(!input.consume().pressed_symbol, "Unsupported mouse button became raw binding");
+        }
+        // Keyboard and mouse share an ordered, bounded capture slot.
+        send_button(Button3, true, 20, 20);
+        send_key(XK_q, true);
+        check(input.consume().pressed_symbol == engine::mouse_symbol(engine::MouseButton::right),
+              "First mouse press was overwritten by a key");
+        send_button(Button3, false, 20, 20);
+        send_key(XK_q, false);
+        input.consume();
+        send_key(XK_q, true);
+        send_button(Button3, true, 20, 20);
+        check(input.consume().pressed_symbol == 'q', "First key press was overwritten by mouse");
+        send_button(Button3, false, 20, 20);
+        send_key(XK_q, false);
+        input.consume();
+        configured = {};
+        configured.assign(6, engine::mouse_symbol(engine::MouseButton::left));
+        window.set_bindings(configured, input);
+        input.consume();
+        send_button(Button1, true, 20, 20);
+        input.consume();
+        check(XSendEvent(display, native, False, 0, &mapping), "Mouse mapping event failed");
+        XSync(display, False);
+        window.poll(input);
+        check(input.consume().canceled, "Mapping change did not cancel mouse input");
+        send_button(Button1, true, 20, 20);
+        auto blocked_mouse = input.consume();
+        check(!engine::button(blocked_mouse, engine::Key::interact).held &&
+                  !blocked_mouse.pointer.primary.held && !blocked_mouse.pressed_symbol,
+              "Mapping change leaked held mouse input");
+        send_button(Button1, false, 20, 20);
+        input.consume();
         XEvent motion{};
         motion.xmotion.type = MotionNotify;
         motion.xmotion.window = native;
@@ -216,6 +305,15 @@ int main() {
               "Focus loss left stuck input");
         check(lost.canceled && !lost.pointer.primary.held && !lost.pointer.primary.released,
               "Focus loss synthesized a click");
+        check(!engine::button(lost, engine::Key::interact).held && !lost.pressed_symbol,
+              "Focus loss left mouse action or capture input");
+        send_button(Button1, false, 20, 20);
+        input.consume();
+        send_button(Button1, true, 20, 20);
+        check(engine::button(input.consume(), engine::Key::interact).pressed,
+              "Mouse binding did not recover after focus loss");
+        send_button(Button1, false, 20, 20);
+        input.consume();
         XEvent close{};
         close.xclient.type = ClientMessage;
         close.xclient.window = native;

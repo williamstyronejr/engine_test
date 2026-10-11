@@ -516,35 +516,45 @@ mute restores the chosen master gain on unmute. Configuration persists audio gai
 mute, and requested VSync; fullscreen remains session-local.
 `--settings-demo` opens the same panel at startup for visual inspection.
 
-## Keyboard bindings
+## Keyboard and mouse bindings
 
-`KeyBindings` stores ten unique lowercase ASCII letter symbols in stable order:
+`KeyBindings::symbols` stores ten unique input symbols in stable action order:
 left, right, up, down, pause, restart, interact, mute, music volume, effects volume.
 `assign` and `validate` reject duplicate/out-of-range symbols before publication.
-Defaults are A/D/W/S/P/R/E/M/N/B. Fixed non-letter aliases remain available.
+Defaults are A/D/W/S/P/R/E/M/N/B. Each entry is either lowercase ASCII `a`–`z`
+or a `MouseButton` symbol: 0x20000001 left, 0x20000002 middle,
+0x20000003 right, 0x20000004 side 1, 0x20000005 side 2. The X11 backend maps native
+buttons 1/2/3/8/9 to these device-independent values; wheel buttons 4/5 remain scroll
+and other buttons are ignored. Labels use LMB/MMB/RMB/SIDE1/SIDE2. Assignment
+replaces the action's letter or mouse input. Fixed non-letter aliases remain available.
 
 `Window::set_bindings` validates the complete table before replacing its cached
-keycode mapping, cancels queued input, and suppresses physically held keys until
-release. Multiple keycodes for an action are aggregated; releasing one alias does
-not release another. MappingKeyboard/MappingModifier notifications refresh the
-X11 mapping with the same cancellation policy. Symbols use unshifted group zero;
+keycode mapping, cancels queued input, and suppresses physically held keys/buttons
+until release, including primary UI clicks. Keyboard and mouse sources for an
+action are aggregated; releasing one alias does not release another.
+MappingKeyboard/MappingModifier notifications refresh the X11 mapping with the
+same cancellation policy. Keyboard symbols use unshifted group zero;
 runtime group switching, physical scan codes and modifier chords are not supported.
 
 `InputFrame::pressed_symbol` carries the first fresh native press per consumed
-frame, or zero. Additional presses in that interval are ignored for capture. Repeat
-does not generate a fresh symbol. Focus loss clears it; modal routing removes it
+frame (key or supported mouse button), or zero. Additional presses in that interval
+are ignored for capture. Repeat does not generate a fresh symbol. Focus loss clears it; modal routing removes it
 from gameplay. This bounded field is for binding capture, not text input.
+`InputGate::route` takes logical-action capture (regardless of device) and UI-pointer
+capture separately. Both are enabled for modal gameplay routing. Pointer-only
+capture also clears raw mouse symbols; it does not suppress mapped logical actions.
 
 Feature Lab exposes ten binding buttons, Restore Defaults and Back in F1 Controls.
+Left-click always operates widgets, including when assigned to a gameplay action.
 Activation starts capture on a subsequent input frame. Conflicts/unsupported keys
 keep capture open; Escape/focus loss cancels it and F1 closes settings. Gameplay
 remains paused and captured throughout. Valid edits apply immediately; preferences
 persist on settings close or normal exit.
 
-## Persistence: ECFG v2 and ESAV v3
+## Persistence: ECFG v3 and ESAV v3
 
 All integers are little-endian, floats are IEEE binary32, and booleans are u32 0/1.
-Files begin with four-byte magic and u32 version (ECFG 2, ESAV 3), ending with a u32 CRC32 of all
+Files begin with four-byte magic and u32 version (ECFG 3, ESAV 3), ending with a u32 CRC32 of all
 preceding bytes (reflected polynomial 0xEDB88320, initial/final XOR 0xFFFFFFFF).
 The envelope is 12..65,536 bytes; parsers reject wrong type/version, excess counts,
 truncation, trailing bytes, invalid booleans, and checksum mismatches. CRC detects
@@ -553,11 +563,12 @@ public in `engine/binary.hpp`; envelope and storage APIs are in `engine/persiste
 Schemas below belong to Feature Lab; the engine storage layer is schema-agnostic.
 
 ECFG payload after the header is three f32 gains (master, music, effects), u32 mute,
-and u32 VSync, followed by ten u32 letter symbols in the binding order above.
-Gains must be finite within [0,1]; bindings must be unique lowercase ASCII letters.
-Total ECFG v2 size is 72 bytes including CRC. Legacy ECFG v1 is 32 bytes, omits the
-bindings and loads with defaults; the next preference save writes v2. Other versions
-are rejected. Checkpoint compatibility is described below.
+and u32 VSync, followed by ten u32 input symbols in the binding order above.
+Gains must be finite within [0,1]; bindings must be unique supported symbols.
+Total ECFG v3 size is 72 bytes including CRC. Legacy ECFG v1 is 32 bytes, omits the
+bindings and loads with defaults. ECFG v2 is 72 bytes and retains strict lowercase
+letter validation; existing assignments are preserved. The next preference save
+writes v3. Other versions are rejected. Checkpoint compatibility is described below.
 Startup uses defaults on malformed/inaccessible configuration, logs the reason,
 and shows a notice. No automatic repair overwrites the file. Changed preferences
 are written on panel close or normal application exit. Crashes before that boundary
@@ -927,7 +938,7 @@ one-shot events; Resume continues existing voices. The title's Tab/Enter/pointer
 input is captured, including the transition tick, and held actions remain blocked
 until physical release. At most one scene command is applied per fixed tick.
 The title-flow increment did not change the persistence schemas. Current schemas
-are ECFG v2 and ESAV v3.
+are ECFG v3 and ESAV v3.
 
 
 ## Replay files: ERPL v1

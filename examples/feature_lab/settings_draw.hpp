@@ -12,7 +12,7 @@ inline void Settings::draw(engine::Renderer& renderer, int width, int height) co
     renderer.quad({(panel_.min.x + panel_.max.x) * 0.5F, -(panel_.min.y + panel_.max.y) * 0.5F},
                   panel_.max - panel_.min, {0.025F, 0.05F, 0.075F, 1});
     renderer.text({panel_.min.x + 20 * scale_, -panel_.min.y - 16 * scale_}, 3 * scale_,
-                  controls_ ? "KEYBOARD CONTROLS" : "SETTINGS", {0.05F, 0.9F, 0.75F, 1});
+                  controls_ ? "INPUT CONTROLS" : "SETTINGS", {0.05F, 0.9F, 0.75F, 1});
     renderer.text({panel_.min.x + 20 * scale_, -panel_.min.y - 48 * scale_}, 1.2F * scale_,
                   !notice.empty()     ? std::string_view(notice)
                   : !vsync_available  ? "VSYNC CONTROL UNAVAILABLE"

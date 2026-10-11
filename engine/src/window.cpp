@@ -96,6 +96,8 @@ struct Window::Impl {
     bool mapped{}, closing{};
     KeyBindings configured;
     std::array<bool, 256> physical{}, blocked{};
+    static constexpr std::array<unsigned int, 5> mouse_codes{Button1, Button2, Button3, 8, 9};
+    std::array<bool, mouse_codes.size()> mouse_physical{}, mouse_blocked{};
     std::array<KeySym, 256> symbols{};
     std::array<std::optional<Key>, 256> bindings{};
     void rebuild_keys() {
@@ -105,6 +107,18 @@ struct Window::Impl {
                 symbols[i] += XK_a - XK_A;
             bindings[i] = key_for(symbols[i], configured);
         }
+    }
+    void update_action(Input& input, Key key) const {
+        bool down = false;
+        for (std::size_t i = 0; i < physical.size(); ++i)
+            if (bindings[i] == key && physical[i] && !blocked[i])
+                down = true;
+        for (std::size_t i = 0; i < mouse_codes.size(); ++i)
+            if (mouse_physical[i] && !mouse_blocked[i] &&
+                configured.action(mouse_symbol(MouseButton::left) +
+                                  static_cast<std::uint32_t>(i)) == key)
+                down = true;
+        input.set(key, down);
     }
     ~Impl() {
         if (!display)
@@ -240,6 +254,7 @@ bool Window::poll(Input& input) {
                 XRefreshKeyboardMapping(&e.xmapping);
                 p.rebuild_keys();
                 p.blocked = p.physical;
+                p.mouse_blocked = p.mouse_physical;
                 input.release_all();
             }
             break;
@@ -260,11 +275,15 @@ bool Window::poll(Input& input) {
             input.release_all();
             p.physical.fill(false);
             p.blocked.fill(false);
+            p.mouse_physical.fill(false);
+            p.mouse_blocked.fill(false);
             break;
         case FocusOut:
             input.release_all();
             p.physical.fill(false);
             p.blocked.fill(false);
+            p.mouse_physical.fill(false);
+            p.mouse_blocked.fill(false);
             break;
         case MotionNotify:
             input.move_pointer({static_cast<float>(e.xmotion.x), static_cast<float>(e.xmotion.y)},
@@ -283,8 +302,24 @@ bool Window::poll(Input& input) {
             input.move_pointer({static_cast<float>(e.xbutton.x), static_cast<float>(e.xbutton.y)},
                                e.xbutton.x >= 0 && e.xbutton.y >= 0 && e.xbutton.x < p.width &&
                                    e.xbutton.y < p.height);
-            if (e.xbutton.button == Button1)
-                input.set_primary(e.type == ButtonPress);
+            for (std::size_t i = 0; i < p.mouse_codes.size(); ++i) {
+                if (e.xbutton.button != p.mouse_codes[i])
+                    continue;
+                const bool down = e.type == ButtonPress;
+                const auto symbol = mouse_symbol(MouseButton::left) + static_cast<std::uint32_t>(i);
+                if (!p.mouse_blocked[i]) {
+                    if (down && !p.mouse_physical[i])
+                        input.press_symbol(symbol);
+                    if (e.xbutton.button == Button1)
+                        input.set_primary(down);
+                }
+                p.mouse_physical[i] = down;
+                if (!down)
+                    p.mouse_blocked[i] = false;
+                if (const auto key = p.configured.action(symbol))
+                    p.update_action(input, *key);
+                break;
+            }
             if (e.type == ButtonPress &&
                 (e.xbutton.button == Button4 || e.xbutton.button == Button5))
                 input.scroll(e.xbutton.button == Button4 ? 1 : -1);
@@ -308,13 +343,8 @@ bool Window::poll(Input& input) {
             p.physical[code] = down_event;
             if (!down_event)
                 p.blocked[code] = false;
-            if (const auto key = p.bindings[code]) {
-                bool down = false;
-                for (std::size_t i = 0; i < p.physical.size(); ++i)
-                    if (p.bindings[i] == key && p.physical[i] && !p.blocked[i])
-                        down = true;
-                input.set(*key, down);
-            }
+            if (const auto key = p.bindings[code])
+                p.update_action(input, *key);
             break;
         }
         default:
@@ -331,6 +361,7 @@ void Window::set_bindings(const KeyBindings& bindings, Input& input) {
     p.configured = bindings;
     p.rebuild_keys();
     p.blocked = p.physical;
+    p.mouse_blocked = p.mouse_physical;
     input.release_all();
 }
 void Window::present() {
