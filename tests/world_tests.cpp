@@ -1,5 +1,6 @@
 #include "engine/animation.hpp"
 #include "engine/collision.hpp"
+#include "engine/sampling.hpp"
 #include "engine/tilemap.hpp"
 #include "test.hpp"
 #include <limits>
@@ -38,6 +39,33 @@ std::shared_ptr<const AnimationSet> clips() {
 void put32(std::vector<std::uint8_t>& bytes, std::size_t offset, std::uint32_t value) {
     for (unsigned i = 0; i < 4; ++i)
         bytes.at(offset + i) = static_cast<std::uint8_t>(value >> (i * 8));
+}
+TEST(texture_sampling_values_and_atlas_texel_centers) {
+    for (auto min : {TextureFilter::nearest, TextureFilter::linear})
+        for (auto mag : {TextureFilter::nearest, TextureFilter::linear})
+            for (auto u : {TextureWrap::clamp, TextureWrap::repeat})
+                for (auto v : {TextureWrap::clamp, TextureWrap::repeat})
+                    TextureSampling{min, mag, u, v}.validate();
+    auto invalid = TextureSampling{};
+    invalid.mag = static_cast<TextureFilter>(99);
+    rejects([&] { invalid.validate(); });
+    invalid = {};
+    invalid.u = static_cast<TextureWrap>(-1);
+    rejects([&] { invalid.validate(); });
+    const auto uv = atlas_uv_inset(5, 4, 2, 16, 8);
+    NEAR(uv.min.x, 4.5F / 16);
+    NEAR(uv.max.x, 7.5F / 16);
+    NEAR(uv.min.y, 4.5F / 8);
+    NEAR(uv.max.y, 7.5F / 8);
+    for (unsigned cell = 0; cell < 9; ++cell) {
+        const auto point = atlas_uv_inset(cell, 3, 3, 3, 3);
+        CHECK(point.min.x == point.max.x && point.min.y == point.max.y);
+    }
+    rejects([] { atlas_uv_inset(8, 4, 2, 16, 8); });
+    rejects([] { atlas_uv_inset(0, 0, 2, 16, 8); });
+    rejects([] { atlas_uv_inset(0, 4, 2, 17, 8); });
+    rejects([] { atlas_uv_inset(0, 1, 1, 0, 8); });
+    rejects([] { atlas_uv_inset(0, 1, 1, 8192, 8); });
 }
 TEST(tilemap_binary_roundtrip_and_corruption) {
     const auto source = tiles();

@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The eighteenth increment adds a parented rotation/scale gallery, interpolated
-local-pose sampling and broader camera/transform validation.
+The nineteenth increment adds per-texture filtering/wrapping controls, atlas-safe
+linear UVs and a four-panel sampling comparison in Feature Lab.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -212,6 +212,27 @@ content are rejected by the existing content check. ESAV/ERPL formats are unchan
 restore/restart, replay and invalid content. `render_targets` checks mirrored and
 sheared texture pixels through rotation, zoom and viewport changes, plus partially
 visible rotated-sprite culling.
+
+## Texture sampling gallery
+
+Walk right and upward from spawn to the four panels around (-21, -4). Columns
+compare **nearest** and **linear** filtering; rows compare **clamp** and **repeat**.
+All four use the same tiny cyan/orange image and UV range -0.5..1.5 on each axis.
+Use +/- zoom to inspect the difference. The panels draw behind the player.
+These are procedural visual fixtures (separate from F7 file reloads); they do not
+change gameplay, save content or random state.
+
+Engine callers select `TextureSampling` at upload or with `set_sampling` between
+passes. Minification/magnification and U/V wrapping are independent. Defaults stay
+nearest/clamp, and image reloads preserve the descriptor. `atlas_uv_inset` provides
+texel-center bounds for linear filtering within an atlas cell. Repeat applies to
+the full image, and mipmaps are not implemented. See [sampling contracts](docs/FORMATS.md#texture-sampling)
+for limits, shared handles and atlas tradeoffs.
+
+`texture_sampling` checks real GPU pixels for filters, wrapping/seams, flips,
+atlas edges, reload preservation, invalid changes and gallery resource stability.
+CPU cases in `tile_animation` validate descriptors and inset bounds. The scene and
+save/replay formats are unchanged in this increment.
 
 ## Shader development
 

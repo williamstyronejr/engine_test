@@ -150,6 +150,7 @@ struct Renderer::Impl {
         GLuint object{};
         std::uint64_t serial{};
         std::size_t bytes{};
+        TextureSampling sampling;
     };
     std::array<TextureSlot, max_textures> textures{};
     struct TargetSlot {
@@ -232,7 +233,17 @@ struct Renderer::Impl {
         gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     }
-    GLuint allocate_texture(const TextureData& data) {
+    void apply_sampling(TextureSampling sampling) {
+        gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+                         sampling.min == TextureFilter::nearest ? GL_NEAREST : GL_LINEAR);
+        gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
+                         sampling.mag == TextureFilter::nearest ? GL_NEAREST : GL_LINEAR);
+        gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,
+                         sampling.u == TextureWrap::clamp ? GL_CLAMP_TO_EDGE : GL_REPEAT);
+        gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,
+                         sampling.v == TextureWrap::clamp ? GL_CLAMP_TO_EDGE : GL_REPEAT);
+    }
+    GLuint allocate_texture(const TextureData& data, TextureSampling sampling) {
         GLint maximum{}, binding{};
         gl.GetIntegerv(GL_MAX_TEXTURE_SIZE, &maximum);
         if (data.width > static_cast<std::uint32_t>(maximum) ||
@@ -249,10 +260,7 @@ struct Renderer::Impl {
         gl.TexImage2D(GL_TEXTURE_2D, 0, GL_SRGB8_ALPHA8, static_cast<GLsizei>(data.width),
                       static_cast<GLsizei>(data.height), 0, GL_RGBA, GL_UNSIGNED_BYTE,
                       data.rgba.data());
-        gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        apply_sampling(sampling);
         const auto error = gl.GetError();
         gl.BindTexture(GL_TEXTURE_2D, static_cast<GLuint>(binding));
         if (error != GL_NO_ERROR) {
@@ -370,7 +378,7 @@ struct Renderer::Impl {
         gl.Scissor(r.x, height - r.y - r.height, r.width, r.height);
     }
     void submit(Transform transform, Color color, Rect uv, GLuint object,
-                bool premultiplied = false);
+                bool premultiplied = false, bool extended_uv = false);
     void flush() {
         if (vertices.empty())
             return;
@@ -545,7 +553,7 @@ void Renderer::set_camera(Camera camera) {
     p.extent = extent;
 }
 void Renderer::Impl::submit(Transform transform, Color color, Rect uv, GLuint object,
-                            bool premultiplied) {
+                            bool premultiplied, bool extended_uv) {
     auto& p = *this;
     if (!p.recording)
         throw std::logic_error("Draw outside begin/end");
@@ -555,8 +563,9 @@ void Renderer::Impl::submit(Transform transform, Color color, Rect uv, GLuint ob
         if (!std::isfinite(value))
             throw std::invalid_argument("Nonfinite sprite");
     for (float value : {uv.min.x, uv.min.y, uv.max.x, uv.max.y})
-        if (value < 0 || value > 1)
-            throw std::invalid_argument("UV outside [0,1]");
+        if (value < (extended_uv ? -max_texture_uv : 0) ||
+            value > (extended_uv ? max_texture_uv : 1))
+            throw std::invalid_argument("UV outside supported range");
     constexpr std::array<Vec2, 4> local = {
         {{-0.5F, -0.5F}, {0.5F, -0.5F}, {0.5F, 0.5F}, {-0.5F, 0.5F}}};
     std::array<Vec2, 4> positions{};
@@ -591,11 +600,12 @@ void Renderer::quad(Vec2 center, Vec2 size, Color color, float angle, bool check
                           : Rect{{0.125F, 0.25F}, {0.125F, 0.25F}},
                   impl_->texture);
 }
-TextureHandle Renderer::upload(const TextureData& data) {
+TextureHandle Renderer::upload(const TextureData& data, TextureSampling sampling) {
     auto& p = *impl_;
     if (p.recording)
         throw std::logic_error("Texture upload during frame");
     data.validate();
+    sampling.validate();
     std::size_t index = 0;
     while (index < p.textures.size() && p.textures[index].object)
         ++index;
@@ -605,8 +615,8 @@ TextureHandle Renderer::upload(const TextureData& data) {
     const auto serial = next_serial.fetch_add(1, std::memory_order_relaxed);
     if (!serial)
         throw std::overflow_error("Texture handle serial exhausted");
-    const auto object = p.allocate_texture(data);
-    p.textures[index] = {object, serial, data.rgba.size()};
+    const auto object = p.allocate_texture(data, sampling);
+    p.textures[index] = {object, serial, data.rgba.size(), sampling};
     return {static_cast<std::uint32_t>(index), serial};
 }
 void Renderer::replace_textures(std::span<const TextureReplacement> replacements) {
@@ -637,13 +647,41 @@ void Renderer::replace_textures(std::span<const TextureReplacement> replacements
         }
     } candidates{p.gl};
     for (std::size_t i = 0; i < replacements.size(); ++i)
-        candidates.objects[i] = p.allocate_texture(replacements[i].data);
+        candidates.objects[i] = p.allocate_texture(
+            replacements[i].data, p.textures[replacements[i].handle.slot].sampling);
     // No throwing work during publication. RAII now retires the previous objects.
     for (std::size_t i = 0; i < replacements.size(); ++i) {
         auto& slot = p.textures[replacements[i].handle.slot];
         std::swap(slot.object, candidates.objects[i]);
         slot.bytes = replacements[i].data.rgba.size();
     }
+}
+TextureSampling Renderer::sampling(TextureHandle texture) const {
+    impl_->texture_object(texture);
+    return impl_->textures[texture.slot].sampling;
+}
+void Renderer::set_sampling(TextureHandle texture, TextureSampling sampling) {
+    auto& p = *impl_;
+    if (p.recording)
+        throw std::logic_error("Texture sampling change during frame");
+    const auto object = p.texture_object(texture);
+    sampling.validate();
+    auto& slot = p.textures[texture.slot];
+    if (slot.sampling == sampling)
+        return;
+    GLint binding{};
+    p.gl.GetIntegerv(GL_TEXTURE_BINDING_2D, &binding);
+    if (p.gl.GetError() != GL_NO_ERROR)
+        throw std::runtime_error("OpenGL error before sampling change");
+    p.gl.BindTexture(GL_TEXTURE_2D, object);
+    p.apply_sampling(sampling);
+    const auto error = p.gl.GetError();
+    if (error != GL_NO_ERROR)
+        p.apply_sampling(slot.sampling);
+    p.gl.BindTexture(GL_TEXTURE_2D, static_cast<GLuint>(binding));
+    if (error != GL_NO_ERROR)
+        throw std::runtime_error("Texture sampling change failed");
+    slot.sampling = sampling;
 }
 void Renderer::release(TextureHandle texture) {
     auto& p = *impl_;
@@ -673,7 +711,7 @@ GraphicsInfo Renderer::graphics_info() const {
     return {read(GL_VENDOR), read(GL_RENDERER), read(GL_VERSION)};
 }
 void Renderer::sprite(TextureHandle texture, Transform model, Color color, Rect uv) {
-    impl_->submit(model, color, uv, impl_->texture_object(texture));
+    impl_->submit(model, color, uv, impl_->texture_object(texture), false, true);
 }
 void Renderer::text(Vec2 origin, float size, std::string_view value, Color color) {
     if (!std::isfinite(size) || size <= 0)

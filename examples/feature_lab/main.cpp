@@ -9,6 +9,7 @@
 #include "overlays.hpp"
 #include "persistence.hpp"
 #include "replay_file.hpp"
+#include "sampling_gallery.hpp"
 #include "scene_flow_draw.hpp"
 #include "settings_draw.hpp"
 #include "shader_tools.hpp"
@@ -35,6 +36,7 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
           int width, int height, Camera camera, const feature_lab::Overlays& overlays,
           const feature_lab::Soundtrack& soundtrack,
           const feature_lab::CollisionVisuals& collision_visuals,
+          const feature_lab::SamplingGallery& sampling_gallery,
           const feature_lab::Diagnostics& diagnostics, const feature_lab::ShaderTools& shaders,
           bool settings_open, const KeyBindings& bindings, std::string_view replay_status,
           bool replay_session, bool playing_replay) {
@@ -52,11 +54,21 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
         visible.cells += stats.cells;
         visible.tiles += stats.tiles;
     };
+    bool gallery_drawn = false;
+    const auto draw_gallery = [&] {
+        // Insert the visual station at layer 5, below the player and foreground tiles.
+        while (layer < map.layers.size() && map.layers[layer].order <= 5)
+            draw_layer();
+        sampling_gallery.draw();
+        gallery_drawn = true;
+    };
     for (const auto entity : game.draw_order) {
         if (!game.world.valid(entity))
             continue;
         const auto& node = game.world.get(entity);
         const auto& sprite = *node.sprite;
+        if (!gallery_drawn && sprite.layer >= 5)
+            draw_gallery();
         while (layer < map.layers.size() && map.layers[layer].order <= sprite.layer)
             draw_layer();
         const auto model = game.render_transform(entity, alpha);
@@ -77,6 +89,8 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
         if (node.tag == "rotor")
             r.text({model.x - 1.8F, model.y + 2.7F}, 0.025F, "ROTATE / SCALE / PARENT", cyan);
     }
+    if (!gallery_drawn)
+        draw_gallery();
     while (layer < map.layers.size())
         draw_layer();
     collision_visuals.draw(r, game, alpha, bindings);
@@ -359,6 +373,7 @@ int main(int argc, char** argv) {
             shaders.fail_demo(renderer);
         feature_lab::Overlays overlays(renderer, game);
         feature_lab::CollisionVisuals collision_visuals(renderer);
+        feature_lab::SamplingGallery sampling_gallery(renderer);
         feature_lab::Diagnostics diagnostics;
         diagnostics.controls = {diagnostics_demo, diagnostics_demo};
         Textures textures(assets);
@@ -597,8 +612,8 @@ int main(int argc, char** argv) {
                 flow.draw(renderer, window.width(), window.height());
             } else {
                 draw(renderer, game, textures, batch.alpha, window.width(), window.height(), camera,
-                     overlays, soundtrack, collision_visuals, diagnostics, shaders,
-                     settings.opened(), settings.bindings,
+                     overlays, soundtrack, collision_visuals, sampling_gallery, diagnostics,
+                     shaders, settings.opened(), settings.bindings,
                      recorder ? "15 / RECORD " + std::to_string(recorder->file().commands.size()) +
                                     " / 36000"
                      : playback ? "15 / REPLAY " + std::to_string(playback_index) + " / " +
