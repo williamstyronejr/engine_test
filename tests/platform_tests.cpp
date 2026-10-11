@@ -47,12 +47,14 @@ int main() {
         Display* display = connection.get();
         const auto native = find_window(display, name);
         engine::Input input;
-        auto send_key = [&](KeySym key, bool down) {
+        auto send_key = [&](KeySym key, bool down, unsigned int state = 0) {
             XEvent event{};
             event.xkey.type = down ? KeyPress : KeyRelease;
             event.xkey.display = display;
             event.xkey.window = native;
             event.xkey.keycode = XKeysymToKeycode(display, key);
+            check(event.xkey.keycode != 0, "Test key unavailable in native keymap");
+            event.xkey.state = state;
             event.xkey.same_screen = True;
             check(XSendEvent(display, native, False, down ? KeyPressMask : KeyReleaseMask, &event),
                   "Key send failed");
@@ -166,6 +168,75 @@ int main() {
             send_key(static_cast<KeySym>(symbol), false);
             input.consume();
         }
+        // The physical key's unshifted group-zero symbol selects the binding.
+        const std::array<KeySym, 27> extended_keys{XK_0,
+                                                   XK_1,
+                                                   XK_2,
+                                                   XK_3,
+                                                   XK_4,
+                                                   XK_5,
+                                                   XK_6,
+                                                   XK_7,
+                                                   XK_8,
+                                                   XK_9,
+                                                   XK_grave,
+                                                   XK_bracketleft,
+                                                   XK_bracketright,
+                                                   XK_backslash,
+                                                   XK_semicolon,
+                                                   XK_apostrophe,
+                                                   XK_comma,
+                                                   XK_period,
+                                                   XK_slash,
+                                                   XK_BackSpace,
+                                                   XK_Home,
+                                                   XK_End,
+                                                   XK_Insert,
+                                                   XK_Delete,
+                                                   XK_F4,
+                                                   XK_F9,
+                                                   XK_F12};
+        for (const auto symbol : extended_keys) {
+            configured = {};
+            configured.assign(2, static_cast<std::uint32_t>(symbol));
+            window.set_bindings(configured, input);
+            input.consume();
+            send_key(symbol, true, ShiftMask); // Shift does not turn 1 into a distinct ! binding.
+            auto frame = input.consume();
+            check(engine::button(frame, engine::Key::up).pressed && frame.pressed_symbol == symbol,
+                  "Extended key mapping/capture failed");
+            send_key(symbol, true);
+            frame = input.consume();
+            check(!engine::button(frame, engine::Key::up).pressed && !frame.pressed_symbol,
+                  "Extended key repeat generated input");
+            send_key(XK_Up, true);
+            send_key(symbol, false);
+            check(engine::button(input.consume(), engine::Key::up).held,
+                  "Extended key released fixed alias");
+            send_key(XK_Up, false);
+            check(engine::button(input.consume(), engine::Key::up).released,
+                  "Extended key alias remained stuck");
+            send_key(symbol, true);
+            input.consume();
+            configured.assign(2, 'w');
+            configured.assign(6, static_cast<std::uint32_t>(symbol));
+            window.set_bindings(configured, input);
+            input.consume();
+            send_key(symbol, true);
+            frame = input.consume();
+            check(!engine::button(frame, engine::Key::interact).held && !frame.pressed_symbol,
+                  "Held extended rebind leaked input");
+            send_key(symbol, false);
+            input.consume();
+            send_key(symbol, true);
+            send_key(symbol, false);
+            frame = input.consume();
+            const auto& action = engine::button(frame, engine::Key::interact);
+            check(action.pressed && action.released && !action.held,
+                  "Fast extended key press lost action edges");
+        }
+        window.set_bindings({}, input);
+        input.consume();
         const auto send_button = [&](unsigned int button, bool down, int x, int y) {
             XEvent event{};
             event.xbutton.type = down ? ButtonPress : ButtonRelease;

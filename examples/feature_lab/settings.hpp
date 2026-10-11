@@ -91,7 +91,7 @@ class Settings {
                     if (action.id >= binding_first &&
                         action.id < binding_first + bindings.symbols.size()) {
                         capture_ = action.id - binding_first;
-                        notice = "PRESS A-Z OR MOUSE / ESC CANCEL";
+                        notice = "PRESS KEY OR MOUSE / ESC CANCEL";
                         ui_.reset_interaction();
                         break;
                     }

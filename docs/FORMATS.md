@@ -521,12 +521,27 @@ mute, and requested VSync; fullscreen remains session-local.
 `KeyBindings::symbols` stores ten unique input symbols in stable action order:
 left, right, up, down, pause, restart, interact, mute, music volume, effects volume.
 `assign` and `validate` reject duplicate/out-of-range symbols before publication.
-Defaults are A/D/W/S/P/R/E/M/N/B. Each entry is either lowercase ASCII `a`–`z`
-or a `MouseButton` symbol: 0x20000001 left, 0x20000002 middle,
-0x20000003 right, 0x20000004 side 1, 0x20000005 side 2. The X11 backend maps native
-buttons 1/2/3/8/9 to these device-independent values; wheel buttons 4/5 remain scroll
-and other buttons are ignored. Labels use LMB/MMB/RMB/SIDE1/SIDE2. Assignment
-replaces the action's letter or mouse input. Fixed non-letter aliases remain available.
+Defaults are A/D/W/S/P/R/E/M/N/B. Supported keyboard symbols are lowercase
+ASCII `a`–`z`, digits `0`–`9`, and the following stable X11 symbols. The CPU core
+does not depend on Xlib; its allowlist and labels are in `bindings.hpp`.
+
+| Keys | Symbols | Labels |
+| --- | --- | --- |
+| Grave, left/right bracket, backslash | 0x60, 0x5b, 0x5d, 0x5c | GRAVE, LBRK, RBRK, BSLS |
+| Semicolon, apostrophe, comma, period, slash | 0x3b, 0x27, 0x2c, 0x2e, 0x2f | SEMI, APOS, COMMA, DOT, SLASH |
+| Backspace, Home, End, Insert, Delete | 0xff08, 0xff50, 0xff57, 0xff63, 0xffff | BKSP, HOME, END, INS, DEL |
+| F4, F9, F12 | 0xffc1, 0xffc6, 0xffc9 | F4, F9, F12 |
+
+Other keyboard symbols are rejected, including uppercase/shifted symbols, keypad,
+modifiers and international/media keys. Fixed arrow/menu/page/zoom controls and
+F1/F2/F3/F5/F6/F7/F8/F10/F11 cannot be reassigned. Shift does not select another
+binding: the unshifted group-zero symbol is used (Shift+1 activates 1).
+
+Mouse symbols are 0x20000001 left, 0x20000002 middle, 0x20000003 right,
+0x20000004 side 1, 0x20000005 side 2. X11 maps native buttons 1/2/3/8/9 to these
+values; wheel buttons 4/5 remain scroll and other buttons are ignored.
+Labels use LMB/MMB/RMB/SIDE1/SIDE2. Each action has one configurable input;
+assigning another replaces it. Fixed aliases remain available.
 
 `Window::set_bindings` validates the complete table before replacing its cached
 keycode mapping, cancels queued input, and suppresses physically held keys/buttons
@@ -551,10 +566,10 @@ keep capture open; Escape/focus loss cancels it and F1 closes settings. Gameplay
 remains paused and captured throughout. Valid edits apply immediately; preferences
 persist on settings close or normal exit.
 
-## Persistence: ECFG v3 and ESAV v3
+## Persistence: ECFG v4 and ESAV v3
 
 All integers are little-endian, floats are IEEE binary32, and booleans are u32 0/1.
-Files begin with four-byte magic and u32 version (ECFG 3, ESAV 3), ending with a u32 CRC32 of all
+Files begin with four-byte magic and u32 version (ECFG 4, ESAV 3), ending with a u32 CRC32 of all
 preceding bytes (reflected polynomial 0xEDB88320, initial/final XOR 0xFFFFFFFF).
 The envelope is 12..65,536 bytes; parsers reject wrong type/version, excess counts,
 truncation, trailing bytes, invalid booleans, and checksum mismatches. CRC detects
@@ -565,10 +580,12 @@ Schemas below belong to Feature Lab; the engine storage layer is schema-agnostic
 ECFG payload after the header is three f32 gains (master, music, effects), u32 mute,
 and u32 VSync, followed by ten u32 input symbols in the binding order above.
 Gains must be finite within [0,1]; bindings must be unique supported symbols.
-Total ECFG v3 size is 72 bytes including CRC. Legacy ECFG v1 is 32 bytes, omits the
+Total ECFG v4 size is 72 bytes including CRC. Legacy ECFG v1 is 32 bytes, omits the
 bindings and loads with defaults. ECFG v2 is 72 bytes and retains strict lowercase
-letter validation; existing assignments are preserved. The next preference save
-writes v3. Other versions are rejected. Checkpoint compatibility is described below.
+letter validation. ECFG v3 has the same size and permits only letters and mouse
+symbols. Legacy validation is retained before migration; newer keyboard symbols
+in v2/v3 records are rejected even with a valid checksum. Existing assignments
+are preserved, and the next preference save writes v4. Other versions are rejected. Checkpoint compatibility is described below.
 Startup uses defaults on malformed/inaccessible configuration, logs the reason,
 and shows a notice. No automatic repair overwrites the file. Changed preferences
 are written on panel close or normal application exit. Crashes before that boundary
@@ -938,7 +955,7 @@ one-shot events; Resume continues existing voices. The title's Tab/Enter/pointer
 input is captured, including the transition tick, and held actions remain blocked
 until physical release. At most one scene command is applied per fixed tick.
 The title-flow increment did not change the persistence schemas. Current schemas
-are ECFG v3 and ESAV v3.
+are ECFG v4 and ESAV v3.
 
 
 ## Replay files: ERPL v1

@@ -1,7 +1,7 @@
 # Implementation status
 
-The twentieth increment adds configurable mouse-button actions, native input
-regressions and settings migration. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
+The twenty-first increment adds configurable non-reserved keyboard keys, named
+hints and settings migration. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
 ## Delivered
 
@@ -51,7 +51,7 @@ entire plan feature ID when required subfeatures are still absent.
 | ID | Status | Current evidence | Still required |
 | --- | --- | --- | --- |
 | F01 | Partial | `graphics`, `platform_events`, `platform_no_display`, visible startup/resize | Manual minimize/fullscreen/scaling matrix and visible-window focus checks |
-| F02 | Partial | CPU edge/focus/capture tests; native key-repeat/alias/pointer/wheel/focus tests; modal gameplay routing; ten configurable letter/mouse actions, conflict/capture/persistence tests; mixed-device aliases and mapping notification refresh | Arbitrary keys/chords and keyboard group switching |
+| F02 | Partial | CPU edge/focus/capture tests; native key-repeat/alias/pointer/wheel/focus tests; modal gameplay routing; ten configurable keyboard/mouse actions, conflict/capture/persistence tests; mixed-device aliases and mapping notification refresh | Modifier chords, keypad/international symbols and keyboard group switching |
 | F03 | Implemented (v1) | Parented rotating/scaled/mirrored gallery; sampled affine hierarchy; camera corner/aspect/follow/zoom checkpoints; pause/step/save/replay pose tests; GPU shear/mirror/culling/resize pixels | Broader manual camera and display matrix; transform caching is optional |
 | F04 | Implemented (v1) | GPU pixel/order/color/atlas/culling/batch tests; animated/parented sprites; transactional reload; independent nearest/linear min/mag filters and clamp/repeat axes; atlas inset and sampling gallery | Optional mipmaps, anisotropy and atlas-cell repetition |
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
@@ -113,7 +113,7 @@ not a controlled 1080p benchmark or a GPU/full-frame performance guarantee.
   No voice-stealing, streaming, or automatic device reconnection is implemented.
 - The static collision API assumes positive player extents and no initial overlap.
   It resolves X then Y; it is not a general rigid-body solver or arbitrary-shape CCD.
-- Ten actions accept letter or mouse bindings; other keyboard controls remain fixed. Fullscreen/VSync are requests
+- Ten actions accept supported keyboard or mouse bindings; reserved controls stay fixed. Fullscreen/VSync are requests
   to the window system; compositor behavior is not guaranteed by a successful call.
 - Bitmap text is an uppercase subset. Diagnostic strings and screenshot capture
   allocate; a whole-engine allocation-free guarantee has not been established.
@@ -857,7 +857,38 @@ labels fit the controls panel and the HUD reflects LMB/RMB. Physical side-button
 hardware was not exercised; side buttons were covered with native event injection.
 No new performance baseline or physical audio test was taken.
 
+## Added in the twenty-first increment
+
+- Configurable 0–9, nine punctuation keys, Backspace, Insert/Delete, Home/End,
+  and F4/F9/F12, in addition to existing letters and five mouse buttons.
+  Named ASCII labels fit the existing controls panel and gameplay hints.
+- One validated symbol allowlist drives assignment and native keyboard mapping.
+  Reserved controls remain available. Unshifted group-zero semantics are retained,
+  including Shift+1 activating a 1 binding. No modifier chords are introduced.
+- ECFG v4 retains the 72-byte format and migrates v1/v2/v3 preferences, preserving
+  their validation rules. Saves, replay action bits and asset content are unchanged.
+- CPU cases cover all named labels, conflicts, reserved/unsupported rejection,
+  legacy migration and settings capture. Native events exercise all 27 new symbols,
+  repeat suppression, fixed aliases, held rebinding and fast-tap edges.
+
+## Twenty-first-increment validation (2026-10-11)
+
+GCC Debug and Release each pass all 27 runtime groups without skips. Focused
+bindings, persistence, UI and native platform-event groups also pass with Clang
+and native-platform ASan/UBSan
+(driver leak detection disabled). The bindings suite now has eleven CPU cases.
+Native tests exercise all 27 added keyboard symbols using the installed keymap,
+including Shift-state capture, repeat, aliases, held rebinding and fast taps.
+
+Two isolated Feature Lab launches verified capture and persistence of Move Left=1,
+Interact=Home, Music Volume=Slash and Effects Volume=F12. Reserved Tab and duplicate
+Home inputs were rejected during capture. Closing settings wrote a 72-byte ECFG v4
+file; relaunch restored all four bindings. Both 1050x1360 captures were inspected:
+controls and HUD labels fit, and the second launch remained paused at zero ticks.
+These checks use injected X11 events; other keyboard layouts, physical audio and
+new performance baselines were not exercised.
+
 ## Next increment
 
-Extend bindings to non-reserved keyboard keys, with named labels and settings
-migration (F02).
+Add modifier-chord bindings with deterministic capture, conflict rules and native
+input tests (F02).

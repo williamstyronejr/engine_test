@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The twentieth increment adds configurable mouse-button actions, native input
-regressions, and backward-compatible settings migration.
+The twenty-first increment adds configurable digits, punctuation, editing keys and
+unused function keys, with named hints and backward-compatible settings migration.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -290,22 +290,30 @@ details. File watching and background loading remain unimplemented.
 
 ## Keyboard and mouse controls
 
-Open **F1 → Controls**, select an action, then press a letter **A–Z** or a mouse
-button. Ten actions can be rebound: movement in four directions, pause, restart,
+Open **F1 → Controls**, select an action, then press a supported key or mouse
+button. Keyboard choices include A–Z, 0–9, common punctuation, Backspace,
+Insert/Delete, Home/End, and F4/F9/F12. Ten actions can be rebound: movement in four directions, pause, restart,
 interact, mute, music volume and effects volume. Supported buttons are left (LMB),
 middle (MMB), right (RMB), and two side buttons (SIDE1/SIDE2, X11 buttons 8/9).
 Wheel input remains scrolling. Each action has one configurable input; assigning
-a mouse button replaces its letter, and no input can belong to two actions.
+a new key or mouse button replaces the previous input, and inputs cannot be shared.
 Conflicts and unsupported keys leave capture open; Escape cancels it.
 Restore Defaults restores A/D/W/S/P/R/E/M/N/B. Hints follow the selected input.
 Changes apply immediately and save when settings close or the game exits normally.
 
-Arrow keys, Space, Tab, Enter, Escape, Shift, zoom/page keys and function keys stay
-fixed so menus remain accessible. Left-click still operates menus even when bound
+Arrow keys, Space, Tab, Enter, Escape, Shift, zoom/page keys and F1/F2/F3/F5/F6/F7/
+F8/F10/F11 stay fixed so menus and diagnostics remain accessible. Left-click still operates menus even when bound
 to gameplay. Held keys/buttons are suppressed until released after a binding
-change, and modal menus capture gameplay. Focus loss cancels capture. Letter keys
-use unshifted X11 group zero. Arbitrary keys, chords and group switching remain
-future work.
+change, and modal menus capture gameplay. Focus loss cancels capture. Keyboard
+bindings use unshifted X11 group zero: Shift+1 still activates the 1 binding.
+Supported punctuation: grave, brackets, backslash, semicolon, apostrophe, comma,
+period and slash. Minus/equal remain zoom controls. Keypad keys, other international
+symbols, modifier chords and group switching are not configurable yet.
+
+Try binding **Interact** to Home or F12 and **Move Left** to 1, then close settings.
+Use the selected interact key at the alarm switch. Hold 1 and Left Arrow together;
+movement continues until both are released. Controls and HUD show the selected
+names. Reopen Controls and choose Restore Defaults to reset all ten actions.
 
 To exercise mouse input in Feature Lab, bind **Interact** to RMB, close settings,
 and right-click at the alarm switch. Bind a movement direction to a mouse button
@@ -314,8 +322,9 @@ movement active until both are released. Reopen Controls to restore defaults.
 
 ## Saved data
 
-Settings use ECFG v3. ECFG v1 loads default bindings; v2 preserves customized
-letters. Both upgrade on the next preference save. Saves and replays are unchanged.
+Settings use ECFG v4. ECFG v1 loads default bindings; v2 preserves customized
+letters and v3 preserves letter/mouse bindings. All upgrade on the next preference
+save. Saves and replays are unchanged.
 
 Settings: `$XDG_CONFIG_HOME/feature_lab/settings.ecfg`, falling back to
 `$HOME/.config/feature_lab/settings.ecfg`. Slots: `$XDG_STATE_HOME/feature_lab/slot-N.esav`,
@@ -408,11 +417,13 @@ and layout bounds. GPU checks render the title at four viewport sizes while
 repeated transitions keep resource counts stable. A null-device audio case checks
 initial pause and resume without duplicate voices.
 
-The eight-case bindings suite checks keyboard/mouse conflicts, ordered raw press
-consumption, v1/v2 migration and v3 round trips, malformed bindings, capture/cancel/
-defaults, held-button modal suppression and layout bounds. Native tests exercise
-all five mouse buttons, mixed keyboard/mouse aliases, duplicate events, fast clicks,
-held remapping, focus recovery, ignored wheel/unsupported buttons and mapping
+The eleven-case bindings suite checks keyboard/mouse conflicts, named symbols,
+reserved-key rejection, v1/v2/v3 migration and v4 round trips, malformed bindings,
+ordered raw press consumption, capture/cancel/defaults, held-button modal
+suppression and layout bounds. Native tests exercise
+all 27 new keyboard symbols and five mouse buttons, unshifted capture, aliases,
+duplicate events, fast clicks, held remapping, focus recovery, ignored wheel/
+unsupported buttons and mapping
 notifications. GPU tests draw both settings pages at small and large viewports.
 
 The eight-case texture reload suite checks shared-handle pixel updates, dimensions,
