@@ -45,6 +45,25 @@ inline constexpr std::uint32_t mouse_symbol(MouseButton button) {
 inline constexpr bool is_mouse_symbol(std::uint32_t symbol) {
     return symbol >= mouse_symbol(MouseButton::left) && symbol <= mouse_symbol(MouseButton::side2);
 }
+namespace modifiers {
+inline constexpr std::uint32_t shift = 1, control = 2, alt = 4, all = 7;
+}
+// Left/right variants contribute to the same logical modifier.
+inline constexpr std::uint32_t modifier_for_symbol(std::uint32_t symbol) {
+    switch (symbol) {
+    case 0xffe1:
+    case 0xffe2:
+        return modifiers::shift;
+    case 0xffe3:
+    case 0xffe4:
+        return modifiers::control;
+    case 0xffe9:
+    case 0xffea:
+        return modifiers::alt;
+    default:
+        return 0;
+    }
+}
 struct Button {
     bool held{}, pressed{}, released{};
 };
@@ -57,6 +76,7 @@ struct PointerFrame {
 struct InputFrame : std::array<Button, static_cast<std::size_t>(Key::count)> {
     std::uint32_t
         pressed_symbol{}; // First fresh native key/button press this tick; zero means none.
+    std::uint32_t pressed_modifiers{}; // Snapshot paired with pressed_symbol.
     PointerFrame pointer;
     bool canceled{};
 };
@@ -73,8 +93,10 @@ class InputGate {
             if (capture_actions || blocked_[i])
                 input[i] = {};
         }
-        if (capture_actions || (capture_pointer && is_mouse_symbol(input.pressed_symbol)))
+        if (capture_actions || (capture_pointer && is_mouse_symbol(input.pressed_symbol))) {
             input.pressed_symbol = 0;
+            input.pressed_modifiers = 0;
+        }
         if (!input.pointer.primary.held || input.pointer.primary.released)
             pointer_blocked_ = false;
         if (capture_pointer)
@@ -105,9 +127,13 @@ class Input {
         else
             b.released = true;
     }
-    void press_symbol(std::uint32_t symbol) {
-        if (!state_.pressed_symbol)
+    void press_symbol(std::uint32_t symbol, std::uint32_t held_modifiers = 0) {
+        if (held_modifiers & ~modifiers::all)
+            throw std::invalid_argument("Unsupported modifier mask");
+        if (symbol && !state_.pressed_symbol) {
             state_.pressed_symbol = symbol;
+            state_.pressed_modifiers = held_modifiers;
+        }
     }
     void move_pointer(Vec2 position, bool inside = true) {
         if (!std::isfinite(position.x) || !std::isfinite(position.y))
@@ -135,6 +161,7 @@ class Input {
     void leave_pointer() { state_.pointer.inside = false; }
     void release_all() {
         state_.pressed_symbol = 0;
+        state_.pressed_modifiers = 0;
         for (auto& b : state_) {
             b.released = b.held;
             b.held = false;
@@ -148,6 +175,7 @@ class Input {
     InputFrame consume() {
         const auto result = state_;
         state_.pressed_symbol = 0;
+        state_.pressed_modifiers = 0;
         for (auto& b : state_) {
             b.pressed = false;
             b.released = false;

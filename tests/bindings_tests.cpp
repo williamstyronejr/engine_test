@@ -114,11 +114,11 @@ TEST(raw_press_queue_cancellation_and_modal_capture) {
     CHECK(input.consume().pressed_symbol == mouse_symbol(MouseButton::left));
     CHECK(!input.consume().pressed_symbol);
 }
-TEST(configuration_v4_roundtrip_and_legacy_migration) {
+TEST(configuration_v5_roundtrip_and_legacy_migration) {
     Configuration config;
     config.bindings.assign(0, 'q');
     auto bytes = encode_config(config);
-    CHECK(bytes.size() == 72 && decode_config(bytes) == config);
+    CHECK(bytes.size() == 112 && bytes[4] == 5 && decode_config(bytes) == config);
     binary::Writer legacy("ECFG");
     legacy.f32(0.5F);
     legacy.f32(0.25F);
@@ -128,44 +128,79 @@ TEST(configuration_v4_roundtrip_and_legacy_migration) {
     const auto restored = decode_config(seal_record(legacy.take()));
     CHECK(restored.audio.master == 0.5F && restored.audio.muted && !restored.vsync);
     CHECK(restored.bindings == KeyBindings{});
-    CHECK(decode_config(encode_config(restored)) == restored);
-    auto legacy_v2 = std::vector<std::uint8_t>(bytes.begin(), bytes.end() - 4);
-    legacy_v2[4] = 2;
-    CHECK(decode_config(seal_record(legacy_v2)) == config);
+    const auto old_record = [](Configuration value, std::uint8_t version) {
+        auto encoded = encode_config(value);
+        encoded.resize(68); // Older schemas omit the ten appended modifier masks.
+        encoded[4] = version;
+        return seal_record(encoded);
+    };
+    CHECK(decode_config(old_record(config, 2)) == config);
     config.bindings.assign(6, mouse_symbol(MouseButton::right));
+    CHECK(decode_config(old_record(config, 3)) == config);
+    rejects([&] { decode_config(old_record(config, 2)); });
+    config.bindings.assign(0, 0xff50);
+    CHECK(decode_config(old_record(config, 4)) == config);
+    rejects([&] { decode_config(old_record(config, 3)); });
+    config.bindings.assign(0, 'e', modifiers::control);
+    config.bindings.assign(6, 'e'); // Plain + chord sharing a base is valid in v5.
     CHECK(decode_config(encode_config(config)) == config);
-    const auto mouse_bytes = encode_config(config);
-    auto mouse_payload = open_record(mouse_bytes);
-    auto invalid = std::vector<std::uint8_t>(mouse_payload.begin(), mouse_payload.end());
-    invalid[4] = 2; // v2 remains strictly letters, even with a valid checksum.
-    rejects([&] { decode_config(seal_record(invalid)); });
-    invalid[4] = 3;
-    CHECK(decode_config(seal_record(invalid)) == config);
-    for (const auto symbol : {static_cast<std::uint32_t>('1'), 0xff50U, 0xffc9U}) {
-        auto extended = config;
-        extended.bindings.assign(0, symbol);
-        const auto encoded = encode_config(extended);
-        CHECK(encoded[4] == 4 && decode_config(encoded) == extended);
-        auto old_schema = std::vector<std::uint8_t>(encoded.begin(), encoded.end() - 4);
-        old_schema[4] = 3;
-        rejects([&] { decode_config(seal_record(old_schema)); });
-        old_schema[4] = 2;
-        rejects([&] { decode_config(seal_record(old_schema)); });
-    }
-    invalid[4] = 4;
-    invalid[28 + 6 * 4] = 6; // Unknown mouse symbol.
-    rejects([&] { decode_config(seal_record(invalid)); });
-    invalid[28 + 6 * 4] = 3;
-    std::copy_n(invalid.begin() + 28 + 6 * 4, 4, invalid.begin() + 28);
-    rejects([&] { decode_config(seal_record(invalid)); });
-    bytes[28] = 'd'; // Duplicate right binding with a valid checksum.
-    auto payload = std::vector<std::uint8_t>(bytes.begin(), bytes.end() - 4);
+    rejects([&] { decode_config(old_record(config, 4)); }); // Old duplicate rule retained.
+    auto payload = encode_config(config);
+    payload.resize(payload.size() - 4);
+    payload[68] = 8; // Unsupported modifier bit, valid CRC.
     rejects([&] { decode_config(seal_record(payload)); });
+    payload[68] = 0; // Identical plain E assignments.
+    rejects([&] { decode_config(seal_record(payload)); });
+    payload[68] = 2;
+    payload[68 + 6 * 4] = 1; // Ctrl+E and Shift+E overlap ambiguously.
+    rejects([&] { decode_config(seal_record(payload)); });
+    payload[68 + 6 * 4] = 0;
     payload[28] = 0;
     rejects([&] { decode_config(seal_record(payload)); });
-    payload[28] = 'q';
-    payload[5] = 1; // High version bytes must also be checked.
+    payload[28] = 'e';
+    payload[5] = 1;
     rejects([&] { decode_config(seal_record(payload)); });
+}
+TEST(chord_specificity_conflicts_and_labels) {
+    KeyBindings bindings;
+    bindings.assign(0, 'e', modifiers::control);
+    bindings.assign(1, 'e', modifiers::control | modifiers::shift);
+    bindings.assign(2, 'e', modifiers::all);
+    CHECK(bindings.action('e') == Key::interact);
+    CHECK(bindings.action('e', modifiers::shift) == Key::interact);
+    CHECK(bindings.action('e', modifiers::control | modifiers::alt) == Key::left);
+    CHECK(bindings.action('e', modifiers::control | modifiers::shift) == Key::right);
+    CHECK(bindings.action('e', modifiers::all) == Key::up);
+    CHECK(bindings.key_name(Key::up) == "C+S+A+E");
+    const auto before = bindings;
+    rejects([&] { bindings.assign(3, 'e', modifiers::alt); });
+    rejects([&] { bindings.assign(3, 'e', modifiers::control); });
+    rejects([&] { bindings.assign(3, 'q', 8); });
+    rejects([&] { bindings.assign(3, 0xffbe, modifiers::control); });
+    CHECK(bindings == before);
+    bindings.assign(3, mouse_symbol(MouseButton::right), modifiers::alt);
+    CHECK(!bindings.action(mouse_symbol(MouseButton::right)));
+    CHECK(bindings.action(mouse_symbol(MouseButton::right), modifiers::all) == Key::down);
+    CHECK(bindings.key_name(Key::down) == "A+RMB");
+    bindings.assign(3, 's');
+    CHECK(bindings.modifier_masks[3] == 0);
+}
+TEST(raw_chord_snapshot_is_atomic_and_cleared_with_capture) {
+    Input input;
+    input.press_symbol('e', modifiers::control);
+    input.press_symbol('q', modifiers::shift);
+    auto frame = input.consume();
+    CHECK(frame.pressed_symbol == 'e' && frame.pressed_modifiers == modifiers::control);
+    CHECK(!input.consume().pressed_modifiers);
+    InputGate gate;
+    CHECK(!gate.route(frame, true, false).pressed_modifiers);
+    input.press_symbol(mouse_symbol(MouseButton::right), modifiers::alt);
+    CHECK(!gate.route(input.consume(), false, true).pressed_modifiers);
+    input.press_symbol('q', modifiers::all);
+    input.release_all();
+    frame = input.consume();
+    CHECK(!frame.pressed_symbol && !frame.pressed_modifiers);
+    rejects([&] { input.press_symbol('q', 8); });
 }
 struct Menu {
     Game game = load_game(AssetRoot(TEST_ASSET_ROOT));
@@ -239,6 +274,24 @@ TEST(settings_capture_extended_keys_rejects_reserved_and_restores_defaults) {
     }
     CHECK(m.click(Settings::defaults).bindings_changed);
     CHECK(m.settings.bindings == KeyBindings{});
+}
+TEST(settings_capture_chords_and_conflicts) {
+    Menu m;
+    m.click(Settings::binding_first);
+    InputFrame frame{};
+    frame.pressed_symbol = 'e';
+    frame.pressed_modifiers = modifiers::control;
+    CHECK(m.update(frame).bindings_changed);
+    CHECK(m.settings.bindings.key_name(Key::left) == "C+E");
+    m.click(Settings::binding_first + 1);
+    CHECK(!m.update(frame).bindings_changed && m.settings.capturing_binding());
+    frame.pressed_modifiers = modifiers::shift;
+    CHECK(!m.update(frame).bindings_changed && m.settings.notice == "AMBIGUOUS CHORDS");
+    frame.pressed_modifiers = modifiers::control | modifiers::shift;
+    const auto result = m.update(frame);
+    CHECK(result.bindings_changed && !result.gameplay.pressed_modifiers);
+    CHECK(m.settings.bindings.key_name(Key::right) == "C+S+E");
+    CHECK(m.click(Settings::defaults).bindings_changed && m.settings.bindings == KeyBindings{});
 }
 TEST(mouse_capture_conflicts_and_held_actions_do_not_escape_the_menu) {
     Menu m;

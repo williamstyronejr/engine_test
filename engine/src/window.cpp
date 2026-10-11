@@ -28,9 +28,7 @@ bool extension(std::string_view list, std::string_view name) {
     }
     return false;
 }
-std::optional<Key> key_for(KeySym key, const KeyBindings& bindings) {
-    if (key <= 0xffffffffUL && is_bindable_keyboard_symbol(static_cast<std::uint32_t>(key)))
-        return bindings.action(static_cast<std::uint32_t>(key));
+std::optional<Key> fixed_key_for(KeySym key) {
     switch (key) {
     case XK_Left:
         return Key::left;
@@ -100,13 +98,22 @@ struct Window::Impl {
     std::array<bool, mouse_codes.size()> mouse_physical{}, mouse_blocked{};
     std::array<KeySym, 256> symbols{};
     std::array<std::optional<Key>, 256> bindings{};
+    std::array<std::optional<Key>, mouse_codes.size()> mouse_bindings{};
     void rebuild_keys() {
+        bindings.fill(std::nullopt);
+        mouse_bindings.fill(std::nullopt);
         for (std::size_t i = 8; i < bindings.size(); ++i) {
             symbols[i] = XkbKeycodeToKeysym(display, static_cast<KeyCode>(i), 0, 0);
             if (symbols[i] >= XK_A && symbols[i] <= XK_Z)
                 symbols[i] += XK_a - XK_A;
-            bindings[i] = key_for(symbols[i], configured);
         }
+    }
+    std::uint32_t held_modifiers() const {
+        std::uint32_t result = 0;
+        for (std::size_t i = 0; i < physical.size(); ++i)
+            if (physical[i] && !blocked[i])
+                result |= modifier_for_symbol(static_cast<std::uint32_t>(symbols[i]));
+        return result;
     }
     void update_action(Input& input, Key key) const {
         bool down = false;
@@ -114,9 +121,7 @@ struct Window::Impl {
             if (bindings[i] == key && physical[i] && !blocked[i])
                 down = true;
         for (std::size_t i = 0; i < mouse_codes.size(); ++i)
-            if (mouse_physical[i] && !mouse_blocked[i] &&
-                configured.action(mouse_symbol(MouseButton::left) +
-                                  static_cast<std::uint32_t>(i)) == key)
+            if (mouse_physical[i] && !mouse_blocked[i] && mouse_bindings[i] == key)
                 down = true;
         input.set(key, down);
     }
@@ -308,16 +313,21 @@ bool Window::poll(Input& input) {
                 const bool down = e.type == ButtonPress;
                 const auto symbol = mouse_symbol(MouseButton::left) + static_cast<std::uint32_t>(i);
                 if (!p.mouse_blocked[i]) {
-                    if (down && !p.mouse_physical[i])
-                        input.press_symbol(symbol);
+                    if (down && !p.mouse_physical[i]) {
+                        const auto mask = p.held_modifiers();
+                        input.press_symbol(symbol, mask);
+                        p.mouse_bindings[i] = p.configured.action(symbol, mask);
+                    }
                     if (e.xbutton.button == Button1)
                         input.set_primary(down);
                 }
                 p.mouse_physical[i] = down;
                 if (!down)
                     p.mouse_blocked[i] = false;
-                if (const auto key = p.configured.action(symbol))
+                if (const auto key = p.mouse_bindings[i])
                     p.update_action(input, *key);
+                if (!down)
+                    p.mouse_bindings[i].reset();
                 break;
             }
             if (e.type == ButtonPress &&
@@ -338,13 +348,22 @@ bool Window::poll(Input& input) {
             if (code >= p.physical.size())
                 break;
             const bool down_event = e.type == KeyPress;
-            if (down_event && !p.physical[code] && !p.blocked[code])
-                input.press_symbol(static_cast<std::uint32_t>(p.symbols[code]));
+            if (down_event && !p.physical[code] && !p.blocked[code]) {
+                const auto symbol = static_cast<std::uint32_t>(p.symbols[code]);
+                const auto mask = p.held_modifiers();
+                if (!modifier_for_symbol(symbol))
+                    input.press_symbol(symbol, mask);
+                p.bindings[code] = fixed_key_for(p.symbols[code]);
+                if (!p.bindings[code])
+                    p.bindings[code] = p.configured.action(symbol, mask);
+            }
             p.physical[code] = down_event;
             if (!down_event)
                 p.blocked[code] = false;
             if (const auto key = p.bindings[code])
                 p.update_action(input, *key);
+            if (!down_event)
+                p.bindings[code].reset();
             break;
         }
         default:

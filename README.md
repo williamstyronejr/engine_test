@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The twenty-first increment adds configurable digits, punctuation, editing keys and
-unused function keys, with named hints and backward-compatible settings migration.
+The twenty-second increment adds Ctrl/Shift/Alt chords for keyboard and mouse
+bindings, deterministic press handling, and backward-compatible settings migration.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -291,24 +291,39 @@ details. File watching and background loading remain unimplemented.
 ## Keyboard and mouse controls
 
 Open **F1 → Controls**, select an action, then press a supported key or mouse
-button. Keyboard choices include A–Z, 0–9, common punctuation, Backspace,
-Insert/Delete, Home/End, and F4/F9/F12. Ten actions can be rebound: movement in four directions, pause, restart,
+button, optionally holding Ctrl, Shift and/or Alt first. Keyboard choices include
+A–Z, 0–9, common punctuation, Backspace, Insert/Delete, Home/End, and F4/F9/F12.
+Ten actions can be rebound: movement in four directions, pause, restart,
 interact, mute, music volume and effects volume. Supported buttons are left (LMB),
 middle (MMB), right (RMB), and two side buttons (SIDE1/SIDE2, X11 buttons 8/9).
 Wheel input remains scrolling. Each action has one configurable input; assigning
-a new key or mouse button replaces the previous input, and inputs cannot be shared.
-Conflicts and unsupported keys leave capture open; Escape cancels it.
+a new key, mouse button or chord replaces the previous input. Identical bindings
+cannot be shared. Conflicts and unsupported keys leave capture open; Escape cancels it.
 Restore Defaults restores A/D/W/S/P/R/E/M/N/B. Hints follow the selected input.
 Changes apply immediately and save when settings close or the game exits normally.
 
 Arrow keys, Space, Tab, Enter, Escape, Shift, zoom/page keys and F1/F2/F3/F5/F6/F7/
-F8/F10/F11 stay fixed so menus and diagnostics remain accessible. Left-click still operates menus even when bound
-to gameplay. Held keys/buttons are suppressed until released after a binding
+F8/F10/F11 stay fixed so menus and diagnostics remain accessible. Left-click still
+operates menus even when bound to gameplay. Held keys/buttons are suppressed until released after a binding
 change, and modal menus capture gameplay. Focus loss cancels capture. Keyboard
-bindings use unshifted X11 group zero: Shift+1 still activates the 1 binding.
+bindings use unshifted X11 group zero: Shift+1 uses the base symbol 1.
 Supported punctuation: grave, brackets, backslash, semicolon, apostrophe, comma,
 period and slash. Minus/equal remain zoom controls. Keypad keys, other international
-symbols, modifier chords and group switching are not configurable yet.
+symbols and group switching are not configurable yet.
+
+Chord labels use **C+** for Ctrl, **S+** for Shift and **A+** for Alt. Modifier keys
+alone keep capture open. For bindings sharing a base key/button, the required
+modifier sets must be nested: E, Ctrl+E and Ctrl+Shift+E may coexist, but Ctrl+E and
+Shift+E conflict because Ctrl+Shift+E would be ambiguous. The most specific
+matching chord wins; extra modifiers still allow a plain binding as a fallback.
+The action is selected on the fresh key/button press and stays selected until that
+key/button is released. Pressing/releasing modifiers during a hold does not switch
+actions. After rebinding, release held modifiers and press them again.
+
+To exercise chords, keep Interact=E and bind Move Left=Ctrl+E and Move Right=
+Ctrl+Shift+E. E interacts, Ctrl+E moves left, and Ctrl+Shift+E moves right. Releasing
+Ctrl/Shift while holding E keeps the selected movement until E is released. Try
+Alt+RMB for another action and restore defaults when finished.
 
 Try binding **Interact** to Home or F12 and **Move Left** to 1, then close settings.
 Use the selected interact key at the alarm switch. Hold 1 and Left Arrow together;
@@ -322,9 +337,10 @@ movement active until both are released. Reopen Controls to restore defaults.
 
 ## Saved data
 
-Settings use ECFG v4. ECFG v1 loads default bindings; v2 preserves customized
-letters and v3 preserves letter/mouse bindings. All upgrade on the next preference
-save. Saves and replays are unchanged.
+Settings use ECFG v5. ECFG v1 loads defaults, v2 preserves letters, v3 preserves
+letter/mouse bindings, and v4 preserves extended keys. Older bindings load with no
+required modifiers and upgrade on the next preference save. Saves and replays are
+unchanged.
 
 Settings: `$XDG_CONFIG_HOME/feature_lab/settings.ecfg`, falling back to
 `$HOME/.config/feature_lab/settings.ecfg`. Slots: `$XDG_STATE_HOME/feature_lab/slot-N.esav`,
@@ -417,14 +433,19 @@ and layout bounds. GPU checks render the title at four viewport sizes while
 repeated transitions keep resource counts stable. A null-device audio case checks
 initial pause and resume without duplicate voices.
 
-The eleven-case bindings suite checks keyboard/mouse conflicts, named symbols,
-reserved-key rejection, v1/v2/v3 migration and v4 round trips, malformed bindings,
+The fourteen-case bindings suite checks keyboard/mouse conflicts, named symbols,
+reserved-key rejection, v1–v4 migration and v5 round trips, malformed bindings,
 ordered raw press consumption, capture/cancel/defaults, held-button modal
 suppression and layout bounds. Native tests exercise
 all 27 new keyboard symbols and five mouse buttons, unshifted capture, aliases,
 duplicate events, fast clicks, held remapping, focus recovery, ignored wheel/
 unsupported buttons and mapping
 notifications. GPU tests draw both settings pages at small and large viewports.
+
+The six-case native chord suite checks all modifier masks, press-time selection,
+modifier release order, repeat suppression, left/right Ctrl/Shift, mouse chords,
+fixed aliases, focus/mapping cancellation, held rebinds and atomic capture. CPU
+cases additionally check nested conflict rules and settings capture/defaults.
 
 The eight-case texture reload suite checks shared-handle pixel updates, dimensions,
 alpha/filter/wrap behavior, atomic invalid-batch rejection, active-pass rejection,

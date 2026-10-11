@@ -1,6 +1,7 @@
 #pragma once
 #include "engine/input.hpp"
 #include <array>
+#include <bit>
 #include <optional>
 #include <string>
 #include <string_view>
@@ -50,28 +51,47 @@ inline constexpr bool is_bindable_keyboard_symbol(std::uint32_t symbol) {
 }
 struct KeyBindings {
     std::array<std::uint32_t, 10> symbols{'a', 'd', 'w', 's', 'p', 'r', 'e', 'm', 'n', 'b'};
+    std::array<std::uint32_t, 10> modifier_masks{};
     bool operator==(const KeyBindings&) const = default;
     void validate() const {
         for (std::size_t i = 0; i < symbols.size(); ++i) {
             const auto symbol = symbols[i];
             if (!is_bindable_keyboard_symbol(symbol) && !is_mouse_symbol(symbol))
                 throw std::invalid_argument("KEY RESERVED OR UNSUPPORTED");
-            for (std::size_t j = 0; j < i; ++j)
-                if (symbols[j] == symbol)
+            const auto mask = modifier_masks[i];
+            if (mask & ~modifiers::all)
+                throw std::invalid_argument("UNSUPPORTED MODIFIER");
+            for (std::size_t j = 0; j < i; ++j) {
+                if (symbols[j] != symbol)
+                    continue;
+                const auto other = modifier_masks[j];
+                if (mask == other)
                     throw std::invalid_argument("INPUT ALREADY ASSIGNED");
+                if ((mask & other) != mask && (mask & other) != other)
+                    throw std::invalid_argument("AMBIGUOUS CHORDS");
+            }
         }
     }
-    void assign(std::size_t action, std::uint32_t symbol) {
+    void assign(std::size_t action, std::uint32_t symbol, std::uint32_t mask = 0) {
         auto candidate = *this;
         candidate.symbols.at(action) = symbol;
+        candidate.modifier_masks.at(action) = mask;
         candidate.validate();
         *this = candidate;
     }
-    std::optional<Key> action(std::uint32_t symbol) const {
-        for (std::size_t i = 0; i < symbols.size(); ++i)
-            if (symbols[i] == symbol)
-                return bindable_actions[i];
-        return std::nullopt;
+    // Valid tables have nested masks for shared symbols, so specificity has no ties.
+    std::optional<Key> action(std::uint32_t symbol, std::uint32_t held_modifiers = 0) const {
+        std::optional<Key> result;
+        int specificity = -1;
+        for (std::size_t i = 0; i < symbols.size(); ++i) {
+            const auto mask = modifier_masks[i];
+            if (symbols[i] == symbol && (held_modifiers & mask) == mask &&
+                std::popcount(mask) > specificity) {
+                result = bindable_actions[i];
+                specificity = std::popcount(mask);
+            }
+        }
+        return result;
     }
     static std::string symbol_name(std::uint32_t symbol) {
         if (is_mouse_symbol(symbol)) {
@@ -87,14 +107,25 @@ struct KeyBindings {
                 return std::string(entry.name);
         throw std::invalid_argument("Invalid binding symbol");
     }
+    std::string chord_name(std::size_t index) const {
+        const auto mask = modifier_masks.at(index);
+        std::string name;
+        if (mask & modifiers::control)
+            name += "C+";
+        if (mask & modifiers::shift)
+            name += "S+";
+        if (mask & modifiers::alt)
+            name += "A+";
+        return name + symbol_name(symbols.at(index));
+    }
     std::string key_name(Key key) const {
         for (std::size_t i = 0; i < bindable_actions.size(); ++i)
             if (bindable_actions[i] == key)
-                return symbol_name(symbols[i]);
+                return chord_name(i);
         throw std::invalid_argument("Action has no configurable binding");
     }
     std::string label(std::size_t index) const {
-        return std::string(binding_names.at(index)) + " : " + symbol_name(symbols.at(index));
+        return std::string(binding_names.at(index)) + " : " + chord_name(index);
     }
 };
 } // namespace engine

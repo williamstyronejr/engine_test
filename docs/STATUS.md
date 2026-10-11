@@ -1,7 +1,7 @@
 # Implementation status
 
-The twenty-first increment adds configurable non-reserved keyboard keys, named
-hints and settings migration. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
+The twenty-second increment adds keyboard/mouse modifier chords, deterministic
+press handling and settings migration. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
 ## Delivered
 
@@ -51,7 +51,7 @@ entire plan feature ID when required subfeatures are still absent.
 | ID | Status | Current evidence | Still required |
 | --- | --- | --- | --- |
 | F01 | Partial | `graphics`, `platform_events`, `platform_no_display`, visible startup/resize | Manual minimize/fullscreen/scaling matrix and visible-window focus checks |
-| F02 | Partial | CPU edge/focus/capture tests; native key-repeat/alias/pointer/wheel/focus tests; modal gameplay routing; ten configurable keyboard/mouse actions, conflict/capture/persistence tests; mixed-device aliases and mapping notification refresh | Modifier chords, keypad/international symbols and keyboard group switching |
+| F02 | Partial | CPU edge/focus/capture tests; native key-repeat/alias/pointer/wheel/focus tests; modal gameplay routing; ten configurable keyboard/mouse actions, conflict/capture/persistence tests; mixed-device aliases, modifier chords and mapping notification refresh | Keypad/international symbols and keyboard group switching |
 | F03 | Implemented (v1) | Parented rotating/scaled/mirrored gallery; sampled affine hierarchy; camera corner/aspect/follow/zoom checkpoints; pause/step/save/replay pose tests; GPU shear/mirror/culling/resize pixels | Broader manual camera and display matrix; transform caching is optional |
 | F04 | Implemented (v1) | GPU pixel/order/color/atlas/culling/batch tests; animated/parented sprites; transactional reload; independent nearest/linear min/mag filters and clamp/repeat axes; atlas inset and sampling gallery | Optional mipmaps, anisotropy and atlas-cell repetition |
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
@@ -888,7 +888,44 @@ controls and HUD labels fit, and the second launch remained paused at zero ticks
 These checks use injected X11 events; other keyboard layouts, physical audio and
 new performance baselines were not exercised.
 
+## Added in the twenty-second increment
+
+- Ctrl/Shift/Alt chords for supported keyboard and mouse inputs, with atomic
+  symbol/mask capture. Modifier-only presses keep capture open; labels and the
+  Controls legend explain C+/S+/A+. Button text scales to fit longer bindings.
+- Transactional duplicate/ambiguity validation: shared-base modifier sets must be
+  nested. Fresh triggers choose the most specific match, with plain bindings as
+  fallback. Modifier changes never switch an action during a held trigger.
+- Fixed-array native modifier tracking and per-key/button action selection retain
+  alias aggregation, repeat suppression, focus cancellation and held-rebind gating.
+  Fixed menu/diagnostic controls remain available with modifiers.
+- ECFG v5 appends ten modifier masks (112 bytes total). v1–v4 load their existing
+  bindings with zero masks. Save/replay formats, asset content and dependencies
+  are unchanged.
+- CPU chord/migration/capture cases and a dedicated six-case native chord suite.
+
+## Twenty-second-increment validation (2026-10-11)
+
+GCC Debug and Release each pass all 28 runtime CTest groups without skips. Focused
+bindings, persistence, UI, platform_events and platform_chords groups also pass
+with Clang and native-platform ASan/UBSan (driver leak detection disabled).
+
+Fourteen CPU binding cases cover specificity, nested-mask conflict rejection,
+transactional edits, paired capture/reset, v1–v4 migration and malformed v5 masks.
+Six native chord cases cover all eight masks, left/right Ctrl/Shift, press-time
+selection, base-first rejection, modifier release order, repeat, mouse/fixed-key
+aliases, held remapping, focus recovery and mapping cancellation. Existing native
+keyboard/mouse and replay tests still pass.
+
+Two isolated Feature Lab launches captured and restored Ctrl+E, Ctrl+Shift+E,
+Alt+RMB and Ctrl+Shift+Alt+Slash. An ambiguous Shift+E edit was rejected before
+Ctrl+Shift+E was accepted. The saved ECFG v5 file is 112 bytes with the expected
+symbols/masks. Both 1050x1360 captures were inspected: long button labels fit and
+HUD hints show chords; relaunch retained all assignments without another edit.
+The checks used injected X11 events, not a broader physical keyboard/layout matrix.
+No new performance baseline or physical audio test was taken.
+
 ## Next increment
 
-Add modifier-chord bindings with deterministic capture, conflict rules and native
-input tests (F02).
+Add keypad bindings with Num Lock-independent behavior and native input tests
+(F02).

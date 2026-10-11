@@ -76,7 +76,7 @@ class Settings {
             if (capture_) {
                 if (input.pressed_symbol) {
                     try {
-                        bindings.assign(*capture_, input.pressed_symbol);
+                        bindings.assign(*capture_, input.pressed_symbol, input.pressed_modifiers);
                         capture_.reset();
                         notice = "BINDING UPDATED - SAVED ON CLOSE";
                         result.bindings_changed = true;
@@ -91,7 +91,7 @@ class Settings {
                     if (action.id >= binding_first &&
                         action.id < binding_first + bindings.symbols.size()) {
                         capture_ = action.id - binding_first;
-                        notice = "PRESS KEY OR MOUSE / ESC CANCEL";
+                        notice = "HOLD MODIFIERS THEN KEY OR MOUSE";
                         ui_.reset_interaction();
                         break;
                     }
