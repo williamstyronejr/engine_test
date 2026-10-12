@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The twenty-third increment adds keypad bindings with Num Lock-independent
-identities, chord support, and backward-compatible settings migration.
+The twenty-fourth increment follows the active keyboard layout group and safely
+cancels held input when layouts change.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -307,10 +307,12 @@ Arrow keys, Space, Tab, Enter, Escape, Shift, zoom/page keys and F1/F2/F3/F5/F6/
 F8/F10/F11 stay fixed so menus and diagnostics remain accessible. Left-click still
 operates menus even when bound to gameplay. Held keys/buttons are suppressed until released after a binding
 change, and modal menus capture gameplay. Focus loss cancels capture. Keyboard
-bindings use unshifted X11 group zero: Shift+1 uses the base symbol 1.
+bindings use the active XKB layout group at level zero: Shift+1 uses the base
+symbol 1 on layouts where that key has 1 at level zero.
 Supported punctuation: grave, brackets, backslash, semicolon, apostrophe, comma,
 period and slash. Main-row minus/equal remain zoom controls. Other international
-symbols and group switching are not configurable yet.
+symbols remain unsupported; supported bindings follow symbols in the active
+layout, rather than fixed physical key positions.
 
 Keypad digits use **KP0–KP9**, separate from the number row. Decimal/separator uses
 **KPDOT**; arithmetic keys use **KP+**, **KP-**, **KPMUL**, **KP/** and **KPEQ**.
@@ -319,6 +321,21 @@ on keypad 1) become keypad digits, without affecting dedicated navigation keys.
 Num Lock does not consume capture; keypad Enter remains fixed menu activation.
 To test this, bind Interact to KP1, toggle Num Lock, and use keypad 1 at the alarm
 switch in either state. Ctrl/Shift/Alt chords work with keypad keys too.
+
+Keyboard group changes cancel pending input and Controls capture, and suppress
+held keys, modifiers and mouse buttons until released. New presses use the new
+layout; switching back restores the original symbol mapping. Keys with fewer
+groups follow their XKB wrap/clamp/redirect rule. Settings keep symbol bindings,
+so changing layouts does not rewrite preferences.
+
+To exercise this in Feature Lab with layouts already configured on your desktop:
+
+1. Hold a movement key, switch layouts, then release and press again. Movement
+   must stop at the switch and resume according to the new layout's symbol.
+2. Open **F1 → Controls**, select an action, and switch layouts. Capture must end
+   with **BINDING CANCELED**. Select it again to bind a supported key in that layout.
+3. Repeat with a held Ctrl chord or mouse button; neither should remain active.
+   Verify arrows, menu keys and keypad input still work, then switch back.
 
 Chord labels use **C+** for Ctrl, **S+** for Shift and **A+** for Alt. Modifier keys
 alone keep capture open. For bindings sharing a base key/button, the required
@@ -450,13 +467,20 @@ all 27 new keyboard symbols and five mouse buttons, unshifted capture, aliases,
 duplicate events, fast clicks, held remapping, focus recovery, ignored wheel/
 unsupported buttons and mapping notifications. GPU tests draw both settings pages at small and large viewports.
 
-The ten-case native chord/keypad suite checks all modifier masks, press-time selection,
+The fourteen-case native chord/keypad/group suite checks all modifier masks, press-time selection,
 modifier release order, repeat suppression, left/right Ctrl/Shift, mouse chords,
 fixed aliases, focus/mapping cancellation, held rebinds and atomic capture. CPU
 cases additionally check nested conflict rules and settings capture/defaults.
 Keypad cases cover all 16 canonical symbols plus 11 navigation aliases, lock-state
 event masks, main-row separation, chords, Num Lock capture and fixed keypad Enter.
 Locale separator normalization is covered in CPU tests.
+
+Keyboard layout tests include four in-memory XKB map cases for distinct groups,
+level-zero lookup, wrap/clamp/redirect, single-group keys and unsupported symbols.
+Native group cases inject per-event group state into owned windows and verify
+held-input cancellation, release/repress, focus resynchronization, fixed/keypad
+keys and Feature Lab Controls capture. They do not change the desktop keymap;
+physical layout-switch shortcuts and compositor behavior still need manual checks.
 
 The eight-case texture reload suite checks shared-handle pixel updates, dimensions,
 alpha/filter/wrap behavior, atomic invalid-batch rejection, active-pass rejection,

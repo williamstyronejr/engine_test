@@ -1,6 +1,7 @@
+#include "../examples/feature_lab/persistence.hpp"
 #include "engine/window.hpp"
 #include "test.hpp"
-#include <X11/Xlib.h>
+#include <X11/XKBlib.h>
 #include <X11/keysym.h>
 #include <cstdlib>
 #include <memory>
@@ -368,6 +369,121 @@ TEST(num_lock_does_not_consume_capture_and_keypad_enter_stays_fixed) {
     n.key(XK_Return, false);
     CHECK(button(n.input.consume(), Key::accept).released);
 }
+TEST(group_changes_cancel_held_keys_mouse_and_pending_capture) {
+    Native n;
+    KeyBindings b;
+    b.assign(6, mouse_symbol(MouseButton::left), modifiers::control);
+    n.configure(b);
+    n.key(XK_Control_L, true);
+    n.key(XK_a, true);
+    n.mouse(1, true);
+    // Leave raw presses queued: the transition must clear them as well as holds.
+    n.key(XK_a, true, XkbBuildCoreState(0, 1)); // Held repeat observes new group.
+    auto f = n.input.consume();
+    CHECK(f.canceled && !f.pressed_symbol && !f.pressed_modifiers);
+    CHECK(!button(f, Key::left).held && !button(f, Key::interact).held);
+    CHECK(!f.pointer.primary.held && !f.pointer.primary.pressed);
+    n.key(XK_a, true, XkbBuildCoreState(0, 1));
+    n.mouse(1, true);
+    f = n.input.consume();
+    CHECK(!f.canceled && !f.pressed_symbol && !f.pointer.primary.held);
+    n.key(XK_a, false, XkbBuildCoreState(0, 1));
+    n.mouse(1, false);
+    n.mouse(1, true); // Still-held Ctrl was canceled, so this is a plain click.
+    f = n.input.consume();
+    CHECK(f.pointer.primary.pressed && !button(f, Key::interact).held);
+    CHECK(f.pressed_modifiers == 0);
+    n.mouse(1, false);
+    n.key(XK_Control_L, false, XkbBuildCoreState(0, 1));
+    n.key(XK_Control_L, true, XkbBuildCoreState(0, 1));
+    n.mouse(1, true);
+    CHECK(button(n.input.consume(), Key::interact).pressed);
+}
+TEST(group_switch_on_release_and_focus_resynchronization) {
+    Native n;
+    XkbStateRec state{};
+    CHECK(XkbGetState(n.display.get(), XkbUseCoreKbd, &state) == Success);
+    const auto initial = static_cast<unsigned int>(state.group);
+    const auto other = (initial + 1) % 4;
+    n.key(XK_Left, true, XkbBuildCoreState(0, initial));
+    n.input.consume();
+    n.key(XK_Left, false, XkbBuildCoreState(0, other));
+    auto f = n.input.consume();
+    CHECK(f.canceled && !button(f, Key::left).held);
+    n.key(XK_Left, true, XkbBuildCoreState(0, other));
+    CHECK(button(n.input.consume(), Key::left).pressed);
+    XEvent e{};
+    e.xfocus.type = FocusIn;
+    e.xfocus.window = n.native;
+    n.send(e, FocusChangeMask);
+    f = n.input.consume();
+    CHECK(f.canceled && !button(f, Key::left).held);
+    n.key(XK_Left, true, XkbBuildCoreState(0, initial));
+    CHECK(!button(n.input.consume(), Key::left).held);
+    n.key(XK_Left, false, XkbBuildCoreState(0, initial));
+    n.key(XK_Left, true, XkbBuildCoreState(0, initial));
+    CHECK(button(n.input.consume(), Key::left).pressed);
+}
+TEST(single_group_fixed_keys_and_keypad_work_after_group_switch) {
+    Native n;
+    KeyBindings b;
+    b.assign(6, XK_KP_1);
+    n.configure(b);
+    for (unsigned int group = 0; group < 4; ++group) {
+        const auto state = static_cast<unsigned int>(XkbBuildCoreState(LockMask, group));
+        n.key(XK_KP_End, true, state);
+        auto f = n.input.consume();
+        CHECK(f.pressed_symbol == XK_KP_1 && button(f, Key::interact).pressed);
+        n.key(XK_KP_End, false, state);
+        CHECK(button(n.input.consume(), Key::interact).released);
+        n.key(XK_F1, true, state);
+        CHECK(button(n.input.consume(), Key::settings).pressed);
+        n.key(XK_F1, false, state);
+        n.input.consume();
+    }
+}
+
+TEST(group_transition_cancels_feature_lab_binding_capture) {
+    using namespace feature_lab;
+    Native n;
+    Game game = load_game(AssetRoot(TEST_ASSET_ROOT));
+    Settings settings;
+    n.key(XK_F1, true);
+    settings.update(game, n.input.consume(), 640, 480, false);
+    n.key(XK_F1, false);
+    n.input.consume();
+    const auto click = [&](UiId id) {
+        Rect bounds{};
+        bool found = false;
+        for (const auto& widget : settings.ui().widgets())
+            if (widget.id == id) {
+                bounds = widget.bounds;
+                found = true;
+            }
+        CHECK(found);
+        Input pointer;
+        pointer.move_pointer((bounds.min + bounds.max) * 0.5F);
+        pointer.set_primary(true);
+        settings.update(game, pointer.consume(), 640, 480, false);
+        pointer.set_primary(false);
+        settings.update(game, pointer.consume(), 640, 480, false);
+    };
+    click(Settings::controls);
+    click(Settings::binding_first);
+    CHECK(settings.capturing_binding());
+    n.key(XK_q, true, XkbBuildCoreState(0, 1));
+    settings.update(game, n.input.consume(), 640, 480, false);
+    CHECK(!settings.capturing_binding() && settings.notice == "BINDING CANCELED");
+    CHECK(settings.bindings == KeyBindings{});
+    n.key(XK_q, false, XkbBuildCoreState(0, 1));
+    n.input.consume();
+    click(Settings::binding_first);
+    n.key(XK_q, true, XkbBuildCoreState(0, 1));
+    const auto step = settings.update(game, n.input.consume(), 640, 480, false);
+    CHECK(step.bindings_changed && !settings.capturing_binding());
+    CHECK(settings.bindings.action('q') == Key::left);
+}
+
 } // namespace
 int main() {
     if (!std::getenv("DISPLAY")) {
