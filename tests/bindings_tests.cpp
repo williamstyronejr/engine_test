@@ -80,11 +80,11 @@ TEST(reserved_and_unsupported_keyboard_symbols_stay_unbindable) {
     const auto before = bindings;
     // Navigation, zoom, diagnostics and modifiers must remain accessible.
     for (const auto symbol :
-         {0U,          0x20U,       0x2bU,   0x2dU,   0x3dU,      0x5fU,   0xff1bU, 0xff09U,
-          0xfe20U,     0xff0dU,     0xff8dU, 0xff51U, 0xff52U,    0xff53U, 0xff54U, 0xff55U,
-          0xff56U,     0xffbeU,     0xffbfU, 0xffc0U, 0xffc2U,    0xffc3U, 0xffc4U, 0xffc5U,
-          0xffc7U,     0xffc8U,     0xffe1U, 0xffe2U, 0xffe3U,    0xffe9U, 0xffebU, 0xff7fU,
-          0x1008ff12U, 0x010003b1U, 0x41U,   0x21U,   0xffffffffU}) {
+         {0U,          0x20U,       0x2bU,   0x2dU,       0x3dU,      0x5fU,   0xff1bU, 0xff09U,
+          0xfe20U,     0xff0dU,     0xff8dU, 0xff51U,     0xff52U,    0xff53U, 0xff54U, 0xff55U,
+          0xff56U,     0xffbeU,     0xffbfU, 0xffc0U,     0xffc2U,    0xffc3U, 0xffc4U, 0xffc5U,
+          0xffc7U,     0xffc8U,     0xffe1U, 0xffe2U,     0xffe3U,    0xffe9U, 0xffebU, 0xff7fU,
+          0x1008ff12U, 0x0100d800U, 0x41U,   0x01000021U, 0xffffffffU}) {
         CHECK(!is_bindable_keyboard_symbol(symbol));
         rejects([&] { bindings.assign(6, symbol); });
         rejects([&] { KeyBindings::symbol_name(symbol); });
@@ -149,11 +149,11 @@ TEST(raw_press_queue_cancellation_and_modal_capture) {
     CHECK(input.consume().pressed_symbol == mouse_symbol(MouseButton::left));
     CHECK(!input.consume().pressed_symbol);
 }
-TEST(configuration_v6_roundtrip_and_legacy_migration) {
+TEST(configuration_v7_roundtrip_and_legacy_migration) {
     Configuration config;
     config.bindings.assign(0, 'q');
     auto bytes = encode_config(config);
-    CHECK(bytes.size() == 112 && bytes[4] == 6 && decode_config(bytes) == config);
+    CHECK(bytes.size() == 112 && bytes[4] == 7 && decode_config(bytes) == config);
     binary::Writer legacy("ECFG");
     legacy.f32(0.5F);
     legacy.f32(0.25F);

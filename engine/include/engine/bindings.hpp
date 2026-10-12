@@ -1,5 +1,6 @@
 #pragma once
 #include "engine/input.hpp"
+#include "engine/keyboard_symbols.hpp"
 #include <array>
 #include <bit>
 #include <optional>
@@ -7,7 +8,7 @@
 #include <string_view>
 
 namespace engine {
-// Stable persisted order. Letter symbols use lowercase ASCII, independent of X11 keycodes.
+// Stable persisted order. ASCII letters use lowercase; symbols are independent of keycodes.
 inline constexpr std::array bindable_actions{
     Key::left,    Key::right,    Key::up,   Key::down,         Key::pause,
     Key::restart, Key::interact, Key::mute, Key::music_volume, Key::effects_volume};
@@ -60,7 +61,7 @@ inline constexpr bool is_keypad_symbol(std::uint32_t symbol) {
             return true;
     return false;
 }
-// Normalize group-zero keypad navigation/decimal aliases before capture and lookup.
+// Normalize active-group keypad navigation/decimal aliases before capture and lookup.
 // Lock state never changes the persisted identity; non-keypad keys stay distinct.
 inline constexpr std::uint32_t canonical_keypad_symbol(std::uint32_t symbol) {
     switch (symbol) {
@@ -94,10 +95,38 @@ inline constexpr std::uint32_t canonical_keypad_symbol(std::uint32_t symbol) {
 inline constexpr bool is_letter_symbol(std::uint32_t symbol) {
     return symbol >= 'a' && symbol <= 'z';
 }
-inline constexpr bool is_bindable_keyboard_symbol(std::uint32_t symbol) {
+inline constexpr bool is_v6_bindable_keyboard_symbol(std::uint32_t symbol) {
     if (is_letter_symbol(symbol) || (symbol >= '0' && symbol <= '9') || is_keypad_symbol(symbol))
         return true;
     for (const auto& entry : named_binding_symbols)
+        if (entry.symbol == symbol)
+            return true;
+    return false;
+}
+// Additional level-zero punctuation used by international layouts.
+inline constexpr std::array<NamedBindingSymbol, 19> extra_binding_symbols{{{'!', "EXCL"},
+                                                                           {'"', "QUOTE"},
+                                                                           {'#', "HASH"},
+                                                                           {'$', "DOLLAR"},
+                                                                           {'%', "PERCENT"},
+                                                                           {'&', "AMP"},
+                                                                           {'(', "LPAREN"},
+                                                                           {')', "RPAREN"},
+                                                                           {'*', "STAR"},
+                                                                           {':', "COLON"},
+                                                                           {'<', "LESS"},
+                                                                           {'>', "GREATER"},
+                                                                           {'?', "QUESTION"},
+                                                                           {'@', "AT"},
+                                                                           {'^', "CARET"},
+                                                                           {'{', "LBRACE"},
+                                                                           {'|', "PIPE"},
+                                                                           {'}', "RBRACE"},
+                                                                           {'~', "TILDE"}}};
+inline bool is_bindable_keyboard_symbol(std::uint32_t symbol) {
+    if (is_v6_bindable_keyboard_symbol(symbol) || is_international_binding_symbol(symbol))
+        return true;
+    for (const auto& entry : extra_binding_symbols)
         if (entry.symbol == symbol)
             return true;
     return false;
@@ -161,7 +190,10 @@ struct KeyBindings {
         for (const auto& entry : keypad_binding_symbols)
             if (entry.symbol == symbol)
                 return std::string(entry.name);
-        throw std::invalid_argument("Invalid binding symbol");
+        for (const auto& entry : extra_binding_symbols)
+            if (entry.symbol == symbol)
+                return std::string(entry.name);
+        return international_symbol_name(symbol);
     }
     std::string chord_name(std::size_t index) const {
         const auto mask = modifier_masks.at(index);
