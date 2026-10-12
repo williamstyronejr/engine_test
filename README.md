@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The twenty-fourth increment follows the active keyboard layout group and safely
-cancels held input when layouts change.
+The twenty-fifth increment adds international character bindings, readable ASCII
+labels, additional layout punctuation and backward-compatible settings migration.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -293,7 +293,7 @@ details. File watching and background loading remain unimplemented.
 Open **F1 → Controls**, select an action, then press a supported key or mouse
 button, optionally holding Ctrl, Shift and/or Alt first. Keyboard choices include
 A–Z, 0–9, common punctuation, Backspace, Insert/Delete, Home/End, F4/F9/F12,
-and keypad digits, decimal and arithmetic keys.
+keypad digits, decimal and arithmetic keys, and international character keys.
 Ten actions can be rebound: movement in four directions, pause, restart,
 interact, mute, music volume and effects volume. Supported buttons are left (LMB),
 middle (MMB), right (RMB), and two side buttons (SIDE1/SIDE2, X11 buttons 8/9).
@@ -310,9 +310,26 @@ change, and modal menus capture gameplay. Focus loss cancels capture. Keyboard
 bindings use the active XKB layout group at level zero: Shift+1 uses the base
 symbol 1 on layouts where that key has 1 at level zero.
 Supported punctuation: grave, brackets, backslash, semicolon, apostrophe, comma,
-period and slash. Main-row minus/equal remain zoom controls. Other international
-symbols remain unsupported; supported bindings follow symbols in the active
-layout, rather than fixed physical key positions.
+period and slash, plus exclamation, quotation mark, hash, dollar, percent,
+ampersand, parentheses, star, colon, comparison signs, question mark, at, caret,
+braces, pipe and tilde. Main-row plus/minus/equal/underscore remain zoom controls.
+Bindings follow symbols in the active layout rather than physical key positions.
+
+International keys accept Unicode 16 letters, numbers, punctuation and symbols.
+Exact legacy X11 character aliases and their Unicode equivalents have one identity:
+for example, legacy Greek alpha and U+03B1 cannot become separate bindings.
+ASCII letters normalize to lowercase; non-ASCII case is preserved. Common accented
+letters have short labels such as **EACUTE**, **AUML** and **CCEDIL**. Other characters
+use **U+XXXX** (up to six hex digits), so all labels work in the existing bitmap
+font. Ctrl/Shift/Alt chords work with these keys. Settings save as ECFG v7 and load
+v1–v6 without changing their existing assignments.
+
+Dead keys, composed text, IME input, combining marks, whitespace, controls and
+private/unassigned code points are outside binding support. This does not add
+Unicode text rendering. See [character data and regeneration](docs/KEYBOARD_DATA.md).
+To test in Feature Lab, bind Interact to an accented or non-Latin key in your
+active layout, operate the alarm switch, then close and reopen the game to verify
+the binding and label. Try a Ctrl chord and a conflicting assignment too.
 
 Keypad digits use **KP0–KP9**, separate from the number row. Decimal/separator uses
 **KPDOT**; arithmetic keys use **KP+**, **KP-**, **KPMUL**, **KP/** and **KPEQ**.
@@ -460,7 +477,7 @@ repeated transitions keep resource counts stable. A null-device audio case check
 initial pause and resume without duplicate voices.
 
 The sixteen-case bindings suite checks keyboard/mouse conflicts, named symbols,
-reserved-key rejection, v1–v5 migration and v6 round trips, malformed bindings,
+reserved-key rejection, v1–v6 migration and v7 round trips, malformed bindings,
 ordered raw press consumption, capture/cancel/defaults, held-button modal
 suppression and layout bounds. Native tests exercise
 all 27 new keyboard symbols and five mouse buttons, unshifted capture, aliases,
@@ -481,6 +498,14 @@ Native group cases inject per-event group state into owned windows and verify
 held-input cancellation, release/repress, focus resynchronization, fixed/keypad
 keys and Feature Lab Controls capture. They do not change the desktop keymap;
 physical layout-switch shortcuts and compositor behavior still need manual checks.
+
+Five international binding cases check alias identity across scripts, character
+categories, labels, punctuation, conflicts, canonical records and v7 migration.
+Three native cases use a test-only client-side XKB map fixture and real queued
+window events to exercise accented/Greek/CJK capture, chords, group transitions,
+Controls labels, settings round trips and held-input suppression. The fixture
+never changes the server keymap. GPU tests render long international chord labels
+at 320×240, 640×480 and 1280×720.
 
 The eight-case texture reload suite checks shared-handle pixel updates, dimensions,
 alpha/filter/wrap behavior, atomic invalid-batch rejection, active-pass rejection,

@@ -17,7 +17,7 @@ inline void validate(Configuration config) {
 }
 inline std::vector<std::uint8_t> encode_config(Configuration config) {
     validate(config);
-    engine::binary::Writer out("ECFG", 6);
+    engine::binary::Writer out("ECFG", 7);
     out.f32(config.audio.master);
     out.f32(config.audio.music);
     out.f32(config.audio.effects);
@@ -34,13 +34,16 @@ inline Configuration decode_config(std::span<const std::uint8_t> bytes) {
     if (payload.size() < 8)
         throw std::runtime_error("Truncated configuration");
     const auto version = static_cast<std::uint32_t>(payload[4]);
-    if (version < 1 || version > 6)
+    if (version < 1 || version > 7)
         throw std::runtime_error("Unsupported configuration version");
     engine::binary::Reader in(payload, "ECFG", version);
     Configuration config{{in.f32(), in.f32(), in.f32(), in.boolean()}, in.boolean()};
     if (version >= 2)
         for (auto& symbol : config.bindings.symbols) {
             symbol = in.u32();
+            if (version < 7 && !engine::is_v6_bindable_keyboard_symbol(symbol) &&
+                !engine::is_mouse_symbol(symbol))
+                throw std::runtime_error("Invalid legacy keyboard binding");
             if (version < 6 && engine::is_keypad_symbol(symbol))
                 throw std::runtime_error("Invalid legacy keypad binding");
             if (version == 2 && !engine::is_letter_symbol(symbol))

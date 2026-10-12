@@ -26,10 +26,10 @@ TEST(active_group_uses_its_own_unshifted_symbol) {
     auto cache = detail::keyboard_symbols(layout.keyboard);
     CHECK(cache[0][38] == 'a' && cache[1][38] == 'q');
     CHECK(cache[2][38] == 'z' && cache[3][38] == 'w');
-    // Unsupported international symbols must not silently become a group-zero action.
+    // Exact legacy character aliases use the canonical Unicode identity.
     layout.symbols[2] = XK_Cyrillic_ya;
     cache = detail::keyboard_symbols(layout.keyboard);
-    CHECK(cache[1][38] == XK_Cyrillic_ya);
+    CHECK(cache[1][38] == 0x0100044f);
     CHECK(!KeyBindings{}.action(static_cast<std::uint32_t>(cache[1][38])));
 }
 TEST(per_key_group_wrap_clamp_and_redirect) {

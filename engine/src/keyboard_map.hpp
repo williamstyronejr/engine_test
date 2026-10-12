@@ -38,9 +38,8 @@ inline KeyboardSymbols keyboard_symbols(const XkbDescRec& keyboard) {
             const auto offset = key.offset + effective * key.width;
             if (offset >= map->num_syms)
                 continue;
-            auto symbol = canonical_keypad_symbol(static_cast<std::uint32_t>(map->syms[offset]));
-            if (symbol >= XK_A && symbol <= XK_Z)
-                symbol += XK_a - XK_A;
+            const auto symbol = canonical_keypad_symbol(
+                canonical_character_symbol(static_cast<std::uint32_t>(map->syms[offset])));
             result[group][code] = symbol;
         }
     }

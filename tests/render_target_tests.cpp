@@ -318,6 +318,9 @@ TEST(settings_render_at_small_and_large_sizes) {
         break; // The layout was replaced; do not advance the old iterator.
     }
     CHECK(settings.controls_opened());
+    settings.bindings.assign(0, 0xe9, modifiers::all);
+    settings.bindings.assign(1, 0x010003b1, modifiers::all);
+    settings.bindings.assign(6, 0x01020000, modifiers::all);
     render_sizes();
 }
 TEST(title_renders_before_simulation_and_reuses_gpu_resources) {

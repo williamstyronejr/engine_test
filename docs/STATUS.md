@@ -1,7 +1,7 @@
 # Implementation status
 
-The twenty-fourth increment adds active keyboard-layout groups and held-input
-cancellation during layout changes. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
+The twenty-fifth increment adds international character bindings, readable labels
+and ECFG v7 migration. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
 ## Delivered
 
@@ -51,7 +51,7 @@ entire plan feature ID when required subfeatures are still absent.
 | ID | Status | Current evidence | Still required |
 | --- | --- | --- | --- |
 | F01 | Partial | `graphics`, `platform_events`, `platform_no_display`, visible startup/resize | Manual minimize/fullscreen/scaling matrix and visible-window focus checks |
-| F02 | Partial | CPU edge/focus/capture tests; native key-repeat/alias/pointer/wheel/focus tests; modal gameplay routing; ten configurable keyboard/mouse actions, conflict/capture/persistence tests; mixed-device aliases, modifier chords, keypad identities, active XKB layout groups and mapping notification refresh | International symbols; physical multi-layout/compositor validation |
+| F02 | Partial | CPU edge/focus/capture tests; native key-repeat/alias/pointer/wheel/focus tests; modal gameplay routing; ten configurable keyboard/mouse actions, conflict/capture/persistence tests; mixed-device aliases, modifier chords, keypad identities, active XKB layout groups, international symbols and mapping notification refresh | Physical multi-layout/compositor validation; dead keys, text composition and Unicode glyph rendering are outside binding v1 |
 | F03 | Implemented (v1) | Parented rotating/scaled/mirrored gallery; sampled affine hierarchy; camera corner/aspect/follow/zoom checkpoints; pause/step/save/replay pose tests; GPU shear/mirror/culling/resize pixels | Broader manual camera and display matrix; transform caching is optional |
 | F04 | Implemented (v1) | GPU pixel/order/color/atlas/culling/batch tests; animated/parented sprites; transactional reload; independent nearest/linear min/mag filters and clamp/repeat axes; atlas inset and sampling gallery | Optional mipmaps, anisotropy and atlas-cell repetition |
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
@@ -995,7 +995,47 @@ shortcuts, asynchronous server group notifications and keyboard replacement stil
 need a broader manual multi-layout/compositor matrix. No new performance baseline
 or physical audio test was taken.
 
+## Added in the twenty-fifth increment
+
+- International Unicode 16 character bindings, including exact legacy X11 aliases
+  normalized to canonical Latin-1/Unicode identities. ASCII is lowercase-normalized;
+  non-ASCII case is preserved. Additional level-zero punctuation supports layouts
+  with punctuation on number-row keys. Fixed controls and keypad identities remain.
+- Short accented-letter names and bounded U+XXXX labels use the existing bitmap
+  font and work with Ctrl/Shift/Alt chords. Dead keys/composition, combining marks,
+  controls, whitespace and private/unassigned characters remain outside support.
+- ECFG v7 keeps the 112-byte schema and reads v1–v6 under their original validation
+  rules. Save/replay formats are unchanged. Character tables are checked in;
+  optional in-house regeneration uses installed X11 protocol data and Python's
+  standard Unicode data. No new runtime libraries or build downloads.
+- Five CPU cases, three native international cases and GPU long-label coverage.
+  Native tests use a client-only map fixture with real queued window events;
+  Feature Lab capture, labels, settings and held-input behavior are exercised.
+
+## Twenty-fifth-increment validation (2026-10-12)
+
+GCC Debug and Release each pass all 31 runtime CTest groups without skips. Eight
+focused groups (international_bindings, bindings, persistence, keyboard_maps,
+platform_international, platform_chords, platform_events and render_targets) also
+pass with Clang and native-platform ASan/UBSan (driver leak detection disabled).
+The optional generator's --check reproduces the checked-in character tables.
+
+The five new CPU cases cover representative legacy aliases across Latin, Greek,
+Cyrillic, Arabic, Hebrew, Kana and Thai, direct Unicode/CJK/supplementary characters,
+labels, conflicts, punctuation, excluded character categories and strict v1–v7
+migration. Three native cases inject four groups into client-owned map snapshots,
+then send events to owned windows to verify capture, chords, group cancellation,
+settings labels/round trips and held rebinds. They do not change the server keymap.
+
+Two visible Feature Lab launches loaded the same isolated ECFG v7 fixture with
+EACUTE, U+03B1 and U+20000 modifier chords, plus CCEDIL. Both 1050x1360 captures
+were inspected: Controls labels fit and HUD hints remain legible; the preferences
+file remained unchanged across launches. GPU tests cover long labels at 320×240,
+640×480 and 1280×720. Physical international keyboards, layout-switch shortcuts
+and compositor behavior still need a broader manual matrix. No new performance
+baseline or physical audio test was taken.
+
 ## Next increment
 
-Extend configurable input to international keyboard symbols with readable labels
-and settings migration (F02), while retaining symbol-based binding semantics.
+Add transitions between separately authored levels in Feature Lab with transactional
+loading, explicit spawn points and tests (F07).

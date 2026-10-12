@@ -534,8 +534,34 @@ does not depend on Xlib; its allowlist and labels are in `bindings.hpp`.
 | Keypad 0–9 | 0xffb0–0xffb9 | KP0–KP9 |
 | Keypad decimal, multiply, add, subtract, divide, equal | 0xffae, 0xffaa, 0xffab, 0xffad, 0xffaf, 0xffbd | KPDOT, KPMUL, KP+, KP-, KP/, KPEQ |
 
-Other keyboard symbols are rejected, including uppercase/shifted symbols,
-modifiers and international/media keys. Fixed arrow/menu/page/zoom controls and
+Additional layout punctuation is supported: `!`, quotation mark, `#`, `$`, `%`,
+`&`, `(`, `)`, `*`, `:`, `<`, `>`, `?`, `@`, `^`, `{`, `|`, `}`, `~`. Labels are EXCL, QUOTE, HASH, DOLLAR, PERCENT,
+AMP, LPAREN, RPAREN, STAR, COLON, LESS, GREATER, QUESTION, AT, CARET, LBRACE, PIPE,
+RBRACE and TILDE. Main-row plus/minus/equal/underscore remain reserved.
+
+International canonical symbols use direct Latin-1 values 0xA1–0xFF or
+0x01000000 + Unicode code point for U+0100–U+10FFFF. The vocabulary is frozen to
+Unicode 16.0.0 categories L/N/P/S (letters, numbers, punctuation, symbols).
+Controls, whitespace, combining marks, format characters, surrogates, private-use,
+unassigned values and noncharacters are rejected. Exact legacy X11 character
+mappings normalize before capture/lookup; approximate mappings are not imported.
+Unicode-encoded ASCII/Latin-1 aliases normalize to their direct representation.
+ASCII capitals normalize to lowercase; non-ASCII case is preserved. No composition,
+normalization of character sequences, locale case folding or text input is performed.
+`KeyBindings` and persisted records require canonical values, so duplicate aliases
+cannot evade conflict checks. Function/keypad/mouse identities remain distinct.
+
+Labels for common Latin-1 characters include EACUTE, EGRAVE, ECIRC, AGRAVE,
+AUML, OUML, UUML, ARING, CCEDIL, NTILDE and SHARPS. Others use uppercase hexadecimal
+U+XXXX with at least four digits, at most six. Prefixes still use C+/S+/A+.
+This keeps labels bounded and drawable by the bitmap font. Mapping and category
+lookup use sorted, read-only tables and binary searches; no allocation or locale
+query occurs during map normalization or successful validation. See [data provenance and
+regeneration](KEYBOARD_DATA.md).
+
+Other keyboard symbols are rejected, including raw uppercase ASCII, noncanonical
+aliases, modifiers, dead keys and media/function symbols outside the allowlist.
+Fixed arrow/menu/page/zoom controls and
 F1/F2/F3/F5/F6/F7/F8/F10/F11 cannot be reassigned, even with modifiers. The
 unshifted active-group base symbol is used (Shift+1 uses symbol 1 when that
 key has 1 at level zero).
@@ -575,8 +601,8 @@ input. Per-key wrap/clamp/redirect rules preserve keys with fewer groups; missin
 symbols do not fall back to a different layout. Lookup uses level zero, ASCII
 case normalization and keypad normalization. No server round trip or allocation
 is needed for ordinary key events or group changes. Binding serialization remains
-ECFG v6: OS layout state is not a preference. Physical scan codes, international
-binding symbols and text composition are not supported.
+ECFG v7: OS layout state is not a preference. Physical scan codes and text
+composition are not supported.
 
 The backend follows the [Xlib XKB specification](https://www.x.org/releases/current/doc/libX11/XKB/xkblib.html)
 for effective group state and per-key group-range normalization.
@@ -619,10 +645,10 @@ keep capture open; Escape/focus loss cancels it and F1 closes settings. Gameplay
 remains paused and captured throughout. Valid edits apply immediately; preferences
 persist on settings close or normal exit.
 
-## Persistence: ECFG v6 and ESAV v3
+## Persistence: ECFG v7 and ESAV v3
 
 All integers are little-endian, floats are IEEE binary32, and booleans are u32 0/1.
-Files begin with four-byte magic and u32 version (ECFG 6, ESAV 3), ending with a u32 CRC32 of all
+Files begin with four-byte magic and u32 version (ECFG 7, ESAV 3), ending with a u32 CRC32 of all
 preceding bytes (reflected polynomial 0xEDB88320, initial/final XOR 0xFFFFFFFF).
 The envelope is 12..65,536 bytes; parsers reject wrong type/version, excess counts,
 truncation, trailing bytes, invalid booleans, and checksum mismatches. CRC detects
@@ -634,7 +660,7 @@ ECFG payload after the header is three f32 gains (master, music, effects), u32 m
 and u32 VSync, followed by ten u32 input symbols in the binding order above, then
 ten u32 modifier masks in the same order. Symbols begin at byte 28, masks at byte
 68, and CRC at byte 108. Gains must be finite within [0,1]; bindings must satisfy
-the symbol, mask and conflict rules above. Total ECFG v6 size is 112 bytes.
+the symbol, mask and conflict rules above. Total ECFG v7 size is 112 bytes.
 Legacy ECFG v1 is 32 bytes, omits bindings and loads with defaults. ECFG v2 is 72 bytes and retains strict lowercase
 letter validation. ECFG v3 has the same size and permits only letters and mouse
 symbols. Legacy validation is retained before migration; newer keyboard symbols
@@ -642,8 +668,11 @@ in v2/v3 records are rejected even with a valid checksum. Existing assignments
 are preserved. ECFG v4 is 72 bytes and supports extended keys. All older schemas
 before v5 load with zero modifier masks and retain their unique-symbol rule.
 ECFG v5 is 112 bytes and preserves existing chords. Versions 1–5 reject keypad
-bindings even with valid checksums; only v6 permits canonical keypad symbols.
-The next preference save writes v6. Other versions are rejected. Checkpoint compatibility
+bindings even with valid checksums; v6 adds canonical keypad symbols. Versions
+1–6 reject the new international and punctuation symbols even with valid checksums.
+ECFG v7 keeps the 112-byte layout and adds the vocabulary above. Noncanonical
+character aliases are rejected instead of silently repairing saved records.
+The next preference save writes v7. Other versions are rejected. Checkpoint compatibility
 is described below.
 Startup uses defaults on malformed/inaccessible configuration, logs the reason,
 and shows a notice. No automatic repair overwrites the file. Changed preferences
