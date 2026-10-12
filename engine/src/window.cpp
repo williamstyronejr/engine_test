@@ -1,4 +1,5 @@
 #include "engine/window.hpp"
+#include "keyboard_map.hpp"
 #include <GL/gl.h>
 #include <GL/glx.h>
 #include <GL/glxext.h>
@@ -93,6 +94,9 @@ struct Window::Impl {
     int width{}, height{};
     bool mapped{}, closing{};
     KeyBindings configured;
+    int xkb_event{};
+    unsigned int group{};
+    detail::KeyboardSymbols keymap{};
     std::array<bool, 256> physical{}, blocked{};
     static constexpr std::array<unsigned int, 5> mouse_codes{Button1, Button2, Button3, 8, 9};
     std::array<bool, mouse_codes.size()> mouse_physical{}, mouse_blocked{};
@@ -102,12 +106,33 @@ struct Window::Impl {
     void rebuild_keys() {
         bindings.fill(std::nullopt);
         mouse_bindings.fill(std::nullopt);
-        for (std::size_t i = 8; i < bindings.size(); ++i) {
-            symbols[i] = canonical_keypad_symbol(static_cast<std::uint32_t>(
-                XkbKeycodeToKeysym(display, static_cast<KeyCode>(i), 0, 0)));
-            if (symbols[i] >= XK_A && symbols[i] <= XK_Z)
-                symbols[i] += XK_a - XK_A;
-        }
+        symbols = keymap[group];
+    }
+    void read_keymap() {
+        auto* map = XkbGetMap(display, XkbAllClientInfoMask, XkbUseCoreKbd);
+        if (!map)
+            throw std::runtime_error("Cannot read XKB keyboard map");
+        keymap = detail::keyboard_symbols(*map);
+        XkbFreeKeyboard(map, XkbAllComponentsMask, True);
+        rebuild_keys();
+    }
+    unsigned int read_group() const {
+        XkbStateRec state{};
+        if (XkbGetState(display, XkbUseCoreKbd, &state) != Success)
+            throw std::runtime_error("Cannot read XKB keyboard group");
+        return state.group;
+    }
+    void cancel_input(Input& input) {
+        rebuild_keys();
+        blocked = physical;
+        mouse_blocked = mouse_physical;
+        input.release_all();
+    }
+    void change_group(unsigned int next, Input& input) {
+        if (next >= keymap.size() || next == group)
+            return;
+        group = next;
+        cancel_input(input);
     }
     std::uint32_t held_modifiers() const {
         std::uint32_t result = 0;
@@ -205,9 +230,19 @@ Window::Window(int width, int height, std::string_view title_text, bool visible)
     p.close_atom = XInternAtom(p.display, "WM_DELETE_WINDOW", False);
     XSetWMProtocols(p.display, p.window, &p.close_atom, 1);
     title(title_text);
+    int opcode{}, error{}, major_version = XkbMajorVersion, minor_version = XkbMinorVersion;
+    if (!XkbQueryExtension(p.display, &opcode, &p.xkb_event, &error, &major_version,
+                           &minor_version))
+        throw std::runtime_error("XKB keyboard extension is required");
+    constexpr unsigned int map_events = XkbMapNotifyMask | XkbNewKeyboardNotifyMask;
+    if (!XkbSelectEvents(p.display, XkbUseCoreKbd, map_events, map_events) ||
+        !XkbSelectEventDetails(p.display, XkbUseCoreKbd, XkbStateNotify, XkbAllStateComponentsMask,
+                               XkbGroupStateMask))
+        throw std::runtime_error("Cannot subscribe to XKB keyboard changes");
+    p.group = p.read_group();
+    p.read_keymap();
     Bool repeat_supported{};
     XkbSetDetectableAutoRepeat(p.display, True, &repeat_supported);
-    p.rebuild_keys();
     auto create = reinterpret_cast<PFNGLXCREATECONTEXTATTRIBSARBPROC>(
         glXGetProcAddressARB(reinterpret_cast<const GLubyte*>("glXCreateContextAttribsARB")));
     const char* extensions = glXQueryExtensionsString(p.display, screen);
@@ -254,14 +289,25 @@ bool Window::poll(Input& input) {
     while (XPending(p.display)) {
         XEvent e{};
         XNextEvent(p.display, &e);
+        if (e.type == p.xkb_event) {
+            const auto& xkb = reinterpret_cast<const XkbEvent&>(e);
+            if (xkb.any.xkb_type == XkbStateNotify && (xkb.state.changed & XkbGroupStateMask)) {
+                p.change_group(static_cast<unsigned int>(xkb.state.group), input);
+            } else if (xkb.any.xkb_type == XkbMapNotify ||
+                       xkb.any.xkb_type == XkbNewKeyboardNotify) {
+                if (xkb.any.xkb_type == XkbNewKeyboardNotify)
+                    p.group = p.read_group();
+                p.read_keymap();
+                p.cancel_input(input);
+            }
+            continue;
+        }
         switch (e.type) {
         case MappingNotify:
             if (e.xmapping.request == MappingKeyboard || e.xmapping.request == MappingModifier) {
                 XRefreshKeyboardMapping(&e.xmapping);
-                p.rebuild_keys();
-                p.blocked = p.physical;
-                p.mouse_blocked = p.mouse_physical;
-                input.release_all();
+                p.read_keymap();
+                p.cancel_input(input);
             }
             break;
         case ClientMessage:
@@ -283,6 +329,9 @@ bool Window::poll(Input& input) {
             p.blocked.fill(false);
             p.mouse_physical.fill(false);
             p.mouse_blocked.fill(false);
+            break;
+        case FocusIn:
+            p.change_group(p.read_group(), input);
             break;
         case FocusOut:
             input.release_all();
@@ -348,6 +397,9 @@ bool Window::poll(Input& input) {
             const auto code = static_cast<std::size_t>(e.xkey.keycode);
             if (code >= p.physical.size())
                 break;
+            // Core key events carry the lookup group at the time of the event.
+            // Use it before lookup so queued input never uses a later server state.
+            p.change_group(XkbGroupForCoreState(e.xkey.state), input);
             const bool down_event = e.type == KeyPress;
             if (down_event && !p.physical[code] && !p.blocked[code]) {
                 const auto symbol = static_cast<std::uint32_t>(p.symbols[code]);
@@ -379,10 +431,7 @@ void Window::set_bindings(const KeyBindings& bindings, Input& input) {
     if (p.configured == bindings)
         return;
     p.configured = bindings;
-    p.rebuild_keys();
-    p.blocked = p.physical;
-    p.mouse_blocked = p.mouse_physical;
-    input.release_all();
+    p.cancel_input(input);
 }
 void Window::present() {
     glXSwapBuffers(impl_->display, impl_->window);

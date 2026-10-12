@@ -1,7 +1,7 @@
 # Implementation status
 
-The twenty-third increment adds keypad bindings, Num Lock-independent input
-identities and settings migration. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
+The twenty-fourth increment adds active keyboard-layout groups and held-input
+cancellation during layout changes. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
 ## Delivered
 
@@ -51,7 +51,7 @@ entire plan feature ID when required subfeatures are still absent.
 | ID | Status | Current evidence | Still required |
 | --- | --- | --- | --- |
 | F01 | Partial | `graphics`, `platform_events`, `platform_no_display`, visible startup/resize | Manual minimize/fullscreen/scaling matrix and visible-window focus checks |
-| F02 | Partial | CPU edge/focus/capture tests; native key-repeat/alias/pointer/wheel/focus tests; modal gameplay routing; ten configurable keyboard/mouse actions, conflict/capture/persistence tests; mixed-device aliases, modifier chords, keypad identities and mapping notification refresh | International symbols and keyboard group switching |
+| F02 | Partial | CPU edge/focus/capture tests; native key-repeat/alias/pointer/wheel/focus tests; modal gameplay routing; ten configurable keyboard/mouse actions, conflict/capture/persistence tests; mixed-device aliases, modifier chords, keypad identities, active XKB layout groups and mapping notification refresh | International symbols; physical multi-layout/compositor validation |
 | F03 | Implemented (v1) | Parented rotating/scaled/mirrored gallery; sampled affine hierarchy; camera corner/aspect/follow/zoom checkpoints; pause/step/save/replay pose tests; GPU shear/mirror/culling/resize pixels | Broader manual camera and display matrix; transform caching is optional |
 | F04 | Implemented (v1) | GPU pixel/order/color/atlas/culling/batch tests; animated/parented sprites; transactional reload; independent nearest/linear min/mag filters and clamp/repeat axes; atlas inset and sampling gallery | Optional mipmaps, anisotropy and atlas-cell repetition |
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
@@ -960,7 +960,42 @@ Ctrl+Shift+Alt+KPDOT and KPMUL. An injected Num Lock press left capture open. Th
 relaunch. Both 1050x1360 captures were inspected: labels fit and the HUD distinguishes
 main-row/keypad input. No new performance baseline or physical audio test was taken.
 
+## Added in the twenty-fourth increment
+
+- Active XKB keyboard groups, selected from state notifications and each key
+  event's lookup state. Startup/focus-in synchronization and map/new-keyboard
+  refresh keep cached mappings current. No additional libraries or config changes.
+- Four bounded level-zero caches follow per-key wrap/clamp/redirect rules, ASCII
+  case normalization and keypad canonicalization. Unsupported international
+  symbols remain unsupported instead of becoming group-zero actions.
+- Layout changes clear queued input and cancel binding capture; held keys,
+  modifiers and mouse buttons remain suppressed until release. Same-group input
+  does not cancel actions. ECFG v6 and save/replay formats are unchanged.
+- Four in-memory map cases and four native group cases, including Feature Lab
+  Controls capture and recovery. README includes a multi-layout gameplay procedure.
+
+## Twenty-fourth-increment validation (2026-10-12)
+
+GCC Debug and Release each pass all 29 runtime CTest groups without skips. Six
+focused groups (keyboard_maps, platform_chords, platform_events, bindings,
+persistence and UI) also pass with Clang and native-platform ASan/UBSan (driver
+leak detection disabled). The map suite has four cases and the expanded native
+chord/keypad/group suite has fourteen.
+
+Two isolated, visible Feature Lab launches exercise injected group changes.
+The first cancels an active capture, displays BINDING CANCELED, retains A and
+creates no preferences file. The second captures Q after the transition, updates
+the movement hint and saves the expected 112-byte ECFG v6 file. Both 1050x1360
+captures were inspected. Existing GPU/menu, replay and persistence tests pass.
+
+Distinct layout symbols and range policies are tested in memory; native tests
+inject core-event group bits and focus/mapping events into owned windows. No
+global keyboard mapping or desktop group was changed. Physical layout-switch
+shortcuts, asynchronous server group notifications and keyboard replacement still
+need a broader manual multi-layout/compositor matrix. No new performance baseline
+or physical audio test was taken.
+
 ## Next increment
 
-Support keyboard-group changes with active-layout mapping and held-input
-cancellation (F02).
+Extend configurable input to international keyboard symbols with readable labels
+and settings migration (F02), while retaining symbol-based binding semantics.

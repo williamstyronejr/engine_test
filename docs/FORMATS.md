@@ -537,17 +537,18 @@ does not depend on Xlib; its allowlist and labels are in `bindings.hpp`.
 Other keyboard symbols are rejected, including uppercase/shifted symbols,
 modifiers and international/media keys. Fixed arrow/menu/page/zoom controls and
 F1/F2/F3/F5/F6/F7/F8/F10/F11 cannot be reassigned, even with modifiers. The
-unshifted group-zero base symbol is used (Shift+1 uses symbol 1).
+unshifted active-group base symbol is used (Shift+1 uses symbol 1 when that
+key has 1 at level zero).
 
-`canonical_keypad_symbol` normalizes the native group-zero keypad symbols before
+`canonical_keypad_symbol` normalizes the native active-group keypad symbols before
 capture and lookup. KP_Insert/End/Down/Next/Left/Begin/Right/Home/Up/Prior map to
 KP_0/1/2/3/4/5/6/7/8/9. KP_Delete and KP_Separator map to KP_Decimal. Canonical
 symbols pass through unchanged. Dedicated arrows/navigation and main-row digits
 remain distinct. Assignment and persisted records accept only canonical symbols;
 raw keypad navigation aliases are rejected to prevent duplicate identities.
 
-The backend uses cached group-zero keycodes rather than lock-dependent text
-translation. Num Lock (including changes during a hold) and Caps Lock do not
+The backend uses cached level-zero key symbols for all four XKB groups rather
+than lock-dependent text translation. Num Lock (including changes during a hold) and Caps Lock do not
 change keypad identity or modifier masks; Shift still participates in chords.
 Decimal and locale separator share one bindable identity. KP_Enter remains fixed
 menu activation, and Num_Lock presses never occupy the raw capture slot. Keypad
@@ -564,8 +565,21 @@ keycode mapping, cancels queued input, and suppresses physically held keys/butto
 until release, including primary UI clicks. Keyboard and mouse sources for an
 action are aggregated; releasing one alias does not release another.
 MappingKeyboard/MappingModifier notifications refresh the X11 mapping with the
-same cancellation policy. Keyboard symbols use unshifted group zero;
-runtime group switching and physical scan codes are not supported.
+same cancellation policy. XKB map/new-keyboard notifications rebuild the bounded
+4 × 256 symbol cache. Effective-group notifications and per-key-event group bits
+select the active group; startup, keyboard replacement and focus-in query the
+server state. Group changes apply the same cancellation policy, including modifier
+and mouse holds,
+and cancel Feature Lab binding capture. Same-group notifications do not interrupt
+input. Per-key wrap/clamp/redirect rules preserve keys with fewer groups; missing
+symbols do not fall back to a different layout. Lookup uses level zero, ASCII
+case normalization and keypad normalization. No server round trip or allocation
+is needed for ordinary key events or group changes. Binding serialization remains
+ECFG v6: OS layout state is not a preference. Physical scan codes, international
+binding symbols and text composition are not supported.
+
+The backend follows the [Xlib XKB specification](https://www.x.org/releases/current/doc/libX11/XKB/xkblib.html)
+for effective group state and per-key group-range normalization.
 
 Modifier masks use Shift=1, Ctrl=2, Alt=4; only bits 0–2 are valid. Zero means no
 required modifiers. Left/right Shift, Control and Alt keysyms contribute to the
