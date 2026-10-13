@@ -145,6 +145,22 @@ engine::TileMapData facility_map() {
         put(0, x, 0, 6);
     return map;
 }
+engine::TileMapData annex_map() {
+    auto map = facility_map();
+    map.width = 40;
+    map.height = 24;
+    map.origin = {-20, -12};
+    for (auto& layer : map.layers)
+        layer.cells.assign(40 * 24, 0);
+    for (int y = 0; y < 24; ++y)
+        for (int x = 0; x < 40; ++x) {
+            const auto i = static_cast<std::size_t>(y * 40 + x);
+            map.layers[0].cells[i] = y == 12 ? 6 : 2;
+            if (x == 0 || x == 39 || y == 0 || y == 23 || (x == 20 && (y < 10 || y > 14)))
+                map.layers[1].cells[i] = 3;
+        }
+    return map;
+}
 engine::SoundData sound_asset(int kind) {
     const std::size_t frames = kind == 0 ? 7200U : kind == 1 ? 96000U : kind == 2 ? 48000U : 19200U;
     engine::SoundData sound{kind == 1 ? 2U : 1U, {}};
@@ -241,6 +257,30 @@ int main(int argc, char** argv) {
         scene.set_transform(satellite, {{0.7F, 0.4F}, -0.3F, {1, 1}});
         scene.set_sprite(satellite, {"textures/white.etex", {0.2F, 0.3F}, 1, 0.4F, 0.06F, 1, 10});
         root.write_text("facility.scene", engine::serialize_scene(scene));
+        root.write_atomic("annex.etmp", engine::encode_tilemap(annex_map()));
+        engine::Scene annex;
+        const auto annex_root = annex.create(1, "Annex", "group");
+        const auto annex_add = [&](std::uint64_t entity_id, const char* name, const char* tag,
+                                   engine::Vec2 position, engine::Vec2 size, int layer,
+                                   const std::string& texture) {
+            const auto entity = annex.create(entity_id, name, tag);
+            annex.set_parent(entity, annex_root);
+            annex.set_transform(entity, {position, 0, {1, 1}});
+            annex.set_sprite(entity, {texture, size, 1, 1, 1, 1, layer});
+            return entity;
+        };
+        annex_add(20, "Entry spawn", "player", {-15, 0}, {0.9F, 0.95F}, 30, animations.texture);
+        annex_add(21, "Return door", "exit", {15, -6}, {2.4F, 1.8F}, 10, animations.texture);
+        id = 30;
+        for (auto point : {engine::Vec2{-10, 6}, engine::Vec2{10, 6}, engine::Vec2{10, -6}})
+            annex_add(id++, "Annex core", "core", point, {0.9F, 0.9F}, 20, animations.texture);
+        const auto fan = annex_add(40, "Annex ventilation", "machine", {-2, -7}, {2.5F, 2.5F}, 10,
+                                   animations.texture);
+        annex.set_collider(fan, {{1, 1}});
+        annex_add(50, "Entry marker", "decoration", {-15, -2}, {4, 0.2F}, 10,
+                  "textures/white.etex");
+        annex_add(51, "Annex panel", "decoration", {-15, 7}, {3, 2}, 10, "textures/checker.etex");
+        root.write_text("annex.scene", engine::serialize_scene(annex));
         std::cout << "Wrote " << scene.size()
                   << " entities, 64x32 three-layer map, five animation clips, atlases and four WAV "
                      "sounds to "

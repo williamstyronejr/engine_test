@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The twenty-fifth increment adds international character bindings, readable ASCII
-labels, additional layout punctuation and backward-compatible settings migration.
+The twenty-sixth increment adds a second authored level, staged level transitions,
+cross-level save loading and a complete two-level test route.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -288,6 +288,41 @@ payload per transaction. Candidates temporarily coexist with the old resources.
 See [texture reload contracts](docs/FORMATS.md#texture-reload) for memory and lifetime
 details. File watching and background loading remain unimplemented.
 
+## Authored levels
+
+Feature Lab now includes **Facility** and **Annex**, each with its own scene, tilemap,
+player spawn, core positions and exit. Collect the cores and reach the open exit,
+then press your **Interact** binding (E by default) to enter the other level.
+R restarts the current level. New Game returns to the level selected at startup;
+Resume retains the current level and progress. A transition resets level progress,
+clock, camera interpolation and audio voices, while retaining controls, audio
+preferences and the session's random seed.
+
+```sh
+./build/debug/feature_lab --level annex --no-audio
+./build/debug/feature_lab --level annex --verify
+./build/debug/feature_lab --level-tour --no-audio --no-vsync --screenshot tour.ppm
+```
+
+`--level-tour` traverses Facility, advances into Annex through the real game loop,
+and exits after completing Annex. It fails if a frame limit or early exit prevents
+completion. `--scripted --level annex` tests Annex alone. Replay recordings remain
+single-level sessions; recording/playback disables level advancement, and a replay's
+initial content identity selects its installed level. Save slots can likewise load
+either level from gameplay, the title screen or `--load-slot` without a schema change.
+Existing Facility content files remain unchanged.
+
+Loading stages the destination and validates its player spawn, resident texture
+requirements and minimap data before replacing the live world. Failure retains the
+current level and displays **LEVEL LOAD FAILED - SESSION RETAINED**. Release and
+press Interact again to retry. Held gameplay keys/buttons are suppressed until
+release after a successful transition. These two authored levels share a resident
+texture bank; arbitrary new texture sets and background loading are not included.
+
+The player entity's authored world position is the entry spawn. Its parent must
+have an identity transform; the player box must fit inside the map and avoid walls
+and the closed exit. The Annex moves the alarm station to its own play area.
+
 ## Keyboard and mouse controls
 
 Open **F1 → Controls**, select an action, then press a supported key or mouse
@@ -469,6 +504,14 @@ culling, texture-byte accounting and JSON report validation.
 The eight-case `replay_files` group checks seeded reference sequences, save migration,
 full-game record/decode/playback, paused starts, short taps, stepping, restart,
 content/state divergence, malformed files, recording limits and atomic file storage.
+
+Six level cases complete both routes, check reset and held-input behavior, reject
+missing/corrupt/invalid-spawn content and failed resource preparation, reject
+replacement during scene iteration, resolve cross-level saves and replay Annex
+commands from a Facility startup. A native `level_tour` CTest completes both levels
+through the application loop. GPU tests repeat eight replacements, verify minimap
+wall counts and stable texture/target counts, and reject absent/incompatible
+resident texture requirements.
 
 The six-case scene-flow suite covers new/continue/resume, empty/corrupt/invalid
 checkpoints, failed replacement during scene iteration, input capture, menu return,

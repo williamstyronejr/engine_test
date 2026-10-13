@@ -135,10 +135,12 @@ inline void save_slot(const engine::UserStorage& storage, unsigned slot, const G
     game.validate_checkpoint(state);
     storage.write_slot(slot, encode_checkpoint(state));
 }
-inline void load_slot(const engine::UserStorage& storage, unsigned slot, Game& game) {
+inline void load_slot(const engine::UserStorage& storage, unsigned slot, Game& game,
+                      const engine::AssetRoot* assets = nullptr,
+                      const std::function<void(const Game&)>& prepare = {}) {
     const auto bytes = storage.read_slot(slot);
     if (!bytes)
         throw std::runtime_error("Save slot is empty");
-    game.restore(decode_checkpoint(*bytes));
+    restore_game(game, decode_checkpoint(*bytes), assets, prepare);
 }
 } // namespace feature_lab

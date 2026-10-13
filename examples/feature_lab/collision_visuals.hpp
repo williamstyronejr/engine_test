@@ -25,11 +25,12 @@ class CollisionVisuals {
         using namespace engine;
         const Color red{1, 0.12F, 0.07F, 1}, green{0.05F, 0.9F, 0.5F, 1};
         const auto center = game.alarm_position();
-        r.quad({center.x, -10}, {0.04F, 4}, {0.6F, 0.25F, 0.15F, 0.5F});
+        r.quad({center.x, game.level == Level::facility ? -10.0F : -4.0F}, {0.04F, 4},
+               {0.6F, 0.25F, 0.15F, 0.5F});
         r.sprite(disk_, Transform::from(center, 0, {1.4F, 1.4F}),
                  game.alarm_disabled ? green : red);
-        r.quad(Game::switch_position, {0.8F, 0.8F}, game.alarm_disabled ? green : red);
-        r.text(Game::switch_position + Vec2{-1.4F, 1}, 0.035F,
+        r.quad(game.switch_location(), {0.8F, 0.8F}, game.alarm_disabled ? green : red);
+        r.text(game.switch_location() + Vec2{-1.4F, 1}, 0.035F,
                bindings.key_name(Key::interact) + " / ALARM SWITCH", green);
         r.text(center + Vec2{0.9F, 0.2F}, 0.035F, game.alarm_disabled ? "SAFE" : "ALARM",
                game.alarm_disabled ? green : red);

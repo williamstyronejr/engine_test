@@ -17,9 +17,18 @@ class Overlays {
   public:
     Overlays(engine::Renderer& renderer, const Game& game)
         : minimap_(renderer.create_target(276, 138)) {
-        walls_.reserve(game.map.solid_cells() + game.walls.size());
-        game.map.append_colliders(game.map.bounds(), walls_);
-        walls_.insert(walls_.end(), game.walls.begin(), game.walls.end());
+        walls_ = stage(game);
+    }
+    static std::vector<engine::Rect> stage(const Game& game) {
+        std::vector<engine::Rect> walls;
+        walls.reserve(game.map.solid_cells() + game.walls.size());
+        game.map.append_colliders(game.map.bounds(), walls);
+        walls.insert(walls.end(), game.walls.begin(), game.walls.end());
+        return walls;
+    }
+    void replaced(std::vector<engine::Rect>&& walls) noexcept {
+        walls_ = std::move(walls);
+        scroll_ = 0;
     }
     void reset() { scroll_ = 0; }
     void input(const engine::InputFrame& frame) {
@@ -80,7 +89,7 @@ class Overlays {
                          static_cast<int>(std::ceil((py + h) * scale)) - top});
         };
         box(x - 8, 102, 292, 170, {0.008F, 0.018F, 0.03F, 0.96F});
-        text(x, 108, "FACILITY MAP", accent);
+        text(x, 108, std::string(level_name(game.level)) + " MAP", accent);
         // Nested clipping keeps both the texture and its camera outline inside the panel.
         clip(x - 8, 102, 292, 170);
         clip(x, 126, 276, 138);

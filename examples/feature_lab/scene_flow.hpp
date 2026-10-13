@@ -10,13 +10,12 @@ struct FlowStep {
     engine::InputFrame gameplay{};
     bool quit{}, transitioned{}, replaced{};
 };
-// Title and gameplay share immutable facility content and renderer resources.
-// A replacement world is committed by Game::restore only after full validation.
+// Level changes stage CPU state and caller-prepared resources before publication.
 class SceneFlow {
   public:
     enum Id : engine::UiId { new_game = 1, continue_game, slot, resume, quit };
-    SceneFlow(Game& game, bool show_title)
-        : initial_(game.checkpoint()), title_(show_title), session_(!show_title) {
+    SceneFlow(Game& game, bool show_title, const engine::AssetRoot* assets = nullptr)
+        : assets_(assets), initial_(game.checkpoint()), title_(show_title), session_(!show_title) {
         if (title_) {
             previous_pause_ = game.paused;
             game.paused = true;
@@ -24,6 +23,20 @@ class SceneFlow {
     }
     bool title_open() const { return title_; }
     bool has_session() const { return session_; }
+    // Optional preflight; must stage resources without publishing live state.
+    std::function<void(const Game&)> prepare_replacement;
+    void advance_level(Game& game, const engine::InputFrame& input) {
+        if (!assets_ || !game.won)
+            throw std::logic_error("Complete the current level before advancing");
+        auto candidate = load_game(*assets_, next_level(game.level));
+        candidate.random_seed = game.random_seed;
+        candidate.random.restore(game.random_seed);
+        if (prepare_replacement)
+            prepare_replacement(candidate);
+        game.replace(std::move(candidate));
+        gate_.route(input, true, true); // Held inputs cannot spill into the new spawn.
+        notice.clear();
+    }
     unsigned selected_slot{1};
     std::string notice;
     const engine::Ui& ui() const { return ui_; }
@@ -39,7 +52,7 @@ class SceneFlow {
         ui_.reset_interaction();
     }
     void start_new(Game& game) {
-        game.restore(initial_);
+        restore_game(game, initial_, assets_, prepare_replacement);
         title_ = false;
         session_ = true;
         notice.clear();
@@ -47,7 +60,7 @@ class SceneFlow {
     void continue_slot(Game& game, const engine::UserStorage* storage) {
         if (!storage)
             throw std::runtime_error("User storage unavailable");
-        load_slot(*storage, selected_slot, game);
+        load_slot(*storage, selected_slot, game, assets_, prepare_replacement);
         title_ = false;
         session_ = true;
         notice.clear();
@@ -140,6 +153,7 @@ class SceneFlow {
             UiWidget{quit, UiKind::button, column.next(52 * scale_), "QUIT"}};
         ui_.layout(panel_, widgets);
     }
+    const engine::AssetRoot* assets_{}; // Owner must outlive this flow.
     Checkpoint initial_;
     engine::Ui ui_;
     engine::InputGate gate_;

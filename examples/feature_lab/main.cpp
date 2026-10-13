@@ -150,20 +150,25 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
     if (!settings_open && (game.won || (game.paused && !diagnostics.controls.visible))) {
         r.quad({w * 0.5F, -h * 0.5F}, {650 * scale, 150 * scale}, {0.008F, 0.014F, 0.022F, 0.96F});
         label(w / scale * 0.5F - (game.won ? 240 : 90), h / scale * 0.5F - 35, 3,
-              game.won ? "FACILITY COMPLETE" : "PAUSED", cyan);
+              game.won ? std::string(feature_lab::level_name(game.level)) + " COMPLETE" : "PAUSED",
+              cyan);
         label(w / scale * 0.5F - 140, h / scale * 0.5F + 20, 1.5F,
-              playing_replay ? "RECORDED STATE / ESC EXIT"
-              : game.won     ? "PRESS " + bindings.key_name(Key::restart) + " TO PLAY AGAIN"
-                             : "SPACE RESUME / F10 STEP",
+              playing_replay                ? "RECORDED STATE / ESC EXIT"
+              : game.won && !replay_session ? bindings.key_name(Key::interact) + " NEXT / " +
+                                                  bindings.key_name(Key::restart) + " RESTART"
+              : game.won ? "PRESS " + bindings.key_name(Key::restart) + " TO PLAY AGAIN"
+                         : "SPACE RESUME / F10 STEP",
               white);
     }
 }
-int verify(const AssetRoot& assets) {
-    auto a = feature_lab::load_game(assets);
+int verify(const AssetRoot& assets, feature_lab::Level level) {
+    auto a = feature_lab::load_game(assets, level);
     feature_lab::Game b(
-        serialize_scene(parse_scene(assets.text("facility.scene"))),
+        serialize_scene(parse_scene(
+            assets.text(level == feature_lab::Level::facility ? "facility.scene" : "annex.scene"))),
         decode_tilemap(encode_tilemap(a.map.data())),
-        std::make_shared<const AnimationSet>(decode_animations(encode_animations(*a.animations))));
+        std::make_shared<const AnimationSet>(decode_animations(encode_animations(*a.animations))),
+        level);
     std::vector<Rect> obstacles;
     const auto original_player = a.player;
     feature_lab::Replay replay;
@@ -210,6 +215,9 @@ int main(int argc, char** argv) {
         int frame_limit = 0;
         unsigned load_slot = 0, save_slot = 0;
         bool vsync_override = false;
+        auto selected_level = feature_lab::Level::facility;
+        bool level_tour = false;
+        unsigned level_changes = 0;
         std::string user_directory, record_path, playback_path, verify_path;
         std::optional<std::uint64_t> seed;
         bool audio_enabled = true, scripted = false, verification = false, vsync = true;
@@ -220,7 +228,18 @@ int main(int argc, char** argv) {
             const std::string_view arg(argv[i]);
             if (arg == "--assets" && i + 1 < argc)
                 asset_directory = argv[++i];
-            else if (arg == "--record-replay" && i + 1 < argc)
+            else if (arg == "--level" && i + 1 < argc) {
+                const std::string_view name(argv[++i]);
+                if (name == "facility")
+                    selected_level = feature_lab::Level::facility;
+                else if (name == "annex")
+                    selected_level = feature_lab::Level::annex;
+                else
+                    throw std::invalid_argument("--level must be facility or annex");
+                direct_play = true;
+            } else if (arg == "--level-tour") {
+                level_tour = scripted = true;
+            } else if (arg == "--record-replay" && i + 1 < argc)
                 record_path = argv[++i];
             else if (arg == "--replay" && i + 1 < argc)
                 playback_path = argv[++i];
@@ -288,6 +307,7 @@ int main(int argc, char** argv) {
                              "F5 reload shaders, F6 shader failure demo, F7 reload textures, "
                              "F8 texture failure demo, F10 single step while "
                              "paused, Escape close settings/quit.\n"
+                             "--level facility|annex --level-tour (script both levels) "
                              "--play (skip title) --verify (CPU gameplay test) --scripted --frames "
                              "N --no-audio "
                              "--no-vsync --screenshot FILE.ppm --assets DIRECTORY "
@@ -309,10 +329,14 @@ int main(int argc, char** argv) {
         if (replay_modes > 1 || (replay_modes && (settings_demo || verification)) ||
             (playing_file && (seed || load_slot || scripted)) || (seed && load_slot))
             throw std::invalid_argument("Conflicting replay/seed/startup options");
+        if (level_tour &&
+            (replay_modes || load_slot || selected_level != feature_lab::Level::facility))
+            throw std::invalid_argument(
+                "--level-tour requires an unsaved facility start without replay");
         const AssetRoot assets = AssetRoot::discover(asset_directory);
         if (verification)
-            return verify(assets);
-        auto game = feature_lab::load_game(assets);
+            return verify(assets, selected_level);
+        auto game = feature_lab::load_game(assets, selected_level);
         if (seed) {
             game.random_seed = *seed;
             game.random.restore(*seed);
@@ -321,7 +345,7 @@ int main(int argc, char** argv) {
         std::size_t playback_index = 0;
         if (playing_file) {
             playback = feature_lab::read_replay(verify_path.empty() ? playback_path : verify_path);
-            game.restore(playback->initial);
+            feature_lab::restore_game(game, playback->initial, &assets);
             if (!verify_path.empty()) {
                 for (; playback_index < playback->commands.size(); ++playback_index)
                     feature_lab::playback_step(game, *playback, playback_index);
@@ -331,10 +355,11 @@ int main(int argc, char** argv) {
                 return 0;
             }
         }
-        feature_lab::SceneFlow flow(game, !(replay_modes || direct_play || scripted || load_slot ||
-                                            save_slot || settings_demo || diagnostics_demo ||
-                                            missing_texture_demo || shader_error_demo ||
-                                            texture_error_demo));
+        feature_lab::SceneFlow flow(
+            game,
+            !(replay_modes || direct_play || scripted || load_slot || save_slot || settings_demo ||
+              diagnostics_demo || missing_texture_demo || shader_error_demo || texture_error_demo),
+            &assets);
         std::unique_ptr<UserStorage> storage;
         feature_lab::Configuration config;
         std::string persistence_notice;
@@ -351,7 +376,7 @@ int main(int argc, char** argv) {
         if (load_slot) {
             if (!storage)
                 throw std::runtime_error("User storage unavailable");
-            feature_lab::load_slot(*storage, load_slot, game);
+            feature_lab::load_slot(*storage, load_slot, game, &assets);
             scripted = false; // A restored human checkpoint has no scripted route cursor.
             std::cout << "[persistence] loaded slot=" << load_slot << " ticks=" << game.ticks
                       << '\n';
@@ -359,7 +384,7 @@ int main(int argc, char** argv) {
         std::optional<feature_lab::ReplayRecorder> recorder;
         if (!record_path.empty())
             recorder.emplace(game);
-        if (!screenshot.empty() && frame_limit == 0 && !playback)
+        if (!screenshot.empty() && frame_limit == 0 && !playback && !level_tour)
             frame_limit = 120;
         Window window(1280, 720, "Feature Lab | Linux 2D Engine");
         const bool vsync_available = window.set_vsync(vsync);
@@ -399,6 +424,15 @@ int main(int argc, char** argv) {
         soundtrack.locate_emitter(game);
         if (load_slot || playback)
             soundtrack.restored(game);
+        std::vector<Rect> staged_walls;
+        flow.prepare_replacement = [&](const feature_lab::Game& candidate) {
+            textures.validate_level(candidate);
+            staged_walls = feature_lab::Overlays::stage(candidate);
+        };
+        const auto replacement_applied = [&] {
+            overlays.replaced(std::move(staged_walls));
+            soundtrack.restored(game);
+        };
         feature_lab::Replay replay;
         Input input;
         window.set_bindings(config.bindings, input);
@@ -488,7 +522,7 @@ int main(int argc, char** argv) {
                 }
                 if (routed.transitioned) {
                     if (routed.replaced) {
-                        soundtrack.restored(game);
+                        replacement_applied();
                         replay = feature_lab::Replay{};
                         scripted = false;
                         overlays.reset();
@@ -548,9 +582,10 @@ int main(int argc, char** argv) {
                             settings.notice =
                                 "SAVED SLOT " + std::to_string(settings.selected_slot);
                         } else {
-                            feature_lab::load_slot(*storage, settings.selected_slot, game);
+                            feature_lab::load_slot(*storage, settings.selected_slot, game, &assets,
+                                                   flow.prepare_replacement);
                             settings.loaded(game);
-                            soundtrack.restored(game);
+                            replacement_applied();
                             scripted = false;
                             settings.notice =
                                 "LOADED SLOT " + std::to_string(settings.selected_slot);
@@ -560,6 +595,24 @@ int main(int argc, char** argv) {
                         settings.notice =
                             menu.save ? "SAVE FAILED - SEE LOG" : "LOAD FAILED - SEE LOG";
                     }
+                }
+                if (!recorder && !menu.captured && game.won &&
+                    (button(controls, Key::interact).pressed ||
+                     (level_tour && level_changes == 0))) {
+                    try {
+                        flow.advance_level(game, physical_input);
+                        replacement_applied();
+                        replay = feature_lab::Replay{};
+                        ++level_changes;
+                        std::cout << "[level] entered=" << feature_lab::level_name(game.level)
+                                  << " spawn=" << game.position.x << ',' << game.position.y << '\n';
+                    } catch (const std::exception& error) {
+                        flow.notice = "LEVEL LOAD FAILED - SESSION RETAINED";
+                        std::cerr << "[level] " << error.what() << '\n';
+                        if (level_tour)
+                            throw;
+                    }
+                    continue;
                 }
                 const bool restarting = button(controls, Key::restart).pressed;
                 if (restarting)
@@ -584,6 +637,8 @@ int main(int argc, char** argv) {
                 if (game.ticks > ticks_before)
                     ++simulation_steps;
                 soundtrack.update(game, controls, picked);
+                if (level_tour && level_changes == 1 && game.won)
+                    running = false;
                 const auto audio = soundtrack.settings();
                 if (!(config.audio == audio)) {
                     config.audio = audio;
@@ -618,7 +673,10 @@ int main(int argc, char** argv) {
                                     " / 36000"
                      : playback ? "15 / REPLAY " + std::to_string(playback_index) + " / " +
                                       std::to_string(playback->commands.size())
-                                : "15 / SEEDED REPLAY FILES",
+                     : !flow.notice.empty()
+                         ? flow.notice
+                         : "26 / " + std::string(feature_lab::level_name(game.level)) +
+                               " / LEVEL TRANSITIONS",
                      recorder.has_value() || playback.has_value(), playback.has_value());
                 diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
                 settings.draw(renderer, window.width(), window.height());
@@ -675,10 +733,15 @@ int main(int argc, char** argv) {
             std::cout << "[persistence] saved slot=" << save_slot << " ticks=" << game.ticks
                       << '\n';
         }
+        if (level_tour &&
+            (level_changes != 1 || game.level != feature_lab::Level::annex || !game.won))
+            throw std::runtime_error("Level tour did not complete both levels");
         std::cout << "[session] frames=" << frames << " ticks=" << game.ticks
                   << " door_completions=" << game.door_completions << " collected=" << game.count()
                   << " dropped_seconds=" << dropped << " window_draws=" << renderer.stats().draws
                   << " minimap_draws=" << overlays.minimap_stats().draws
+                  << " level=" << feature_lab::level_name(game.level)
+                  << " level_changes=" << level_changes
                   << " scene=" << (flow.title_open() ? "title" : "gameplay")
                   << " texture_revision=" << textures.revision()
                   << " texture_applied=" << textures.applied()

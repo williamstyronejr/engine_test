@@ -1126,3 +1126,47 @@ leaves both images and byte counts unchanged; release returns their counts to ze
 Built-in rendering storage and target bytes are separate. `graphics_info()` reads
 GL vendor/device/version from the owning current context. These methods add no
 external dependency and do not change content, save or replay schemas.
+
+## Authored level replacement
+
+The Feature Lab catalog contains `Level::facility` (`facility.scene` and
+`facility.etmp`) and `Level::annex` (`annex.scene` and `annex.etmp`). Both share
+`facility.eani` and the same resident texture bank. The scene's player transform
+is the explicit entry spawn; it must lie wholly inside map bounds and outside
+static/closed-door collision geometry. Each level has its own deterministic
+script route and alarm/switch placement. `make_assets` regenerates both scenes
+and maps; this increment leaves the original Facility files byte-for-byte intact.
+
+`Game::replace` moves the candidate scene first. Scene move assignment rejects
+active iteration in either world before modifying either one. Remaining owned
+state has nonthrowing moves: map, source scene text, animation data/players,
+collision state, entity handles, counters and presentation state. Old entity
+handles cannot alias the new world. `Game::restore` uses the same commit path
+with an optional preparation callback after checkpoint validation.
+
+`SceneFlow::advance_level` requires a completed level, loads its successor,
+resets level progress with the existing random seed, invokes resource preparation,
+and publishes the candidate only after success. It captures transition-frame
+input through the existing InputGate so held actions stay blocked until release.
+Level changes are explicit Interact presses; the native `--level-tour` scenario
+advances once automatically and stops at Annex completion. Restart stays in the
+current level; New Game restores the initial session checkpoint, including its
+startup level and seed. Settings remain outside Game and survive replacement.
+
+The application's preparation callback validates all map/animation/sprite textures
+against the resident bank and stages minimap wall geometry. Incoming atlas grids
+must divide the resident grids, preserving the existing texture reload contract.
+It does not upload or replace GPU resources. The successful commit installs the
+staged minimap geometry into its existing render target and restarts soundtrack
+voices/emitter placement. CPU parsing, spawn/resource validation or iteration
+failure retains the previous world and presentation resources. Loading is synchronous
+and temporarily holds both CPU worlds. Separate graphics banks, streaming,
+cross-level inventory and multi-level replay commands are outside this increment.
+
+ESAV v3 and ERPL v1 remain unchanged. Their existing scene/map/animation content
+fingerprints resolve which installed level a record belongs to. `restore_game`
+first checks the current level; on mismatch it stages the other catalog level and
+requires an exact content match before applying the checkpoint and committing.
+No filename comes from a save/replay record. Unknown/modified content is rejected.
+A recording remains a single-level session; gameplay advancement is unavailable
+while recording or playing it. ECFG v7 is unchanged.
