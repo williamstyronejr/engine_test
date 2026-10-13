@@ -38,6 +38,12 @@ struct Checkpoint {
     bool alarm_disabled{};
     std::uint64_t random_seed{1}, random_state{1};
 };
+// Runtime data rebuilt from authored core tags; the existing save format stores
+// collected persistent IDs. Destruction removes this component with its entity.
+struct CorePickup {
+    std::size_t slot{};
+    float radius{0.65F};
+};
 struct Game {
     Level level{Level::facility};
     Vec2 spawn_position{};
@@ -166,16 +172,14 @@ struct Game {
         transform.position = position;
         world.set_transform(player, transform);
         int picked = 0;
-        for (std::size_t i = 0; i < keys.size(); ++i) {
-            if (collected[i])
-                continue;
-            const auto p = location(keys[i]);
-            if (std::hypot(position.x - p.x, position.y - p.y) < 0.65F) {
-                collected[i] = true;
+        world.each_component<CorePickup>([&](engine::Entity entity, const CorePickup& core) {
+            const auto p = location(entity);
+            if (std::hypot(position.x - p.x, position.y - p.y) < core.radius) {
+                collected[core.slot] = true;
                 ++picked;
-                world.defer_destroy(keys[i]);
+                world.defer_destroy(entity);
             }
-        }
+        });
         world.flush();
         if (count() == total() && !door_started) {
             door_started = true;
@@ -435,6 +439,8 @@ struct Game {
         });
         if (!player || !exit || keys.empty() || keys.size() > 64)
             throw std::runtime_error("Feature Lab requires player, exit and 1..64 cores");
+        for (std::size_t i = 0; i < keys.size(); ++i)
+            world.add_component<CorePickup>(keys[i], i);
         if (const auto parent = world.get(player).parent) {
             const auto t = world.world_transform(parent);
             if (t.a != 1 || t.d != 1 || t.b != 0 || t.c != 0 || t.x != 0 || t.y != 0)

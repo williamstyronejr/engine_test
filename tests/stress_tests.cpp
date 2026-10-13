@@ -1,5 +1,6 @@
 #include "../examples/feature_lab/stress_benchmark.hpp"
 #include "test.hpp"
+#include <array>
 #include <cstddef>
 #include <cstdlib>
 #include <new>
@@ -66,6 +67,40 @@ void operator delete[](void* p, std::size_t, std::align_val_t) noexcept {
 namespace {
 using namespace feature_lab;
 using namespace testing;
+TEST(component_queries_and_pool_reuse_allocate_nothing_after_setup) {
+    struct Counter {
+        std::uint64_t value{};
+    };
+    struct Increment {
+        std::uint64_t value{1};
+    };
+    const auto baseline = allocation_check::live;
+    {
+        engine::Scene scene;
+        std::array<engine::Entity, 256> entities{};
+        for (std::size_t i = 0; i < entities.size(); ++i) {
+            entities[i] = scene.create(i + 1, "component stress");
+            scene.add_component<Counter>(entities[i]);
+            scene.add_component<Increment>(entities[i]);
+        }
+        const auto bytes = scene.buffer_bytes();
+        const auto calls = allocation_check::calls;
+        for (int tick = 0; tick < 120; ++tick) {
+            scene.each_component<Counter, Increment>(
+                [](engine::Entity, Counter& counter, const Increment& increment) {
+                    counter.value += increment.value;
+                });
+            // Swap compaction followed by in-place reconstruction reuses reserved storage.
+            scene.remove_component<Increment>(entities[0]);
+            scene.add_component<Increment>(entities[0]);
+        }
+        const bool no_allocations = calls == allocation_check::calls;
+        CHECK(no_allocations && scene.buffer_bytes() == bytes);
+        for (auto entity : entities)
+            CHECK(scene.get_component<Counter>(entity).value == 120);
+    }
+    CHECK(allocation_check::live == baseline);
+}
 TEST(deterministic_workloads_and_exact_tile_occupancy) {
     StressConfig config{37, 113, 20, 32, 4, 123, false};
     StressArena a(config), b(config);

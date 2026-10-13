@@ -675,8 +675,8 @@ int main(int argc, char** argv) {
                                       std::to_string(playback->commands.size())
                      : !flow.notice.empty()
                          ? flow.notice
-                         : "26 / " + std::string(feature_lab::level_name(game.level)) +
-                               " / LEVEL TRANSITIONS",
+                         : "27 / " + std::string(feature_lab::level_name(game.level)) +
+                               " / COMPONENT POOLS",
                      recorder.has_value() || playback.has_value(), playback.has_value());
                 diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
                 settings.draw(renderer, window.width(), window.height());
@@ -742,6 +742,7 @@ int main(int argc, char** argv) {
                   << " minimap_draws=" << overlays.minimap_stats().draws
                   << " level=" << feature_lab::level_name(game.level)
                   << " level_changes=" << level_changes
+                  << " core_components=" << game.world.component_count<feature_lab::CorePickup>()
                   << " scene=" << (flow.title_open() ? "title" : "gameplay")
                   << " texture_revision=" << textures.revision()
                   << " texture_applied=" << textures.applied()

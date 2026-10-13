@@ -1,7 +1,8 @@
 # Implementation status
 
-The twenty-sixth increment adds a second authored level, transactional replacement
-and cross-level save/replay startup. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
+The twenty-seventh increment adds extensible runtime component pools, typed queries
+and entity-owned cleanup. It is **not completion of all six design milestones**.
+The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
 ## Delivered
 
@@ -56,7 +57,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F04 | Implemented (v1) | GPU pixel/order/color/atlas/culling/batch tests; animated/parented sprites; transactional reload; independent nearest/linear min/mag filters and clamp/repeat axes; atlas inset and sampling gallery | Optional mipmaps, anisotropy and atlas-cell repetition |
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
 | F06 | Implemented (v1) | EANI reader/writer; exact frame timing, loops, pause/restart, large advances; animated player/machine/door with exactly-once completion | Optional frame callbacks and richer animation types |
-| F07 | Partial | Handle/compaction/hierarchy tests, scene round trips, deferred core deletion and restart; title/gameplay transitions with staged new/continue and in-memory resume; Facility/Annex replacement, cross-level save resolution, resource preflight and native two-level tour | Extensible component pools |
+| F07 | Implemented (v1) | Handle/compaction/hierarchy tests, scene round trips, deferred deletion; title/gameplay and Facility/Annex transitions; typed runtime pools with checked access, intersecting queries, ownership/exception/move tests, allocation-free steady queries and pickup integration | Optional custom component serialization codecs, query scheduling and broader ECS tooling |
 | F08 | Partial | ETEX/ETMP/EANI/WAV readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, bounded shader files and transactional shader/texture reload | Further asset types and file watching |
 | F09 | Implemented (v1) | Swept player boxes; box/circle contacts; moving-body grid vs brute force; reciprocal filters; trigger history; overlap/segment queries; alarm/switch and restore tests | Rigid-body dynamics, rotating shapes and moving-body CCD are outside initial scope |
 | F10 | Partial | PCM16 WAV assets/resampling, loops, voice controls, gain ramps, master/music/effects controls, stereo emitter, null-device soundtrack/restart/failure tests | Physical disconnect/recovery testing and audible-output checks |
@@ -1070,7 +1071,44 @@ stable. Original Facility scene/map/animation bytes match regenerated output.
 Relocated-package checks now verify both authored routes. No new performance
 baseline or physical audio test was taken.
 
+## Added in the twenty-seventh increment
+
+- Scene-owned typed component pools with dense entries and sparse checked lookup,
+  at most 64 types and 4096 entries per type. Move-only resources and over-aligned
+  components are supported; nonthrowing moves/destruction make compaction safe.
+- Const/mutable access and intersecting queries, shared nested iteration guards,
+  deferred subtree cleanup, constructor-failure rollback and scene move/replacement
+  lifecycle handling. Pool buffers join existing scene memory accounting.
+- CorePickup components drive both levels' collectible detection and disappear on
+  entity deletion. Restart and save/load reconstruct them from authored tags and
+  collected IDs. F2 and session logs expose live pickup counts.
+- Ten component cases, a seeded reference model, allocation/lifetime stress checks,
+  and a seventh level case for pickup persistence and transitions. The native tour
+  additionally requires an empty pickup pool at Annex completion.
+- Runtime pools are intentionally absent from scene text; custom persistence codecs
+  are not included. Existing authored content, save/replay/config formats and minimal
+  Linux system-library requirements remain unchanged.
+
+## Twenty-seventh-increment validation (2026-10-13)
+
+GCC Debug and Release each pass all 34 runtime CTest groups without skips. Ten
+focused groups (components, content, stress_cpu, levels, transforms, scene_flow,
+persistence, replay_files, render_targets and audio_transport) also pass with Clang
+and native-platform ASan/UBSan (driver leak detection disabled).
+
+The component suite covers 2500 seeded model operations, full entity/type capacity,
+owned resource teardown, over-aligned storage, nested guards and transactional
+construction/moves. The stress check performs 120 query/remove/reinsert rounds over
+256 entities with no C++ allocations after setup, stable tracked buffers and no
+remaining allocation blocks after teardown. No new timing baseline was taken.
+
+Both authored routes complete through the native loop in 2084 frames; the final
+session reports zero pickup components. Inspected 1050x669 diagnostics captures show
+three live pickups at Annex startup and zero at completion, with the added row
+inside its panel. A 1500-command recording created by the previous packaged release
+(0bfbc3f) verifies with the new executable at tick 1381 with the same state hash.
+Annex CPU verification still completes in 702 ticks. No physical audio test was taken.
+
 ## Next increment
 
-Add extensible component pools with generation-safe entity access and lifecycle
-tests (F07).
+Add bounded file watching for the existing shader and texture reload paths (F08).

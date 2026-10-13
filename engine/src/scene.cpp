@@ -13,8 +13,11 @@
 
 namespace engine {
 std::size_t Scene::buffer_bytes() const {
-    return slots_.capacity() * sizeof(Slot) + nodes_.capacity() * sizeof(SceneNode) +
-           pending_.capacity() * sizeof(Entity);
+    auto bytes = slots_.capacity() * sizeof(Slot) + nodes_.capacity() * sizeof(SceneNode) +
+                 pending_.capacity() * sizeof(Entity);
+    for (const auto& [type, pool] : components_)
+        bytes += pool->buffer_bytes();
+    return bytes;
 }
 
 namespace {
@@ -63,10 +66,12 @@ Scene& Scene::operator=(Scene&& other) {
     nodes_ = std::move(other.nodes_);
     ids_ = std::move(other.ids_);
     pending_ = std::move(other.pending_);
+    components_ = std::move(other.components_);
     other.slots_.clear();
     other.nodes_.clear();
     other.ids_.clear();
     other.pending_.clear();
+    other.components_.clear();
     other.domain_ = replacement_domain;
     return *this;
 }
@@ -195,6 +200,8 @@ void Scene::destroy(Entity e) {
             continue;
         }
         auto& slot = slots_[nodes_[i].entity.index];
+        for (auto& [type, pool] : components_)
+            pool->erase(nodes_[i].entity);
         ids_.erase(nodes_[i].id);
         slot.alive = false;
         ++slot.generation;
