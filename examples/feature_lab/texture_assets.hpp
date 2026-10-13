@@ -3,6 +3,7 @@
 #include "engine/atlas.hpp"
 #include "engine/input.hpp"
 #include "engine/renderer.hpp"
+#include "game.hpp"
 #include <algorithm>
 #include <iostream>
 #include <limits>
@@ -26,6 +27,25 @@ class TextureAssets {
     explicit TextureAssets(engine::AssetRoot assets)
         : assets_(std::move(assets)), cache_(std::make_unique<engine::TextureCache>(assets_)) {}
     const ResidentTexture& at(const std::string& key) const { return entries_.at(key); }
+    // Authored levels share a resident texture bank. Validate before replacing the
+    // world; a missing/incompatible resource must not fail midway through drawing.
+    void validate_level(const Game& game) const {
+        const auto check = [&](const std::string& key, std::uint32_t columns, std::uint32_t rows) {
+            const auto& resident = at(key);
+            const auto& image = *resident.data;
+            engine::validate_atlas(columns, rows);
+            if (resident.columns % columns || resident.rows % rows || image.width % columns ||
+                image.height % rows)
+                throw std::runtime_error("Level texture does not fit its atlas: " + key);
+        };
+        check(game.map.data().texture, game.map.data().atlas_columns, game.map.data().atlas_rows);
+        check(game.animations->texture, game.animations->atlas_columns,
+              game.animations->atlas_rows);
+        game.world.each([&](const engine::SceneNode& node) {
+            if (node.sprite)
+                check(node.sprite->texture, 1, 1);
+        });
+    }
     std::uint64_t revision() const { return revision_; }
     bool applied() const { return applied_; }
     const std::string& diagnostic() const { return diagnostic_; }

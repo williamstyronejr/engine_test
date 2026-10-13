@@ -12,11 +12,20 @@
 #include <algorithm>
 #include <array>
 #include <cstdint>
+#include <functional>
 #include <string>
+#include <type_traits>
 #include <vector>
 
 namespace feature_lab {
 using engine::Vec2;
+enum class Level { facility, annex };
+inline std::string_view level_name(Level level) {
+    return level == Level::facility ? "FACILITY" : "ANNEX";
+}
+inline Level next_level(Level level) {
+    return level == Level::facility ? Level::annex : Level::facility;
+}
 struct Checkpoint {
     std::array<std::uint32_t, 3> content{};
     Vec2 position{};
@@ -30,6 +39,8 @@ struct Checkpoint {
     std::uint64_t random_seed{1}, random_state{1};
 };
 struct Game {
+    Level level{Level::facility};
+    Vec2 spawn_position{};
     engine::TileMap map;
     std::shared_ptr<const engine::AnimationSet> animations;
     engine::AnimationPlayer player_animation, core_animation, machine_animation, door_animation;
@@ -51,16 +62,20 @@ struct Game {
     std::uint64_t alarm_entries{};
     bool alarm_disabled{}, alarm_touching{};
     static constexpr Vec2 switch_position{-27, -7.5F};
+    Vec2 switch_location() const {
+        return level == Level::facility ? switch_position : Vec2{-15, 3};
+    }
     Vec2 alarm_position() const {
         const auto phase = ticks % 240;
         const auto distance = phase <= 120 ? phase : 240 - phase;
-        return {-24, -12 + static_cast<float>(distance) / 30};
+        return (level == Level::facility ? Vec2{-24, -12} : Vec2{-12, -6}) +
+               Vec2{0, static_cast<float>(distance) / 30};
     }
     Game(std::string scene_text, engine::TileMapData tiles,
-         std::shared_ptr<const engine::AnimationSet> clips)
-        : map(std::move(tiles)), animations(std::move(clips)), player_animation(animations),
-          core_animation(animations), machine_animation(animations), door_animation(animations),
-          initial_(std::move(scene_text)) {
+         std::shared_ptr<const engine::AnimationSet> clips, Level selected = Level::facility)
+        : level(selected), map(std::move(tiles)), animations(std::move(clips)),
+          player_animation(animations), core_animation(animations), machine_animation(animations),
+          door_animation(animations), initial_(std::move(scene_text)) {
         restart();
     }
     void append_obstacles(engine::Rect query, std::vector<engine::Rect>& output) const {
@@ -213,17 +228,34 @@ struct Game {
     void validate_checkpoint(const Checkpoint& state) const {
         if (state.content != content_id())
             throw std::runtime_error("Checkpoint content differs from installed facility");
-        Game candidate(initial_, map.data(), animations);
+        Game candidate(initial_, map.data(), animations, level);
         candidate.apply_checkpoint(state);
     }
-    void restore(const Checkpoint& state) {
+    void restore(const Checkpoint& state, const std::function<void(const Game&)>& prepare = {}) {
         if (state.content != content_id())
             throw std::runtime_error("Checkpoint content differs from installed facility");
-        Game candidate(initial_, map.data(), animations);
+        Game candidate(initial_, map.data(), animations, level);
         candidate.apply_checkpoint(state);
+        if (prepare)
+            prepare(candidate);
+        replace(std::move(candidate));
+    }
+    // The scene checks both worlds for active iteration before any publication.
+    // Other owned containers/resources have noexcept move assignment.
+    void replace(Game&& candidate) {
+        if (&candidate == this)
+            throw std::invalid_argument("Cannot replace a game with itself");
+        static_assert(std::is_nothrow_move_assignable_v<engine::TileMap>);
+        static_assert(std::is_nothrow_move_assignable_v<engine::CollisionWorld>);
+        static_assert(std::is_nothrow_move_assignable_v<engine::AnimationPlayer>);
         // Commit world first: its move validates scene iteration before changing anything.
         // All following moves use standard allocators and cannot fail.
         world = std::move(candidate.world);
+        map = std::move(candidate.map);
+        animations = std::move(candidate.animations);
+        initial_ = std::move(candidate.initial_);
+        level = candidate.level;
+        spawn_position = candidate.spawn_position;
         position = previous = candidate.position;
         camera_height = candidate.camera_height;
         ticks = candidate.ticks;
@@ -268,7 +300,7 @@ struct Game {
         sensor_bodies_.push_back(
             {2, Shape2D::circle(alarm_position(), 0.7F), 2, alarm_disabled ? 0U : 1U, true, true});
         sensor_bodies_.push_back(
-            {3, Shape2D::box(switch_position, {0.4F, 0.4F}), 4, 0, false, true});
+            {3, Shape2D::box(switch_location(), {0.4F, 0.4F}), 4, 0, false, true});
         for (std::size_t i = 0; i < sensor_walls_.size(); ++i) {
             const auto r = sensor_walls_[i];
             sensor_bodies_.push_back({1000 + i,
@@ -290,10 +322,10 @@ struct Game {
                 ++alarm_entries;
     }
     void interact_switch() {
-        const auto d = switch_position - position;
+        const auto d = switch_location() - position;
         if (std::hypot(d.x, d.y) > 3)
             return;
-        const auto hit = collisions.segment(position, switch_position, {4 | 8, 1, true});
+        const auto hit = collisions.segment(position, switch_location(), {4 | 8, 1, true});
         if (hit && hit->id == 3) {
             alarm_disabled = !alarm_disabled;
             update_sensors(false); // Mask change generates an exit/enter on this same tick.
@@ -416,6 +448,11 @@ struct Game {
                                                       : x.sprite->layer < y.sprite->layer;
         });
         position = location(player);
+        spawn_position = position;
+        const auto bounds = map.bounds();
+        if (position.x - 0.3F < bounds.min.x || position.y - 0.3F < bounds.min.y ||
+            position.x + 0.3F > bounds.max.x || position.y + 0.3F > bounds.max.y)
+            throw std::runtime_error("Player spawn is outside the map");
         previous = position;
         door_started = door_open = false;
         door_completions = 0;
@@ -449,13 +486,37 @@ struct Game {
         update_sensors(true);
     }
 };
-inline Game load_game(const engine::AssetRoot& assets) {
+inline Game load_game(const engine::AssetRoot& assets, Level level = Level::facility) {
+    const auto stem = level == Level::facility ? "facility" : "annex";
     return Game(
-        assets.text("facility.scene"),
-        engine::decode_tilemap(assets.read("facility.etmp", 4 * 1024 * 1024), "facility.etmp"),
+        assets.text(std::string(stem) + ".scene"),
+        engine::decode_tilemap(assets.read(std::string(stem) + ".etmp", 4 * 1024 * 1024), stem),
         std::make_shared<const engine::AnimationSet>(
-            engine::decode_animations(assets.read("facility.eani", 1024 * 1024), "facility.eani")));
+            engine::decode_animations(assets.read("facility.eani", 1024 * 1024), "facility.eani")),
+        level);
 }
+// Saves/replays already carry content identity. Resolve installed levels without
+// trusting a filename from an external record, preserving the existing formats.
+inline void restore_game(Game& game, const Checkpoint& state,
+                         const engine::AssetRoot* assets = nullptr,
+                         const std::function<void(const Game&)>& prepare = {}) {
+    if (state.content == game.content_id()) {
+        game.restore(state, prepare);
+        return;
+    }
+    if (assets) {
+        auto candidate = load_game(*assets, next_level(game.level));
+        if (candidate.content_id() == state.content) {
+            candidate.restore(state);
+            if (prepare)
+                prepare(candidate);
+            game.replace(std::move(candidate));
+            return;
+        }
+    }
+    throw std::runtime_error("Checkpoint content differs from installed levels");
+}
+
 struct Replay {
     static constexpr std::array<Vec2, 10> route = {{{-22, -10},
                                                     {-22, 8},
@@ -467,15 +528,20 @@ struct Replay {
                                                     {22, 8},
                                                     {28, 8},
                                                     {28, -10}}};
+    static constexpr std::array<Vec2, 7> annex_route{
+        {{-10, 0}, {-10, 6}, {-10, 0}, {10, 0}, {10, 6}, {10, -6}, {15, -6}}};
     std::size_t waypoint{};
     engine::InputFrame next(const Game& game) {
-        while (waypoint < route.size() && std::hypot(game.position.x - route[waypoint].x,
-                                                     game.position.y - route[waypoint].y) < 0.16F)
+        const std::span<const Vec2> points = game.level == Level::facility
+                                                 ? std::span<const Vec2>(route)
+                                                 : std::span<const Vec2>(annex_route);
+        while (waypoint < points.size() && std::hypot(game.position.x - points[waypoint].x,
+                                                      game.position.y - points[waypoint].y) < 0.16F)
             ++waypoint;
         engine::InputFrame frame{};
-        if (waypoint == route.size())
+        if (waypoint == points.size())
             return frame;
-        const auto delta = route[waypoint] - game.position;
+        const auto delta = points[waypoint] - game.position;
         frame[static_cast<std::size_t>(engine::Key::right)].held = delta.x > 0.08F;
         frame[static_cast<std::size_t>(engine::Key::left)].held = delta.x < -0.08F;
         frame[static_cast<std::size_t>(engine::Key::up)].held = delta.y > 0.08F;

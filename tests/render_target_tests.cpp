@@ -3,6 +3,7 @@
 #include "../examples/feature_lab/overlays.hpp"
 #include "../examples/feature_lab/scene_flow_draw.hpp"
 #include "../examples/feature_lab/settings_draw.hpp"
+#include "../examples/feature_lab/texture_assets.hpp"
 #include "engine/renderer.hpp"
 #include "engine/window.hpp"
 #include "test.hpp"
@@ -322,6 +323,51 @@ TEST(settings_render_at_small_and_large_sizes) {
     settings.bindings.assign(1, 0x010003b1, modifiers::all);
     settings.bindings.assign(6, 0x01020000, modifiers::all);
     render_sizes();
+}
+TEST(level_replacements_refresh_minimap_and_reuse_resident_resources) {
+    using namespace feature_lab;
+    Window window(640, 480, "Level resources", false);
+    Renderer renderer;
+    const AssetRoot assets(TEST_ASSET_ROOT);
+    auto game = load_game(assets);
+    TextureAssets textures(assets);
+    textures.load(renderer, "textures/tiles.etex", 6, 1);
+    textures.load(renderer, game.animations->texture, game.animations->atlas_columns,
+                  game.animations->atlas_rows);
+    textures.load(renderer, "textures/white.etex", 1, 1);
+    textures.load(renderer, "textures/checker.etex", 1, 1);
+    Overlays overlays(renderer, game);
+    const auto texture_count = renderer.live_textures();
+    const auto target_count = renderer.live_targets();
+    for (int cycle = 0; cycle < 8; ++cycle) {
+        auto candidate = load_game(assets, next_level(game.level));
+        textures.validate_level(candidate);
+        auto walls = Overlays::stage(candidate);
+        const auto expected_quads = walls.size() + 10;
+        const auto old = game.player;
+        game.replace(std::move(candidate));
+        overlays.replaced(std::move(walls));
+        overlays.render_minimap(renderer, game, 640, 480, 1);
+        CHECK(!game.world.valid(old));
+        CHECK(overlays.minimap_stats().quads == expected_quads);
+        CHECK(renderer.live_textures() == texture_count && renderer.live_targets() == target_count);
+        CHECK(renderer.healthy());
+    }
+    auto bad = load_game(assets, Level::annex);
+    auto sprite = *bad.world.get(bad.player).sprite;
+    sprite.texture = "textures/not-resident.etex";
+    bad.world.set_sprite(bad.player, sprite);
+    const auto old = game.player;
+    rejects([&] { textures.validate_level(bad); });
+    CHECK(game.world.valid(old) && renderer.live_textures() == texture_count);
+    sprite.texture = "textures/actors.etex";
+    bad.world.set_sprite(bad.player, sprite);
+    auto tiles = bad.map.data();
+    tiles.atlas_columns = 3;
+    tiles.atlas_rows = 2; // Fits current pixels but violates the resident reload contract.
+    bad.map = TileMap(std::move(tiles));
+    rejects([&] { textures.validate_level(bad); });
+    CHECK(game.world.valid(old) && renderer.live_textures() == texture_count);
 }
 TEST(title_renders_before_simulation_and_reuses_gpu_resources) {
     Window window(640, 480, "Title flow", false);

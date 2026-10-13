@@ -1,7 +1,7 @@
 # Implementation status
 
-The twenty-fifth increment adds international character bindings, readable labels
-and ECFG v7 migration. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
+The twenty-sixth increment adds a second authored level, transactional replacement
+and cross-level save/replay startup. It is **not completion of all six design milestones**. The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
 ## Delivered
 
@@ -56,7 +56,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F04 | Implemented (v1) | GPU pixel/order/color/atlas/culling/batch tests; animated/parented sprites; transactional reload; independent nearest/linear min/mag filters and clamp/repeat axes; atlas inset and sampling gallery | Optional mipmaps, anisotropy and atlas-cell repetition |
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
 | F06 | Implemented (v1) | EANI reader/writer; exact frame timing, loops, pause/restart, large advances; animated player/machine/door with exactly-once completion | Optional frame callbacks and richer animation types |
-| F07 | Partial | Handle/compaction/hierarchy tests, scene round trips, deferred core deletion and restart; title/gameplay transitions with staged new/continue and in-memory resume | Extensible component pools, transitions between different authored levels |
+| F07 | Partial | Handle/compaction/hierarchy tests, scene round trips, deferred core deletion and restart; title/gameplay transitions with staged new/continue and in-memory resume; Facility/Annex replacement, cross-level save resolution, resource preflight and native two-level tour | Extensible component pools |
 | F08 | Partial | ETEX/ETMP/EANI/WAV readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, bounded shader files and transactional shader/texture reload | Further asset types and file watching |
 | F09 | Implemented (v1) | Swept player boxes; box/circle contacts; moving-body grid vs brute force; reciprocal filters; trigger history; overlap/segment queries; alarm/switch and restore tests | Rigid-body dynamics, rotating shapes and moving-body CCD are outside initial scope |
 | F10 | Partial | PCM16 WAV assets/resampling, loops, voice controls, gain ramps, master/music/effects controls, stereo emitter, null-device soundtrack/restart/failure tests | Physical disconnect/recovery testing and audible-output checks |
@@ -1035,7 +1035,42 @@ file remained unchanged across launches. GPU tests cover long labels at 320×240
 and compositor behavior still need a broader manual matrix. No new performance
 baseline or physical audio test was taken.
 
+## Added in the twenty-sixth increment
+
+- Authored Annex scene/map, explicit validated player spawn and a second complete
+  collect/exit route. Interact advances between completed levels; Restart stays in
+  the current level, and New Game returns to the startup level.
+- Staged CPU worlds, resident texture/atlas preflight, staged minimap geometry and
+  a scene-first commit. Missing/malformed content, invalid spawns, preparation
+  failure and active scene iteration leave the live world intact.
+- Cross-level title/gameplay save loading and replay startup resolve existing
+  content fingerprints. ESAV v3, ERPL v1 and ECFG v7 are unchanged. Original
+  Facility scene/map/animation bytes remain identical. Recordings stay single-level.
+- Held-input suppression after advancement, fresh level clocks/interpolation,
+  refreshed collision/minimap state and soundtrack voices/emitter placement.
+- Six CPU level cases, an application-level two-level tour and GPU resource/cache
+  checks. `--level annex`, `--level annex --verify` and `--level-tour` expose the
+  scenarios in the sample game.
+
+## Twenty-sixth-increment validation (2026-10-13)
+
+GCC Debug and Release each pass all 33 runtime CTest groups without skips. Eight
+focused groups (levels, scene_flow, persistence, replay_files, render_targets,
+audio_transport, transforms and collision) also pass with Clang and native-platform
+ASan/UBSan (driver leak detection disabled). The sanitizer build command was
+terminated after linking; a build recheck found no remaining work and the separate
+test run passed. The Annex CPU verification completes with three cores in 702 ticks.
+
+The native application tour completes Facility and Annex in 2084 rendered frames.
+A visible tour saves the completed Annex to slot 2, and a fresh default-Facility
+launch resolves that save back to Annex. The 1050x1360 Annex spawn and restored
+completion captures were inspected, including the level label, minimap and next/
+restart hint. Eight repeated GPU replacements keep texture and target counts
+stable. Original Facility scene/map/animation bytes match regenerated output.
+Relocated-package checks now verify both authored routes. No new performance
+baseline or physical audio test was taken.
+
 ## Next increment
 
-Add transitions between separately authored levels in Feature Lab with transactional
-loading, explicit spawn points and tests (F07).
+Add extensible component pools with generation-safe entity access and lifecycle
+tests (F07).

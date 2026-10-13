@@ -1,0 +1,20 @@
+scene 1
+entity 1 "Annex" "group" 0 0 0 0 1 1
+entity 20 "Entry spawn" "player" 1 -15 0 0 1 1
+sprite 20 "textures/actors.etex" 0.899999976 0.949999988 1 1 1 1 30
+entity 21 "Return door" "exit" 1 15 -6 0 1 1
+sprite 21 "textures/actors.etex" 2.4000001 1.79999995 1 1 1 1 10
+entity 30 "Annex core" "core" 1 -10 6 0 1 1
+sprite 30 "textures/actors.etex" 0.899999976 0.899999976 1 1 1 1 20
+entity 31 "Annex core" "core" 1 10 6 0 1 1
+sprite 31 "textures/actors.etex" 0.899999976 0.899999976 1 1 1 1 20
+entity 32 "Annex core" "core" 1 10 -6 0 1 1
+sprite 32 "textures/actors.etex" 0.899999976 0.899999976 1 1 1 1 20
+entity 40 "Annex ventilation" "machine" 1 -2 -7 0 1 1
+sprite 40 "textures/actors.etex" 2.5 2.5 1 1 1 1 10
+collider 40 1 1
+entity 50 "Entry marker" "decoration" 1 -15 -2 0 1 1
+sprite 50 "textures/white.etex" 4 0.200000003 1 1 1 1 10
+entity 51 "Annex panel" "decoration" 1 -15 7 0 1 1
+sprite 51 "textures/checker.etex" 3 2 1 1 1 1 10
+end
