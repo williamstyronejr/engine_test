@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The twenty-sixth increment adds a second authored level, staged level transitions,
-cross-level save loading and a complete two-level test route.
+The twenty-seventh increment adds extensible runtime component pools, typed
+queries and automatic lifecycle cleanup, exercised by Feature Lab's core pickups.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -323,6 +323,43 @@ The player entity's authored world position is the entry spawn. Its parent must
 have an identity transform; the player box must fit inside the map and avoid walls
 and the closed exit. The Annex moves the alarm station to its own play area.
 
+## Runtime components
+
+`Scene` owns typed component pools alongside its authored nodes. Add your own
+C++ types without editing the engine; entity destruction, subtree deletion and
+world replacement release their components automatically.
+
+```cpp
+struct Health { int points; };
+struct Regeneration { int per_tick; };
+engine::Scene scene;
+const auto actor = scene.create(1, "actor");
+scene.add_component<Health>(actor, 80);
+scene.add_component<Regeneration>(actor, 1);
+scene.each_component<Health, Regeneration>(
+    [](engine::Entity, Health& health, const Regeneration& rate) {
+        health.points += rate.per_tick;
+    });
+```
+
+Queries visit the intersection of requested types. Const scenes expose const
+payloads. `try_component<T>` returns null for absent components or invalid handles;
+`get_component<T>` rejects them. Add/remove and other structural changes must occur
+outside iteration; queue entity deletion with `defer_destroy`, then call `flush`.
+Use entity handles to reacquire payloads after structural changes.
+
+Pools reserve bounded dense storage when first used (4096 entries per type, at most
+64 types per scene). Queries and removal/reinsertion do not allocate engine storage
+after setup. Components must have nonthrowing moves and destruction; user constructors
+can fail without publishing a partial entry. See [component contracts](docs/FORMATS.md#runtime-component-pools)
+for memory, iteration order and lifetime details.
+
+These are runtime components: the existing scene format still stores authored
+transforms, sprites and colliders. Custom serialization codecs are not included.
+Feature Lab rebuilds `CorePickup` components from core tags and restores collection
+state from the existing save format. Both levels exercise pickup, deferred deletion,
+restart, save/load and world replacement. F2 shows live entity and pickup counts.
+
 ## Keyboard and mouse controls
 
 Open **F1 → Controls**, select an action, then press a supported key or mouse
@@ -505,13 +542,21 @@ The eight-case `replay_files` group checks seeded reference sequences, save migr
 full-game record/decode/playback, paused starts, short taps, stepping, restart,
 content/state divergence, malformed files, recording limits and atomic file storage.
 
-Six level cases complete both routes, check reset and held-input behavior, reject
+Seven level cases complete both routes, check reset and held-input behavior, reject
 missing/corrupt/invalid-spawn content and failed resource preparation, reject
 replacement during scene iteration, resolve cross-level saves and replay Annex
 commands from a Facility startup. A native `level_tour` CTest completes both levels
 through the application loop. GPU tests repeat eight replacements, verify minimap
 wall counts and stable texture/target counts, and reject absent/incompatible
 resident texture requirements.
+
+Ten `components` cases cover checked access, compact removal, resource ownership,
+const and intersecting queries, alignment, nested iteration, constructor failures,
+deferred subtree deletion, scene moves/replacement, capacity limits and a 2500-step
+reference-model comparison. The stress suite checks zero C++ allocations during
+120 rounds of typed queries and component removal/reinsertion, then full teardown.
+The level suite also checks live pickup components through saves, restart and both
+levels; the native two-level tour verifies that all pickup components are removed.
 
 The six-case scene-flow suite covers new/continue/resume, empty/corrupt/invalid
 checkpoints, failed replacement during scene iteration, input capture, menu return,

@@ -97,6 +97,8 @@ class Diagnostics {
         row(controls.shapes ? "F3 SHAPES ON / RED CONTACT GOLD SENSOR"
                             : "F3 COLLISION / CAMERA SHAPES OFF");
         row("BLUE STATIC / CYAN MOVING AND CAMERA");
+        row("ENTITIES " + std::to_string(game.world.size()) + "  PICKUPS " +
+            std::to_string(game.world.component_count<CorePickup>()));
         renderer.pop_clip();
     }
 

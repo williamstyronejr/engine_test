@@ -46,6 +46,36 @@ TEST(authored_levels_have_distinct_content_spawns_and_complete_routes) {
     NEAR(annex.position.x, -15);
     NEAR(annex.position.y, 0);
 }
+TEST(core_components_follow_pickup_save_restart_and_level_replacement) {
+    auto game = load_game(assets);
+    const auto initial = game.checkpoint();
+    CHECK(game.world.component_count<CorePickup>() == 3);
+    const auto first_core = game.keys.front();
+    auto near_core = game.checkpoint();
+    near_core.position = game.location(first_core);
+    game.restore(near_core);
+    const auto picked = game.keys.front();
+    CHECK(game.update({}) == 1);
+    CHECK(!game.world.valid(picked) && !game.world.try_component<CorePickup>(picked));
+    CHECK(game.world.component_count<CorePickup>() == 2 && game.count() == 1);
+    const auto progress = game.checkpoint();
+    game.restore(initial);
+    CHECK(game.world.component_count<CorePickup>() == 3);
+    game.restore(progress);
+    CHECK(game.world.component_count<CorePickup>() == 2 && game.count() == 1);
+    game.restore(initial);
+    finish(game);
+    CHECK(game.world.component_count<CorePickup>() == 0);
+    SceneFlow flow(game, false, &assets);
+    flow.advance_level(game, {});
+    CHECK(game.level == Level::annex && game.world.component_count<CorePickup>() == 3);
+    finish(game);
+    CHECK(game.world.component_count<CorePickup>() == 0);
+    InputFrame restart{};
+    restart[static_cast<std::size_t>(Key::restart)].pressed = true;
+    game.update(restart);
+    CHECK(game.world.component_count<CorePickup>() == 3);
+}
 TEST(level_commit_resets_world_and_blocks_held_input) {
     auto game = load_game(assets);
     SceneFlow flow(game, false, &assets);

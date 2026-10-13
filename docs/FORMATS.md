@@ -192,8 +192,8 @@ old handles; slot reuse cannot revive them, and handles from other scenes are
 rejected. Moving a scene transfers its valid handles and gives the moved-from scene
 a new identity. Persistent IDs remain stable across serialization/reload.
 
-Nodes occupy dense storage, with optional sprite/collider records. This is a
-bounded initial component model, not a general extensible ECS. `get` returns a
+Nodes occupy dense storage, with optional sprite/collider records. Additional
+runtime component types live in scene-owned pools described below. `get` returns a
 borrowed reference: structural changes can invalidate references, but valid entity
 handles remain usable. Reparenting preserves the local transform, not world space.
 World transforms are computed from the ancestor chain; dirty-transform caching is
@@ -204,11 +204,74 @@ scale. The sampler must not mutate the scene. Sampling allocates no storage and
 leaves authored local transforms unchanged; invalid handles and nonfinite or
 out-of-range final matrices are rejected, as with `world_transform`.
 
-`each` forbids immediate scene mutation. Queue deletions with `defer_destroy`, then
+`each` forbids structural scene mutation (component payload edits remain allowed).
+Queue deletions with `defer_destroy`, then
 call `flush` outside iteration. Deleting a parent removes its subtree. Repeated
 requests are deduplicated; already-removed descendants are ignored during flush.
 Scene storage is thread-confined; concurrent readers/writers require external
 coordination.
+
+## Runtime component pools
+
+`Scene::add_component<T>(entity, constructor_arguments...)` creates one `T` for a
+live entity. The application defines `T`; no engine registration macro or external
+library is required. A scene lazily creates at most 64 distinct type pools. Each
+reserves 4096 dense `{Entity, T}` entries and a 4096-entry sparse index vector on
+first successful use. Empty pools retain their storage and registry slot until
+scene destruction or replacement. Lookup-only APIs never create a pool.
+
+`try_component<T>` returns a borrowed pointer, or null for absent components,
+null/stale/foreign entities. `get_component<T>` returns a reference or throws for
+those cases. Mutable scenes expose mutable payloads; const scenes expose only
+const payloads. `remove_component<T>` rejects invalid entities and returns false
+for a missing component on a valid entity. `component_count<T>` reports live entries.
+Adding a duplicate component throws; replacement is an explicit payload assignment
+or remove/add operation. Pool removal swaps the last dense entry into the hole and
+repairs its sparse index. Full world/generation handles prevent slot reuse from
+resurrecting data belonging to a deleted entity.
+
+`each_component<First, Rest...>(callback)` scans First's dense pool and calls
+`callback(Entity, First&, Rest&...)` only when all requested components exist.
+Const scenes pass const references. Put a selective type first: the query costs
+O(first-pool size times requested-type count), resolves type pools once, and uses
+constant-time sparse lookup per candidate. Missing/empty pools yield no calls.
+Iteration order is insertion order modified by swap erasure, not persistent-ID
+order. Repeated types refer to the same payload. Applications needing stable
+ordering must explicitly order by persistent IDs outside the query.
+
+Queries and `each` share a nesting-aware iteration guard. Payload updates, checked
+lookups, nested queries and `defer_destroy` are allowed. Immediate entity creation,
+destruction, node setters, component add/remove, flush and scene move/replacement
+are rejected while either involved scene is being iterated. Callback exceptions
+release their guard, but do not roll back earlier payload edits or queued deletes.
+`flush` outside iteration removes queued subtrees and every attached component.
+No callback may retain an entry reference across structural changes. Scene moves
+transfer pools with their entity domain; the moved-from scene is empty and reusable.
+
+Component types must be unqualified non-array objects with nonthrowing move
+construction, move assignment and destruction. Default construction and copying
+are not required; move-only owned resources and over-aligned types are supported.
+All user constructors and special members must avoid accessing the owning scene.
+Structural constructor reentry is additionally guarded. A throwing constructor
+does not publish an entry or a new pool; existing entries remain intact. Once a
+pool exists, queries, removal and reinsertion allocate no engine storage, although
+user component constructors or callbacks may allocate. Scene structural operations
+remain thread-confined. References are short-lived borrows, never persistent IDs.
+
+`Scene::buffer_bytes` includes reserved sparse/dense pool payloads, including padding
+and entity handles. It excludes hash registry/allocator overhead and allocations
+owned by component values. Memory is bounded by the type count and each application's
+component sizes, not by a universal byte budget.
+
+These pools contain **runtime data only**. Scene text version 1 remains unchanged;
+`serialize_scene` writes authored nodes/sprites/colliders and omits runtime pools.
+Parsing returns empty pools; applications must rebuild derived state or implement
+explicit versioned codecs before using custom components as persistent state.
+Built-in node fields remain separate from runtime pools. RTTI identifies types
+within the executable; there are no serialized type names or plugin ABI promises.
+Feature Lab builds `CorePickup {slot, radius}` from core tags, queries the pool for
+pickup detection and defers deletion. Save loading reconstructs the pool, then
+deletes already-collected IDs. ESAV v3, ERPL v1 and ECFG v7 remain unchanged.
 
 ## Tile and animation atlases
 
