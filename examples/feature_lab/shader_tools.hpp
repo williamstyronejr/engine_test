@@ -4,7 +4,7 @@
 #include <iostream>
 
 namespace feature_lab {
-// Explicit development commands only; no file polling or compilation on normal frames.
+// Explicit commands and optional watched reloads share the same transaction path.
 class ShaderTools {
   public:
     const engine::ShaderReloadResult& result() const { return result_; }
@@ -27,12 +27,16 @@ class ShaderTools {
                                     "#version 460 core\n#error deliberate Feature Lab failure\n");
         report("deliberate failure demo");
     }
-    void update(engine::Renderer& renderer, const engine::AssetRoot& assets,
+    bool update(engine::Renderer& renderer, const engine::AssetRoot& assets,
                 const engine::InputFrame& input) {
-        if (engine::button(input, engine::Key::reload_shaders).pressed)
+        if (engine::button(input, engine::Key::reload_shaders).pressed) {
             reload(renderer, assets); // A real reload takes precedence over the failure demo.
-        else if (engine::button(input, engine::Key::shader_error).pressed)
+            return true;
+        } else if (engine::button(input, engine::Key::shader_error).pressed) {
             fail_demo(renderer);
+            return true;
+        }
+        return false;
     }
     std::string status() const {
         return std::string(result_.applied ? "SHADER READY R" : "SHADER FAILED - KEPT R") +

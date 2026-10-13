@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The twenty-seventh increment adds extensible runtime component pools, typed
-queries and automatic lifecycle cleanup, exercised by Feature Lab's core pickups.
+The twenty-eighth increment adds optional automatic shader and texture reload,
+with bounded Linux file notifications, debounce and metadata recovery.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -260,7 +260,8 @@ hitch. Sources are bounded to 64 KiB per stage. Candidates must match the render
 active input/uniform/output interface. Optimized-out required resources are rejected.
 This validates compatibility, not the visual behavior of custom GLSL. Keep the
 premultiplied-alpha handling when editing. See [shader API contracts](docs/FORMATS.md#shader-program-reload).
-There is no file watcher, background compilation, or general material system.
+Optional file watching is described below. Background compilation and a general
+material system are not included.
 
 ## Texture development
 
@@ -286,7 +287,43 @@ Reload runs synchronously between passes and may hitch. There are at most 64
 uploaded texture handles, 16 MiB decoded per image, and 64 MiB of candidate pixel
 payload per transaction. Candidates temporarily coexist with the old resources.
 See [texture reload contracts](docs/FORMATS.md#texture-reload) for memory and lifetime
-details. File watching and background loading remain unimplemented.
+details. Background loading remains unimplemented.
+
+## Automatic asset reload
+
+Launch with an explicit editable asset root and **`--watch-assets`**:
+
+```sh
+./build/debug/feature_lab --play --watch-assets --assets "$PWD/assets" --no-audio
+```
+
+Edits to `shaders/sprite.vert`, `shaders/sprite.frag` or a resident ETEX texture
+automatically use the existing transactional reload paths. Each affected group
+waits for 150 ms without another observed change; shader stages reload together,
+and textures reload as one bank. Invalid or missing files retain the last working
+resources and show the existing failure status. Fix the file to retry. An unchanged
+failed file is not retried every frame. F5–F8 remain available and take precedence
+over a ready automatic reload of their group in the same frame.
+
+Watching is off by default and has no persisted preference. Enabling it performs
+one initial debounced refresh to synchronize the loaded resources with disk. It
+operates while the title, settings or paused game is visible; minimized rendering
+defers checks until the window becomes drawable. Shader/texture edits affect
+presentation during replay without changing the recorded simulation state.
+
+The in-house watcher uses nonblocking Linux inotify and checks bounded file metadata
+once per second to recover missed notifications, symlink-target edits and replaced
+directories. Atomic editor saves, deletion/recreation and notification saturation
+are covered by tests. If directory notifications are unavailable, metadata checks
+continue and reattachment is retried. Only the two shader files and resident texture
+keys are watched; unrelated files do not normally cause a reload. Scene, tilemap,
+animation, audio and font reload are outside this increment.
+
+Loading/compilation still runs synchronously between render passes and can hitch a
+frame. Debounce does not make separate filesystem writes an atomic project edit;
+use atomic saves for complete files. See [watcher bounds and recovery](docs/FORMATS.md#asset-file-watching)
+for limits and metadata-detection caveats. Console `[watch]` messages report mode,
+and session logs include automatic reload attempt counts.
 
 ## Authored levels
 
@@ -609,6 +646,14 @@ The eight-case GPU shader suite verifies shipped/fallback parity, changed pixels
 compile/link/interface failures, source bounds, active-pass rejection, sampler and
 premultiplied uniform relocation, repeated program retirement, real GL-error detection,
 file recovery and modal input capture. Native event tests cover F5/F6.
+
+The nine-case `asset_watch` suite covers bounded registration, descriptor cleanup,
+debounce, atomic saves, deletion/recreation, directory/root replacement, symlink
+metadata recovery, event saturation and missing-directory reattachment. Two native
+`watched_reload` cases verify shader/texture pixels, invalid-edit retention, recovery,
+resource counts and manual-command priority through the same controller used by
+Feature Lab. These filesystem tests use private temporary assets and simulated time.
+
 The diagnostics suite tests rolling timing statistics, overflow/invalid samples,
 input edges, catch-up single-step behavior, modal capture, save/restore and complete
 stepped replay equivalence. GPU checks exercise debug outline pixels, clipping,
@@ -676,7 +721,8 @@ For a visible missing-texture/fallback scenario:
 
 Invalid scenes, maps, and animations are fatal with source diagnostics; missing or
 broken textures produce an error and a magenta fallback. F7 provides coordinated
-CPU/GPU texture reload. Interactive scene reload and a file watcher are not implemented.
+CPU/GPU texture reload. `--watch-assets` automates shader/texture reload; interactive
+scene reload is not implemented.
 
 The install target includes both executables, assets and documentation:
 

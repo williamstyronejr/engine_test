@@ -1,7 +1,7 @@
 # Implementation status
 
-The twenty-seventh increment adds extensible runtime component pools, typed queries
-and entity-owned cleanup. It is **not completion of all six design milestones**.
+The twenty-eighth increment adds optional automatic shader/texture file watching,
+bounded notifications and recovery. It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
 ## Delivered
@@ -58,7 +58,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
 | F06 | Implemented (v1) | EANI reader/writer; exact frame timing, loops, pause/restart, large advances; animated player/machine/door with exactly-once completion | Optional frame callbacks and richer animation types |
 | F07 | Implemented (v1) | Handle/compaction/hierarchy tests, scene round trips, deferred deletion; title/gameplay and Facility/Annex transitions; typed runtime pools with checked access, intersecting queries, ownership/exception/move tests, allocation-free steady queries and pickup integration | Optional custom component serialization codecs, query scheduling and broader ECS tooling |
-| F08 | Partial | ETEX/ETMP/EANI/WAV readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, bounded shader files and transactional shader/texture reload | Further asset types and file watching |
+| F08 | Partial | ETEX/ETMP/EANI/WAV readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, transactional shader/texture reload; optional bounded inotify watching, debounce, metadata recovery and watched GPU pixel tests | Font assets and broader asset-type reload support |
 | F09 | Implemented (v1) | Swept player boxes; box/circle contacts; moving-body grid vs brute force; reciprocal filters; trigger history; overlap/segment queries; alarm/switch and restore tests | Rigid-body dynamics, rotating shapes and moving-body CCD are outside initial scope |
 | F10 | Partial | PCM16 WAV assets/resampling, loops, voice controls, gain ramps, master/music/effects controls, stereo emitter, null-device soundtrack/restart/failure tests | Physical disconnect/recovery testing and audible-output checks |
 | F11 | Partial | Bitmap text, clipped status panel, buttons/checkboxes/sliders, keyboard/pointer navigation, bounded layout, modal settings and title screen; `ui`, scene-flow and GPU pixel tests | Broader text fixtures and manual navigation checks |
@@ -1109,6 +1109,48 @@ inside its panel. A 1500-command recording created by the previous packaged rele
 (0bfbc3f) verifies with the new executable at tick 1381 with the same state hash.
 Annex CPU verification still completes in 702 ticks. No physical audio test was taken.
 
+## Added in the twenty-eighth increment
+
+- `AssetWatcher` registers up to 128 keys and 32 notification groups, reads at most
+  16 KiB of inotify events per poll and debounces each group for 150 ms. A one-second
+  bounded metadata scan recovers missed events and directory/root replacement.
+- Explicit initial synchronization and rescan, saturation/lost-watch recovery,
+  missing-directory fallback and reattachment, canonical asset-root containment,
+  and descriptor cleanup. No new runtime libraries or worker threads.
+- Feature Lab `--watch-assets` calls existing shader/texture transactions between
+  render passes, including title/settings/pause/replay frames. Watching is off by
+  default. Manual commands take priority over a ready automatic group in that frame.
+- Nine filesystem cases and two GPU cases cover editor-style atomic saves, debounce,
+  deletion/recreation, root replacement, symlink metadata changes, bounded event
+  recovery, pixel changes, invalid-edit retention, recovery and stable resources.
+- No scene/audio/animation/font reload or asynchronous compilation/loading. Existing
+  content, save/replay/config formats and authored levels remain unchanged.
+
+## Twenty-eighth-increment validation (2026-10-13)
+
+GCC Debug and Release each pass all 36 runtime CTest groups without skips. Eight
+focused groups (asset_watch, watched_reload, shaders, texture_reload, content,
+levels, replay_files and render_targets) also pass with Clang and native-platform
+ASan/UBSan (driver leak detection disabled). This session initially lacked DISPLAY;
+the existing :0 XWayland display was verified and used for all final hardware runs
+on Intel HD Graphics 4400 / OpenGL 4.6.
+
+The nine filesystem cases use private temporary files and simulated time. They
+exercise atomic rename saves, independent group deadlines, missing files/directories,
+directory/root replacement, symlink metadata recovery, saturated read-budget recovery
+and descriptor cleanup. GPU checks compare changed shader/texture pixels, preserve
+working GPU and CPU snapshots after invalid edits, recover on subsequent edits and
+retain stable texture/target counts. Manual reload priority is also covered.
+
+A 300-frame native run against a private asset copy observed initial synchronization,
+invalid shader and texture edits, and successful repair: three automatic attempts
+per group, final shader revision 4 and texture revision 3. The 1050x1360 recovered
+capture was inspected. The original 3000-frame capture run completed its edit checks
+but exceeded the harness's 45-second exit timeout; the shortened run exited normally.
+Separate title and paused-settings launches reload both groups while simulation stays
+at tick zero. A 1500-command replay with watching enabled retains state hash
+3859428580428616961 at tick 1381. No new timing baseline or physical audio test was taken.
+
 ## Next increment
 
-Add bounded file watching for the existing shader and texture reload paths (F08).
+Add bitmap-font asset loading with glyph metrics and fallback validation (F08/F11).

@@ -126,9 +126,9 @@ animation definitions, procedural textures, save formats or files are modified.
 F8/`--texture-error-demo` supplies an invalid payload in the last staged replacement,
 exercising validation rejection without disk writes. Failure leaves the revision
 unchanged and reports retained status; F7 takes precedence if both keys are pressed.
-Settings capture both keys until release. Reload is synchronous and on demand,
-including while paused, with no file watcher or background loading. It is outside
-the GPU render timing interval.
+Settings capture both keys until release. Reload is synchronous, including while
+paused, with optional `--watch-assets` automation but no background loading. It is
+outside the GPU render timing interval.
 
 The 64 MiB limit counts candidate RGBA bytes, not driver overhead or all engine
 memory. Old GPU objects coexist with candidates during upload; the driver may retain
@@ -922,8 +922,9 @@ check parity. Feature Lab reads both bounded files before building at startup/F5
 Its F6/`--shader-error-demo` submits a deliberate compiler error without writing files.
 The HUD shows success/failure and the active revision; full details go to the console.
 F5 takes precedence over F6 if both are pressed; settings capture both keys. Reload
-requires explicit input, performs no background polling, and is synchronous between
-passes. It may hitch a frame. The normal bounded fixed clock handles the delay.
+is explicit by default, with optional `--watch-assets` automation described below.
+It is synchronous between passes and may hitch a frame. The normal bounded fixed
+clock handles the delay.
 
 GLSL semantics remain the shader author's responsibility. Inputs use clip-space
 coordinates and linear tint; straight textures use straight-alpha blending, while
@@ -1233,3 +1234,68 @@ requires an exact content match before applying the checkpoint and committing.
 No filename comes from a save/replay record. Unknown/modified content is rejected.
 A recording remains a single-level session; gameplay advancement is unavailable
 while recording or playing it. ECFG v7 is unchanged.
+
+## Asset file watching
+
+`AssetWatcher` is an in-house Linux notification coordinator in `engine_core`.
+It owns one `IN_NONBLOCK | IN_CLOEXEC` inotify descriptor and watches the immediate
+parent directories of 1..128 explicitly registered asset keys. A `WatchedAsset`
+combines a validated relative key with a nonzero 32-bit group mask. Duplicate keys,
+invalid paths, empty registration and excess registrations are rejected. The
+watcher is neither copyable nor movable and is confined to its owner's thread.
+Destroying it closes the descriptor and all associated kernel watches.
+
+Directory notifications cover ordinary writes, metadata changes, atomic rename
+saves and deletion/recreation without binding to a file's old inode. `poll(now)`
+reads at most four 4096-byte batches per call, using bounded storage and dispatch
+over the registered keys. Unrelated filenames are ignored unless their volume
+exhausts that read budget. Kernel overflow, lost watches, interrupted/failed reads
+or budget saturation trigger conservative resynchronization of all groups and a
+new inotify instance. Rebuilding the instance discards stale watch-descriptor events.
+This path favors an extra reload over silently losing a watched change.
+
+Once per second of supplied steady-clock time, the watcher compares bounded metadata
+snapshots (device, inode, size, mode, nanosecond modification/change timestamps).
+It also checks parent-directory identity and reattaches after directory/root
+replacement. Missing directories or notification setup failure leave metadata
+polling active and cause notification setup to retry on the next scheduled scan.
+Event-triggered scans update the same baseline so the periodic scan does not repeat
+an already-reported edit. Canonical containment checks prevent intentionally following
+symlink targets outside the asset root; normal asset reads still perform their own
+validation. This is not a filesystem security boundary against concurrent renames.
+
+Each group has an independent 150 ms quiet deadline, reset by observed changes.
+`poll` returns the mask of ready groups and clears those pending bits. The first
+poll schedules all groups for an initial synchronization, covering the interval
+between resource loading and watcher creation. `request_rescan()` schedules another
+conservative synchronization. Supplied times must be monotonic. Filesystem events
+are hints: consumers must fully validate candidates and retain working resources
+on failure. A failed reload alone does not schedule another attempt; another file
+change, rescan or explicit manual command is needed.
+
+Idle notification polls do not read asset contents. Metadata scans and watch rebuilds
+can perform filesystem work and allocate temporary path storage. There is no worker
+thread, recursive directory enumeration, background decoding or content hashing.
+Continuous edits may postpone a group's reload indefinitely. A change invisible to
+both inotify and the metadata fingerprint cannot be detected. Local filesystems are
+the intended development target; debounce does not guarantee consistency across
+separately written files or make a concurrently edited file immutable during reads.
+See the [Linux inotify contract](https://man7.org/linux/man-pages/man7/inotify.7.html)
+for event coalescing, directory/inode behavior and queue limitations.
+
+Feature Lab's optional `--watch-assets` registers the two sprite shader files as one
+group and all resident texture keys as another. `AssetReload::update` polls once per
+drawable frame after input/simulation, before GPU timing and any render pass. This
+also works on the title, in settings, while paused and during replay; minimized
+windows defer it until drawing resumes. Ready groups call the existing full shader
+or texture-bank transactions. A manual F5/F6 or F7/F8 attempt suppresses a ready
+automatic transaction in the same group/frame. Groups remain independent; this is
+not one atomic shader-plus-texture project transaction. Logs count automatic attempts
+including failures, and report notification or metadata-fallback mode changes.
+
+Watching is disabled by default and is not persisted in configuration. It never
+modifies source assets, game checkpoints or replay commands. Reload still runs on
+the render thread and can hitch a frame. Watched keys remain fixed for the session's
+shared resident bank; arbitrary new banks, interactive scene reload, audio reload,
+font reload and background loading are outside this increment. Asset/save/replay/
+configuration schemas and Linux system-library requirements are unchanged.

@@ -50,6 +50,16 @@ class TextureAssets {
     bool applied() const { return applied_; }
     const std::string& diagnostic() const { return diagnostic_; }
     std::size_t size() const { return entries_.size(); }
+    std::vector<std::string> keys() const {
+        std::vector<std::string> result;
+        result.reserve(entries_.size());
+        for (const auto& [key, entry] : entries_) {
+            (void)entry;
+            result.push_back(key);
+        }
+        std::sort(result.begin(), result.end());
+        return result;
+    }
     void load(engine::Renderer& renderer, const std::string& key, std::uint32_t columns,
               std::uint32_t rows, bool force_missing = false) {
         using namespace engine;
@@ -90,19 +100,13 @@ class TextureAssets {
             if (revision_ == std::numeric_limits<std::uint64_t>::max())
                 throw std::runtime_error("Texture revision exhausted");
             auto candidate_cache = std::make_unique<TextureCache>(assets_);
-            std::vector<std::string> keys;
-            keys.reserve(entries_.size());
-            for (const auto& [key, entry] : entries_) {
-                (void)entry;
-                keys.push_back(key);
-            }
-            std::sort(keys.begin(), keys.end());
+            const auto texture_keys = keys();
             std::vector<Staged> staged;
             std::vector<TextureReplacement> replacements;
-            staged.reserve(keys.size());
-            replacements.reserve(keys.size());
+            staged.reserve(texture_keys.size());
+            replacements.reserve(texture_keys.size());
             std::size_t bytes = 0;
-            for (const auto& key : keys) {
+            for (const auto& key : texture_keys) {
                 auto& resident = entries_.at(key);
                 auto data = candidate_cache->load(key);
                 try {
@@ -144,11 +148,15 @@ class TextureAssets {
             std::cerr << diagnostic_ << '\n';
         return applied_;
     }
-    void update(engine::Renderer& renderer, const engine::InputFrame& input) {
-        if (engine::button(input, engine::Key::reload_textures).pressed)
+    bool update(engine::Renderer& renderer, const engine::InputFrame& input) {
+        if (engine::button(input, engine::Key::reload_textures).pressed) {
             reload(renderer);
-        else if (engine::button(input, engine::Key::texture_error).pressed)
+            return true;
+        } else if (engine::button(input, engine::Key::texture_error).pressed) {
             reload(renderer, true);
+            return true;
+        }
+        return false;
     }
     std::string status() const {
         return std::string(applied_ ? "TEXTURES READY R" : "TEXTURES FAILED - KEPT R") +

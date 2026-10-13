@@ -1,5 +1,6 @@
 #include "collision_visuals.hpp"
 #include "diagnostics.hpp"
+#include "asset_reload.hpp"
 #include "engine/assets.hpp"
 #include "engine/audio.hpp"
 #include "engine/renderer.hpp"
@@ -217,6 +218,7 @@ int main(int argc, char** argv) {
         bool vsync_override = false;
         auto selected_level = feature_lab::Level::facility;
         bool level_tour = false;
+        bool watch_assets = false;
         unsigned level_changes = 0;
         std::string user_directory, record_path, playback_path, verify_path;
         std::optional<std::uint64_t> seed;
@@ -228,6 +230,8 @@ int main(int argc, char** argv) {
             const std::string_view arg(argv[i]);
             if (arg == "--assets" && i + 1 < argc)
                 asset_directory = argv[++i];
+            else if (arg == "--watch-assets")
+                watch_assets = true;
             else if (arg == "--level" && i + 1 < argc) {
                 const std::string_view name(argv[++i]);
                 if (name == "facility")
@@ -308,6 +312,7 @@ int main(int argc, char** argv) {
                              "F8 texture failure demo, F10 single step while "
                              "paused, Escape close settings/quit.\n"
                              "--level facility|annex --level-tour (script both levels) "
+                             "--watch-assets (automatic shader/texture reload) "
                              "--play (skip title) --verify (CPU gameplay test) --scripted --frames "
                              "N --no-audio "
                              "--no-vsync --screenshot FILE.ppm --assets DIRECTORY "
@@ -417,6 +422,9 @@ int main(int argc, char** argv) {
         });
         if (texture_error_demo)
             textures.reload(renderer, true);
+        std::unique_ptr<feature_lab::AssetReload> asset_reload;
+        if (watch_assets)
+            asset_reload = std::make_unique<feature_lab::AssetReload>(assets, textures);
         std::cout << "[assets] " << assets.directory() << " entities=" << game.world.size()
                   << " GPU textures=" << renderer.live_textures() << '\n';
         feature_lab::Soundtrack soundtrack(assets, audio_enabled, "default", config.audio,
@@ -475,6 +483,7 @@ int main(int argc, char** argv) {
             const double elapsed = std::chrono::duration<double>(now - last).count();
             auto batch = clock.advance(elapsed);
             unsigned simulation_steps = 0;
+            std::uint32_t manual_reloads = 0;
             last = now;
             if (!scripted && !playback)
                 dropped += batch.dropped;
@@ -556,8 +565,10 @@ int main(int argc, char** argv) {
                 const auto& controls = menu.gameplay;
                 overlays.input(controls);
                 diagnostics.controls.update(controls);
-                shaders.update(renderer, assets, controls);
-                textures.update(renderer, controls);
+                if (shaders.update(renderer, assets, controls))
+                    manual_reloads |= feature_lab::AssetReload::shader_group;
+                if (textures.update(renderer, controls))
+                    manual_reloads |= feature_lab::AssetReload::texture_group;
                 if (menu.quit || button(controls, Key::escape).pressed)
                     running = false;
                 if (menu.fullscreen || button(controls, Key::fullscreen).pressed)
@@ -655,6 +666,8 @@ int main(int argc, char** argv) {
                 std::this_thread::sleep_for(std::chrono::milliseconds(10));
                 continue;
             }
+            if (asset_reload)
+                asset_reload->update(renderer, assets, shaders, textures, manual_reloads);
             diagnostics.collect_gpu(gpu_timer, frames + 1);
             gpu_timer.begin(frames + 1);
             const auto camera = game.camera(window.width(), window.height(), batch.alpha);
@@ -675,8 +688,8 @@ int main(int argc, char** argv) {
                                       std::to_string(playback->commands.size())
                      : !flow.notice.empty()
                          ? flow.notice
-                         : "27 / " + std::string(feature_lab::level_name(game.level)) +
-                               " / COMPONENT POOLS",
+                         : "28 / " + std::string(feature_lab::level_name(game.level)) +
+                               (watch_assets ? " / AUTO RELOAD" : " / FILE WATCHING"),
                      recorder.has_value() || playback.has_value(), playback.has_value());
                 diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
                 settings.draw(renderer, window.width(), window.height());
@@ -743,6 +756,8 @@ int main(int argc, char** argv) {
                   << " level=" << feature_lab::level_name(game.level)
                   << " level_changes=" << level_changes
                   << " core_components=" << game.world.component_count<feature_lab::CorePickup>()
+                  << " watched_shaders=" << (asset_reload ? asset_reload->shader_reloads() : 0)
+                  << " watched_textures=" << (asset_reload ? asset_reload->texture_reloads() : 0)
                   << " scene=" << (flow.title_open() ? "title" : "gameplay")
                   << " texture_revision=" << textures.revision()
                   << " texture_applied=" << textures.applied()
