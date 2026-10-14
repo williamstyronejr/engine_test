@@ -36,98 +36,6 @@ void main() {
     if (premultiplied != 0) output_color.rgb *= color.a;
 }
 )";
-std::array<unsigned char, 7> glyph(char c) {
-    switch (c) {
-    case '%':
-        return {25, 26, 2, 4, 8, 11, 19};
-    case '+':
-        return {0, 4, 4, 31, 4, 4, 0};
-    case 'A':
-        return {14, 17, 17, 31, 17, 17, 17};
-    case 'B':
-        return {30, 17, 17, 30, 17, 17, 30};
-    case 'C':
-        return {14, 17, 16, 16, 16, 17, 14};
-    case 'D':
-        return {30, 17, 17, 17, 17, 17, 30};
-    case 'E':
-        return {31, 16, 16, 30, 16, 16, 31};
-    case 'F':
-        return {31, 16, 16, 30, 16, 16, 16};
-    case 'G':
-        return {14, 17, 16, 23, 17, 17, 15};
-    case 'H':
-        return {17, 17, 17, 31, 17, 17, 17};
-    case 'I':
-        return {14, 4, 4, 4, 4, 4, 14};
-    case 'J':
-        return {7, 2, 2, 2, 18, 18, 12};
-    case 'K':
-        return {17, 18, 20, 24, 20, 18, 17};
-    case 'L':
-        return {16, 16, 16, 16, 16, 16, 31};
-    case 'M':
-        return {17, 27, 21, 21, 17, 17, 17};
-    case 'N':
-        return {17, 25, 25, 21, 19, 19, 17};
-    case 'O':
-        return {14, 17, 17, 17, 17, 17, 14};
-    case 'P':
-        return {30, 17, 17, 30, 16, 16, 16};
-    case 'Q':
-        return {14, 17, 17, 17, 21, 18, 13};
-    case 'R':
-        return {30, 17, 17, 30, 20, 18, 17};
-    case 'S':
-        return {15, 16, 16, 14, 1, 1, 30};
-    case 'T':
-        return {31, 4, 4, 4, 4, 4, 4};
-    case 'U':
-        return {17, 17, 17, 17, 17, 17, 14};
-    case 'V':
-        return {17, 17, 17, 17, 17, 10, 4};
-    case 'W':
-        return {17, 17, 17, 21, 21, 21, 10};
-    case 'X':
-        return {17, 17, 10, 4, 10, 17, 17};
-    case 'Y':
-        return {17, 17, 10, 4, 4, 4, 4};
-    case 'Z':
-        return {31, 1, 2, 4, 8, 16, 31};
-    case '0':
-        return {14, 17, 19, 21, 25, 17, 14};
-    case '1':
-        return {4, 12, 4, 4, 4, 4, 14};
-    case '2':
-        return {14, 17, 1, 2, 4, 8, 31};
-    case '3':
-        return {30, 1, 1, 14, 1, 1, 30};
-    case '4':
-        return {2, 6, 10, 18, 31, 2, 2};
-    case '5':
-        return {31, 16, 16, 30, 1, 1, 30};
-    case '6':
-        return {14, 16, 16, 30, 17, 17, 14};
-    case '7':
-        return {31, 1, 2, 4, 8, 8, 8};
-    case '8':
-        return {14, 17, 17, 14, 17, 17, 14};
-    case '9':
-        return {14, 17, 17, 15, 1, 1, 14};
-    case '-':
-        return {0, 0, 0, 31, 0, 0, 0};
-    case '/':
-        return {1, 1, 2, 4, 8, 16, 16};
-    case ':':
-        return {0, 4, 4, 0, 4, 4, 0};
-    case '.':
-        return {0, 0, 0, 0, 0, 4, 4};
-    case ' ':
-        return {};
-    default:
-        return {31, 17, 5, 4, 0, 4, 0};
-    }
-}
 void APIENTRY debug_callback(GLenum source, GLenum, GLuint, GLenum severity, GLsizei length,
                              const GLchar* text, const void* user) {
     // Expected shader compiler diagnostics are returned by the reload operation.
@@ -144,6 +52,8 @@ void APIENTRY debug_callback(GLenum source, GLenum, GLuint, GLenum severity, GLs
 struct Renderer::Impl {
     Gl gl;
     GLuint vao{}, vbo{}, texture{}, program{};
+    GLuint font_texture{};
+    std::unique_ptr<BitmapFont> font;
     GLint premultiplied_location{};
     std::uint64_t shader_revision{1};
     struct TextureSlot {
@@ -183,6 +93,8 @@ struct Renderer::Impl {
                 gl.DeleteTextures(1, &slot.object);
         if (program)
             gl.DeleteProgram(program);
+        if (font_texture)
+            gl.DeleteTextures(1, &font_texture);
         if (texture)
             gl.DeleteTextures(1, &texture);
         if (vbo)
@@ -232,6 +144,8 @@ struct Renderer::Impl {
         gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        font = std::make_unique<BitmapFont>(builtin_font());
+        font_texture = allocate_texture(font->data().atlas, {});
     }
     void apply_sampling(TextureSampling sampling) {
         gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
@@ -713,19 +627,39 @@ GraphicsInfo Renderer::graphics_info() const {
 void Renderer::sprite(TextureHandle texture, Transform model, Color color, Rect uv) {
     impl_->submit(model, color, uv, impl_->texture_object(texture), false, true);
 }
+void Renderer::set_font(const BitmapFont& font) {
+    auto& p = *impl_;
+    if (p.recording)
+        throw std::logic_error("Font replacement during active render pass");
+    auto candidate = std::make_unique<BitmapFont>(font);
+    const auto object = p.allocate_texture(candidate->data().atlas, {});
+    const auto previous = p.font_texture;
+    p.font.swap(candidate);
+    p.font_texture = object;
+    p.gl.DeleteTextures(1, &previous);
+}
+Vec2 Renderer::text_size(std::string_view value, float size) const {
+    return impl_->font->measure(value, size);
+}
+std::size_t Renderer::font_bytes() const {
+    return impl_->font->data().atlas.rgba.size();
+}
 void Renderer::text(Vec2 origin, float size, std::string_view value, Color color) {
-    if (!std::isfinite(size) || size <= 0)
-        throw std::invalid_argument("Invalid text size");
-    float cursor = origin.x;
-    for (char c : value) {
-        const auto rows = glyph(c);
-        for (std::size_t y = 0; y < rows.size(); ++y)
-            for (int x = 0; x < 5; ++x)
-                if (rows[y] & (1U << (4 - x)))
-                    quad({cursor + (static_cast<float>(x) + 0.5F) * size,
-                          origin.y - (static_cast<float>(y) + 0.5F) * size},
-                         {size, size}, color);
-        cursor += size * 6;
+    auto& p = *impl_;
+    if (!p.recording)
+        throw std::logic_error("Text requires an active render pass");
+    for (float v : {origin.x, origin.y, color.r, color.g, color.b, color.a})
+        if (!std::isfinite(v))
+            throw std::invalid_argument("Nonfinite text origin or color");
+    if (color.r < 0 || color.g < 0 || color.b < 0 || color.a < 0 || color.a > 1)
+        throw std::invalid_argument("Invalid text color");
+    TextCursor cursor(*p.font, value, size);
+    PositionedGlyph g;
+    while (cursor.next(g)) {
+        const auto center = (g.bounds.min + g.bounds.max) * 0.5F;
+        p.submit(Transform::from({origin.x + center.x, origin.y - center.y}, 0,
+                                 g.bounds.max - g.bounds.min),
+                 color, g.uv, p.font_texture);
     }
 }
 void Renderer::end() {

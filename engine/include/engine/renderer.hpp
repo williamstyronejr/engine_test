@@ -1,5 +1,6 @@
 #pragma once
 #include "engine/assets.hpp"
+#include "engine/font.hpp"
 #include "engine/math.hpp"
 #include "engine/sampling.hpp"
 #include <array>
@@ -93,6 +94,11 @@ class Renderer {
     // Finite UVs in [-max_texture_uv,max_texture_uv]; wrap/clamp applies to the whole image.
     void sprite(TextureHandle texture, Transform model, Color color = {},
                 Rect uv = {{0, 0}, {1, 1}});
+    // One current font per renderer. Copies/uploads atomically between passes;
+    // failures preserve the previous snapshot. Built-in font is available at startup.
+    void set_font(const BitmapFont& font);
+    Vec2 text_size(std::string_view value, float pixel_size = 1) const;
+    std::size_t font_bytes() const; // Font atlas payload, separate from texture_bytes().
     void text(Vec2 top_left, float pixel_size, std::string_view value, Color color);
     void end();
     RenderStats stats() const;

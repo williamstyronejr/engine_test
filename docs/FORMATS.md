@@ -1299,3 +1299,66 @@ the render thread and can hitch a frame. Watched keys remain fixed for the sessi
 shared resident bank; arbitrary new banks, interactive scene reload, audio reload,
 font reload and background loading are outside this increment. Asset/save/replay/
 configuration schemas and Linux system-library requirements are unchanged.
+
+## Bitmap fonts (EFNT v1)
+
+`fonts/ui.efnt` contains an engine-owned bitmap atlas and glyph metrics in one file,
+so the loader cannot accidentally combine mismatched metrics and image revisions.
+All integers are little-endian. No struct-memory serialization is used.
+
+| Field | Encoding |
+| --- | --- |
+| Magic/version | `EFNT`, u32 `1` |
+| Line height | u32, 1..512 unscaled pixels |
+| Fallback character | u32, must name a visible glyph |
+| Glyph count | u32, 1..95 |
+| Each glyph | Eight 32-bit fields: code, x, y, width, height, signed offset_x, signed offset_y, advance |
+| Atlas length | u32 byte length of the following complete ETEX v1 image |
+| Atlas | Embedded ETEX v1, bottom-up RGBA8, at most 1024x1024 |
+
+Files are capped at 4 MiB + 4096 bytes. Truncated/trailing data, unknown versions,
+duplicate codes, out-of-atlas rectangles, invalid metrics and invisible fallback
+coverage are rejected before a `BitmapFont` can be constructed. Glyph codes are
+unique printable ASCII (32..126). Width/height are at most 256 and must both be
+zero or both nonzero. Advances are 1..256; offsets are -256..256. Space is required
+and must be advance-only. The fallback must have at least one nonzero-alpha texel.
+Atlas rectangles may overlap, allowing shared artwork.
+
+Rectangles use bottom-left atlas pixels. Offsets are relative to a top-left text
+pen, x right and y down. There is no baseline/kerning/shaping convention implicit
+in the format. `BitmapFont` owns a validated snapshot and a fixed lookup table.
+`TextCursor` emits positioned glyph rectangles without allocations. LF resets x
+and advances by line height; all other absent characters and non-ASCII bytes emit
+one fallback glyph per byte. UTF-8 decoding, CRLF normalization, tabs and Unicode
+shaping are not provided. Callers can normalize their own input beforehand.
+
+`measure(text, scale)` returns the maximum line advance (including trailing spaces)
+and line-box height, not the ink bounds. Empty text measures zero; a trailing LF
+adds an empty line. Both measurement and layout accept up to 4096 bytes and finite
+scales in (0,1024]. Offsets and overhangs do not change logical advance measurements.
+
+`load_font` uses the asset-root containment and size checks and reports the source
+key on failure. `load_font_or_fallback` returns the embedded font and a diagnostic
+if loading/validation fails. Success clears the diagnostic. The embedded font uses
+uppercase A-Z, digits, space and `%+-/:.?`; other characters use `?`. The checked-in
+font uses the same artwork with narrower I, 1, period and colon metrics. The in-house
+`make_assets` tool reproducibly writes it; no font/image libraries are required.
+
+Each renderer starts with an embedded atlas font. `set_font` copies a snapshot and
+uploads a replacement atlas between passes, publishing only after successful upload.
+It rejects calls inside a render pass. The renderer owns this single current font;
+callers may destroy their source snapshot immediately. `text` submits one sprite
+per nonempty glyph, preserving order, tint, clipping, culling and offscreen alpha
+through the normal batch path. Space and LF do not submit sprites. Coordinates are
+world units, with the given origin at the text's top-left and world y pointing up.
+Text requires an active pass even for an empty string. Button fitting uses measured
+advance width and UI sizing respects the selected line height.
+
+`font_bytes()` reports the current font's RGBA atlas payload separately from public
+texture handles, `live_textures()` and `texture_bytes()`. It excludes CPU snapshots
+and driver overhead. The diagnostics overlay displays font KiB. `--font-demo` shows
+proportional advances, measurement, multiline text, fallback, tint and clipping in
+Feature Lab. All ordinary menus/HUD labels load `fonts/ui.efnt` at startup, retaining
+readable embedded text when it is missing or corrupt. Automatic font-file reload,
+multiple simultaneously selected fonts and additional text encodings are deferred;
+`--watch-assets` still watches shaders and scene textures only.

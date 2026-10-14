@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The twenty-eighth increment adds optional automatic shader and texture reload,
-with bounded Linux file notifications, debounce and metadata recovery.
+The twenty-ninth increment adds bitmap-font assets, glyph metrics, readable fallback
+text and atlas-based glyph rendering, with a visual text gallery.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -711,7 +711,7 @@ its executable, or `../share/feature_lab` in an installed package. Use `--assets
 to select another root. It runs independently of the current working directory.
 The in-house C++ generator produces the scene, map, textures and sounds. Shader
 sources live in `assets/shaders/`, with embedded startup fallbacks; the diagnostic
-font remains embedded; `sounds/*.wav` are loaded from disk. See [format/API contracts](docs/FORMATS.md).
+font is loaded from `fonts/ui.efnt` with an embedded fallback; `sounds/*.wav` are loaded from disk. See [format/API contracts](docs/FORMATS.md).
 
 For a visible missing-texture/fallback scenario:
 
@@ -750,3 +750,23 @@ automatically compatible. See [package contents, tests and compatibility](docs/P
 Develop new features on a dedicated branch. Run the relevant tests, commit the
 completed feature, and merge it into `main` after validation. Push both the feature
 branch and updated `main` to the GitHub remote.
+
+
+### Bitmap-font assets
+
+Feature Lab loads `fonts/ui.efnt` for its HUD and menus. This in-house format packs
+an RGBA atlas, glyph rectangles, advances, offsets, line spacing and a fallback
+glyph. Missing or damaged font files log a diagnostic and use readable embedded
+artwork. Text now submits one quad per glyph instead of one quad per lit pixel.
+The supplied font supports uppercase A-Z, digits, space and `%+-/:.?`; unsupported
+bytes display `?`. Unicode shaping is outside v1.
+
+```sh
+./build/release/feature_lab --play --font-demo --no-audio
+```
+
+The gallery demonstrates proportional widths, measured width, multiline layout,
+fallback characters, color/alpha and clipping. `make_assets` regenerates the font
+alongside the other sample content. Font files load at startup; `--watch-assets`
+continues to reload only shaders and scene textures. See
+[the EFNT and text API contract](docs/FORMATS.md#bitmap-fonts-efnt-v1).
