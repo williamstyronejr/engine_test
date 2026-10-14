@@ -58,7 +58,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
 | F06 | Implemented (v1) | EANI reader/writer; exact frame timing, loops, pause/restart, large advances; animated player/machine/door with exactly-once completion | Optional frame callbacks and richer animation types |
 | F07 | Implemented (v1) | Handle/compaction/hierarchy tests, scene round trips, deferred deletion; title/gameplay and Facility/Annex transitions; typed runtime pools with checked access, intersecting queries, ownership/exception/move tests, allocation-free steady queries and pickup integration | Optional custom component serialization codecs, query scheduling and broader ECS tooling |
-| F08 | Partial | ETEX/ETMP/EANI/WAV/EFNT readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, transactional shader/texture reload; optional bounded inotify watching, debounce, metadata recovery and watched GPU pixel tests | Broader asset-type reload support |
+| F08 | Partial | ETEX/ETMP/EANI/WAV/EFNT readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, transactional shader/texture/font reload; optional bounded inotify watching, debounce, metadata recovery and watched GPU pixel tests | Broader asset-type reload support |
 | F09 | Implemented (v1) | Swept player boxes; box/circle contacts; moving-body grid vs brute force; reciprocal filters; trigger history; overlap/segment queries; alarm/switch and restore tests | Rigid-body dynamics, rotating shapes and moving-body CCD are outside initial scope |
 | F10 | Partial | PCM16 WAV assets/resampling, loops, voice controls, gain ramps, master/music/effects controls, stereo emitter, null-device soundtrack/restart/failure tests | Physical disconnect/recovery testing and audible-output checks |
 | F11 | Partial | Atlas bitmap text with authored metrics, bounded allocation-free layout, font fallback and visual gallery; clipped status panel, buttons/checkboxes/sliders, keyboard/pointer navigation, bounded layout, modal settings and title screen; `ui`, scene-flow and GPU pixel tests | Broader manual navigation checks |
@@ -1192,8 +1192,43 @@ during compositor resizing; final visual checks used 120-frame runs. Full gamepl
 level tours and replay tests still pass. No new performance baseline or physical
 audio validation is claimed. Font watching and general Unicode text remain deferred.
 
+## Added in the thirtieth increment
+
+- `FontAssets` uses strict bounded EFNT loading and the renderer's existing atomic
+  font replacement. Revisions and diagnostics distinguish the retained embedded
+  startup font from a successfully loaded file; failed edits never reset a working
+  file font to the embedded fallback.
+- `--watch-assets` registers `fonts/ui.efnt` as an independent third notification
+  group. Existing debounce, initial synchronization and directory recovery apply.
+  Metrics, atlas pixels and byte accounting change together between render passes.
+- Font HUD status and session counters expose successful/failed attempts and source
+  provenance. No new controls, dependencies, file formats or replay commands.
+- Four GPU integration cases cover direct and watched replacement, invalid metrics,
+  deletion/recreation, missing-directory recovery, symlink escape rejection,
+  independent groups, manual priority and repeated resource stability.
+
+## Thirtieth-increment validation (2026-10-14)
+
+GCC Debug and Release each pass all 39 runtime CTest groups without skips. Six focused groups
+(font_reload, watched_reload, asset_watch, fonts, font_graphics and render_targets)
+pass with Clang and native ASan/UBSan (driver leak detection disabled). Three
+packaging checks pass: archive build, relocation and native OpenGL smoke. Tests use
+Intel HD Graphics 4400 / OpenGL 4.6 through the existing :0 XWayland display.
+The initial font-reload fixture incorrectly expected a texture notification without
+registering a texture; it now includes a resident texture and checks all three groups.
+
+A 360-frame native run against a private asset copy applied changed glyph color and
+advance metrics, retained revision 4 after a malformed EFNT edit, and recovered to
+revision 5 after repair. Four automatic font attempts (including synchronization)
+were observed; shader and texture counts stayed at one each. The recovered 1050x1360
+font-gallery capture was inspected. Separate title and paused-settings runs each
+reload the font while simulation remains at tick zero. A 1500-command watched replay
+with the modified font still ends at tick 1381 and hash 3859428580428616961.
+No new performance baseline or physical audio validation was taken.
+
 ## Next increment
 
-Expand asset reload support beyond shaders/textures, starting with transactional
-font reload and its file-watcher integration (F08), then close the remaining
-platform/audio/manual validation checklist rather than adding optional v1 scope.
+Close the remaining platform lifecycle validation matrix (F01): minimize/restore,
+fullscreen, scaling and visible-window focus behavior. Keep broader asset-type
+reload, physical audio checks and profiling/resource accounting visible in the
+coverage manifest; optional v1 scope remains deferred.

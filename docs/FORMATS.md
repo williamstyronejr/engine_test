@@ -1284,20 +1284,20 @@ See the [Linux inotify contract](https://man7.org/linux/man-pages/man7/inotify.7
 for event coalescing, directory/inode behavior and queue limitations.
 
 Feature Lab's optional `--watch-assets` registers the two sprite shader files as one
-group and all resident texture keys as another. `AssetReload::update` polls once per
+group, all resident texture keys as another, and `fonts/ui.efnt` as a third. `AssetReload::update` polls once per
 drawable frame after input/simulation, before GPU timing and any render pass. This
 also works on the title, in settings, while paused and during replay; minimized
 windows defer it until drawing resumes. Ready groups call the existing full shader
-or texture-bank transactions. A manual F5/F6 or F7/F8 attempt suppresses a ready
+or texture-bank transactions, or the strict font transaction. A manual F5/F6 or F7/F8 attempt suppresses a ready
 automatic transaction in the same group/frame. Groups remain independent; this is
-not one atomic shader-plus-texture project transaction. Logs count automatic attempts
+not one atomic shader/texture/font project transaction. Logs count automatic attempts
 including failures, and report notification or metadata-fallback mode changes.
 
 Watching is disabled by default and is not persisted in configuration. It never
 modifies source assets, game checkpoints or replay commands. Reload still runs on
 the render thread and can hitch a frame. Watched keys remain fixed for the session's
-shared resident bank; arbitrary new banks, interactive scene reload, audio reload,
-font reload and background loading are outside this increment. Asset/save/replay/
+shared resident bank and fixed font key; arbitrary new banks, interactive scene
+reload, audio reload and background loading remain unimplemented. Asset/save/replay/
 configuration schemas and Linux system-library requirements are unchanged.
 
 ## Bitmap fonts (EFNT v1)
@@ -1359,6 +1359,39 @@ texture handles, `live_textures()` and `texture_bytes()`. It excludes CPU snapsh
 and driver overhead. The diagnostics overlay displays font KiB. `--font-demo` shows
 proportional advances, measurement, multiline text, fallback, tint and clipping in
 Feature Lab. All ordinary menus/HUD labels load `fonts/ui.efnt` at startup, retaining
-readable embedded text when it is missing or corrupt. Automatic font-file reload,
-multiple simultaneously selected fonts and additional text encodings are deferred;
-`--watch-assets` still watches shaders and scene textures only.
+readable embedded text when it is missing or corrupt. Multiple simultaneously
+selected fonts and additional text encodings remain deferred.
+
+### Font reload
+
+Feature Lab's `FontAssets` tracks the current UI font's revision, last reload
+outcome, embedded/file provenance and failure diagnostic. Revision 1 describes the
+renderer's initial embedded font. Startup and watched loads use `load_font`, not
+`load_font_or_fallback`: once a file font has been installed, a missing or invalid
+edit must not replace it with the embedded font. The renderer owns the complete
+live font; the controller retains no additional CPU snapshot or texture handle.
+
+`FontAssets::reload(renderer, assets)` reads and validates the bounded EFNT candidate
+before calling `Renderer::set_font`. Atlas and metrics publish together between
+passes. Successful publication increments the revision and clears the diagnostic;
+read/decode/upload failures preserve the last working metrics, pixels, atlas-byte
+count and revision. On startup failure the renderer's embedded font remains active.
+A valid reload inside a render pass remains a programming error and throws.
+Allocation failure also propagates while preserving the renderer's live font.
+
+`AssetReload` registers font mask 4 independently of shader mask 1 and texture mask 2.
+Initial synchronization, 150 ms debounce, atomic saves, deletion/recreation,
+metadata recovery and the absence of a retry loop for unchanged failures apply to
+fonts as well. Recovery from a missing font directory automatically reattaches its
+watch. Candidate reads still enforce normal asset-root containment. Font failure
+does not block the shader/texture groups; a font-only edit does not normally reload
+either of them. Conservative watcher resynchronization can refresh all groups.
+
+The controller's manual mask can suppress a ready font transaction for callers that
+already invoked it that frame; Feature Lab adds no keyboard binding. The existing
+`--watch-assets` option enables this third group in gameplay, title, settings, pause
+and replay frames. Polling occurs before all render passes and GPU timing; minimized
+windows defer updates. EFNT, save/replay/config schemas and simulation behavior are
+unchanged. Font upload/decoding is synchronous and can hitch. The HUD and `[font]`
+logs report the last outcome and retained source; `watched_fonts` counts automatic
+attempts, including failures, and excludes the startup load.
