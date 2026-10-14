@@ -4,6 +4,7 @@
 #include <GL/glx.h>
 #include <GL/glxext.h>
 #include <X11/XKBlib.h>
+#include <X11/Xatom.h>
 #include <X11/Xutil.h>
 #include <X11/keysym.h>
 #include <array>
@@ -90,9 +91,9 @@ struct Window::Impl {
     ::Window window{};
     Colormap colormap{};
     GLXContext context{};
-    Atom close_atom{};
+    Atom close_atom{}, protocols_atom{}, state_atom{}, fullscreen_atom{};
     int width{}, height{};
-    bool mapped{}, closing{};
+    bool mapped{}, closing{}, focused{}, fullscreen{};
     KeyBindings configured;
     int xkb_event{};
     unsigned int group{};
@@ -103,6 +104,44 @@ struct Window::Impl {
     std::array<KeySym, 256> symbols{};
     std::array<std::optional<Key>, 256> bindings{};
     std::array<std::optional<Key>, mouse_codes.size()> mouse_bindings{};
+    void read_fullscreen() {
+        Atom type{};
+        int format{};
+        unsigned long count{}, remaining{};
+        unsigned char* bytes{};
+        const int result = XGetWindowProperty(display, window, state_atom, 0, 256, False, XA_ATOM,
+                                              &type, &format, &count, &remaining, &bytes);
+        fullscreen = false;
+        if (result == Success && type == XA_ATOM && format == 32 && remaining == 0) {
+            const auto* atoms = reinterpret_cast<const unsigned long*>(bytes);
+            for (unsigned long i = 0; i < count; ++i)
+                fullscreen |= atoms[i] == fullscreen_atom;
+        }
+        if (bytes)
+            XFree(bytes);
+    }
+    void request_fullscreen(long action) {
+        XEvent event{};
+        event.xclient.type = ClientMessage;
+        event.xclient.window = window;
+        event.xclient.message_type = state_atom;
+        event.xclient.format = 32;
+        event.xclient.data.l[0] = action;
+        event.xclient.data.l[1] = static_cast<long>(fullscreen_atom);
+        event.xclient.data.l[3] = 1; // Normal application source, EWMH.
+        XSendEvent(display, DefaultRootWindow(display), False,
+                   SubstructureRedirectMask | SubstructureNotifyMask, &event);
+        XFlush(display);
+    }
+    void lose_focus(Input& input) {
+        focused = false;
+        input.release_all();
+        physical.fill(false);
+        blocked.fill(false);
+        mouse_physical.fill(false);
+        mouse_blocked.fill(false);
+        rebuild_keys();
+    }
     void rebuild_keys() {
         bindings.fill(std::nullopt);
         mouse_bindings.fill(std::nullopt);
@@ -217,7 +256,7 @@ Window::Window(int width, int height, std::string_view title_text, bool visible)
     settings.override_redirect = visible ? False : True;
     settings.event_mask = StructureNotifyMask | KeyPressMask | KeyReleaseMask | FocusChangeMask |
                           PointerMotionMask | ButtonPressMask | ButtonReleaseMask |
-                          EnterWindowMask | LeaveWindowMask | ExposureMask;
+                          EnterWindowMask | LeaveWindowMask | ExposureMask | PropertyChangeMask;
     p.window = XCreateWindow(p.display, RootWindow(p.display, screen), 0, 0,
                              static_cast<unsigned int>(width), static_cast<unsigned int>(height), 0,
                              visual->depth, InputOutput, visual->visual,
@@ -228,6 +267,9 @@ Window::Window(int width, int height, std::string_view title_text, bool visible)
     p.width = width;
     p.height = height;
     p.close_atom = XInternAtom(p.display, "WM_DELETE_WINDOW", False);
+    p.protocols_atom = XInternAtom(p.display, "WM_PROTOCOLS", False);
+    p.state_atom = XInternAtom(p.display, "_NET_WM_STATE", False);
+    p.fullscreen_atom = XInternAtom(p.display, "_NET_WM_STATE_FULLSCREEN", False);
     XSetWMProtocols(p.display, p.window, &p.close_atom, 1);
     title(title_text);
     int opcode{}, error{}, major_version = XkbMajorVersion, minor_version = XkbMinorVersion;
@@ -311,9 +353,14 @@ bool Window::poll(Input& input) {
             }
             break;
         case ClientMessage:
-            if (e.xclient.message_type == XInternAtom(p.display, "WM_PROTOCOLS", False) &&
+            if (e.xclient.window == p.window && e.xclient.format == 32 &&
+                e.xclient.message_type == p.protocols_atom &&
                 static_cast<Atom>(e.xclient.data.l[0]) == p.close_atom)
                 p.closing = true;
+            break;
+        case PropertyNotify:
+            if (e.xproperty.window == p.window && e.xproperty.atom == p.state_atom)
+                p.read_fullscreen();
             break;
         case ConfigureNotify:
             p.width = e.xconfigure.width;
@@ -324,21 +371,18 @@ bool Window::poll(Input& input) {
             break;
         case UnmapNotify:
             p.mapped = false;
-            input.release_all();
-            p.physical.fill(false);
-            p.blocked.fill(false);
-            p.mouse_physical.fill(false);
-            p.mouse_blocked.fill(false);
+            p.lose_focus(input);
             break;
         case FocusIn:
-            p.change_group(p.read_group(), input);
+            if (e.xfocus.mode != NotifyGrab && e.xfocus.mode != NotifyUngrab) {
+                p.focused = true;
+                p.change_group(p.read_group(), input);
+            }
             break;
         case FocusOut:
-            input.release_all();
-            p.physical.fill(false);
-            p.blocked.fill(false);
-            p.mouse_physical.fill(false);
-            p.mouse_blocked.fill(false);
+            if (e.xfocus.mode != NotifyGrab && e.xfocus.mode != NotifyUngrab &&
+                e.xfocus.detail != NotifyInferior)
+                p.lose_focus(input);
             break;
         case MotionNotify:
             input.move_pointer({static_cast<float>(e.xmotion.x), static_cast<float>(e.xmotion.y)},
@@ -434,7 +478,8 @@ void Window::set_bindings(const KeyBindings& bindings, Input& input) {
     p.cancel_input(input);
 }
 void Window::present() {
-    glXSwapBuffers(impl_->display, impl_->window);
+    if (drawable())
+        glXSwapBuffers(impl_->display, impl_->window);
 }
 bool Window::set_vsync(bool enabled) {
     const char* ext = glXQueryExtensionsString(impl_->display, DefaultScreen(impl_->display));
@@ -447,18 +492,26 @@ bool Window::set_vsync(bool enabled) {
     swap_interval(impl_->display, impl_->window, enabled ? 1 : 0);
     return true;
 }
+void Window::set_fullscreen(bool enabled) {
+    impl_->request_fullscreen(enabled ? 1 : 0);
+}
 void Window::toggle_fullscreen() {
-    XEvent e{};
-    e.xclient.type = ClientMessage;
-    e.xclient.window = impl_->window;
-    e.xclient.message_type = XInternAtom(impl_->display, "_NET_WM_STATE", False);
-    e.xclient.format = 32;
-    e.xclient.data.l[0] = 2; // EWMH toggle.
-    e.xclient.data.l[1] =
-        static_cast<long>(XInternAtom(impl_->display, "_NET_WM_STATE_FULLSCREEN", False));
-    e.xclient.data.l[3] = 1;
-    XSendEvent(impl_->display, DefaultRootWindow(impl_->display), False,
-               SubstructureRedirectMask | SubstructureNotifyMask, &e);
+    impl_->request_fullscreen(2);
+}
+bool Window::minimize() {
+    const auto sent = XIconifyWindow(impl_->display, impl_->window, DefaultScreen(impl_->display));
+    XFlush(impl_->display);
+    return sent != 0;
+}
+void Window::restore() {
+    XMapRaised(impl_->display, impl_->window);
+    XFlush(impl_->display);
+}
+bool Window::fullscreen() const {
+    return impl_->fullscreen;
+}
+bool Window::focused() const {
+    return impl_->focused;
 }
 void Window::resize(int width, int height) {
     if (width <= 0 || height <= 0 || width > 16384 || height > 16384)
@@ -474,7 +527,7 @@ int Window::height() const {
     return impl_->height;
 }
 bool Window::drawable() const {
-    return impl_->mapped && impl_->width > 0 && impl_->height > 0;
+    return !impl_->closing && impl_->mapped && impl_->width > 0 && impl_->height > 0;
 }
 void Window::title(std::string_view value) {
     const std::string text(value);

@@ -51,7 +51,7 @@ entire plan feature ID when required subfeatures are still absent.
 
 | ID | Status | Current evidence | Still required |
 | --- | --- | --- | --- |
-| F01 | Partial | `graphics`, `platform_events`, `platform_no_display`, visible startup/resize | Manual minimize/fullscreen/scaling matrix and visible-window focus checks |
+| F01 | Partial | `platform_lifecycle`, graphics/input/no-display tests; visible fullscreen/focus/client unmap/restore; native gameplay/replay suspension; six-size pixel/UI/pointer matrix | WM-supported minimize/restore and physical monitor-scale matrix; see [platform validation](PLATFORM_VALIDATION.md) |
 | F02 | Partial | CPU edge/focus/capture tests; native key-repeat/alias/pointer/wheel/focus tests; modal gameplay routing; ten configurable keyboard/mouse actions, conflict/capture/persistence tests; mixed-device aliases, modifier chords, keypad identities, active XKB layout groups, international symbols and mapping notification refresh | Physical multi-layout/compositor validation; dead keys, text composition and Unicode glyph rendering are outside binding v1 |
 | F03 | Implemented (v1) | Parented rotating/scaled/mirrored gallery; sampled affine hierarchy; camera corner/aspect/follow/zoom checkpoints; pause/step/save/replay pose tests; GPU shear/mirror/culling/resize pixels | Broader manual camera and display matrix; transform caching is optional |
 | F04 | Implemented (v1) | GPU pixel/order/color/atlas/culling/batch tests; animated/parented sprites; transactional reload; independent nearest/linear min/mag filters and clamp/repeat axes; atlas inset and sampling gallery | Optional mipmaps, anisotropy and atlas-cell repetition |
@@ -1226,9 +1226,47 @@ reload the font while simulation remains at tick zero. A 1500-command watched re
 with the modified font still ends at tick 1381 and hash 3859428580428616961.
 No new performance baseline or physical audio validation was taken.
 
+## Added in the thirty-first increment
+
+- Explicit fullscreen requests and observed fullscreen/focus state, cached protocol
+  atoms, validated close messages, and safe presentation while unmapped/closed.
+- Temporary X11 focus grabs preserve logical focus; actual focus loss/unmap clears
+  held input and binding associations without generating a pointer click.
+- Feature Lab now suspends ordinary gameplay as well as replay/scripted modes when
+  unmapped, resets hidden elapsed time, and reports suspension/resume ticks.
+- Six lifecycle integration cases and an opt-in `platform_probe` separate engine
+  checks from WM acceptance and physical display-scale evidence. No new dependencies.
+- [Platform validation matrix](PLATFORM_VALIDATION.md) records confirmed fullscreen,
+  visible focus, client unmap/restore, and unresolved WM minimize/physical scaling.
+
+## Thirty-first-increment validation (2026-10-14)
+
+All 40 runtime CTest groups pass with GCC Debug and Release, without skips. Six
+focused platform/graphics groups pass with Clang and native ASan/UBSan (driver leak
+detection disabled). Three Release packaging checks pass: archive build, relocation
+and native OpenGL smoke. The lifecycle group also passes ten consecutive Release runs.
+The initial resize fixture assumed immediate agreement between X11 events and GLX
+buffers and retained startup cancellation before the injected click. The corrected
+fixture waits for both observed dimensions to converge, synchronizes queued events,
+and consumes startup input before testing the click. No production busy-wait or
+extra per-frame synchronization was introduced.
+
+The opt-in managed-window probe confirms fullscreen entry/exit, real focus transfer,
+client unmap/restore and X11/GLX pixel agreement. It exits 2 because the WM minimize
+request was unconfirmed, not because an engine check failed. Fullscreen was
+2160x1440; restored/tiled size was 1050x1360. VSync requests were available, with no
+physical timing or tearing measurement. The final probe capture was inspected.
+
+A native 240-frame watched play run suspended/resumed at tick 30 across a 0.5-second
+unmap. A watched 1500-command replay suspended/resumed at tick 21 and retained its
+reference final tick 1381 and hash 3859428580428616961. Both restored game captures
+were inspected. No physical monitor-scale, audible-output or performance-baseline
+claim is made. F01 remains partial for the outstanding matrix entries.
+
 ## Next increment
 
-Close the remaining platform lifecycle validation matrix (F01): minimize/restore,
-fullscreen, scaling and visible-window focus behavior. Keep broader asset-type
-reload, physical audio checks and profiling/resource accounting visible in the
-coverage manifest; optional v1 scope remains deferred.
+Continue the outstanding audio validation and recovery work (F10), keeping actual
+speaker/device evidence separate from null-device transport tests. F01 remains
+partial until WM-supported minimize/restore and physical monitor scaling are
+verified. Broader asset-type reload, profiling/resource accounting and optional
+v1 scope remain tracked in the coverage manifest.
