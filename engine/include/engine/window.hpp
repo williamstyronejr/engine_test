@@ -16,7 +16,13 @@ class Window {
     void set_bindings(const KeyBindings& bindings, Input& input);
     void present();
     bool set_vsync(bool enabled);
+    // Asynchronous WM requests. Observed state changes only when poll receives it.
+    void set_fullscreen(bool enabled);
     void toggle_fullscreen();
+    bool minimize(); // Reports request submission, not WM acceptance.
+    void restore();
+    bool fullscreen() const;
+    bool focused() const;
     void resize(int width, int height);
     int width() const;
     int height() const;

@@ -487,9 +487,23 @@ int main(int argc, char** argv) {
         std::array<double, 8192> cpu_samples{};
         std::size_t sample_count = 0;
         double dropped = 0;
-        bool running = true;
+        bool running = true, suspended = false;
         while (running && window.poll(input)) {
             const auto now = Clock::now();
+            if (!window.drawable()) {
+                if (!suspended)
+                    std::cout << "[platform] suspended ticks=" << game.ticks << std::endl;
+                suspended = true;
+                clock = FixedClock{};
+                last = now;
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                continue;
+            }
+            if (suspended) {
+                std::cout << "[platform] resumed ticks=" << game.ticks << std::endl;
+                suspended = false;
+                last = now; // Resume without hidden time or a partial catch-up step.
+            }
             const double elapsed = std::chrono::duration<double>(now - last).count();
             auto batch = clock.advance(elapsed);
             unsigned simulation_steps = 0;
@@ -497,10 +511,6 @@ int main(int argc, char** argv) {
             last = now;
             if (!scripted && !playback)
                 dropped += batch.dropped;
-            if ((scripted || playback) && !window.drawable()) {
-                std::this_thread::sleep_for(std::chrono::milliseconds(10));
-                continue;
-            }
             if (scripted || playback) {
                 batch.steps = 1;
                 batch.alpha = 1;
@@ -672,10 +682,6 @@ int main(int argc, char** argv) {
                     break;
                 }
             }
-            if (!window.drawable()) {
-                std::this_thread::sleep_for(std::chrono::milliseconds(10));
-                continue;
-            }
             if (asset_reload)
                 asset_reload->update(renderer, assets, shaders, textures, fonts, manual_reloads);
             diagnostics.collect_gpu(gpu_timer, frames + 1);
@@ -698,8 +704,8 @@ int main(int argc, char** argv) {
                                       std::to_string(playback->commands.size())
                      : !flow.notice.empty()
                          ? flow.notice
-                         : "30 / " + std::string(feature_lab::level_name(game.level)) +
-                               (watch_assets ? " / AUTO RELOAD" : " / FONT RELOAD"),
+                         : "31 / " + std::string(feature_lab::level_name(game.level)) +
+                               (watch_assets ? " / AUTO RELOAD" : " / WINDOW LIFECYCLE"),
                      recorder.has_value() || playback.has_value(), playback.has_value());
                 diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
                 settings.draw(renderer, window.width(), window.height());
@@ -779,6 +785,7 @@ int main(int argc, char** argv) {
                   << " texture_applied=" << textures.applied()
                   << " shader_revision=" << renderer.shader_revision()
                   << " shader_applied=" << shaders.result().applied
+                  << " fullscreen=" << window.fullscreen() << " focused=" << window.focused()
                   << " targets=" << renderer.live_targets()
                   << " target_bytes=" << renderer.target_bytes() << '\n';
         diagnostics.collect_gpu(gpu_timer, frames); // Final poll only; never wait on shutdown.

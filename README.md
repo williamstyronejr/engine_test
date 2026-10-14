@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The thirtieth increment adds automatic bitmap-font reload, updating metrics and
-atlas pixels together while preserving the working font after invalid edits.
+The thirty-first increment adds observed fullscreen/focus state, safe unmap/restore
+behavior, lifecycle tests, and an opt-in desktop validation probe.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -568,7 +568,29 @@ and GPU timings, hardware/build metadata, workload counts, checksum and memory
 observations. `--stress --help` lists options; Escape aborts. This mode does not
 modify saves or settings. See [workloads, report fields and measurement limits](benchmarks/README.md).
 
+## Window lifecycle
+
+Fullscreen and minimize are asynchronous window-manager requests. The engine exposes
+observed fullscreen/focus state after polling. Feature Lab suspends simulation,
+replay consumption, rendering and asset watching while its window is unmapped,
+and resumes without catching up hidden time. Focus loss cancels held input but
+does not itself pause gameplay. Already-playing audio is not suspended by unmapping.
+
+```sh
+DISPLAY=:0 ./build/debug/platform_probe --exercise
+```
+
+This development probe opens its own window to exercise fullscreen, focus,
+minimize/restore and drawable dimensions. Exit 2 means a desktop request was
+unconfirmed; see the [platform validation matrix](docs/PLATFORM_VALIDATION.md).
+The current desktop confirms fullscreen and client unmap/restore but does not
+confirm the WM minimize request. Physical monitor scaling remains unverified.
+
 ## Tests
+
+The `platform_lifecycle` group covers fullscreen observation/requests, focus modes,
+input cancellation, repeated unmap/restore, six resize/UI/pointer sizes, and close
+protocol validation. See [platform evidence and manual checks](docs/PLATFORM_VALIDATION.md).
 
 Stress tests cover deterministic workloads, all capacity limits, dense collision
 results, allocation-free steady CPU updates, repeated CPU/GPU teardown, batching,

@@ -1395,3 +1395,37 @@ windows defer updates. EFNT, save/replay/config schemas and simulation behavior 
 unchanged. Font upload/decoding is synchronous and can hitch. The HUD and `[font]`
 logs report the last outcome and retained source; `watched_fonts` counts automatic
 attempts, including failures, and excludes the startup load.
+
+
+## Window lifecycle and suspension
+
+`Window::set_fullscreen(bool)` and `toggle_fullscreen()` send and flush EWMH
+requests. `fullscreen()` reflects the last `_NET_WM_STATE` observed by `poll`, not
+the requested value. State parsing is bounded to 256 atoms; missing, malformed or
+oversized properties report false. `minimize()` sends and flushes an ICCCM
+iconification request; its boolean reports submission only. `restore()` maps and
+raises the window. The WM can ignore or override these requests. Width and height
+are observed X11 pixels; `resize()` validates and requests a size but a managed
+window can retain a WM-selected size.
+
+`focused()` records logical keyboard focus. Real focus loss and unmapping clear
+held keys/buttons and their action associations, cancel UI interaction, and do not
+synthesize pointer clicks. Temporary `NotifyGrab`/`NotifyUngrab` focus events and
+focus moving to an inferior window do not count as logical focus loss. Focus gain
+refreshes the keyboard group. WM close messages must target this window and have
+32-bit WM_PROTOCOLS/WM_DELETE_WINDOW payloads. `drawable()` is false after close or
+unmap; `present()` is then a safe no-op. The context and GPU resources survive an
+unmap/restore cycle. Mapped-but-occluded windows still count as drawable.
+
+Feature Lab polls while unmapped with a 10 ms sleep, defers all simulation, replay
+consumption, asset reload and drawing, and resets its fixed-step accumulator and
+wall-clock baseline. The first restored frame receives zero hidden elapsed time;
+scripted/replay modes then resume their normal one-command-per-frame behavior.
+Suspension does not change the user's pause preference. Focus loss alone does not
+suspend simulation, and already-playing audio continues unless separately paused
+or muted. Transition logs report suspension/resume ticks; the session summary
+includes the final observed fullscreen/focus flags. No save or replay schema changes.
+
+See [platform validation](PLATFORM_VALIDATION.md) for the automated and visible
+checks, asynchronous GLX buffer-resize handling in tests, protocol references and
+remaining physical-monitor/WM checks.
