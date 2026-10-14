@@ -29,9 +29,9 @@ void draw_ui(Renderer& r, const Ui& ui) {
             ui.captured() == w.id  ? Color{0.06F, 0.26F, 0.28F, 1}
             : ui.hovered() == w.id ? Color{0.04F, 0.12F, 0.16F, 1}
                                    : Color{0.018F, 0.04F, 0.06F, 1});
-        float font = size.y / (w.kind == UiKind::slider ? 20.0F : 13.0F);
+        float font = size.y / (w.kind == UiKind::slider ? 20.0F : 13.0F) * 8 / r.text_size(" ").y;
         if (w.kind == UiKind::button && !w.label.empty())
-            font = std::min(font, size.x * 0.9F / (6 * static_cast<float>(w.label.size())));
+            font = std::min(font, size.x * 0.9F / r.text_size(w.label).x);
         r.text({b.min.x + size.x * 0.05F, -b.min.y - size.y * 0.2F}, font, w.label, text);
         if (w.kind == UiKind::slider) {
             const float x0 = b.min.x + size.x * 0.05F, x1 = b.max.x - size.x * 0.05F;

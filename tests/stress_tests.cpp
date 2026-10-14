@@ -1,4 +1,5 @@
 #include "../examples/feature_lab/stress_benchmark.hpp"
+#include "engine/font.hpp"
 #include "test.hpp"
 #include <array>
 #include <cstddef>
@@ -67,6 +68,26 @@ void operator delete[](void* p, std::size_t, std::align_val_t) noexcept {
 namespace {
 using namespace feature_lab;
 using namespace testing;
+TEST(font_measurement_and_layout_allocate_nothing_after_setup) {
+    const auto baseline = allocation_check::live;
+    {
+        const engine::BitmapFont font(engine::builtin_font());
+        const std::string text = "SCORE 123 / TEST\nFALLBACK abc @ []";
+        const auto calls = allocation_check::calls;
+        std::size_t count = 0;
+        float width = 0;
+        for (int i = 0; i < 1000; ++i) {
+            width += font.measure(text).x;
+            engine::TextCursor cursor(font, text);
+            engine::PositionedGlyph glyph;
+            while (cursor.next(glyph))
+                ++count;
+        }
+        const bool stable = calls == allocation_check::calls;
+        CHECK(stable && count == 27000 && width == 102000);
+    }
+    CHECK(allocation_check::live == baseline);
+}
 TEST(component_queries_and_pool_reuse_allocate_nothing_after_setup) {
     struct Counter {
         std::uint64_t value{};

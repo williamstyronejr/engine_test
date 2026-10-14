@@ -1,5 +1,6 @@
 #include "engine/animation.hpp"
 #include "engine/assets.hpp"
+#include "engine/font.hpp"
 #include "engine/scene.hpp"
 #include "engine/sound.hpp"
 #include "engine/tilemap.hpp"
@@ -196,7 +197,30 @@ int main(int argc, char** argv) {
         }
         std::filesystem::create_directories(std::filesystem::path(argv[1]) / "textures");
         std::filesystem::create_directories(std::filesystem::path(argv[1]) / "sounds");
+        std::filesystem::create_directories(std::filesystem::path(argv[1]) / "fonts");
         engine::AssetRoot root(argv[1]);
+        auto font = engine::builtin_font();
+        // Authored proportional variants retain the same in-house pixel artwork.
+        for (auto& glyph : font.glyphs) {
+            if (glyph.code == 'I' || glyph.code == '1') {
+                ++glyph.x;
+                glyph.width = 3;
+                glyph.advance = 4;
+            } else if (glyph.code == '.' || glyph.code == ':') {
+                glyph.x += 2;
+                glyph.width = 1;
+                glyph.advance = 2;
+                if (glyph.code == '.') {
+                    glyph.height = 2;
+                    glyph.offset_y = 5;
+                } else {
+                    ++glyph.y;
+                    glyph.height = 5;
+                    glyph.offset_y = 1;
+                }
+            }
+        }
+        root.write_atomic("fonts/ui.efnt", engine::encode_font(font));
         int sound_kind = 0;
         for (const auto key :
              {"sounds/pickup.wav", "sounds/music.wav", "sounds/machine.wav", "sounds/door.wav"})

@@ -1,11 +1,12 @@
+#include "asset_reload.hpp"
 #include "collision_visuals.hpp"
 #include "diagnostics.hpp"
-#include "asset_reload.hpp"
 #include "engine/assets.hpp"
 #include "engine/audio.hpp"
 #include "engine/renderer.hpp"
 #include "engine/timing.hpp"
 #include "engine/window.hpp"
+#include "font_gallery.hpp"
 #include "game.hpp"
 #include "overlays.hpp"
 #include "persistence.hpp"
@@ -219,6 +220,7 @@ int main(int argc, char** argv) {
         auto selected_level = feature_lab::Level::facility;
         bool level_tour = false;
         bool watch_assets = false;
+        bool font_demo = false;
         unsigned level_changes = 0;
         std::string user_directory, record_path, playback_path, verify_path;
         std::optional<std::uint64_t> seed;
@@ -230,6 +232,8 @@ int main(int argc, char** argv) {
             const std::string_view arg(argv[i]);
             if (arg == "--assets" && i + 1 < argc)
                 asset_directory = argv[++i];
+            else if (arg == "--font-demo")
+                font_demo = true;
             else if (arg == "--watch-assets")
                 watch_assets = true;
             else if (arg == "--level" && i + 1 < argc) {
@@ -312,7 +316,8 @@ int main(int argc, char** argv) {
                              "F8 texture failure demo, F10 single step while "
                              "paused, Escape close settings/quit.\n"
                              "--level facility|annex --level-tour (script both levels) "
-                             "--watch-assets (automatic shader/texture reload) "
+                             "--watch-assets (automatic shader/texture reload) --font-demo (text "
+                             "gallery) "
                              "--play (skip title) --verify (CPU gameplay test) --scripted --frames "
                              "N --no-audio "
                              "--no-vsync --screenshot FILE.ppm --assets DIRECTORY "
@@ -396,6 +401,16 @@ int main(int argc, char** argv) {
         if (!vsync_available)
             std::cerr << "[platform] Requested VSync control unavailable\n";
         Renderer renderer;
+        {
+            std::string font_error;
+            const auto font = load_font_or_fallback(assets, "fonts/ui.efnt", font_error);
+            renderer.set_font(font);
+            std::cerr << "[font " << (font_error.empty() ? "loaded" : "fallback")
+                      << "] fonts/ui.efnt glyphs=" << font.data().glyphs.size()
+                      << " atlas_bytes=" << renderer.font_bytes() << '\n';
+            if (!font_error.empty())
+                std::cerr << font_error << '\n';
+        }
         GpuTimer gpu_timer;
         feature_lab::ShaderTools shaders;
         shaders.reload(renderer, assets);
@@ -688,12 +703,14 @@ int main(int argc, char** argv) {
                                       std::to_string(playback->commands.size())
                      : !flow.notice.empty()
                          ? flow.notice
-                         : "28 / " + std::string(feature_lab::level_name(game.level)) +
-                               (watch_assets ? " / AUTO RELOAD" : " / FILE WATCHING"),
+                         : "29 / " + std::string(feature_lab::level_name(game.level)) +
+                               (watch_assets ? " / AUTO RELOAD" : " / BITMAP FONT ASSETS"),
                      recorder.has_value() || playback.has_value(), playback.has_value());
                 diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
                 settings.draw(renderer, window.width(), window.height());
             }
+            if (font_demo)
+                feature_lab::draw_font_gallery(renderer, window.width(), window.height());
             renderer.end();
             gpu_timer.end();
             ++frames;

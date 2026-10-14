@@ -89,7 +89,8 @@ class Diagnostics {
             " / GPU = RENDER INTERVAL");
         row("TEXTURES " + std::to_string(renderer.live_textures()) + "  TARGETS " +
             std::to_string(renderer.live_targets()) + "  KB " +
-            number(static_cast<double>(renderer.target_bytes()) / 1024));
+            number(static_cast<double>(renderer.target_bytes()) / 1024) + " FONT KB " +
+            number(static_cast<double>(renderer.font_bytes()) / 1024));
         row("BODIES " + std::to_string(game.collisions.bodies().size()) + "  CONTACTS " +
             std::to_string(game.collisions.contacts().size()));
         row("GRID PAIRS " + std::to_string(collision.candidate_pairs) + "  TESTS " +
