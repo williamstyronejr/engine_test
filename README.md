@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The twenty-ninth increment adds bitmap-font assets, glyph metrics, readable fallback
-text and atlas-based glyph rendering, with a visual text gallery.
+The thirtieth increment adds automatic bitmap-font reload, updating metrics and
+atlas pixels together while preserving the working font after invalid edits.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -297,27 +297,27 @@ Launch with an explicit editable asset root and **`--watch-assets`**:
 ./build/debug/feature_lab --play --watch-assets --assets "$PWD/assets" --no-audio
 ```
 
-Edits to `shaders/sprite.vert`, `shaders/sprite.frag` or a resident ETEX texture
-automatically use the existing transactional reload paths. Each affected group
-waits for 150 ms without another observed change; shader stages reload together,
-and textures reload as one bank. Invalid or missing files retain the last working
-resources and show the existing failure status. Fix the file to retry. An unchanged
+Edits to `shaders/sprite.vert`, `shaders/sprite.frag`, a resident ETEX texture,
+or `fonts/ui.efnt` automatically use the existing transactional reload paths. Each
+affected group waits for 150 ms without another observed change; shader stages reload together,
+textures reload as one bank, and the font reloads as its own independent group.
+Invalid or missing files retain the last working resources and show the existing failure status. Fix the file to retry. An unchanged
 failed file is not retried every frame. F5–F8 remain available and take precedence
 over a ready automatic reload of their group in the same frame.
 
 Watching is off by default and has no persisted preference. Enabling it performs
 one initial debounced refresh to synchronize the loaded resources with disk. It
 operates while the title, settings or paused game is visible; minimized rendering
-defers checks until the window becomes drawable. Shader/texture edits affect
+defers checks until the window becomes drawable. Shader/texture/font edits affect
 presentation during replay without changing the recorded simulation state.
 
 The in-house watcher uses nonblocking Linux inotify and checks bounded file metadata
 once per second to recover missed notifications, symlink-target edits and replaced
 directories. Atomic editor saves, deletion/recreation and notification saturation
 are covered by tests. If directory notifications are unavailable, metadata checks
-continue and reattachment is retried. Only the two shader files and resident texture
-keys are watched; unrelated files do not normally cause a reload. Scene, tilemap,
-animation, audio and font reload are outside this increment.
+continue and reattachment is retried. Only the two shader files, resident texture
+keys and `fonts/ui.efnt` are watched; unrelated files do not normally cause a reload.
+Scene, tilemap, animation and audio reload remain unimplemented.
 
 Loading/compilation still runs synchronously between render passes and can hitch a
 frame. Debounce does not make separate filesystem writes an atomic project edit;
@@ -652,7 +652,10 @@ debounce, atomic saves, deletion/recreation, directory/root replacement, symlink
 metadata recovery, event saturation and missing-directory reattachment. Two native
 `watched_reload` cases verify shader/texture pixels, invalid-edit retention, recovery,
 resource counts and manual-command priority through the same controller used by
-Feature Lab. These filesystem tests use private temporary assets and simulated time.
+Feature Lab. Four `font_reload` GPU cases cover atomic metrics/pixel replacement,
+invalid/missing file retention, recovery from missing directories, path containment,
+resource stability and independent notification groups. These filesystem tests use
+private temporary assets and simulated time.
 
 The diagnostics suite tests rolling timing statistics, overflow/invalid samples,
 input edges, catch-up single-step behavior, modal capture, save/restore and complete
@@ -721,7 +724,7 @@ For a visible missing-texture/fallback scenario:
 
 Invalid scenes, maps, and animations are fatal with source diagnostics; missing or
 broken textures produce an error and a magenta fallback. F7 provides coordinated
-CPU/GPU texture reload. `--watch-assets` automates shader/texture reload; interactive
+CPU/GPU texture reload. `--watch-assets` automates shader/texture/font reload; interactive
 scene reload is not implemented.
 
 The install target includes both executables, assets and documentation:
@@ -756,8 +759,8 @@ branch and updated `main` to the GitHub remote.
 
 Feature Lab loads `fonts/ui.efnt` for its HUD and menus. This in-house format packs
 an RGBA atlas, glyph rectangles, advances, offsets, line spacing and a fallback
-glyph. Missing or damaged font files log a diagnostic and use readable embedded
-artwork. Text now submits one quad per glyph instead of one quad per lit pixel.
+glyph. At startup, missing or damaged font files log a diagnostic and keep readable
+embedded artwork. Invalid later edits preserve the current font. Text now submits one quad per glyph instead of one quad per lit pixel.
 The supplied font supports uppercase A-Z, digits, space and `%+-/:.?`; unsupported
 bytes display `?`. Unicode shaping is outside v1.
 
@@ -767,6 +770,14 @@ bytes display `?`. Unicode shaping is outside v1.
 
 The gallery demonstrates proportional widths, measured width, multiline layout,
 fallback characters, color/alpha and clipping. `make_assets` regenerates the font
-alongside the other sample content. Font files load at startup; `--watch-assets`
-continues to reload only shaders and scene textures. See
+alongside the other sample content. Fonts load at startup; `--watch-assets` also
+reloads `fonts/ui.efnt` after edits. Combine `--font-demo --watch-assets --assets
+"$PWD/assets"` to see changes in the gallery. Missing or corrupt edits retain the
+current atlas and metrics; a subsequent valid edit recovers automatically. The
+startup embedded font stays active until the first valid file can be loaded.
+
+The HUD shows font revision and whether the retained font is embedded. Console
+`[font applied]`/`[font retained]` messages include diagnostics; session summaries
+report `watched_fonts`, revision, last outcome, embedded state and atlas bytes.
+Watching remains opt-in, and there is no new keyboard shortcut. See
 [the EFNT and text API contract](docs/FORMATS.md#bitmap-fonts-efnt-v1).

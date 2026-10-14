@@ -40,8 +40,8 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
           const feature_lab::CollisionVisuals& collision_visuals,
           const feature_lab::SamplingGallery& sampling_gallery,
           const feature_lab::Diagnostics& diagnostics, const feature_lab::ShaderTools& shaders,
-          bool settings_open, const KeyBindings& bindings, std::string_view replay_status,
-          bool replay_session, bool playing_replay) {
+          const feature_lab::FontAssets& fonts, bool settings_open, const KeyBindings& bindings,
+          std::string_view replay_status, bool replay_session, bool playing_replay) {
     const auto extent = camera.extent(width, height) * 0.5F;
     const Rect view{camera.center - extent, camera.center + extent};
     const auto& map = game.map.data();
@@ -138,6 +138,8 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
               std::to_string(visible.chunks) + " / " + std::to_string(game.map.chunk_count()) +
               "    COLLIDERS " + std::to_string(game.collision_candidates.size()),
           cyan);
+    label(24, bottom - 102, 1.3F, fonts.status(),
+          fonts.applied() ? cyan : Color{1, 0.3F, 0.12F, 1});
     label(24, bottom - 84, 1.3F, textures.status(),
           textures.applied() ? cyan : Color{1, 0.3F, 0.12F, 1});
     label(24, bottom - 66, 1.3F, shaders.status(),
@@ -306,28 +308,29 @@ int main(int argc, char** argv) {
             } else if (arg == "--screenshot" && i + 1 < argc)
                 screenshot = argv[++i];
             else if (arg == "--help") {
-                std::cout << "Feature Lab defaults: WASD/arrows move, +/- zoom, Space pause, R "
-                             "restart, F11 "
-                             "fullscreen, PageUp/PageDown scroll status, M mute, N/B music/effects "
-                             "volume, E nearby alarm switch, F1 settings/rebind controls, F2 "
-                             "diagnostics, F3 debug "
-                             "shapes, "
-                             "F5 reload shaders, F6 shader failure demo, F7 reload textures, "
-                             "F8 texture failure demo, F10 single step while "
-                             "paused, Escape close settings/quit.\n"
-                             "--level facility|annex --level-tour (script both levels) "
-                             "--watch-assets (automatic shader/texture reload) --font-demo (text "
-                             "gallery) "
-                             "--play (skip title) --verify (CPU gameplay test) --scripted --frames "
-                             "N --no-audio "
-                             "--no-vsync --screenshot FILE.ppm --assets DIRECTORY "
-                             "--missing-texture-demo --settings-demo --diagnostics-demo "
-                             "--shader-error-demo --texture-error-demo --user-data DIRECTORY "
-                             "--load-slot 1..3 --save-slot 1..3 (on exit)\n"
-                             "--seed UINT64 --record-replay FILE.erpl --replay FILE.erpl "
-                             "--verify-replay FILE.erpl (CPU only). Replay modes disable F1; "
-                             "Escape ends recording/playback.\n"
-                             "--stress --help (configurable arena and benchmark reports)\n";
+                std::cout
+                    << "Feature Lab defaults: WASD/arrows move, +/- zoom, Space pause, R "
+                       "restart, F11 "
+                       "fullscreen, PageUp/PageDown scroll status, M mute, N/B music/effects "
+                       "volume, E nearby alarm switch, F1 settings/rebind controls, F2 "
+                       "diagnostics, F3 debug "
+                       "shapes, "
+                       "F5 reload shaders, F6 shader failure demo, F7 reload textures, "
+                       "F8 texture failure demo, F10 single step while "
+                       "paused, Escape close settings/quit.\n"
+                       "--level facility|annex --level-tour (script both levels) "
+                       "--watch-assets (automatic shader/texture/font reload) --font-demo (text "
+                       "gallery) "
+                       "--play (skip title) --verify (CPU gameplay test) --scripted --frames "
+                       "N --no-audio "
+                       "--no-vsync --screenshot FILE.ppm --assets DIRECTORY "
+                       "--missing-texture-demo --settings-demo --diagnostics-demo "
+                       "--shader-error-demo --texture-error-demo --user-data DIRECTORY "
+                       "--load-slot 1..3 --save-slot 1..3 (on exit)\n"
+                       "--seed UINT64 --record-replay FILE.erpl --replay FILE.erpl "
+                       "--verify-replay FILE.erpl (CPU only). Replay modes disable F1; "
+                       "Escape ends recording/playback.\n"
+                       "--stress --help (configurable arena and benchmark reports)\n";
                 return 0;
             } else
                 throw std::invalid_argument("Unknown/incomplete option: " + std::string(arg));
@@ -401,16 +404,8 @@ int main(int argc, char** argv) {
         if (!vsync_available)
             std::cerr << "[platform] Requested VSync control unavailable\n";
         Renderer renderer;
-        {
-            std::string font_error;
-            const auto font = load_font_or_fallback(assets, "fonts/ui.efnt", font_error);
-            renderer.set_font(font);
-            std::cerr << "[font " << (font_error.empty() ? "loaded" : "fallback")
-                      << "] fonts/ui.efnt glyphs=" << font.data().glyphs.size()
-                      << " atlas_bytes=" << renderer.font_bytes() << '\n';
-            if (!font_error.empty())
-                std::cerr << font_error << '\n';
-        }
+        feature_lab::FontAssets fonts;
+        fonts.reload(renderer, assets);
         GpuTimer gpu_timer;
         feature_lab::ShaderTools shaders;
         shaders.reload(renderer, assets);
@@ -682,7 +677,7 @@ int main(int argc, char** argv) {
                 continue;
             }
             if (asset_reload)
-                asset_reload->update(renderer, assets, shaders, textures, manual_reloads);
+                asset_reload->update(renderer, assets, shaders, textures, fonts, manual_reloads);
             diagnostics.collect_gpu(gpu_timer, frames + 1);
             gpu_timer.begin(frames + 1);
             const auto camera = game.camera(window.width(), window.height(), batch.alpha);
@@ -696,15 +691,15 @@ int main(int argc, char** argv) {
             } else {
                 draw(renderer, game, textures, batch.alpha, window.width(), window.height(), camera,
                      overlays, soundtrack, collision_visuals, sampling_gallery, diagnostics,
-                     shaders, settings.opened(), settings.bindings,
+                     shaders, fonts, settings.opened(), settings.bindings,
                      recorder ? "15 / RECORD " + std::to_string(recorder->file().commands.size()) +
                                     " / 36000"
                      : playback ? "15 / REPLAY " + std::to_string(playback_index) + " / " +
                                       std::to_string(playback->commands.size())
                      : !flow.notice.empty()
                          ? flow.notice
-                         : "29 / " + std::string(feature_lab::level_name(game.level)) +
-                               (watch_assets ? " / AUTO RELOAD" : " / BITMAP FONT ASSETS"),
+                         : "30 / " + std::string(feature_lab::level_name(game.level)) +
+                               (watch_assets ? " / AUTO RELOAD" : " / FONT RELOAD"),
                      recorder.has_value() || playback.has_value(), playback.has_value());
                 diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
                 settings.draw(renderer, window.width(), window.height());
@@ -775,6 +770,10 @@ int main(int argc, char** argv) {
                   << " core_components=" << game.world.component_count<feature_lab::CorePickup>()
                   << " watched_shaders=" << (asset_reload ? asset_reload->shader_reloads() : 0)
                   << " watched_textures=" << (asset_reload ? asset_reload->texture_reloads() : 0)
+                  << " watched_fonts=" << (asset_reload ? asset_reload->font_reloads() : 0)
+                  << " font_revision=" << fonts.revision() << " font_applied=" << fonts.applied()
+                  << " font_embedded=" << fonts.embedded()
+                  << " font_bytes=" << renderer.font_bytes()
                   << " scene=" << (flow.title_open() ? "title" : "gameplay")
                   << " texture_revision=" << textures.revision()
                   << " texture_applied=" << textures.applied()

@@ -19,7 +19,9 @@ struct Files {
         path = pattern;
         std::filesystem::create_directories(path / "shaders");
         std::filesystem::create_directories(path / "textures");
+        std::filesystem::create_directories(path / "fonts");
         AssetRoot root(path);
+        root.write_atomic("fonts/ui.efnt", encode_font(builtin_font()));
         root.write_text("shaders/sprite.vert", Renderer::default_vertex_shader());
         root.write_text("shaders/sprite.frag", Renderer::default_fragment_shader());
         root.write_atomic("textures/test.etex", encode_texture({1, 1, {255, 0, 0, 255}}));
@@ -37,6 +39,7 @@ TEST(watched_edits_apply_pixels_retain_failures_and_recover_without_resource_gro
     TextureAssets textures(root);
     textures.load(renderer, "textures/test.etex", 1, 1);
     ShaderTools shaders;
+    FontAssets fonts;
     shaders.reload(renderer, root);
     AssetReload reload(root, textures);
     const auto handle = textures.at("textures/test.etex").gpu;
@@ -48,7 +51,7 @@ TEST(watched_edits_apply_pixels_retain_failures_and_recover_without_resource_gro
         return renderer.pixel(16, 16);
     };
     auto time = AssetWatcher::Time{};
-    const auto tick = [&] { reload.update(renderer, root, shaders, textures, 0, time); };
+    const auto tick = [&] { reload.update(renderer, root, shaders, textures, fonts, 0, time); };
     const auto settle = [&] {
         time += 200ms;
         tick();
@@ -109,17 +112,18 @@ TEST(manual_reload_wins_over_a_ready_automatic_group) {
     TextureAssets textures(root);
     textures.load(renderer, "textures/test.etex", 1, 1);
     ShaderTools shaders;
+    FontAssets fonts;
     AssetReload reload(root, textures);
-    reload.update(renderer, root, shaders, textures, 0, AssetWatcher::Time{});
+    reload.update(renderer, root, shaders, textures, fonts, 0, AssetWatcher::Time{});
     InputFrame input{};
     input[static_cast<std::size_t>(Key::reload_shaders)].pressed = true;
     CHECK(shaders.update(renderer, root, input));
     const auto revision = renderer.shader_revision();
-    reload.update(renderer, root, shaders, textures, AssetReload::shader_group,
+    reload.update(renderer, root, shaders, textures, fonts, AssetReload::shader_group,
                   AssetWatcher::Time{} + 150ms);
     CHECK(renderer.shader_revision() == revision && reload.shader_reloads() == 0);
     CHECK(reload.texture_reloads() == 1);
-    reload.update(renderer, root, shaders, textures, 0, AssetWatcher::Time{} + 2s);
+    reload.update(renderer, root, shaders, textures, fonts, 0, AssetWatcher::Time{} + 2s);
     CHECK(reload.shader_reloads() == 0 && renderer.healthy());
 }
 } // namespace
