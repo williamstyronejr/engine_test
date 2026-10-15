@@ -193,6 +193,45 @@ TEST(title_audio_starts_paused_and_resumes_without_duplicate_voices) {
     }
     CHECK(track.enabled() && track.stats().started == 3 && track.stats().queue_rejections == 0);
 }
+TEST(real_alsa_write_failure_disables_output_and_retains_soundtrack_diagnostics) {
+    {
+        // Standard ALSA file PCM over null: /dev/full deterministically rejects writes.
+        // This exercises the real worker/adapter without a physical device or config edits.
+        AudioOutput audio("file:/dev/full");
+        eventually([&] { return !audio.healthy(); });
+        const auto failure = audio.stats();
+        CHECK(failure.device_error < 0 && failure.recoveries == 0);
+        CHECK(!audio.stop_all());
+        CHECK(audio.stats().queue_rejections == failure.queue_rejections + 1);
+        CHECK(audio.stats().device_error == failure.device_error);
+    }
+    const AssetRoot assets(TEST_ASSET_ROOT);
+    const auto game = feature_lab::load_game(assets);
+    feature_lab::Soundtrack track(assets, true, "file:/dev/full");
+    eventually([&] {
+        track.update(game, {}, 0);
+        return !track.enabled();
+    });
+    const auto failure = track.stats();
+    CHECK(failure.device_error < 0 && track.status() == "AUDIO OFF");
+    track.configure({.2F, .3F, .4F, true});
+    track.restored(game);
+    track.update(game, {}, 1);
+    CHECK(track.stats().device_error == failure.device_error);
+    CHECK(track.stats().written_frames == failure.written_frames);
+    CHECK(track.settings().muted);
+}
+TEST(output_reports_device_progress_without_spurious_recoveries) {
+    AudioOutput audio("null");
+    eventually([&] { return audio.stats().written_frames >= 1024; });
+    const auto stats = audio.stats();
+    CHECK(audio.healthy() && stats.device_error == 0);
+    CHECK(stats.underruns == 0 && stats.suspensions == 0 && stats.recoveries == 0);
+    const auto clip = audio.register_sound({1, {.25F, -.25F}});
+    CHECK(audio.play(clip));
+    eventually([&] { return audio.stats().completed == 1; });
+    CHECK(audio.stats().written_frames >= stats.written_frames);
+}
 TEST(missing_audio_device_is_rejected) {
     rejects([] { AudioOutput bad("engine_test_intentionally_missing_device"); });
     const AssetRoot assets(TEST_ASSET_ROOT);
