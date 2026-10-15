@@ -408,7 +408,57 @@ reload use that identity and must be restored with matching content; pre-edit sa
 are not silently migrated. Repeated phase conversions can round down by ticks;
 they are not a lossless restoration of the previous timeline. File reload remains
 synchronous, with temporary candidate allocations; no work was added to per-tick
-animation advancement. Scene, tilemap and audio hot reload remain unimplemented.
+animation advancement. Scene and audio hot reload remain unimplemented.
+
+## Tilemap snapshot replacement
+
+Feature Lab's `Game::reload_tilemap(data, prepare)` constructs an independent
+validated `TileMap`. Width, height, origin, tile size, texture key and atlas grid
+must match the installed map, preserving the authored scene's coordinate system
+and resident GPU texture contract. Cells, palette cells/solidity, layer count and
+layer ordering may change within ETMP bounds. Collision solids are still the union
+of all layers, including cells hidden by another layer.
+
+Before publishing, the game stages the candidate's chunk/solid lookup, all tile and
+scene walls, query bodies, a primed collision world and reserved movement scratch.
+The total wall count plus four reserved gameplay bodies must fit the existing
+256-body collision budget. The current player and restart spawn must remain inside
+the map and outside those walls. Current-position overlap uses the save validator's
+0.2999 half extent to tolerate swept movement at a wall; restart uses 0.3. Geometry
+is unchanged and the existing door state is retained. This does not prove routes to
+cores, switch or exit remain traversable; authoring a blocked route is permitted.
+
+The optional `prepare(const TileMap&)` stages dependent presentation while the live
+map is unchanged. It must not mutate live game/presentation state. Any exception
+retains the old map, collision world, movement scratch and interpolation state.
+After preparation all publications are noexcept moves. Feature Lab stages minimap
+walls through this hook, then commits them through `Overlays::reload` immediately
+after the successful game transaction, before any drawing. Minimap scroll and its
+existing GPU target are retained. The next tile pass and minimap pass see the same
+map that movement, queries and switch occlusion use.
+
+Reload preserves scene entities/handles, pickups, game ticks, random state, pause,
+animation and door completion. Player interpolation snaps to the current position
+to avoid drawing through newly solid tiles. Priming seeds the current sensor contacts
+without emitting events; the next simulation step continues enter/stay/exit from
+that contact state, so an overlapping alarm does not generate another enter.
+Transient old collision events/candidates are discarded; no simulation tick runs.
+
+`TilemapAssets` reads the current level's fixed `facility.etmp` or `annex.etmp` key
+with the existing 4 MiB limit. Invalid/missing/escaping paths, invalid data, budget
+failures or preparation failures retain the current revision and report the source.
+Successful attempts increment the revision. New-game/level/save replacement resets
+status to ready revision 1; plain restart keeps the edited map. Save fingerprints
+include the new encoded ETMP; old saves need matching content and are not migrated.
+The format and file schema do not change.
+
+With `--watch-assets`, each level map has an independent 150 ms debounce group.
+Only a ready key matching the active level attempts a reload; inactive edits do not
+change status or attempt counts. Level replacement reads its own file normally and
+future watcher callbacks resolve the then-active level. Recording/playback locks
+`TilemapAssets` and omits both map keys. The watcher owns its callbacks; captured
+references must outlive it. Reload is synchronous and temporarily duplicates CPU
+map/collision storage, with no new allocation or reload work in movement's hot path.
 
 ## Camera changes within a frame
 
@@ -1338,20 +1388,22 @@ for event coalescing, directory/inode behavior and queue limitations.
 
 Feature Lab's optional `--watch-assets` registers the two sprite shader files as one
 group, all resident texture keys as another, `fonts/ui.efnt` as a third, and
-`facility.eani` as a fourth outside recording/playback. `AssetReload::update` polls once per
-drawable frame after input/simulation, before GPU timing and any render pass. This
+`facility.eani` as a fourth, plus independent `facility.etmp` and `annex.etmp`
+groups outside recording/playback. `AssetReload::update` polls once per drawable
+frame after input/simulation, before GPU timing and any render pass. This
 also works on the title, in settings, while paused and during replay; minimized
 windows defer it until drawing resumes. Ready groups call the existing full shader
-or texture-bank transactions, the strict font transaction, or the animation callback. A manual F5/F6 or F7/F8 attempt suppresses a ready
+or texture-bank transactions, the strict font transaction, or the animation/tilemap
+callbacks. A manual F5/F6 or F7/F8 attempt suppresses a ready
 automatic transaction in the same group/frame. Groups remain independent; this is
-not one atomic shader/texture/font/animation project transaction. Logs count automatic attempts
-including failures, and report notification or metadata-fallback mode changes.
+not one atomic project transaction. Logs count automatic attempts including failures,
+and report notification or metadata-fallback mode changes.
 
 Watching is disabled by default and is not persisted in configuration. It never
 modifies source assets, game checkpoints or replay commands. Reload still runs on
 the render thread and can hitch a frame. Watched keys remain fixed for the session's
-shared resident bank and fixed font/animation keys; arbitrary new banks, interactive scene
-reload, audio reload and background loading remain unimplemented. Asset/save/replay/
+shared resident bank and fixed font/animation/level-map keys; arbitrary new banks,
+interactive scene reload, audio reload and background loading remain unimplemented. Asset/save/replay/
 configuration schemas and Linux system-library requirements are unchanged.
 
 ## Bitmap fonts (EFNT v1)
