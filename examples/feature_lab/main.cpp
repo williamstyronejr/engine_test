@@ -704,8 +704,8 @@ int main(int argc, char** argv) {
                                       std::to_string(playback->commands.size())
                      : !flow.notice.empty()
                          ? flow.notice
-                         : "31 / " + std::string(feature_lab::level_name(game.level)) +
-                               (watch_assets ? " / AUTO RELOAD" : " / WINDOW LIFECYCLE"),
+                         : "32 / " + std::string(feature_lab::level_name(game.level)) +
+                               (watch_assets ? " / AUTO RELOAD" : " / AUDIO RECOVERY"),
                      recorder.has_value() || playback.has_value(), playback.has_value());
                 diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
                 settings.draw(renderer, window.width(), window.height());
@@ -803,7 +803,12 @@ int main(int argc, char** argv) {
         std::cout << "[audio stats] enabled=" << soundtrack.enabled()
                   << " started=" << audio_stats.started << " completed=" << audio_stats.completed
                   << " dropped=" << audio_stats.dropped_plays
-                  << " queue_rejections=" << audio_stats.queue_rejections << '\n';
+                  << " queue_rejections=" << audio_stats.queue_rejections
+                  << " written_frames=" << audio_stats.written_frames
+                  << " underruns=" << audio_stats.underruns
+                  << " suspensions=" << audio_stats.suspensions
+                  << " recoveries=" << audio_stats.recoveries << " waits=" << audio_stats.waits
+                  << " device_error=" << audio_stats.device_error << '\n';
         if (sample_count > 0) {
             std::sort(cpu_samples.begin(),
                       cpu_samples.begin() + static_cast<std::ptrdiff_t>(sample_count));

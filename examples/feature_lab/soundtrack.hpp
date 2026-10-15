@@ -145,7 +145,7 @@ class Soundtrack {
             disable(error.what());
         }
     }
-    engine::AudioStats stats() const { return output_ ? output_->stats() : engine::AudioStats{}; }
+    engine::AudioStats stats() const { return output_ ? output_->stats() : final_stats_; }
     bool enabled() const { return static_cast<bool>(output_); }
     static constexpr std::array<std::string_view, 4> keys = {
         "sounds/pickup.wav", "sounds/music.wav", "sounds/machine.wav", "sounds/door.wav"};
@@ -164,7 +164,12 @@ class Soundtrack {
         last_pan_ = 0;
     }
     void disable(std::string_view reason) {
-        std::cerr << "[audio] Muted: " << reason << '\n';
+        if (output_)
+            final_stats_ = output_->stats();
+        std::cerr << "[audio] Muted: " << reason;
+        if (final_stats_.device_error)
+            std::cerr << " (device_error=" << final_stats_.device_error << ')';
+        std::cerr << '\n';
         output_.reset();
     }
     static constexpr std::array<float, 3> music_levels{0.3F, 0.15F, 0},
@@ -176,6 +181,7 @@ class Soundtrack {
     std::size_t music_level_{}, effect_level_{};
     float last_gain_{}, last_pan_{};
     AudioSettings settings_;
+    engine::AudioStats final_stats_;
     bool paused_{}, door_{}, won_{};
 };
 } // namespace feature_lab

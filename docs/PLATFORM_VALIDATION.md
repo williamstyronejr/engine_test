@@ -29,11 +29,14 @@ The six-case `platform_lifecycle` group checks bounded fullscreen-property parsi
 explicit flushed request messages, real versus temporary-grab focus transitions,
 input cancellation, four actual unmap/restore cycles with retained texture pixels,
 resize/camera/UI/pointer agreement, and close-message validation. The resize matrix
-covers 320x240, 640x480, 1280x720, 1920x1080, 900x1200 and 320x200. GLX backing-buffer
-replacement may trail ConfigureNotify, so the test drives frames and requires
-convergence within two seconds. It synchronizes queued startup events before
-injecting the controlled pointer click. This is viewport-pixel testing, not a
-physical DPI or compositor-scale test.
+covers 320x240, 640x480, 1280x720, 1920x1080, 900x1200 and 320x200. The exact-size
+fixture stays unmapped to avoid asynchronous desktop sizing.
+It orders X11 resizing before GL with `glXWaitX` and explicitly swaps its hidden
+test drawable to retire the old back buffer; public `Window::present()` correctly
+skips unmapped windows. The test requires observed X11/GLX dimensions to converge
+within two seconds and synchronizes queued events before the controlled click.
+Mapped unmap/restore remains covered independently, including the visible probe.
+This is viewport-pixel testing, not a physical DPI or compositor-scale test.
 
 ## Observed desktop results — 2026-10-14
 
@@ -79,3 +82,9 @@ Fullscreen requests and observed state follow the
 [EWMH window-manager specification](https://specifications.freedesktop.org/wm/latest-single/).
 Map/unmap, focus-grab modes and iconification use the installed Xlib interfaces
 specified in the [Xlib programming manual](https://xorg.freedesktop.org/releases/current/doc/libX11/libX11/libX11.html).
+
+
+The thirty-second increment isolates the size fixture after a full-suite run
+observed a mapped override-redirect window revert from a requested 640x480 to
+320x240. It tests the same size, pixel and pointer assertions without relying on
+the desktop retaining that exact mapped size. Native window behavior is unchanged.

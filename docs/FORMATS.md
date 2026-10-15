@@ -520,11 +520,20 @@ immutable views; callers must keep those views alive until voices stop. The mono
 span convenience overload remains for simple CPU use. Production asynchronous
 playback uses output-owned sound handles, replacing the earlier borrowed-span API.
 
-ALSA output remains nonblocking 48 kHz float stereo. Underruns attempt prepare;
-unrecoverable write errors latch failure. Device reconnection is not automatic.
-Feature Lab logs errors, joins/releases the output, and displays `AUDIO OFF` on
-failure. The null-device tests validate software transport, not speakers or physical
-device disconnect/recovery. Those still require manual hardware checks.
+ALSA output remains nonblocking 48 kHz float stereo. Short writes preserve the
+unwritten tail. Write and wait errors share handling: underruns attempt prepare;
+suspension first attempts resume, backs off on temporary failure, and falls back
+to prepare when resume is unsupported or otherwise fails. One bounded step returns
+to the shutdown check; no block is remixed during recovery. Failed prepare and
+terminal write/wait errors latch the negative device error and reject commands.
+
+`AudioStats` additionally reports accepted `written_frames`, `underruns`,
+`suspensions`, successful `recoveries`, readiness `waits`, and `device_error`.
+Device reconnection is not automatic. Feature Lab logs errors, joins/releases the
+output, displays `AUDIO OFF`, and retains the last observed statistics after
+failure. These counters do not prove speaker output. See [audio validation and
+recovery limits](AUDIO_VALIDATION.md) for exact retry semantics, injected and real
+ALSA file-sink checks, and the outstanding physical device/listening matrix.
 
 ## Input and UI contracts
 

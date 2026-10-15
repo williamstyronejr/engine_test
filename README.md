@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The thirty-first increment adds observed fullscreen/focus state, safe unmap/restore
-behavior, lifecycle tests, and an opt-in desktop validation probe.
+The thirty-second increment adds tested audio suspend/underrun recovery, device
+failure diagnostics, and an opt-in stereo listening probe.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -142,9 +142,19 @@ with an `AUDIO OFF` indicator. Use `--no-audio` to skip sound loading and device
 # Start with diagnostics and collision/camera outlines visible.
 ./build/debug/feature_lab --diagnostics-demo
 
-# Check real audio-device initialization with silence, not an audible test.
+# Check real audio-device initialization and PCM progress with silence.
 ./build/debug/audio_probe
+
+# Opt in to an eight-second stereo/mute/pause/stop listening sequence.
+./build/debug/audio_probe --exercise
 ```
+
+Audio transport now retries partial writes, handles underruns and suspended PCMs,
+and records accepted frames, recovery counters and terminal errors. Failed audio
+is disabled while gameplay continues; the final report retains the last diagnostics.
+See [audio validation](docs/AUDIO_VALIDATION.md) for automated fault tests and the
+remaining physical listening/device checks. Removed devices are not automatically
+reopened.
 
 `--scripted` advances one simulation tick per rendered frame for reproducible visual
 inspection. Pause, single-step, restart, and debug toggles also work in this mode.
@@ -587,6 +597,11 @@ The current desktop confirms fullscreen and client unmap/restore but does not
 confirm the WM minimize request. Physical monitor scaling remains unverified.
 
 ## Tests
+
+The CPU `audio_recovery` group checks short writes, wait errors, underruns, bounded
+suspend/resume retries, failed recovery and exact pending samples. `audio_transport`
+also exercises a real ALSA write failure through `file:/dev/full` and verifies
+Feature Lab disables audio while retaining failure diagnostics.
 
 The `platform_lifecycle` group covers fullscreen observation/requests, focus modes,
 input cancellation, repeated unmap/restore, six resize/UI/pointer sizes, and close

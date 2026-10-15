@@ -152,24 +152,23 @@ TEST(real_unmap_restore_preserves_context_and_cancels_input) {
 TEST(resize_matrix_matches_glx_pixels_camera_ui_and_pointer) {
     NativeInput f;
     Renderer renderer;
-    XMoveWindow(f.display.get(), f.native, -20000, -20000);
-    sync(f);
-    f.window.restore();
-    XSync(glXGetCurrentDisplay(), False);
-    f.window.poll(f.input);
+    // Keep the exact-size fixture unmapped: mapped native sizes can be overridden
+    // asynchronously even with override_redirect set.
     for (const auto size :
          {RenderTargetSize{320, 240}, RenderTargetSize{640, 480}, RenderTargetSize{1280, 720},
           RenderTargetSize{1920, 1080}, RenderTargetSize{900, 1200}, RenderTargetSize{320, 200}}) {
         f.window.resize(size.width, size.height);
-        // XWayland/GLX buffer replacement can trail ConfigureNotify. Drive frames
-        // and allow bounded convergence, just as the visible application does.
+        glXWaitX(); // Order native resize before rendering into the hidden drawable.
+        // Allow bounded convergence of the X11 event and GLX drawable sizes.
         unsigned gl_width{}, gl_height{};
         const auto deadline = std::chrono::steady_clock::now() + 2s;
         do {
             f.window.poll(f.input);
             renderer.begin(f.window.width(), f.window.height(), {{0, 0}, 2});
             renderer.end();
-            f.window.present();
+            // Window::present intentionally skips unmapped windows. Retire the
+            // hidden test buffer explicitly so GLX allocates the resized back buffer.
+            glXSwapBuffers(glXGetCurrentDisplay(), glXGetCurrentDrawable());
             glXQueryDrawable(glXGetCurrentDisplay(), glXGetCurrentDrawable(), GLX_WIDTH, &gl_width);
             glXQueryDrawable(glXGetCurrentDisplay(), glXGetCurrentDrawable(), GLX_HEIGHT,
                              &gl_height);

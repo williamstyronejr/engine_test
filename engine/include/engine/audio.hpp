@@ -12,6 +12,8 @@ struct AudioStats {
     std::uint64_t processed{}, started{}, completed{}, stopped{}, dropped_plays{}, stale_controls{},
         queue_rejections{};
     std::size_t active_voices{};
+    std::uint64_t written_frames{}, underruns{}, suspensions{}, recoveries{}, waits{};
+    int device_error{}; // Latched negative ALSA error; zero while healthy.
 };
 class AudioOutput {
   public:

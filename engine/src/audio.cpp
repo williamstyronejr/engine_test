@@ -1,8 +1,10 @@
 #include "engine/audio.hpp"
 #include "audio_queue.hpp"
+#include "audio_transport.hpp"
 #include <alsa/asoundlib.h>
 #include <array>
 #include <atomic>
+#include <chrono>
 #include <stdexcept>
 #include <string>
 #include <thread>
@@ -10,6 +12,18 @@
 namespace engine {
 using audio_detail::Command;
 using audio_detail::CommandKind;
+namespace {
+struct AlsaDevice {
+    snd_pcm_t* pcm;
+    snd_pcm_sframes_t write(const float* samples, std::size_t frames) {
+        return snd_pcm_writei(pcm, samples, frames);
+    }
+    int wait() { return snd_pcm_wait(pcm, 10); }
+    int prepare() { return snd_pcm_prepare(pcm); }
+    int resume() { return snd_pcm_resume(pcm); }
+    void backoff() { std::this_thread::sleep_for(std::chrono::milliseconds(10)); }
+};
+} // namespace
 struct AudioOutput::Impl {
     explicit Impl(MixerGains initial) : mixer(initial) {}
     Mixer mixer; // Initialized before the worker starts; subsequently worker-owned.
@@ -24,6 +38,8 @@ struct AudioOutput::Impl {
     std::atomic<std::uint64_t> processed{}, started{}, completed{}, stopped{}, dropped{}, stale{},
         rejected{};
     std::atomic<std::size_t> active{};
+    std::atomic<std::uint64_t> written_frames{}, underruns{}, suspensions{}, recoveries{}, waits{};
+    std::atomic<int> device_error{};
     std::atomic<bool> running{true}, failed{false};
     std::thread thread;
     ~Impl() {
@@ -44,11 +60,12 @@ struct AudioOutput::Impl {
         return true;
     }
     void process() {
-        std::array<float, 512> buffer{};
-        std::size_t offset = buffer.size() / 2;
+        audio_detail::BlockWriter::Buffer buffer{};
+        audio_detail::BlockWriter writer;
+        AlsaDevice device{pcm};
         std::uint64_t consumed = 0;
         while (running.load(std::memory_order_relaxed)) {
-            if (offset == buffer.size() / 2) {
+            if (writer.needs_block()) {
                 Command command;
                 // Bound work per block even if the producer keeps replenishing the queue.
                 for (std::size_t n = 0;
@@ -67,21 +84,18 @@ struct AudioOutput::Impl {
                 stopped.store(mixer.stopped(), std::memory_order_relaxed);
                 active.store(mixer.active_voices(), std::memory_order_relaxed);
                 processed.store(consumed, std::memory_order_release);
-                offset = 0;
+                writer.begin_block();
             }
-            const auto n =
-                snd_pcm_writei(pcm, buffer.data() + offset * 2, buffer.size() / 2 - offset);
-            if (n > 0)
-                offset += static_cast<std::size_t>(n);
-            else if (n == -EAGAIN || n == 0)
-                snd_pcm_wait(pcm, 10);
-            else if (n == -EPIPE || n == -ESTRPIPE) {
-                if (snd_pcm_prepare(pcm) < 0) {
-                    failed.store(true);
-                    break;
-                }
-            } else if (n != -EINTR) {
-                failed.store(true);
+            writer.step(device, buffer);
+            const auto transport = writer.stats();
+            written_frames.store(transport.written_frames, std::memory_order_relaxed);
+            underruns.store(transport.underruns, std::memory_order_relaxed);
+            suspensions.store(transport.suspensions, std::memory_order_relaxed);
+            recoveries.store(transport.recoveries, std::memory_order_relaxed);
+            waits.store(transport.waits, std::memory_order_relaxed);
+            if (transport.error) {
+                device_error.store(transport.error, std::memory_order_relaxed);
+                failed.store(true, std::memory_order_release);
                 break;
             }
         }
@@ -213,7 +227,13 @@ AudioStats AudioOutput::stats() const {
             p.dropped.load(),
             p.stale.load(),
             p.rejected.load(),
-            p.active.load()};
+            p.active.load(),
+            p.written_frames.load(),
+            p.underruns.load(),
+            p.suspensions.load(),
+            p.recoveries.load(),
+            p.waits.load(),
+            p.device_error.load()};
 }
 bool AudioOutput::healthy() const {
     return !impl_->failed.load();

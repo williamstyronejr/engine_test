@@ -60,7 +60,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F07 | Implemented (v1) | Handle/compaction/hierarchy tests, scene round trips, deferred deletion; title/gameplay and Facility/Annex transitions; typed runtime pools with checked access, intersecting queries, ownership/exception/move tests, allocation-free steady queries and pickup integration | Optional custom component serialization codecs, query scheduling and broader ECS tooling |
 | F08 | Partial | ETEX/ETMP/EANI/WAV/EFNT readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, transactional shader/texture/font reload; optional bounded inotify watching, debounce, metadata recovery and watched GPU pixel tests | Broader asset-type reload support |
 | F09 | Implemented (v1) | Swept player boxes; box/circle contacts; moving-body grid vs brute force; reciprocal filters; trigger history; overlap/segment queries; alarm/switch and restore tests | Rigid-body dynamics, rotating shapes and moving-body CCD are outside initial scope |
-| F10 | Partial | PCM16 WAV assets/resampling, loops, voice controls, gain ramps, master/music/effects controls, stereo emitter, null-device soundtrack/restart/failure tests | Physical disconnect/recovery testing and audible-output checks |
+| F10 | Partial | PCM16 WAV assets/resampling, loops, voice controls, gain ramps, master/music/effects controls, stereo emitter, null-device soundtrack/restart tests; deterministic transport recovery faults; real ALSA file-sink failure/fallback; recovery counters and listening probe | Physical disconnect/recovery, system suspend/resume and audible-output checks; see [audio validation](AUDIO_VALIDATION.md) |
 | F11 | Partial | Atlas bitmap text with authored metrics, bounded allocation-free layout, font fallback and visual gallery; clipped status panel, buttons/checkboxes/sliders, keyboard/pointer navigation, bounded layout, modal settings and title screen; `ui`, scene-flow and GPU pixel tests | Broader manual navigation checks |
 | F12 | Implemented (v1) | Live minimap, clipped scrolling panel; seven GPU cases for pixels, alpha composition, clipping, resizing, resource limits and example integration | Optional multisampling, HDR and post-processing |
 | F13 | Implemented (v1) | Clock/catch-up, paused stepping, ERPL recording/playback, per-command state checks, seeded random state, save migration and full-game replay tests | Cross-machine float determinism and replaying menu/audio/render commands are outside v1 |
@@ -1263,10 +1263,56 @@ reference final tick 1381 and hash 3859428580428616961. Both restored game captu
 were inspected. No physical monitor-scale, audible-output or performance-baseline
 claim is made. F01 remains partial for the outstanding matrix entries.
 
+## Added in the thirty-second increment
+
+- Worker-owned block submission preserves pending samples across short writes,
+  wait interruptions, underruns and suspended-device recovery. Wait errors now
+  receive the same handling as write errors. Resume retries use bounded backoff
+  and preserve shutdown responsiveness; unsupported resume falls back to prepare.
+- Audio statistics report accepted PCM frames, underruns, suspensions, successful
+  recoveries, waits and a terminal error code. Feature Lab retains diagnostics
+  after disabling failed output and continues silent gameplay.
+- Seven CPU recovery cases cover exact sample delivery, retry bounds, failed
+  prepare and terminal errors. Two additional real-worker tests check null-device
+  progress and `/dev/full` write failure with preserved soundtrack diagnostics.
+- `audio_probe` still defaults to a silent check and now requires PCM progress.
+  Opt-in `--exercise` provides left/right/center, mute, group pause/resume and stop
+  phases. No system volume/routing configuration or dependencies were added.
+- [Audio validation](AUDIO_VALIDATION.md) separates software and PCM acceptance
+  from physical audibility, suspend/resume and unplug/reconnect evidence.
+
+The full Release suite also exposed an intermittent mapped resize fixture from
+increment 31. Its exact-size checks now use an unmapped drawable, synchronize X11
+before GL and retire the hidden back buffer explicitly. Ten repeated lifecycle
+runs pass; mapped unmap/restore and visible-probe coverage remain separate. No
+production window behavior changed.
+
+## Thirty-second-increment validation (2026-10-15)
+
+All 41 runtime CTest groups pass with GCC Debug and Release, without skips,
+including the corrected lifecycle fixture. Four focused groups (audio_recovery,
+audio_transport, sound and core) pass with Clang and native ASan/UBSan (leak
+detection disabled). The recovery group also passes the CPU-only sanitizer preset
+with no ALSA/platform dependency. Three Release packaging checks pass: archive
+build, relocation and native OpenGL smoke. No new performance baseline was taken.
+
+The silent default-device probe accepted 6144 frames with no device errors or
+recoveries. The eight-phase exercise on ALSA null completed with one started/stopped
+voice, no active voices at exit and no rejected/stale commands. These are transport
+and control checks, not proof of speaker output. The real ALSA `file:/dev/full`
+probe latched error -5 after 1792 accepted frames and exited 1 as expected.
+
+A native 1500-command replay with normal default output ended at tick 1381 and hash
+3859428580428616961, with eight voice starts and no rejected commands or device
+errors. A separate replay used a process-local ALSA configuration routing output to
+`/dev/full`: it disabled audio, kept the same final tick/hash, and retained error -5
+and 1792 accepted frames in the exit summary. The completed game capture with
+`AUDIO OFF` was inspected. The failure configuration was verified with the probe
+first; no installed system configuration was changed. Physical listening, real
+suspend and real disconnect/reconnection checks remain outstanding; F10 remains partial.
+
 ## Next increment
 
-Continue the outstanding audio validation and recovery work (F10), keeping actual
-speaker/device evidence separate from null-device transport tests. F01 remains
-partial until WM-supported minimize/restore and physical monitor scaling are
-verified. Broader asset-type reload, profiling/resource accounting and optional
-v1 scope remain tracked in the coverage manifest.
+Extend transactional asset reload to animation content (F08), preserving working
+resources when edited files fail validation. Physical audio and monitor/WM checks
+remain visible in their validation matrices; optional v1 scope remains deferred.
