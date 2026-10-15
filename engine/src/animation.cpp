@@ -89,6 +89,16 @@ AnimationPlayer::AnimationPlayer(std::shared_ptr<const AnimationSet> animations)
     animations_->validate();
     play(animations_->clips.front().name);
 }
+void AnimationPlayer::replace(std::shared_ptr<const AnimationSet> animations) {
+    AnimationPlayer candidate(std::move(animations));
+    candidate.play(clip_name());
+    if (candidate.animations_->clips[candidate.clip_].loop != animations_->clips[clip_].loop)
+        throw std::invalid_argument("Reload changes active animation loop mode");
+    // Validated durations are at most 256 * 36000 ticks, so this product fits u64.
+    candidate.position_ = position_ * candidate.duration_ / duration_;
+    candidate.paused_ = paused_;
+    *this = std::move(candidate);
+}
 void AnimationPlayer::play(std::string_view name, bool restart) {
     const auto found = std::find_if(animations_->clips.begin(), animations_->clips.end(),
                                     [&](const auto& clip) { return clip.name == name; });

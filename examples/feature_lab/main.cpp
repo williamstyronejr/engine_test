@@ -1,3 +1,4 @@
+#include "animation_assets.hpp"
 #include "asset_reload.hpp"
 #include "collision_visuals.hpp"
 #include "diagnostics.hpp"
@@ -40,8 +41,9 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
           const feature_lab::CollisionVisuals& collision_visuals,
           const feature_lab::SamplingGallery& sampling_gallery,
           const feature_lab::Diagnostics& diagnostics, const feature_lab::ShaderTools& shaders,
-          const feature_lab::FontAssets& fonts, bool settings_open, const KeyBindings& bindings,
-          std::string_view replay_status, bool replay_session, bool playing_replay) {
+          const feature_lab::FontAssets& fonts, const feature_lab::AnimationAssets& animations,
+          bool settings_open, const KeyBindings& bindings, std::string_view replay_status,
+          bool replay_session, bool playing_replay) {
     const auto extent = camera.extent(width, height) * 0.5F;
     const Rect view{camera.center - extent, camera.center + extent};
     const auto& map = game.map.data();
@@ -138,6 +140,8 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
               std::to_string(visible.chunks) + " / " + std::to_string(game.map.chunk_count()) +
               "    COLLIDERS " + std::to_string(game.collision_candidates.size()),
           cyan);
+    label(24, bottom - 120, 1.3F, animations.status(),
+          animations.applied() ? cyan : Color{1, 0.3F, 0.12F, 1});
     label(24, bottom - 102, 1.3F, fonts.status(),
           fonts.applied() ? cyan : Color{1, 0.3F, 0.12F, 1});
     label(24, bottom - 84, 1.3F, textures.status(),
@@ -432,9 +436,14 @@ int main(int argc, char** argv) {
         });
         if (texture_error_demo)
             textures.reload(renderer, true);
+        feature_lab::AnimationAssets animation_assets(recorder.has_value() || playback.has_value());
+        std::function<void()> reload_animations;
+        if (!animation_assets.locked())
+            reload_animations = [&] { animation_assets.reload(game, assets); };
         std::unique_ptr<feature_lab::AssetReload> asset_reload;
         if (watch_assets)
-            asset_reload = std::make_unique<feature_lab::AssetReload>(assets, textures);
+            asset_reload =
+                std::make_unique<feature_lab::AssetReload>(assets, textures, reload_animations);
         std::cout << "[assets] " << assets.directory() << " entities=" << game.world.size()
                   << " GPU textures=" << renderer.live_textures() << '\n';
         feature_lab::Soundtrack soundtrack(assets, audio_enabled, "default", config.audio,
@@ -448,6 +457,7 @@ int main(int argc, char** argv) {
             staged_walls = feature_lab::Overlays::stage(candidate);
         };
         const auto replacement_applied = [&] {
+            animation_assets.replaced();
             overlays.replaced(std::move(staged_walls));
             soundtrack.restored(game);
         };
@@ -697,15 +707,15 @@ int main(int argc, char** argv) {
             } else {
                 draw(renderer, game, textures, batch.alpha, window.width(), window.height(), camera,
                      overlays, soundtrack, collision_visuals, sampling_gallery, diagnostics,
-                     shaders, fonts, settings.opened(), settings.bindings,
+                     shaders, fonts, animation_assets, settings.opened(), settings.bindings,
                      recorder ? "15 / RECORD " + std::to_string(recorder->file().commands.size()) +
                                     " / 36000"
                      : playback ? "15 / REPLAY " + std::to_string(playback_index) + " / " +
                                       std::to_string(playback->commands.size())
                      : !flow.notice.empty()
                          ? flow.notice
-                         : "32 / " + std::string(feature_lab::level_name(game.level)) +
-                               (watch_assets ? " / AUTO RELOAD" : " / AUDIO RECOVERY"),
+                         : "33 / " + std::string(feature_lab::level_name(game.level)) +
+                               (watch_assets ? " / AUTO RELOAD" : " / ANIMATION RELOAD"),
                      recorder.has_value() || playback.has_value(), playback.has_value());
                 diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
                 settings.draw(renderer, window.width(), window.height());
@@ -776,6 +786,11 @@ int main(int argc, char** argv) {
                   << " core_components=" << game.world.component_count<feature_lab::CorePickup>()
                   << " watched_shaders=" << (asset_reload ? asset_reload->shader_reloads() : 0)
                   << " watched_textures=" << (asset_reload ? asset_reload->texture_reloads() : 0)
+                  << " watched_animations="
+                  << (asset_reload ? asset_reload->animation_reloads() : 0)
+                  << " animation_revision=" << animation_assets.revision()
+                  << " animation_applied=" << animation_assets.applied()
+                  << " animation_locked=" << animation_assets.locked()
                   << " watched_fonts=" << (asset_reload ? asset_reload->font_reloads() : 0)
                   << " font_revision=" << fonts.revision() << " font_applied=" << fonts.applied()
                   << " font_embedded=" << fonts.embedded()

@@ -3,13 +3,17 @@
 #include "font_assets.hpp"
 #include "shader_tools.hpp"
 #include "texture_assets.hpp"
+#include <functional>
 
 namespace feature_lab {
 class AssetReload {
   public:
-    static constexpr std::uint32_t shader_group = 1, texture_group = 2, font_group = 4;
-    AssetReload(const engine::AssetRoot& assets, const TextureAssets& textures)
-        : watch_(assets, files(textures)) {
+    static constexpr std::uint32_t shader_group = 1, texture_group = 2, font_group = 4,
+                                   animation_group = 8;
+    AssetReload(const engine::AssetRoot& assets, const TextureAssets& textures,
+                std::function<void()> animation_reload = {})
+        : watch_(assets, files(textures, static_cast<bool>(animation_reload))),
+          animation_reload_(std::move(animation_reload)) {
         std::cerr << "[watch] enabled files=" << watch_.size() << '\n';
     }
     // Call once per frame, outside render passes. A manual command takes priority
@@ -37,22 +41,30 @@ class AssetReload {
             ++font_reloads_;
             fonts.reload(renderer, assets);
         }
+        if (changed & animation_group) {
+            ++animation_reloads_;
+            animation_reload_();
+        }
     }
+    std::uint64_t animation_reloads() const { return animation_reloads_; }
     std::uint64_t font_reloads() const { return font_reloads_; }
     std::uint64_t shader_reloads() const { return shader_reloads_; }
     std::uint64_t texture_reloads() const { return texture_reloads_; }
 
   private:
-    static std::vector<engine::WatchedAsset> files(const TextureAssets& textures) {
+    static std::vector<engine::WatchedAsset> files(const TextureAssets& textures, bool animations) {
         std::vector<engine::WatchedAsset> result{{"shaders/sprite.vert", shader_group},
                                                  {"shaders/sprite.frag", shader_group},
                                                  {std::string(FontAssets::key), font_group}};
+        if (animations)
+            result.push_back({"facility.eani", animation_group});
         for (const auto& key : textures.keys())
             result.push_back({key, texture_group});
         return result;
     }
     engine::AssetWatcher watch_;
-    std::uint64_t shader_reloads_{}, texture_reloads_{}, font_reloads_{};
+    std::function<void()> animation_reload_;
+    std::uint64_t shader_reloads_{}, texture_reloads_{}, font_reloads_{}, animation_reloads_{};
     bool reported_{}, notifications_{};
 };
 } // namespace feature_lab

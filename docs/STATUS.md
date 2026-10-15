@@ -58,7 +58,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
 | F06 | Implemented (v1) | EANI reader/writer; exact frame timing, loops, pause/restart, large advances; animated player/machine/door with exactly-once completion | Optional frame callbacks and richer animation types |
 | F07 | Implemented (v1) | Handle/compaction/hierarchy tests, scene round trips, deferred deletion; title/gameplay and Facility/Annex transitions; typed runtime pools with checked access, intersecting queries, ownership/exception/move tests, allocation-free steady queries and pickup integration | Optional custom component serialization codecs, query scheduling and broader ECS tooling |
-| F08 | Partial | ETEX/ETMP/EANI/WAV/EFNT readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, transactional shader/texture/font reload; optional bounded inotify watching, debounce, metadata recovery and watched GPU pixel tests | Broader asset-type reload support |
+| F08 | Partial | ETEX/ETMP/EANI/WAV/EFNT readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, transactional shader/texture/font/animation reload with replay isolation; optional bounded inotify watching, debounce, metadata recovery and watched GPU pixel tests | Scene, tilemap and audio reload support |
 | F09 | Implemented (v1) | Swept player boxes; box/circle contacts; moving-body grid vs brute force; reciprocal filters; trigger history; overlap/segment queries; alarm/switch and restore tests | Rigid-body dynamics, rotating shapes and moving-body CCD are outside initial scope |
 | F10 | Partial | PCM16 WAV assets/resampling, loops, voice controls, gain ramps, master/music/effects controls, stereo emitter, null-device soundtrack/restart tests; deterministic transport recovery faults; real ALSA file-sink failure/fallback; recovery counters and listening probe | Physical disconnect/recovery, system suspend/resume and audible-output checks; see [audio validation](AUDIO_VALIDATION.md) |
 | F11 | Partial | Atlas bitmap text with authored metrics, bounded allocation-free layout, font fallback and visual gallery; clipped status panel, buttons/checkboxes/sliders, keyboard/pointer navigation, bounded layout, modal settings and title screen; `ui`, scene-flow and GPU pixel tests | Broader manual navigation checks |
@@ -1311,8 +1311,45 @@ and 1792 accepted frames in the exit summary. The completed game capture with
 first; no installed system configuration was changed. Physical listening, real
 suspend and real disconnect/reconnection checks remain outstanding; F10 remains partial.
 
+## Added in the thirty-third increment
+
+- `AnimationPlayer::replace` stages a validated snapshot and maps normalized tick
+  progress by clip name, preserving pause and completed state without emitting events.
+- Feature Lab stages all four animation players together and rejects incompatible
+  required clips, loop modes or resident texture/atlas changes. Bad file edits
+  retain working animation; ready/failed revision status appears in the HUD/logs.
+- Optional `--watch-assets` adds `facility.eani` as an independent group. Animation
+  watching is omitted during recording/playback; those sessions keep fixed content.
+  Title/settings/paused frames can reload; unmapped frames defer all watching.
+- Save fingerprints already include EANI; reload changes content identity and does
+  not migrate old saves. Game/level/save replacement resets reload status for the
+  newly installed snapshot. No new formats, hotkeys or external dependencies.
+- Seven CPU cases and two GPU/watch cases cover phase/completion, whole-bank
+  validation, old snapshot lifetime, save compatibility, debounce, changed pixels,
+  failure/repair, group isolation and stable renderer resource counts.
+
+## Thirty-third-increment validation (2026-10-15)
+
+All 43 runtime CTest groups pass with GCC Debug and Release, without skips.
+Seven focused groups (animation_reload, animation_watch, tile_animation,
+replay_files, levels, font_reload and watched_reload) pass with Clang and native
+ASan/UBSan with leak detection disabled. The new animation_reload group also passes
+the CPU-only sanitizer preset. Three Release packaging checks pass: archive build,
+relocation and native OpenGL smoke. No new performance baseline was taken.
+
+Native 240-frame watched runs in gameplay, title and settings each applied a valid
+edit, retained the bank after malformed EANI and accepted a repaired file. Each
+ended at revision 4 with four attempts (including initial synchronization); title
+and settings remained at tick 0. A 1500-command replay ignored a later malformed
+EANI edit and retained final tick 1381 and hash 3859428580428616961. Recording also
+ignored the edit; its 250-command output verified against the original assets at
+tick 250 with hash 13207249788274756958. Both fixed-content sessions reported zero
+animation reload attempts. Gameplay and replay captures were inspected, including
+the ready/locked animation HUD. Physical audio/display validation remains pending.
+
 ## Next increment
 
-Extend transactional asset reload to animation content (F08), preserving working
-resources when edited files fail validation. Physical audio and monitor/WM checks
-remain visible in their validation matrices; optional v1 scope remains deferred.
+Extend transactional reload to tilemap content (F08), including collision and
+minimap consistency and validation of the current player position before commit.
+Keep physical audio/display checks and remaining scene/audio reload coverage
+visible in the manifest; optional v1 scope remains deferred.

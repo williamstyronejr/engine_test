@@ -366,6 +366,50 @@ Feature Lab advances animations once per 60 Hz simulation tick and freezes them
 on game pause/completion. Clip durations therefore remain independent of render FPS.
 No arbitrary frame callbacks or interpolated/skeletal animation are provided.
 
+## Animation snapshot replacement
+
+`AnimationPlayer::replace(snapshot)` validates a new immutable snapshot and stages
+its active clip by name. The active clip must exist with the same loop flag.
+Playback position becomes `floor(old_position * new_duration / old_duration)`;
+validated durations are at most 9,216,000 ticks, so the product fits uint64. Pause
+is preserved. A finished one-shot maps to the new endpoint; an unfinished one-shot
+stays before it, even if shortened to one tick. Replacement emits no completion or
+loop event. The next normal advance may complete an unfinished one-shot once.
+Frame order/count/cells/durations and clip order can change. Failed replacement
+leaves the old snapshot and state intact; other players retaining it are unaffected.
+Callers must surrender mutable aliases, as with initial player construction.
+
+Feature Lab's `Game::reload_animations` stages all four players before committing
+with noexcept moves. It additionally requires looping `idle`, `walk`, `core_pulse`
+and `machine`, non-looping `door_open`, and the same resident texture key and atlas
+grid. It checks even clips not active yet. It preserves game ticks, positions,
+pause, collected objects, collision state, door flags/completion count and random
+state. Edited timing can affect future gameplay; this is not a presentation-only
+reload. All live players and `Game::animations` publish together at a main-thread
+frame boundary, after simulation and before drawing.
+
+`AnimationAssets` strictly reads `facility.eani` (1 MiB bound), decodes and requests
+that game transaction. Invalid/missing/escaping paths and incompatible data retain
+the previous bank and report the source error. Successful attempts increment the
+revision; failures retain it. Old snapshots are released when no reader owns them.
+New-game/level/save replacement resets this status to ready revision 1 because it
+installs its own game snapshot. Plain restart keeps the current bank and status.
+
+With `--watch-assets`, animation gets its own 150 ms debounced group. The optional
+`AssetReload` callback runs only when that group is ready and performs its
+transaction at the frame boundary. Any referenced objects captured by the callback
+must outlive the watcher. Without the callback,
+EANI is not registered. Recording/playback constructs a locked `AnimationAssets`
+and omits that group entirely, so later file edits cannot alter recorded content.
+No new UI command, content file, save schema or replay command is introduced.
+
+Content fingerprints include the current encoded EANI. Checkpoints made after a
+reload use that identity and must be restored with matching content; pre-edit saves
+are not silently migrated. Repeated phase conversions can round down by ticks;
+they are not a lossless restoration of the previous timeline. File reload remains
+synchronous, with temporary candidate allocations; no work was added to per-tick
+animation advancement. Scene, tilemap and audio hot reload remain unimplemented.
+
 ## Camera changes within a frame
 
 `Renderer::set_camera` flushes queued geometry before changing projection. It does
@@ -1293,19 +1337,20 @@ See the [Linux inotify contract](https://man7.org/linux/man-pages/man7/inotify.7
 for event coalescing, directory/inode behavior and queue limitations.
 
 Feature Lab's optional `--watch-assets` registers the two sprite shader files as one
-group, all resident texture keys as another, and `fonts/ui.efnt` as a third. `AssetReload::update` polls once per
+group, all resident texture keys as another, `fonts/ui.efnt` as a third, and
+`facility.eani` as a fourth outside recording/playback. `AssetReload::update` polls once per
 drawable frame after input/simulation, before GPU timing and any render pass. This
 also works on the title, in settings, while paused and during replay; minimized
 windows defer it until drawing resumes. Ready groups call the existing full shader
-or texture-bank transactions, or the strict font transaction. A manual F5/F6 or F7/F8 attempt suppresses a ready
+or texture-bank transactions, the strict font transaction, or the animation callback. A manual F5/F6 or F7/F8 attempt suppresses a ready
 automatic transaction in the same group/frame. Groups remain independent; this is
-not one atomic shader/texture/font project transaction. Logs count automatic attempts
+not one atomic shader/texture/font/animation project transaction. Logs count automatic attempts
 including failures, and report notification or metadata-fallback mode changes.
 
 Watching is disabled by default and is not persisted in configuration. It never
 modifies source assets, game checkpoints or replay commands. Reload still runs on
 the render thread and can hitch a frame. Watched keys remain fixed for the session's
-shared resident bank and fixed font key; arbitrary new banks, interactive scene
+shared resident bank and fixed font/animation keys; arbitrary new banks, interactive scene
 reload, audio reload and background loading remain unimplemented. Asset/save/replay/
 configuration schemas and Linux system-library requirements are unchanged.
 

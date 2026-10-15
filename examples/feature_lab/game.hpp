@@ -202,6 +202,37 @@ struct Game {
         return picked;
     }
 
+    // Main-thread frame boundary. Stage every player before publishing the bank.
+    void reload_animations(std::shared_ptr<const engine::AnimationSet> candidate) {
+        if (!candidate)
+            throw std::invalid_argument("Missing animation candidate");
+        candidate->validate();
+        if (candidate->texture != animations->texture ||
+            candidate->atlas_columns != animations->atlas_columns ||
+            candidate->atlas_rows != animations->atlas_rows)
+            throw std::runtime_error("Animation reload must retain the resident texture/atlas");
+        for (const auto name : {"idle", "walk", "core_pulse", "machine", "door_open"}) {
+            const auto clip = std::find_if(candidate->clips.begin(), candidate->clips.end(),
+                                           [&](const auto& c) { return c.name == name; });
+            if (clip == candidate->clips.end() ||
+                clip->loop != (std::string_view(name) != "door_open"))
+                throw std::runtime_error("Missing or incompatible required animation: " +
+                                         std::string(name));
+        }
+        auto player_next = player_animation, core_next = core_animation,
+             machine_next = machine_animation, door_next = door_animation;
+        player_next.replace(candidate);
+        core_next.replace(candidate);
+        machine_next.replace(candidate);
+        door_next.replace(candidate);
+        static_assert(std::is_nothrow_move_assignable_v<engine::AnimationPlayer>);
+        animations = std::move(candidate);
+        player_animation = std::move(player_next);
+        core_animation = std::move(core_next);
+        machine_animation = std::move(machine_next);
+        door_animation = std::move(door_next);
+    }
+
     std::array<std::uint32_t, 3> content_id() const {
         return {engine::crc32(
                     {reinterpret_cast<const std::uint8_t*>(initial_.data()), initial_.size()}),

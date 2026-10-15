@@ -41,6 +41,9 @@ class AnimationPlayer {
   public:
     explicit AnimationPlayer(std::shared_ptr<const AnimationSet> animations);
     void play(std::string_view name, bool restart = true);
+    // Transactional snapshot replacement. Keep clip name, pause and normalized
+    // tick progress; active clip loop mode must match. Emits no completion event.
+    void replace(std::shared_ptr<const AnimationSet> animations);
     void pause(bool paused) { paused_ = paused; }
     bool paused() const { return paused_; }
     std::uint64_t position() const { return position_; }
