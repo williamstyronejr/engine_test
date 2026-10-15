@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The thirty-second increment adds tested audio suspend/underrun recovery, device
-failure diagnostics, and an opt-in stereo listening probe.
+The thirty-third increment adds transactional animation reload, preserving playback
+progress and working resources after bad edits, with fixed content during replays.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -290,8 +290,8 @@ explains the failure and the HUD shows the retained revision.
 
 **F8** triggers the same rejection during play. Fix the file and press F7 to recover.
 F7 can also recover the tile texture in `--missing-texture-demo`. Files must remain
-ETEX v1 and fit all registered atlas grids; scene and animation definitions are not
-reloaded. Settings capture these controls and held keys do not repeat reloads.
+ETEX v1 and fit all registered atlas grids; this command does not reload scene or
+animation definitions. Settings capture these controls and held keys do not repeat reloads.
 
 Reload runs synchronously between passes and may hitch. There are at most 64
 uploaded texture handles, 16 MiB decoded per image, and 64 MiB of candidate pixel
@@ -308,9 +308,9 @@ Launch with an explicit editable asset root and **`--watch-assets`**:
 ```
 
 Edits to `shaders/sprite.vert`, `shaders/sprite.frag`, a resident ETEX texture,
-or `fonts/ui.efnt` automatically use the existing transactional reload paths. Each
+`fonts/ui.efnt`, or `facility.eani` automatically use transactional reload paths. Each
 affected group waits for 150 ms without another observed change; shader stages reload together,
-textures reload as one bank, and the font reloads as its own independent group.
+textures reload as one bank, and font/animation files reload as independent groups.
 Invalid or missing files retain the last working resources and show the existing failure status. Fix the file to retry. An unchanged
 failed file is not retried every frame. F5–F8 remain available and take precedence
 over a ready automatic reload of their group in the same frame.
@@ -326,8 +326,22 @@ once per second to recover missed notifications, symlink-target edits and replac
 directories. Atomic editor saves, deletion/recreation and notification saturation
 are covered by tests. If directory notifications are unavailable, metadata checks
 continue and reattachment is retried. Only the two shader files, resident texture
-keys and `fonts/ui.efnt` are watched; unrelated files do not normally cause a reload.
-Scene, tilemap, animation and audio reload remain unimplemented.
+keys, `fonts/ui.efnt` and (outside recording/playback) `facility.eani` are watched;
+unrelated files do not normally cause a reload. Scene, tilemap and audio reload
+remain unimplemented.
+
+Animation reload retains each active clip's name, pause state and normalized tick
+progress. All four players swap together. Finished doors remain finished; a timing
+edit cannot manufacture a completion event. The five required gameplay clips and
+the existing texture key/atlas grid must remain compatible. The HUD and console
+show the retained revision after bad edits. Animation timing affects gameplay, so
+animation watching is disabled for recording/playback even with `--watch-assets`.
+Shader, texture and font watching remain available in those modes.
+
+Saves keep their existing content checks: editing EANI changes animation identity,
+so old checkpoints require matching content. A successful new game, level change or
+save replacement resets animation reload status to revision 1 for that snapshot.
+There is no new hotkey or file format. See [animation reload semantics](docs/FORMATS.md#animation-snapshot-replacement).
 
 Loading/compilation still runs synchronously between render passes and can hitch a
 frame. Debounce does not make separate filesystem writes an atomic project edit;
@@ -598,6 +612,12 @@ confirm the WM minimize request. Physical monitor scaling remains unverified.
 
 ## Tests
 
+Seven CPU `animation_reload` cases cover normalized tick progress, pause/completion,
+maximum durations, required clips/atlas constraints, atomic publication, save
+compatibility, file failure/repair and old-snapshot release. Two `animation_watch`
+GPU cases cover debounce, changed sprite pixels, retained failures, independent
+watch groups, fixed-content omission and repeated resource stability.
+
 The CPU `audio_recovery` group checks short writes, wait errors, underruns, bounded
 suspend/resume retries, failed recovery and exact pending samples. `audio_transport`
 also exercises a real ALSA write failure through `file:/dev/full` and verifies
@@ -759,10 +779,10 @@ For a visible missing-texture/fallback scenario:
 ./build/debug/feature_lab --missing-texture-demo --no-audio
 ```
 
-Invalid scenes, maps, and animations are fatal with source diagnostics; missing or
+Invalid startup scenes, maps, and animations are fatal with source diagnostics; missing or
 broken textures produce an error and a magenta fallback. F7 provides coordinated
-CPU/GPU texture reload. `--watch-assets` automates shader/texture/font reload; interactive
-scene reload is not implemented.
+CPU/GPU texture reload. `--watch-assets` automates shader/texture/font/animation reload; invalid animation
+edits retain working playback. Interactive scene reload is not implemented.
 
 The install target includes both executables, assets and documentation:
 
