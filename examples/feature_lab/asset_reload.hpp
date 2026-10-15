@@ -9,11 +9,16 @@ namespace feature_lab {
 class AssetReload {
   public:
     static constexpr std::uint32_t shader_group = 1, texture_group = 2, font_group = 4,
-                                   animation_group = 8;
+                                   animation_group = 8, facility_map_group = 16,
+                                   annex_map_group = 32;
+    // Tilemap callback returns true when it attempted the active level's reload.
     AssetReload(const engine::AssetRoot& assets, const TextureAssets& textures,
-                std::function<void()> animation_reload = {})
-        : watch_(assets, files(textures, static_cast<bool>(animation_reload))),
-          animation_reload_(std::move(animation_reload)) {
+                std::function<void()> animation_reload = {},
+                std::function<bool(std::string_view)> tilemap_reload = {})
+        : watch_(assets, files(textures, static_cast<bool>(animation_reload),
+                               static_cast<bool>(tilemap_reload))),
+          animation_reload_(std::move(animation_reload)),
+          tilemap_reload_(std::move(tilemap_reload)) {
         std::cerr << "[watch] enabled files=" << watch_.size() << '\n';
     }
     // Call once per frame, outside render passes. A manual command takes priority
@@ -45,26 +50,38 @@ class AssetReload {
             ++animation_reloads_;
             animation_reload_();
         }
+        if ((changed & facility_map_group) && tilemap_reload_("facility.etmp"))
+            ++tilemap_reloads_;
+        if ((changed & annex_map_group) && tilemap_reload_("annex.etmp"))
+            ++tilemap_reloads_;
     }
+    std::uint64_t tilemap_reloads() const { return tilemap_reloads_; }
     std::uint64_t animation_reloads() const { return animation_reloads_; }
     std::uint64_t font_reloads() const { return font_reloads_; }
     std::uint64_t shader_reloads() const { return shader_reloads_; }
     std::uint64_t texture_reloads() const { return texture_reloads_; }
 
   private:
-    static std::vector<engine::WatchedAsset> files(const TextureAssets& textures, bool animations) {
+    static std::vector<engine::WatchedAsset> files(const TextureAssets& textures, bool animations,
+                                                   bool tilemaps) {
         std::vector<engine::WatchedAsset> result{{"shaders/sprite.vert", shader_group},
                                                  {"shaders/sprite.frag", shader_group},
                                                  {std::string(FontAssets::key), font_group}};
         if (animations)
             result.push_back({"facility.eani", animation_group});
+        if (tilemaps) {
+            result.push_back({"facility.etmp", facility_map_group});
+            result.push_back({"annex.etmp", annex_map_group});
+        }
         for (const auto& key : textures.keys())
             result.push_back({key, texture_group});
         return result;
     }
     engine::AssetWatcher watch_;
     std::function<void()> animation_reload_;
+    std::function<bool(std::string_view)> tilemap_reload_;
     std::uint64_t shader_reloads_{}, texture_reloads_{}, font_reloads_{}, animation_reloads_{};
+    std::uint64_t tilemap_reloads_{};
     bool reported_{}, notifications_{};
 };
 } // namespace feature_lab

@@ -58,7 +58,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
 | F06 | Implemented (v1) | EANI reader/writer; exact frame timing, loops, pause/restart, large advances; animated player/machine/door with exactly-once completion | Optional frame callbacks and richer animation types |
 | F07 | Implemented (v1) | Handle/compaction/hierarchy tests, scene round trips, deferred deletion; title/gameplay and Facility/Annex transitions; typed runtime pools with checked access, intersecting queries, ownership/exception/move tests, allocation-free steady queries and pickup integration | Optional custom component serialization codecs, query scheduling and broader ECS tooling |
-| F08 | Partial | ETEX/ETMP/EANI/WAV/EFNT readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, transactional shader/texture/font/animation reload with replay isolation; optional bounded inotify watching, debounce, metadata recovery and watched GPU pixel tests | Scene, tilemap and audio reload support |
+| F08 | Partial | ETEX/ETMP/EANI/WAV/EFNT readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, transactional shader/texture/font/animation/tilemap reload with replay isolation; optional bounded inotify watching, debounce, metadata recovery and watched GPU pixel tests | Scene and audio reload support |
 | F09 | Implemented (v1) | Swept player boxes; box/circle contacts; moving-body grid vs brute force; reciprocal filters; trigger history; overlap/segment queries; alarm/switch and restore tests | Rigid-body dynamics, rotating shapes and moving-body CCD are outside initial scope |
 | F10 | Partial | PCM16 WAV assets/resampling, loops, voice controls, gain ramps, master/music/effects controls, stereo emitter, null-device soundtrack/restart tests; deterministic transport recovery faults; real ALSA file-sink failure/fallback; recovery counters and listening probe | Physical disconnect/recovery, system suspend/resume and audible-output checks; see [audio validation](AUDIO_VALIDATION.md) |
 | F11 | Partial | Atlas bitmap text with authored metrics, bounded allocation-free layout, font fallback and visual gallery; clipped status panel, buttons/checkboxes/sliders, keyboard/pointer navigation, bounded layout, modal settings and title screen; `ui`, scene-flow and GPU pixel tests | Broader manual navigation checks |
@@ -1347,9 +1347,48 @@ tick 250 with hash 13207249788274756958. Both fixed-content sessions reported ze
 animation reload attempts. Gameplay and replay captures were inspected, including
 the ready/locked animation HUD. Physical audio/display validation remains pending.
 
+## Added in the thirty-fourth increment
+
+- Transactional map reload stages tile chunks/solids, movement scratch, static query
+  bodies and a primed collision world before publication. The minimap stages through
+  the same transaction and retains its target and scroll state.
+- Player and restart-spawn occupancy, grid/atlas compatibility and collision body
+  capacity are checked before commit. Bad edits preserve working content. Cells,
+  palette entries/solidity and layers can change; grid geometry stays fixed.
+- Reload preserves entity handles and gameplay progress, clears transient old
+  collision events and snaps player interpolation. Active alarm contact history is
+  primed without an extra entry. Save identities reflect the edited ETMP.
+- Facility/Annex maps have independent watched groups. Only active-level edits
+  attempt reload; recording/playback omit both files. HUD/logs report status and
+  revision; whole game/level/save replacement resets status for its new content.
+- Seven CPU and three GPU/watch cases cover collision insertion/removal, map/minimap
+  pixels, staging failure, player/spawn/capacity rejection, save compatibility,
+  preserved progress, both levels, debounce and repeated resource stability.
+
+## Thirty-fourth-increment validation (2026-10-15)
+
+All 45 runtime CTest groups pass with GCC Debug and Release, without skips.
+Nine focused groups (tilemap_reload, tilemap_watch, animation_reload,
+animation_watch, tile_animation, collision, levels, replay_files and render_targets)
+pass with Clang and native ASan/UBSan, with leak detection disabled. The new CPU
+reload group also passes the CPU-only sanitizer preset. Three Release packaging
+checks pass: archive build, relocation and native OpenGL smoke. No new performance
+baseline was taken.
+
+Native 240-frame watched runs in Facility, Annex, title and settings each applied a
+valid tile edit, rejected an edit covering the restart spawn, retained the map after
+malformed ETMP and accepted a repaired file. All four ended at revision 4 with five
+attempts including initial synchronization; title/settings remained at tick 0.
+A 1500-command replay ignored a later malformed map edit and retained tick 1381
+and hash 3859428580428616961. A recording likewise ignored map edits; its 256-command
+output verified against the original assets at tick 256 with hash 362213885974637685.
+Both fixed-content sessions reported zero tilemap reload attempts. Gameplay and
+replay captures were inspected, including the ready/locked tilemap HUD. Existing
+physical audio/display validation gaps remain unchanged.
+
 ## Next increment
 
-Extend transactional reload to tilemap content (F08), including collision and
-minimap consistency and validation of the current player position before commit.
-Keep physical audio/display checks and remaining scene/audio reload coverage
-visible in the manifest; optional v1 scope remains deferred.
+Extend transactional asset reload to scene content (F08), with explicit live-state
+and entity-handle semantics and staged validation of dependent systems. Keep audio
+reload and physical audio/display checks visible in the manifest; optional v1 scope
+remains deferred.

@@ -19,6 +19,7 @@
 #include "soundtrack.hpp"
 #include "stress_benchmark.hpp"
 #include "texture_assets.hpp"
+#include "tilemap_assets.hpp"
 #include <array>
 #include <charconv>
 #include <chrono>
@@ -42,8 +43,9 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
           const feature_lab::SamplingGallery& sampling_gallery,
           const feature_lab::Diagnostics& diagnostics, const feature_lab::ShaderTools& shaders,
           const feature_lab::FontAssets& fonts, const feature_lab::AnimationAssets& animations,
-          bool settings_open, const KeyBindings& bindings, std::string_view replay_status,
-          bool replay_session, bool playing_replay) {
+          const feature_lab::TilemapAssets& tilemaps, bool settings_open,
+          const KeyBindings& bindings, std::string_view replay_status, bool replay_session,
+          bool playing_replay) {
     const auto extent = camera.extent(width, height) * 0.5F;
     const Rect view{camera.center - extent, camera.center + extent};
     const auto& map = game.map.data();
@@ -140,6 +142,8 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
               std::to_string(visible.chunks) + " / " + std::to_string(game.map.chunk_count()) +
               "    COLLIDERS " + std::to_string(game.collision_candidates.size()),
           cyan);
+    label(24, bottom - 138, 1.3F, tilemaps.status(),
+          tilemaps.applied() ? cyan : Color{1, 0.3F, 0.12F, 1});
     label(24, bottom - 120, 1.3F, animations.status(),
           animations.applied() ? cyan : Color{1, 0.3F, 0.12F, 1});
     label(24, bottom - 102, 1.3F, fonts.status(),
@@ -437,13 +441,26 @@ int main(int argc, char** argv) {
         if (texture_error_demo)
             textures.reload(renderer, true);
         feature_lab::AnimationAssets animation_assets(recorder.has_value() || playback.has_value());
+        feature_lab::TilemapAssets tilemap_assets(recorder.has_value() || playback.has_value());
         std::function<void()> reload_animations;
         if (!animation_assets.locked())
             reload_animations = [&] { animation_assets.reload(game, assets); };
+        std::function<bool(std::string_view)> reload_tilemap;
+        if (!tilemap_assets.locked())
+            reload_tilemap = [&](std::string_view key) {
+                if (key != feature_lab::TilemapAssets::key(game.level))
+                    return false;
+                std::vector<Rect> walls;
+                if (tilemap_assets.reload(game, assets, [&](const TileMap& candidate) {
+                        walls = feature_lab::Overlays::stage(candidate, game.walls);
+                    }))
+                    overlays.reload(std::move(walls));
+                return true;
+            };
         std::unique_ptr<feature_lab::AssetReload> asset_reload;
         if (watch_assets)
-            asset_reload =
-                std::make_unique<feature_lab::AssetReload>(assets, textures, reload_animations);
+            asset_reload = std::make_unique<feature_lab::AssetReload>(
+                assets, textures, reload_animations, reload_tilemap);
         std::cout << "[assets] " << assets.directory() << " entities=" << game.world.size()
                   << " GPU textures=" << renderer.live_textures() << '\n';
         feature_lab::Soundtrack soundtrack(assets, audio_enabled, "default", config.audio,
@@ -458,6 +475,7 @@ int main(int argc, char** argv) {
         };
         const auto replacement_applied = [&] {
             animation_assets.replaced();
+            tilemap_assets.replaced();
             overlays.replaced(std::move(staged_walls));
             soundtrack.restored(game);
         };
@@ -707,15 +725,16 @@ int main(int argc, char** argv) {
             } else {
                 draw(renderer, game, textures, batch.alpha, window.width(), window.height(), camera,
                      overlays, soundtrack, collision_visuals, sampling_gallery, diagnostics,
-                     shaders, fonts, animation_assets, settings.opened(), settings.bindings,
+                     shaders, fonts, animation_assets, tilemap_assets, settings.opened(),
+                     settings.bindings,
                      recorder ? "15 / RECORD " + std::to_string(recorder->file().commands.size()) +
                                     " / 36000"
                      : playback ? "15 / REPLAY " + std::to_string(playback_index) + " / " +
                                       std::to_string(playback->commands.size())
                      : !flow.notice.empty()
                          ? flow.notice
-                         : "33 / " + std::string(feature_lab::level_name(game.level)) +
-                               (watch_assets ? " / AUTO RELOAD" : " / ANIMATION RELOAD"),
+                         : "34 / " + std::string(feature_lab::level_name(game.level)) +
+                               (watch_assets ? " / AUTO RELOAD" : " / TILEMAP RELOAD"),
                      recorder.has_value() || playback.has_value(), playback.has_value());
                 diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
                 settings.draw(renderer, window.width(), window.height());
@@ -786,7 +805,10 @@ int main(int argc, char** argv) {
                   << " core_components=" << game.world.component_count<feature_lab::CorePickup>()
                   << " watched_shaders=" << (asset_reload ? asset_reload->shader_reloads() : 0)
                   << " watched_textures=" << (asset_reload ? asset_reload->texture_reloads() : 0)
-                  << " watched_animations="
+                  << " watched_tilemaps=" << (asset_reload ? asset_reload->tilemap_reloads() : 0)
+                  << " tilemap_revision=" << tilemap_assets.revision()
+                  << " tilemap_applied=" << tilemap_assets.applied()
+                  << " tilemap_locked=" << tilemap_assets.locked() << " watched_animations="
                   << (asset_reload ? asset_reload->animation_reloads() : 0)
                   << " animation_revision=" << animation_assets.revision()
                   << " animation_applied=" << animation_assets.applied()

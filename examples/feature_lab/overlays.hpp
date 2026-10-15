@@ -19,13 +19,16 @@ class Overlays {
         : minimap_(renderer.create_target(276, 138)) {
         walls_ = stage(game);
     }
-    static std::vector<engine::Rect> stage(const Game& game) {
+    static std::vector<engine::Rect> stage(const Game& game) { return stage(game.map, game.walls); }
+    static std::vector<engine::Rect> stage(const engine::TileMap& map,
+                                           std::span<const engine::Rect> scene_walls) {
         std::vector<engine::Rect> walls;
-        walls.reserve(game.map.solid_cells() + game.walls.size());
-        game.map.append_colliders(game.map.bounds(), walls);
-        walls.insert(walls.end(), game.walls.begin(), game.walls.end());
+        walls.reserve(map.solid_cells() + scene_walls.size());
+        map.append_colliders(map.bounds(), walls);
+        walls.insert(walls.end(), scene_walls.begin(), scene_walls.end());
         return walls;
     }
+    void reload(std::vector<engine::Rect>&& walls) noexcept { walls_ = std::move(walls); }
     void replaced(std::vector<engine::Rect>&& walls) noexcept {
         walls_ = std::move(walls);
         scroll_ = 0;

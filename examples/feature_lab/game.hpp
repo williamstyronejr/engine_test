@@ -233,6 +233,55 @@ struct Game {
         door_animation = std::move(door_next);
     }
 
+    // Stage collision/query storage and dependent presentation before publication.
+    // Keep the authored scene's coordinate system and resident atlas unchanged.
+    void reload_tilemap(engine::TileMapData data,
+                        const std::function<void(const engine::TileMap&)>& prepare = {}) {
+        const auto& old = map.data();
+        if (data.width != old.width || data.height != old.height || data.origin.x != old.origin.x ||
+            data.origin.y != old.origin.y || data.tile_size != old.tile_size ||
+            data.texture != old.texture || data.atlas_columns != old.atlas_columns ||
+            data.atlas_rows != old.atlas_rows)
+            throw std::runtime_error("Tilemap reload must retain grid geometry and texture/atlas");
+        engine::TileMap candidate(std::move(data));
+        if (candidate.solid_cells() + walls.size() + 4 > engine::CollisionWorld::max_bodies)
+            throw std::runtime_error("Tilemap reload exceeds collision body capacity");
+        std::vector<engine::Rect> next_walls;
+        next_walls.reserve(candidate.solid_cells() + walls.size());
+        candidate.append_colliders(candidate.bounds(), next_walls);
+        next_walls.insert(next_walls.end(), walls.begin(), walls.end());
+        const auto validate_position = [&](Vec2 center, Vec2 half) {
+            const engine::Rect box{center - half, center + half};
+            const auto bounds = candidate.bounds();
+            if (box.min.x < bounds.min.x || box.min.y < bounds.min.y || box.max.x > bounds.max.x ||
+                box.max.y > bounds.max.y)
+                throw std::runtime_error("Tilemap reload excludes player or restart spawn");
+            for (const auto& wall : next_walls)
+                if (engine::overlaps(box, wall))
+                    throw std::runtime_error("Tilemap reload blocks player or restart spawn");
+        };
+        // Match save validation's tolerance at swept-collision boundaries.
+        validate_position(position, {0.2999F, 0.2999F});
+        validate_position(spawn_position, {0.3F, 0.3F});
+        std::vector<engine::Body2D> next_bodies;
+        next_bodies.reserve(engine::CollisionWorld::max_bodies);
+        stage_sensor_bodies(next_walls, next_bodies);
+        engine::CollisionWorld next_collisions;
+        next_collisions.prime(next_bodies); // Seed current contacts without synthetic enters.
+        std::vector<engine::Rect> next_candidates;
+        next_candidates.reserve(next_walls.size() + 1);
+        if (prepare)
+            prepare(candidate);
+        static_assert(std::is_nothrow_move_assignable_v<engine::TileMap>);
+        static_assert(std::is_nothrow_move_assignable_v<engine::CollisionWorld>);
+        map = std::move(candidate);
+        sensor_walls_ = std::move(next_walls);
+        sensor_bodies_ = std::move(next_bodies);
+        collisions = std::move(next_collisions);
+        collision_candidates = std::move(next_candidates);
+        previous = position; // Do not interpolate through newly solid tiles.
+    }
+
     std::array<std::uint32_t, 3> content_id() const {
         return {engine::crc32(
                     {reinterpret_cast<const std::uint8_t*>(initial_.data()), initial_.size()}),
@@ -328,23 +377,26 @@ struct Game {
     std::vector<engine::Body2D> sensor_bodies_;
     std::vector<engine::Rect> sensor_walls_;
     std::vector<std::uint64_t> sensor_query_;
-    void update_sensors(bool prime) {
+    void stage_sensor_bodies(const std::vector<engine::Rect>& static_walls,
+                             std::vector<engine::Body2D>& bodies) const {
         using namespace engine;
-        sensor_bodies_.clear();
-        sensor_bodies_.push_back({1, Shape2D::box(position, {0.3F, 0.3F}), 1, 2, true, false});
-        sensor_bodies_.push_back(
+        bodies.clear();
+        bodies.push_back({1, Shape2D::box(position, {0.3F, 0.3F}), 1, 2, true, false});
+        bodies.push_back(
             {2, Shape2D::circle(alarm_position(), 0.7F), 2, alarm_disabled ? 0U : 1U, true, true});
-        sensor_bodies_.push_back(
-            {3, Shape2D::box(switch_location(), {0.4F, 0.4F}), 4, 0, false, true});
-        for (std::size_t i = 0; i < sensor_walls_.size(); ++i) {
-            const auto r = sensor_walls_[i];
-            sensor_bodies_.push_back({1000 + i,
-                                      Shape2D::box((r.min + r.max) * 0.5F, (r.max - r.min) * 0.5F),
-                                      8, 0, false, false});
+        bodies.push_back({3, Shape2D::box(switch_location(), {0.4F, 0.4F}), 4, 0, false, true});
+        for (std::size_t i = 0; i < static_walls.size(); ++i) {
+            const auto r = static_walls[i];
+            bodies.push_back({1000 + i,
+                              Shape2D::box((r.min + r.max) * 0.5F, (r.max - r.min) * 0.5F), 8, 0,
+                              false, false});
         }
         if (!door_open)
-            sensor_bodies_.push_back(
-                {4, Shape2D::box(location(exit), {1.2F, 0.7F}), 8, 0, false, false});
+            bodies.push_back({4, Shape2D::box(location(exit), {1.2F, 0.7F}), 8, 0, false, false});
+    }
+    void update_sensors(bool prime) {
+        using namespace engine;
+        stage_sensor_bodies(sensor_walls_, sensor_bodies_);
         if (prime)
             collisions.prime(sensor_bodies_);
         else
