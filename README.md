@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The thirty-fourth increment adds transactional tilemap reload, publishing rendering,
-collision queries and minimap walls together while retaining working content after bad edits.
+The thirty-fifth increment adds transactional scene reload, rebuilding entity handles,
+collision queries and minimap walls together while preserving progress after valid edits.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -308,10 +308,10 @@ Launch with an explicit editable asset root and **`--watch-assets`**:
 ```
 
 Edits to `shaders/sprite.vert`, `shaders/sprite.frag`, a resident ETEX texture,
-`fonts/ui.efnt`, `facility.eani`, or the active level's ETMP file automatically use
+`fonts/ui.efnt`, `facility.eani`, or the active level's ETMP/scene file automatically use
 transactional reload paths. Each
 affected group waits for 150 ms without another observed change; shader stages reload together,
-textures reload as one bank, and font, animation and each level's tilemap reload as independent groups.
+textures reload as one bank, and font, animation, tilemap and scene files use independent groups.
 Invalid or missing files retain the last working resources and show the existing failure status. Fix the file to retry. An unchanged
 failed file is not retried every frame. F5–F8 remain available and take precedence
 over a ready automatic reload of their group in the same frame.
@@ -328,8 +328,9 @@ directories. Atomic editor saves, deletion/recreation and notification saturatio
 are covered by tests. If directory notifications are unavailable, metadata checks
 continue and reattachment is retried. Only the two shader files, resident texture
 keys, `fonts/ui.efnt` and (outside recording/playback) `facility.eani`,
-`facility.etmp` and `annex.etmp` are watched. Inactive-level map edits are ignored
-until that level is loaded. Scene and audio reload remain unimplemented.
+`facility.etmp`, `annex.etmp`, `facility.scene` and `annex.scene` are watched.
+Inactive-level map/scene edits are ignored until that level is loaded. Audio reload
+remains unimplemented.
 
 Animation reload retains each active clip's name, pause state and normalized tick
 progress. All four players swap together. Finished doors remain finished; a timing
@@ -356,6 +357,27 @@ Map edits affect gameplay, so both tilemap files are omitted from recording/play
 watching. ETMP content fingerprints change after a successful edit; old saves still
 require matching content. New-game/level/save replacement resets the map's reload
 status; plain restart uses the current edited map. See [tilemap reload semantics](docs/FORMATS.md#tilemap-snapshot-replacement).
+
+Scene reload replaces the world and invalidates all old entity handles on success.
+Player/exit IDs and the set of core IDs must stay fixed; pickups are rebound by ID,
+so collected cores stay collected even if records are reordered. Position, pause,
+clock, RNG, camera zoom, alarm state and animation/door progress are preserved.
+Sprite appearance, decoration hierarchy, static colliders, core/exit positions and
+restart spawn may change if the candidate remains compatible with live state.
+Player/core nodes must be leaves, and player/core/exit nodes cannot own static colliders.
+
+Reload validates both the new restart spawn and current player against collision,
+checks door/win consistency, rebuilds runtime components and collision contacts, and
+stages minimap walls and resident texture validation before commit. New texture keys
+are rejected; use the already loaded bank. Failed edits preserve handles and all
+working content. Minimap scroll and targets survive; the machine sound emitter is
+relocated without restarting audio. Edits do not prove route solvability.
+
+Scene watching is disabled during recording/playback. Successful edits update the
+scene content fingerprint, so old saves (and the title's original new-game checkpoint)
+still require matching authored content. Plain restart uses the current scene and
+its edited spawn. Scene status/revision appears in the HUD and session log; game,
+level and save replacement reset it. See [scene reload semantics](docs/FORMATS.md#scene-snapshot-replacement).
 
 Loading/compilation still runs synchronously between render passes and can hitch a
 frame. Debounce does not make separate filesystem writes an atomic project edit;
@@ -626,6 +648,12 @@ confirm the WM minimize request. Physical monitor scaling remains unverified.
 
 ## Tests
 
+Seven CPU `scene_reload` cases cover persistent-ID rebinding, stale handles,
+movement/query collision, spawn and live-state rejection, staged failure, save
+compatibility, active iteration, alarm contacts, door completion, both levels and
+file repair/locking. Three `scene_watch` GPU cases verify sprite/minimap pixels,
+texture preflight, failure retention, debounce, level isolation and stable resources.
+
 Seven CPU `tilemap_reload` cases cover collision insertion/removal, player/spawn
 rejection, capacity/geometry limits, dependent staging failure, entity/progress
 preservation, contact priming, saves, both levels and file repair. Three
@@ -801,8 +829,8 @@ For a visible missing-texture/fallback scenario:
 
 Invalid startup scenes, maps, and animations are fatal with source diagnostics; missing or
 broken textures produce an error and a magenta fallback. F7 provides coordinated
-CPU/GPU texture reload. `--watch-assets` automates shader/texture/font/animation/tilemap reload; invalid
-animation/map edits retain working content. Interactive scene reload is not implemented.
+CPU/GPU texture reload. `--watch-assets` automates shader/texture/font/animation/tilemap/scene reload; invalid
+animation/map/scene edits retain working content.
 
 The install target includes both executables, assets and documentation:
 

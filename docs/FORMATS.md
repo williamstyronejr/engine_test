@@ -408,7 +408,7 @@ reload use that identity and must be restored with matching content; pre-edit sa
 are not silently migrated. Repeated phase conversions can round down by ticks;
 they are not a lossless restoration of the previous timeline. File reload remains
 synchronous, with temporary candidate allocations; no work was added to per-tick
-animation advancement. Scene and audio hot reload remain unimplemented.
+animation advancement. Audio hot reload remains unimplemented. Scene replacement is documented below.
 
 ## Tilemap snapshot replacement
 
@@ -1388,12 +1388,12 @@ for event coalescing, directory/inode behavior and queue limitations.
 
 Feature Lab's optional `--watch-assets` registers the two sprite shader files as one
 group, all resident texture keys as another, `fonts/ui.efnt` as a third, and
-`facility.eani` as a fourth, plus independent `facility.etmp` and `annex.etmp`
-groups outside recording/playback. `AssetReload::update` polls once per drawable
+`facility.eani` as a fourth, plus independent `facility.etmp`, `annex.etmp`,
+`facility.scene` and `annex.scene` groups outside recording/playback. `AssetReload::update` polls once per drawable
 frame after input/simulation, before GPU timing and any render pass. This
 also works on the title, in settings, while paused and during replay; minimized
 windows defer it until drawing resumes. Ready groups call the existing full shader
-or texture-bank transactions, the strict font transaction, or the animation/tilemap
+or texture-bank transactions, the strict font transaction, or the animation/tilemap/scene
 callbacks. A manual F5/F6 or F7/F8 attempt suppresses a ready
 automatic transaction in the same group/frame. Groups remain independent; this is
 not one atomic project transaction. Logs count automatic attempts including failures,
@@ -1402,8 +1402,8 @@ and report notification or metadata-fallback mode changes.
 Watching is disabled by default and is not persisted in configuration. It never
 modifies source assets, game checkpoints or replay commands. Reload still runs on
 the render thread and can hitch a frame. Watched keys remain fixed for the session's
-shared resident bank and fixed font/animation/level-map keys; arbitrary new banks,
-interactive scene reload, audio reload and background loading remain unimplemented. Asset/save/replay/
+shared resident bank and fixed font/animation/level-map/scene keys; arbitrary new banks,
+audio reload and background loading remain unimplemented. Asset/save/replay/
 configuration schemas and Linux system-library requirements are unchanged.
 
 ## Bitmap fonts (EFNT v1)
@@ -1535,3 +1535,46 @@ includes the final observed fullscreen/focus flags. No save or replay schema cha
 See [platform validation](PLATFORM_VALIDATION.md) for the automated and visible
 checks, asynchronous GLX buffer-resize handling in tests, protocol references and
 remaining physical-monitor/WM checks.
+
+## Scene snapshot replacement
+
+`Game::reload_scene(text, prepare)` is a main-thread frame-boundary transaction.
+It constructs a private Game using the new scene text and the current tilemap and
+animation snapshots, validates authored spawn/colliders/decorations, then restores
+live progress by persistent ID. It requires the same player and exit IDs and the
+same core ID set (record order may change). Player/core nodes must be leaves;
+player/core/exit nodes cannot have static collider records. Decorative nodes may
+be added, removed or reparented. Axis-aligned static colliders remain required.
+
+The private world recreates CorePickup components and removes collected entities.
+Player position, ticks, pause, RNG seed/state, camera height, collected IDs, alarm
+state and exact animation states survive. The new spawn must be clear with a closed
+door; the live player must be clear under the current door state. An edited exit
+must remain consistent with the saved win state. Collision queries are rebuilt and
+contacts primed without synthetic alarm enters. The completion counter is retained;
+reloading an opening or completed door does not emit another completion.
+
+The optional `prepare(const Game&)` callback validates/stages dependent resources
+without mutating live state. Feature Lab checks all referenced textures against its
+resident bank and stages minimap walls. Unregistered textures fail the transaction.
+The world move checks active iteration before publication; subsequent state moves
+cannot throw. Success invalidates **every old Entity handle**, including unchanged
+persistent IDs. Callers must reacquire handles through the new world. Failure
+preserves all handles, content identities and live runtime state. Interpolation
+snaps to the current tick/position. External application-owned runtime components
+are not migrated; this example rebuilds only its CorePickup bindings.
+
+`SceneAssets` reads up to 4 MiB through AssetRoot containment checks. It preserves
+revision and records source diagnostics on failure. Facility and Annex use watcher
+masks 64 and 128, independent of tilemaps (16/32). Only the active level callback
+attempts replacement. Initial debounce, no repeated attempts on unchanged failures,
+manual-mask suppression and recovery work like other watched groups. Recording
+and playback lock the controller and omit both scene files from the watch list.
+
+The HUD and session summary expose revision, outcome, lock and attempted reloads.
+Whole game/level/save replacement resets revision to 1; plain restart uses the
+last accepted scene. The authored text fingerprint changes even for whitespace-only
+edits. No save/replay format migration is performed: old saves and the title's
+original new-game checkpoint require their original content. Groups are independent,
+so an edit spanning a scene and a tilemap is not a combined transaction. Content
+reads and staging are synchronous; route solvability is an authoring responsibility.

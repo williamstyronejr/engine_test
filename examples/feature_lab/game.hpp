@@ -282,6 +282,33 @@ struct Game {
         previous = position; // Do not interpolate through newly solid tiles.
     }
 
+    // Rebuild runtime bindings by persistent ID in a private world. Successful
+    // publication invalidates every old entity handle; failure retains them all.
+    void reload_scene(std::string text, const std::function<void(const Game&)>& prepare = {}) {
+        Game candidate(std::move(text), map.data(), animations, level);
+        auto ids = core_ids, next_ids = candidate.core_ids;
+        std::sort(ids.begin(), ids.end());
+        std::sort(next_ids.begin(), next_ids.end());
+        if (ids != next_ids || world.get(player).id != candidate.world.get(candidate.player).id ||
+            world.get(exit).id != candidate.world.get(candidate.exit).id)
+            throw std::runtime_error("Scene reload must retain player, exit and core IDs/roles");
+        candidate.world.each([&](const engine::SceneNode& node) {
+            if (node.collider && (node.tag == "player" || node.tag == "core" || node.tag == "exit"))
+                throw std::runtime_error("Gameplay actors cannot own static colliders");
+            for (auto p = node.parent; p; p = candidate.world.get(p).parent) {
+                const auto& parent = candidate.world.get(p);
+                if (parent.tag == "player" || parent.tag == "core")
+                    throw std::runtime_error("Player and core nodes must remain leaves");
+            }
+        });
+        const auto state = checkpoint();
+        candidate.apply_checkpoint(state); // Validates live occupancy and door/win consistency.
+        candidate.door_completions = door_completions;
+        if (prepare)
+            prepare(candidate); // Validate resident resources and stage dependent views.
+        replace(std::move(candidate));
+    }
+
     std::array<std::uint32_t, 3> content_id() const {
         return {engine::crc32(
                     {reinterpret_cast<const std::uint8_t*>(initial_.data()), initial_.size()}),
@@ -479,7 +506,8 @@ struct Game {
         update_sensors(true);
     }
     void restart() {
-        world = engine::parse_scene(initial_, "facility.scene");
+        world = engine::parse_scene(initial_,
+                                    level == Level::facility ? "facility.scene" : "annex.scene");
         validate_decorations(world);
         walls.clear();
         keys.clear();
