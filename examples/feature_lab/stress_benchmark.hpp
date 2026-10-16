@@ -36,7 +36,7 @@ inline double stress_ms(StressClock::time_point start, StressClock::time_point e
 }
 struct StressReport {
     explicit StressReport(const StressOptions& options);
-    Measurements load, simulation, audio, submission, frame, gpu;
+    Measurements load, simulation, audio, submission, preview, present, frame, gpu;
     StressResources resources;
     std::uint64_t checksum{}, quads{}, culled{}, draws{}, tiles{}, pairs{}, contacts{};
     std::size_t completed_cycles{}, measured_frames{}, rss_start{}, rss_end{}, rss_peak{};

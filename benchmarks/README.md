@@ -1,5 +1,8 @@
 # Feature Lab stress workloads
 
+The [2026-10-16 validation report](2026-10-16-validation.md) records repeated 1080p
+results, workload scaling, presentation timings and the remaining F15/F16 gaps.
+
 Run the optimized executable after a release build. All workloads are generated
 in-house and require no asset files. The visible mode uses OpenGL 4.6; the CPU
 executable has no X11/OpenGL/ALSA dependency. Both install into `bin/`.
@@ -82,12 +85,24 @@ Samples cover all measured cycles, with warmup excluded separately in each cycle
 - `render_submit`: CPU time for timer commands, offscreen tile/sprite traversal,
   batching and GL submission. Driver back-pressure can be included; presentation
   and the preview/HUD are outside this interval.
+- `preview_submit`: CPU time after offscreen submission through preview/HUD
+  submission, including HUD formatting and driver back-pressure.
+- `present`: CPU time in the window buffer swap. This can include driver/compositor
+  waiting even when VSync disable was accepted; it is not a pure VSync measurement.
+  These two fields are additive schema-v1 extensions; older reports omit them,
+  and CPU-only runs have zero samples for both.
 - `frame`: visual loop from event polling through presentation, including preview,
-  HUD and swap pacing. CPU mode measures simulation plus mixing only.
+  HUD and swap pacing. Per-frame health/resource checks and report bookkeeping,
+  cycle checksums, load and teardown are outside this interval. CPU mode measures
+  simulation plus mixing only. This is not total run wall time or display latency.
 - `gpu_render`: asynchronous timestamps around the offscreen workload, excluding
   preview/HUD and presentation. Frame tags exclude warmup even when results arrive
   during the next cycle. Missing/pending/skipped/invalid query counts are explicit;
   shutdown never waits for GPU timing results.
+
+CPU scopes measure elapsed time, including scheduling delays, rather than CPU
+execution time. GPU work overlaps CPU work; do not add CPU and GPU distributions.
+Percentiles of separate scopes also cannot be added to reconstruct frame percentiles.
 
 `totals` counts only measured offscreen passes and simulation steps. HUD quads
 are excluded. `--screenshot FILE.ppm` captures the final preview for visual checks;

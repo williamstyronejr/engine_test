@@ -1,0 +1,20 @@
+{
+  "schema":"feature_lab_stress_v1","workload_version":1,"mode":"cpu","label":"2026-10-16 collision-dense","complete":true,"resources_stable":true,
+  "build":{"revision":"f6e8ce4","compiler":"GNU 16.2.1","configuration":"Release","flags":" -O3 -DNDEBUG; C++20; sanitizers=OFF"},
+  "machine":{"cpu":" Intel(R) Core(TM) i5-4300U CPU @ 1.90GHz","system":"Linux 7.2.5-3-omarchy x86_64","gl_vendor":"","gl_device":"","gl_version":""},
+  "workload":{"sprites":0,"tiles":0,"entities":0,"bodies":256,"voices":0,"dense":true,"seed":"1","width":1920,"height":1080,"warmup_per_cycle":60,"frames_per_cycle":600,"cycles":3},
+  "run":{"completed_cycles":3,"measured_frames":1800,"checksum":"3476943666651152694","window_width":0,"window_height":0,"vsync_requested":false,"vsync_disable_accepted":false,"audio_device":false,"capture_requested":false},
+  "totals":{"quads":0,"culled":0,"draws":0,"visible_tiles":0,"collision_candidates":58752000,"contacts":58752000},
+  "memory":{"tracked_cpu_buffer_bytes":7888936,"report_buffer_bytes":100824,"rss_start":4022272,"rss_end":4657152,"rss_peak_at_cycle_boundary":9232384,"peak_uploaded_textures":0,"peak_uploaded_texture_bytes":0,"peak_targets":0,"peak_target_bytes":0},
+  "gpu_queries":{"supported":false,"submitted":0,"completed":0,"pending":0,"skipped":0,"invalid":0},
+  "milliseconds":{
+    "load":{"samples":3,"mean":2.86804133,"median":2.942975,"p95":2.942975,"p99":2.942975,"max":2.963905},
+    "simulation":{"samples":1800,"mean":3.06817773,"median":2.097027,"p95":8.71987,"p99":9.883095,"max":23.083351},
+    "mixer":{"samples":1800,"mean":8.38188889e-05,"median":8.7e-05,"p95":0.000197,"p99":0.000305,"max":0.000538},
+    "render_submit":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0},
+    "preview_submit":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0},
+    "present":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0},
+    "frame":{"samples":1800,"mean":3.06826155,"median":2.097058,"p95":8.7199,"p99":9.883267,"max":23.083413},
+    "gpu_render":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0}
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "schema":"feature_lab_stress_v1","workload_version":1,"mode":"cpu","label":"2026-10-16 entities-4096","complete":true,"resources_stable":true,
+  "build":{"revision":"f6e8ce4","compiler":"GNU 16.2.1","configuration":"Release","flags":" -O3 -DNDEBUG; C++20; sanitizers=OFF"},
+  "machine":{"cpu":" Intel(R) Core(TM) i5-4300U CPU @ 1.90GHz","system":"Linux 7.2.5-3-omarchy x86_64","gl_vendor":"","gl_device":"","gl_version":""},
+  "workload":{"sprites":0,"tiles":0,"entities":4096,"bodies":0,"voices":0,"dense":false,"seed":"1","width":1920,"height":1080,"warmup_per_cycle":60,"frames_per_cycle":600,"cycles":3},
+  "run":{"completed_cycles":3,"measured_frames":1800,"checksum":"12182250956169877890","window_width":0,"window_height":0,"vsync_requested":false,"vsync_disable_accepted":false,"audio_device":false,"capture_requested":false},
+  "totals":{"quads":0,"culled":0,"draws":0,"visible_tiles":0,"collision_candidates":0,"contacts":0},
+  "memory":{"tracked_cpu_buffer_bytes":7977000,"report_buffer_bytes":100824,"rss_start":4046848,"rss_end":6012928,"rss_peak_at_cycle_boundary":6012928,"peak_uploaded_textures":0,"peak_uploaded_texture_bytes":0,"peak_targets":0,"peak_target_bytes":0},
+  "gpu_queries":{"supported":false,"submitted":0,"completed":0,"pending":0,"skipped":0,"invalid":0},
+  "milliseconds":{
+    "load":{"samples":3,"mean":9.60654667,"median":9.182682,"p95":9.182682,"p99":9.182682,"max":11.262324},
+    "simulation":{"samples":1800,"mean":0.130796571,"median":0.121864,"p95":0.190951,"p99":0.272096,"max":0.409815},
+    "mixer":{"samples":1800,"mean":3.59533333e-05,"median":3.1e-05,"p95":5.6e-05,"p99":0.000101,"max":0.00402},
+    "render_submit":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0},
+    "preview_submit":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0},
+    "present":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0},
+    "frame":{"samples":1800,"mean":0.130832524,"median":0.121902,"p95":0.190979,"p99":0.272146,"max":0.409875},
+    "gpu_render":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0}
+  }
+}

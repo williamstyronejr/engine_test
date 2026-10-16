@@ -1,7 +1,8 @@
 # Implementation status
 
-The thirty-sixth increment adds transactional audio-bank reload with block-boundary
-voice updates and acknowledged sample retirement. It is **not completion of all six design milestones**.
+The thirty-seventh increment adds separate preview/swap timing and a controlled
+CPU/GPU stress validation suite with preserved raw reports and workload comparisons.
+It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
 ## Delivered
@@ -65,8 +66,8 @@ entire plan feature ID when required subfeatures are still absent.
 | F12 | Implemented (v1) | Live minimap, clipped scrolling panel; seven GPU cases for pixels, alpha composition, clipping, resizing, resource limits and example integration | Optional multisampling, HDR and post-processing |
 | F13 | Implemented (v1) | Clock/catch-up, paused stepping, ERPL recording/playback, per-command state checks, seeded random state, save migration and full-game replay tests | Cross-machine float determinism and replaying menu/audio/render commands are outside v1 |
 | F14 | Implemented (v1) | Versioned scene/checkpoint/config formats; three-slot UI; CRC, bounds and semantic checks; unchanged live game on failed load; interrupted-process write tests | Power-loss/filesystem fault testing and content migration |
-| F15 | Partial | Console errors, GL callback, F2 rolling timing/counter overlay, F3 collision/camera outlines, target accounting, CPU percentiles, shader reload/failure recovery, GPU pixel/interface/lifetime tests, bounded asynchronous GPU timing with sample age/skips | Broader manual fault scenarios and profiling coverage |
-| F16 | Partial | Configurable stress arena, CPU/GPU repeated teardown checks, allocation-free steady CPU tests, tracked buffer/texture/target bytes, JSON benchmarks, installed CPU runner and hashed relocatable archives with CPU/OpenGL smoke tests | Full allocator/driver accounting and broader hardware/manual checks |
+| F15 | Partial | Console errors, GL callback, F2 rolling timing/counter overlay, F3 collision/camera outlines, target accounting, CPU percentiles, shader reload/failure recovery, GPU pixel/interface/lifetime tests, bounded asynchronous GPU timing with sample age/skips; separate preview/swap timing and [controlled stress results](../benchmarks/2026-10-16-validation.md) | Investigate one rejected native timestamp pair; representative gameplay profiling and broader manual fault scenarios |
+| F16 | Partial | Configurable stress arena, CPU/GPU repeated teardown checks, allocation-free steady CPU tests, tracked buffer/texture/target bytes, JSON benchmarks, repeated 1080p baselines and independent workload comparisons, installed CPU runner and hashed relocatable archives with CPU/OpenGL smoke tests | Full allocator/driver accounting, representative gameplay budgets and broader hardware/manual checks |
 
 ## Initial validation environment
 
@@ -1461,8 +1462,35 @@ measurements (some catch-up time was dropped). Physical listening, disconnect/
 reconnect and system suspend remain outstanding; no crossfade or waveform-continuity
 guarantee is claimed.
 
+## Added in the thirty-seventh increment
+
+- Stress reports separate preview/HUD submission from window buffer swapping, with
+  zero samples for both in CPU mode. Schema v1 and the generated workload remain
+  compatible; the timing definitions now explicitly exclude per-frame validation.
+- Committed-source 1080p measurements include three combined repeats, a 720p
+  comparison, sprite/tile scaling and entity/collision/mixer CPU isolates. Exact
+  commands, environment, temperature observations and all fourteen raw attempts
+  are preserved in [the performance report](../benchmarks/2026-10-16-validation.md).
+- Combined frame p99 was 10.912–12.413 ms, with 24.400–33.185 ms maxima. Presentation
+  had the largest measured CPU subinterval p99; dense all-pairs collision was the
+  largest isolated simulation cost. These are workload-specific observations,
+  not an uninterrupted 60 FPS or complete memory-accounting guarantee.
+
+## Thirty-seventh-increment validation (2026-10-16)
+
+All 50 GCC Debug and Release runtime CTest groups pass without skips. The new CPU
+report fields are checked as absent measurements, and native measurements verify
+1,800 samples per active CPU scope. All benchmark attempts completed their cycles
+with stable tracked resources and checksums. Thirteen runs were accepted. One
+sprite-only attempt was rejected for an out-of-order GPU timestamp pair; its report
+is retained, and a single repeat passed. Its cause remains unresolved. GPU queue
+rejection checks remain intact; no waits or timing-based CI thresholds were added.
+Physical audio/display and full allocator/driver-accounting gaps remain open.
+
 ## Next increment
 
-Run controlled 1080p CPU/GPU performance validation and document bottlenecks and
-remaining F15/F16 limits. Keep physical audio/display validation gaps visible;
-optional asset tooling and background loading remain deferred.
+Add bounded diagnostics for rejected native GPU timestamp pairs, retaining raw
+values/frame identity for investigation and testing query reuse/lifecycle behavior.
+Then extend profiling to a declared recorded Feature Lab gameplay workload; the
+synthetic arena does not cover normal UI/minimap/reload or transition costs.
+Optional asset tooling and background loading remain deferred.
