@@ -110,6 +110,7 @@ class Soundtrack {
         }
     }
     void locate_emitter(const Game& game) {
+        emitter_ = {};
         game.world.each([&](const engine::SceneNode& node) {
             if (node.tag == "machine")
                 emitter_ = game.location(node.entity);

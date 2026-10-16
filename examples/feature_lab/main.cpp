@@ -13,6 +13,7 @@
 #include "persistence.hpp"
 #include "replay_file.hpp"
 #include "sampling_gallery.hpp"
+#include "scene_assets.hpp"
 #include "scene_flow_draw.hpp"
 #include "settings_draw.hpp"
 #include "shader_tools.hpp"
@@ -43,8 +44,9 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
           const feature_lab::SamplingGallery& sampling_gallery,
           const feature_lab::Diagnostics& diagnostics, const feature_lab::ShaderTools& shaders,
           const feature_lab::FontAssets& fonts, const feature_lab::AnimationAssets& animations,
-          const feature_lab::TilemapAssets& tilemaps, bool settings_open,
-          const KeyBindings& bindings, std::string_view replay_status, bool replay_session,
+          const feature_lab::TilemapAssets& tilemaps, const feature_lab::SceneAssets& scenes,
+          bool settings_open, const KeyBindings& bindings, std::string_view replay_status,
+          bool replay_session,
           bool playing_replay) {
     const auto extent = camera.extent(width, height) * 0.5F;
     const Rect view{camera.center - extent, camera.center + extent};
@@ -142,6 +144,8 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
               std::to_string(visible.chunks) + " / " + std::to_string(game.map.chunk_count()) +
               "    COLLIDERS " + std::to_string(game.collision_candidates.size()),
           cyan);
+    label(24, bottom - 156, 1.3F, scenes.status(),
+          scenes.applied() ? cyan : Color{1, 0.3F, 0.12F, 1});
     label(24, bottom - 138, 1.3F, tilemaps.status(),
           tilemaps.applied() ? cyan : Color{1, 0.3F, 0.12F, 1});
     label(24, bottom - 120, 1.3F, animations.status(),
@@ -327,7 +331,7 @@ int main(int argc, char** argv) {
                        "F8 texture failure demo, F10 single step while "
                        "paused, Escape close settings/quit.\n"
                        "--level facility|annex --level-tour (script both levels) "
-                       "--watch-assets (automatic shader/texture/font reload) --font-demo (text "
+                       "--watch-assets (automatic visual/gameplay asset reload) --font-demo (text "
                        "gallery) "
                        "--play (skip title) --verify (CPU gameplay test) --scripted --frames "
                        "N --no-audio "
@@ -442,6 +446,7 @@ int main(int argc, char** argv) {
             textures.reload(renderer, true);
         feature_lab::AnimationAssets animation_assets(recorder.has_value() || playback.has_value());
         feature_lab::TilemapAssets tilemap_assets(recorder.has_value() || playback.has_value());
+        feature_lab::SceneAssets scene_assets(recorder.has_value() || playback.has_value());
         std::function<void()> reload_animations;
         if (!animation_assets.locked())
             reload_animations = [&] { animation_assets.reload(game, assets); };
@@ -457,10 +462,6 @@ int main(int argc, char** argv) {
                     overlays.reload(std::move(walls));
                 return true;
             };
-        std::unique_ptr<feature_lab::AssetReload> asset_reload;
-        if (watch_assets)
-            asset_reload = std::make_unique<feature_lab::AssetReload>(
-                assets, textures, reload_animations, reload_tilemap);
         std::cout << "[assets] " << assets.directory() << " entities=" << game.world.size()
                   << " GPU textures=" << renderer.live_textures() << '\n';
         feature_lab::Soundtrack soundtrack(assets, audio_enabled, "default", config.audio,
@@ -468,6 +469,25 @@ int main(int argc, char** argv) {
         soundtrack.locate_emitter(game);
         if (load_slot || playback)
             soundtrack.restored(game);
+        std::function<bool(std::string_view)> reload_scene;
+        if (!scene_assets.locked())
+            reload_scene = [&](std::string_view key) {
+                if (key != feature_lab::SceneAssets::key(game.level))
+                    return false;
+                std::vector<Rect> walls;
+                if (scene_assets.reload(game, assets, [&](const feature_lab::Game& candidate) {
+                        textures.validate_level(candidate);
+                        walls = feature_lab::Overlays::stage(candidate);
+                    })) {
+                    overlays.reload(std::move(walls));
+                    soundtrack.locate_emitter(game);
+                }
+                return true;
+            };
+        std::unique_ptr<feature_lab::AssetReload> asset_reload;
+        if (watch_assets)
+            asset_reload = std::make_unique<feature_lab::AssetReload>(
+                assets, textures, reload_animations, reload_tilemap, reload_scene);
         std::vector<Rect> staged_walls;
         flow.prepare_replacement = [&](const feature_lab::Game& candidate) {
             textures.validate_level(candidate);
@@ -476,6 +496,7 @@ int main(int argc, char** argv) {
         const auto replacement_applied = [&] {
             animation_assets.replaced();
             tilemap_assets.replaced();
+            scene_assets.replaced();
             overlays.replaced(std::move(staged_walls));
             soundtrack.restored(game);
         };
@@ -725,15 +746,15 @@ int main(int argc, char** argv) {
             } else {
                 draw(renderer, game, textures, batch.alpha, window.width(), window.height(), camera,
                      overlays, soundtrack, collision_visuals, sampling_gallery, diagnostics,
-                     shaders, fonts, animation_assets, tilemap_assets, settings.opened(),
-                     settings.bindings,
+                     shaders, fonts, animation_assets, tilemap_assets, scene_assets,
+                     settings.opened(), settings.bindings,
                      recorder ? "15 / RECORD " + std::to_string(recorder->file().commands.size()) +
                                     " / 36000"
                      : playback ? "15 / REPLAY " + std::to_string(playback_index) + " / " +
                                       std::to_string(playback->commands.size())
                      : !flow.notice.empty()
                          ? flow.notice
-                         : "34 / " + std::string(feature_lab::level_name(game.level)) +
+                         : "35 / " + std::string(feature_lab::level_name(game.level)) +
                                (watch_assets ? " / AUTO RELOAD" : " / TILEMAP RELOAD"),
                      recorder.has_value() || playback.has_value(), playback.has_value());
                 diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
@@ -805,6 +826,10 @@ int main(int argc, char** argv) {
                   << " core_components=" << game.world.component_count<feature_lab::CorePickup>()
                   << " watched_shaders=" << (asset_reload ? asset_reload->shader_reloads() : 0)
                   << " watched_textures=" << (asset_reload ? asset_reload->texture_reloads() : 0)
+                  << " watched_scenes=" << (asset_reload ? asset_reload->scene_reloads() : 0)
+                  << " scene_revision=" << scene_assets.revision()
+                  << " scene_applied=" << scene_assets.applied()
+                  << " scene_locked=" << scene_assets.locked()
                   << " watched_tilemaps=" << (asset_reload ? asset_reload->tilemap_reloads() : 0)
                   << " tilemap_revision=" << tilemap_assets.revision()
                   << " tilemap_applied=" << tilemap_assets.applied()

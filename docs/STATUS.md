@@ -1,7 +1,7 @@
 # Implementation status
 
-The twenty-eighth increment adds optional automatic shader/texture file watching,
-bounded notifications and recovery. It is **not completion of all six design milestones**.
+The thirty-fifth increment adds transactional scene reload with persistent-ID
+progress restoration and staged dependent-system validation. It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
 ## Delivered
@@ -58,7 +58,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
 | F06 | Implemented (v1) | EANI reader/writer; exact frame timing, loops, pause/restart, large advances; animated player/machine/door with exactly-once completion | Optional frame callbacks and richer animation types |
 | F07 | Implemented (v1) | Handle/compaction/hierarchy tests, scene round trips, deferred deletion; title/gameplay and Facility/Annex transitions; typed runtime pools with checked access, intersecting queries, ownership/exception/move tests, allocation-free steady queries and pickup integration | Optional custom component serialization codecs, query scheduling and broader ECS tooling |
-| F08 | Partial | ETEX/ETMP/EANI/WAV/EFNT readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, transactional shader/texture/font/animation/tilemap reload with replay isolation; optional bounded inotify watching, debounce, metadata recovery and watched GPU pixel tests | Scene and audio reload support |
+| F08 | Partial | ETEX/ETMP/EANI/WAV/EFNT readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, transactional shader/texture/font/animation/tilemap/scene reload with replay isolation; optional bounded inotify watching, debounce, metadata recovery and watched GPU pixel tests | Audio reload support |
 | F09 | Implemented (v1) | Swept player boxes; box/circle contacts; moving-body grid vs brute force; reciprocal filters; trigger history; overlap/segment queries; alarm/switch and restore tests | Rigid-body dynamics, rotating shapes and moving-body CCD are outside initial scope |
 | F10 | Partial | PCM16 WAV assets/resampling, loops, voice controls, gain ramps, master/music/effects controls, stereo emitter, null-device soundtrack/restart tests; deterministic transport recovery faults; real ALSA file-sink failure/fallback; recovery counters and listening probe | Physical disconnect/recovery, system suspend/resume and audible-output checks; see [audio validation](AUDIO_VALIDATION.md) |
 | F11 | Partial | Atlas bitmap text with authored metrics, bounded allocation-free layout, font fallback and visual gallery; clipped status panel, buttons/checkboxes/sliders, keyboard/pointer navigation, bounded layout, modal settings and title screen; `ui`, scene-flow and GPU pixel tests | Broader manual navigation checks |
@@ -1386,9 +1386,45 @@ Both fixed-content sessions reported zero tilemap reload attempts. Gameplay and
 replay captures were inspected, including the ready/locked tilemap HUD. Existing
 physical audio/display validation gaps remain unchanged.
 
+## Added in the thirty-fifth increment
+
+- Scene reload stages a complete world using current map/animation content, restores
+  progress by persistent ID, rebuilds pickup components and collision contacts, and
+  validates resident textures/minimap walls before publication.
+- Success invalidates old entity handles; failure retains them. Player/exit IDs and
+  core ID set remain fixed. Player/core leaves and static-collider restrictions
+  prevent collected or moving subtrees from invalidating runtime bindings.
+- Position, pause, time, RNG, zoom, collection, alarm and door/animation state survive.
+  Both current occupancy and authored spawn are validated; inconsistent exit/win
+  edits are rejected. Plain restart uses the last accepted scene and its spawn.
+- Separate Facility/Annex scene groups follow the active level and are omitted for
+  recording/playback. HUD/logs expose revision, outcome and lock. Minimap target and
+  scroll survive; machine sound position updates without restarting voices.
+- Seven CPU and three GPU/watch cases cover handles, persistent collection,
+  movement/query collision, minimap/sprite pixels, invalid edits and dependencies,
+  save identity, alarm priming, door completion, both levels and resource stability.
+
+## Thirty-fifth-increment validation (2026-10-16)
+
+All 47 runtime CTest groups pass with GCC Debug and Release, without skips. Nine focused groups
+(scene_reload, scene_watch, tilemap_reload, animation_reload, scene_flow, levels,
+replay_files, render_targets and audio_transport) pass with Clang and native
+ASan/UBSan (driver leak detection disabled). The new scene_reload group also passes
+the CPU-only sanitizer preset with leak detection enabled. Three Release packaging
+checks pass: archive build, relocation and native OpenGL smoke.
+
+Native Debug 240-frame watched runs in Facility, Annex, title and settings each
+accepted an added sprite/collider, rejected a wall over the restart spawn, retained
+content after malformed scene text and recovered after repair. They ended at
+revision 4 after five attempts including initial synchronization. Title/settings
+stayed at tick 0. Gameplay and replay captures were inspected at 1050x1360.
+A 1500-command replay ignored scene edits and retained tick 1381 and reference hash
+3859428580428616961. Recording ignored the edits too; its 255-command output verified
+at tick 255 with hash 16886348535325130272. Both reported zero scene reload attempts.
+No new performance baseline or physical audio/display validation is claimed.
+
 ## Next increment
 
-Extend transactional asset reload to scene content (F08), with explicit live-state
-and entity-handle semantics and staged validation of dependent systems. Keep audio
-reload and physical audio/display checks visible in the manifest; optional v1 scope
-remains deferred.
+Extend transactional asset reload to audio content (F08), with explicit ownership
+and playing-voice semantics and failure retention. Physical audio/display checks
+remain visible in the manifest; optional v1 scope remains deferred.
