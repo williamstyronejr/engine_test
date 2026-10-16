@@ -146,6 +146,7 @@ std::size_t stress_rss_bytes() {
 StressReport::StressReport(const StressOptions& options)
     : load((options.validate(), options.cycles)), simulation(options.frames * options.cycles),
       audio(options.frames * options.cycles), submission(options.frames * options.cycles),
+      preview(options.frames * options.cycles), present(options.frames * options.cycles),
       frame(options.frames * options.cycles), gpu(options.frames * options.cycles) {
     rss_start = rss_peak = stress_rss_bytes();
 }
@@ -210,7 +211,8 @@ std::string StressReport::json(const StressOptions& options) const {
         << "},\n  \"memory\":{\"tracked_cpu_buffer_bytes\":" << resources.buffer_bytes
         << ",\"report_buffer_bytes\":"
         << load.buffer_bytes() + simulation.buffer_bytes() + audio.buffer_bytes() +
-               submission.buffer_bytes() + frame.buffer_bytes() + gpu.buffer_bytes()
+               submission.buffer_bytes() + preview.buffer_bytes() + present.buffer_bytes() +
+               frame.buffer_bytes() + gpu.buffer_bytes()
         << ",\"rss_start\":" << rss_start << ",\"rss_end\":" << rss_end
         << ",\"rss_peak_at_cycle_boundary\":" << rss_peak
         << ",\"peak_uploaded_textures\":" << texture_peak
@@ -231,6 +233,8 @@ std::string StressReport::json(const StressOptions& options) const {
     metric("simulation", simulation, true);
     metric("mixer", audio, true);
     metric("render_submit", submission, true);
+    metric("preview_submit", preview, true);
+    metric("present", present, true);
     metric("frame", frame, true);
     metric("gpu_render", gpu, true);
     return out.str() + "\n  }\n}\n";

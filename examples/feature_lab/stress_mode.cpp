@@ -117,6 +117,8 @@ int run_stress_mode(int argc, char** argv) {
                     report.simulation.add(stress_ms(begin, simulated));
                     report.audio.add(stress_ms(simulated, mixed));
                     report.submission.add(stress_ms(mixed, submitted));
+                    report.preview.add(stress_ms(submitted, before_capture));
+                    report.present.add(stress_ms(after_capture, end));
                     report.frame.add(stress_ms(frame_start, end) -
                                      stress_ms(before_capture, after_capture));
                     report.quads += stats.quads;
