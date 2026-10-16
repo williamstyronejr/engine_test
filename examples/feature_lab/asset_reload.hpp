@@ -11,16 +11,19 @@ class AssetReload {
     static constexpr std::uint32_t shader_group = 1, texture_group = 2, font_group = 4,
                                    animation_group = 8, facility_map_group = 16,
                                    annex_map_group = 32, facility_scene_group = 64,
-                                   annex_scene_group = 128;
-    // Level callbacks return true when they attempt the active level's reload.
+                                   annex_scene_group = 128, audio_group = 256;
+    // Level/audio callbacks return true when they attempt a reload.
     AssetReload(const engine::AssetRoot& assets, const TextureAssets& textures,
                 std::function<void()> animation_reload = {},
                 std::function<bool(std::string_view)> tilemap_reload = {},
-                std::function<bool(std::string_view)> scene_reload = {})
+                std::function<bool(std::string_view)> scene_reload = {},
+                std::function<bool()> audio_reload = {})
         : watch_(assets, files(textures, static_cast<bool>(animation_reload),
-                               static_cast<bool>(tilemap_reload), static_cast<bool>(scene_reload))),
+                               static_cast<bool>(tilemap_reload), static_cast<bool>(scene_reload),
+                               static_cast<bool>(audio_reload))),
           animation_reload_(std::move(animation_reload)),
-          tilemap_reload_(std::move(tilemap_reload)), scene_reload_(std::move(scene_reload)) {
+          tilemap_reload_(std::move(tilemap_reload)), scene_reload_(std::move(scene_reload)),
+          audio_reload_(std::move(audio_reload)) {
         std::cerr << "[watch] enabled files=" << watch_.size() << '\n';
     }
     // Call once per frame, outside render passes. A manual command takes priority
@@ -60,7 +63,10 @@ class AssetReload {
             ++scene_reloads_;
         if ((changed & annex_scene_group) && scene_reload_("annex.scene"))
             ++scene_reloads_;
+        if ((changed & audio_group) && audio_reload_())
+            ++audio_reloads_;
     }
+    std::uint64_t audio_reloads() const { return audio_reloads_; }
     std::uint64_t scene_reloads() const { return scene_reloads_; }
     std::uint64_t tilemap_reloads() const { return tilemap_reloads_; }
     std::uint64_t animation_reloads() const { return animation_reloads_; }
@@ -70,7 +76,7 @@ class AssetReload {
 
   private:
     static std::vector<engine::WatchedAsset> files(const TextureAssets& textures, bool animations,
-                                                   bool tilemaps, bool scenes) {
+                                                   bool tilemaps, bool scenes, bool audio) {
         std::vector<engine::WatchedAsset> result{{"shaders/sprite.vert", shader_group},
                                                  {"shaders/sprite.frag", shader_group},
                                                  {std::string(FontAssets::key), font_group}};
@@ -84,6 +90,10 @@ class AssetReload {
             result.push_back({"facility.scene", facility_scene_group});
             result.push_back({"annex.scene", annex_scene_group});
         }
+        if (audio)
+            for (auto key :
+                 {"sounds/pickup.wav", "sounds/music.wav", "sounds/machine.wav", "sounds/door.wav"})
+                result.push_back({key, audio_group});
         for (const auto& key : textures.keys())
             result.push_back({key, texture_group});
         return result;
@@ -91,8 +101,9 @@ class AssetReload {
     engine::AssetWatcher watch_;
     std::function<void()> animation_reload_;
     std::function<bool(std::string_view)> tilemap_reload_, scene_reload_;
+    std::function<bool()> audio_reload_;
     std::uint64_t shader_reloads_{}, texture_reloads_{}, font_reloads_{}, animation_reloads_{};
-    std::uint64_t tilemap_reloads_{}, scene_reloads_{};
+    std::uint64_t tilemap_reloads_{}, scene_reloads_{}, audio_reloads_{};
     bool reported_{}, notifications_{};
 };
 } // namespace feature_lab

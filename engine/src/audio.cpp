@@ -5,6 +5,7 @@
 #include <array>
 #include <atomic>
 #include <chrono>
+#include <limits>
 #include <stdexcept>
 #include <string>
 #include <thread>
@@ -33,6 +34,15 @@ struct AudioOutput::Impl {
     };
     std::array<SoundSlot, max_sounds> sounds{}; // Main thread only; worker holds sample views.
     std::size_t count{}, bytes{};
+    struct Pending {
+        std::vector<SoundSwap> swaps;
+        std::vector<std::unique_ptr<const SoundData>> retired;
+        std::size_t bytes{};
+        std::uint64_t after{};
+    };
+    std::vector<std::unique_ptr<Pending>> pending; // Stable payload addresses until ack.
+    std::size_t retired_bytes{};
+    std::uint64_t submitted{}; // Producer only; matches worker's processed counter.
     snd_pcm_t* pcm{};
     audio_detail::CommandQueue commands;
     std::atomic<std::uint64_t> processed{}, started{}, completed{}, stopped{}, dropped{}, stale{},
@@ -53,11 +63,22 @@ struct AudioOutput::Impl {
         // Sound storage is destroyed after the consumer has joined.
     }
     bool enqueue(Command command) {
-        if (failed.load() || !commands.push(command)) {
+        if (submitted == std::numeric_limits<std::uint64_t>::max() || failed.load() ||
+            !commands.push(command)) {
             rejected.fetch_add(1, std::memory_order_relaxed);
             return false;
         }
+        ++submitted;
         return true;
+    }
+    void collect() {
+        const auto acknowledged = processed.load(std::memory_order_acquire);
+        std::erase_if(pending, [&](const auto& batch) {
+            if (batch->after > acknowledged)
+                return false;
+            retired_bytes -= batch->bytes;
+            return true;
+        });
     }
     void process() {
         audio_detail::BlockWriter::Buffer buffer{};
@@ -117,8 +138,9 @@ AudioOutput::~AudioOutput() = default;
 SoundHandle AudioOutput::register_sound(SoundData sound) {
     sound.validate();
     auto& p = *impl_;
+    p.collect();
     const auto bytes = sound.samples.size() * sizeof(float);
-    if (p.count == max_sounds || bytes > max_sound_bytes - p.bytes)
+    if (p.count == max_sounds || bytes > max_sound_bytes - p.bytes - p.retired_bytes)
         throw std::runtime_error("Audio sound bank limit reached");
     static std::atomic<std::uint64_t> next_serial{1};
     const auto serial = next_serial.fetch_add(1, std::memory_order_relaxed);
@@ -130,6 +152,61 @@ SoundHandle AudioOutput::register_sound(SoundData sound) {
     ++p.count;
     p.bytes += bytes;
     return {static_cast<std::uint32_t>(index), serial};
+}
+bool AudioOutput::replace_sounds(std::span<SoundReplacement> replacements) {
+    auto& p = *impl_;
+    p.collect();
+    if (replacements.empty() || replacements.size() > max_sounds)
+        throw std::invalid_argument("Audio replacement batch must contain 1..32 sounds");
+    std::array<bool, max_sounds> seen{};
+    std::size_t new_bytes = 0, old_bytes = 0;
+    for (const auto& entry : replacements) {
+        const auto h = entry.handle;
+        if (h.slot >= p.count || !h.serial || p.sounds[h.slot].serial != h.serial || seen[h.slot])
+            throw std::invalid_argument("Invalid, foreign or duplicate replacement sound handle");
+        seen[h.slot] = true;
+        entry.data.validate();
+        const auto bytes = entry.data.samples.size() * sizeof(float);
+        if (bytes > max_sound_bytes - p.bytes - p.retired_bytes - new_bytes)
+            throw std::runtime_error("Audio replacement exceeds retained sample budget");
+        new_bytes += bytes;
+        old_bytes += p.sounds[h.slot].data->samples.size() * sizeof(float);
+    }
+    auto batch = std::make_unique<Impl::Pending>();
+    batch->swaps.reserve(replacements.size());
+    batch->retired.reserve(replacements.size());
+    std::vector<std::unique_ptr<const SoundData>> candidates;
+    candidates.reserve(replacements.size());
+    p.pending.reserve(p.pending.size() + 1);
+    for (auto& entry : replacements) {
+        candidates.push_back(std::make_unique<const SoundData>(std::move(entry.data)));
+        batch->swaps.push_back(
+            {p.sounds[entry.handle.slot].data->view(), candidates.back()->view()});
+    }
+    Command command{};
+    command.kind = CommandKind::replace_sounds;
+    command.replacements = batch->swaps;
+    if (!p.enqueue(command))
+        return false;
+    // No throwing operations after enqueue. Worker can already use candidate samples;
+    // all old samples stay owned until processed acknowledges this command/block.
+    batch->after = p.submitted;
+    batch->bytes = old_bytes;
+    for (std::size_t i = 0; i < replacements.size(); ++i) {
+        auto& slot = p.sounds[replacements[i].handle.slot];
+        batch->retired.push_back(std::move(slot.data));
+        slot.data = std::move(candidates[i]);
+    }
+    p.bytes = p.bytes - old_bytes + new_bytes;
+    p.retired_bytes += old_bytes;
+    p.pending.push_back(std::move(batch));
+    return true;
+}
+void AudioOutput::collect_sounds() {
+    impl_->collect();
+}
+std::size_t AudioOutput::retained_sound_bytes() const {
+    return impl_->bytes + impl_->retired_bytes;
 }
 std::size_t AudioOutput::sound_count() const {
     return impl_->count;

@@ -408,7 +408,7 @@ reload use that identity and must be restored with matching content; pre-edit sa
 are not silently migrated. Repeated phase conversions can round down by ticks;
 they are not a lossless restoration of the previous timeline. File reload remains
 synchronous, with temporary candidate allocations; no work was added to per-tick
-animation advancement. Audio hot reload remains unimplemented. Scene replacement is documented below.
+animation advancement. Scene and audio replacement are documented below.
 
 ## Tilemap snapshot replacement
 
@@ -575,8 +575,9 @@ quantization rounds and clamps, so +1 maps to 32767. There is no dithering.
 
 `AudioOutput::register_sound(SoundData)` takes ownership of sample storage, validates
 it, and returns a checked `SoundHandle`. Callers must abandon mutable aliases after
-transferring storage. The output retains sounds until shutdown and joins its worker
-before freeing them. There are at most 32 registrations / 64 MiB of float payload
+transferring storage. Current samples survive until replacement or shutdown; retired
+samples are freed only after worker acknowledgement. Shutdown joins the worker before
+freeing any remaining samples. There are at most 32 registrations / 64 MiB of float payload
 per output; no individual unload or streaming API exists yet. Bank operations and
 all command producers run on the owning main thread. The worker accesses only
 immutable sample views published through the queue, never the bank's owner slots.
@@ -1389,11 +1390,12 @@ for event coalescing, directory/inode behavior and queue limitations.
 Feature Lab's optional `--watch-assets` registers the two sprite shader files as one
 group, all resident texture keys as another, `fonts/ui.efnt` as a third, and
 `facility.eani` as a fourth, plus independent `facility.etmp`, `annex.etmp`,
-`facility.scene` and `annex.scene` groups outside recording/playback. `AssetReload::update` polls once per drawable
+`facility.scene` and `annex.scene` groups outside recording/playback, plus a four-WAV
+audio bank group whenever output is enabled (including recording/playback). `AssetReload::update` polls once per drawable
 frame after input/simulation, before GPU timing and any render pass. This
 also works on the title, in settings, while paused and during replay; minimized
 windows defer it until drawing resumes. Ready groups call the existing full shader
-or texture-bank transactions, the strict font transaction, or the animation/tilemap/scene
+or texture-bank transactions, the strict font transaction, or the audio/animation/tilemap/scene
 callbacks. A manual F5/F6 or F7/F8 attempt suppresses a ready
 automatic transaction in the same group/frame. Groups remain independent; this is
 not one atomic project transaction. Logs count automatic attempts including failures,
@@ -1403,7 +1405,7 @@ Watching is disabled by default and is not persisted in configuration. It never
 modifies source assets, game checkpoints or replay commands. Reload still runs on
 the render thread and can hitch a frame. Watched keys remain fixed for the session's
 shared resident bank and fixed font/animation/level-map/scene keys; arbitrary new banks,
-audio reload and background loading remain unimplemented. Asset/save/replay/
+background loading remains unimplemented. Asset/save/replay/
 configuration schemas and Linux system-library requirements are unchanged.
 
 ## Bitmap fonts (EFNT v1)
@@ -1578,3 +1580,58 @@ edits. No save/replay format migration is performed: old saves and the title's
 original new-game checkpoint require their original content. Groups are independent,
 so an edit spanning a scene and a tilemap is not a combined transaction. Content
 reads and staging are synchronous; route solvability is an authoring responsibility.
+
+## Audio bank replacement
+
+`AudioOutput::replace_sounds(span<SoundReplacement>)` is a single-producer/main-thread
+operation over 1..32 registered handles. Invalid/foreign/duplicate handles, invalid
+PCM and sample-budget violations throw before enqueue. It may move input sample
+storage while staging; callers must abandon mutable aliases. A false return means
+queue saturation or device failure. In either case the resident bank stays intact.
+Candidate payload plus current and unacknowledged retired payload must fit 64 MiB.
+This budget excludes caller-owned source WAV bytes, temporary decode buffers and
+container/allocator overhead. There is still no individual unload or streaming API.
+
+All allocations/validation happen on the producer. One FIFO command carries a view
+of an immutable batch of old/new sample views. Once accepted, noexcept ownership
+moves publish new resident samples under the same SoundHandles. Earlier queued play
+commands use old views and are remapped by the swap; later plays use the new bank.
+The worker applies the complete batch between mix blocks, never partway through a
+block. Active VoiceHandles, loop/group/voice pause, pan and gain ramps survive.
+Position becomes `floor(old_cursor * new_frames / old_frames)`, with integer bounds
+from the maximum clip length. Stopped/completed voices stay absent; active one-shots
+complete once at their new end. Group gain and pause settings are unchanged.
+
+`Mixer::replace_sounds(span<SoundSwap>)` provides the thread-confined operation for
+borrowed views. It validates every mapping before mutating any voice and applies
+mappings simultaneously (not as a chain). Views and samples remain the caller's
+lifetime responsibility. Mixing/replacement performs no allocations, file I/O,
+locks, reference-count destruction or sample deallocation on the audio worker.
+There is no crossfade or zero-crossing alignment; changed waveforms can click.
+
+Each accepted batch retains its old samples and mapping storage on the producer.
+The worker release-stores its processed command count after mixing the block.
+`collect_sounds()` acquire-loads this acknowledgement and destroys only retired
+batches whose commands have completed. FIFO order plus stable handles guarantees
+that no voice or queued command can still reference those samples. Multiple pending
+swaps remain safe even if the output stalls, underruns, suspends or fails. Shutdown
+joins the worker before destroying current/pending storage. `sound_bytes()` reports
+the resident bank; `retained_sound_bytes()` includes unacknowledged old samples.
+These ownership queries, registration, replacement and collection are main-thread
+only. The counter acknowledgement means consumed/mixed, not physically audible.
+
+Feature Lab decodes pickup/music/machine/door WAVs as one transaction. Failure
+retains working output and a source diagnostic instead of disabling sound. Reload
+preserves settings and does not replay pickups/door effects, restart loops or revive
+a stopped machine. Its watcher group is mask 256; it shares initial refresh, debounce,
+manual-mask suppression and no busy retry of unchanged failures. The callback
+counts attempted transactions, including failures, and stops attempting after audio
+has been disabled. Startup-disabled output omits all four keys. The application
+collects retired samples once per drawable frame. Recording/playback allow audio
+watching because samples do not participate in simulation identity or commands.
+
+HUD/session diagnostics distinguish the accepted revision/outcome and resident vs
+retained bytes. `QUEUED` is an enqueue acknowledgement, not a device guarantee.
+Whole game/level/save replacement keeps the accepted audio bank; newly started
+loops use it. A failed device still follows the existing silent fallback and needs
+a new output/session for reconnection. WAV/config/save/replay schemas are unchanged.

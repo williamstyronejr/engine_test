@@ -4,7 +4,18 @@
 #include <atomic>
 
 namespace engine::audio_detail {
-enum class CommandKind { play, stop, pause, gain, pan, master, group_gain, group_pause, stop_all };
+enum class CommandKind {
+    play,
+    stop,
+    pause,
+    gain,
+    pan,
+    master,
+    group_gain,
+    group_pause,
+    stop_all,
+    replace_sounds
+};
 struct Command {
     CommandKind kind{};
     VoiceHandle voice;
@@ -13,6 +24,7 @@ struct Command {
     float value{};
     bool flag{};
     AudioGroup group{};
+    std::span<const SoundSwap> replacements;
     bool apply(Mixer& mixer) const {
         switch (kind) {
         case CommandKind::play:
@@ -34,6 +46,8 @@ struct Command {
         case CommandKind::stop_all:
             mixer.stop_all();
             return true;
+        case CommandKind::replace_sounds:
+            return mixer.replace_sounds(replacements);
         }
         return false;
     }

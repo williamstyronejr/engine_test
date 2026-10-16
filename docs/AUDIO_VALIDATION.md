@@ -109,3 +109,14 @@ failure and retained tick 1381 / hash 3859428580428616961, matching normal outpu
 See [increment validation](STATUS.md#thirty-second-increment-validation-2026-10-15)
 for compiler, sanitizer and packaging results. No physical speaker or unplug result
 is claimed.
+
+## Audio reload validation — 2026-10-16
+
+Audio-bank reload now has exact mixer sample tests and ALSA null-output tests for
+paused/active voices, queue rejection, acknowledged retirement, repair and shutdown.
+These do not establish audible continuity. Sample replacement preserves normalized
+frame position but does not crossfade or match waveforms. For a physical listening
+check, edit the four WAVs under `--watch-assets`, confirm live loops change while
+volume/mute/pause controls survive, then corrupt and repair one file. Record any
+clicks and verify that already completed effects do not replay. Physical listening
+and the existing disconnect/suspend matrix remain outstanding.

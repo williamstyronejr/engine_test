@@ -20,6 +20,9 @@ struct Playback {
     bool loop{};
     AudioGroup group{AudioGroup::effects};
 };
+struct SoundSwap {
+    SoundView before, after;
+};
 namespace audio_detail {
 inline VoiceHandle ticket() {
     static std::atomic<std::uint64_t> next{1};
@@ -88,6 +91,34 @@ class Mixer {
                 v = {};
                 ++stopped_;
             }
+    }
+    // Atomic within this thread. Borrowed replacement storage must outlive voices.
+    // Keep controls and normalized frame position; never restart completed voices.
+    bool replace_sounds(std::span<const SoundSwap> swaps) {
+        if (swaps.empty() || swaps.size() > 32)
+            return false;
+        for (std::size_t i = 0; i < swaps.size(); ++i) {
+            const auto& s = swaps[i];
+            if (!s.before.valid() || !s.after.valid() ||
+                s.before.frames() > SoundData::max_frames ||
+                s.after.frames() > SoundData::max_frames)
+                return false;
+            for (std::size_t j = 0; j < i; ++j)
+                if (swaps[j].before.samples.data() == s.before.samples.data())
+                    return false;
+        }
+        for (auto& v : voices_)
+            if (v.handle)
+                for (const auto& s : swaps)
+                    if (v.sound.samples.data() == s.before.samples.data() &&
+                        v.sound.samples.size() == s.before.samples.size() &&
+                        v.sound.channels == s.before.channels) {
+                        v.cursor = static_cast<std::size_t>(static_cast<std::uint64_t>(v.cursor) *
+                                                            s.after.frames() / s.before.frames());
+                        v.sound = s.after;
+                        break;
+                    }
+        return true;
     }
     bool pause(VoiceHandle handle, bool paused) {
         auto* v = find(handle);

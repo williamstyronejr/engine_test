@@ -144,6 +144,8 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
               std::to_string(visible.chunks) + " / " + std::to_string(game.map.chunk_count()) +
               "    COLLIDERS " + std::to_string(game.collision_candidates.size()),
           cyan);
+    label(24, bottom - 174, 1.3F, soundtrack.reload_status(),
+          soundtrack.reload_applied() ? cyan : Color{1, 0.3F, 0.12F, 1});
     label(24, bottom - 156, 1.3F, scenes.status(),
           scenes.applied() ? cyan : Color{1, 0.3F, 0.12F, 1});
     label(24, bottom - 138, 1.3F, tilemaps.status(),
@@ -484,10 +486,18 @@ int main(int argc, char** argv) {
                 }
                 return true;
             };
+        std::function<bool()> reload_audio;
+        if (soundtrack.enabled())
+            reload_audio = [&] {
+                if (!soundtrack.enabled())
+                    return false;
+                soundtrack.reload(assets);
+                return true;
+            };
         std::unique_ptr<feature_lab::AssetReload> asset_reload;
         if (watch_assets)
             asset_reload = std::make_unique<feature_lab::AssetReload>(
-                assets, textures, reload_animations, reload_tilemap, reload_scene);
+                assets, textures, reload_animations, reload_tilemap, reload_scene, reload_audio);
         std::vector<Rect> staged_walls;
         flow.prepare_replacement = [&](const feature_lab::Game& candidate) {
             textures.validate_level(candidate);
@@ -731,6 +741,7 @@ int main(int argc, char** argv) {
                     break;
                 }
             }
+            soundtrack.collect();
             if (asset_reload)
                 asset_reload->update(renderer, assets, shaders, textures, fonts, manual_reloads);
             diagnostics.collect_gpu(gpu_timer, frames + 1);
@@ -754,8 +765,8 @@ int main(int argc, char** argv) {
                                       std::to_string(playback->commands.size())
                      : !flow.notice.empty()
                          ? flow.notice
-                         : "35 / " + std::string(feature_lab::level_name(game.level)) +
-                               (watch_assets ? " / AUTO RELOAD" : " / TILEMAP RELOAD"),
+                         : "36 / " + std::string(feature_lab::level_name(game.level)) +
+                               (watch_assets ? " / AUTO RELOAD" : " / AUDIO BANK RELOAD"),
                      recorder.has_value() || playback.has_value(), playback.has_value());
                 diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
                 settings.draw(renderer, window.width(), window.height());
@@ -826,6 +837,11 @@ int main(int argc, char** argv) {
                   << " core_components=" << game.world.component_count<feature_lab::CorePickup>()
                   << " watched_shaders=" << (asset_reload ? asset_reload->shader_reloads() : 0)
                   << " watched_textures=" << (asset_reload ? asset_reload->texture_reloads() : 0)
+                  << " watched_audio=" << (asset_reload ? asset_reload->audio_reloads() : 0)
+                  << " audio_revision=" << soundtrack.revision()
+                  << " audio_reload_applied=" << soundtrack.reload_applied()
+                  << " sound_bytes=" << soundtrack.sound_bytes()
+                  << " retained_sound_bytes=" << soundtrack.retained_sound_bytes()
                   << " watched_scenes=" << (asset_reload ? asset_reload->scene_reloads() : 0)
                   << " scene_revision=" << scene_assets.revision()
                   << " scene_applied=" << scene_assets.applied()
