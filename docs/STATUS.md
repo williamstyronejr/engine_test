@@ -1,7 +1,7 @@
 # Implementation status
 
-The thirty-fifth increment adds transactional scene reload with persistent-ID
-progress restoration and staged dependent-system validation. It is **not completion of all six design milestones**.
+The thirty-sixth increment adds transactional audio-bank reload with block-boundary
+voice updates and acknowledged sample retirement. It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
 ## Delivered
@@ -58,7 +58,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
 | F06 | Implemented (v1) | EANI reader/writer; exact frame timing, loops, pause/restart, large advances; animated player/machine/door with exactly-once completion | Optional frame callbacks and richer animation types |
 | F07 | Implemented (v1) | Handle/compaction/hierarchy tests, scene round trips, deferred deletion; title/gameplay and Facility/Annex transitions; typed runtime pools with checked access, intersecting queries, ownership/exception/move tests, allocation-free steady queries and pickup integration | Optional custom component serialization codecs, query scheduling and broader ECS tooling |
-| F08 | Partial | ETEX/ETMP/EANI/WAV/EFNT readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, transactional shader/texture/font/animation/tilemap/scene reload with replay isolation; optional bounded inotify watching, debounce, metadata recovery and watched GPU pixel tests | Audio reload support |
+| F08 | Implemented (v1) | ETEX/ETMP/EANI/WAV/EFNT readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, transactional shader/texture/font/animation/tilemap/scene/audio reload with gameplay-content replay isolation; optional bounded inotify watching, debounce, metadata recovery and watched GPU pixel tests | Optional background loading and broader asset tooling |
 | F09 | Implemented (v1) | Swept player boxes; box/circle contacts; moving-body grid vs brute force; reciprocal filters; trigger history; overlap/segment queries; alarm/switch and restore tests | Rigid-body dynamics, rotating shapes and moving-body CCD are outside initial scope |
 | F10 | Partial | PCM16 WAV assets/resampling, loops, voice controls, gain ramps, master/music/effects controls, stereo emitter, null-device soundtrack/restart tests; deterministic transport recovery faults; real ALSA file-sink failure/fallback; recovery counters and listening probe | Physical disconnect/recovery, system suspend/resume and audible-output checks; see [audio validation](AUDIO_VALIDATION.md) |
 | F11 | Partial | Atlas bitmap text with authored metrics, bounded allocation-free layout, font fallback and visual gallery; clipped status panel, buttons/checkboxes/sliders, keyboard/pointer navigation, bounded layout, modal settings and title screen; `ui`, scene-flow and GPU pixel tests | Broader manual navigation checks |
@@ -106,7 +106,8 @@ not a controlled 1080p benchmark or a GPU/full-frame performance guarantee.
 - One window/context and one renderer at a time. Window and rendering operations,
   including destruction, stay on the main thread. Mixing is confined to the audio
   worker; `play` has a single main-thread producer.
-- `AudioOutput` owns registered immutable samples until its worker joins at shutdown.
+- `AudioOutput` owns immutable samples; replacements retire old buffers only after
+  worker acknowledgement, and shutdown joins before freeing remaining storage.
   Direct CPU `Mixer` use still borrows sample views; callers must validate/retain them.
   WAV support is PCM16 mono/stereo at selected rates; playback is always 48 kHz.
 - Queue overflow rejects commands; voice exhaustion drops excess play requests and
@@ -1423,8 +1424,45 @@ A 1500-command replay ignored scene edits and retained tick 1381 and reference h
 at tick 255 with hash 16886348535325130272. Both reported zero scene reload attempts.
 No new performance baseline or physical audio/display validation is claimed.
 
+## Added in the thirty-sixth increment
+
+- Atomic audio-bank replacement validates and stages owned samples, then enqueues one
+  block-boundary transaction. Stable sound/voice handles, controls and normalized
+  playback position survive. Completed/stopped voices are never resurrected.
+- Producer-owned retirement batches keep samples/mapping storage alive until the
+  worker acknowledges consumption. Collection and destruction stay off the audio
+  worker. Current, retired and candidate payloads share the 64 MiB bank budget.
+- Feature Lab watches all four WAV files as one group, including during replay.
+  Invalid edits or queue rejection retain working audio; device failure retains the
+  existing silent fallback. HUD/logs show accepted revision and retained bytes.
+- Five CPU mixer, five output/controller and two watcher cases cover exact samples,
+  queue ordering, controls/completion, stalled-worker ownership, bounded memory,
+  invalid edits/repair, stable voices and recorded gameplay equality.
+
+## Thirty-sixth-increment validation (2026-10-16)
+
+All 50 Debug and Release runtime groups pass without skips. Eight focused groups (mixer_reload,
+audio_reload, audio_watch, sound, audio_transport, audio_recovery, replay_files and
+watched_reload) pass with Clang and native ASan/UBSan (driver leak detection disabled).
+The CPU-only mixer_reload/sound groups and native audio_reload ownership group pass
+with leak detection enabled. Three Release packaging checks pass: archive build,
+relocation and native OpenGL smoke. Native Debug runs using a private
+ALSA null default applied valid WAV edits, retained the bank after malformed input
+and recovered after repair in Facility, Annex, title, settings, recording and a
+1500-command replay. Each enabled run reported four attempts and revision 4;
+resident/retained bytes both settled at 299648, with no queue rejections. Gameplay
+and replay captures were inspected at 1050x1360. Title and
+settings remained at tick 0. Disabled audio omitted the group entirely.
+
+Replay retained tick 1381 and hash 3859428580428616961. The 326-command recording
+verified at tick 326 with hash 10563975167933789901 against the original assets.
+These runs overlapped compilation and are functional evidence, not performance
+measurements (some catch-up time was dropped). Physical listening, disconnect/
+reconnect and system suspend remain outstanding; no crossfade or waveform-continuity
+guarantee is claimed.
+
 ## Next increment
 
-Extend transactional asset reload to audio content (F08), with explicit ownership
-and playing-voice semantics and failure retention. Physical audio/display checks
-remain visible in the manifest; optional v1 scope remains deferred.
+Run controlled 1080p CPU/GPU performance validation and document bottlenecks and
+remaining F15/F16 limits. Keep physical audio/display validation gaps visible;
+optional asset tooling and background loading remain deferred.

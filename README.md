@@ -2,8 +2,8 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The thirty-fifth increment adds transactional scene reload, rebuilding entity handles,
-collision queries and minimap walls together while preserving progress after valid edits.
+The thirty-sixth increment adds transactional audio reload, replacing WAV banks at
+mixer block boundaries while retaining voice handles, controls and playback progress.
 Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
@@ -308,10 +308,12 @@ Launch with an explicit editable asset root and **`--watch-assets`**:
 ```
 
 Edits to `shaders/sprite.vert`, `shaders/sprite.frag`, a resident ETEX texture,
-`fonts/ui.efnt`, `facility.eani`, or the active level's ETMP/scene file automatically use
+`fonts/ui.efnt`, `facility.eani`, the active level's ETMP/scene file, or the four
+WAV files (with audio enabled) automatically use
 transactional reload paths. Each
 affected group waits for 150 ms without another observed change; shader stages reload together,
-textures reload as one bank, and font, animation, tilemap and scene files use independent groups.
+textures reload as one bank, WAV sounds as another, and font, animation, tilemap
+and scene files use independent groups.
 Invalid or missing files retain the last working resources and show the existing failure status. Fix the file to retry. An unchanged
 failed file is not retried every frame. F5–F8 remain available and take precedence
 over a ready automatic reload of their group in the same frame.
@@ -320,7 +322,8 @@ Watching is off by default and has no persisted preference. Enabling it performs
 one initial debounced refresh to synchronize the loaded resources with disk. It
 operates while the title, settings or paused game is visible; minimized rendering
 defers checks until the window becomes drawable. Shader/texture/font edits affect
-presentation during replay without changing the recorded simulation state.
+presentation during replay without changing the recorded simulation state. Audio
+watching is also available during recording/playback.
 
 The in-house watcher uses nonblocking Linux inotify and checks bounded file metadata
 once per second to recover missed notifications, symlink-target edits and replaced
@@ -329,8 +332,9 @@ are covered by tests. If directory notifications are unavailable, metadata check
 continue and reattachment is retried. Only the two shader files, resident texture
 keys, `fonts/ui.efnt` and (outside recording/playback) `facility.eani`,
 `facility.etmp`, `annex.etmp`, `facility.scene` and `annex.scene` are watched.
-Inactive-level map/scene edits are ignored until that level is loaded. Audio reload
-remains unimplemented.
+Inactive-level map/scene edits are ignored until that level is loaded. With audio
+enabled, `sounds/pickup.wav`, `sounds/music.wav`, `sounds/machine.wav` and
+`sounds/door.wav` are watched as one additional group.
 
 Animation reload retains each active clip's name, pause state and normalized tick
 progress. All four players swap together. Finished doors remain finished; a timing
@@ -378,6 +382,25 @@ scene content fingerprint, so old saves (and the title's original new-game check
 still require matching authored content. Plain restart uses the current scene and
 its edited spawn. Scene status/revision appears in the HUD and session log; game,
 level and save replacement reset it. See [scene reload semantics](docs/FORMATS.md#scene-snapshot-replacement).
+
+Audio reload validates all four WAV files before enqueueing one sound-bank swap.
+Active voices keep their handles, loop/group/pause state, pan and gain ramps. Their
+frame positions map to the same normalized position in the new clips, including
+mono/stereo or length changes. Completed/stopped voices are not restarted. The new
+bank is used for later play commands; existing music and machine loops update in
+place. No gameplay state or replay content identity changes.
+
+Malformed, missing, escaping or oversized files and queue rejection keep the current
+bank and working output. The HUD reports the accepted revision as `QUEUED`; it does
+not claim the device has played the new samples. Old buffers are reclaimed on the
+main thread after worker acknowledgement. Current, retired and staged replacement
+samples must fit the output's 64 MiB payload budget. A real device failure retains
+the existing silent-fallback behavior. `--no-audio` omits WAV watches; reload does
+not reconnect a failed output. No new hotkey or file format is added.
+
+This is a block-boundary sample swap, without a crossfade or waveform matching;
+edits can cause an audible discontinuity. Physical listening remains pending.
+See [audio replacement contracts](docs/FORMATS.md#audio-bank-replacement).
 
 Loading/compilation still runs synchronously between render passes and can hitch a
 frame. Debounce does not make separate filesystem writes an atomic project edit;
@@ -648,6 +671,13 @@ confirm the WM minimize request. Physical monitor scaling remains unverified.
 
 ## Tests
 
+Five CPU `mixer_reload` cases verify exact output samples, normalized frame progress,
+mono/stereo changes, paused controls/ramps, completion and FIFO ordering. Five
+`audio_reload` cases exercise real ALSA null output with a held worker, queued
+replacement lifetime, queue pressure, bounds, file failures/repair and shutdown.
+Two `audio_watch` cases cover bank debounce, atomic failure/repair, stable voices,
+manual priority, disabled watches and unchanged recorded gameplay bytes.
+
 Seven CPU `scene_reload` cases cover persistent-ID rebinding, stale handles,
 movement/query collision, spawn and live-state rejection, staged failure, save
 compatibility, active iteration, alarm contacts, door completion, both levels and
@@ -829,8 +859,8 @@ For a visible missing-texture/fallback scenario:
 
 Invalid startup scenes, maps, and animations are fatal with source diagnostics; missing or
 broken textures produce an error and a magenta fallback. F7 provides coordinated
-CPU/GPU texture reload. `--watch-assets` automates shader/texture/font/animation/tilemap/scene reload; invalid
-animation/map/scene edits retain working content.
+CPU/GPU texture reload. `--watch-assets` automates shader/texture/font/animation/tilemap/scene/audio reload; invalid
+animation/map/scene/audio edits retain working content.
 
 The install target includes both executables, assets and documentation:
 

@@ -3,6 +3,7 @@
 #include "game.hpp"
 #include "settings.hpp"
 #include <iostream>
+#include <limits>
 
 namespace feature_lab {
 class Soundtrack {
@@ -116,6 +117,59 @@ class Soundtrack {
                 emitter_ = game.location(node.entity);
         });
     }
+    // Audio is presentation-only, so this is also available during replay.
+    // Decode the whole bank before queuing one transaction; never disable working
+    // output because an edited file or a replacement command was rejected.
+    bool reload(const engine::AssetRoot& assets) {
+        if (!output_)
+            return false;
+        try {
+            if (revision_ == std::numeric_limits<std::uint64_t>::max())
+                throw std::runtime_error("Audio bank revision exhausted");
+            output_->collect_sounds();
+            std::vector<engine::SoundReplacement> batch;
+            batch.reserve(keys.size());
+            std::size_t bytes = 0;
+            for (std::size_t i = 0; i < keys.size(); ++i) {
+                auto data = engine::decode_wav(
+                    assets.read(keys[i], engine::SoundData::max_file_bytes), keys[i]);
+                bytes += data.samples.size() * sizeof(float);
+                if (bytes > engine::AudioOutput::max_sound_bytes - output_->retained_sound_bytes())
+                    throw std::runtime_error("Audio reload exceeds retained sample budget");
+                batch.push_back({sounds_[i], std::move(data)});
+            }
+            if (!output_->replace_sounds(batch))
+                throw std::runtime_error("Audio replacement command rejected");
+            ++revision_;
+            reload_applied_ = true;
+            reload_diagnostic_.clear();
+        } catch (const std::exception& error) {
+            reload_applied_ = false;
+            reload_diagnostic_ = error.what();
+        }
+        std::cerr << "[audio bank " << (reload_applied_ ? "queued" : "retained")
+                  << "] revision=" << revision_ << std::endl;
+        if (!reload_diagnostic_.empty())
+            std::cerr << reload_diagnostic_ << '\n';
+        return reload_applied_;
+    }
+    void collect() {
+        if (output_)
+            output_->collect_sounds();
+    }
+    std::uint64_t revision() const { return revision_; }
+    bool reload_applied() const { return reload_applied_; }
+    const std::string& reload_diagnostic() const { return reload_diagnostic_; }
+    std::size_t sound_bytes() const { return output_ ? output_->sound_bytes() : 0; }
+    std::size_t retained_sound_bytes() const { return output_ ? output_->retained_sound_bytes() : 0; }
+    std::string reload_status() const {
+        if (!output_)
+            return "AUDIO BANK OFF";
+        if (reload_applied_ && revision_ == 1)
+            return "AUDIO BANK READY R1";
+        return std::string(reload_applied_ ? "AUDIO BANK QUEUED R" : "AUDIO BANK FAILED - KEPT R") +
+               std::to_string(revision_);
+    }
     std::string status(const engine::KeyBindings& bindings = {}) const {
         if (!output_)
             return "AUDIO OFF";
@@ -184,5 +238,8 @@ class Soundtrack {
     AudioSettings settings_;
     engine::AudioStats final_stats_;
     bool paused_{}, door_{}, won_{};
+    std::uint64_t revision_{1};
+    bool reload_applied_{true};
+    std::string reload_diagnostic_;
 };
 } // namespace feature_lab

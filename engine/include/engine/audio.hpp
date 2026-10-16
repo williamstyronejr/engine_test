@@ -8,6 +8,10 @@ struct SoundHandle {
     std::uint32_t slot{};
     std::uint64_t serial{};
 };
+struct SoundReplacement {
+    SoundHandle handle;
+    SoundData data;
+};
 struct AudioStats {
     std::uint64_t processed{}, started{}, completed{}, stopped{}, dropped_plays{}, stale_controls{},
         queue_rejections{};
@@ -22,10 +26,17 @@ class AudioOutput {
     AudioOutput(const AudioOutput&) = delete;
     AudioOutput& operator=(const AudioOutput&) = delete;
     static constexpr std::size_t max_sounds = 32, max_sound_bytes = 64 * 1024 * 1024;
-    // Main-thread only. Transfer immutable sample ownership; retained until shutdown.
+    // Main-thread only. Transfer immutable sample ownership.
     SoundHandle register_sound(SoundData sound);
+    // Validate/stage the whole batch, then enqueue one block-boundary replacement.
+    // Handles remain valid. False means queue/device rejection; invalid data throws.
+    // Active voices preserve controls and normalized position. Input data may move.
+    bool replace_sounds(std::span<SoundReplacement> replacements);
+    // Main-thread retirement after worker acknowledgement; never frees on worker.
+    void collect_sounds();
     std::size_t sound_count() const;
-    std::size_t sound_bytes() const;
+    std::size_t sound_bytes() const;          // Current bank.
+    std::size_t retained_sound_bytes() const; // Current + unacknowledged old samples.
     // Nonzero ticket means enqueued, not a guarantee that a voice slot was available.
     VoiceHandle play(SoundHandle sound, Playback options = {});
     bool stop(VoiceHandle voice);
