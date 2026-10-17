@@ -144,6 +144,9 @@ int run_stress_mode(int argc, char** argv) {
     report.gpu_submitted = gpu.submitted;
     report.gpu_completed = gpu.completed;
     report.gpu_pending = gpu.pending;
+    const auto failures = timer.failures();
+    std::copy(failures.begin(), failures.end(), report.gpu_failures.begin());
+    report.gpu_failure_count = failures.size();
     report.gpu_skipped = gpu.skipped;
     report.gpu_invalid = gpu.invalid;
     report.window_width = window.width();

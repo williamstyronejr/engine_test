@@ -252,6 +252,26 @@ TEST(options_bounds_json_escaping_and_resource_growth_detection) {
     char* arguments[] = {program, frames, bad};
     rejects([&] { parse_stress_options(3, arguments); });
 }
+TEST(gpu_failure_report_preserves_uint64_values_and_omitted_count) {
+    StressOptions options;
+    StressReport report(options);
+    report.gpu_invalid = 10;
+    report.gpu_failure_count = report.gpu_failures.size();
+    for (auto& failure : report.gpu_failures)
+        failure = {9007199254740993ULL, UINT64_MAX, UINT64_MAX - 1, UINT64_MAX, 7};
+    const auto json = report.json(options);
+    CHECK(json.find("\"failure_capacity\":8,\"failures_omitted\":2") != std::string::npos);
+    const std::string entry =
+        "{\"frame\":\"9007199254740993\",\"start_ns\":\"18446744073709551615\","
+        "\"end_ns\":\"18446744073709551614\",\"last_attempted_frame\":\"18446744073709551615\","
+        "\"slot\":7}";
+    std::size_t found{}, count{};
+    while ((found = json.find(entry, found)) != std::string::npos) {
+        ++count;
+        found += entry.size();
+    }
+    CHECK(count == 8);
+}
 } // namespace
 int main() {
     return run_tests();

@@ -1067,8 +1067,26 @@ Returned `GpuTimingSample{frame, milliseconds}` entries are ordered by submitted
 The returned span is valid until the next collect or destruction. Results subtract
 64-bit nanoseconds before converting to floating-point milliseconds; equal timestamps
 are valid zero-duration samples. An end earlier than its start is discarded as invalid
-(clock reset/wrap) and its slot freed. Collection never substitutes CPU time for a
-missing GPU reading. Driver errors still flow through the renderer's GL health check.
+and its slot freed; this observation alone does not establish its cause. Collection
+never substitutes CPU time for a missing GPU reading. Driver errors still flow through the renderer's GL health check.
+
+`failures()` exposes the first eight reversed pairs for the timer's lifetime in
+collection order. Each `GpuTimingFailure` contains the original `frame`, exact raw
+`start_ns` and `end_ns`, zero-based query-pair `slot`, and `last_attempted_frame`
+(the latest accepted begin tag at collection, including full-pool skipped attempts).
+The slot identifies a reusable pair, not a GL query object name. Frame tags need
+not be consecutive, so tag differences are not necessarily elapsed frame counts.
+The returned span is valid until the next collect or destruction; copy it for
+longer ownership. Empty collects and subsequent reuse of a slot preserve retained
+records. A new timer starts with no records. After eight records, `invalid` still
+increments; the number omitted is `stats().invalid - failures().size()`.
+
+Failure storage is a fixed array. Capturing a failure performs no allocation,
+formatting, I/O, extra GL reads or synchronization. It does not replace or clamp
+the timestamp, publish an invalid duration, block slot reuse, or change query
+scheduling. Feature Lab prints retained records and any omitted count at normal
+shutdown; stress mode includes them in its JSON. A crash need not produce a final
+report or log. Missing records in an older report cannot be recovered retroactively.
 
 Stats report counter width/support, pending closed scopes, submitted closed measured
 scopes, completed valid samples, skipped begins, and discarded invalid samples.

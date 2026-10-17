@@ -9,6 +9,11 @@ struct GpuTimingSample {
     std::uint64_t frame{};
     double milliseconds{};
 };
+// Raw reversed timestamp pair. This records an observation, not its cause.
+struct GpuTimingFailure {
+    std::uint64_t frame{}, start_ns{}, end_ns{}, last_attempted_frame{};
+    std::size_t slot{};
+};
 struct GpuTimingStats {
     int counter_bits{};
     bool supported{};
@@ -19,6 +24,7 @@ struct GpuTimingStats {
 class GpuTimer {
   public:
     static constexpr std::size_t capacity = 8;
+    static constexpr std::size_t failure_capacity = 8;
     GpuTimer();
     ~GpuTimer();
     GpuTimer(const GpuTimer&) = delete;
@@ -30,6 +36,11 @@ class GpuTimer {
     // Between scopes only. Poll once; never wait or read an unavailable result.
     // Returned span remains valid until the next collect or destruction.
     std::span<const GpuTimingSample> collect();
+    // First failure_capacity reversed pairs, in collection order, for this timer's
+    // lifetime. No allocations, extra GL reads or waits. Later failures only raise
+    // stats().invalid; omitted count = invalid - failures().size().
+    // Returned span remains valid until the next collect or destruction.
+    std::span<const GpuTimingFailure> failures() const;
     GpuTimingStats stats() const;
 
   private:
