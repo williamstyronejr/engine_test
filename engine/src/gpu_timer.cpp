@@ -22,4 +22,7 @@ std::span<const GpuTimingSample> GpuTimer::collect() {
 GpuTimingStats GpuTimer::stats() const {
     return impl_->queue.stats();
 }
+std::span<const GpuTimingFailure> GpuTimer::failures() const {
+    return impl_->queue.failures();
+}
 } // namespace engine

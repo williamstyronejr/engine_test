@@ -877,6 +877,15 @@ int main(int argc, char** argv) {
                   << " submitted=" << gpu_stats.submitted << " completed=" << gpu_stats.completed
                   << " pending=" << gpu_stats.pending << " skipped=" << gpu_stats.skipped
                   << " invalid=" << gpu_stats.invalid << '\n';
+        const auto gpu_failures = gpu_timer.failures();
+        for (const auto& failure : gpu_failures)
+            std::cerr << "[gpu timestamp reversed] frame=" << failure.frame
+                      << " slot=" << failure.slot << " start_ns=" << failure.start_ns
+                      << " end_ns=" << failure.end_ns
+                      << " last_attempted_frame=" << failure.last_attempted_frame << '\n';
+        if (gpu_stats.invalid > gpu_failures.size())
+            std::cerr << "[gpu timestamp diagnostics] omitted="
+                      << gpu_stats.invalid - gpu_failures.size() << '\n';
         const auto audio_stats = soundtrack.stats();
         std::cout << "[audio stats] enabled=" << soundtrack.enabled()
                   << " started=" << audio_stats.started << " completed=" << audio_stats.completed

@@ -119,6 +119,39 @@ TEST(query_objects_are_deleted_with_pending_or_unfinished_scopes) {
         CHECK(renderer.healthy());
     }
 }
+TEST(native_slot_reuse_across_target_teardown_preserves_tags) {
+    engine::Window window(64, 64, "GPU timer target lifetimes", false);
+    Renderer renderer;
+    GpuTimer timer;
+    std::uint64_t expected = 1;
+    for (std::uint64_t cycle = 0; cycle < 12; ++cycle) {
+        const auto target = renderer.create_target(64, 64);
+        for (std::uint64_t i = 1; i <= GpuTimer::capacity; ++i) {
+            CHECK(timer.begin(cycle * GpuTimer::capacity + i));
+            renderer.begin(target, {{0, 0}, 2});
+            renderer.quad({}, {2, 2}, {0, 0, 1, 1});
+            renderer.end();
+            timer.end();
+        }
+        renderer.release(target); // Match stress teardown before the final poll.
+        flush_commands();
+        eventually([&] {
+            const auto samples = timer.collect();
+            for (const auto& failure : timer.failures())
+                std::cerr << "Reversed GPU pair: frame=" << failure.frame << " slot=" << failure.slot
+                          << " start=" << failure.start_ns << " end=" << failure.end_ns << '\n';
+            CHECK(timer.failures().empty() && timer.stats().invalid == 0);
+            for (const auto sample : samples) {
+                CHECK(sample.frame == expected++);
+                CHECK(std::isfinite(sample.milliseconds) && sample.milliseconds >= 0);
+            }
+            return timer.stats().pending == 0;
+        });
+        CHECK(timer.stats().completed == (cycle + 1) * GpuTimer::capacity);
+        CHECK(renderer.live_targets() == 0 && renderer.healthy());
+    }
+    CHECK(expected == 97 && timer.stats().skipped == 0);
+}
 TEST(overlay_displays_collected_samples_and_keeps_resources_stable) {
     engine::Window window(64, 64, "GPU overlay", false);
     Renderer renderer;

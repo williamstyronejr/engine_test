@@ -130,6 +130,75 @@ TEST(clock_reversal_zero_and_large_timestamps) {
     NEAR(samples[1].milliseconds, 1);
     CHECK(timer.stats().invalid == 1 && timer.stats().completed == 2);
     CHECK(timer.stats().pending == 0);
+    const auto failures = timer.failures();
+    CHECK(failures.size() == 1 && failures[0].frame == 1);
+    CHECK(failures[0].start_ns == 100 && failures[0].end_ns == 99);
+    CHECK(failures[0].slot == 0 && failures[0].last_attempted_frame == 3);
+}
+TEST(failure_evidence_survives_slot_reuse_and_bounded_overflow) {
+    FakeBackend backend;
+    detail::GpuTimerQueue timer(backend, 64);
+    constexpr auto maximum = std::numeric_limits<std::uint64_t>::max();
+    for (std::uint64_t frame = 1; frame <= 40; ++frame) {
+        CHECK(timer.begin(frame));
+        timer.end();
+        const auto slot = static_cast<std::size_t>((frame - 1) % GpuTimer::capacity);
+        // Alternate exact large reversed values and valid samples through five wraps.
+        backend.finish(slot, maximum - frame,
+                       frame % 2 ? maximum - frame - 1 : maximum - frame + 1);
+        const auto reads = backend.reads, probes = backend.probes;
+        const auto samples = timer.collect();
+        CHECK(backend.reads == reads + 2 && backend.probes == probes + 2);
+        CHECK(samples.size() == (frame % 2 ? 0 : 1));
+        if (!samples.empty())
+            CHECK(samples[0].frame == frame && samples[0].milliseconds == 0.000001);
+        CHECK(timer.stats().pending == 0);
+        CHECK(timer.stats().submitted == timer.stats().completed + timer.stats().invalid);
+    }
+    CHECK(timer.stats().completed == 20 && timer.stats().invalid == 20);
+    CHECK(timer.failures().size() == GpuTimer::failure_capacity);
+    for (std::size_t i = 0; i < timer.failures().size(); ++i) {
+        const auto& failure = timer.failures()[i];
+        const auto frame = i * 2 + 1;
+        CHECK(failure.frame == frame && failure.last_attempted_frame == frame);
+        CHECK(failure.start_ns == maximum - frame && failure.end_ns == maximum - frame - 1);
+        CHECK(failure.slot == (frame - 1) % GpuTimer::capacity);
+    }
+    const auto reads = backend.reads;
+    CHECK(timer.collect().empty() && backend.reads == reads);
+    CHECK(timer.failures().front().frame == 1 && timer.failures().back().frame == 15);
+    FakeBackend fresh_backend;
+    detail::GpuTimerQueue fresh(fresh_backend, 64);
+    CHECK(fresh.failures().empty() && fresh.stats().invalid == 0);
+}
+TEST(delayed_reversed_pair_keeps_original_tag_after_skipped_begin) {
+    FakeBackend backend;
+    detail::GpuTimerQueue timer(backend, 64);
+    for (std::uint64_t frame = 1; frame <= GpuTimer::capacity; ++frame) {
+        CHECK(timer.begin(frame * 100));
+        timer.end();
+    }
+    CHECK(!timer.begin(900));
+    timer.end();
+    backend.queries[1].ready = true;
+    CHECK(timer.collect().empty() && timer.failures().empty() && backend.reads == 0);
+    backend.finish(0, 9007199254740993ULL, 9007199254740992ULL);
+    CHECK(timer.collect().empty());
+    CHECK(timer.failures().size() == 1);
+    const auto first = timer.failures()[0];
+    CHECK(first.frame == 100 && first.last_attempted_frame == 900 && first.slot == 0);
+    CHECK(first.start_ns - first.end_ns == 1);
+    CHECK(timer.begin(1000));
+    timer.end();
+    backend.finish(0, 50, 60);
+    CHECK(timer.collect().empty()); // A ready reused slot cannot pass the unavailable head.
+    for (std::size_t i = 1; i < GpuTimer::capacity; ++i)
+        backend.finish(i, 10, 20);
+    const auto completed = timer.collect();
+    CHECK(completed.size() == 8 && completed.back().frame == 1000);
+    CHECK(timer.failures()[0].start_ns == first.start_ns && timer.failures()[0].frame == 100);
+    CHECK(timer.stats().invalid == 1 && timer.stats().completed == 8);
+    CHECK(timer.stats().pending == 0 && timer.stats().skipped == 1);
 }
 TEST(repeated_pool_rollover_keeps_tags_and_bounds) {
     FakeBackend backend;

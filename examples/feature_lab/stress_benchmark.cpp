@@ -221,7 +221,19 @@ std::string StressReport::json(const StressOptions& options) const {
         << "},\n  \"gpu_queries\":{\"supported\":" << gpu_supported
         << ",\"submitted\":" << gpu_submitted << ",\"completed\":" << gpu_completed
         << ",\"pending\":" << gpu_pending << ",\"skipped\":" << gpu_skipped
-        << ",\"invalid\":" << gpu_invalid << "},\n  \"milliseconds\":{";
+        << ",\"invalid\":" << gpu_invalid
+        << ",\"failure_capacity\":" << engine::GpuTimer::failure_capacity
+        << ",\"failures_omitted\":" << gpu_invalid - gpu_failure_count
+        << ",\"failures\":[";
+    for (std::size_t i = 0; i < gpu_failure_count; ++i) {
+        const auto& failure = gpu_failures[i];
+        out << (i ? "," : "") << "{\"frame\":" << json_string(std::to_string(failure.frame))
+            << ",\"start_ns\":" << json_string(std::to_string(failure.start_ns))
+            << ",\"end_ns\":" << json_string(std::to_string(failure.end_ns))
+            << ",\"last_attempted_frame\":" << json_string(std::to_string(failure.last_attempted_frame))
+            << ",\"slot\":" << failure.slot << '}';
+    }
+    out << "]},\n  \"milliseconds\":{";
     const auto metric = [&](std::string_view name, const Measurements& samples, bool comma) {
         const auto s = samples.summary();
         out << (comma ? "," : "") << '\n'

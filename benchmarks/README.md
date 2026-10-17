@@ -104,6 +104,23 @@ CPU scopes measure elapsed time, including scheduling delays, rather than CPU
 execution time. GPU work overlaps CPU work; do not add CPU and GPU distributions.
 Percentiles of separate scopes also cannot be added to reconstruct frame percentiles.
 
+The additive `gpu_queries.failure_capacity`, `failures` and `failures_omitted`
+fields retain the first eight reversed timestamp pairs, including warmup failures,
+across the entire timer lifetime. Each record has decimal-string `frame`, `start_ns`,
+`end_ns` and `last_attempted_frame` fields, preserving exact 64-bit values, plus a
+numeric zero-based `slot`. The last attempted tag includes skipped begins; the
+slot is a reusable query-pair index, not a GL object name. `invalid` still counts
+all rejected pairs, and `failures_omitted = invalid - failures.length`. CPU-only
+runs have an empty array and zero omitted failures. Older reports lack these fields.
+
+Stress frame tags start at one and include warmup. For a retained tag `f`, cycle
+is `floor((f-1)/(warmup+frames))+1`; its zero-based step within that cycle is
+`(f-1) % (warmup+frames)`, with steps below `warmup` excluded from timing summaries.
+A reversed pair still makes the stress command fail even if it belongs to warmup
+or exceeds the retained-record limit. Diagnostics neither wait for pending pairs
+at shutdown nor infer the reason for a reversal. The fixed diagnostic arrays are
+outside `memory.report_buffer_bytes`, which counts reserved timing vectors only.
+
 `totals` counts only measured offscreen passes and simulation steps. HUD quads
 are excluded. `--screenshot FILE.ppm` captures the final preview for visual checks;
 readback time is subtracted from that frame's CPU interval, but capture can still

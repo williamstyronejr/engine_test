@@ -53,9 +53,12 @@ template <class Backend> class GpuTimerQueue {
             if (!backend_.available(end) || !backend_.available(start))
                 break;
             const auto a = backend_.result(start), b = backend_.result(end);
-            if (b < a)
-                ++stats_.invalid; // Clock reset/wrap: discard, never publish a huge duration.
-            else {
+            if (b < a) {
+                // Preserve evidence before reusing this slot; never publish a huge duration.
+                if (failure_count_ < failures_.size())
+                    failures_[failure_count_++] = {frames_[head_], a, b, last_frame_, head_};
+                ++stats_.invalid;
+            } else {
                 completed_[count++] = {frames_[head_], static_cast<double>(b - a) / 1000000.0};
                 ++stats_.completed;
             }
@@ -65,12 +68,17 @@ template <class Backend> class GpuTimerQueue {
         return {completed_.data(), count};
     }
     GpuTimingStats stats() const { return stats_; }
+    std::span<const GpuTimingFailure> failures() const {
+        return {failures_.data(), failure_count_};
+    }
 
   private:
     Backend& backend_;
     GpuTimingStats stats_;
     std::array<std::uint64_t, GpuTimer::capacity> frames_{};
     std::array<GpuTimingSample, GpuTimer::capacity> completed_{};
+    std::array<GpuTimingFailure, GpuTimer::failure_capacity> failures_{};
+    std::size_t failure_count_{};
     std::size_t head_{};
     std::uint64_t last_frame_{};
     bool open_{}, measuring_{};

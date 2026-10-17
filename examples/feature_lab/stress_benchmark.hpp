@@ -1,5 +1,7 @@
 #pragma once
 #include "stress.hpp"
+#include "engine/gpu_timer.hpp"
+#include <array>
 #include <chrono>
 #include <string>
 
@@ -43,6 +45,8 @@ struct StressReport {
     std::size_t texture_peak{}, texture_bytes_peak{}, target_peak{}, target_bytes_peak{};
     std::uint64_t gpu_submitted{}, gpu_completed{}, gpu_skipped{}, gpu_invalid{};
     std::size_t gpu_pending{};
+    std::array<engine::GpuTimingFailure, engine::GpuTimer::failure_capacity> gpu_failures{};
+    std::size_t gpu_failure_count{};
     bool complete{}, resources_stable{true}, gpu_supported{}, vsync_disable_accepted{};
     int window_width{}, window_height{};
     std::string vendor, device, gl_version;
