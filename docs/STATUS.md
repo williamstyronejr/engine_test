@@ -1,7 +1,7 @@
 # Implementation status
 
-The thirty-eighth increment adds bounded GPU timestamp failure evidence, report/log
-integration and stronger query-reuse/lifecycle coverage.
+The thirty-ninth increment adds verified replay profiling through normal gameplay
+rendering, declared Facility/Annex recordings and repeated native measurements.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
@@ -66,8 +66,8 @@ entire plan feature ID when required subfeatures are still absent.
 | F12 | Implemented (v1) | Live minimap, clipped scrolling panel; seven GPU cases for pixels, alpha composition, clipping, resizing, resource limits and example integration | Optional multisampling, HDR and post-processing |
 | F13 | Implemented (v1) | Clock/catch-up, paused stepping, ERPL recording/playback, per-command state checks, seeded random state, save migration and full-game replay tests | Cross-machine float determinism and replaying menu/audio/render commands are outside v1 |
 | F14 | Implemented (v1) | Versioned scene/checkpoint/config formats; three-slot UI; CRC, bounds and semantic checks; unchanged live game on failed load; interrupted-process write tests | Power-loss/filesystem fault testing and content migration |
-| F15 | Partial | Console errors, GL callback, F2 rolling timing/counter overlay, F3 collision/camera outlines, target accounting, CPU percentiles, shader reload/failure recovery, GPU pixel/interface/lifetime tests, bounded asynchronous GPU timing with sample age/skips; separate preview/swap timing, [controlled stress results](../benchmarks/2026-10-16-validation.md) and [bounded failure evidence](../benchmarks/2026-10-17-gpu-timing.md) | Root cause of one unreproduced native timestamp reversal; representative gameplay profiling and broader manual fault scenarios |
-| F16 | Partial | Configurable stress arena, CPU/GPU repeated teardown checks, allocation-free steady CPU tests, tracked buffer/texture/target bytes, JSON benchmarks, repeated 1080p baselines and independent workload comparisons, installed CPU runner and hashed relocatable archives with CPU/OpenGL smoke tests | Full allocator/driver accounting, representative gameplay budgets and broader hardware/manual checks |
+| F15 | Partial | Console errors, GL callback, F2 rolling timing/counter overlay, F3 collision/camera outlines, target accounting, CPU percentiles, shader reload/failure recovery, GPU pixel/interface/lifetime tests, bounded asynchronous GPU timing with sample age/skips; separate preview/swap timing, [controlled stress results](../benchmarks/2026-10-16-validation.md) and [bounded failure evidence](../benchmarks/2026-10-17-gpu-timing.md); [recorded gameplay profiles](../benchmarks/2026-10-17-replay-results.md) | Verify native timestamp rollover behavior; reload/transition profiling and broader manual fault scenarios |
+| F16 | Partial | Configurable stress arena, CPU/GPU repeated teardown checks, allocation-free steady CPU tests, tracked buffer/texture/target bytes, JSON benchmarks, repeated 1080p baselines and independent workload comparisons, installed CPU runner and hashed relocatable archives with CPU/OpenGL smoke tests | Full allocator/driver accounting, broader gameplay/display budgets and hardware/manual checks |
 
 ## Initial validation environment
 
@@ -1513,9 +1513,44 @@ synchronization change or new performance guarantee is claimed. Failure capture
 is verified through deterministic injected pairs, not a fabricated native failure.
 Physical audio/display validation and full allocator/driver accounting remain open.
 
+## Added in the thirty-ninth increment
+
+- `--replay ... --profile-report ... --profile-warmup ...` profiles verified normal
+  gameplay rendering with separate simulation, minimap/world/UI submission, swap,
+  full-frame and asynchronous combined-render GPU distributions.
+- One recorded command advances per rendered frame. Default configuration, silent
+  audio, disabled deliberate pacing and rejected workload-changing options isolate
+  the run from user settings. Reports retain actual viewport, workload fingerprint,
+  final state hash, counters, GPU failures and incomplete/resize status.
+- Checked-in Facility/Annex recordings each contain 3,000 commands, complete both
+  pre- and post-restart routes and exercise pause/single-step and camera zoom.
+  They ship with the documentation and have a deterministic fixture generator.
+- Four CPU cases and a two-level native integration group validate boundaries,
+  completion, precise failure values, replay equality, report/input preservation
+  and user-storage isolation. See [the profile contract](../benchmarks/REPLAY_PROFILING.md).
+
+## Thirty-ninth-increment validation (2026-10-17)
+
+All 52 GCC Debug and Release runtime groups pass without skips. The extended
+3,000-command native cases pass in both builds. The replay_profile and replay_files
+CPU groups pass ASan/UBSan with leak detection enabled. Six sequential Release
+measurements use the same committed source and assets, with three repeats per level;
+all finish with matching per-level gameplay hashes, fingerprints and draw counts.
+
+Five timing runs pass; Annex repeat 2 is retained as a failed timing run because it
+captured a reversed pair at frame 1614: start 68717863232 ns, end 43536 ns, collected
+after tag 1615 in slot 5. A hypothetical 2^36-ns rollover yields a plausible interval,
+but the installed driver path is not yet confirmed and no correction is applied.
+This is the first native raw failure evidence, not a synchronization fix.
+
+Accepted frame p99 is 9.527–9.861 ms at the actual 1050×1360 window, with maxima
+22.539–43.440 ms. These results do not establish the separate 1080p target or
+uninterrupted 60 FPS. [Results and all raw attempts](../benchmarks/2026-10-17-replay-results.md)
+preserve the failed run and remaining physical audio/display and accounting gaps.
+
 ## Next increment
 
-Extend profiling to a declared recorded Feature Lab gameplay workload, with explicit
-simulation, minimap/UI, submission and presentation timing boundaries. Preserve
-failure evidence if the native timestamp anomaly recurs. Reload/transition spikes
-need separate scenarios; optional asset tooling and background loading remain deferred.
+Verify the installed driver's timestamp rollover behavior and evaluate a portable,
+nonblocking elapsed-query approach with deterministic overflow/lifecycle tests.
+Keep rejected evidence intact. Reload/transition spike workloads and broader physical
+hardware checks remain outstanding; asset tooling/background loading stay deferred.

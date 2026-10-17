@@ -1,5 +1,9 @@
 # GPU timestamp investigation — 2026-10-17
 
+Follow-up: a [later gameplay profile](2026-10-17-replay-results.md#reproduced-gpu-timestamp-reversal)
+on the same day reproduced a reversal and retained raw values. The sessions below
+preceded that observation.
+
 The [October 16 sprite-only run](baselines/2026-10-16/sprites-8192.json) reported
 one reversed GPU timestamp pair and correctly exited with code 1. That report
 retained only the invalid count, so its raw values and frame cannot be recovered.

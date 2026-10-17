@@ -1,5 +1,8 @@
 # Recorded gameplay profiling
 
+The [2026-10-17 results](2026-10-17-replay-results.md) preserve three runs per level,
+including one rejected GPU timing attempt.
+
 `feature_lab --replay FILE.erpl --profile-report FILE.json` profiles the real
 Feature Lab rendering path: the minimap, world, text/status panels and normal HUD.
 It verifies every recorded command's tick and resulting gameplay hash through the

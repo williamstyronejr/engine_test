@@ -49,6 +49,22 @@ if(MODE STREQUAL "graphics")
   if(NOT stable OR NOT complete OR NOT measured EQUAL 8 OR NOT EXISTS "${work}/stress.ppm")
     message(FATAL_ERROR "Packaged stress resources/completion check failed")
   endif()
+  set(profile_replay "${root}/share/doc/feature_lab/benchmarks/replays/facility.erpl")
+  execute_process(COMMAND "${CMAKE_COMMAND}" -E env --unset=LD_LIBRARY_PATH --unset=LD_PRELOAD
+    "${root}/bin/feature_lab" --replay "${profile_replay}"
+    --profile-report "${work}/profile.json" --profile-warmup 30
+    WORKING_DIRECTORY "${work}/cwd" RESULT_VARIABLE result OUTPUT_VARIABLE output ERROR_VARIABLE error TIMEOUT 60)
+  file(WRITE "${work}/profile.log" "${output}${error}")
+  if(NOT result EQUAL 0)
+    message(FATAL_ERROR "Packaged replay profile failed (${work}): ${output}${error}")
+  endif()
+  file(READ "${work}/profile.json" report)
+  string(JSON complete GET "${report}" run complete)
+  string(JSON measured GET "${report}" run measured_frames)
+  string(JSON hash GET "${report}" run final_hash)
+  if(NOT complete OR NOT measured EQUAL 2970 OR NOT "${hash}" STREQUAL "3859428580428616961")
+    message(FATAL_ERROR "Packaged replay profile differs from its declared workload")
+  endif()
 else()
   package_headless("${root}" "${work}/checks")
   # A checksum mismatch must fail before trusting packaged payloads.
