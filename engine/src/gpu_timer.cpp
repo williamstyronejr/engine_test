@@ -4,10 +4,11 @@
 
 namespace engine {
 struct GpuTimer::Impl {
+    explicit Impl(GpuTimingMethod method) : backend(method), queue(backend, backend.bits, method) {}
     detail::TimerBackend backend;
-    detail::GpuTimerQueue<detail::TimerBackend> queue{backend, backend.bits};
+    detail::GpuTimerQueue<detail::TimerBackend> queue;
 };
-GpuTimer::GpuTimer() : impl_(std::make_unique<Impl>()) {
+GpuTimer::GpuTimer(GpuTimingMethod method) : impl_(std::make_unique<Impl>(method)) {
 }
 GpuTimer::~GpuTimer() = default;
 bool GpuTimer::begin(std::uint64_t frame) {

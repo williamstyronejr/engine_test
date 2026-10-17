@@ -177,16 +177,16 @@ samples include diagnostic drawing overhead. Wall intervals include pacing; scri
 mode does not count ignored wall-clock time as dropped simulation time.
 
 The GPU rows show mean/p95 over the last 240 completed measurements, sample age in
-rendered frames, pending slots, skipped measurements, and invalid timestamps. Timing
-covers the minimap and window passes, including UI/debug drawing, between two GPU
-timestamps. It excludes simulation, shader compilation, screenshot readback, and
+rendered frames, pending slots, skipped measurements, and invalid timestamp pairs
+(diagnostic mode). Timing covers the minimap and window passes, including UI/debug
+drawing, inside one GPU elapsed query. It excludes simulation, shader compilation, screenshot readback, and
 presentation. It can include GPU scheduling delays and gaps while the CPU submits
 commands, so it is a render interval rather than a pure GPU utilization measure.
 CPU/GPU values come from separate histories and need not describe the same frame.
 
-Eight slots (16 query objects) are reused only after their results are available.
+Eight slots (eight elapsed query objects) are reused only after their results are available.
 A full pool skips measurement instead of waiting or overwriting pending results.
-No completed samples shows `GPU WAITING`; drivers without 64-bit timestamps show
+No completed samples shows `GPU WAITING`; drivers without 64-bit elapsed counters show
 `GPU TIMING UNAVAILABLE`. Rendering continues in either case. The GPU exit report
 includes collected/pending/skipped/invalid counts and does not wait for the last
 frame to finish. F2 hides the overlay while timing continues; there is no new key.
@@ -787,10 +787,11 @@ full handle capacity, repeated GPU-object retirement, staging bounds, coordinate
 CPU/GPU publication, retained readers, fallback recovery, shared atlas compatibility,
 and modal/press-edge controls. Native event tests cover F7/F8.
 
-The GPU timing suites include seven deterministic CPU cases for delayed availability,
+The GPU timing suites include eleven deterministic CPU cases for delayed availability,
 full-pool skipping, FIFO reuse, tag/scope validation, unsupported counters, timestamp
-reversal and rolling history; four OpenGL cases cover real result collection, pixel
-stability, saturation/recovery, shader reload/resize, cleanup and overlay layouts.
+reversal, bounded failure evidence, elapsed results and rolling history; six OpenGL
+cases cover real result collection, pixel stability, saturation/recovery, shader
+reload/resize, external query conflicts, interrupted-scope cleanup and overlay layouts.
 The eight-case GPU shader suite verifies shipped/fallback parity, changed pixels,
 compile/link/interface failures, source bounds, active-pass rejection, sampler and
 premultiplied uniform relocation, repeated program retirement, real GL-error detection,

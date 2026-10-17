@@ -1039,60 +1039,63 @@ are not a shader sandbox or visual correctness proof. No save-format changes occ
 
 ## Asynchronous GPU timing
 
-`GpuTimer` (`gpu_timer.hpp`) owns eight slots of two timestamp query objects each.
-Construct, use, and destroy it on the owning OpenGL context/thread. It is neither
-copyable nor movable. A 64-bit `GL_TIMESTAMP` counter is required; other counter
-widths allocate no query objects and report `supported=false` without blocking
-rendering. The tested Intel/Mesa driver reports 64 bits. Narrow counters are omitted
-to avoid ambiguous multi-wrap intervals during slow frames.
+`GpuTimer` (`gpu_timer.hpp`) owns eight slots. The default `GpuTimingMethod::elapsed`
+uses one `GL_TIME_ELAPSED` query object per slot; the driver returns an interval in
+nanoseconds. Optional `GpuTimingMethod::timestamp_pair` retains two `GL_TIMESTAMP`
+objects per slot for diagnosis. Construct, use, and destroy on the owning OpenGL
+context/thread. The timer is neither copyable nor movable. The selected target must
+report 64 counter bits; other widths allocate no queries and report unsupported.
+This conservative requirement avoids narrow elapsed counters overflowing during
+slow frames. It does not guarantee that a driver's reported width matches its
+implementation. No driver-specific mask or timestamp repair is applied.
 
 `begin(frame)` / `end()` enclose an interval in the GPU command stream. Tags must be
-nonzero and strictly increasing, including skipped attempts. Pair every begin with
-end even when begin returns false (unsupported counters or a full pool). Nested
-begins, unmatched ends and collect calls inside an open scope throw `logic_error`;
-bad tags throw `invalid_argument` before changing state. A scope interrupted by
-an exception can be destroyed safely: timestamp markers are not active BeginQuery
-blocks and need no EndQuery cleanup.
+nonzero and strictly increasing, including skipped attempts. Pair every successful
+begin call with end even when it returns false (unsupported counters or a full pool).
+Nested begins, unmatched ends and collecting inside a scope throw `logic_error`;
+bad tags throw `invalid_argument` before changing state.
 
-Call `collect()` between scopes. It polls the oldest pending slot's end and start
-availability once, stops at the first unavailable slot, and reads values only after
-both are available. Work is bounded by eight slots, with no busy loop, explicit
-flush, finish, fence wait, or unavailable `GL_QUERY_RESULT` read. Uncollected slots
-are never overwritten, even if the driver already has their results. Query object
-names are reused after collection, and all names are deleted on destruction without
-waiting for pending work. This follows OpenGL's
-[asynchronous timer-query contract](https://registry.khronos.org/OpenGL/extensions/ARB/ARB_timer_query.txt).
+Elapsed queries cannot overlap another elapsed query in the same context, including
+one owned by external code. Before issuing a measured begin, the backend checks
+`GL_CURRENT_QUERY`; a conflict throws without opening a scope or consuming its tag.
+Do not call end after a thrown begin. The current-query check reads context state,
+not a pending GPU result. A skipped begin issues no GL commands. Do not externally
+end or delete a timer's query. Destruction ends an owned unfinished elapsed scope
+before deleting its objects; it leaves unrelated queries alone. Timestamp markers
+may be nested inside an elapsed scope for diagnosis, as permitted by the
+[Khronos contract](https://registry.khronos.org/OpenGL/extensions/ARB/ARB_timer_query.txt).
 
-Returned `GpuTimingSample{frame, milliseconds}` entries are ordered by submitted tag.
-The returned span is valid until the next collect or destruction. Results subtract
-64-bit nanoseconds before converting to floating-point milliseconds; equal timestamps
-are valid zero-duration samples. An end earlier than its start is discarded as invalid
-and its slot freed; this observation alone does not establish its cause. Collection
-never substitutes CPU time for a missing GPU reading. Driver errors still flow through the renderer's GL health check.
+Call `collect()` between scopes. It polls the oldest pending slot once (both markers
+in timestamp mode), stops at the first unavailable slot, and reads only available
+results. Work is bounded by eight slots, with no busy loop, explicit flush, finish,
+fence wait, or unavailable result read. Uncollected slots are never overwritten.
+Names are reused after collection and deleted on destruction without waiting.
 
-`failures()` exposes the first eight reversed pairs for the timer's lifetime in
-collection order. Each `GpuTimingFailure` contains the original `frame`, exact raw
-`start_ns` and `end_ns`, zero-based query-pair `slot`, and `last_attempted_frame`
-(the latest accepted begin tag at collection, including full-pool skipped attempts).
-The slot identifies a reusable pair, not a GL query object name. Frame tags need
-not be consecutive, so tag differences are not necessarily elapsed frame counts.
-The returned span is valid until the next collect or destruction; copy it for
-longer ownership. Empty collects and subsequent reuse of a slot preserve retained
-records. A new timer starts with no records. After eight records, `invalid` still
-increments; the number omitted is `stats().invalid - failures().size()`.
+Returned `GpuTimingSample{frame, milliseconds}` entries are ordered by tag. The span
+is valid until the next collect or destruction. Elapsed mode converts the driver's
+unsigned 64-bit duration directly to milliseconds, accepting zero. It trusts the
+result: it cannot detect an internal driver overflow, and does not apply arbitrary
+caps. Timestamp mode subtracts unsigned values only when end >= start; reversed
+pairs are discarded and counted as invalid. Neither mode substitutes CPU time.
+GL errors still flow through the renderer's health check.
 
-Failure storage is a fixed array. Capturing a failure performs no allocation,
-formatting, I/O, extra GL reads or synchronization. It does not replace or clamp
-the timestamp, publish an invalid duration, block slot reuse, or change query
-scheduling. Feature Lab prints retained records and any omitted count at normal
-shutdown; stress mode includes them in its JSON. A crash need not produce a final
-report or log. Missing records in an older report cannot be recovered retroactively.
+In timestamp mode, `failures()` retains the first eight reversed pairs for the timer's
+lifetime. Each contains the original `frame`, exact `start_ns`/`end_ns`, zero-based
+pair `slot`, and `last_attempted_frame` (including skipped attempts). Records survive
+slot reuse. Later failures increment `invalid` without additional records; omitted
+count is `invalid - failures().size()`. Fixed storage adds no allocations, GL reads,
+waits, or I/O. In elapsed mode there are no absolute pairs to reject: `invalid` stays
+zero and this list stays empty. This is not a claim of independent clock validation.
 
-Stats report counter width/support, pending closed scopes, submitted closed measured
-scopes, completed valid samples, skipped begins, and discarded invalid samples.
-Outside an open scope, `submitted = completed + invalid + pending`. An open measured
-scope occupies a slot but is not counted as pending/submitted until end. Results
-are delayed and may be skipped under pressure; these are not per-frame guarantees.
+Stats report `method`, selected target's counter width/support, pending closed scopes,
+submitted closed measured scopes, completed samples, skipped begins, and invalid
+pairs. Outside an open scope, `submitted = completed + invalid + pending`. An open
+measured scope occupies a slot but is not pending/submitted until end. Results can
+arrive late or be skipped under pressure; per-frame measurements are not guaranteed.
+Stress/replay JSON adds `gpu_queries.method` (`time_elapsed` or `timestamp_pair`) and
+`counter_bits` within the existing v1 schemas. Reports before increment 40 lack these
+fields and used timestamp pairs; their original raw files remain unchanged. Compare
+results with this method change in mind.
 
 `GpuTimingHistory` retains 240 completed measurements without allocation. Tags must
 increase and milliseconds must be finite/nonnegative; bad records preserve state.

@@ -1,5 +1,8 @@
 # Feature Lab stress workloads
 
+Follow-up: [elapsed timing and rollover evidence](2026-10-17-elapsed-timing.md)
+records the next increment's query-method change; earlier raw results are preserved.
+
 The [2026-10-16 validation report](2026-10-16-validation.md) records repeated 1080p
 results, workload scaling, presentation timings and the remaining F15/F16 gaps.
 The [2026-10-17 GPU timing investigation](2026-10-17-gpu-timing.md) adds bounded
@@ -100,7 +103,7 @@ Samples cover all measured cycles, with warmup excluded separately in each cycle
   HUD and swap pacing. Per-frame health/resource checks and report bookkeeping,
   cycle checksums, load and teardown are outside this interval. CPU mode measures
   simulation plus mixing only. This is not total run wall time or display latency.
-- `gpu_render`: asynchronous timestamps around the offscreen workload, excluding
+- `gpu_render`: asynchronous elapsed queries around the offscreen workload, excluding
   preview/HUD and presentation. Frame tags exclude warmup even when results arrive
   during the next cycle. Missing/pending/skipped/invalid query counts are explicit;
   shutdown never waits for GPU timing results.
@@ -110,13 +113,13 @@ execution time. GPU work overlaps CPU work; do not add CPU and GPU distributions
 Percentiles of separate scopes also cannot be added to reconstruct frame percentiles.
 
 The additive `gpu_queries.failure_capacity`, `failures` and `failures_omitted`
-fields retain the first eight reversed timestamp pairs, including warmup failures,
+fields retain the first eight reversed pairs in timestamp mode, including warmup failures,
 across the entire timer lifetime. Each record has decimal-string `frame`, `start_ns`,
 `end_ns` and `last_attempted_frame` fields, preserving exact 64-bit values, plus a
 numeric zero-based `slot`. The last attempted tag includes skipped begins; the
 slot is a reusable query-pair index, not a GL object name. `invalid` still counts
 all rejected pairs, and `failures_omitted = invalid - failures.length`. CPU-only
-runs have an empty array and zero omitted failures. Older reports lack these fields.
+runs and elapsed-query runs have an empty array and zero omitted failures. Older reports lack these fields.
 
 Stress frame tags start at one and include warmup. For a retained tag `f`, cycle
 is `floor((f-1)/(warmup+frames))+1`; its zero-based step within that cycle is
@@ -213,3 +216,9 @@ These are initial comparison baselines, not CI timing thresholds or a promise fo
 other hardware. Repeat under comparable conditions before attributing a timing
 change to engine code; structural counts, capacity failures and resource checks
 remain deterministic test gates.
+
+GPU timing defaults to `GL_TIME_ELAPSED` from increment 40. Reports include
+`gpu_queries.method` and `counter_bits`. Older reports without these fields used
+`GL_TIMESTAMP` pairs. Elapsed mode trusts the driver duration; its zero `invalid`
+count does not independently validate the clock. Timestamp diagnostics remain
+available through the C++ timer API; see [the timing contract](../docs/FORMATS.md#asynchronous-gpu-timing).

@@ -935,6 +935,7 @@ int main(int argc, char** argv) {
         const auto gpu = diagnostics.gpu_summary();
         const auto gpu_stats = gpu_timer.stats();
         std::cout << "[gpu render interval ms] supported=" << gpu_stats.supported
+                  << " method=" << gpu_timing_method_name(gpu_stats.method)
                   << " counter_bits=" << gpu_stats.counter_bits << " mean=" << gpu.mean_ms
                   << " p95=" << gpu.p95_ms << " max=" << gpu.max_ms << " samples=" << gpu.samples
                   << " last_frame=" << gpu.last_frame

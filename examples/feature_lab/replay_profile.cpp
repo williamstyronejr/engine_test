@@ -111,6 +111,8 @@ std::string ReplayProfile::json(std::uint64_t final_hash, std::uint64_t ticks,
         << ",\"window_draws\":" << draws_ << ",\"minimap_quads\":" << map_quads_
         << ",\"minimap_draws\":" << map_draws_ << ",\"simulation_steps\":" << simulation_steps_
         << "},\"gpu_queries\":{\"supported\":" << gpu.supported
+        << ",\"method\":" << json_string(engine::gpu_timing_method_name(gpu.method))
+        << ",\"counter_bits\":" << gpu.counter_bits
         << ",\"submitted\":" << gpu.submitted << ",\"completed\":" << gpu.completed
         << ",\"pending\":" << gpu.pending << ",\"skipped\":" << gpu.skipped
         << ",\"invalid\":" << gpu.invalid

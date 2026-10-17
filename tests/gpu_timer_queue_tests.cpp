@@ -13,6 +13,13 @@ struct FakeBackend {
     };
     std::array<Query, GpuTimer::capacity * 2> queries{};
     unsigned stamps{}, probes{}, reads{};
+    bool conflict{};
+    void begin(std::size_t slot) {
+        if (conflict)
+            throw std::logic_error("active query");
+        stamp(slot * 2);
+    }
+    void end(std::size_t slot) { stamp(slot * 2 + 1); }
     void stamp(std::size_t index) {
         auto& q = queries.at(index);
         CHECK(!q.issued || q.consumed); // Never overwrite an unread query.
@@ -39,7 +46,7 @@ struct FakeBackend {
 };
 TEST(delayed_queries_never_read_unavailable_results) {
     FakeBackend backend;
-    detail::GpuTimerQueue timer(backend, 64);
+    detail::GpuTimerQueue timer(backend, 64, GpuTimingMethod::timestamp_pair);
     CHECK(timer.begin(1));
     timer.end();
     CHECK(timer.collect().empty() && backend.probes == 1 && backend.reads == 0);
@@ -54,7 +61,7 @@ TEST(delayed_queries_never_read_unavailable_results) {
 }
 TEST(full_pool_skips_without_overwrite_and_recovers_in_fifo_order) {
     FakeBackend backend;
-    detail::GpuTimerQueue timer(backend, 64);
+    detail::GpuTimerQueue timer(backend, 64, GpuTimingMethod::timestamp_pair);
     for (std::uint64_t frame = 1; frame <= GpuTimer::capacity; ++frame) {
         CHECK(timer.begin(frame));
         timer.end();
@@ -83,7 +90,7 @@ TEST(full_pool_skips_without_overwrite_and_recovers_in_fifo_order) {
 }
 TEST(scope_misuse_preserves_pending_results_and_tags) {
     FakeBackend backend;
-    detail::GpuTimerQueue timer(backend, 64);
+    detail::GpuTimerQueue timer(backend, 64, GpuTimingMethod::timestamp_pair);
     rejects([&] { timer.end(); });
     rejects([&] { timer.begin(0); });
     CHECK(timer.begin(5));
@@ -103,7 +110,7 @@ TEST(scope_misuse_preserves_pending_results_and_tags) {
 TEST(unsupported_counters_issue_no_queries) {
     for (const int bits : {0, 30, 32, 63, 65}) {
         FakeBackend backend;
-        detail::GpuTimerQueue timer(backend, bits);
+        detail::GpuTimerQueue timer(backend, bits, GpuTimingMethod::timestamp_pair);
         CHECK(!timer.stats().supported && timer.stats().counter_bits == bits);
         CHECK(!timer.begin(1));
         rejects([&] { timer.collect(); });
@@ -115,7 +122,7 @@ TEST(unsupported_counters_issue_no_queries) {
 }
 TEST(clock_reversal_zero_and_large_timestamps) {
     FakeBackend backend;
-    detail::GpuTimerQueue timer(backend, 64);
+    detail::GpuTimerQueue timer(backend, 64, GpuTimingMethod::timestamp_pair);
     for (std::uint64_t i = 1; i <= 3; ++i) {
         CHECK(timer.begin(i));
         timer.end();
@@ -137,7 +144,7 @@ TEST(clock_reversal_zero_and_large_timestamps) {
 }
 TEST(failure_evidence_survives_slot_reuse_and_bounded_overflow) {
     FakeBackend backend;
-    detail::GpuTimerQueue timer(backend, 64);
+    detail::GpuTimerQueue timer(backend, 64, GpuTimingMethod::timestamp_pair);
     constexpr auto maximum = std::numeric_limits<std::uint64_t>::max();
     for (std::uint64_t frame = 1; frame <= 40; ++frame) {
         CHECK(timer.begin(frame));
@@ -168,12 +175,12 @@ TEST(failure_evidence_survives_slot_reuse_and_bounded_overflow) {
     CHECK(timer.collect().empty() && backend.reads == reads);
     CHECK(timer.failures().front().frame == 1 && timer.failures().back().frame == 15);
     FakeBackend fresh_backend;
-    detail::GpuTimerQueue fresh(fresh_backend, 64);
+    detail::GpuTimerQueue fresh(fresh_backend, 64, GpuTimingMethod::timestamp_pair);
     CHECK(fresh.failures().empty() && fresh.stats().invalid == 0);
 }
 TEST(delayed_reversed_pair_keeps_original_tag_after_skipped_begin) {
     FakeBackend backend;
-    detail::GpuTimerQueue timer(backend, 64);
+    detail::GpuTimerQueue timer(backend, 64, GpuTimingMethod::timestamp_pair);
     for (std::uint64_t frame = 1; frame <= GpuTimer::capacity; ++frame) {
         CHECK(timer.begin(frame * 100));
         timer.end();
@@ -202,7 +209,7 @@ TEST(delayed_reversed_pair_keeps_original_tag_after_skipped_begin) {
 }
 TEST(repeated_pool_rollover_keeps_tags_and_bounds) {
     FakeBackend backend;
-    detail::GpuTimerQueue timer(backend, 64);
+    detail::GpuTimerQueue timer(backend, 64, GpuTimingMethod::timestamp_pair);
     for (std::uint64_t batch = 0; batch < 100; ++batch) {
         for (std::uint64_t i = 0; i < GpuTimer::capacity; ++i) {
             CHECK(timer.begin(batch * GpuTimer::capacity + i + 1));
@@ -219,6 +226,69 @@ TEST(repeated_pool_rollover_keeps_tags_and_bounds) {
         }
     }
     CHECK(timer.stats().completed == 800 && timer.stats().skipped == 0);
+}
+// Elapsed results are already durations; no absolute clock subtraction is involved.
+struct ElapsedBackend : FakeBackend {
+    void begin(std::size_t slot) {
+        if (conflict)
+            throw std::logic_error("active query");
+        stamp(slot);
+    }
+    void end(std::size_t) {}
+    void finish_elapsed(std::size_t slot, std::uint64_t value) {
+        queries.at(slot).value = value;
+        queries.at(slot).ready = true;
+    }
+};
+TEST(elapsed_queries_poll_once_and_preserve_tags_across_pool_reuse) {
+    ElapsedBackend backend;
+    detail::GpuTimerQueue timer(backend, 64, GpuTimingMethod::elapsed);
+    CHECK(timer.stats().method == GpuTimingMethod::elapsed);
+    for (std::uint64_t batch = 0; batch < 100; ++batch) {
+        for (std::uint64_t i = 0; i < GpuTimer::capacity; ++i) {
+            CHECK(timer.begin(batch * 9 + i + 1));
+            timer.end();
+        }
+        CHECK(!timer.begin(batch * 9 + 9));
+        timer.end();
+        const auto reads = backend.reads, probes = backend.probes;
+        CHECK(timer.collect().empty());
+        CHECK(backend.reads == reads && backend.probes == probes + 1);
+        for (std::size_t i = 0; i < GpuTimer::capacity; ++i)
+            backend.finish_elapsed(i, i * 1000000);
+        const auto samples = timer.collect();
+        CHECK(samples.size() == 8 && backend.reads == reads + 8);
+        CHECK(backend.probes == probes + 9);
+        for (std::size_t i = 0; i < samples.size(); ++i) {
+            CHECK(samples[i].frame == batch * 9 + i + 1);
+            NEAR(samples[i].milliseconds, static_cast<double>(i));
+        }
+    }
+    CHECK(timer.stats().completed == 800 && timer.stats().skipped == 100);
+    CHECK(timer.stats().invalid == 0 && timer.failures().empty());
+}
+TEST(elapsed_conflict_is_transactional_and_unsigned_results_are_not_subtracted) {
+    ElapsedBackend backend;
+    detail::GpuTimerQueue timer(backend, 64, GpuTimingMethod::elapsed);
+    backend.conflict = true;
+    rejects([&] { timer.begin(1); });
+    rejects([&] { timer.end(); });
+    CHECK(timer.collect().empty() && timer.stats().submitted == 0);
+    backend.conflict = false;
+    CHECK(timer.begin(1)); // A failed begin did not consume the frame tag.
+    timer.end();
+    backend.finish_elapsed(0, UINT64_MAX);
+    const auto samples = timer.collect();
+    CHECK(samples.size() == 1 && samples[0].milliseconds > 1e12);
+    // Driver durations are trusted; absolute wrap repair and arbitrary caps are not applied.
+    CHECK(timer.stats().invalid == 0 && timer.failures().empty());
+    for (const int bits : {0, 30, 32, 63, 65}) {
+        ElapsedBackend unsupported;
+        detail::GpuTimerQueue narrow(unsupported, bits, GpuTimingMethod::elapsed);
+        CHECK(!narrow.begin(1));
+        narrow.end();
+        CHECK(narrow.collect().empty() && unsupported.stamps == 0);
+    }
 }
 TEST(gpu_history_uses_completed_samples_and_rejects_invalid_records) {
     GpuTimingHistory history;

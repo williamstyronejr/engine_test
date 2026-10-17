@@ -1,5 +1,8 @@
 # Recorded gameplay measurements — 2026-10-17
 
+Follow-up: [elapsed timing and rollover evidence](2026-10-17-elapsed-timing.md)
+records the next increment's query-method change; earlier raw results are preserved.
+
 Five of six preplanned runs passed. All six verified every replay command and
 finished with matching per-level fingerprints, final hashes, viewport and draw
 counts; Annex repeat 2 returned failure because of one reversed GPU timestamp pair.

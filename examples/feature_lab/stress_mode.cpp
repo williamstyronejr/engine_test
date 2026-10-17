@@ -141,6 +141,8 @@ int run_stress_mode(int argc, char** argv) {
     collect(); // No GPU wait; outstanding measurements are reported explicitly.
     const auto gpu = timer.stats();
     report.gpu_supported = gpu.supported;
+    report.gpu_method = gpu.method;
+    report.gpu_counter_bits = gpu.counter_bits;
     report.gpu_submitted = gpu.submitted;
     report.gpu_completed = gpu.completed;
     report.gpu_pending = gpu.pending;
