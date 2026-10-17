@@ -10,11 +10,13 @@ namespace feature_lab {
 class Diagnostics {
   public:
     engine::DebugControls controls;
-    void collect_gpu(engine::GpuTimer& timer, std::uint64_t frame) {
-        for (const auto sample : timer.collect())
+    std::span<const engine::GpuTimingSample> collect_gpu(engine::GpuTimer& timer, std::uint64_t frame) {
+        const auto samples = timer.collect();
+        for (const auto sample : samples)
             gpu_history_.record(sample);
         gpu_stats_ = timer.stats();
         frame_ = frame;
+        return samples;
     }
     engine::GpuTimingSummary gpu_summary() const { return gpu_history_.summary(); }
     void record(engine::FrameSample sample, engine::RenderStats window, engine::RenderStats minimap,

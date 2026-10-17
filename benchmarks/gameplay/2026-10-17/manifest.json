@@ -1,0 +1,119 @@
+{
+  "source": "9b6d52c54b5da7cc2f66c0c162810b90e9aa23e9",
+  "started_utc": "2026-10-17T16:22:47Z",
+  "runs": [
+    {
+      "name": "facility-1",
+      "command": [
+        "build/release/feature_lab",
+        "--replay",
+        "benchmarks/replays/facility.erpl",
+        "--profile-report",
+        "benchmarks/gameplay/2026-10-17/facility-1.json",
+        "--profile-warmup",
+        "30"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 8.110558343003504,
+      "stderr": "[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt\n[shader applied] revision=2 source=/home/zero/dev/engine_test/build/release/assets\n",
+      "package_temperature_before_millidegrees_c": 57000,
+      "package_temperature_after_millidegrees_c": 73000
+    },
+    {
+      "name": "annex-1",
+      "command": [
+        "build/release/feature_lab",
+        "--replay",
+        "benchmarks/replays/annex.erpl",
+        "--profile-report",
+        "benchmarks/gameplay/2026-10-17/annex-1.json",
+        "--profile-warmup",
+        "30"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 8.388421594994725,
+      "stderr": "[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt\n[shader applied] revision=2 source=/home/zero/dev/engine_test/build/release/assets\n",
+      "package_temperature_before_millidegrees_c": 73000,
+      "package_temperature_after_millidegrees_c": 78000
+    },
+    {
+      "name": "facility-2",
+      "command": [
+        "build/release/feature_lab",
+        "--replay",
+        "benchmarks/replays/facility.erpl",
+        "--profile-report",
+        "benchmarks/gameplay/2026-10-17/facility-2.json",
+        "--profile-warmup",
+        "30"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 8.531001914001536,
+      "stderr": "[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt\n[shader applied] revision=2 source=/home/zero/dev/engine_test/build/release/assets\n",
+      "package_temperature_before_millidegrees_c": 77000,
+      "package_temperature_after_millidegrees_c": 81000
+    },
+    {
+      "name": "annex-2",
+      "command": [
+        "build/release/feature_lab",
+        "--replay",
+        "benchmarks/replays/annex.erpl",
+        "--profile-report",
+        "benchmarks/gameplay/2026-10-17/annex-2.json",
+        "--profile-warmup",
+        "30"
+      ],
+      "exit_code": 1,
+      "wall_seconds": 8.645335420005722,
+      "stderr": "[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt\n[shader applied] revision=2 source=/home/zero/dev/engine_test/build/release/assets\n[gpu timestamp reversed] frame=1614 slot=5 start_ns=68717863232 end_ns=43536 last_attempted_frame=1615\n",
+      "package_temperature_before_millidegrees_c": 81000,
+      "package_temperature_after_millidegrees_c": 86000
+    },
+    {
+      "name": "facility-3",
+      "command": [
+        "build/release/feature_lab",
+        "--replay",
+        "benchmarks/replays/facility.erpl",
+        "--profile-report",
+        "benchmarks/gameplay/2026-10-17/facility-3.json",
+        "--profile-warmup",
+        "30"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 8.501423952999176,
+      "stderr": "[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt\n[shader applied] revision=2 source=/home/zero/dev/engine_test/build/release/assets\n",
+      "package_temperature_before_millidegrees_c": 86000,
+      "package_temperature_after_millidegrees_c": 83000
+    },
+    {
+      "name": "annex-3",
+      "command": [
+        "build/release/feature_lab",
+        "--replay",
+        "benchmarks/replays/annex.erpl",
+        "--profile-report",
+        "benchmarks/gameplay/2026-10-17/annex-3.json",
+        "--profile-warmup",
+        "30"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 8.857966518000467,
+      "stderr": "[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt\n[shader applied] revision=2 source=/home/zero/dev/engine_test/build/release/assets\n",
+      "package_temperature_before_millidegrees_c": 84000,
+      "package_temperature_after_millidegrees_c": 83000
+    }
+  ],
+  "environment": {
+    "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor": "schedutil",
+    "/sys/devices/system/cpu/cpu0/cpufreq/scaling_driver": "intel_cpufreq",
+    "/sys/class/power_supply/AC0/online": "1"
+  },
+  "finished_utc": "2026-10-17T16:23:38Z",
+  "invariants_checked": true,
+  "rejected_runs": [
+    "annex-2"
+  ],
+  "all_runs_passed": false
+}

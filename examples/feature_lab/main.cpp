@@ -12,6 +12,7 @@
 #include "overlays.hpp"
 #include "persistence.hpp"
 #include "replay_file.hpp"
+#include "replay_profile.hpp"
 #include "sampling_gallery.hpp"
 #include "scene_assets.hpp"
 #include "scene_flow_draw.hpp"
@@ -47,7 +48,8 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
           const feature_lab::TilemapAssets& tilemaps, const feature_lab::SceneAssets& scenes,
           bool settings_open, const KeyBindings& bindings, std::string_view replay_status,
           bool replay_session,
-          bool playing_replay) {
+          bool playing_replay,
+          std::chrono::steady_clock::time_point* world_submitted = nullptr) {
     const auto extent = camera.extent(width, height) * 0.5F;
     const Rect view{camera.center - extent, camera.center + extent};
     const auto& map = game.map.data();
@@ -107,6 +109,8 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
     r.text(goal + Vec2{-0.7F, 1.4F}, 0.045F, game.door_open ? "EXIT OPEN" : "LOCKED", cyan);
     const float w = static_cast<float>(width), h = static_cast<float>(height);
     r.set_camera({{w * 0.5F, -h * 0.5F}, h});
+    if (world_submitted)
+        *world_submitted = std::chrono::steady_clock::now();
     const float scale = feature_lab::hud_scale(width, height);
     const auto label = [&](float x, float y, float size, std::string_view text, Color color) {
         r.text({x * scale, -y * scale}, size * scale, text, color);
@@ -238,7 +242,9 @@ int main(int argc, char** argv) {
         bool watch_assets = false;
         bool font_demo = false;
         unsigned level_changes = 0;
-        std::string user_directory, record_path, playback_path, verify_path;
+        std::string user_directory, record_path, playback_path, verify_path, profile_path;
+        std::size_t profile_warmup = 30;
+        bool profile_requested = false, profile_warmup_set = false;
         std::optional<std::uint64_t> seed;
         bool audio_enabled = true, scripted = false, verification = false, vsync = true;
         std::string screenshot, asset_directory;
@@ -263,6 +269,17 @@ int main(int argc, char** argv) {
                 direct_play = true;
             } else if (arg == "--level-tour") {
                 level_tour = scripted = true;
+            } else if (arg == "--profile-report" && i + 1 < argc) {
+                profile_path = argv[++i];
+                profile_requested = true;
+            } else if (arg == "--profile-warmup" && i + 1 < argc) {
+                const std::string_view value(argv[++i]);
+                const auto [end, error] =
+                    std::from_chars(value.data(), value.data() + value.size(), profile_warmup);
+                if (error != std::errc{} || end != value.data() + value.size() ||
+                    profile_warmup > 35999)
+                    throw std::invalid_argument("--profile-warmup requires 0..35999");
+                profile_warmup_set = true;
             } else if (arg == "--record-replay" && i + 1 < argc)
                 record_path = argv[++i];
             else if (arg == "--replay" && i + 1 < argc)
@@ -344,6 +361,8 @@ int main(int argc, char** argv) {
                        "--seed UINT64 --record-replay FILE.erpl --replay FILE.erpl "
                        "--verify-replay FILE.erpl (CPU only). Replay modes disable F1; "
                        "Escape ends recording/playback.\n"
+                       "--profile-report FILE.json --profile-warmup N "
+                       "(requires --replay; unpaced, silent, default config)\n"
                        "--stress --help (configurable arena and benchmark reports)\n";
                 return 0;
             } else
@@ -360,6 +379,21 @@ int main(int argc, char** argv) {
             (replay_modes || load_slot || selected_level != feature_lab::Level::facility))
             throw std::invalid_argument(
                 "--level-tour requires an unsaved facility start without replay");
+        if (profile_warmup_set && !profile_requested)
+            throw std::invalid_argument("--profile-warmup requires --profile-report");
+        if (profile_requested) {
+            feature_lab::validate_profile_arguments(argc, argv);
+            if (profile_path.empty() || playback_path.empty())
+                throw std::invalid_argument("Replay profiling requires --replay and a report path");
+            std::error_code error;
+            if (std::filesystem::absolute(profile_path).lexically_normal() ==
+                    std::filesystem::absolute(playback_path).lexically_normal() ||
+                std::filesystem::equivalent(profile_path, playback_path, error))
+                throw std::invalid_argument("Profile report must not replace its replay input");
+            audio_enabled = false;
+            vsync = false;
+            vsync_override = true;
+        }
         const AssetRoot assets = AssetRoot::discover(asset_directory);
         if (verification)
             return verify(assets, selected_level);
@@ -382,6 +416,10 @@ int main(int argc, char** argv) {
                 return 0;
             }
         }
+        std::optional<feature_lab::ReplayProfile> profile;
+        if (profile_requested)
+            profile.emplace(playback->commands.size(), profile_warmup,
+                            feature_lab::replay_fingerprint(feature_lab::encode_replay(*playback)));
         feature_lab::SceneFlow flow(
             game,
             !(replay_modes || direct_play || scripted || load_slot || save_slot || settings_demo ||
@@ -390,13 +428,15 @@ int main(int argc, char** argv) {
         std::unique_ptr<UserStorage> storage;
         feature_lab::Configuration config;
         std::string persistence_notice;
-        try {
-            storage = std::make_unique<UserStorage>(UserPaths::discover(user_directory));
-            if (const auto bytes = storage->read_config())
-                config = feature_lab::decode_config(*bytes);
-        } catch (const std::exception& error) {
-            std::cerr << "[persistence] " << error.what() << '\n';
-            persistence_notice = "CONFIG UNAVAILABLE - USING DEFAULTS";
+        if (!profile) {
+            try {
+                storage = std::make_unique<UserStorage>(UserPaths::discover(user_directory));
+                if (const auto bytes = storage->read_config())
+                    config = feature_lab::decode_config(*bytes);
+            } catch (const std::exception& error) {
+                std::cerr << "[persistence] " << error.what() << '\n';
+                persistence_notice = "CONFIG UNAVAILABLE - USING DEFAULTS";
+            }
         }
         if (!vsync_override)
             vsync = config.vsync;
@@ -547,7 +587,10 @@ int main(int argc, char** argv) {
         std::size_t sample_count = 0;
         double dropped = 0;
         bool running = true, suspended = false;
-        while (running && window.poll(input)) {
+        while (running) {
+            const auto frame_started = profile ? Clock::now() : Clock::time_point{};
+            if (!window.poll(input))
+                break;
             const auto now = Clock::now();
             if (!window.drawable()) {
                 if (!suspended)
@@ -586,7 +629,7 @@ int main(int argc, char** argv) {
                     }
                 }
                 if (playback) {
-                    if (button(physical_input, Key::fullscreen).pressed)
+                    if (!profile && button(physical_input, Key::fullscreen).pressed)
                         window.toggle_fullscreen();
                     if (playback_index == playback->commands.size()) {
                         running = false;
@@ -741,15 +784,23 @@ int main(int argc, char** argv) {
                     break;
                 }
             }
+            if (profile && !running && playback_index < playback->commands.size())
+                break; // Abort without inventing a frame/command pair.
             soundtrack.collect();
             if (asset_reload)
                 asset_reload->update(renderer, assets, shaders, textures, fonts, manual_reloads);
-            diagnostics.collect_gpu(gpu_timer, frames + 1);
+            const auto simulated = profile ? Clock::now() : Clock::time_point{};
+            const auto gpu_samples = diagnostics.collect_gpu(gpu_timer, frames + 1);
+            if (profile)
+                profile->collect_gpu(gpu_samples);
+            const auto rendering = profile ? Clock::now() : Clock::time_point{};
             gpu_timer.begin(frames + 1);
             const auto camera = game.camera(window.width(), window.height(), batch.alpha);
             if (!flow.title_open())
                 overlays.render_minimap(renderer, game, window.width(), window.height(),
                                         batch.alpha);
+            const auto minimap_submitted = profile ? Clock::now() : Clock::time_point{};
+            Clock::time_point world_submitted{};
             renderer.begin(window.width(), window.height(), camera);
             if (flow.title_open()) {
                 flow.prepare(window.width(), window.height(), storage != nullptr);
@@ -767,7 +818,8 @@ int main(int argc, char** argv) {
                          ? flow.notice
                          : "36 / " + std::string(feature_lab::level_name(game.level)) +
                                (watch_assets ? " / AUTO RELOAD" : " / AUDIO BANK RELOAD"),
-                     recorder.has_value() || playback.has_value(), playback.has_value());
+                     recorder.has_value() || playback.has_value(), playback.has_value(),
+                     profile ? &world_submitted : nullptr);
                 diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
                 settings.draw(renderer, window.width(), window.height());
             }
@@ -787,7 +839,18 @@ int main(int argc, char** argv) {
             if (!screenshot.empty() &&
                 (!running || frames == static_cast<std::size_t>(frame_limit)))
                 renderer.screenshot(screenshot);
+            const auto presenting = profile ? Clock::now() : Clock::time_point{};
             window.present();
+            const auto presented = profile ? Clock::now() : Clock::time_point{};
+            if (profile)
+                profile->record({feature_lab::stress_ms(now, simulated),
+                                 feature_lab::stress_ms(rendering, minimap_submitted),
+                                 feature_lab::stress_ms(minimap_submitted, world_submitted),
+                                 feature_lab::stress_ms(world_submitted, submitted),
+                                 feature_lab::stress_ms(presenting, presented),
+                                 feature_lab::stress_ms(frame_started, presented)},
+                                window.width(), window.height(), renderer.stats(),
+                                overlays.minimap_stats(), simulation_steps);
             if (!renderer.healthy())
                 throw std::runtime_error("OpenGL validation failed");
             const double interval = std::chrono::duration<double>(now - report).count();
@@ -803,7 +866,7 @@ int main(int argc, char** argv) {
             }
             if (frame_limit > 0 && frames >= static_cast<std::size_t>(frame_limit))
                 break;
-            if (!vsync)
+            if (!vsync && !profile)
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
         }
         persist_config();
@@ -866,7 +929,9 @@ int main(int argc, char** argv) {
                   << " fullscreen=" << window.fullscreen() << " focused=" << window.focused()
                   << " targets=" << renderer.live_targets()
                   << " target_bytes=" << renderer.target_bytes() << '\n';
-        diagnostics.collect_gpu(gpu_timer, frames); // Final poll only; never wait on shutdown.
+        const auto final_gpu_samples = diagnostics.collect_gpu(gpu_timer, frames); // Final poll only.
+        if (profile)
+            profile->collect_gpu(final_gpu_samples);
         const auto gpu = diagnostics.gpu_summary();
         const auto gpu_stats = gpu_timer.stats();
         std::cout << "[gpu render interval ms] supported=" << gpu_stats.supported
@@ -906,6 +971,12 @@ int main(int argc, char** argv) {
                       << " p95=" << percentile(95) << " p99=" << percentile(99)
                       << " samples=" << sample_count << " viewport=" << window.width() << 'x'
                       << window.height() << " (excludes swap wait; not GPU time)\n";
+        }
+        if (profile) {
+            profile->write(profile_path, profile->json(feature_lab::replay_hash(game), game.ticks,
+                           feature_lab::level_name(game.level), renderer.graphics_info(),
+                           vsync_available, gpu_stats, gpu_failures));
+            return profile->complete() && gpu_stats.invalid == 0 ? 0 : 1;
         }
         return 0;
     } catch (const std::exception& e) {

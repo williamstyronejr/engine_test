@@ -654,6 +654,17 @@ modify saves or settings. See [workloads, report fields and measurement limits](
 [GPU timestamp diagnostics](benchmarks/2026-10-17-gpu-timing.md) retain raw evidence
 for rejected timing pairs without waiting for the GPU.
 
+Recorded gameplay uses the normal minimap/world/HUD rendering path:
+
+```sh
+./build/release/feature_lab --replay benchmarks/replays/facility.erpl \
+  --profile-report build/facility-profile.json --profile-warmup 30
+```
+
+Profile mode verifies every replay state, uses default configuration, disables audio
+and deliberate pacing, and reports the actual managed viewport. See the
+[workloads, timing boundaries and report contract](benchmarks/REPLAY_PROFILING.md).
+
 ## Window lifecycle
 
 Fullscreen and minimize are asynchronous window-manager requests. The engine exposes
