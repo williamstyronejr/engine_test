@@ -219,6 +219,8 @@ std::string StressReport::json(const StressOptions& options) const {
         << ",\"peak_uploaded_texture_bytes\":" << texture_bytes_peak
         << ",\"peak_targets\":" << target_peak << ",\"peak_target_bytes\":" << target_bytes_peak
         << "},\n  \"gpu_queries\":{\"supported\":" << gpu_supported
+        << ",\"method\":" << json_string(engine::gpu_timing_method_name(gpu_method))
+        << ",\"counter_bits\":" << gpu_counter_bits
         << ",\"submitted\":" << gpu_submitted << ",\"completed\":" << gpu_completed
         << ",\"pending\":" << gpu_pending << ",\"skipped\":" << gpu_skipped
         << ",\"invalid\":" << gpu_invalid

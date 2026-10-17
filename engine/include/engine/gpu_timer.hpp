@@ -5,6 +5,10 @@
 #include <span>
 
 namespace engine {
+enum class GpuTimingMethod { elapsed, timestamp_pair };
+constexpr const char* gpu_timing_method_name(GpuTimingMethod method) {
+    return method == GpuTimingMethod::elapsed ? "time_elapsed" : "timestamp_pair";
+}
 struct GpuTimingSample {
     std::uint64_t frame{};
     double milliseconds{};
@@ -15,6 +19,7 @@ struct GpuTimingFailure {
     std::size_t slot{};
 };
 struct GpuTimingStats {
+    GpuTimingMethod method{GpuTimingMethod::elapsed};
     int counter_bits{};
     bool supported{};
     std::size_t pending{};
@@ -25,19 +30,22 @@ class GpuTimer {
   public:
     static constexpr std::size_t capacity = 8;
     static constexpr std::size_t failure_capacity = 8;
-    GpuTimer();
+    explicit GpuTimer(GpuTimingMethod method = GpuTimingMethod::elapsed);
     ~GpuTimer();
     GpuTimer(const GpuTimer&) = delete;
     GpuTimer& operator=(const GpuTimer&) = delete;
     // Tags must be nonzero and strictly increasing. Always pair begin/end, even if false.
     // False means unsupported counters or a full pending pool; rendering continues normally.
+    // Elapsed scopes cannot overlap any other GL_TIME_ELAPSED query in this context.
+    // A conflicting begin throws before consuming the tag; do not end that failed begin.
+    // Do not manipulate this timer's GL query externally. Destruction closes an open scope.
     bool begin(std::uint64_t frame);
     void end();
     // Between scopes only. Poll once; never wait or read an unavailable result.
     // Returned span remains valid until the next collect or destruction.
     std::span<const GpuTimingSample> collect();
-    // First failure_capacity reversed pairs, in collection order, for this timer's
-    // lifetime. No allocations, extra GL reads or waits. Later failures only raise
+    // Timestamp mode only: first failure_capacity reversed pairs, in collection order, for this
+    // timer's lifetime. No allocations, extra GL reads or waits. Later failures only raise
     // stats().invalid; omitted count = invalid - failures().size().
     // Returned span remains valid until the next collect or destruction.
     std::span<const GpuTimingFailure> failures() const;

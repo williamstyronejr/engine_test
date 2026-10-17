@@ -68,7 +68,7 @@ Counters and CPU distributions exclude warmup. Timing scopes are:
 - `frame`: from before event polling through swap completion. Includes GPU query
   collection and existing diagnostic recording. Excludes subsequent profile sample
   storage, GL health check, window-title updates and shutdown/report writing.
-- `gpu_render`: asynchronous timestamps around minimap plus window world/UI rendering,
+- `gpu_render`: asynchronous elapsed queries around minimap plus window world/UI rendering,
   excluding event handling, simulation, presentation and compositor scanout.
 
 CPU timings include OS scheduling delays and driver back-pressure. GPU and CPU
@@ -108,3 +108,9 @@ and repeat each workload on the same viewport/driver/configuration. Preserve raw
 reports and process exit codes, compare replay fingerprints/final hashes and draw
 counts first, and retain any failed attempt. A passing replay and p99 below 16.7 ms
 alone do not establish uninterrupted 60 FPS.
+
+GPU timing defaults to `GL_TIME_ELAPSED` from increment 40. Reports include
+`gpu_queries.method` and `counter_bits`. Older reports without these fields used
+`GL_TIMESTAMP` pairs. Elapsed mode trusts the driver duration; its zero `invalid`
+count does not independently validate the clock. Timestamp diagnostics remain
+available through the C++ timer API; see [the timing contract](../docs/FORMATS.md#asynchronous-gpu-timing).

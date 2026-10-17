@@ -101,23 +101,65 @@ TEST(query_objects_are_deleted_with_pending_or_unfinished_scopes) {
         glXGetProcAddressARB(reinterpret_cast<const GLubyte*>("glIsQuery")));
     CHECK(is_query != nullptr);
     for (int cycle = 0; cycle < 8; ++cycle) {
-        std::array<GLuint, GpuTimer::capacity * 2> names{};
-        {
-            detail::TimerBackend backend;
-            names = backend.queries;
-            for (std::size_t i = 0; i < names.size(); ++i) {
-                backend.stamp(i);
-                CHECK(is_query(names[i]));
+        for (const auto method : {GpuTimingMethod::elapsed, GpuTimingMethod::timestamp_pair}) {
+            std::vector<GLuint> names;
+            {
+                detail::TimerBackend backend(method);
+                names.assign(backend.queries.begin(),
+                             backend.queries.begin() + backend.query_count());
+                for (std::size_t i = 0; i < GpuTimer::capacity; ++i) {
+                    backend.begin(i);
+                    backend.end(i);
+                }
+                for (const auto name : names)
+                    CHECK(is_query(name));
             }
+            for (const auto name : names)
+                CHECK(!is_query(name));
         }
-        for (const auto name : names)
-            CHECK(!is_query(name));
         {
             GpuTimer timer;
-            CHECK(timer.begin(1)); // Timestamp scopes need no EndQuery during teardown.
+            CHECK(timer.begin(1)); // Destruction must close the active elapsed query.
         }
         CHECK(renderer.healthy());
     }
+}
+TEST(elapsed_overlap_external_ownership_and_interrupted_scope_cleanup) {
+    engine::Window window(16, 16, "Elapsed query ownership", false);
+    Renderer renderer;
+    Gl gl;
+    GpuTimer first, second;
+    CHECK(first.begin(1));
+    rejects([&] { second.begin(1); });
+    first.end();
+    CHECK(second.begin(1));
+    second.end();
+    GLuint external{};
+    gl.GenQueries(1, &external);
+    gl.BeginQuery(GL_TIME_ELAPSED, external);
+    {
+        GpuTimer blocked;
+        rejects([&] { blocked.begin(1); });
+    } // Must not close somebody else's query.
+    GLint current{};
+    gl.GetQueryiv(GL_TIME_ELAPSED, GL_CURRENT_QUERY, &current);
+    CHECK(static_cast<GLuint>(current) == external);
+    gl.EndQuery(GL_TIME_ELAPSED);
+    gl.DeleteQueries(1, &external);
+    GLuint interrupted{};
+    {
+        detail::TimerBackend backend;
+        interrupted = backend.queries[0];
+        backend.begin(0);
+    }
+    gl.GetQueryiv(GL_TIME_ELAPSED, GL_CURRENT_QUERY, &current);
+    CHECK(current == 0);
+    const auto is_query = reinterpret_cast<PFNGLISQUERYPROC>(
+        glXGetProcAddressARB(reinterpret_cast<const GLubyte*>("glIsQuery")));
+    CHECK(!is_query(interrupted));
+    CHECK(first.begin(2));
+    first.end();
+    CHECK(renderer.healthy());
 }
 TEST(native_slot_reuse_across_target_teardown_preserves_tags) {
     engine::Window window(64, 64, "GPU timer target lifetimes", false);
@@ -138,8 +180,9 @@ TEST(native_slot_reuse_across_target_teardown_preserves_tags) {
         eventually([&] {
             const auto samples = timer.collect();
             for (const auto& failure : timer.failures())
-                std::cerr << "Reversed GPU pair: frame=" << failure.frame << " slot=" << failure.slot
-                          << " start=" << failure.start_ns << " end=" << failure.end_ns << '\n';
+                std::cerr << "Reversed GPU pair: frame=" << failure.frame
+                          << " slot=" << failure.slot << " start=" << failure.start_ns
+                          << " end=" << failure.end_ns << '\n';
             CHECK(timer.failures().empty() && timer.stats().invalid == 0);
             for (const auto sample : samples) {
                 CHECK(sample.frame == expected++);
@@ -196,12 +239,12 @@ int main() {
         return 77;
     }
     {
-        engine::Window probe(16, 16, "GPU timestamp support", false);
+        engine::Window probe(16, 16, "GPU elapsed support", false);
         Gl gl;
         GLint bits{};
-        gl.GetQueryiv(GL_TIMESTAMP, GL_QUERY_COUNTER_BITS, &bits);
+        gl.GetQueryiv(GL_TIME_ELAPSED, GL_QUERY_COUNTER_BITS, &bits);
         if (bits != 64) {
-            std::cout << "SKIP: 64-bit GPU timestamps unavailable\n";
+            std::cout << "SKIP: 64-bit GPU elapsed counters unavailable\n";
             return 77;
         }
     }

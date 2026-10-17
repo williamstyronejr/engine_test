@@ -255,11 +255,15 @@ TEST(options_bounds_json_escaping_and_resource_growth_detection) {
 TEST(gpu_failure_report_preserves_uint64_values_and_omitted_count) {
     StressOptions options;
     StressReport report(options);
+    report.gpu_method = engine::GpuTimingMethod::timestamp_pair;
+    report.gpu_counter_bits = 64;
     report.gpu_invalid = 10;
     report.gpu_failure_count = report.gpu_failures.size();
     for (auto& failure : report.gpu_failures)
         failure = {9007199254740993ULL, UINT64_MAX, UINT64_MAX - 1, UINT64_MAX, 7};
     const auto json = report.json(options);
+    CHECK(json.find("\"method\":\"timestamp_pair\"") != std::string::npos);
+    CHECK(json.find("\"counter_bits\":64") != std::string::npos);
     CHECK(json.find("\"failure_capacity\":8,\"failures_omitted\":2") != std::string::npos);
     const std::string entry =
         "{\"frame\":\"9007199254740993\",\"start_ns\":\"18446744073709551615\","

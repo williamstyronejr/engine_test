@@ -4,11 +4,12 @@
 #include <stdexcept>
 
 namespace engine::detail {
-// Backend supplies stamp(index), available(index), and result(index). The same
+// Backend supplies begin(slot), end(slot), available(index), and result(index). The same
 // bounded scheduling code runs against GL and deterministic delayed-result tests.
 template <class Backend> class GpuTimerQueue {
   public:
-    GpuTimerQueue(Backend& backend, int counter_bits) : backend_(backend) {
+    GpuTimerQueue(Backend& backend, int counter_bits, GpuTimingMethod method) : backend_(backend) {
+        stats_.method = method;
         stats_.counter_bits = counter_bits;
         // Narrow counters can overflow during a slow frame. Report unavailable instead.
         stats_.supported = counter_bits == 64;
@@ -20,16 +21,18 @@ template <class Backend> class GpuTimerQueue {
             throw std::logic_error("GPU timer scope already open");
         if (!frame || frame <= last_frame_)
             throw std::invalid_argument("GPU timer frame tags must increase from 1");
+        const bool measuring = stats_.supported && stats_.pending < GpuTimer::capacity;
+        const auto slot = (head_ + stats_.pending) % GpuTimer::capacity;
+        if (measuring)
+            backend_.begin(slot); // A conflicting query must leave tags and scope unchanged.
         last_frame_ = frame;
         open_ = true;
-        measuring_ = stats_.supported && stats_.pending < GpuTimer::capacity;
+        measuring_ = measuring;
         if (!measuring_) {
             ++stats_.skipped;
             return false;
         }
-        const auto slot = (head_ + stats_.pending) % GpuTimer::capacity;
         frames_[slot] = frame;
-        backend_.stamp(slot * 2);
         return true;
     }
     void end() {
@@ -37,7 +40,7 @@ template <class Backend> class GpuTimerQueue {
             throw std::logic_error("GPU timer end without begin");
         if (measuring_) {
             const auto slot = (head_ + stats_.pending) % GpuTimer::capacity;
-            backend_.stamp(slot * 2 + 1);
+            backend_.end(slot);
             ++stats_.pending;
             ++stats_.submitted;
         }
@@ -48,11 +51,13 @@ template <class Backend> class GpuTimerQueue {
             throw std::logic_error("GPU timer collect inside scope");
         std::size_t count = 0;
         while (stats_.pending) {
-            const auto start = head_ * 2, end = start + 1;
+            const bool paired = stats_.method == GpuTimingMethod::timestamp_pair;
+            const auto start = head_ * 2, end = paired ? start + 1 : head_;
             // Readiness checks are bounded to this pool. An unavailable head stops polling.
-            if (!backend_.available(end) || !backend_.available(start))
+            if (!backend_.available(end) || (paired && !backend_.available(start)))
                 break;
-            const auto a = backend_.result(start), b = backend_.result(end);
+            const auto a = paired ? backend_.result(start) : 0;
+            const auto b = backend_.result(end);
             if (b < a) {
                 // Preserve evidence before reusing this slot; never publish a huge duration.
                 if (failure_count_ < failures_.size())

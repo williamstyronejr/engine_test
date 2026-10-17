@@ -7,6 +7,8 @@
     X(PFNGLGETQUERYIVPROC, GetQueryiv)                                                             \
     X(PFNGLGENQUERIESPROC, GenQueries)                                                             \
     X(PFNGLDELETEQUERIESPROC, DeleteQueries)                                                       \
+    X(PFNGLBEGINQUERYPROC, BeginQuery) \
+    X(PFNGLENDQUERYPROC, EndQuery) \
     X(PFNGLQUERYCOUNTERPROC, QueryCounter)                                                         \
     X(PFNGLGETQUERYOBJECTUIVPROC, GetQueryObjectuiv)                                               \
     X(PFNGLGETQUERYOBJECTUI64VPROC, GetQueryObjectui64v)                                           \

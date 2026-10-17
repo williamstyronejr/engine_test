@@ -100,7 +100,7 @@ Samples cover all measured cycles, with warmup excluded separately in each cycle
   HUD and swap pacing. Per-frame health/resource checks and report bookkeeping,
   cycle checksums, load and teardown are outside this interval. CPU mode measures
   simulation plus mixing only. This is not total run wall time or display latency.
-- `gpu_render`: asynchronous timestamps around the offscreen workload, excluding
+- `gpu_render`: asynchronous elapsed queries around the offscreen workload, excluding
   preview/HUD and presentation. Frame tags exclude warmup even when results arrive
   during the next cycle. Missing/pending/skipped/invalid query counts are explicit;
   shutdown never waits for GPU timing results.
@@ -213,3 +213,9 @@ These are initial comparison baselines, not CI timing thresholds or a promise fo
 other hardware. Repeat under comparable conditions before attributing a timing
 change to engine code; structural counts, capacity failures and resource checks
 remain deterministic test gates.
+
+GPU timing defaults to `GL_TIME_ELAPSED` from increment 40. Reports include
+`gpu_queries.method` and `counter_bits`. Older reports without these fields used
+`GL_TIMESTAMP` pairs. Elapsed mode trusts the driver duration; its zero `invalid`
+count does not independently validate the clock. Timestamp diagnostics remain
+available through the C++ timer API; see [the timing contract](../docs/FORMATS.md#asynchronous-gpu-timing).

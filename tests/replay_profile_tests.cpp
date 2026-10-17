@@ -56,11 +56,15 @@ TEST(incomplete_run_and_exact_gpu_failure_evidence) {
     p.record({}, 64, 64, {}, {}, 0);
     CHECK(!p.complete());
     engine::GpuTimingStats stats{};
+    stats.method = engine::GpuTimingMethod::timestamp_pair;
+    stats.counter_bits = 64;
     stats.invalid = 9;
     std::array<engine::GpuTimingFailure, 8> failures{};
     for (auto& failure : failures)
         failure = {1, UINT64_MAX, UINT64_MAX - 1, 2, 0};
     const auto json = p.json(0, 0, "facility", {}, true, stats, failures);
+    CHECK(json.find("\"method\":\"timestamp_pair\"") != std::string::npos);
+    CHECK(json.find("\"counter_bits\":64") != std::string::npos);
     CHECK(json.find("\"complete\":false") != std::string::npos);
     CHECK(json.find("\"failures_omitted\":1") != std::string::npos);
     CHECK(json.find("\"start_ns\":\"18446744073709551615\"") != std::string::npos);
