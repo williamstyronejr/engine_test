@@ -73,6 +73,7 @@ endif()
 file(COPY "${ASSET_ROOT}/" DESTINATION "${OUTPUT_DIR}/broken-assets")
 file(WRITE "${OUTPUT_DIR}/broken-assets/shaders/sprite.frag"
   "#version 460 core\n#error injected unexpected profile failure\n")
+file(REMOVE "${OUTPUT_DIR}/failed.json")
 execute_process(COMMAND "${GAME_EXE}" --assets "${OUTPUT_DIR}/broken-assets"
   --spike-report "${OUTPUT_DIR}/failed.json" RESULT_VARIABLE rejected
   OUTPUT_VARIABLE output ERROR_VARIABLE errors TIMEOUT 30)
