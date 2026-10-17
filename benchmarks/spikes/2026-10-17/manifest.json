@@ -1,0 +1,75 @@
+{
+  "source": "357abea9c57e6ef3a56b47d0df60ea0c89f38d3e",
+  "started_utc": "2026-10-17T23:43:08.421667+00:00",
+  "planned_runs": [
+    "run-1",
+    "run-2",
+    "run-3",
+    "unexpected-shader-failure"
+  ],
+  "purpose": "Sequential reload/transition measurements after compilation/tests; three attempts, no retries or timing thresholds; final run deliberately uses an invalid shader in a private asset copy",
+  "runs": [
+    {
+      "name": "run-1",
+      "command": [
+        "build/release/feature_lab",
+        "--spike-report",
+        "benchmarks/spikes/2026-10-17/run-1.json"
+      ],
+      "expected_exit_code": 0,
+      "exit_code": 0,
+      "wall_seconds": 17.944196325028315,
+      "temperature_before_millidegrees_c": 66000,
+      "temperature_after_millidegrees_c": 66000,
+      "stdout": "[platform] X11/GLX (may be XWayland)\n[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)\n[OpenGL] 4.6 (Core Profile) Mesa 26.2.2-arch1.1\n[assets] \"/home/zero/dev/engine_test/build/release/assets\" entities=11 GPU textures=9\n[session] frames=3600 ticks=1381 door_completions=1 collected=3 dropped_seconds=0 window_draws=17 minimap_draws=1 level=FACILITY level_changes=2 core_components=0 watched_shaders=0 watched_textures=0 watched_audio=0 audio_revision=1 audio_reload_applied=1 sound_bytes=0 retained_sound_bytes=0 watched_scenes=0 scene_revision=1 scene_applied=1 scene_locked=0 watched_tilemaps=0 tilemap_revision=1 tilemap_applied=1 tilemap_locked=0 watched_animations=0 animation_revision=1 animation_applied=1 animation_locked=0 watched_fonts=0 font_revision=3 font_applied=1 font_embedded=0 font_bytes=16384 scene=gameplay texture_revision=3 texture_applied=1 shader_revision=4 shader_applied=1 fullscreen=0 focused=1 targets=1 target_bytes=103968\n[gpu render interval ms] supported=1 method=time_elapsed counter_bits=64 mean=2.61098 p95=2.84272 max=2.91464 samples=240 last_frame=3599 age_frames=1 submitted=3600 completed=3599 pending=1 skipped=0 invalid=0\n[audio stats] enabled=0 started=0 completed=0 dropped=0 queue_rejections=0 written_frames=0 underruns=0 suspensions=0 recoveries=0 waits=0 device_error=0\n[cpu update+submit ms] median=1.16227 p95=2.3443 p99=5.36232 samples=3570 viewport=1050x1360 (excludes swap wait; not GPU time)\n",
+      "stderr": "[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt\n[shader applied] revision=2 source=/home/zero/dev/engine_test/build/release/assets\n[shader applied] revision=3 source=/home/zero/dev/engine_test/build/release/assets\n[shader retained] revision=3 source=deliberate failure demo\nsprite.frag:\n0:2(1): preprocessor error: #error deliberate Feature Lab failure\n\nsprite.frag: compilation failed\n[shader applied] revision=4 source=/home/zero/dev/engine_test/build/release/assets\n[textures applied] revision=2 count=4\n[textures retained] revision=2 count=4\nTexture payload size mismatch\n[textures applied] revision=3 count=4\n[font applied] revision=3 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt\n"
+    },
+    {
+      "name": "run-2",
+      "command": [
+        "build/release/feature_lab",
+        "--spike-report",
+        "benchmarks/spikes/2026-10-17/run-2.json"
+      ],
+      "expected_exit_code": 0,
+      "exit_code": 0,
+      "wall_seconds": 18.00455130901537,
+      "temperature_before_millidegrees_c": 66000,
+      "temperature_after_millidegrees_c": 67000,
+      "stdout": "[platform] X11/GLX (may be XWayland)\n[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)\n[OpenGL] 4.6 (Core Profile) Mesa 26.2.2-arch1.1\n[assets] \"/home/zero/dev/engine_test/build/release/assets\" entities=11 GPU textures=9\n[session] frames=3600 ticks=1381 door_completions=1 collected=3 dropped_seconds=0 window_draws=17 minimap_draws=1 level=FACILITY level_changes=2 core_components=0 watched_shaders=0 watched_textures=0 watched_audio=0 audio_revision=1 audio_reload_applied=1 sound_bytes=0 retained_sound_bytes=0 watched_scenes=0 scene_revision=1 scene_applied=1 scene_locked=0 watched_tilemaps=0 tilemap_revision=1 tilemap_applied=1 tilemap_locked=0 watched_animations=0 animation_revision=1 animation_applied=1 animation_locked=0 watched_fonts=0 font_revision=3 font_applied=1 font_embedded=0 font_bytes=16384 scene=gameplay texture_revision=3 texture_applied=1 shader_revision=4 shader_applied=1 fullscreen=0 focused=1 targets=1 target_bytes=103968\n[gpu render interval ms] supported=1 method=time_elapsed counter_bits=64 mean=2.49263 p95=2.66208 max=2.70064 samples=240 last_frame=3599 age_frames=1 submitted=3600 completed=3599 pending=1 skipped=0 invalid=0\n[audio stats] enabled=0 started=0 completed=0 dropped=0 queue_rejections=0 written_frames=0 underruns=0 suspensions=0 recoveries=0 waits=0 device_error=0\n[cpu update+submit ms] median=1.22813 p95=2.18777 p99=4.56328 samples=3570 viewport=1050x1360 (excludes swap wait; not GPU time)\n",
+      "stderr": "[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt\n[shader applied] revision=2 source=/home/zero/dev/engine_test/build/release/assets\n[shader applied] revision=3 source=/home/zero/dev/engine_test/build/release/assets\n[shader retained] revision=3 source=deliberate failure demo\nsprite.frag:\n0:2(1): preprocessor error: #error deliberate Feature Lab failure\n\nsprite.frag: compilation failed\n[shader applied] revision=4 source=/home/zero/dev/engine_test/build/release/assets\n[textures applied] revision=2 count=4\n[textures retained] revision=2 count=4\nTexture payload size mismatch\n[textures applied] revision=3 count=4\n[font applied] revision=3 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt\n"
+    },
+    {
+      "name": "run-3",
+      "command": [
+        "build/release/feature_lab",
+        "--spike-report",
+        "benchmarks/spikes/2026-10-17/run-3.json"
+      ],
+      "expected_exit_code": 0,
+      "exit_code": 0,
+      "wall_seconds": 17.328587088006316,
+      "temperature_before_millidegrees_c": 67000,
+      "temperature_after_millidegrees_c": 67000,
+      "stdout": "[platform] X11/GLX (may be XWayland)\n[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)\n[OpenGL] 4.6 (Core Profile) Mesa 26.2.2-arch1.1\n[assets] \"/home/zero/dev/engine_test/build/release/assets\" entities=11 GPU textures=9\n[session] frames=3600 ticks=1381 door_completions=1 collected=3 dropped_seconds=0 window_draws=17 minimap_draws=1 level=FACILITY level_changes=2 core_components=0 watched_shaders=0 watched_textures=0 watched_audio=0 audio_revision=1 audio_reload_applied=1 sound_bytes=0 retained_sound_bytes=0 watched_scenes=0 scene_revision=1 scene_applied=1 scene_locked=0 watched_tilemaps=0 tilemap_revision=1 tilemap_applied=1 tilemap_locked=0 watched_animations=0 animation_revision=1 animation_applied=1 animation_locked=0 watched_fonts=0 font_revision=3 font_applied=1 font_embedded=0 font_bytes=16384 scene=gameplay texture_revision=3 texture_applied=1 shader_revision=4 shader_applied=1 fullscreen=0 focused=1 targets=1 target_bytes=103968\n[gpu render interval ms] supported=1 method=time_elapsed counter_bits=64 mean=2.45236 p95=2.67288 max=2.69448 samples=240 last_frame=3599 age_frames=1 submitted=3600 completed=3599 pending=1 skipped=0 invalid=0\n[audio stats] enabled=0 started=0 completed=0 dropped=0 queue_rejections=0 written_frames=0 underruns=0 suspensions=0 recoveries=0 waits=0 device_error=0\n[cpu update+submit ms] median=1.20816 p95=1.94202 p99=4.33164 samples=3570 viewport=1050x1360 (excludes swap wait; not GPU time)\n",
+      "stderr": "[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt\n[shader applied] revision=2 source=/home/zero/dev/engine_test/build/release/assets\n[shader applied] revision=3 source=/home/zero/dev/engine_test/build/release/assets\n[shader retained] revision=3 source=deliberate failure demo\nsprite.frag:\n0:2(1): preprocessor error: #error deliberate Feature Lab failure\n\nsprite.frag: compilation failed\n[shader applied] revision=4 source=/home/zero/dev/engine_test/build/release/assets\n[textures applied] revision=2 count=4\n[textures retained] revision=2 count=4\nTexture payload size mismatch\n[textures applied] revision=3 count=4\n[font applied] revision=3 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt\n"
+    },
+    {
+      "name": "unexpected-shader-failure",
+      "command": [
+        "build/release/feature_lab",
+        "--spike-report",
+        "benchmarks/spikes/2026-10-17/unexpected-shader-failure.json",
+        "--assets",
+        "build/spike-evidence-assets"
+      ],
+      "expected_exit_code": 1,
+      "exit_code": 1,
+      "wall_seconds": 0.9867517550010234,
+      "temperature_before_millidegrees_c": 67000,
+      "temperature_after_millidegrees_c": 67000,
+      "stdout": "[platform] X11/GLX (may be XWayland)\n[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)\n[OpenGL] 4.6 (Core Profile) Mesa 26.2.2-arch1.1\n[assets] \"/home/zero/dev/engine_test/build/spike-evidence-assets\" entities=11 GPU textures=9\n[session] frames=120 ticks=119 door_completions=0 collected=0 dropped_seconds=0 window_draws=26 minimap_draws=1 level=FACILITY level_changes=0 core_components=3 watched_shaders=0 watched_textures=0 watched_audio=0 audio_revision=1 audio_reload_applied=1 sound_bytes=0 retained_sound_bytes=0 watched_scenes=0 scene_revision=1 scene_applied=1 scene_locked=0 watched_tilemaps=0 tilemap_revision=1 tilemap_applied=1 tilemap_locked=0 watched_animations=0 animation_revision=1 animation_applied=1 animation_locked=0 watched_fonts=0 font_revision=2 font_applied=1 font_embedded=0 font_bytes=16384 scene=gameplay texture_revision=1 texture_applied=1 shader_revision=1 shader_applied=0 fullscreen=0 focused=1 targets=1 target_bytes=103968\n[gpu render interval ms] supported=1 method=time_elapsed counter_bits=64 mean=2.42582 p95=2.69584 max=3.60696 samples=119 last_frame=119 age_frames=1 submitted=120 completed=119 pending=1 skipped=0 invalid=0\n[audio stats] enabled=0 started=0 completed=0 dropped=0 queue_rejections=0 written_frames=0 underruns=0 suspensions=0 recoveries=0 waits=0 device_error=0\n[cpu update+submit ms] median=1.79748 p95=2.27298 p99=2.59967 samples=90 viewport=1050x1360 (excludes swap wait; not GPU time)\n",
+      "stderr": "[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt\n[shader retained] revision=1 source=/home/zero/dev/engine_test/build/spike-evidence-assets\nsprite.frag:\n0:2(1): preprocessor error: #error injected unexpected profile failure\n\nsprite.frag: compilation failed\n[shader retained] revision=1 source=/home/zero/dev/engine_test/build/spike-evidence-assets\nsprite.frag:\n0:2(1): preprocessor error: #error injected unexpected profile failure\n\nsprite.frag: compilation failed\n"
+    }
+  ]
+}

@@ -1586,6 +1586,14 @@ and resources, collecting 12,597 elapsed results with three pending and no skips
   operation latency from later rendering and total frame time. Live-resource checks
   do not claim to measure transient staging peaks or driver allocations.
 
+All 54 runtime groups pass in GCC Debug and Release without skips; spike/replay
+profile CPU tests pass ASan/UBSan. Three committed-source native attempts preserve
+all reference hashes, counts and event frames. Each collects 3,599 elapsed queries
+with one pending and no skips. A private-copy unexpected failure retains an incomplete
+frame-120 report. [Raw attempts and findings](../benchmarks/2026-10-17-spike-results.md)
+include the presentation tail around shader recovery; they do not establish a
+constant frame budget or transient-memory bound.
+
 ## Next increment
 
 Extend owned-memory accounting to transient reload/transition staging and record

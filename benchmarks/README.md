@@ -1,7 +1,8 @@
 # Feature Lab stress workloads
 
 For scripted reload and level-transition spikes through normal gameplay rendering,
-see [SPIKE_PROFILING.md](SPIKE_PROFILING.md). Recorded ERPL profiling remains separate.
+see [SPIKE_PROFILING.md](SPIKE_PROFILING.md) and the
+[measured results](2026-10-17-spike-results.md). Recorded ERPL profiling remains separate.
 
 Follow-up: [elapsed timing and rollover evidence](2026-10-17-elapsed-timing.md)
 records the next increment's query-method change; earlier raw results are preserved.
