@@ -651,6 +651,8 @@ and GPU timings, hardware/build metadata, workload counts, checksum and memory
 observations. `--stress --help` lists options; Escape aborts. This mode does not
 modify saves or settings. See [workloads, report fields and measurement limits](benchmarks/README.md) and the
 [controlled 1080p validation results](benchmarks/2026-10-16-validation.md).
+[GPU timestamp diagnostics](benchmarks/2026-10-17-gpu-timing.md) retain raw evidence
+for rejected timing pairs without waiting for the GPU.
 
 ## Window lifecycle
 

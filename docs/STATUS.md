@@ -1,7 +1,7 @@
 # Implementation status
 
-The thirty-seventh increment adds separate preview/swap timing and a controlled
-CPU/GPU stress validation suite with preserved raw reports and workload comparisons.
+The thirty-eighth increment adds bounded GPU timestamp failure evidence, report/log
+integration and stronger query-reuse/lifecycle coverage.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
@@ -66,7 +66,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F12 | Implemented (v1) | Live minimap, clipped scrolling panel; seven GPU cases for pixels, alpha composition, clipping, resizing, resource limits and example integration | Optional multisampling, HDR and post-processing |
 | F13 | Implemented (v1) | Clock/catch-up, paused stepping, ERPL recording/playback, per-command state checks, seeded random state, save migration and full-game replay tests | Cross-machine float determinism and replaying menu/audio/render commands are outside v1 |
 | F14 | Implemented (v1) | Versioned scene/checkpoint/config formats; three-slot UI; CRC, bounds and semantic checks; unchanged live game on failed load; interrupted-process write tests | Power-loss/filesystem fault testing and content migration |
-| F15 | Partial | Console errors, GL callback, F2 rolling timing/counter overlay, F3 collision/camera outlines, target accounting, CPU percentiles, shader reload/failure recovery, GPU pixel/interface/lifetime tests, bounded asynchronous GPU timing with sample age/skips; separate preview/swap timing and [controlled stress results](../benchmarks/2026-10-16-validation.md) | Investigate one rejected native timestamp pair; representative gameplay profiling and broader manual fault scenarios |
+| F15 | Partial | Console errors, GL callback, F2 rolling timing/counter overlay, F3 collision/camera outlines, target accounting, CPU percentiles, shader reload/failure recovery, GPU pixel/interface/lifetime tests, bounded asynchronous GPU timing with sample age/skips; separate preview/swap timing, [controlled stress results](../benchmarks/2026-10-16-validation.md) and [bounded failure evidence](../benchmarks/2026-10-17-gpu-timing.md) | Root cause of one unreproduced native timestamp reversal; representative gameplay profiling and broader manual fault scenarios |
 | F16 | Partial | Configurable stress arena, CPU/GPU repeated teardown checks, allocation-free steady CPU tests, tracked buffer/texture/target bytes, JSON benchmarks, repeated 1080p baselines and independent workload comparisons, installed CPU runner and hashed relocatable archives with CPU/OpenGL smoke tests | Full allocator/driver accounting, representative gameplay budgets and broader hardware/manual checks |
 
 ## Initial validation environment
@@ -1487,10 +1487,35 @@ is retained, and a single repeat passed. Its cause remains unresolved. GPU queue
 rejection checks remain intact; no waits or timing-based CI thresholds were added.
 Physical audio/display and full allocator/driver-accounting gaps remain open.
 
+## Added in the thirty-eighth increment
+
+- GPU timing retains the first eight reversed pairs with exact raw timestamps,
+  original frame, reusable slot and latest attempted frame at collection. Later
+  failures still increment the total; first-occurrence evidence survives reuse.
+- Stress JSON includes bounded records and an omitted count, using decimal strings
+  for 64-bit values. Gameplay logs records at normal shutdown. Capture adds no
+  allocation, extra GL reads or waits, and invalid timings remain rejected.
+- Two new queue cases cover delayed availability, skips, reuse, overflow and precise
+  values; a report case checks 64-bit serialization. A native test covers 96 tags
+  across twelve target releases before query collection.
+
+## Thirty-eighth-increment validation (2026-10-17)
+
+All 50 GCC Debug and Release runtime groups pass without skips. The gpu_timer_queue,
+stress_cpu and stress_report groups pass ASan/UBSan with leak detection enabled.
+Four committed-source native sessions complete forty load/unload cycles with stable
+resources/checksums: 26,400 pairs submitted, 26,397 valid pairs collected, three
+pending, and zero invalid/skipped pairs. All raw reports and exact commands are in
+[the investigation report](../benchmarks/2026-10-17-gpu-timing.md).
+
+The prior reversal did not recur; its cause remains unresolved. No GPU timing
+synchronization change or new performance guarantee is claimed. Failure capture
+is verified through deterministic injected pairs, not a fabricated native failure.
+Physical audio/display validation and full allocator/driver accounting remain open.
+
 ## Next increment
 
-Add bounded diagnostics for rejected native GPU timestamp pairs, retaining raw
-values/frame identity for investigation and testing query reuse/lifecycle behavior.
-Then extend profiling to a declared recorded Feature Lab gameplay workload; the
-synthetic arena does not cover normal UI/minimap/reload or transition costs.
-Optional asset tooling and background loading remain deferred.
+Extend profiling to a declared recorded Feature Lab gameplay workload, with explicit
+simulation, minimap/UI, submission and presentation timing boundaries. Preserve
+failure evidence if the native timestamp anomaly recurs. Reload/transition spikes
+need separate scenarios; optional asset tooling and background loading remain deferred.

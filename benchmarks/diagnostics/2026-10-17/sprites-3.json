@@ -1,0 +1,20 @@
+{
+  "schema":"feature_lab_stress_v1","workload_version":1,"mode":"opengl","label":"gpu-diagnostics-2026-10-17-sprites-3","complete":true,"resources_stable":true,
+  "build":{"revision":"16419dd","compiler":"GNU 16.2.1","configuration":"Release","flags":" -O3 -DNDEBUG; C++20; sanitizers=OFF"},
+  "machine":{"cpu":" Intel(R) Core(TM) i5-4300U CPU @ 1.90GHz","system":"Linux 7.2.5-3-omarchy x86_64","gl_vendor":"Intel","gl_device":"Mesa Intel(R) HD Graphics 4400 (HSW GT2)","gl_version":"4.6 (Core Profile) Mesa 26.2.2-arch1.1"},
+  "workload":{"sprites":8192,"tiles":0,"entities":0,"bodies":0,"voices":0,"dense":false,"seed":"1","width":1920,"height":1080,"warmup_per_cycle":60,"frames_per_cycle":600,"cycles":10},
+  "run":{"completed_cycles":10,"measured_frames":6000,"checksum":"10141788747900155707","window_width":1050,"window_height":1360,"vsync_requested":false,"vsync_disable_accepted":true,"audio_device":false,"capture_requested":false},
+  "totals":{"quads":36864000,"culled":12288000,"draws":12000,"visible_tiles":0,"collision_candidates":0,"contacts":0},
+  "memory":{"tracked_cpu_buffer_bytes":8042536,"report_buffer_bytes":336080,"rss_start":52068352,"rss_end":55197696,"rss_peak_at_cycle_boundary":55386112,"peak_uploaded_textures":1,"peak_uploaded_texture_bytes":16,"peak_targets":1,"peak_target_bytes":8294400},
+  "gpu_queries":{"supported":true,"submitted":6600,"completed":6599,"pending":1,"skipped":0,"invalid":0,"failure_capacity":8,"failures_omitted":0,"failures":[]},
+  "milliseconds":{
+    "load":{"samples":10,"mean":4.1106949,"median":3.616739,"p95":5.96315,"p99":5.96315,"max":6.223867},
+    "simulation":{"samples":6000,"mean":0.066871507,"median":0.068897,"p95":0.099656,"p99":0.124652,"max":0.897319},
+    "mixer":{"samples":6000,"mean":0.0001213485,"median":9.4e-05,"p95":0.000307,"p99":0.000555,"max":0.001424},
+    "render_submit":{"samples":6000,"mean":1.59320536,"median":1.540083,"p95":2.487396,"p99":2.780869,"max":6.826999},
+    "preview_submit":{"samples":6000,"mean":0.23370592,"median":0.213078,"p95":0.41682,"p99":0.511134,"max":3.14531},
+    "present":{"samples":6000,"mean":2.55538265,"median":1.271183,"p95":6.842532,"p99":7.90715,"max":36.227202},
+    "frame":{"samples":6000,"mean":4.46897132,"median":3.022037,"p95":8.592492,"p99":9.579141,"max":37.066266},
+    "gpu_render":{"samples":5999,"mean":1.3739435,"median":1.36384,"p95":1.52664,"p99":1.6156,"max":5.5624}
+  }
+}

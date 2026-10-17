@@ -2,6 +2,8 @@
 
 The [2026-10-16 validation report](2026-10-16-validation.md) records repeated 1080p
 results, workload scaling, presentation timings and the remaining F15/F16 gaps.
+The [2026-10-17 GPU timing investigation](2026-10-17-gpu-timing.md) adds bounded
+failure evidence and records native query-reuse/teardown validation.
 
 Run the optimized executable after a release build. All workloads are generated
 in-house and require no asset files. The visible mode uses OpenGL 4.6; the CPU
