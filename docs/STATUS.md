@@ -1,7 +1,7 @@
 # Implementation status
 
-The thirty-ninth increment adds verified replay profiling through normal gameplay
-rendering, declared Facility/Annex recordings and repeated native measurements.
+The fortieth increment switches GPU profiling to nonblocking elapsed queries,
+retains timestamp diagnostics and investigates the native clock rollover.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
@@ -66,7 +66,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F12 | Implemented (v1) | Live minimap, clipped scrolling panel; seven GPU cases for pixels, alpha composition, clipping, resizing, resource limits and example integration | Optional multisampling, HDR and post-processing |
 | F13 | Implemented (v1) | Clock/catch-up, paused stepping, ERPL recording/playback, per-command state checks, seeded random state, save migration and full-game replay tests | Cross-machine float determinism and replaying menu/audio/render commands are outside v1 |
 | F14 | Implemented (v1) | Versioned scene/checkpoint/config formats; three-slot UI; CRC, bounds and semantic checks; unchanged live game on failed load; interrupted-process write tests | Power-loss/filesystem fault testing and content migration |
-| F15 | Partial | Console errors, GL callback, F2 rolling timing/counter overlay, F3 collision/camera outlines, target accounting, CPU percentiles, shader reload/failure recovery, GPU pixel/interface/lifetime tests, bounded asynchronous GPU timing with sample age/skips; separate preview/swap timing, [controlled stress results](../benchmarks/2026-10-16-validation.md) and [bounded failure evidence](../benchmarks/2026-10-17-gpu-timing.md); [recorded gameplay profiles](../benchmarks/2026-10-17-replay-results.md) | Verify native timestamp rollover behavior; reload/transition profiling and broader manual fault scenarios |
+| F15 | Partial | Console errors, GL callback, F2 rolling timing/counter overlay, F3 collision/camera outlines, target accounting, CPU percentiles, shader reload/failure recovery, GPU pixel/interface/lifetime tests, bounded asynchronous GPU timing with sample age/skips; separate preview/swap timing, [controlled stress results](../benchmarks/2026-10-16-validation.md) and [bounded failure evidence](../benchmarks/2026-10-17-gpu-timing.md); [recorded gameplay profiles](../benchmarks/2026-10-17-replay-results.md) | Reload/transition profiling, broader drivers and manual fault scenarios |
 | F16 | Partial | Configurable stress arena, CPU/GPU repeated teardown checks, allocation-free steady CPU tests, tracked buffer/texture/target bytes, JSON benchmarks, repeated 1080p baselines and independent workload comparisons, installed CPU runner and hashed relocatable archives with CPU/OpenGL smoke tests | Full allocator/driver accounting, broader gameplay/display budgets and hardware/manual checks |
 
 ## Initial validation environment
@@ -1548,9 +1548,30 @@ Accepted frame p99 is 9.527–9.861 ms at the actual 1050×1360 window, with max
 uninterrupted 60 FPS. [Results and all raw attempts](../benchmarks/2026-10-17-replay-results.md)
 preserve the failed run and remaining physical audio/display and accounting gaps.
 
+## Increment 40: elapsed GPU queries
+
+- Default `GL_TIME_ELAPSED` timing uses eight asynchronous queries and preserves
+  bounded collection, full-pool skipping and delayed frame tags.
+- Active-query ownership is checked before begin; a rejected overlap preserves the
+  tag and scope. Teardown closes an owned unfinished scope and leaves external
+  queries alone. Timestamp-pair mode retains the original failure evidence.
+- Replay/stress reports identify timing method and counter width. Historical raw
+  results remain unchanged; elapsed durations are not independently validated by
+  the timestamp-only invalid counter.
+- A separate paced native probe compares elapsed results with nested timestamp
+  markers across the suspected rollover. It is diagnostic tooling, not a game-loop
+  wait or a performance benchmark.
+- Matching upstream Mesa 26.2.2 source confirms the 36-bit nanosecond mask and the
+  distinct elapsed delta path. See [evidence and validation](../benchmarks/2026-10-17-elapsed-timing.md).
+
+Debug and Release each pass all 52 runtime groups without skips; focused CPU suites
+pass ASan/UBSan. The 75-second native probe captured one reversal in 11,166 scopes;
+the enclosing elapsed result differs from the hypothetical wrapped timestamp delta
+by 720 ns. Facility, Annex and ten combined stress cycles preserve hashes/counts
+and resources, collecting 12,597 elapsed results with three pending and no skips.
+
 ## Next increment
 
-Verify the installed driver's timestamp rollover behavior and evaluate a portable,
-nonblocking elapsed-query approach with deterministic overflow/lifecycle tests.
-Keep rejected evidence intact. Reload/transition spike workloads and broader physical
-hardware checks remain outstanding; asset tooling/background loading stay deferred.
+Add representative reload/transition spike workloads to gameplay profiling, with
+explicit timing scopes and retained failure reports. Broader physical hardware and
+driver checks remain outstanding; asset tooling/background loading stay deferred.

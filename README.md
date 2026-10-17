@@ -787,10 +787,11 @@ full handle capacity, repeated GPU-object retirement, staging bounds, coordinate
 CPU/GPU publication, retained readers, fallback recovery, shared atlas compatibility,
 and modal/press-edge controls. Native event tests cover F7/F8.
 
-The GPU timing suites include seven deterministic CPU cases for delayed availability,
+The GPU timing suites include eleven deterministic CPU cases for delayed availability,
 full-pool skipping, FIFO reuse, tag/scope validation, unsupported counters, timestamp
-reversal and rolling history; four OpenGL cases cover real result collection, pixel
-stability, saturation/recovery, shader reload/resize, cleanup and overlay layouts.
+reversal, bounded failure evidence, elapsed results and rolling history; six OpenGL
+cases cover real result collection, pixel stability, saturation/recovery, shader
+reload/resize, external query conflicts, interrupted-scope cleanup and overlay layouts.
 The eight-case GPU shader suite verifies shipped/fallback parity, changed pixels,
 compile/link/interface failures, source bounds, active-pass rejection, sampler and
 premultiplied uniform relocation, repeated program retirement, real GL-error detection,
