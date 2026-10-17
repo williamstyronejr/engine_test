@@ -3,7 +3,9 @@
 #include "stress_benchmark.hpp"
 
 namespace feature_lab {
-// One checked replay command per rendered frame. Warmup is a prefix of the replay.
+class SpikeProfile;
+// Frame metrics shared by checked replays and the scripted spike workload.
+// Warmup is a prefix; each rendered frame has at most one fixed simulation step.
 class ReplayProfile {
   public:
     enum Scope : std::size_t { simulation, minimap, world, ui, present, frame, scope_count };
@@ -16,7 +18,8 @@ class ReplayProfile {
     std::string json(std::uint64_t final_hash, std::uint64_t ticks, std::string_view level,
                      const engine::GraphicsInfo& device, bool vsync_disabled,
                      const engine::GpuTimingStats& gpu,
-                     std::span<const engine::GpuTimingFailure> failures) const;
+                     std::span<const engine::GpuTimingFailure> failures,
+                     const SpikeProfile* spikes = nullptr) const;
     void write(std::string_view path, std::string_view json) const;
 
   private:

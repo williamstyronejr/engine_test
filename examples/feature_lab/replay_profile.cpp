@@ -1,4 +1,5 @@
 #include "replay_profile.hpp"
+#include "spike_profile.hpp"
 #include "engine/assets.hpp"
 #include "stress_build.hpp"
 #include <fstream>
@@ -76,7 +77,8 @@ void ReplayProfile::collect_gpu(std::span<const engine::GpuTimingSample> samples
 std::string ReplayProfile::json(std::uint64_t final_hash, std::uint64_t ticks,
                                 std::string_view level, const engine::GraphicsInfo& device,
                                 bool vsync_disabled, const engine::GpuTimingStats& gpu,
-                                std::span<const engine::GpuTimingFailure> failures) const {
+                                std::span<const engine::GpuTimingFailure> failures,
+                                const SpikeProfile* spikes) const {
     std::string cpu = "unavailable", system = "unavailable", line;
     std::ifstream input("/proc/cpuinfo");
     while (std::getline(input, line))
@@ -90,7 +92,9 @@ std::string ReplayProfile::json(std::uint64_t final_hash, std::uint64_t ticks,
     std::ostringstream out;
     out.imbue(std::locale::classic());
     out << std::setprecision(9) << std::boolalpha;
-    out << "{\"schema\":\"feature_lab_replay_profile_v1\",\"build\":{\"revision\":"
+    out << "{\"schema\":"
+        << json_string(spikes ? "feature_lab_spike_profile_v1" : "feature_lab_replay_profile_v1")
+        << ",\"build\":{\"revision\":"
         << json_string(stress_build_revision)
         << ",\"compiler\":" << json_string(stress_build_compiler)
         << ",\"configuration\":" << json_string(stress_build_configuration)
@@ -99,9 +103,14 @@ std::string ReplayProfile::json(std::uint64_t final_hash, std::uint64_t ticks,
         << ",\"gl_vendor\":" << json_string(device.vendor)
         << ",\"gl_device\":" << json_string(device.device)
         << ",\"gl_version\":" << json_string(device.version)
-        << "},\"workload\":{\"replay_fingerprint\":" << json_string(std::to_string(fingerprint_))
-        << ",\"commands\":" << commands_ << ",\"warmup\":" << warmup_
-        << ",\"level\":" << json_string(level) << "},\"run\":{\"complete\":" << complete()
+        << "},\"workload\":{";
+    if (spikes)
+        out << "\"name\":\"reload_transition_v1\",\"seed\":\"1\",\"frame_limit\":" << commands_;
+    else
+        out << "\"replay_fingerprint\":" << json_string(std::to_string(fingerprint_))
+            << ",\"commands\":" << commands_;
+    out << ",\"warmup\":" << warmup_
+        << ",\"level\":" << json_string(level) << "},\"run\":{\"complete\":" << (complete() && (!spikes || spikes->complete()))
         << ",\"frames\":" << frames_
         << ",\"measured_frames\":" << (frames_ > warmup_ ? frames_ - warmup_ : 0)
         << ",\"final_hash\":" << json_string(std::to_string(final_hash)) << ",\"ticks\":" << ticks
@@ -136,7 +145,10 @@ std::string ReplayProfile::json(std::uint64_t final_hash, std::uint64_t ticks,
             << ",\"median\":" << s.median << ",\"p95\":" << s.p95 << ",\"p99\":" << s.p99
             << ",\"max\":" << s.maximum << '}';
     }
-    return out.str() + "\n}}\n";
+    out << "\n}";
+    if (spikes)
+        out << ",\"spikes\":" << spikes->json();
+    return out.str() + "}\n";
 }
 void ReplayProfile::write(std::string_view path, std::string_view json) const {
     const auto absolute = std::filesystem::absolute(path).lexically_normal();

@@ -1656,3 +1656,16 @@ retained bytes. `QUEUED` is an enqueue acknowledgement, not a device guarantee.
 Whole game/level/save replacement keeps the accepted audio bank; newly started
 loops use it. A failed device still follows the existing silent fallback and needs
 a new output/session for reconnection. WAV/config/save/replay schemas are unchanged.
+
+## Scripted reload/transition profile
+
+`feature_lab --spike-report FILE.json` emits `feature_lab_spike_profile_v1` for the
+versioned `reload_transition_v1` workload. It reuses replay profiling's six frame
+scopes and GPU accounting while retaining ten operation records, exact before/after
+state hashes, resource/revision checks, bounded diagnostics and five-frame event
+neighborhoods. Pending GPU samples serialize as `null`, not zero. Unexpected
+operation failures preserve an incomplete report and return nonzero.
+
+See [SPIKE_PROFILING.md](../benchmarks/SPIKE_PROFILING.md) for the schedule, scope
+boundaries, completion rules, CPU-array order and diagnostic/storage limits. This
+is procedural profiling; ERPL content isolation and replay schema are unchanged.

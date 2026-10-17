@@ -79,7 +79,10 @@ remain excluded. Pending queries are never waited on at shutdown. Query totals
 include warmup, while distributions do not. The first eight reversed timestamp pairs
 and omitted count follow the [GPU timing diagnostics contract](../docs/FORMATS.md#asynchronous-gpu-timing).
 
-The profiler does not measure device audio or offline mixing, startup loading,
+For reload and transition event timings, use the separate
+[scripted spike workload](SPIKE_PROFILING.md).
+
+The replay profiler does not measure device audio or offline mixing, startup loading,
 filesystem writes, reload spikes, or transitions between levels. It retains normal
 minimap/UI allocations and all gameplay replay checks; this is not an allocation-free
 or complete resource-accounting claim. A visible driver's accepted VSync-off request
