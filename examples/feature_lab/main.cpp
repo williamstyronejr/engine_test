@@ -13,6 +13,7 @@
 #include "persistence.hpp"
 #include "replay_file.hpp"
 #include "replay_profile.hpp"
+#include "spike_profile.hpp"
 #include "sampling_gallery.hpp"
 #include "scene_assets.hpp"
 #include "scene_flow_draw.hpp"
@@ -244,7 +245,7 @@ int main(int argc, char** argv) {
         unsigned level_changes = 0;
         std::string user_directory, record_path, playback_path, verify_path, profile_path;
         std::size_t profile_warmup = 30;
-        bool profile_requested = false, profile_warmup_set = false;
+        bool profile_requested = false, profile_warmup_set = false, spike_requested = false;
         std::optional<std::uint64_t> seed;
         bool audio_enabled = true, scripted = false, verification = false, vsync = true;
         std::string screenshot, asset_directory;
@@ -269,6 +270,9 @@ int main(int argc, char** argv) {
                 direct_play = true;
             } else if (arg == "--level-tour") {
                 level_tour = scripted = true;
+            } else if (arg == "--spike-report" && i + 1 < argc) {
+                profile_path = argv[++i];
+                spike_requested = true;
             } else if (arg == "--profile-report" && i + 1 < argc) {
                 profile_path = argv[++i];
                 profile_requested = true;
@@ -363,6 +367,7 @@ int main(int argc, char** argv) {
                        "Escape ends recording/playback.\n"
                        "--profile-report FILE.json --profile-warmup N "
                        "(requires --replay; unpaced, silent, default config)\n"
+                       "--spike-report FILE.json (scripted reload/transition profiling)\n"
                        "--stress --help (configurable arena and benchmark reports)\n";
                 return 0;
             } else
@@ -394,6 +399,14 @@ int main(int argc, char** argv) {
             vsync = false;
             vsync_override = true;
         }
+        if (spike_requested) {
+            feature_lab::validate_spike_arguments(argc, argv);
+            scripted = direct_play = true;
+            audio_enabled = vsync = false;
+            vsync_override = true;
+            seed = 1;
+            frame_limit = static_cast<int>(feature_lab::SpikeProfile::frame_limit);
+        }
         const AssetRoot assets = AssetRoot::discover(asset_directory);
         if (verification)
             return verify(assets, selected_level);
@@ -416,7 +429,12 @@ int main(int argc, char** argv) {
                 return 0;
             }
         }
+        std::optional<feature_lab::SpikeProfile> spikes;
         std::optional<feature_lab::ReplayProfile> profile;
+        if (spike_requested) {
+            spikes.emplace();
+            profile.emplace(feature_lab::SpikeProfile::frame_limit, feature_lab::SpikeProfile::warmup, 0);
+        }
         if (profile_requested)
             profile.emplace(playback->commands.size(), profile_warmup,
                             feature_lab::replay_fingerprint(feature_lab::encode_replay(*playback)));
@@ -538,10 +556,13 @@ int main(int argc, char** argv) {
         if (watch_assets)
             asset_reload = std::make_unique<feature_lab::AssetReload>(
                 assets, textures, reload_animations, reload_tilemap, reload_scene, reload_audio);
+        bool reject_spike_transition = false;
         std::vector<Rect> staged_walls;
         flow.prepare_replacement = [&](const feature_lab::Game& candidate) {
             textures.validate_level(candidate);
             staged_walls = feature_lab::Overlays::stage(candidate);
+            if (reject_spike_transition)
+                throw std::runtime_error("Deliberate spike-profile transition preflight rejection");
         };
         const auto replacement_applied = [&] {
             animation_assets.replaced();
@@ -549,6 +570,14 @@ int main(int argc, char** argv) {
             scene_assets.replaced();
             overlays.replaced(std::move(staged_walls));
             soundtrack.restored(game);
+        };
+        const auto spike_resources = [&] {
+            return feature_lab::SpikeResources{renderer.live_textures(), renderer.texture_bytes(),
+                renderer.live_targets(), renderer.target_bytes(), renderer.font_bytes()};
+        };
+        const auto spike_state = [&] {
+            return feature_lab::SpikeState{feature_lab::replay_hash(game), renderer.shader_revision(),
+                textures.revision(), fonts.revision(), static_cast<unsigned>(game.level), spike_resources()};
         };
         feature_lab::Replay replay;
         Input input;
@@ -619,6 +648,61 @@ int main(int argc, char** argv) {
             }
             for (int step = 0; step < batch.steps; ++step) {
                 auto physical_input = input.consume();
+                if (spikes) {
+                    if (button(physical_input, Key::escape).pressed) {
+                        running = false;
+                        break;
+                    }
+                    physical_input = {}; // Only Escape/close can steer this declared workload.
+                    if (const auto action = spikes->next(frames + 1, game.won)) {
+                        using A = feature_lab::SpikeAction;
+                        feature_lab::SpikeEvent event;
+                        event.frame = frames + 1;
+                        event.action = *action;
+                        event.before = spike_state();
+                        event.verified = true;
+                        const auto operation_started = Clock::now();
+                        try {
+                            switch (*action) {
+                            case A::shader_reload: case A::shader_recover:
+                                shaders.reload(renderer, assets);
+                                event.applied = shaders.result().applied;
+                                event.diagnostic = shaders.result().diagnostics;
+                                break;
+                            case A::shader_reject:
+                                shaders.fail_demo(renderer);
+                                event.applied = shaders.result().applied;
+                                event.diagnostic = shaders.result().diagnostics;
+                                break;
+                            case A::texture_reload: case A::texture_recover: case A::texture_reject:
+                                event.applied = textures.reload(renderer, *action == A::texture_reject);
+                                event.diagnostic = textures.diagnostic();
+                                break;
+                            case A::font_reload:
+                                fonts.reload(renderer, assets);
+                                event.applied = fonts.applied();
+                                event.diagnostic = fonts.diagnostic();
+                                break;
+                            case A::transition_reject: case A::transition:
+                                reject_spike_transition = *action == A::transition_reject;
+                                flow.advance_level(game, physical_input);
+                                replacement_applied();
+                                replay = feature_lab::Replay{};
+                                ++level_changes;
+                                event.applied = true;
+                                break;
+                            }
+                        } catch (const std::exception& error) {
+                            event.diagnostic = error.what();
+                        }
+                        event.milliseconds = feature_lab::stress_ms(operation_started, Clock::now());
+                        reject_spike_transition = false;
+                        event.after = spike_state();
+                        spikes->event(std::move(event));
+                        if (spikes->failed() || *action == A::transition || *action == A::transition_reject)
+                            continue;
+                    }
+                }
                 if (recorder || playback) {
                     // A replay is one uninterrupted game session. Menus and slot loads
                     // alter state outside Game::update and are unavailable in this mode.
@@ -784,7 +868,9 @@ int main(int argc, char** argv) {
                     break;
                 }
             }
-            if (profile && !running && playback_index < playback->commands.size())
+            if (spikes && !running)
+                break;
+            if (profile && playback && !running && playback_index < playback->commands.size())
                 break; // Abort without inventing a frame/command pair.
             soundtrack.collect();
             if (asset_reload)
@@ -793,6 +879,8 @@ int main(int argc, char** argv) {
             const auto gpu_samples = diagnostics.collect_gpu(gpu_timer, frames + 1);
             if (profile)
                 profile->collect_gpu(gpu_samples);
+            if (spikes)
+                spikes->collect_gpu(gpu_samples);
             const auto rendering = profile ? Clock::now() : Clock::time_point{};
             gpu_timer.begin(frames + 1);
             const auto camera = game.camera(window.width(), window.height(), batch.alpha);
@@ -842,15 +930,22 @@ int main(int argc, char** argv) {
             const auto presenting = profile ? Clock::now() : Clock::time_point{};
             window.present();
             const auto presented = profile ? Clock::now() : Clock::time_point{};
-            if (profile)
-                profile->record({feature_lab::stress_ms(now, simulated),
-                                 feature_lab::stress_ms(rendering, minimap_submitted),
-                                 feature_lab::stress_ms(minimap_submitted, world_submitted),
-                                 feature_lab::stress_ms(world_submitted, submitted),
-                                 feature_lab::stress_ms(presenting, presented),
-                                 feature_lab::stress_ms(frame_started, presented)},
-                                window.width(), window.height(), renderer.stats(),
+            if (profile) {
+                const std::array<double, feature_lab::ReplayProfile::scope_count> frame_ms{
+                    feature_lab::stress_ms(now, simulated),
+                    feature_lab::stress_ms(rendering, minimap_submitted),
+                    feature_lab::stress_ms(minimap_submitted, world_submitted),
+                    feature_lab::stress_ms(world_submitted, submitted),
+                    feature_lab::stress_ms(presenting, presented),
+                    feature_lab::stress_ms(frame_started, presented)};
+                profile->record(frame_ms, window.width(), window.height(), renderer.stats(),
                                 overlays.minimap_stats(), simulation_steps);
+                if (spikes) {
+                    spikes->record(frame_ms, spike_resources());
+                    if (spikes->failed())
+                        running = false;
+                }
+            }
             if (!renderer.healthy())
                 throw std::runtime_error("OpenGL validation failed");
             const double interval = std::chrono::duration<double>(now - report).count();
@@ -932,6 +1027,8 @@ int main(int argc, char** argv) {
         const auto final_gpu_samples = diagnostics.collect_gpu(gpu_timer, frames); // Final poll only.
         if (profile)
             profile->collect_gpu(final_gpu_samples);
+        if (spikes)
+            spikes->collect_gpu(final_gpu_samples);
         const auto gpu = diagnostics.gpu_summary();
         const auto gpu_stats = gpu_timer.stats();
         std::cout << "[gpu render interval ms] supported=" << gpu_stats.supported
@@ -976,8 +1073,8 @@ int main(int argc, char** argv) {
         if (profile) {
             profile->write(profile_path, profile->json(feature_lab::replay_hash(game), game.ticks,
                            feature_lab::level_name(game.level), renderer.graphics_info(),
-                           vsync_available, gpu_stats, gpu_failures));
-            return profile->complete() && gpu_stats.invalid == 0 ? 0 : 1;
+                           vsync_available, gpu_stats, gpu_failures, spikes ? &*spikes : nullptr));
+            return profile->complete() && (!spikes || spikes->complete()) && gpu_stats.invalid == 0 ? 0 : 1;
         }
         return 0;
     } catch (const std::exception& e) {

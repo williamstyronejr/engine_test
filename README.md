@@ -665,6 +665,17 @@ Profile mode verifies every replay state, uses default configuration, disables a
 and deliberate pacing, and reports the actual managed viewport. See the
 [workloads, timing boundaries and report contract](benchmarks/REPLAY_PROFILING.md).
 
+Reload and transition profiling uses a separate scripted workload:
+
+```sh
+./build/release/feature_lab --spike-report build/spikes.json
+```
+
+It exercises successful/rejected shader and texture reloads, font reload, and
+Facility → Annex → Facility, retaining per-operation timings and nearby frames.
+Expected failures must preserve state/resources; unexpected outcomes save an
+incomplete report and return nonzero. See [the workload and timing contract](benchmarks/SPIKE_PROFILING.md).
+
 ## Window lifecycle
 
 Fullscreen and minimize are asynchronous window-manager requests. The engine exposes
