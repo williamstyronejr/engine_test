@@ -1,4 +1,5 @@
 #include "engine/renderer.hpp"
+#include "engine/staging_memory.hpp"
 #include "gl.hpp"
 #include "shader_program.hpp"
 #include <algorithm>
@@ -560,9 +561,14 @@ void Renderer::replace_textures(std::span<const TextureReplacement> replacements
                     gl.DeleteTextures(1, &object);
         }
     } candidates{p.gl};
-    for (std::size_t i = 0; i < replacements.size(); ++i)
+    StagingBytes gpu_memory(0, StagingKind::gpu);
+    std::size_t staged_bytes = 0;
+    for (std::size_t i = 0; i < replacements.size(); ++i) {
         candidates.objects[i] = p.allocate_texture(
             replacements[i].data, p.textures[replacements[i].handle.slot].sampling);
+        staged_bytes += replacements[i].data.rgba.size();
+        gpu_memory.set(staged_bytes);
+    }
     // No throwing work during publication. RAII now retires the previous objects.
     for (std::size_t i = 0; i < replacements.size(); ++i) {
         auto& slot = p.textures[replacements[i].handle.slot];
@@ -632,10 +638,20 @@ void Renderer::set_font(const BitmapFont& font) {
     if (p.recording)
         throw std::logic_error("Font replacement during active render pass");
     auto candidate = std::make_unique<BitmapFont>(font);
-    const auto object = p.allocate_texture(candidate->data().atlas, {});
+    const StagingBytes cpu_memory(candidate->data().atlas.rgba.capacity() +
+                                 candidate->data().glyphs.capacity() * sizeof(FontGlyph));
+    struct CandidateTexture {
+        Gl& gl;
+        GLuint object;
+        ~CandidateTexture() {
+            if (object)
+                gl.DeleteTextures(1, &object);
+        }
+    } texture{p.gl, p.allocate_texture(candidate->data().atlas, {})};
+    const StagingBytes gpu_memory(candidate->data().atlas.rgba.size(), StagingKind::gpu);
     const auto previous = p.font_texture;
     p.font.swap(candidate);
-    p.font_texture = object;
+    p.font_texture = std::exchange(texture.object, 0);
     p.gl.DeleteTextures(1, &previous);
 }
 Vec2 Renderer::text_size(std::string_view value, float size) const {

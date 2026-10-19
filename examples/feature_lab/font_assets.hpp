@@ -1,5 +1,6 @@
 #pragma once
 #include "engine/renderer.hpp"
+#include "engine/staging_memory.hpp"
 #include <iostream>
 #include <limits>
 
@@ -16,6 +17,8 @@ class FontAssets {
             if (revision_ == std::numeric_limits<std::uint64_t>::max())
                 throw std::runtime_error("Font revision exhausted");
             const auto candidate = engine::load_font(assets, key);
+            const engine::StagingBytes candidate_memory(candidate.data().atlas.rgba.capacity() +
+                candidate.data().glyphs.capacity() * sizeof(engine::FontGlyph));
             renderer.set_font(candidate);
             ++revision_;
             embedded_ = false;

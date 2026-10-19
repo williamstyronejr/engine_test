@@ -1,4 +1,5 @@
 #pragma once
+#include "engine/staging_memory.hpp"
 #include "engine/assets.hpp"
 #include "engine/atlas.hpp"
 #include "engine/input.hpp"
@@ -105,10 +106,16 @@ class TextureAssets {
             std::vector<TextureReplacement> replacements;
             staged.reserve(texture_keys.size());
             replacements.reserve(texture_keys.size());
+            const StagingBytes list_memory(staged.capacity() * sizeof(Staged) +
+                                          replacements.capacity() * sizeof(TextureReplacement));
+            StagingBytes decoded_memory;
+            std::size_t decoded_bytes = 0;
             std::size_t bytes = 0;
             for (const auto& key : texture_keys) {
                 auto& resident = entries_.at(key);
                 auto data = candidate_cache->load(key);
+                decoded_bytes += data->rgba.capacity();
+                decoded_memory.set(decoded_bytes);
                 try {
                     validate_image(*data, resident.columns, resident.rows);
                     if (data->rgba.size() > Renderer::max_texture_reload_bytes - bytes)

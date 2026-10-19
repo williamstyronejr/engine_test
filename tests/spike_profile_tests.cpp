@@ -1,12 +1,93 @@
 #include "../examples/feature_lab/replay_file.hpp"
 #include "../examples/feature_lab/scene_flow.hpp"
 #include "../examples/feature_lab/spike_profile.hpp"
+#include "engine/font.hpp"
 #include "test.hpp"
 #include <fstream>
 
 namespace {
 using namespace feature_lab;
 using namespace testing;
+TEST(asset_staging_overlaps_encoded_and_decoded_payload_once) {
+    using namespace engine;
+    const AssetRoot assets(TEST_ASSET_ROOT);
+    TextureCache cache(assets);
+    {
+        StagingScope scope;
+        const auto texture = cache.load("textures/actors.etex");
+        const auto bytes = texture->rgba.capacity();
+        CHECK(scope.snapshot().cpu_peak == bytes * 2 + 16);
+        CHECK(scope.snapshot().clean()); // Returned snapshot is no longer cache staging.
+        const auto shared = cache.load("textures/actors.etex");
+        CHECK(shared == texture && scope.snapshot().cpu_peak == bytes * 2 + 16);
+    }
+    {
+        const auto encoded = assets.read("fonts/ui.efnt", BitmapFont::max_file_bytes);
+        StagingScope scope;
+        const auto font = load_font(assets, "fonts/ui.efnt");
+        const auto decoded =
+            font.data().atlas.rgba.capacity() + font.data().glyphs.capacity() * sizeof(FontGlyph);
+        CHECK(scope.snapshot().cpu_peak == encoded.capacity() + decoded);
+        CHECK(scope.snapshot().clean());
+    }
+}
+TEST(staging_overlap_transfer_unwind_and_overflow) {
+    using namespace engine;
+    {
+        StagingBytes inactive(123);
+    }
+    StagingScope scope;
+    rejects([] { StagingScope nested; });
+    {
+        StagingBytes cpu(100);
+        {
+            StagingBytes gpu(40, StagingKind::gpu);
+            cpu.set(80);
+            StagingBytes transferred(std::move(gpu));
+            CHECK(scope.snapshot().gpu_remaining == 40);
+        }
+        CHECK(scope.snapshot().gpu_remaining == 0);
+        rejects([] { StagingBytes huge(SIZE_MAX); });
+        CHECK(scope.snapshot().cpu_remaining == 80);
+        try {
+            StagingBytes failed(50);
+            throw std::runtime_error("unwind");
+        } catch (const std::runtime_error&) {
+        }
+        CHECK(scope.snapshot().cpu_remaining == 80);
+    }
+    const auto result = scope.snapshot();
+    CHECK(result.measured && result.clean());
+    CHECK(result.cpu_peak == 130 && result.gpu_peak == 40 && result.combined_peak == 140);
+}
+TEST(transition_candidate_overlap_and_rejection_cleanup) {
+    using namespace engine;
+    const AssetRoot assets(TEST_ASSET_ROOT);
+    auto game = load_game(assets);
+    SceneFlow flow(game, false, &assets);
+    game.won = true;
+    const auto original_hash = replay_hash(game);
+    std::size_t candidate_bytes = 0;
+    flow.prepare_replacement = [&](const Game& candidate) {
+        candidate_bytes = candidate.staging_buffer_bytes();
+        StagingBytes overlay(256);
+        throw std::runtime_error("reject candidate");
+    };
+    {
+        StagingScope scope;
+        rejects([&] { flow.advance_level(game, {}); });
+        CHECK(scope.snapshot().clean());
+        CHECK(candidate_bytes > 0 && scope.snapshot().cpu_peak == candidate_bytes + 256);
+        CHECK(scope.snapshot().gpu_peak == 0 && replay_hash(game) == original_hash);
+    }
+    flow.prepare_replacement = {};
+    {
+        StagingScope scope;
+        flow.advance_level(game, {});
+        CHECK(scope.snapshot().clean() && scope.snapshot().cpu_peak == candidate_bytes);
+        CHECK(game.level == Level::annex && !game.won);
+    }
+}
 SpikeEvent make_event(std::uint64_t frame, SpikeAction action) {
     SpikeEvent e{frame, action, 1.25, true, true, {UINT64_MAX, 2, 1, 2, 0, {}}, {}, {}};
     e.after = e.before;
@@ -70,7 +151,7 @@ TEST(failure_preserves_event_and_partial_neighborhood) {
     CHECK(json.find("\"frame\":121") == std::string::npos);
 }
 TEST(rejection_must_preserve_state_and_resources) {
-    for (int fault = 0; fault < 4; ++fault) {
+    for (int fault = 0; fault < 5; ++fault) {
         SpikeProfile p;
         for (int frame = 1; frame < 240; ++frame) {
             if (frame == 120)
@@ -86,6 +167,8 @@ TEST(rejection_must_preserve_state_and_resources) {
             ++e.after.shader;
         if (fault == 3)
             e.diagnostic.clear();
+        if (fault == 4)
+            e.staging.cpu_remaining = 1;
         p.event(e);
         CHECK(p.failed());
     }

@@ -61,6 +61,8 @@ still appear during the first draw. GPU queries never wait for pending results.
 - Before/after gameplay hashes as exact decimal strings, level (0 Facility / 1 Annex),
   shader/texture/font revisions, texture/target counts and payload bytes, and font bytes.
 - Failure diagnostic, bounded to 4,096 bytes, with an explicit truncation flag.
+- `staging`: explicit owned-payload CPU, GPU and simultaneous combined peaks, plus
+  remaining staging bytes at return; see the coverage contract below.
 - `nearby_frames`: up to five frames, from two before through two after the event,
   each with CPU timings and a delayed GPU sample, or JSON `null` if uncollected.
   `cpu_scope_order` gives the order of the CPU array. Adjacent events can share
@@ -76,10 +78,52 @@ Visual reloads and expected failures must preserve gameplay hashes and tracked
 resources. Successful operations advance only their relevant revision; transitions
 must change level/hash without changing the resident resource inventory. The
 post-warmup resource baseline is checked every frame. These counts describe live
-engine payloads, not transient staging allocations, process RSS or driver memory.
+engine payloads. The separate staging counters cover selected temporary payloads;
+neither metric measures process RSS or driver memory.
 Storage is bounded: 3,600 frame records and ten events are reserved before rendering.
 Only event neighborhoods are serialized; global distributions still cover all
 3,570 measured frames. Startup loading and final report writing are outside them.
+
+## Staging memory coverage
+
+Each event adds `staging.coverage = "owned_payload_v1"`, `measured`,
+`cpu_peak_bytes`, `gpu_peak_bytes`, `combined_peak_bytes`, `cpu_remaining_bytes`
+and `gpu_remaining_bytes`. These are byte counts, not timings. Combined peak is
+the maximum simultaneous CPU + GPU staging payload, **not** the sum of separate
+category peaks. Both remaining counts must be zero for event verification.
+The independent CPU route reference leaves `measured=false`; native runs require
+measurement on every event. Old reports without this additive object have no
+staging evidence.
+
+One synchronous, thread-local measurement scope surrounds each operation. Explicit
+RAII leases track the lifetime of these selected payloads until disposal or
+publication; shared texture/animation data is counted once. No allocator hooks,
+sampling thread, GPU waits or allocations are introduced by the counters.
+
+| Operation | Covered CPU payload | Covered GPU payload |
+| --- | --- | --- |
+| Shader reload/recovery | Loaded vertex/fragment source lengths | None: compiler/program storage is opaque |
+| Shader rejection demo | None: both source strings are static | None |
+| Texture reload/rejection/recovery | Encoded ETEX vectors while decoding; decoded RGBA vector capacities; staged-entry and replacement-vector capacities | Successfully allocated candidate RGBA texels, until publication/cleanup |
+| Font reload | Encoded EFNT vector; decoded atlas/glyph vector capacities; renderer's separate candidate atlas/glyph copy | Candidate font RGBA texels |
+| Level transition/rejection | Fully constructed candidate's scene/component, tilemap, collision and gameplay buffers; scene-source length; animation clip/frame vectors once; staged minimap-wall vector | None: levels reuse the resident texture bank |
+
+Transition accounting starts **after candidate construction**, using existing
+`Scene`, `TileMap` and `CollisionWorld::buffer_bytes()` conventions. Collision
+accounting includes its fixed seen-bitset; gameplay includes reserved scratch
+vectors and packed collection bits. The peak includes candidate/overlay overlap.
+Rejected overlay staging is destroyed before returning, rather than retained until
+the next attempt.
+
+This coverage excludes transition loading/parsing intermediates, parser scratch,
+file-stream buffers, shader file-read intermediates, scene/animation nested strings
+and hash nodes, allocator/control-block overhead, diagnostics, profiler storage,
+shader compiler/program memory, driver upload copies/alignment and deferred GPU
+retirement. Partially constructed objects that throw before reaching an accounting
+point are also excluded. Existing live resources are outside staging; these are
+**covered-payload peaks, not total operation/process memory bounds**. GPU bytes
+describe requested texel payload, without claiming physical residency. Texture
+rejection validates all candidates before GPU allocation, so its GPU peak is zero.
 
 ## Completion and failures
 

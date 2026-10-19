@@ -1,5 +1,6 @@
 #pragma once
 #include "persistence.hpp"
+#include "engine/staging_memory.hpp"
 #include <iostream>
 namespace engine {
 class Renderer;
@@ -29,6 +30,7 @@ class SceneFlow {
         if (!assets_ || !game.won)
             throw std::logic_error("Complete the current level before advancing");
         auto candidate = load_game(*assets_, next_level(game.level));
+        const engine::StagingBytes candidate_memory(candidate.staging_buffer_bytes());
         candidate.random_seed = game.random_seed;
         candidate.random.restore(game.random_seed);
         if (prepare_replacement)

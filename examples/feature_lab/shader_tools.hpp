@@ -1,6 +1,7 @@
 #pragma once
 #include "engine/input.hpp"
 #include "engine/renderer.hpp"
+#include "engine/staging_memory.hpp"
 #include <iostream>
 
 namespace feature_lab {
@@ -13,8 +14,10 @@ class ShaderTools {
         try {
             const auto vertex =
                 assets.text("shaders/sprite.vert", engine::Renderer::max_shader_source_bytes);
+            const engine::StagingBytes vertex_memory(vertex.size());
             const auto fragment =
                 assets.text("shaders/sprite.frag", engine::Renderer::max_shader_source_bytes);
+            const engine::StagingBytes fragment_memory(fragment.size());
             result_ = renderer.reload_shaders(vertex, fragment);
         } catch (const std::runtime_error& error) {
             result_ = {false, renderer.shader_revision(), error.what()};
