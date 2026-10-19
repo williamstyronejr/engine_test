@@ -86,14 +86,15 @@ Only event neighborhoods are serialized; global distributions still cover all
 
 ## Staging memory coverage
 
-Each event adds `staging.coverage = "owned_payload_v1"`, `measured`,
+Each event adds `staging.coverage = "owned_payload_v2"`, `measured`,
 `cpu_peak_bytes`, `gpu_peak_bytes`, `combined_peak_bytes`, `cpu_remaining_bytes`
 and `gpu_remaining_bytes`. These are byte counts, not timings. Combined peak is
 the maximum simultaneous CPU + GPU staging payload, **not** the sum of separate
 category peaks. Both remaining counts must be zero for event verification.
 The independent CPU route reference leaves `measured=false`; native runs require
 measurement on every event. Old reports without this additive object have no
-staging evidence.
+staging evidence. Historical `owned_payload_v1` reports start transition accounting
+after construction; v2 extends the coverage without changing the JSON field layout.
 
 One synchronous, thread-local measurement scope surrounds each operation. Explicit
 RAII leases track the lifetime of these selected payloads until disposal or
@@ -102,25 +103,34 @@ sampling thread, GPU waits or allocations are introduced by the counters.
 
 | Operation | Covered CPU payload | Covered GPU payload |
 | --- | --- | --- |
-| Shader reload/recovery | Loaded vertex/fragment source lengths | None: compiler/program storage is opaque |
+| Shader reload/recovery | Loaded vertex/fragment source lengths and file-read vectors during text conversion | None: compiler/program storage is opaque |
 | Shader rejection demo | None: both source strings are static | None |
 | Texture reload/rejection/recovery | Encoded ETEX vectors while decoding; decoded RGBA vector capacities; staged-entry and replacement-vector capacities | Successfully allocated candidate RGBA texels, until publication/cleanup |
 | Font reload | Encoded EFNT vector; decoded atlas/glyph vector capacities; renderer's separate candidate atlas/glyph copy | Candidate font RGBA texels |
-| Level transition/rejection | Fully constructed candidate's scene/component, tilemap, collision and gameplay buffers; scene-source length; animation clip/frame vectors once; staged minimap-wall vector | None: levels reuse the resident texture bank |
+| Level transition/rejection | Source/read buffers, decoded tile/animation vectors, tilemap construction buffers, scene parser candidate/parent/token vectors, game-construction buffers, completed candidate and minimap walls | None: levels reuse the resident texture bank |
 
-Transition accounting starts **after candidate construction**, using existing
-`Scene`, `TileMap` and `CollisionWorld::buffer_bytes()` conventions. Collision
-accounting includes its fixed seen-bitset; gameplay includes reserved scratch
-vectors and packed collection bits. The peak includes candidate/overlay overlap.
-Rejected overlay staging is destroyed before returning, rather than retained until
-the next attempt.
+Loading now follows an explicit order: scene text, tilemap decode, animation decode,
+then game construction and preflight. Encoded binary files are released after each
+decode. Counters transfer between decoder, loader, constructor and completed
+candidate without counting shared payloads twice. Tile/animation parsers update
+their leases as vectors grow, before trailing-data and semantic validation. Scene
+parsing counts its reserved candidate, pending-parent vector and token-vector
+slots, including failures before a complete scene exists. Game construction counts
+the overlap between its initially reserved world/collision buffers and the parser's
+separate scene, then refreshes gameplay/component buffers as they are built.
 
-This coverage excludes transition loading/parsing intermediates, parser scratch,
-file-stream buffers, shader file-read intermediates, scene/animation nested strings
-and hash nodes, allocator/control-block overhead, diagnostics, profiler storage,
-shader compiler/program memory, driver upload copies/alignment and deferred GPU
-retirement. Partially constructed objects that throw before reaching an accounting
-point are also excluded. Existing live resources are outside staging; these are
+Accounting retains existing `Scene`, `TileMap` and `CollisionWorld::buffer_bytes()`
+conventions: collision includes its fixed seen-bitset; gameplay includes reserved
+scratch vectors and packed collection bits. Completed candidate/overlay overlap
+and immediate disposal of rejected overlay staging remain covered.
+
+This coverage still excludes nested string character storage (including token
+characters), validation hash nodes, file-stream buffers, allocator/control-block
+overhead, diagnostics, profiler storage, shader compiler/program memory, driver
+upload copies/alignment and deferred GPU retirement. Source-string lengths remain
+logical bytes. Explicit checkpoints do not capture allocator-internal reallocation
+overlap, failed allocations, or every intermediate during member initialization
+and optional copy/move construction. Existing live resources are outside staging; these are
 **covered-payload peaks, not total operation/process memory bounds**. GPU bytes
 describe requested texel payload, without claiming physical residency. Texture
 rejection validates all candidates before GPU allocation, so its GPU peak is zero.
@@ -137,7 +147,12 @@ process termination or output-write failures can prevent a new report. An older
 file is not evidence of a completed new run: inspect its build/workload/completion.
 
 Native CTest runs compare the full workload to the independent CPU reference and
-exercise an unexpected shader failure using a private asset copy. Package testing
+exercise unexpected shader, Annex tilemap and Annex scene failures using private
+asset copies. The malformed Annex attempts fail during the expected rejection at
+frame 1382 and again on the required transition at frame 1383; the latter is
+unverified and stops the run. Both retain state and clean staging counters. CPU
+tests additionally cover truncated files, quoted tokens, missing parents and
+missing gameplay roles, followed by repair/retry. Package testing
 runs the workload from a relocated archive with a deliberately misleading working
 directory. Real hardware behavior, driver caches, compositor scheduling, thermal
 state, audio-device recovery and watching real editor writes require separate checks.

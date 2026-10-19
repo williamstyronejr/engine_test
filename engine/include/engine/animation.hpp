@@ -22,6 +22,7 @@ struct AnimationSet {
     std::uint32_t atlas_columns{1}, atlas_rows{1};
     std::vector<AnimationClip> clips;
     void validate() const;
+    std::size_t buffer_bytes() const;
 };
 AnimationSet decode_animations(std::span<const std::uint8_t> bytes,
                                std::string_view source = "<animations>");

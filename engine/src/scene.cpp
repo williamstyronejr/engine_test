@@ -1,5 +1,6 @@
 #include "engine/scene.hpp"
 #include "engine/assets.hpp"
+#include "engine/staging_memory.hpp"
 #include <algorithm>
 #include <array>
 #include <atomic>
@@ -229,6 +230,7 @@ std::vector<std::string> tokens(std::string_view line) {
     if (line.size() > 4096)
         throw std::runtime_error("Line exceeds 4096 bytes");
     std::vector<std::string> result;
+    StagingBytes token_memory;
     std::size_t i = 0;
     while (i < line.size()) {
         if (line[i] == ' ' || line[i] == '\t' || line[i] == '\r') {
@@ -272,6 +274,7 @@ std::vector<std::string> tokens(std::string_view line) {
                     throw std::runtime_error("Invalid bare token");
         }
         result.push_back(std::move(token));
+        token_memory.set(result.capacity() * sizeof(std::string));
         if (result.size() > 16)
             throw std::runtime_error("Too many tokens");
     }
@@ -296,12 +299,14 @@ Scene parse_scene(std::string_view text, std::string_view source) {
     if (text.size() > 4 * 1024 * 1024)
         throw std::runtime_error(std::string(source) + ": scene exceeds 4 MiB");
     Scene result;
+    const StagingBytes scene_memory(result.buffer_bytes());
     struct Parent {
         Entity child;
         std::uint64_t parent;
         std::size_t line;
     };
     std::vector<Parent> parents;
+    StagingBytes parent_memory;
     std::size_t line_number = 0, offset = 0;
     bool header = false, ended = false;
     try {
@@ -310,6 +315,7 @@ Scene parse_scene(std::string_view text, std::string_view source) {
             const auto newline = text.find('\n', offset);
             const auto end = newline == std::string_view::npos ? text.size() : newline;
             const auto t = tokens(text.substr(offset, end - offset));
+            const StagingBytes token_memory(t.capacity() * sizeof(std::string));
             offset = end + 1;
             if (t.empty())
                 continue;
@@ -334,6 +340,7 @@ Scene parse_scene(std::string_view text, std::string_view source) {
                                          number<float>(t[7]),
                                          {number<float>(t[8]), number<float>(t[9])}});
                 parents.push_back({e, number<std::uint64_t>(t[4]), line_number});
+                parent_memory.set(parents.capacity() * sizeof(Parent));
             } else if (t[0] == "sprite") {
                 count(t, 10);
                 const auto e = result.find(number<std::uint64_t>(t[1]));

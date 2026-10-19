@@ -1617,9 +1617,33 @@ remaining after every operation. The largest covered peak is 7,909,182 bytes dur
 the return to Facility. An unexpected shader failure retains a clean-staging partial
 report. See [raw evidence and results](../benchmarks/2026-10-19-staging-results.md).
 
+## Increment 43: transition loading and parser staging
+
+- `owned_payload_v2` extends the existing spike report with file-read/text-copy,
+  binary decoder, scene parser and selected game-construction buffer checkpoints.
+  The report layout and procedural game command schedule remain unchanged.
+- Level loading now has explicit scene → tilemap → animation → construction order.
+  Encoded files are released after decoding; payload ownership transfers between
+  scopes without counting the same decoded vectors twice.
+- Scene parsing records the overlap between its separate candidate and the game's
+  initially reserved world/collision buffers, plus pending-parent and token vectors.
+  Binary parsers record growing decoded vectors before final validation.
+- CPU regressions exercise seven malformed-input cases, preserve the live hash and
+  entity handles, then repair the private files and retry. Native checks retain
+  partial reports for late Annex tilemap and scene parse failures.
+- Coverage remains selected payload accounting: nested string storage, validation
+  hash nodes, allocator internals, failed allocations and opaque driver memory are
+  excluded. Member-initialization/copy/move intermediates are not exhaustively tracked.
+
+All 54 runtime groups pass in Debug and Release without skips; the focused CPU
+suite passes ASan/UBSan with leak detection. Three clean-source native runs retain
+identical v2 peaks and reference hashes. Two malformed-level attempts stop at frame
+1383 with unchanged live state and zero remaining staging. The largest covered
+transition peak is 8,804,022 bytes. See [measurements and retained failures](../benchmarks/2026-10-19-parser-staging-results.md).
+
 ## Next increment
 
-Extend staging coverage through transition loading and parsing intermediates, and
-exercise malformed-content failures before candidate construction completes.
-Broader physical hardware/driver checks remain outstanding; asset tooling and
-background loading stay deferred.
+Use the construction measurements to reduce redundant scene-buffer reservations,
+then remeasure transitions and malformed-content rollback. Broader physical
+hardware/driver checks remain outstanding; asset tooling and background loading
+stay deferred.

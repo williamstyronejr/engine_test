@@ -1,18 +1,21 @@
 #include "engine/tilemap.hpp"
 #include "engine/assets.hpp"
 #include "engine/binary.hpp"
+#include "engine/staging_memory.hpp"
 #include <cmath>
 #include <limits>
 
 namespace engine {
-std::size_t TileMap::buffer_bytes() const {
-    std::size_t bytes = data_.palette.capacity() * sizeof(TileDefinition) +
-                        data_.layers.capacity() * sizeof(TileLayer) + chunks_.capacity() +
-                        solids_.capacity() +
-                        (x_edges_.capacity() + y_edges_.capacity()) * sizeof(float);
-    for (const auto& layer : data_.layers)
+std::size_t TileMapData::buffer_bytes() const {
+    std::size_t bytes = palette.capacity() * sizeof(TileDefinition) +
+                        layers.capacity() * sizeof(TileLayer);
+    for (const auto& layer : layers)
         bytes += layer.cells.capacity() * sizeof(std::uint16_t);
     return bytes;
+}
+std::size_t TileMap::buffer_bytes() const {
+    return data_.buffer_bytes() + chunks_.capacity() + solids_.capacity() +
+           (x_edges_.capacity() + y_edges_.capacity()) * sizeof(float);
 }
 
 namespace {
@@ -63,6 +66,7 @@ TileMapData decode_tilemap(std::span<const std::uint8_t> bytes, std::string_view
             throw std::runtime_error("Tilemap exceeds 4 MiB");
         binary::Reader in(bytes, "ETMP");
         TileMapData map;
+        StagingBytes decoded_memory;
         map.width = in.u32();
         map.height = in.u32();
         const auto layers = in.u32();
@@ -80,15 +84,19 @@ TileMapData decode_tilemap(std::span<const std::uint8_t> bytes, std::string_view
             if (flags > 1)
                 in.fail("Unknown tile flags");
             map.palette.push_back({cell, flags != 0});
+            decoded_memory.set(map.buffer_bytes());
         }
         in.require(static_cast<std::size_t>(layers) * (4 + count * 2));
         for (std::uint32_t i = 0; i < layers; ++i) {
             TileLayer layer;
             layer.order = in.i32();
             layer.cells.reserve(count);
+            StagingBytes layer_memory(layer.cells.capacity() * sizeof(std::uint16_t));
             for (std::size_t j = 0; j < count; ++j)
                 layer.cells.push_back(in.u16());
             map.layers.push_back(std::move(layer));
+            layer_memory.set(0); // Payload ownership moved to map; count it once.
+            decoded_memory.set(map.buffer_bytes());
         }
         in.finish();
         map.validate();
@@ -122,9 +130,12 @@ std::vector<std::uint8_t> encode_tilemap(const TileMapData& map) {
     return out.take();
 }
 TileMap::TileMap(TileMapData data) : data_(std::move(data)) {
+    StagingBytes construction_memory(buffer_bytes());
     data_.validate();
     x_edges_.reserve(data_.width + 1);
+    construction_memory.set(buffer_bytes());
     y_edges_.reserve(data_.height + 1);
+    construction_memory.set(buffer_bytes());
     for (std::uint32_t x = 0; x <= data_.width; ++x)
         x_edges_.push_back(static_cast<float>(static_cast<double>(data_.origin.x) +
                                               x * static_cast<double>(data_.tile_size)));
@@ -134,7 +145,9 @@ TileMap::TileMap(TileMapData data) : data_(std::move(data)) {
     chunk_columns_ = (data_.width + chunk_side - 1) / chunk_side;
     chunk_rows_ = (data_.height + chunk_side - 1) / chunk_side;
     chunks_.resize(data_.layers.size() * chunk_columns_ * chunk_rows_);
+    construction_memory.set(buffer_bytes());
     solids_.resize(static_cast<std::size_t>(data_.width) * data_.height);
+    construction_memory.set(buffer_bytes());
     for (std::size_t layer = 0; layer < data_.layers.size(); ++layer)
         for (std::uint32_t y = 0; y < data_.height; ++y)
             for (std::uint32_t x = 0; x < data_.width; ++x) {

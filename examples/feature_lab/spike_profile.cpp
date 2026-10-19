@@ -141,7 +141,7 @@ std::string SpikeProfile::json() const {
         state(e.before);
         out << ",\"after\":";
         state(e.after);
-        out << ",\"staging\":{\"coverage\":\"owned_payload_v1\",\"measured\":" << e.staging.measured
+        out << ",\"staging\":{\"coverage\":\"owned_payload_v2\",\"measured\":" << e.staging.measured
             << ",\"cpu_peak_bytes\":" << e.staging.cpu_peak
             << ",\"gpu_peak_bytes\":" << e.staging.gpu_peak
             << ",\"combined_peak_bytes\":" << e.staging.combined_peak

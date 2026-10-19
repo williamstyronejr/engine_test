@@ -8,6 +8,7 @@
 #include "engine/persistence.hpp"
 #include "engine/random.hpp"
 #include "engine/scene.hpp"
+#include "engine/staging_memory.hpp"
 #include "engine/tilemap.hpp"
 #include <algorithm>
 #include <array>
@@ -82,7 +83,8 @@ struct Game {
         : level(selected), map(std::move(tiles)), animations(std::move(clips)),
           player_animation(animations), core_animation(animations), machine_animation(animations),
           door_animation(animations), initial_(std::move(scene_text)) {
-        restart();
+        engine::StagingBytes construction_memory(staging_buffer_bytes());
+        restart(&construction_memory);
     }
     void append_obstacles(engine::Rect query, std::vector<engine::Rect>& output) const {
         map.append_colliders(query, output);
@@ -111,7 +113,7 @@ struct Game {
     }
     int total() const { return static_cast<int>(keys.size()); }
     // Selected owned buffers, matching the engine's existing buffer_bytes metrics.
-    // Scene strings/hash nodes and parser scratch are deliberately outside this count.
+    // Nested strings/hash nodes are outside this count; parsers track their scratch separately.
     std::size_t staging_buffer_bytes() const {
         auto bytes = map.buffer_bytes() + world.buffer_bytes() + collisions.buffer_bytes() +
             (walls.capacity() + collision_candidates.capacity() + sensor_walls_.capacity()) *
@@ -119,9 +121,7 @@ struct Game {
             (keys.capacity() + draw_order.capacity()) * sizeof(engine::Entity) +
             (core_ids.capacity() + sensor_query_.capacity()) * sizeof(std::uint64_t) +
             sensor_bodies_.capacity() * sizeof(engine::Body2D) + collected.capacity() / 8 +
-            initial_.size() + animations->clips.capacity() * sizeof(engine::AnimationClip);
-        for (const auto& clip : animations->clips)
-            bytes += clip.frames.capacity() * sizeof(engine::AnimationFrame);
+            initial_.size() + animations->buffer_bytes();
         return bytes;
     }
     Vec2 location(engine::Entity entity) const {
@@ -519,9 +519,14 @@ struct Game {
         alarm_disabled = state.alarm_disabled;
         update_sensors(true);
     }
-    void restart() {
+    void restart(engine::StagingBytes* construction_memory = nullptr) {
+        const auto account = [&] {
+            if (construction_memory)
+                construction_memory->set(staging_buffer_bytes());
+        };
         world = engine::parse_scene(initial_,
                                     level == Level::facility ? "facility.scene" : "annex.scene");
+        account();
         validate_decorations(world);
         walls.clear();
         keys.clear();
@@ -532,6 +537,7 @@ struct Game {
         world.each([&](const engine::SceneNode& node) {
             if (node.sprite) {
                 draw_order.push_back(node.entity);
+                account();
                 if ((node.tag == "player" || node.tag == "exit" || node.tag == "core" ||
                      node.tag == "machine") &&
                     node.sprite->texture != animations->texture)
@@ -549,7 +555,9 @@ struct Game {
                 if (!node.sprite)
                     throw std::runtime_error("Core is missing its sprite");
                 keys.push_back(node.entity);
+                account();
                 core_ids.push_back(node.id);
+                account();
             }
             if (node.collider) {
                 const auto t = world.world_transform(node.entity);
@@ -560,12 +568,15 @@ struct Game {
                 const auto a = t.apply(half), b = t.apply(half * -1);
                 walls.push_back({{std::min(a.x, b.x), std::min(a.y, b.y)},
                                  {std::max(a.x, b.x), std::max(a.y, b.y)}});
+                account();
             }
         });
         if (!player || !exit || keys.empty() || keys.size() > 64)
             throw std::runtime_error("Feature Lab requires player, exit and 1..64 cores");
-        for (std::size_t i = 0; i < keys.size(); ++i)
+        for (std::size_t i = 0; i < keys.size(); ++i) {
             world.add_component<CorePickup>(keys[i], i);
+            account();
+        }
         if (const auto parent = world.get(player).parent) {
             const auto t = world.world_transform(parent);
             if (t.a != 1 || t.d != 1 || t.b != 0 || t.c != 0 || t.x != 0 || t.y != 0)
@@ -595,11 +606,13 @@ struct Game {
         door_animation.pause(true);
         collision_candidates.clear();
         collision_candidates.reserve(map.solid_cells() + walls.size() + 1);
+        account();
         append_obstacles(map.bounds(), collision_candidates);
         for (const auto& wall : collision_candidates)
             if (engine::overlaps({position - Vec2{0.3F, 0.3F}, position + Vec2{0.3F, 0.3F}}, wall))
                 throw std::runtime_error("Player starts inside a static collider");
         collected.assign(keys.size(), false);
+        account();
         ticks = 0;
         previous_ticks = 0;
         random.restore(random_seed);
@@ -609,22 +622,46 @@ struct Game {
         alarm_disabled = false;
         sensor_walls_.clear();
         map.append_colliders(map.bounds(), sensor_walls_);
+        account();
         sensor_walls_.insert(sensor_walls_.end(), walls.begin(), walls.end());
+        account();
         if (sensor_walls_.size() + 4 > engine::CollisionWorld::max_bodies)
             throw std::runtime_error("Feature Lab collision station exceeds body capacity");
         sensor_bodies_.reserve(engine::CollisionWorld::max_bodies);
+        account();
         sensor_query_.reserve(engine::CollisionWorld::max_bodies);
+        account();
         update_sensors(true);
+        account();
     }
 };
 inline Game load_game(const engine::AssetRoot& assets, Level level = Level::facility) {
     const auto stem = level == Level::facility ? "facility" : "annex";
-    return Game(
-        assets.text(std::string(stem) + ".scene"),
-        engine::decode_tilemap(assets.read(std::string(stem) + ".etmp", 4 * 1024 * 1024), stem),
-        std::make_shared<const engine::AnimationSet>(
-            engine::decode_animations(assets.read("facility.eani", 1024 * 1024), "facility.eani")),
-        level);
+    // Fixed loading order, with encoded files released after decoding. Each
+    // returned buffer transfers its accounting from decoder to loader to Game.
+    auto scene = assets.text(std::string(stem) + ".scene");
+    engine::StagingBytes scene_memory(scene.size());
+    engine::TileMapData tiles;
+    engine::StagingBytes tile_memory;
+    {
+        const auto encoded = assets.read(std::string(stem) + ".etmp", 4 * 1024 * 1024);
+        const engine::StagingBytes encoded_memory(encoded.capacity());
+        tiles = engine::decode_tilemap(encoded, stem);
+        tile_memory.set(tiles.buffer_bytes());
+    }
+    std::shared_ptr<const engine::AnimationSet> clips;
+    engine::StagingBytes animation_memory;
+    {
+        const auto encoded = assets.read("facility.eani", 1024 * 1024);
+        const engine::StagingBytes encoded_memory(encoded.capacity());
+        clips = std::make_shared<const engine::AnimationSet>(
+            engine::decode_animations(encoded, "facility.eani"));
+        animation_memory.set(clips->buffer_bytes());
+    }
+    scene_memory.set(0);
+    tile_memory.set(0);
+    animation_memory.set(0);
+    return Game(std::move(scene), std::move(tiles), std::move(clips), level);
 }
 // Saves/replays already carry content identity. Resolve installed levels without
 // trusting a filename from an external record, preserving the existing formats.

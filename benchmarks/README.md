@@ -7,6 +7,9 @@ see [SPIKE_PROFILING.md](SPIKE_PROFILING.md) and the
 The [October 19 staging results](2026-10-19-staging-results.md) add covered CPU/GPU
 payload peaks and cleanup evidence for the same operations.
 
+The [parser staging follow-up](2026-10-19-parser-staging-results.md) extends that
+coverage through loading/construction and retains malformed-level failure reports.
+
 Follow-up: [elapsed timing and rollover evidence](2026-10-17-elapsed-timing.md)
 records the next increment's query-method change; earlier raw results are preserved.
 

@@ -2,6 +2,7 @@
 #include "../examples/feature_lab/scene_flow.hpp"
 #include "../examples/feature_lab/spike_profile.hpp"
 #include "engine/font.hpp"
+#include "scene_fixture.hpp"
 #include "test.hpp"
 #include <fstream>
 
@@ -77,15 +78,113 @@ TEST(transition_candidate_overlap_and_rejection_cleanup) {
         StagingScope scope;
         rejects([&] { flow.advance_level(game, {}); });
         CHECK(scope.snapshot().clean());
-        CHECK(candidate_bytes > 0 && scope.snapshot().cpu_peak == candidate_bytes + 256);
+        CHECK(candidate_bytes > 0 && scope.snapshot().cpu_peak >= candidate_bytes + 256);
         CHECK(scope.snapshot().gpu_peak == 0 && replay_hash(game) == original_hash);
     }
     flow.prepare_replacement = {};
     {
         StagingScope scope;
         flow.advance_level(game, {});
-        CHECK(scope.snapshot().clean() && scope.snapshot().cpu_peak == candidate_bytes);
+        CHECK(scope.snapshot().clean() && scope.snapshot().cpu_peak >= candidate_bytes);
         CHECK(game.level == Level::annex && !game.won);
+    }
+}
+TEST(parser_buffers_survive_until_validation_and_unwind_on_trailing_data) {
+    using namespace engine;
+    const AssetRoot assets(TEST_ASSET_ROOT);
+    auto tile_bytes = assets.read("annex.etmp", 4 * 1024 * 1024);
+    const auto tiles = decode_tilemap(tile_bytes);
+    auto animation_bytes = assets.read("facility.eani", 1024 * 1024);
+    const auto animations = decode_animations(animation_bytes);
+    for (const bool malformed : {false, true}) {
+        if (malformed) {
+            tile_bytes.push_back(0);
+            animation_bytes.push_back(0);
+        }
+        {
+            StagingScope scope;
+            if (malformed)
+                rejects([&] { decode_tilemap(tile_bytes); });
+            else
+                decode_tilemap(tile_bytes);
+            CHECK(scope.snapshot().cpu_peak == tiles.buffer_bytes());
+            CHECK(scope.snapshot().clean());
+        }
+        {
+            StagingScope scope;
+            if (malformed)
+                rejects([&] { decode_animations(animation_bytes); });
+            else
+                decode_animations(animation_bytes);
+            CHECK(scope.snapshot().cpu_peak == animations.buffer_bytes());
+            CHECK(scope.snapshot().clean());
+        }
+    }
+    {
+        StagingScope scope;
+        const auto text = assets.text("annex.scene");
+        CHECK(scope.snapshot().cpu_peak == text.size() * 2);
+        CHECK(scope.snapshot().clean());
+    }
+}
+TEST(malformed_transition_inputs_retain_live_game_and_release_staging) {
+    using namespace engine;
+    for (int fault = 0; fault < 7; ++fault) {
+        SceneFiles files;
+        auto game = load_game(files.root);
+        SceneFlow flow(game, false, &files.root);
+        game.won = true;
+        const auto hash = replay_hash(game);
+        const auto player = game.player;
+        bool prepared = false;
+        flow.prepare_replacement = [&](const Game&) { prepared = true; };
+        if (fault < 2) {
+            auto bytes = files.root.read("annex.etmp", 4 * 1024 * 1024);
+            if (fault == 0)
+                bytes.pop_back();
+            else
+                bytes.push_back(0);
+            files.root.write_atomic("annex.etmp", bytes);
+        } else if (fault == 2) {
+            auto bytes = files.root.read("facility.eani", 1024 * 1024);
+            bytes.push_back(0);
+            files.root.write_atomic("facility.eani", bytes);
+        } else {
+            auto scene = files.text(Level::annex);
+            if (fault == 3)
+                scene += "unexpected\n";
+            if (fault == 4)
+                scene = "scene 1\nentity 1 \"unterminated";
+            if (fault == 5) {
+                const auto pos = scene.find("\"player\"");
+                CHECK(pos != std::string::npos);
+                scene.replace(pos, 8, "\"unused\"");
+            }
+            if (fault == 6) {
+                const auto pos = scene.find("\"player\" 1");
+                CHECK(pos != std::string::npos);
+                scene.replace(pos, 10, "\"player\" 999");
+            }
+            files.write(scene, Level::annex);
+        }
+        {
+            StagingScope scope;
+            rejects([&] { flow.advance_level(game, {}); });
+            const auto memory = scope.snapshot();
+            CHECK(memory.clean() && memory.cpu_peak > 0 && memory.gpu_peak == 0);
+            // Scene/semantic failures overlap the already constructed members.
+            if (fault >= 3)
+                CHECK(memory.cpu_peak > game.collisions.buffer_bytes());
+            CHECK(!prepared && replay_hash(game) == hash && game.world.valid(player));
+        }
+        std::filesystem::copy(TEST_ASSET_ROOT, files.path,
+                              std::filesystem::copy_options::recursive |
+                                  std::filesystem::copy_options::overwrite_existing);
+        {
+            StagingScope scope;
+            flow.advance_level(game, {});
+            CHECK(prepared && game.level == Level::annex && scope.snapshot().clean());
+        }
     }
 }
 SpikeEvent make_event(std::uint64_t frame, SpikeAction action) {
