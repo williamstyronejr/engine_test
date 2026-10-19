@@ -1635,6 +1635,12 @@ report. See [raw evidence and results](../benchmarks/2026-10-19-staging-results.
   hash nodes, allocator internals, failed allocations and opaque driver memory are
   excluded. Member-initialization/copy/move intermediates are not exhaustively tracked.
 
+All 54 runtime groups pass in Debug and Release without skips; the focused CPU
+suite passes ASan/UBSan with leak detection. Three clean-source native runs retain
+identical v2 peaks and reference hashes. Two malformed-level attempts stop at frame
+1383 with unchanged live state and zero remaining staging. The largest covered
+transition peak is 8,804,022 bytes. See [measurements and retained failures](../benchmarks/2026-10-19-parser-staging-results.md).
+
 ## Next increment
 
 Use the construction measurements to reduce redundant scene-buffer reservations,
