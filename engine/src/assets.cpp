@@ -108,6 +108,7 @@ std::vector<std::uint8_t> AssetRoot::read(std::string_view key, std::size_t limi
         if (length < 0 || static_cast<std::uint64_t>(length) > limit)
             throw std::runtime_error("Asset exceeds size limit");
         std::vector<std::uint8_t> result(static_cast<std::size_t>(length));
+        const StagingBytes read_memory(result.capacity());
         file.seekg(0);
         if (!result.empty())
             file.read(reinterpret_cast<char*>(result.data()),
@@ -121,7 +122,10 @@ std::vector<std::uint8_t> AssetRoot::read(std::string_view key, std::size_t limi
 }
 std::string AssetRoot::text(std::string_view key, std::size_t limit) const {
     const auto bytes = read(key, limit);
-    return {bytes.begin(), bytes.end()};
+    const StagingBytes encoded_memory(bytes.capacity());
+    std::string result(bytes.begin(), bytes.end());
+    const StagingBytes text_memory(result.size());
+    return result;
 }
 void AssetRoot::write_atomic(std::string_view key, std::span<const std::uint8_t> bytes,
                              AtomicWriteObserver observer) const {

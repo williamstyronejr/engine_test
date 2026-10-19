@@ -83,7 +83,7 @@ if(MODE STREQUAL "graphics")
     string(JSON measured GET "${report}" spikes events ${i} staging measured)
     string(JSON cpu_left GET "${report}" spikes events ${i} staging cpu_remaining_bytes)
     string(JSON gpu_left GET "${report}" spikes events ${i} staging gpu_remaining_bytes)
-    if(NOT coverage STREQUAL "owned_payload_v1" OR NOT measured OR
+    if(NOT coverage STREQUAL "owned_payload_v2" OR NOT measured OR
        NOT cpu_left EQUAL 0 OR NOT gpu_left EQUAL 0)
       message(FATAL_ERROR "Packaged staging evidence missing or unclean at event ${i}")
     endif()

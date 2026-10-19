@@ -25,6 +25,7 @@ struct TileMapData {
     std::vector<TileDefinition> palette; // ID zero is always empty/non-solid.
     std::vector<TileLayer> layers;       // Strictly increasing order.
     void validate() const;
+    std::size_t buffer_bytes() const;
 };
 TileMapData decode_tilemap(std::span<const std::uint8_t> bytes,
                            std::string_view source = "<tilemap>");

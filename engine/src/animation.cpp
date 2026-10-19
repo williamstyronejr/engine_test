@@ -1,10 +1,17 @@
 #include "engine/animation.hpp"
 #include "engine/assets.hpp"
 #include "engine/binary.hpp"
+#include "engine/staging_memory.hpp"
 #include <algorithm>
 #include <unordered_set>
 
 namespace engine {
+std::size_t AnimationSet::buffer_bytes() const {
+    auto bytes = clips.capacity() * sizeof(AnimationClip);
+    for (const auto& clip : clips)
+        bytes += clip.frames.capacity() * sizeof(AnimationFrame);
+    return bytes;
+}
 void AnimationSet::validate() const {
     AssetRoot::validate_key(texture);
     validate_atlas(atlas_columns, atlas_rows);
@@ -35,6 +42,7 @@ AnimationSet decode_animations(std::span<const std::uint8_t> bytes, std::string_
             throw std::runtime_error("Animation file exceeds 1 MiB");
         binary::Reader in(bytes, "EANI");
         AnimationSet set;
+        StagingBytes decoded_memory;
         set.atlas_columns = in.u32();
         set.atlas_rows = in.u32();
         set.texture = in.string(240);
@@ -44,6 +52,7 @@ AnimationSet decode_animations(std::span<const std::uint8_t> bytes, std::string_
         std::size_t total = 0;
         for (std::uint32_t i = 0; i < clips; ++i) {
             AnimationClip clip;
+            StagingBytes frame_memory;
             clip.name = in.string(64);
             const auto loop = in.u32(), frames = in.u32();
             if (loop > 1 || !frames || frames > 256)
@@ -53,9 +62,13 @@ AnimationSet decode_animations(std::span<const std::uint8_t> bytes, std::string_
                 in.fail("Too many animation frames");
             in.require(static_cast<std::size_t>(frames) * 8);
             clip.loop = loop != 0;
-            for (std::uint32_t j = 0; j < frames; ++j)
+            for (std::uint32_t j = 0; j < frames; ++j) {
                 clip.frames.push_back({in.u32(), in.u32()});
+                frame_memory.set(clip.frames.capacity() * sizeof(AnimationFrame));
+            }
             set.clips.push_back(std::move(clip));
+            frame_memory.set(0);
+            decoded_memory.set(set.buffer_bytes());
         }
         in.finish();
         set.validate();

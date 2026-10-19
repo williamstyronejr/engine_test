@@ -675,7 +675,8 @@ It exercises successful/rejected shader and texture reloads, font reload, and
 Facility → Annex → Facility, retaining per-operation timings and nearby frames.
 Each operation also reports covered CPU/GPU staging-payload peaks and verifies
 that staging ownership is released on return. These counters exclude allocator
-overhead, transition construction scratch and driver memory.
+overhead, nested string storage and driver memory. Loading, parsing and selected
+construction buffers are included, with malformed-transition cleanup checks.
 Expected failures must preserve state/resources; unexpected outcomes save an
 incomplete report and return nonzero. See [the workload and timing contract](benchmarks/SPIKE_PROFILING.md).
 
