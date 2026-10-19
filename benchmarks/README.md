@@ -4,6 +4,9 @@ For scripted reload and level-transition spikes through normal gameplay renderin
 see [SPIKE_PROFILING.md](SPIKE_PROFILING.md) and the
 [measured results](2026-10-17-spike-results.md). Recorded ERPL profiling remains separate.
 
+The [October 19 staging results](2026-10-19-staging-results.md) add covered CPU/GPU
+payload peaks and cleanup evidence for the same operations.
+
 Follow-up: [elapsed timing and rollover evidence](2026-10-17-elapsed-timing.md)
 records the next increment's query-method change; earlier raw results are preserved.
 

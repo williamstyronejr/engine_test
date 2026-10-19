@@ -1610,6 +1610,13 @@ constant frame budget or transient-memory bound.
   distinguish these selected payload peaks from total allocator/process/driver
   memory. Transition construction intermediates remain outside this first scope.
 
+All 54 runtime groups pass in Debug and Release without skips, and the staging/profile
+CPU suite passes ASan/UBSan with leak detection. Three clean-source native attempts
+retain identical peaks, reference hashes and event frames, with zero tracked staging
+remaining after every operation. The largest covered peak is 7,909,182 bytes during
+the return to Facility. An unexpected shader failure retains a clean-staging partial
+report. See [raw evidence and results](../benchmarks/2026-10-19-staging-results.md).
+
 ## Next increment
 
 Extend staging coverage through transition loading and parsing intermediates, and
