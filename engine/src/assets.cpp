@@ -1,4 +1,5 @@
 #include "engine/assets.hpp"
+#include "engine/staging_memory.hpp"
 #include <array>
 #include <cerrno>
 #include <cstring>
@@ -184,12 +185,14 @@ std::shared_ptr<const TextureData> TextureCache::load(std::string_view key) {
 }
 std::shared_ptr<const TextureData> TextureCache::reload(std::string_view key) {
     const auto bytes = root_.read(key, max_texture_bytes + 16);
+    const StagingBytes encoded_memory(bytes.capacity());
     std::shared_ptr<const TextureData> texture;
     try {
         texture = std::make_shared<const TextureData>(decode_texture(bytes));
     } catch (const std::exception& e) {
         throw std::runtime_error(std::string(key) + ": " + e.what());
     }
+    const StagingBytes decoded_memory(texture->rgba.capacity());
     collect();
     if (!textures_.contains(std::string(key)) && textures_.size() >= 64)
         throw std::runtime_error("Texture cache entry limit reached");

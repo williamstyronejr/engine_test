@@ -1,5 +1,6 @@
 #pragma once
 #include "replay_profile.hpp"
+#include "engine/staging_memory.hpp"
 #include <optional>
 
 namespace feature_lab {
@@ -32,6 +33,7 @@ struct SpikeEvent {
     SpikeState before, after;
     std::string diagnostic;
     bool diagnostic_truncated{};
+    engine::StagingSnapshot staging{};
 };
 // Fixed, versioned workload. Diagnostics never write or corrupt asset files.
 class SpikeProfile {

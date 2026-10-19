@@ -1594,8 +1594,25 @@ frame-120 report. [Raw attempts and findings](../benchmarks/2026-10-17-spike-res
 include the presentation tail around shader recovery; they do not establish a
 constant frame budget or transient-memory bound.
 
+## Increment 42: owned staging payload peaks
+
+- A synchronous RAII counter records CPU, GPU-texel and simultaneous combined
+  staging peaks without allocator hooks, GPU waits or counter allocations.
+- Reloads account for selected encoded/decoded texture and font buffers, the
+  renderer's font copy, shader source lengths and candidate GPU texture payloads.
+- Transitions account for the constructed candidate's existing scene/tile/collision
+  buffer metrics, gameplay buffers, animation vectors and staged minimap walls.
+  Deliberately rejected overlay staging is now destroyed before returning.
+- Every native spike event retains `owned_payload_v1` coverage and peak/remaining
+  bytes. Remaining tracked staging must be zero for event verification. The CPU
+  route reference explicitly marks memory measurement unavailable.
+- [Coverage and exclusions](../benchmarks/SPIKE_PROFILING.md#staging-memory-coverage)
+  distinguish these selected payload peaks from total allocator/process/driver
+  memory. Transition construction intermediates remain outside this first scope.
+
 ## Next increment
 
-Extend owned-memory accounting to transient reload/transition staging and record
-peak bytes during these workloads. Broader physical hardware/driver checks remain
-outstanding; asset tooling and background loading stay deferred.
+Extend staging coverage through transition loading and parsing intermediates, and
+exercise malformed-content failures before candidate construction completes.
+Broader physical hardware/driver checks remain outstanding; asset tooling and
+background loading stay deferred.

@@ -558,17 +558,22 @@ int main(int argc, char** argv) {
                 assets, textures, reload_animations, reload_tilemap, reload_scene, reload_audio);
         bool reject_spike_transition = false;
         std::vector<Rect> staged_walls;
+        std::optional<StagingBytes> staged_wall_memory;
         flow.prepare_replacement = [&](const feature_lab::Game& candidate) {
             textures.validate_level(candidate);
-            staged_walls = feature_lab::Overlays::stage(candidate);
+            auto walls = feature_lab::Overlays::stage(candidate);
+            StagingBytes memory(walls.capacity() * sizeof(Rect));
             if (reject_spike_transition)
                 throw std::runtime_error("Deliberate spike-profile transition preflight rejection");
+            staged_walls = std::move(walls);
+            staged_wall_memory.emplace(std::move(memory));
         };
         const auto replacement_applied = [&] {
             animation_assets.replaced();
             tilemap_assets.replaced();
             scene_assets.replaced();
             overlays.replaced(std::move(staged_walls));
+            staged_wall_memory.reset();
             soundtrack.restored(game);
         };
         const auto spike_resources = [&] {
@@ -661,6 +666,7 @@ int main(int argc, char** argv) {
                         event.action = *action;
                         event.before = spike_state();
                         event.verified = true;
+                        StagingScope staging;
                         const auto operation_started = Clock::now();
                         try {
                             switch (*action) {
@@ -693,9 +699,12 @@ int main(int argc, char** argv) {
                                 break;
                             }
                         } catch (const std::exception& error) {
+                            std::vector<Rect>().swap(staged_walls);
+                            staged_wall_memory.reset();
                             event.diagnostic = error.what();
                         }
                         event.milliseconds = feature_lab::stress_ms(operation_started, Clock::now());
+                        event.staging = staging.snapshot();
                         reject_spike_transition = false;
                         event.after = spike_state();
                         spikes->event(std::move(event));

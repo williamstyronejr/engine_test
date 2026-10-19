@@ -1,4 +1,5 @@
 #include "engine/font.hpp"
+#include "engine/staging_memory.hpp"
 #include "engine/binary.hpp"
 #include <algorithm>
 #include <cmath>
@@ -231,7 +232,12 @@ Vec2 BitmapFont::measure(std::string_view text, float scale) const {
     return {std::max(maximum, width) * scale, height * scale};
 }
 BitmapFont load_font(const AssetRoot& root, std::string_view key) {
-    return BitmapFont(decode_font(root.read(key, BitmapFont::max_file_bytes), key));
+    const auto bytes = root.read(key, BitmapFont::max_file_bytes);
+    const StagingBytes encoded_memory(bytes.capacity());
+    BitmapFont font(decode_font(bytes, key));
+    const StagingBytes decoded_memory(font.data().atlas.rgba.capacity() +
+                                     font.data().glyphs.capacity() * sizeof(FontGlyph));
+    return font;
 }
 BitmapFont load_font_or_fallback(const AssetRoot& root, std::string_view key, std::string& error) {
     error.clear();

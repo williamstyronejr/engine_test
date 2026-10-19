@@ -1,5 +1,6 @@
 #include "../examples/feature_lab/font_gallery.hpp"
 #include "engine/renderer.hpp"
+#include "engine/staging_memory.hpp"
 #include "engine/window.hpp"
 #include "font_fixture.hpp"
 #include "test.hpp"
@@ -58,7 +59,13 @@ TEST(font_replacement_boundaries_lifetime_and_invalid_text) {
     for (int i = 0; i < 32; ++i) {
         {
             const BitmapFont candidate(i % 2 ? builtin_font() : metric_font());
+            StagingScope staging;
             renderer.set_font(candidate);
+            const auto memory = staging.snapshot();
+            CHECK(memory.clean() && memory.gpu_peak == candidate.data().atlas.rgba.size());
+            CHECK(memory.cpu_peak >= candidate.data().atlas.rgba.size() +
+                  candidate.data().glyphs.size() * sizeof(FontGlyph));
+            CHECK(memory.combined_peak == memory.cpu_peak + memory.gpu_peak);
         } // Renderer must own the copied snapshot and atlas.
         CHECK(renderer.font_bytes() == (i % 2 ? 16384U : 64U));
         renderer.begin(target, {{32, -32}, 64}, {0, 0, 0, 1});

@@ -80,7 +80,7 @@ void SpikeProfile::event(SpikeEvent e) {
                  b.font == a.font + font_delta &&
                  (transition ? (b.level == 1U - a.level && b.hash != a.hash)
                              : (b.level == a.level && b.hash == a.hash)) &&
-                 (!rejection || !e.diagnostic.empty());
+                 (!rejection || !e.diagnostic.empty()) && e.staging.clean();
     failed_ |= !e.verified;
     if (transition || e.action == SpikeAction::transition_reject)
         ++transition_attempts_;
@@ -141,6 +141,12 @@ std::string SpikeProfile::json() const {
         state(e.before);
         out << ",\"after\":";
         state(e.after);
+        out << ",\"staging\":{\"coverage\":\"owned_payload_v1\",\"measured\":" << e.staging.measured
+            << ",\"cpu_peak_bytes\":" << e.staging.cpu_peak
+            << ",\"gpu_peak_bytes\":" << e.staging.gpu_peak
+            << ",\"combined_peak_bytes\":" << e.staging.combined_peak
+            << ",\"cpu_remaining_bytes\":" << e.staging.cpu_remaining
+            << ",\"gpu_remaining_bytes\":" << e.staging.gpu_remaining << '}';
         out << ",\"nearby_frames\":[";
         const auto first = e.frame > 2 ? e.frame - 2 : 1;
         const auto last = std::min<std::uint64_t>(e.frame + 2, frames_.size());

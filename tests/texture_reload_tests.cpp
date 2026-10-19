@@ -43,8 +43,11 @@ TEST(replacement_preserves_shared_handles_and_completed_pixels) {
     f.draw(a, a);
     const auto before = f.pixels();
     const TextureData resized{2, 1, {0, 255, 0, 255, 0, 255, 0, 255}};
+    StagingScope staging;
     f.renderer.replace_textures(
         std::array{TextureReplacement{a, resized}, TextureReplacement{b, red}});
+    CHECK(staging.snapshot().gpu_peak == 12 && staging.snapshot().cpu_peak == 0);
+    CHECK(staging.snapshot().clean());
     CHECK(f.pixels() == before); // A completed render target is not redrawn by a reload.
     f.draw(a, a);
     CHECK(f.pixels()[0][1] > 250 && f.pixels()[1][1] > 250);
@@ -121,11 +124,31 @@ TEST(staging_budget_rejection_is_atomic) {
     std::vector<TextureReplacement> replacements;
     for (int i = 0; i < 5; ++i)
         replacements.push_back({f.renderer.upload(red), large});
+    StagingScope staging;
     rejects([&] { f.renderer.replace_textures(replacements); });
+    CHECK(staging.snapshot().clean() && staging.snapshot().combined_peak == 0);
     f.draw(replacements.front().handle, replacements.back().handle);
     CHECK(f.pixels()[0][0] > 250 && f.pixels()[0][1] < 3);
     CHECK(f.pixels()[1][0] > 250 && f.pixels()[1][1] < 3);
     CHECK(f.renderer.live_textures() == 5 && f.renderer.healthy());
+}
+TEST(accounting_failure_after_partial_gpu_staging_is_atomic) {
+    Fixture f;
+    const auto a = f.renderer.upload(red), b = f.renderer.upload(blue);
+    f.draw(a, b);
+    const auto before = f.pixels();
+    StagingScope staging;
+    {
+        StagingBytes occupied(SIZE_MAX - 4);
+        rejects([&] {
+            f.renderer.replace_textures(
+                std::array{TextureReplacement{a, green}, TextureReplacement{b, green}});
+        });
+        CHECK(staging.snapshot().gpu_peak == 4 && staging.snapshot().gpu_remaining == 0);
+    }
+    CHECK(staging.snapshot().clean());
+    f.draw(a, b);
+    CHECK(f.pixels() == before && f.renderer.live_textures() == 2 && f.renderer.healthy());
 }
 TEST(reloaded_texture_keeps_atlas_filter_wrap_and_alpha_semantics) {
     Fixture f;

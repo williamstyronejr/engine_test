@@ -110,6 +110,20 @@ struct Game {
         return static_cast<int>(std::count(collected.begin(), collected.end(), true));
     }
     int total() const { return static_cast<int>(keys.size()); }
+    // Selected owned buffers, matching the engine's existing buffer_bytes metrics.
+    // Scene strings/hash nodes and parser scratch are deliberately outside this count.
+    std::size_t staging_buffer_bytes() const {
+        auto bytes = map.buffer_bytes() + world.buffer_bytes() + collisions.buffer_bytes() +
+            (walls.capacity() + collision_candidates.capacity() + sensor_walls_.capacity()) *
+                sizeof(engine::Rect) +
+            (keys.capacity() + draw_order.capacity()) * sizeof(engine::Entity) +
+            (core_ids.capacity() + sensor_query_.capacity()) * sizeof(std::uint64_t) +
+            sensor_bodies_.capacity() * sizeof(engine::Body2D) + collected.capacity() / 8 +
+            initial_.size() + animations->clips.capacity() * sizeof(engine::AnimationClip);
+        for (const auto& clip : animations->clips)
+            bytes += clip.frames.capacity() * sizeof(engine::AnimationFrame);
+        return bytes;
+    }
     Vec2 location(engine::Entity entity) const {
         const auto t = world.world_transform(entity);
         return {t.x, t.y};

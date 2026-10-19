@@ -1666,6 +1666,14 @@ state hashes, resource/revision checks, bounded diagnostics and five-frame event
 neighborhoods. Pending GPU samples serialize as `null`, not zero. Unexpected
 operation failures preserve an incomplete report and return nonzero.
 
+Each event now includes an additive `staging` object with coverage
+`owned_payload_v1`, a `measured` flag, CPU/GPU/simultaneous combined peak bytes,
+and CPU/GPU remaining staging bytes. Remaining bytes must be zero for verification.
+CPU reference reports mark measurement false. Older reports lack this evidence.
+The coverage includes selected candidate buffers and texture texels, excluding
+transition construction scratch, allocator overhead and opaque driver allocations;
+it does not establish a total process or operation memory bound.
+
 See [SPIKE_PROFILING.md](../benchmarks/SPIKE_PROFILING.md) for the schedule, scope
 boundaries, completion rules, CPU-array order and diagnostic/storage limits. This
 is procedural profiling; ERPL content isolation and replay schema are unchanged.
