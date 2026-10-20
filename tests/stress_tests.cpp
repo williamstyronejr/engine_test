@@ -69,6 +69,25 @@ void operator delete[](void* p, std::size_t, std::align_val_t) noexcept {
 namespace {
 using namespace feature_lab;
 using namespace testing;
+TEST(small_collision_budgets_reuse_storage_with_full_query_capacity) {
+    using namespace engine;
+    CollisionWorld world(CollisionWorld::Limits{3, 6});
+    std::array<Body2D, CollisionWorld::max_bodies> bodies;
+    for (std::size_t i = 0; i < bodies.size(); ++i)
+        bodies[i] = {i < 3 ? i + 1 : i + 1000, Shape2D::circle({2, 2}, 0.5F),
+                     1, i < 3 ? 1U : 0U, true, true};
+    world.prime(bodies);
+    const auto bytes = world.buffer_bytes();
+    const auto calls = allocation_check::calls;
+    for (int tick = 0; tick < 120; ++tick) {
+        for (std::size_t i = 0; i < 3; ++i)
+            bodies[i].id += 3;
+        world.update(bodies);
+        CHECK(world.bodies().size() == CollisionWorld::max_bodies);
+        CHECK(world.contacts().size() == 3 && world.events().size() == 6);
+    }
+    CHECK(allocation_check::calls == calls && world.buffer_bytes() == bytes);
+}
 TEST(collision_usage_and_worst_case_event_batches_allocate_nothing_after_setup) {
     using namespace engine;
     CollisionWorld world;

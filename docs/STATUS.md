@@ -1681,11 +1681,30 @@ the route. Gameplay states and staging peaks match the previous increment; both
 malformed-content runs preserve live state and clean staging. See
 [measurements and limits](../benchmarks/2026-10-20-collision-usage-results.md).
 
+## Increment 46: per-world collision budgets
+
+- Explicit contact/event budgets retain the engine defaults and full body/query
+  capacity. Zero budgets are supported; above-maximum values are rejected before
+  reservation. Moves transfer limits and storage.
+- Candidate overflow preserves published spans, trigger history, statistics and
+  successful usage peaks, including failed `prime` operations. Tests cover exact
+  saturation, rollback/retry and allocation-free updates at small/default budgets.
+- Feature Lab uses 16 contacts and 32 events across restart, reload, checkpoint and
+  level transitions. Tilemap candidates inherit the current world's chosen limits.
+
+All 54 runtime groups pass in Debug and Release without skips; six focused CPU
+groups pass ASan/UBSan with leak detection. Three clean-source native runs match
+the CPU reference and previous gameplay states. Collision storage falls from
+6,557,696 to 293,888 bytes per world (95.5%); the largest covered transition peak
+falls from 7,909,182 to 1,645,374 bytes (79.2%). Both malformed-level runs preserve
+the live game and clean staging. Coverage is unchanged and timings carry no
+speedup claim. See [measurements and rollback evidence](../benchmarks/2026-10-20-collision-budgets-results.md).
+
 ## Next increment
 
-Add explicit per-world contact/event budgets with the current defaults. Choose
-conservative Feature Lab budgets while retaining its body/query limit, reject
-overflow before publication, and validate saturation, rollback/retry and
-allocation-free steady updates before repeating staging measurements.
+Add per-world grid-membership budgets with the current default. Grid storage is
+now most of the sample world's reservation. Choose conservative sample headroom
+from collider bounds, retain body/query capacity, and validate saturation,
+rollback/retry and allocation-free updates before repeating measurements.
 Broader physical hardware/driver checks remain outstanding; asset tooling and
 background loading stay deferred.

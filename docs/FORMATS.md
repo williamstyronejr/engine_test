@@ -947,12 +947,21 @@ Both `(a.mask & b.layer)` and `(b.mask & a.layer)` must be nonzero; pairs with b
 bodies marked stationary are skipped. A body with mask zero is query-only and does
 not occupy the grid. Query filters operate on category bits independently of masks.
 
-Limits: 256 bodies, 256 memberships per participating body, 16,384 memberships total,
-32,640 contact pairs, and up to 65,280 trigger events per update. Constructor reserves
-all buffers (approximately 6.25 MiB of capacity per world on the current ABI); ordinary
-updates do not allocate. Worlds are movable but not copyable; a moved-from world
-must be reassigned before updating. Invalid input or exceeded limits throw before publishing,
-leaving the previous bodies, contacts, trigger events, and counters unchanged.
+Engine limits: 256 bodies, 256 memberships per participating body, 16,384 memberships
+total, 32,640 contact pairs, and up to 65,280 trigger events per update. The default
+constructor reserves these maxima (approximately 6.25 MiB per world on the current
+ABI). `CollisionWorld(Limits{contacts, events})` instead reserves explicit contact
+and event budgets; active sensor history uses the contact budget. Each budget may
+independently be zero. Values above the engine maxima throw `invalid_argument`
+before reservation. Body, grid and query limits are unchanged.
+
+`limits()` returns the chosen budgets, fixed until the world is replaced. Moves
+transfer budgets, buffers and usage history. Worlds are movable but not copyable;
+a moved-from world must be reassigned before updating. Successful ordinary updates
+do not allocate. Contact or event overflow throws `length_error` before publication,
+preserving published spans, trigger history, counters and successful usage peaks.
+Invalid input likewise preserves the published snapshot. Exception diagnostics may
+allocate. Failed scratch work is discarded when retrying an update.
 Sorting gives deterministic ID order independent of input insertion order.
 `stats()` reports grid memberships, unique candidate pairs, and narrow-phase tests.
 
@@ -975,7 +984,9 @@ are sorted by the pair's ascending IDs; callers must consume each update's event
 span once. Returned spans remain valid until the next successful update. Reusing
 an ID across adjacent snapshots declares the same identity; use a new ID for a new
 body, or publish its removal first. `prime` validates/publishes a snapshot and clears
-its event list while retaining current trigger history, for restart/load. Contacts
+its event list while retaining current trigger history, for restart/load. It enforces
+the event budget before suppressing events; a failed `prime` preserves the existing
+snapshot and event list. Contacts
 are discrete: a fast sensor can cross another body between snapshots unnoticed.
 
 `query(shape, output, filter)` clears the caller's vector and returns sorted unique
@@ -987,7 +998,11 @@ on a shape returns fraction zero and zero normal; a zero-length segment is a poi
 query. Equal fractions prefer the lowest ID. Shapes at the segment endpoint count.
 Segment queries allocate no memory; neither query depends on moving/static flags.
 
-Feature Lab assigns independent collision IDs for its player, patrol alarm, switch,
+Feature Lab uses budgets of 16 contacts and 32 events, retained through reloads,
+restart, checkpoint restoration and level transitions. Only the player/alarm pair
+participates in reciprocal detection, leaving headroom while keeping the full
+256-body query capacity. Tilemap reload candidates inherit the current world's
+budgets. Feature Lab assigns independent collision IDs for its player, patrol alarm, switch,
 static walls, and closed door. The example permits at most 252 static wall boxes
 (including solid tile cells) so its four reserved bodies fit the 256-body world;
 larger authored maps need a different example-side partitioning strategy. Static
