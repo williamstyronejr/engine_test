@@ -10,6 +10,10 @@ payload peaks and cleanup evidence for the same operations.
 The [parser staging follow-up](2026-10-19-parser-staging-results.md) extends that
 coverage through loading/construction and retains malformed-level failure reports.
 
+The [October 20 scene reservation results](2026-10-20-lazy-scene-results.md)
+reduce the largest covered transition peak by 10.2% under the same v2 coverage,
+with repeated normal and malformed-content evidence.
+
 Follow-up: [elapsed timing and rollover evidence](2026-10-17-elapsed-timing.md)
 records the next increment's query-method change; earlier raw results are preserved.
 

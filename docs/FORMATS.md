@@ -192,6 +192,13 @@ old handles; slot reuse cannot revive them, and handles from other scenes are
 rejected. Moving a scene transfers its valid handles and gives the moved-from scene
 a new identity. Persistent IDs remain stable across serialization/reload.
 
+New scenes reserve no core vector storage. The first successful entity creation
+reserves the node, handle-slot and deferred-deletion vectors for 4096 entities.
+Deleting all entities retains those buffers for reuse. Moves transfer existing
+storage without reserving replacement buffers for the destination; a moved-from
+scene reserves storage again when reused. Entity creation can still allocate hash
+nodes and label storage.
+
 Nodes occupy dense storage, with optional sprite/collider records. Additional
 runtime component types live in scene-owned pools described below. `get` returns a
 borrowed reference: structural changes can invalidate references, but valid entity

@@ -677,6 +677,8 @@ Each operation also reports covered CPU/GPU staging-payload peaks and verifies
 that staging ownership is released on return. These counters exclude allocator
 overhead, nested string storage and driver memory. Loading, parsing and selected
 construction buffers are included, with malformed-transition cleanup checks.
+Lazy scene reservations reduce the largest covered transition peak by 10.2%;
+see [the measurements and rollback evidence](benchmarks/2026-10-20-lazy-scene-results.md).
 Expected failures must preserve state/resources; unexpected outcomes save an
 incomplete report and return nonzero. See [the workload and timing contract](benchmarks/SPIKE_PROFILING.md).
 
