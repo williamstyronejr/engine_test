@@ -1660,9 +1660,32 @@ from 8,804,022 to 7,909,182 bytes (10.2%). Two malformed-level runs preserve liv
 state and leave zero tracked staging. Timings carry no speedup claim. See
 [measurements and retained failures](../benchmarks/2026-10-20-lazy-scene-results.md).
 
+## Increment 45: collision buffer utilization
+
+- `CollisionWorld::memory_usage()` reports reserved payload by buffer group and
+  candidate entry high-water counts from successful updates. Initialization events
+  are captured before suppression; failed updates preserve the peaks.
+- Spike reports retain bounded per-level maxima across published worlds, including
+  warmup. The independent CPU reference supplies matching counters. Unpublished
+  candidates are excluded; malformed-transition reports retain only Facility.
+- Allocation-counted coverage includes 256 overlapping sensors followed by disjoint
+  identities: the existing defaults support 32,640 contacts and 65,280 events
+  without allocations after setup. Engine limits and reservations remain unchanged.
+
+All 54 runtime groups pass in Debug and Release without skips; four focused CPU
+groups pass ASan/UBSan with leak detection. Three clean-source native runs match
+the retained CPU reference exactly. Collision storage reserves 6,557,696 bytes per
+world, of which 95.6% is capacity for contacts, active sensor history and events. Facility peaks at
+219 bodies and one contact/event; Annex peaks at 146 bodies and no contacts on
+the route. Gameplay states and staging peaks match the previous increment; both
+malformed-content runs preserve live state and clean staging. See
+[measurements and limits](../benchmarks/2026-10-20-collision-usage-results.md).
+
 ## Next increment
 
-Measure collision scratch utilization to identify the next reservation reduction
-while retaining transactional updates and steady-operation allocation guarantees.
+Add explicit per-world contact/event budgets with the current defaults. Choose
+conservative Feature Lab budgets while retaining its body/query limit, reject
+overflow before publication, and validate saturation, rollback/retry and
+allocation-free steady updates before repeating staging measurements.
 Broader physical hardware/driver checks remain outstanding; asset tooling and
 background loading stay deferred.
