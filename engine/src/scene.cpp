@@ -48,11 +48,7 @@ void transform_valid(LocalTransform t) {
         throw std::invalid_argument("Invalid or out-of-range local transform");
 }
 } // namespace
-Scene::Scene() : domain_(new_domain()) {
-    slots_.reserve(capacity);
-    nodes_.reserve(capacity);
-    pending_.reserve(capacity);
-}
+Scene::Scene() : domain_(new_domain()) {}
 Scene::Scene(Scene&& other) : Scene() {
     *this = std::move(other);
 }
@@ -96,6 +92,12 @@ Entity Scene::create(std::uint64_t id, std::string name, std::string tag) {
     const bool appended = index == slots_.size();
     if (appended && slots_.size() == capacity)
         throw std::runtime_error("Scene handle slots exhausted");
+    // Empty placeholders and move destinations need no backing buffers. Reserve
+    // before publishing the first entity, including when reusing a moved-from scene.
+    // Subsequent calls are no-ops and deferred destruction keeps its fixed storage.
+    slots_.reserve(capacity);
+    nodes_.reserve(capacity);
+    pending_.reserve(capacity);
     if (appended)
         slots_.push_back({});
     const Entity entity{static_cast<std::uint32_t>(index), slots_[index].generation, domain_};
@@ -299,7 +301,7 @@ Scene parse_scene(std::string_view text, std::string_view source) {
     if (text.size() > 4 * 1024 * 1024)
         throw std::runtime_error(std::string(source) + ": scene exceeds 4 MiB");
     Scene result;
-    const StagingBytes scene_memory(result.buffer_bytes());
+    StagingBytes scene_memory;
     struct Parent {
         Entity child;
         std::uint64_t parent;
@@ -336,6 +338,7 @@ Scene parse_scene(std::string_view text, std::string_view source) {
             if (t[0] == "entity") {
                 count(t, 10);
                 const auto e = result.create(number<std::uint64_t>(t[1]), t[2], t[3]);
+                scene_memory.set(result.buffer_bytes());
                 result.set_transform(e, {{number<float>(t[5]), number<float>(t[6])},
                                          number<float>(t[7]),
                                          {number<float>(t[8]), number<float>(t[9])}});

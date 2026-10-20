@@ -78,14 +78,15 @@ TEST(transition_candidate_overlap_and_rejection_cleanup) {
         StagingScope scope;
         rejects([&] { flow.advance_level(game, {}); });
         CHECK(scope.snapshot().clean());
-        CHECK(candidate_bytes > 0 && scope.snapshot().cpu_peak >= candidate_bytes + 256);
+        // Construction no longer exceeds the completed candidate/overlay overlap.
+        CHECK(candidate_bytes > 0 && scope.snapshot().cpu_peak == candidate_bytes + 256);
         CHECK(scope.snapshot().gpu_peak == 0 && replay_hash(game) == original_hash);
     }
     flow.prepare_replacement = {};
     {
         StagingScope scope;
         flow.advance_level(game, {});
-        CHECK(scope.snapshot().clean() && scope.snapshot().cpu_peak >= candidate_bytes);
+        CHECK(scope.snapshot().clean() && scope.snapshot().cpu_peak == candidate_bytes);
         CHECK(game.level == Level::annex && !game.won);
     }
 }
@@ -125,6 +126,43 @@ TEST(parser_buffers_survive_until_validation_and_unwind_on_trailing_data) {
         const auto text = assets.text("annex.scene");
         CHECK(scope.snapshot().cpu_peak == text.size() * 2);
         CHECK(scope.snapshot().clean());
+    }
+}
+TEST(scene_parser_tracks_lazy_reservation_before_later_validation) {
+    using namespace engine;
+    Scene populated;
+    populated.create(1, "one");
+    const auto reserved = populated.buffer_bytes();
+    const std::string text = "scene 1\nentity 1 \"one\" \"\" 0 0 0 0 1 1\nend\n";
+    std::size_t complete_peak = 0;
+    {
+        StagingScope scope;
+        auto scene = parse_scene(text);
+        CHECK(scene.buffer_bytes() == reserved);
+        complete_peak = scope.snapshot().cpu_peak;
+        CHECK(complete_peak > reserved && scope.snapshot().clean());
+    }
+    {
+        StagingScope scope;
+        rejects([&] { parse_scene(text + "unexpected\n"); });
+        CHECK(scope.snapshot().cpu_peak == complete_peak && scope.snapshot().clean());
+    }
+    {
+        StagingScope scope;
+        // The entity exists before transform validation throws.
+        rejects([] { parse_scene("scene 1\nentity 1 \"one\" \"\" 0 invalid 0 0 1 1\nend\n"); });
+        CHECK(scope.snapshot().cpu_peak > reserved && scope.snapshot().clean());
+    }
+    {
+        StagingScope scope;
+        auto empty = parse_scene("scene 1\nend\n");
+        CHECK(empty.buffer_bytes() == 0);
+        CHECK(scope.snapshot().cpu_peak < reserved && scope.snapshot().clean());
+    }
+    {
+        StagingScope scope;
+        rejects([] { parse_scene("scene 1\nentity 1 \"unterminated"); });
+        CHECK(scope.snapshot().cpu_peak < reserved && scope.snapshot().clean());
     }
 }
 TEST(malformed_transition_inputs_retain_live_game_and_release_staging) {
