@@ -9,6 +9,25 @@
 namespace {
 using namespace feature_lab;
 using namespace testing;
+TEST(collision_profile_keeps_each_level_history_across_replacement) {
+    engine::CollisionWorld world;
+    SpikeProfile profile;
+    CHECK(profile.json().find("\"levels\":[]") != std::string::npos);
+    const std::array bodies{
+        engine::Body2D{1, engine::Shape2D::circle({2, 2}, 0.5F), 1, 1, true, true},
+        engine::Body2D{2, engine::Shape2D::circle({2, 2}, 0.5F), 1, 1, true, true}};
+    world.prime(bodies);
+    profile.observe_collision(0, world);
+    profile.observe_collision(1, world);
+    const auto before = profile.json();
+    world = engine::CollisionWorld{};
+    profile.observe_collision(0, world);
+    CHECK(profile.json() == before);
+    rejects([&] { profile.observe_collision(2, world); });
+    CHECK(profile.json() == before);
+    CHECK(before.find("\"coverage\":\"successful_snapshots_v1\"") != std::string::npos);
+    CHECK(before.find("\"peak_entries\":2") != std::string::npos);
+}
 TEST(asset_staging_overlaps_encoded_and_decoded_payload_once) {
     using namespace engine;
     const AssetRoot assets(TEST_ASSET_ROOT);
@@ -378,6 +397,7 @@ void reference(const char* path) {
             game.update(route.next(game));
         profile.record({}, 64, 64, {}, {}, static_cast<unsigned>(game.ticks > ticks));
         spikes.record({}, {});
+        spikes.observe_collision(static_cast<unsigned>(game.level), game.collisions);
     }
     CHECK(spikes.complete() && game.won && game.level == Level::facility);
     profile.write(path, profile.json(replay_hash(game), game.ticks, level_name(game.level), {},

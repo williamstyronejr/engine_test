@@ -1,4 +1,5 @@
 #include "../examples/feature_lab/stress_benchmark.hpp"
+#include "../examples/feature_lab/spike_profile.hpp"
 #include "engine/font.hpp"
 #include "test.hpp"
 #include <array>
@@ -68,6 +69,29 @@ void operator delete[](void* p, std::size_t, std::align_val_t) noexcept {
 namespace {
 using namespace feature_lab;
 using namespace testing;
+TEST(collision_usage_and_worst_case_event_batches_allocate_nothing_after_setup) {
+    using namespace engine;
+    CollisionWorld world;
+    SpikeProfile profile;
+    std::array<Body2D, CollisionWorld::max_bodies> bodies;
+    for (std::size_t i = 0; i < bodies.size(); ++i)
+        bodies[i] = {i + 1, Shape2D::circle({2, 2}, 0.5F), 1, 1, true, true};
+    const auto calls = allocation_check::calls;
+    world.prime(bodies);
+    for (auto& body : bodies)
+        body.id += bodies.size();
+    world.update(bodies);
+    const auto usage = world.memory_usage();
+    for (unsigned i = 0; i < 100; ++i)
+        profile.observe_collision(i % 2, world);
+    CHECK(allocation_check::calls == calls);
+    CHECK(usage.groups[0].peak_entries == CollisionWorld::max_bodies);
+    CHECK(usage.groups[2].peak_entries == CollisionWorld::max_pairs);
+    CHECK(usage.groups[3].peak_entries == CollisionWorld::max_pairs);
+    CHECK(usage.groups[4].peak_entries == CollisionWorld::max_pairs * 2);
+    CHECK(usage.groups[4].reserved_bytes ==
+          usage.groups[4].peak_entries * usage.groups[4].entry_bytes * usage.groups[4].buffers);
+}
 TEST(empty_scenes_and_scene_moves_do_not_allocate) {
     using engine::Scene;
     const auto baseline = allocation_check::live;

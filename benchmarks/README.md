@@ -14,6 +14,10 @@ The [October 20 scene reservation results](2026-10-20-lazy-scene-results.md)
 reduce the largest covered transition peak by 10.2% under the same v2 coverage,
 with repeated normal and malformed-content evidence.
 
+The [collision utilization follow-up](2026-10-20-collision-usage-results.md)
+breaks down reserved buffers and per-level demand, identifying contact/event
+budgets as the next reduction target.
+
 Follow-up: [elapsed timing and rollover evidence](2026-10-17-elapsed-timing.md)
 records the next increment's query-method change; earlier raw results are preserved.
 

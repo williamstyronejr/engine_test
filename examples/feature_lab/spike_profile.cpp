@@ -112,6 +112,23 @@ void SpikeProfile::collect_gpu(std::span<const engine::GpuTimingSample> samples)
         last_gpu_frame_ = sample.frame;
     }
 }
+void SpikeProfile::observe_collision(unsigned level, const engine::CollisionWorld& world) {
+    if (level >= collision_usage_.size())
+        throw std::invalid_argument("Invalid collision profile level");
+    const auto usage = world.memory_usage();
+    auto& saved = collision_usage_[level];
+    if (!saved) {
+        saved = usage;
+        return;
+    }
+    for (std::size_t i = 0; i < usage.groups.size(); ++i) {
+        saved->groups[i].reserved_bytes =
+            std::max(saved->groups[i].reserved_bytes, usage.groups[i].reserved_bytes);
+        saved->groups[i].peak_entries =
+            std::max(saved->groups[i].peak_entries, usage.groups[i].peak_entries);
+    }
+    saved->fixed_bytes = std::max(saved->fixed_bytes, usage.fixed_bytes);
+}
 std::string SpikeProfile::json() const {
     std::ostringstream out;
     out.imbue(std::locale::classic());
@@ -164,6 +181,25 @@ std::string SpikeProfile::json() const {
         }
         out << "]}";
     }
-    return out.str() + "]}";
+    out << "],\"collision_memory\":{\"coverage\":\"successful_snapshots_v1\",\"levels\":[";
+    bool first_level = true;
+    for (std::size_t level = 0; level < collision_usage_.size(); ++level) {
+        if (!collision_usage_[level])
+            continue;
+        const auto& usage = *collision_usage_[level];
+        out << (first_level ? "" : ",") << "{\"level\":" << level
+            << ",\"reserved_bytes\":" << usage.reserved_bytes()
+            << ",\"fixed_bytes\":" << usage.fixed_bytes << ",\"groups\":{";
+        first_level = false;
+        for (std::size_t i = 0; i < usage.groups.size(); ++i) {
+            const auto& group = usage.groups[i];
+            out << (i ? "," : "") << json_string(engine::CollisionMemoryUsage::names[i])
+                << ":{\"reserved_bytes\":" << group.reserved_bytes
+                << ",\"entry_bytes\":" << group.entry_bytes << ",\"buffers\":" << group.buffers
+                << ",\"peak_entries\":" << group.peak_entries << '}';
+        }
+        out << "}}";
+    }
+    return out.str() + "]}}";
 }
 } // namespace feature_lab

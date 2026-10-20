@@ -951,6 +951,7 @@ int main(int argc, char** argv) {
                                 overlays.minimap_stats(), simulation_steps);
                 if (spikes) {
                     spikes->record(frame_ms, spike_resources());
+                    spikes->observe_collision(static_cast<unsigned>(game.level), game.collisions);
                     if (spikes->failed())
                         running = false;
                 }

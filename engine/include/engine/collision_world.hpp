@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <optional>
 #include <span>
+#include <string_view>
 #include <vector>
 
 namespace engine {
@@ -48,6 +49,23 @@ struct SegmentHit {
 struct CollisionStats {
     std::size_t memberships{}, candidate_pairs{}, narrow_tests{};
 };
+struct CollisionBufferUsage {
+    std::size_t reserved_bytes{}, entry_bytes{}, buffers{}, peak_entries{};
+    bool operator==(const CollisionBufferUsage&) const = default;
+};
+struct CollisionMemoryUsage {
+    static constexpr std::array<std::string_view, 5> names{
+        "bodies", "cells", "contacts", "active_sensors", "events"};
+    std::array<CollisionBufferUsage, 5> groups{};
+    std::size_t fixed_bytes{};
+    std::size_t reserved_bytes() const {
+        auto result = fixed_bytes;
+        for (const auto& group : groups)
+            result += group.reserved_bytes;
+        return result;
+    }
+    bool operator==(const CollisionMemoryUsage&) const = default;
+};
 // Bounded uniform-grid detection. Caller integrates poses; this is not a rigid-body solver.
 class CollisionWorld {
   public:
@@ -69,6 +87,10 @@ class CollisionWorld {
     std::span<const TriggerEvent> events() const { return events_; }
     // Reserved vector payload bytes; excludes allocator overhead and string/hash storage.
     std::size_t buffer_bytes() const;
+    // Capacity across each group's buffers, and largest candidate entry count
+    // per successful update since construction. Includes prime's suppressed events;
+    // failed attempts do not change peaks. Peaks are not simultaneous byte usage.
+    CollisionMemoryUsage memory_usage() const;
     CollisionStats stats() const { return stats_; }
     void query(Shape2D shape, std::vector<std::uint64_t>& output, QueryFilter filter = {}) const;
     std::optional<SegmentHit> segment(Vec2 start, Vec2 end, QueryFilter filter = {}) const;
@@ -84,5 +106,6 @@ class CollisionWorld {
     std::vector<TriggerEvent> events_, next_events_;
     std::array<std::uint64_t, max_bodies * max_bodies / 64> seen_{};
     CollisionStats stats_{};
+    std::array<std::size_t, 5> peak_entries_{};
 };
 } // namespace engine

@@ -7,6 +7,46 @@
 namespace {
 using namespace engine;
 using namespace testing;
+TEST(memory_usage_tracks_successful_candidates_including_prime_and_history) {
+    CollisionWorld world;
+    const auto empty = world.memory_usage();
+    CHECK(empty.reserved_bytes() == world.buffer_bytes());
+    const std::array capacities{CollisionWorld::max_bodies * 2, CollisionWorld::max_memberships,
+                                CollisionWorld::max_pairs * 2, CollisionWorld::max_pairs * 2,
+                                CollisionWorld::max_pairs * 4};
+    for (std::size_t i = 0; i < capacities.size(); ++i)
+        CHECK(empty.groups[i].reserved_bytes == capacities[i] * empty.groups[i].entry_bytes);
+    CHECK(empty.fixed_bytes == CollisionWorld::max_bodies * CollisionWorld::max_bodies / 8);
+    for (const auto& group : empty.groups)
+        CHECK(group.peak_entries == 0 && group.reserved_bytes > 0);
+    std::array<Body2D, 8> bodies;
+    for (std::size_t i = 0; i < bodies.size(); ++i)
+        bodies[i] = {i + 1, Shape2D::circle({2, 2}, 0.5F), 1, 1, true, true};
+    world.prime(bodies);
+    CHECK(world.events().empty());
+    const auto primed = world.memory_usage();
+    CHECK(primed.groups[0].peak_entries == 8 && primed.groups[1].peak_entries == 8);
+    CHECK(primed.groups[2].peak_entries == 28 && primed.groups[3].peak_entries == 28);
+    CHECK(primed.groups[4].peak_entries == 28); // Suppressed enter batch was still built.
+    for (auto& body : bodies)
+        body.id += 8;
+    world.update(bodies); // Disjoint identities require exits and enters together.
+    CHECK(world.events().size() == 56);
+    const auto peak = world.memory_usage();
+    CHECK(peak.groups[4].peak_entries == 56 && peak.reserved_bytes() == empty.reserved_bytes());
+    world.update({});
+    CHECK(world.memory_usage() == peak);
+    bodies.back().shape = Shape2D::box({}, {1024, 1024});
+    rejects([&] { world.update(bodies); }); // Fails after staging earlier valid bodies.
+    CHECK(world.memory_usage() == peak && world.bodies().empty());
+    CollisionWorld moved(std::move(world));
+    CHECK(moved.memory_usage() == peak);
+    world = CollisionWorld{};
+    CHECK(world.memory_usage() == empty);
+    bodies.back().shape = Shape2D::circle({2, 2}, 0.5F);
+    world.update(bodies);
+    CHECK(world.memory_usage().groups[4].peak_entries == 28);
+}
 TEST(shape_pairs_touching_corners_and_validation) {
     CHECK(intersects(Shape2D::circle({0, 0}, 1), Shape2D::circle({2, 0}, 1)));
     CHECK(!intersects(Shape2D::circle({0, 0}, 1), Shape2D::circle({2.01F, 0}, 1)));

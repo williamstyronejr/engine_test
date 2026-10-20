@@ -139,6 +139,35 @@ and optional copy/move construction. Existing live resources are outside staging
 describe requested texel payload, without claiming physical residency. Texture
 rejection validates all candidates before GPU allocation, so its GPU peak is zero.
 
+## Collision buffer utilization
+
+`spikes.collision_memory` adds `successful_snapshots_v1` coverage without changing
+the workload or `owned_payload_v2` staging counters. A bounded two-level collector
+observes the published game after each rendered frame, including warmup, and
+retains maxima across replacement worlds. Each world tracks successful updates
+from construction, so initial `prime` batches are included even though their
+trigger events are suppressed before gameplay.
+
+Each observed level reports total `reserved_bytes`, `fixed_bytes` for the seen-pair
+bitset, and five named `groups`: `bodies`, `cells`, `contacts`, `active_sensors`,
+`events`. Each group contains:
+
+- `reserved_bytes`: capacity bytes across its published/scratch vectors.
+- `entry_bytes`: size of one vector element on the measured build.
+- `buffers`: vector count (one for cells, two for the other groups).
+- `peak_entries`: largest single candidate-vector size in a successful update.
+
+These counts measure workload demand, not simultaneous occupied bytes or RSS.
+Peaks need not occur together. Failed update attempts leave peaks unchanged, and
+unpublished transition candidates are outside this collector. A partial report
+lists only levels actually observed. Collection and world counters allocate no
+heap storage; JSON serialization happens afterward. Native tests compare the entire
+object with the independent CPU route reference.
+
+The default worst-case capacities remain unchanged. Smaller observed peaks are
+not sufficient to lower general engine limits: disjoint batches of 256 overlapping
+sensors can require 32,640 contacts and 65,280 exit/enter events in one update.
+
 ## Completion and failures
 
 Success requires the frame limit, all ten verified events, a stable viewport/resource

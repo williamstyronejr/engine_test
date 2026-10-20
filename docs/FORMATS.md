@@ -949,12 +949,25 @@ not occupy the grid. Query filters operate on category bits independently of mas
 
 Limits: 256 bodies, 256 memberships per participating body, 16,384 memberships total,
 32,640 contact pairs, and up to 65,280 trigger events per update. Constructor reserves
-all buffers (approximately 6.5 MiB of capacity per world on the current ABI); ordinary
+all buffers (approximately 6.25 MiB of capacity per world on the current ABI); ordinary
 updates do not allocate. Worlds are movable but not copyable; a moved-from world
 must be reassigned before updating. Invalid input or exceeded limits throw before publishing,
 leaving the previous bodies, contacts, trigger events, and counters unchanged.
 Sorting gives deterministic ID order independent of input insertion order.
 `stats()` reports grid memberships, unique candidate pairs, and narrow-phase tests.
+
+`memory_usage()` separates reserved vector payload into bodies, grid cells,
+contacts, active sensor pairs and trigger events, plus the fixed deduplication
+bitset. Each group reports total reserved bytes across its buffers, entry size,
+buffer count and the largest candidate entry count from successful updates since
+construction. Peaks include events built by `prime` before suppression. Failed
+updates preserve the peaks; move destinations retain the transferred world's
+history. A moved-from world's history is not a utilization measurement of its
+remaining storage; reassign it before reuse.
+These fixed-size counters and reads allocate nothing. Per-group peaks may occur
+on different updates and are counts for a single candidate vector, not simultaneous
+used bytes across both published and scratch buffers. They do not include rejected
+attempts, allocator overhead or vector objects.
 
 A pair involving at least one sensor emits enter, then stay on subsequent overlap
 snapshots, then exit when separated, filtered, made non-sensor, or removed. Events
@@ -1681,7 +1694,15 @@ The coverage includes selected loading/parser/construction buffers, completed
 candidates and texture texels. Historical `owned_payload_v1` reports begin level
 accounting after construction. V2 still excludes nested string storage, allocator
 internals and opaque driver allocations; it does not establish a total process or
-operation memory bound. JSON field layout and the procedural command schedule are unchanged.
+operation memory bound. The procedural command schedule is unchanged.
+
+The additive `spikes.collision_memory` object uses `successful_snapshots_v1`
+coverage. Its `levels` array contains observed published levels (0 Facility,
+1 Annex), with reserved bytes, fixed bitset bytes and the five buffer groups from
+`CollisionWorld::memory_usage()`. It merges maxima across world instances for each
+level, including warmup and initialization history. Rejected candidates are not
+observed. The independent CPU reference reports this telemetry too; native tests
+require exact equality. Older reports lack this object.
 
 See [SPIKE_PROFILING.md](../benchmarks/SPIKE_PROFILING.md) for the schedule, scope
 boundaries, completion rules, CPU-array order and diagnostic/storage limits. This
