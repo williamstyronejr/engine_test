@@ -68,6 +68,48 @@ void operator delete[](void* p, std::size_t, std::align_val_t) noexcept {
 namespace {
 using namespace feature_lab;
 using namespace testing;
+TEST(empty_scenes_and_scene_moves_do_not_allocate) {
+    using engine::Scene;
+    const auto baseline = allocation_check::live;
+    {
+        const auto empty_calls = allocation_check::calls;
+        Scene source, destination;
+        Scene moved_empty(std::move(destination));
+        destination = std::move(moved_empty);
+        CHECK(allocation_check::calls == empty_calls);
+        CHECK(source.buffer_bytes() == 0 && destination.buffer_bytes() == 0);
+        rejects([&] { source.create(0, "invalid"); });
+        CHECK(source.size() == 0 && source.buffer_bytes() == 0);
+
+        const auto entity = source.create(1, "one");
+        const auto reserved = source.buffer_bytes();
+        CHECK(reserved > 0);
+        source.defer_destroy(entity);
+        const auto move_calls = allocation_check::calls;
+        Scene moved(std::move(source));
+        destination = std::move(moved);
+        CHECK(allocation_check::calls == move_calls);
+        CHECK(destination.valid(entity) && !source.valid(entity) && !moved.valid(entity));
+        CHECK(destination.buffer_bytes() == reserved);
+        destination.flush(); // Pending destruction moves with the entity storage.
+        CHECK(destination.size() == 0 && destination.buffer_bytes() == reserved);
+
+        const auto fresh = source.create(1, "reused");
+        CHECK(source.valid(fresh) && !source.valid(entity) && !destination.valid(fresh));
+        CHECK(source.buffer_bytes() == reserved);
+        for (std::size_t i = 1; i <= Scene::capacity; ++i)
+            destination.create(i, "queued");
+        CHECK(destination.buffer_bytes() == reserved);
+        const auto queue_calls = allocation_check::calls;
+        destination.each([&](const engine::SceneNode& node) {
+            destination.defer_destroy(node.entity);
+            destination.defer_destroy(node.entity);
+        });
+        CHECK(allocation_check::calls == queue_calls);
+        CHECK(destination.buffer_bytes() == reserved);
+    }
+    CHECK(allocation_check::live == baseline);
+}
 TEST(font_measurement_and_layout_allocate_nothing_after_setup) {
     const auto baseline = allocation_check::live;
     {

@@ -1641,9 +1641,28 @@ identical v2 peaks and reference hashes. Two malformed-level attempts stop at fr
 1383 with unchanged live state and zero remaining staging. The largest covered
 transition peak is 8,804,022 bytes. See [measurements and retained failures](../benchmarks/2026-10-19-parser-staging-results.md).
 
+## Increment 44: lazy scene core reservations
+
+- New empty scenes reserve no core vectors. First entity creation reserves the
+  existing 4,096-entity capacity; deletion retains it and moves transfer it.
+  Game-world placeholders and move destinations avoid throwaway reservations.
+- Scene parser staging updates immediately after creation, retaining
+  `owned_payload_v2` coverage through later validation failures.
+- Allocation-counted regressions cover empty construction, moves, pending-deletion
+  transfer, moved-from reuse and a full-capacity deferred queue. Parser tests cover
+  failures before and after reservation. Transition tests require construction to
+  remain within the completed candidate/preflight payload peak.
+
+All 54 runtime groups pass in Debug and Release without skips. Four focused CPU
+groups pass ASan/UBSan with leak detection. Three clean-source native runs reproduce
+the same peaks and CPU-reference hashes; the largest covered transition peak falls
+from 8,804,022 to 7,909,182 bytes (10.2%). Two malformed-level runs preserve live
+state and leave zero tracked staging. Timings carry no speedup claim. See
+[measurements and retained failures](../benchmarks/2026-10-20-lazy-scene-results.md).
+
 ## Next increment
 
-Use the construction measurements to reduce redundant scene-buffer reservations,
-then remeasure transitions and malformed-content rollback. Broader physical
-hardware/driver checks remain outstanding; asset tooling and background loading
-stay deferred.
+Measure collision scratch utilization to identify the next reservation reduction
+while retaining transactional updates and steady-operation allocation guarantees.
+Broader physical hardware/driver checks remain outstanding; asset tooling and
+background loading stay deferred.

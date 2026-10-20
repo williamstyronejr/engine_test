@@ -41,6 +41,8 @@ class Scene {
   public:
     static constexpr std::size_t capacity = 4096, max_depth = 64;
     static constexpr std::size_t max_component_types = 64;
+    // Core vectors reserve capacity on first entity creation, not for empty
+    // placeholders. Destroying entities retains buffers for reuse.
     Scene();
     Scene(const Scene&) = delete;
     Scene& operator=(const Scene&) = delete;

@@ -114,10 +114,14 @@ then game construction and preflight. Encoded binary files are released after ea
 decode. Counters transfer between decoder, loader, constructor and completed
 candidate without counting shared payloads twice. Tile/animation parsers update
 their leases as vectors grow, before trailing-data and semantic validation. Scene
-parsing counts its reserved candidate, pending-parent vector and token-vector
-slots, including failures before a complete scene exists. Game construction counts
-the overlap between its initially reserved world/collision buffers and the parser's
-separate scene, then refreshes gameplay/component buffers as they are built.
+parsing counts its candidate's core buffers immediately after the first entity
+is created, plus pending-parent and token-vector slots, including failures before
+a complete scene exists. New empty scenes reserve no core vectors; first creation
+reserves their full capacity, retained through destruction and reused by later
+entities. Game construction counts its collision buffers alongside the parser's
+scene, then refreshes gameplay/component buffers as they are built. The empty world
+placeholder and scene move destinations no longer reserve redundant core vectors.
+These changes retain the `owned_payload_v2` coverage definition.
 
 Accounting retains existing `Scene`, `TileMap` and `CollisionWorld::buffer_bytes()`
 conventions: collision includes its fixed seen-bitset; gameplay includes reserved
