@@ -131,14 +131,17 @@ bool intersects(Shape2D a, Shape2D b) {
     validate(b);
     return narrow(a, b);
 }
-CollisionWorld::CollisionWorld() {
+CollisionWorld::CollisionWorld() : CollisionWorld(Limits{}) {}
+CollisionWorld::CollisionWorld(Limits limits) : limits_(limits) {
+    if (limits.contacts > max_pairs || limits.events > max_pairs * 2)
+        throw std::invalid_argument("Collision budgets exceed engine limits");
     bodies_.reserve(max_bodies);
     pending_.reserve(max_bodies);
     cells_.reserve(max_memberships);
     for (auto* v : {&contacts_, &next_contacts_, &active_, &next_active_})
-        v->reserve(max_pairs);
-    events_.reserve(max_pairs * 2);
-    next_events_.reserve(max_pairs * 2);
+        v->reserve(limits.contacts);
+    events_.reserve(limits.events);
+    next_events_.reserve(limits.events);
 }
 void CollisionWorld::update(std::span<const Body2D> bodies) {
     if (pending_.capacity() < max_bodies)
@@ -197,8 +200,11 @@ void CollisionWorld::update(std::span<const Body2D> bodies) {
                     !boxes(raw_bounds(a.shape), raw_bounds(b.shape)))
                     continue;
                 ++stats.narrow_tests;
-                if (narrow(a.shape, b.shape))
+                if (narrow(a.shape, b.shape)) {
+                    if (next_contacts_.size() == limits_.contacts)
+                        throw std::length_error("Collision contact budget exceeded");
                     next_contacts_.push_back({a.id, b.id, a.sensor || b.sensor});
+                }
             }
         first = last;
     }
@@ -208,6 +214,8 @@ void CollisionWorld::update(std::span<const Body2D> bodies) {
             next_active_.push_back(c);
     std::size_t old = 0, now = 0;
     while (old < active_.size() || now < next_active_.size()) {
+        if (next_events_.size() == limits_.events)
+            throw std::length_error("Collision event budget exceeded");
         if (now == next_active_.size() ||
             (old < active_.size() && less(active_[old], next_active_[now]))) {
             const auto p = active_[old++];

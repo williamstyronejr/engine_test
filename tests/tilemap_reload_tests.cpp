@@ -4,6 +4,18 @@ namespace {
 using namespace engine;
 using namespace feature_lab;
 using namespace testing;
+TEST(tilemap_replacement_keeps_the_current_world_budgets) {
+    TilemapFiles f;
+    auto game = load_game(f.root);
+    const auto published = game.collisions.bodies();
+    const std::vector<Body2D> bodies(published.begin(), published.end());
+    const CollisionWorld::Limits limits{4, 8};
+    game.collisions = CollisionWorld(limits);
+    game.collisions.prime(bodies);
+    const auto bytes = game.collisions.buffer_bytes();
+    game.reload_tilemap(game.map.data());
+    CHECK(game.collisions.limits() == limits && game.collisions.buffer_bytes() == bytes);
+}
 TEST(tilemap_commit_preserves_game_and_entities_updates_collision_and_save_identity) {
     TilemapFiles f;
     auto game = load_game(f.root);

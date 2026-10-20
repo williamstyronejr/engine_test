@@ -72,7 +72,13 @@ class CollisionWorld {
     static constexpr std::size_t max_bodies = 256, max_memberships = 16384;
     static constexpr std::size_t max_pairs = max_bodies * (max_bodies - 1) / 2;
     static constexpr float cell_size = 4;
+    struct Limits {
+        std::size_t contacts{max_pairs}, events{max_pairs * 2};
+        bool operator==(const Limits&) const = default;
+    };
     CollisionWorld();
+    // Zero budgets are allowed. Limits remain fixed until the world is replaced.
+    explicit CollisionWorld(Limits limits);
     CollisionWorld(const CollisionWorld&) = delete;
     CollisionWorld& operator=(const CollisionWorld&) = delete;
     CollisionWorld(CollisionWorld&&) noexcept = default;
@@ -92,6 +98,7 @@ class CollisionWorld {
     // failed attempts do not change peaks. Peaks are not simultaneous byte usage.
     CollisionMemoryUsage memory_usage() const;
     CollisionStats stats() const { return stats_; }
+    Limits limits() const { return limits_; }
     void query(Shape2D shape, std::vector<std::uint64_t>& output, QueryFilter filter = {}) const;
     std::optional<SegmentHit> segment(Vec2 start, Vec2 end, QueryFilter filter = {}) const;
 
@@ -100,6 +107,7 @@ class CollisionWorld {
         int x{}, y{};
         std::size_t body{};
     };
+    Limits limits_;
     std::vector<Body2D> bodies_, pending_;
     std::vector<Cell> cells_;
     std::vector<Contact2D> contacts_, next_contacts_, active_, next_active_;

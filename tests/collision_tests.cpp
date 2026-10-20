@@ -7,6 +7,124 @@
 namespace {
 using namespace engine;
 using namespace testing;
+void budget_failure_preserves(CollisionWorld& world, std::span<const Body2D> input, bool prime,
+                              std::string_view diagnostic) {
+    const auto bodies = world.bodies();
+    const auto contacts = world.contacts();
+    const auto events = world.events();
+    const std::vector<Body2D> saved_bodies(bodies.begin(), bodies.end());
+    const std::vector<Contact2D> saved_contacts(contacts.begin(), contacts.end());
+    const std::vector<TriggerEvent> saved_events(events.begin(), events.end());
+    const auto stats = world.stats();
+    const auto usage = world.memory_usage();
+    const auto limits = world.limits();
+    bool rejected = false;
+    try {
+        if (prime)
+            world.prime(input);
+        else
+            world.update(input);
+    } catch (const std::length_error& error) {
+        rejected = error.what() == diagnostic;
+    }
+    CHECK(rejected);
+    CHECK(world.bodies().data() == bodies.data() && world.contacts().data() == contacts.data() &&
+          world.events().data() == events.data());
+    CHECK(std::equal(saved_bodies.begin(), saved_bodies.end(), world.bodies().begin(),
+                     world.bodies().end(), [](const Body2D& a, const Body2D& b) {
+                         return a.id == b.id && a.shape.kind == b.shape.kind &&
+                                a.shape.center.x == b.shape.center.x &&
+                                a.shape.center.y == b.shape.center.y &&
+                                a.shape.half.x == b.shape.half.x &&
+                                a.shape.half.y == b.shape.half.y && a.layer == b.layer &&
+                                a.mask == b.mask && a.moving == b.moving && a.sensor == b.sensor;
+                     }));
+    CHECK(std::equal(saved_contacts.begin(), saved_contacts.end(), world.contacts().begin(),
+                     world.contacts().end()));
+    CHECK(std::equal(saved_events.begin(), saved_events.end(), world.events().begin(),
+                     world.events().end()));
+    CHECK(world.stats().memberships == stats.memberships &&
+          world.stats().candidate_pairs == stats.candidate_pairs &&
+          world.stats().narrow_tests == stats.narrow_tests);
+    CHECK(world.memory_usage() == usage && world.limits() == limits);
+}
+TEST(contact_budget_saturation_rollback_retry_and_moves) {
+    const CollisionWorld::Limits limits{3, 6};
+    CollisionWorld world(limits);
+    std::array<Body2D, 4> bodies;
+    for (std::size_t i = 0; i < bodies.size(); ++i)
+        bodies[i] = {i + 1, Shape2D::circle({2, 2}, 0.5F), 1, 1, true, true};
+    const auto three = std::span(bodies).first(3);
+    world.update(three);
+    CHECK(world.contacts().size() == 3 && world.events().size() == 3);
+    for (bool prime : {false, true})
+        budget_failure_preserves(world, bodies, prime, "Collision contact budget exceeded");
+    for (auto& body : bodies)
+        body.id += 4;
+    world.update(three);
+    CHECK(world.contacts().size() == 3 && world.events().size() == 6);
+    const auto usage = world.memory_usage();
+    CHECK(usage.groups[2].reserved_bytes == 6 * sizeof(Contact2D));
+    CHECK(usage.groups[3].reserved_bytes == 6 * sizeof(Contact2D));
+    CHECK(usage.groups[4].reserved_bytes == 12 * sizeof(TriggerEvent));
+    CollisionWorld moved(std::move(world));
+    CHECK(moved.limits() == limits && moved.memory_usage() == usage);
+    rejects([&] { world.update({}); });
+    world = CollisionWorld(CollisionWorld::Limits{0, 0});
+    world = std::move(moved);
+    CHECK(world.limits() == limits && world.memory_usage() == usage);
+    rejects([&] { moved.update({}); });
+    world.update(three);
+    CHECK(world.events().size() == 3 && world.events()[0].phase == TriggerPhase::stay);
+}
+TEST(event_budget_preserves_history_including_failed_prime) {
+    CollisionWorld world(CollisionWorld::Limits{3, 3});
+    std::array<Body2D, 3> bodies;
+    for (std::size_t i = 0; i < bodies.size(); ++i)
+        bodies[i] = {i + 1, Shape2D::circle({2, 2}, 0.5F), 1, 1, true, true};
+    world.update(bodies);
+    auto changed = bodies;
+    changed[2].id = 4; // Three contacts, but five old/new trigger pairs.
+    for (bool prime : {false, true})
+        budget_failure_preserves(world, changed, prime, "Collision event budget exceeded");
+    bodies[2].shape.center.x = 10;
+    world.update(bodies);
+    CHECK(world.contacts().size() == 1 && world.events().size() == 3);
+    CHECK(world.events()[0].phase == TriggerPhase::stay);
+    CHECK(world.events()[1].phase == TriggerPhase::exit &&
+          world.events()[2].phase == TriggerPhase::exit);
+    world.prime(bodies);
+    CHECK(world.events().empty());
+    world.update(bodies);
+    CHECK(world.events().size() == 1 && world.events()[0].phase == TriggerPhase::stay);
+}
+TEST(zero_budgets_query_capacity_and_constructor_bounds) {
+    rejects(
+        [] { CollisionWorld invalid(CollisionWorld::Limits{CollisionWorld::max_pairs + 1, 0}); });
+    rejects([] {
+        CollisionWorld invalid(CollisionWorld::Limits{0, CollisionWorld::max_pairs * 2 + 1});
+    });
+    rejects([] { CollisionWorld invalid(CollisionWorld::Limits{SIZE_MAX, SIZE_MAX}); });
+    CollisionWorld query_only(CollisionWorld::Limits{0, 0});
+    std::array<Body2D, CollisionWorld::max_bodies> bodies;
+    for (std::size_t i = 0; i < bodies.size(); ++i)
+        bodies[i] = {i + 1, Shape2D::circle({2, 2}, 0.5F), 1, 0, true, false};
+    query_only.update(bodies);
+    std::vector<std::uint64_t> hits;
+    query_only.query(Shape2D::circle({2, 2}, 1), hits);
+    CHECK(hits.size() == CollisionWorld::max_bodies);
+    CHECK(query_only.segment({0, 2}, {4, 2})->id == 1);
+    for (std::size_t i = 2; i < 5; ++i)
+        CHECK(query_only.memory_usage().groups[i].reserved_bytes == 0);
+    bodies[0].mask = bodies[1].mask = 1;
+    budget_failure_preserves(query_only, bodies, false, "Collision contact budget exceeded");
+    CollisionWorld solid(CollisionWorld::Limits{1, 0});
+    solid.update(std::span(bodies).first(2));
+    CHECK(solid.contacts().size() == 1 && solid.events().empty());
+    bodies[1].sensor = true;
+    budget_failure_preserves(solid, std::span(bodies).first(2), false,
+                             "Collision event budget exceeded");
+}
 TEST(memory_usage_tracks_successful_candidates_including_prime_and_history) {
     CollisionWorld world;
     const auto empty = world.memory_usage();

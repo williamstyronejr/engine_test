@@ -46,6 +46,9 @@ struct CorePickup {
     float radius{0.65F};
 };
 struct Game {
+    // Only player/alarm participate in reciprocal detection; walls remain queryable.
+    // Leave headroom above the current one-pair demand without shrinking body capacity.
+    static constexpr engine::CollisionWorld::Limits collision_limits{16, 32};
     Level level{Level::facility};
     Vec2 spawn_position{};
     engine::TileMap map;
@@ -65,7 +68,7 @@ struct Game {
     engine::Random random;
     unsigned door_completions{};
     float camera_height{14};
-    engine::CollisionWorld collisions;
+    engine::CollisionWorld collisions{collision_limits};
     std::uint64_t alarm_entries{};
     bool alarm_disabled{}, alarm_touching{};
     static constexpr Vec2 switch_position{-27, -7.5F};
@@ -280,7 +283,7 @@ struct Game {
         std::vector<engine::Body2D> next_bodies;
         next_bodies.reserve(engine::CollisionWorld::max_bodies);
         stage_sensor_bodies(next_walls, next_bodies);
-        engine::CollisionWorld next_collisions;
+        engine::CollisionWorld next_collisions(collisions.limits());
         next_collisions.prime(next_bodies); // Seed current contacts without synthetic enters.
         std::vector<engine::Rect> next_candidates;
         next_candidates.reserve(next_walls.size() + 1);

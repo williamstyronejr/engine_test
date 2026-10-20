@@ -167,6 +167,11 @@ object with the independent CPU route reference.
 The default worst-case capacities remain unchanged. Smaller observed peaks are
 not sufficient to lower general engine limits: disjoint batches of 256 overlapping
 sensors can require 32,640 contacts and 65,280 exit/enter events in one update.
+Explicit per-world contact/event budgets allow applications to reserve less while
+retaining body/query capacity. Feature Lab chooses 16 contacts and 32 events;
+reload candidates preserve those budgets. Overflow rejects the candidate before
+publication and leaves successful utilization peaks unchanged. These reservations
+change reported bytes without changing either coverage definition.
 
 ## Completion and failures
 

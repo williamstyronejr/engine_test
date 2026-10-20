@@ -9,6 +9,33 @@ using namespace testing;
 using namespace engine;
 using namespace feature_lab;
 const AssetRoot assets(TEST_ASSET_ROOT);
+TEST(sample_collision_budgets_survive_restart_reload_restore_and_transition) {
+    const CollisionWorld expected(Game::collision_limits);
+    const auto bytes = expected.buffer_bytes();
+    for (const auto level : {Level::facility, Level::annex}) {
+        auto game = load_game(assets, level);
+        const auto check = [&] {
+            CHECK(game.collisions.limits() == Game::collision_limits);
+            CHECK(game.collisions.buffer_bytes() == bytes);
+        };
+        check();
+        game.reload_tilemap(game.map.data());
+        check();
+        game.reload_scene(serialize_scene(game.world));
+        check();
+        game.restore(game.checkpoint());
+        check();
+        InputFrame restart{};
+        restart[static_cast<std::size_t>(Key::restart)].pressed = true;
+        game.update(restart);
+        check();
+        SceneFlow flow(game, false, &assets);
+        game.won = true;
+        flow.advance_level(game, {});
+        CHECK(game.level == next_level(level));
+        check();
+    }
+}
 void finish(Game& game) {
     Replay route;
     for (int step = 0; step < 3000 && !game.won; ++step)
