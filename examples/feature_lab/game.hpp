@@ -46,6 +46,8 @@ struct CorePickup {
     float radius{0.65F};
 };
 struct Game {
+    // Current authored levels peak at 11 nodes; retain room for edited content.
+    static constexpr engine::Scene::Limits scene_limits{256};
     // Only player/alarm participate in reciprocal detection; walls remain queryable.
     // Each participating shape is narrower than a cell on both axes: at most four
     // memberships each, eight total. Reserve four times that bound for headroom.
@@ -55,7 +57,7 @@ struct Game {
     engine::TileMap map;
     std::shared_ptr<const engine::AnimationSet> animations;
     engine::AnimationPlayer player_animation, core_animation, machine_animation, door_animation;
-    engine::Scene world;
+    engine::Scene world{scene_limits};
     Vec2 position{}, previous{};
     std::vector<engine::Rect> walls, collision_candidates;
     std::vector<engine::Entity> keys, draw_order;
@@ -529,7 +531,8 @@ struct Game {
                 construction_memory->set(staging_buffer_bytes());
         };
         world = engine::parse_scene(initial_,
-                                    level == Level::facility ? "facility.scene" : "annex.scene");
+                                    level == Level::facility ? "facility.scene" : "annex.scene",
+                                    scene_limits);
         account();
         validate_decorations(world);
         walls.clear();

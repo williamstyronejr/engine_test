@@ -32,6 +32,54 @@ collider 2 0.5 1
 entity 1 "parent" "group" 0 4 5 0 2 2
 end
 )";
+TEST(scene_budgets_preserve_handles_on_overflow_and_replacement_failure) {
+    rejects([] { Scene invalid(Scene::Limits{Scene::capacity + 1}); });
+    rejects([] { Scene invalid(Scene::Limits{SIZE_MAX}); });
+    Scene empty(Scene::Limits{0});
+    CHECK(empty.buffer_bytes() == 0);
+    rejects([&] { empty.create(1, "no room"); });
+    CHECK(empty.size() == 0 && empty.memory_usage().reserved_bytes() == 0);
+    replace_scene(empty, "scene 1\nend\n");
+    CHECK(empty.limits().entities == 0 && empty.buffer_bytes() == 0);
+    rejects([&] { replace_scene(empty, scene_text); });
+    const Scene::Limits limits{2};
+    auto scene = parse_scene(scene_text, "budget.scene", limits);
+    const auto parent = scene.find(1), child = scene.find(2);
+    const auto before = serialize_scene(scene);
+    const auto usage = scene.memory_usage();
+    bool overflow = false;
+    try {
+        scene.create(3, "overflow");
+    } catch (const std::length_error&) {
+        overflow = true;
+    }
+    CHECK(overflow && scene.memory_usage() == usage && serialize_scene(scene) == before);
+    auto excessive = before;
+    excessive.insert(excessive.rfind("end\n"), "entity 3 extra decor 0 0 0 0 1 1\n");
+    bool diagnosed = false;
+    try {
+        replace_scene(scene, excessive, "budget.scene");
+    } catch (const std::runtime_error& error) {
+        diagnosed = std::string(error.what()).find("Scene entity budget exceeded") != std::string::npos;
+    }
+    CHECK(diagnosed && scene.valid(parent) && scene.valid(child));
+    CHECK(scene.memory_usage() == usage && scene.limits() == limits);
+    replace_scene(scene, before);
+    CHECK(!scene.valid(parent) && !scene.valid(child) && scene.limits() == limits);
+    scene.defer_destroy(scene.find(1));
+    scene.defer_destroy(scene.find(2));
+    Scene moved(std::move(scene));
+    CHECK(moved.limits() == limits && scene.limits() == limits);
+    moved.flush();
+    CHECK(moved.size() == 0 && moved.memory_usage().core[2].peak_entries == 2);
+    const auto fresh = scene.create(7, "reuse moved source");
+    CHECK(scene.valid(fresh) && scene.limits() == limits);
+    Scene target(Scene::Limits{0});
+    scene.each([&](const SceneNode&) { rejects([&] { target = std::move(scene); }); });
+    CHECK(target.limits().entities == 0 && scene.valid(fresh));
+    target = std::move(scene);
+    CHECK(target.valid(fresh) && target.limits() == limits);
+}
 TEST(texture_roundtrip_and_exact_length) {
     const auto bytes = encode_texture(sample);
     const auto decoded = decode_texture(bytes);

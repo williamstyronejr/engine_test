@@ -93,7 +93,7 @@ TEST(small_collision_budgets_reuse_storage_with_full_query_capacity) {
 }
 TEST(scene_usage_and_component_peaks_allocate_nothing_after_setup) {
     using namespace engine;
-    Scene scene;
+    Scene scene(Scene::Limits{2});
     SpikeProfile profile;
     const auto a = scene.create(1, "a"), b = scene.create(2, "b");
     scene.add_component<int>(a, 1);
@@ -111,6 +111,27 @@ TEST(scene_usage_and_component_peaks_allocate_nothing_after_setup) {
     scene.flush();
     CHECK(scene.memory_usage().core[2].peak_entries == 2);
     CHECK(allocation_check::calls == calls);
+}
+TEST(stale_deletion_requests_do_not_grow_small_scene_buffers) {
+    using namespace engine;
+    Scene scene(Scene::Limits{2});
+    const auto warm = scene.create(1, "warm");
+    scene.destroy(warm);
+    const auto bytes = scene.buffer_bytes();
+    for (int tick = 0; tick < 100; ++tick) {
+        const auto a = scene.create(1, "a"), b = scene.create(2, "b");
+        scene.defer_destroy(a);
+        scene.defer_destroy(b);
+        scene.destroy(a); // Its queued generation is now stale.
+        const auto c = scene.create(3, "reused");
+        const auto calls = allocation_check::calls;
+        scene.defer_destroy(c); // Retain b, retire stale a, append c without growing.
+        scene.defer_destroy(c);
+        CHECK(allocation_check::calls == calls && scene.buffer_bytes() == bytes);
+        CHECK(scene.memory_usage().core[2].peak_entries == 2);
+        scene.flush();
+        CHECK(scene.size() == 0 && !scene.valid(b) && !scene.valid(c));
+    }
 }
 TEST(default_grid_saturation_allocates_nothing_after_setup) {
     using namespace engine;

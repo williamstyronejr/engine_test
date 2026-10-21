@@ -9,7 +9,7 @@ using namespace testing;
 using namespace engine;
 using namespace feature_lab;
 const AssetRoot assets(TEST_ASSET_ROOT);
-TEST(sample_collision_budgets_survive_restart_reload_restore_and_transition) {
+TEST(sample_budgets_survive_restart_reload_restore_and_transition) {
     const CollisionWorld expected(Game::collision_limits);
     const auto bytes = expected.buffer_bytes();
     for (const auto level : {Level::facility, Level::annex}) {
@@ -23,6 +23,14 @@ TEST(sample_collision_budgets_survive_restart_reload_restore_and_transition) {
             }
         CHECK(participating == 2 && Game::collision_limits.memberships >= participating * 4);
         const auto check = [&] {
+            CHECK(game.world.limits() == Game::scene_limits);
+            const auto scene_usage = game.world.memory_usage();
+            for (const auto& group : scene_usage.core)
+                CHECK(group.reserved_bytes == Game::scene_limits.entities * group.entry_bytes);
+            CHECK(scene_usage.components.dense_capacity_entries ==
+                  scene_usage.components.pools * Game::scene_limits.entities);
+            CHECK(scene_usage.components.sparse_capacity_entries ==
+                  scene_usage.components.pools * Game::scene_limits.entities);
             CHECK(game.collisions.limits() == Game::collision_limits);
             CHECK(game.collisions.buffer_bytes() == bytes);
         };

@@ -46,6 +46,28 @@ static_assert(!Component<const Health> && !Component<ThrowingMove>);
 static_assert(std::is_same_v<decltype(std::declval<const Scene&>().try_component<Health>({})),
                              const Health*>);
 
+TEST(component_pools_follow_small_scene_budgets_and_slot_reuse) {
+    Scene scene(Scene::Limits{3});
+    std::array<Entity, 3> entities;
+    for (std::size_t i = 0; i < entities.size(); ++i) {
+        entities[i] = scene.create(i + 1, "small");
+        scene.add_component<Health>(entities[i], static_cast<int>(i));
+    }
+    const auto usage = scene.memory_usage();
+    for (const auto& group : usage.core)
+        CHECK(group.reserved_bytes == 3 * group.entry_bytes);
+    CHECK(usage.components.dense_capacity_entries == 3 &&
+          usage.components.sparse_capacity_entries == 3 && usage.components.peak_entries_sum == 3);
+    rejects([&] { scene.create(4, "overflow"); });
+    CHECK(scene.memory_usage() == usage && scene.get_component<Health>(entities[2]).value == 2);
+    scene.destroy(entities[1]);
+    const auto reused = scene.create(4, "reused");
+    CHECK(reused.index == entities[1].index && reused.generation != entities[1].generation);
+    scene.add_component<Health>(reused, 99);
+    CHECK(!scene.valid(entities[1]) && scene.component_count<Health>() == 3);
+    CHECK(scene.get_component<Health>(entities[2]).value == 2);
+    CHECK(scene.memory_usage() == usage);
+}
 TEST(scene_memory_tracks_core_and_independent_pool_peaks_through_moves) {
     Scene scene;
     CHECK(scene.memory_usage().reserved_bytes() == 0);

@@ -192,12 +192,28 @@ old handles; slot reuse cannot revive them, and handles from other scenes are
 rejected. Moving a scene transfers its valid handles and gives the moved-from scene
 a new identity. Persistent IDs remain stable across serialization/reload.
 
-New scenes reserve no core vector storage. The first successful entity creation
-reserves the node, handle-slot and deferred-deletion vectors for 4096 entities.
+`Scene::Limits{entities}` chooses a fixed per-scene live-entity/handle-slot budget
+from zero through the 4,096-entry engine maximum. The default constructor and
+omitted limits retain 4,096. Above-maximum budgets throw `invalid_argument` before
+reserving storage; `limits()` returns the chosen budget. Moves transfer it to the
+destination and leave the empty, reusable source with the same budget.
+
+New scenes reserve no core vector storage. First entity creation reserves the node,
+handle-slot and deferred-deletion vectors for the chosen budget before publication.
+Entity/slot exhaustion throws `length_error` without changing live handles,
+contents, pending requests or successful usage peaks. This also changes default
+capacity-exhaustion exceptions from `runtime_error` to `length_error`.
 Deleting all entities retains those buffers for reuse. Moves transfer existing
 storage without reserving replacement buffers for the destination; a moved-from
 scene reserves storage again when reused. Entity creation can still allocate hash
 nodes and label storage.
+
+`parse_scene(text, source, limits)` applies the budget to the private candidate;
+`replace_scene` inherits the live scene's limits. Parse errors retain source/line
+diagnostics and remain `runtime_error`; failed replacement preserves the old scene.
+Budgets are runtime configuration, not serialized scene data. Feature Lab selects
+256 entries for both levels, including restart, reload, restore and transitions;
+larger authored scenes require changing that application budget.
 
 Nodes occupy dense storage, with optional sprite/collider records. Additional
 runtime component types live in scene-owned pools described below. `get` returns a
@@ -215,6 +231,9 @@ out-of-range final matrices are rejected, as with `world_transform`.
 Queue deletions with `defer_destroy`, then
 call `flush` outside iteration. Deleting a parent removes its subtree. Repeated
 requests are deduplicated; already-removed descendants are ignored during flush.
+When the queue fills, stale handles from earlier destroy/recreate cycles are
+discarded before a new unique request is appended. Valid requests retain order
+and cannot exceed the live-entity budget, so slot reuse never grows this buffer.
 Scene storage is thread-confined; concurrent readers/writers require external
 coordination.
 
@@ -223,7 +242,7 @@ coordination.
 `Scene::add_component<T>(entity, constructor_arguments...)` creates one `T` for a
 live entity. The application defines `T`; no engine registration macro or external
 library is required. A scene lazily creates at most 64 distinct type pools. Each
-reserves 4096 dense `{Entity, T}` entries and a 4096-entry sparse index vector on
+reserves the scene's entity budget in dense `{Entity, T}` entries and sparse indices on
 first successful use. Empty pools retain their storage and registry slot until
 scene destruction or replacement. Lookup-only APIs never create a pool.
 
@@ -291,7 +310,7 @@ core reservation can leave some vector capacity reserved.
 
 Counter maintenance and reads allocate nothing; reads scan at most 64 pools.
 Registry/hash overhead, object metadata and allocations owned by strings or user
-components remain excluded. Existing `buffer_bytes()` accounting and scene limits
+components remain excluded. Existing `buffer_bytes()` accounting and global engine maxima
 are unchanged.
 
 These pools contain **runtime data only**. Scene text version 1 remains unchanged;

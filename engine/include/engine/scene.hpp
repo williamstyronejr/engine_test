@@ -58,9 +58,15 @@ class Scene {
   public:
     static constexpr std::size_t capacity = 4096, max_depth = 64;
     static constexpr std::size_t max_component_types = 64;
+    struct Limits {
+        std::size_t entities{capacity};
+        bool operator==(const Limits&) const = default;
+    };
     // Core vectors reserve capacity on first entity creation, not for empty
     // placeholders. Destroying entities retains buffers for reuse.
     Scene();
+    explicit Scene(Limits limits);
+    Limits limits() const { return limits_; }
     Scene(const Scene&) = delete;
     Scene& operator=(const Scene&) = delete;
     Scene(Scene&& other);
@@ -103,7 +109,7 @@ class Scene {
             return existing->add(entity, std::forward<Args>(args)...);
         if (components_.size() == max_component_types)
             throw std::length_error("Scene component type limit reached");
-        auto candidate = std::make_unique<detail::ComponentPool<T>>(capacity);
+        auto candidate = std::make_unique<detail::ComponentPool<T>>(limits_.entities);
         auto& result = candidate->add(entity, std::forward<Args>(args)...);
         components_.emplace(std::type_index(typeid(T)), std::move(candidate));
         return result;
@@ -211,6 +217,7 @@ class Scene {
     void require_mutable() const;
     SceneNode& mutable_node(Entity entity);
     std::uint64_t domain_{};
+    Limits limits_;
     std::vector<Slot> slots_;
     std::vector<SceneNode> nodes_;
     std::vector<Entity> pending_;
@@ -219,7 +226,8 @@ class Scene {
     std::unordered_map<std::type_index, std::unique_ptr<detail::ComponentStorage>> components_;
     mutable unsigned int iteration_depth_{};
 };
-Scene parse_scene(std::string_view text, std::string_view source = "<scene>");
+Scene parse_scene(std::string_view text, std::string_view source = "<scene>",
+                  Scene::Limits limits = {});
 std::string serialize_scene(const Scene& scene);
 // Parses a complete replacement before committing; old handles become invalid on success.
 void replace_scene(Scene& live, std::string_view text, std::string_view source = "<scene>");
