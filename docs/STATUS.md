@@ -1,7 +1,7 @@
 # Implementation status
 
-The forty-eighth increment adds scene/core and component storage utilization,
-with retained per-level mutation peaks and native/CPU reference agreement.
+The forty-ninth increment adds per-scene capacity budgets, reducing Feature Lab
+scene reservations by 93.75% with tested overflow rollback and unchanged gameplay.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
@@ -1740,11 +1740,30 @@ gameplay states, collision telemetry and staging peaks match the prior increment
 both malformed-level runs preserve live state and clean staging. See
 [measurements and limits](../benchmarks/2026-10-21-scene-usage-results.md).
 
+## Increment 49: per-scene capacity budgets
+
+- `Scene::Limits` bounds live entities, handle slots, core vectors and component
+  pools, retaining the 4,096-entry engine default. Parsing accepts explicit limits;
+  replacement inherits the live limit and moves transfer it to the destination.
+- Feature Lab selects 256 entries for both levels and every restart, reload,
+  checkpoint restore and transition. A 257th node rejects without publishing the
+  candidate; valid content can be retried successfully.
+- Deferred deletion prunes stale generations when its queue fills, retaining valid
+  request order and avoiding allocation after destroy/recreate cycles.
+
+All 54 runtime groups pass in Debug and Release without skips; six focused CPU
+groups pass ASan/UBSan with leak detection. Three clean-source native runs and the
+CPU reference agree: scene reservations fall from 1,310,720 to 81,920 bytes (93.75%),
+and the largest covered transition peak falls from 1,383,742 to 154,942 bytes (88.8%).
+Gameplay states, collision telemetry and mutation demand are unchanged. Malformed
+scene/tilemap and over-budget scene attempts preserve live state and clean staging.
+Coverage is unchanged and timings carry no speedup claim. See
+[measurements and budget-failure evidence](../benchmarks/2026-10-21-scene-budgets-results.md).
+
 ## Next increment
 
-Add per-scene entity/slot budgets with the current 4,096-entry default, propagate
-them through parsing and component pools, and select conservative Feature Lab
-capacity. Validate saturation, handle identity, deferred deletion, rollback/retry
-and allocation behavior before repeating transition measurements.
-Broader physical hardware/driver checks remain outstanding; asset tooling and
-background loading stay deferred.
+Add an offline asset-validation command using existing readers and Feature Lab
+semantic checks, with file diagnostics and malformed-fixture coverage. Validate
+shipped content and scene budgets without an OpenGL context.
+Broader physical hardware/driver and manual release checks remain outstanding;
+background loading remains deferred.
