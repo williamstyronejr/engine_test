@@ -66,7 +66,12 @@ void transform_valid(LocalTransform t) {
         throw std::invalid_argument("Invalid or out-of-range local transform");
 }
 } // namespace
-Scene::Scene() : domain_(new_domain()) {}
+Scene::Scene() : Scene(Limits{}) {}
+Scene::Scene(Limits limits) : limits_(limits) {
+    if (limits.entities > capacity)
+        throw std::invalid_argument("Scene budget exceeds engine capacity");
+    domain_ = new_domain();
+}
 Scene::Scene(Scene&& other) : Scene() {
     *this = std::move(other);
 }
@@ -76,6 +81,7 @@ Scene& Scene::operator=(Scene&& other) {
     require_mutable();
     other.require_mutable();
     const auto replacement_domain = new_domain();
+    limits_ = other.limits_;
     domain_ = other.domain_;
     slots_ = std::move(other.slots_);
     nodes_ = std::move(other.nodes_);
@@ -101,22 +107,22 @@ Entity Scene::create(std::uint64_t id, std::string name, std::string tag) {
     label_valid(tag);
     if (!id || ids_.contains(id))
         throw std::invalid_argument("Persistent entity IDs must be unique and nonzero");
-    if (nodes_.size() >= capacity)
-        throw std::runtime_error("Scene entity limit reached");
+    if (nodes_.size() >= limits_.entities)
+        throw std::length_error("Scene entity budget exceeded");
     std::size_t index = 0;
     while (index < slots_.size() &&
            (slots_[index].alive ||
             slots_[index].generation == std::numeric_limits<std::uint64_t>::max()))
         ++index;
     const bool appended = index == slots_.size();
-    if (appended && slots_.size() == capacity)
-        throw std::runtime_error("Scene handle slots exhausted");
+    if (appended && slots_.size() == limits_.entities)
+        throw std::length_error("Scene handle slot budget exhausted");
     // Empty placeholders and move destinations need no backing buffers. Reserve
     // before publishing the first entity, including when reusing a moved-from scene.
     // Subsequent calls are no-ops and deferred destruction keeps its fixed storage.
-    slots_.reserve(capacity);
-    nodes_.reserve(capacity);
-    pending_.reserve(capacity);
+    slots_.reserve(limits_.entities);
+    nodes_.reserve(limits_.entities);
+    pending_.reserve(limits_.entities);
     if (appended)
         slots_.push_back({});
     const Entity entity{static_cast<std::uint32_t>(index), slots_[index].generation, domain_};
@@ -238,8 +244,16 @@ void Scene::destroy(Entity e) {
 }
 void Scene::defer_destroy(Entity e) {
     get(e);
-    if (std::find(pending_.begin(), pending_.end(), e) == pending_.end())
-        pending_.push_back(e);
+    if (std::find(pending_.begin(), pending_.end(), e) != pending_.end())
+        return;
+    if (pending_.size() == limits_.entities) {
+        // Destroy/recreate before flush can leave old generations queued. Retire
+        // those requests before appending; valid unique requests fit the live limit.
+        std::erase_if(pending_, [&](Entity queued) { return !valid(queued); });
+    }
+    if (pending_.size() >= limits_.entities)
+        throw std::length_error("Scene deletion queue budget exceeded");
+    pending_.push_back(e);
     peak_entries_[2] = std::max(peak_entries_[2], pending_.size());
 }
 void Scene::flush() {
@@ -319,10 +333,10 @@ void count(const std::vector<std::string>& t, std::size_t expected) {
         throw std::runtime_error("Wrong field count for " + t.front());
 }
 } // namespace
-Scene parse_scene(std::string_view text, std::string_view source) {
+Scene parse_scene(std::string_view text, std::string_view source, Scene::Limits limits) {
     if (text.size() > 4 * 1024 * 1024)
         throw std::runtime_error(std::string(source) + ": scene exceeds 4 MiB");
-    Scene result;
+    Scene result(limits);
     StagingBytes scene_memory;
     struct Parent {
         Entity child;
@@ -436,7 +450,7 @@ std::string serialize_scene(const Scene& scene) {
     return output.str();
 }
 void replace_scene(Scene& live, std::string_view text, std::string_view source) {
-    Scene candidate = parse_scene(text, source);
+    Scene candidate = parse_scene(text, source, live.limits());
     live = std::move(candidate);
 }
 } // namespace engine

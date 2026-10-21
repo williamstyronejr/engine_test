@@ -196,8 +196,10 @@ Fields can peak in different worlds or at different times. The reported total
 sums independently retained reservation maxima, not a simultaneous process-memory
 peak. Entry demand and component peak-byte sums are likewise not simultaneous used
 bytes. Reads and bounded two-level aggregation allocate nothing. JSON serialization
-happens afterward. The existing staging coverage and engine reservations are
-unchanged; strings, registry nodes, allocator overhead and user-owned component
+happens afterward. Per-scene budgets scale core and component pool reservations
+together; Feature Lab uses 256 entries while the engine default remains 4,096.
+Both utilization and staging coverage stay unchanged. Strings, registry nodes,
+allocator overhead and user-owned component
 allocations are outside these measurements. See [scene API details](../docs/FORMATS.md#runtime-component-pools).
 
 ## Completion and failures
@@ -212,10 +214,11 @@ process termination or output-write failures can prevent a new report. An older
 file is not evidence of a completed new run: inspect its build/workload/completion.
 
 Native CTest runs compare the full workload to the independent CPU reference and
-exercise unexpected shader, Annex tilemap and Annex scene failures using private
-asset copies. The malformed Annex attempts fail during the expected rejection at
+exercise unexpected shader, Annex tilemap, malformed Annex scene and 257-entity
+Annex scene failures using private asset copies. The latter exceeds Feature Lab's
+256-entry budget. The failing Annex attempts fail during the expected rejection at
 frame 1382 and again on the required transition at frame 1383; the latter is
-unverified and stops the run. Both retain state and clean staging counters. CPU
+unverified and stops the run. All retain state and clean staging counters. CPU
 tests additionally cover truncated files, quoted tokens, missing parents and
 missing gameplay roles, followed by repair/retry. Package testing
 runs the workload from a relocated archive with a deliberately misleading working

@@ -689,6 +689,9 @@ the largest covered transition peak to 1,383,742 bytes;
 see [grid budget evidence](benchmarks/2026-10-21-collision-grid-budgets-results.md).
 Scene/core and component counters now report reserved capacity and mutation peaks;
 see [scene utilization measurements](benchmarks/2026-10-21-scene-usage-results.md).
+Per-scene budgets now reduce Feature Lab scene reservations to 81,920 bytes and
+the largest covered transition peak to 154,942 bytes, with overflow rollback;
+see [scene budget measurements](benchmarks/2026-10-21-scene-budgets-results.md).
 Expected failures must preserve state/resources; unexpected outcomes save an
 incomplete report and return nonzero. See [the workload and timing contract](benchmarks/SPIKE_PROFILING.md).
 

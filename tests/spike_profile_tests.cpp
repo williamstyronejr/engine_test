@@ -204,7 +204,7 @@ TEST(scene_parser_tracks_lazy_reservation_before_later_validation) {
 }
 TEST(malformed_transition_inputs_retain_live_game_and_release_staging) {
     using namespace engine;
-    for (int fault = 0; fault < 7; ++fault) {
+    for (int fault = 0; fault < 8; ++fault) {
         SceneFiles files;
         auto game = load_game(files.root);
         SceneFlow flow(game, false, &files.root);
@@ -239,6 +239,12 @@ TEST(malformed_transition_inputs_retain_live_game_and_release_staging) {
                 const auto pos = scene.find("\"player\" 1");
                 CHECK(pos != std::string::npos);
                 scene.replace(pos, 10, "\"player\" 999");
+            }
+            if (fault == 7) {
+                auto candidate = parse_scene(scene);
+                while (candidate.size() <= Game::scene_limits.entities)
+                    candidate.create(1000 + candidate.size(), "excess", "decor");
+                scene = serialize_scene(candidate);
             }
             files.write(scene, Level::annex);
         }

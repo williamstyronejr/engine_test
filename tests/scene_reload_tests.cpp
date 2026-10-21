@@ -1,9 +1,28 @@
 #include "scene_fixture.hpp"
+#include "../examples/feature_lab/replay_file.hpp"
 
 namespace {
 using namespace engine;
 using namespace feature_lab;
 using namespace testing;
+TEST(scene_budget_overflow_rejects_reload_then_valid_content_retries) {
+    SceneFiles f;
+    auto game = load_game(f.root);
+    auto candidate = parse_scene(f.text());
+    while (candidate.size() < Game::scene_limits.entities)
+        candidate.create(1000 + candidate.size(), "decoration", "decor");
+    const auto full = serialize_scene(candidate);
+    candidate.create(9999, "excess", "decor");
+    const auto before = replay_hash(game);
+    const auto player = game.player;
+    const auto usage = game.world.memory_usage();
+    rejects([&] { game.reload_scene(serialize_scene(candidate)); });
+    CHECK(replay_hash(game) == before && game.world.valid(player));
+    CHECK(game.world.memory_usage() == usage && game.world.limits() == Game::scene_limits);
+    game.reload_scene(full);
+    CHECK(!game.world.valid(player) && game.world.size() == Game::scene_limits.entities);
+    CHECK(game.world.limits() == Game::scene_limits);
+}
 TEST(commit_rebinds_handles_preserves_progress_and_changes_save_identity) {
     SceneFiles f;
     auto game = load_game(f.root);
