@@ -129,6 +129,30 @@ void SpikeProfile::observe_collision(unsigned level, const engine::CollisionWorl
     }
     saved->fixed_bytes = std::max(saved->fixed_bytes, usage.fixed_bytes);
 }
+void SpikeProfile::observe_scene(unsigned level, const engine::Scene& scene) {
+    if (level >= scene_usage_.size())
+        throw std::invalid_argument("Invalid scene profile level");
+    const auto usage = scene.memory_usage();
+    auto& saved = scene_usage_[level];
+    if (!saved) {
+        saved = usage;
+        return;
+    }
+    const auto merge = [](std::size_t& a, std::size_t b) { a = std::max(a, b); };
+    for (std::size_t i = 0; i < usage.core.size(); ++i) {
+        merge(saved->core[i].reserved_bytes, usage.core[i].reserved_bytes);
+        merge(saved->core[i].peak_entries, usage.core[i].peak_entries);
+    }
+    auto& a = saved->components;
+    const auto& b = usage.components;
+    merge(a.pools, b.pools);
+    merge(a.dense_reserved_bytes, b.dense_reserved_bytes);
+    merge(a.sparse_reserved_bytes, b.sparse_reserved_bytes);
+    merge(a.dense_capacity_entries, b.dense_capacity_entries);
+    merge(a.sparse_capacity_entries, b.sparse_capacity_entries);
+    merge(a.peak_entries_sum, b.peak_entries_sum);
+    merge(a.peak_dense_bytes_sum, b.peak_dense_bytes_sum);
+}
 std::string SpikeProfile::json() const {
     std::ostringstream out;
     out.imbue(std::locale::classic());
@@ -199,6 +223,31 @@ std::string SpikeProfile::json() const {
                 << ",\"peak_entries\":" << group.peak_entries << '}';
         }
         out << "}}";
+    }
+    out << "]},\"scene_memory\":{\"coverage\":\"successful_mutations_v1\",\"levels\":[";
+    first_level = true;
+    for (std::size_t level = 0; level < scene_usage_.size(); ++level) {
+        if (!scene_usage_[level])
+            continue;
+        const auto& usage = *scene_usage_[level];
+        out << (first_level ? "" : ",") << "{\"level\":" << level
+            << ",\"reserved_bytes\":" << usage.reserved_bytes() << ",\"core\":{";
+        first_level = false;
+        for (std::size_t i = 0; i < usage.core.size(); ++i) {
+            const auto& group = usage.core[i];
+            out << (i ? "," : "") << json_string(engine::SceneMemoryUsage::names[i])
+                << ":{\"reserved_bytes\":" << group.reserved_bytes
+                << ",\"entry_bytes\":" << group.entry_bytes
+                << ",\"peak_entries\":" << group.peak_entries << '}';
+        }
+        const auto& c = usage.components;
+        out << "},\"components\":{\"pools\":" << c.pools
+            << ",\"dense_reserved_bytes\":" << c.dense_reserved_bytes
+            << ",\"sparse_reserved_bytes\":" << c.sparse_reserved_bytes
+            << ",\"dense_capacity_entries\":" << c.dense_capacity_entries
+            << ",\"sparse_capacity_entries\":" << c.sparse_capacity_entries
+            << ",\"peak_entries_sum\":" << c.peak_entries_sum
+            << ",\"peak_dense_bytes_sum\":" << c.peak_dense_bytes_sum << "}}";
     }
     return out.str() + "]}}";
 }

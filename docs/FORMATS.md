@@ -270,6 +270,30 @@ and entity handles. It excludes hash registry/allocator overhead and allocations
 owned by component values. Memory is bounded by the type count and each application's
 component sizes, not by a universal byte budget.
 
+`Scene::memory_usage()` splits the same reserved vector payload into `slots`,
+`nodes` and `pending` core groups, plus aggregate component storage. Each core
+group reports reserved bytes, entry size and peak entry count from successful
+mutations since construction. Slot demand includes retained handle slots after
+deletion; node demand counts live dense nodes; pending demand counts unique queued
+handles, including entries that become stale before flush. Duplicate requests
+do not increase the queue. Deletion and flush retain peaks. Moves transfer history
+and reset the source's counters; reusing that source starts new history.
+
+Component totals report retained pool count, dense/sparse reserved bytes and
+capacity entries. `peak_entries_sum` and `peak_dense_bytes_sum` sum each pool's
+successful-add peak, with bytes including entry handles and alignment padding.
+These are not simultaneous occupied totals: different pools can peak at different
+times. Empty pools remain reserved. Sparse capacity describes initialized index
+storage, including missing-entry sentinels, rather than live component demand.
+Failed construction/addition does not advance peaks or publish a new pool. Other
+failed mutations do not advance peaks, although a failed allocation during initial
+core reservation can leave some vector capacity reserved.
+
+Counter maintenance and reads allocate nothing; reads scan at most 64 pools.
+Registry/hash overhead, object metadata and allocations owned by strings or user
+components remain excluded. Existing `buffer_bytes()` accounting and scene limits
+are unchanged.
+
 These pools contain **runtime data only**. Scene text version 1 remains unchanged;
 `serialize_scene` writes authored nodes/sprites/colliders and omits runtime pools.
 Parsing returns empty pools; applications must rebuild derived state or implement

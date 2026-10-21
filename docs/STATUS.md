@@ -1,7 +1,7 @@
 # Implementation status
 
-The forty-seventh increment adds per-world collision grid budgets, retaining full
-query capacity and validating overflow rollback and native transition memory savings.
+The forty-eighth increment adds scene/core and component storage utilization,
+with retained per-level mutation peaks and native/CPU reference agreement.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
@@ -1720,10 +1720,31 @@ the CPU reference and previous gameplay states. Collision storage falls from
 and clean staging. Coverage is unchanged and timings carry no speedup claim. See
 [measurements and rollback evidence](../benchmarks/2026-10-21-collision-grid-budgets-results.md).
 
+## Increment 48: scene and component storage utilization
+
+- `Scene::memory_usage()` separates core slot/node/deletion-queue reservations from
+  aggregate dense/sparse component storage. Successful mutation peaks survive
+  deletion and flush; moves transfer history and reset source counters.
+- Component demand sums independent per-pool peaks, including entry handles and
+  alignment padding. Failed additions do not advance peaks or publish new pools.
+  Reads and bounded per-level collection allocate nothing.
+- Spike reports retain per-field maxima across published replacement worlds.
+  Native checks compare the full scene object to the CPU route reference; malformed
+  transition reports exclude unpublished candidates. Reservations remain unchanged.
+
+All 54 runtime groups pass in Debug and Release without skips; six focused CPU
+groups pass ASan/UBSan with leak detection. Three clean-source native runs agree:
+each scene reserves 1,310,720 bytes, with 4,096-entry capacities. Facility peaks at
+11 nodes, Annex at nine, and each level's component pool at three entries. All
+gameplay states, collision telemetry and staging peaks match the prior increment;
+both malformed-level runs preserve live state and clean staging. See
+[measurements and limits](../benchmarks/2026-10-21-scene-usage-results.md).
+
 ## Next increment
 
-Add scene core/component storage utilization to the spike reports, including
-reserved capacities and peak demand across published worlds. Validate collection
-and CPU/native agreement before proposing changes to the 4,096-entity default.
+Add per-scene entity/slot budgets with the current 4,096-entry default, propagate
+them through parsing and component pools, and select conservative Feature Lab
+capacity. Validate saturation, handle identity, deferred deletion, rollback/retry
+and allocation behavior before repeating transition measurements.
 Broader physical hardware/driver checks remain outstanding; asset tooling and
 background loading stay deferred.

@@ -2,6 +2,7 @@
 #include "replay_profile.hpp"
 #include "engine/staging_memory.hpp"
 #include "engine/collision_world.hpp"
+#include "engine/scene.hpp"
 #include <optional>
 
 namespace feature_lab {
@@ -47,6 +48,7 @@ class SpikeProfile {
                 const SpikeResources& resources);
     void collect_gpu(std::span<const engine::GpuTimingSample> samples);
     void observe_collision(unsigned level, const engine::CollisionWorld& world);
+    void observe_scene(unsigned level, const engine::Scene& scene);
     bool failed() const { return failed_ || !resources_stable_; }
     bool complete() const {
         return frames_.size() == frame_limit && events_.size() == event_limit && !failed();
@@ -61,6 +63,7 @@ class SpikeProfile {
     std::vector<Frame> frames_;
     std::vector<SpikeEvent> events_;
     std::array<std::optional<engine::CollisionMemoryUsage>, 2> collision_usage_{};
+    std::array<std::optional<engine::SceneMemoryUsage>, 2> scene_usage_{};
     SpikeResources baseline_{};
     std::uint64_t last_gpu_frame_{};
     unsigned transition_attempts_{};
