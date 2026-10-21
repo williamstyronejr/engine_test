@@ -950,18 +950,24 @@ not occupy the grid. Query filters operate on category bits independently of mas
 Engine limits: 256 bodies, 256 memberships per participating body, 16,384 memberships
 total, 32,640 contact pairs, and up to 65,280 trigger events per update. The default
 constructor reserves these maxima (approximately 6.25 MiB per world on the current
-ABI). `CollisionWorld(Limits{contacts, events})` instead reserves explicit contact
-and event budgets; active sensor history uses the contact budget. Each budget may
+ABI). `CollisionWorld(Limits{contacts, events, memberships})` instead reserves explicit
+contact, event and total grid-membership budgets; active sensor history uses the
+contact budget. Omitting `memberships` retains the engine default. Each budget may
 independently be zero. Values above the engine maxima throw `invalid_argument`
-before reservation. Body, grid and query limits are unchanged.
+before reservation. Body/query limits and the 256-membership per-body limit are
+unchanged. Nonzero-mask bodies consume memberships even if stationary or unable
+to form a reciprocal pair; zero-mask bodies consume none.
 
 `limits()` returns the chosen budgets, fixed until the world is replaced. Moves
 transfer budgets, buffers and usage history. Worlds are movable but not copyable;
 a moved-from world must be reassigned before updating. Successful ordinary updates
-do not allocate. Contact or event overflow throws `length_error` before publication,
-preserving published spans, trigger history, counters and successful usage peaks.
+do not allocate. Contact, event or total membership overflow throws `length_error`
+before publication, preserving published spans, trigger history, counters and
+successful usage peaks.
 Invalid input likewise preserves the published snapshot. Exception diagnostics may
 allocate. Failed scratch work is discarded when retrying an update.
+The per-body membership cap still throws `invalid_argument`; total membership
+overflow now throws `length_error` even with the default budget.
 Sorting gives deterministic ID order independent of input insertion order.
 `stats()` reports grid memberships, unique candidate pairs, and narrow-phase tests.
 
@@ -998,11 +1004,14 @@ on a shape returns fraction zero and zero normal; a zero-length segment is a poi
 query. Equal fractions prefer the lowest ID. Shapes at the segment endpoint count.
 Segment queries allocate no memory; neither query depends on moving/static flags.
 
-Feature Lab uses budgets of 16 contacts and 32 events, retained through reloads,
-restart, checkpoint restoration and level transitions. Only the player/alarm pair
+Feature Lab uses budgets of 16 contacts, 32 events and 32 grid memberships, retained
+through reloads, restart, checkpoint restoration and level transitions. Only the player/alarm pair
 participates in reciprocal detection, leaving headroom while keeping the full
-256-body query capacity. Tilemap reload candidates inherit the current world's
-budgets. Feature Lab assigns independent collision IDs for its player, patrol alarm, switch,
+256-body query capacity. The player's 0.6-unit box and alarm's 1.4-unit diameter
+are narrower than a 4-unit grid cell on each axis, so each occupies at most four
+cells at any position. The 32-membership budget is four times their combined bound.
+Tilemap reload candidates inherit the current world's budgets. Feature Lab assigns
+independent collision IDs for its player, patrol alarm, switch,
 static walls, and closed door. The example permits at most 252 static wall boxes
 (including solid tile cells) so its four reserved bodies fit the 256-body world;
 larger authored maps need a different example-side partitioning strategy. Static

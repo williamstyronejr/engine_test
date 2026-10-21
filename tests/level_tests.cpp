@@ -14,6 +14,14 @@ TEST(sample_collision_budgets_survive_restart_reload_restore_and_transition) {
     const auto bytes = expected.buffer_bytes();
     for (const auto level : {Level::facility, Level::annex}) {
         auto game = load_game(assets, level);
+        std::size_t participating = 0;
+        for (const auto& body : game.collisions.bodies())
+            if (body.mask) {
+                ++participating;
+                CHECK(body.shape.half.x * 2 < CollisionWorld::cell_size);
+                CHECK(body.shape.half.y * 2 < CollisionWorld::cell_size);
+            }
+        CHECK(participating == 2 && Game::collision_limits.memberships >= participating * 4);
         const auto check = [&] {
             CHECK(game.collisions.limits() == Game::collision_limits);
             CHECK(game.collisions.buffer_bytes() == bytes);

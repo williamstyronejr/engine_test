@@ -133,11 +133,12 @@ bool intersects(Shape2D a, Shape2D b) {
 }
 CollisionWorld::CollisionWorld() : CollisionWorld(Limits{}) {}
 CollisionWorld::CollisionWorld(Limits limits) : limits_(limits) {
-    if (limits.contacts > max_pairs || limits.events > max_pairs * 2)
+    if (limits.contacts > max_pairs || limits.events > max_pairs * 2 ||
+        limits.memberships > max_memberships)
         throw std::invalid_argument("Collision budgets exceed engine limits");
     bodies_.reserve(max_bodies);
     pending_.reserve(max_bodies);
-    cells_.reserve(max_memberships);
+    cells_.reserve(limits.memberships);
     for (auto* v : {&contacts_, &next_contacts_, &active_, &next_active_})
         v->reserve(limits.contacts);
     events_.reserve(limits.events);
@@ -171,8 +172,10 @@ void CollisionWorld::update(std::span<const Body2D> bodies) {
                   y1 = static_cast<int>(std::floor(b.max.y / cell_size));
         const auto count =
             static_cast<std::size_t>(x1 - x0 + 1) * static_cast<std::size_t>(y1 - y0 + 1);
-        if (count > 256 || count > max_memberships - cells_.size())
+        if (count > 256)
             throw std::invalid_argument("Collision grid membership limit exceeded");
+        if (count > limits_.memberships - cells_.size())
+            throw std::length_error("Collision grid membership budget exceeded");
         for (int y = y0; y <= y1; ++y)
             for (int x = x0; x <= x1; ++x)
                 cells_.push_back({x, y, i});

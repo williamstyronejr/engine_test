@@ -47,8 +47,9 @@ struct CorePickup {
 };
 struct Game {
     // Only player/alarm participate in reciprocal detection; walls remain queryable.
-    // Leave headroom above the current one-pair demand without shrinking body capacity.
-    static constexpr engine::CollisionWorld::Limits collision_limits{16, 32};
+    // Each participating shape is narrower than a cell on both axes: at most four
+    // memberships each, eight total. Reserve four times that bound for headroom.
+    static constexpr engine::CollisionWorld::Limits collision_limits{16, 32, 32};
     Level level{Level::facility};
     Vec2 spawn_position{};
     engine::TileMap map;
