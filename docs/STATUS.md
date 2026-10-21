@@ -1,7 +1,7 @@
 # Implementation status
 
-The forty-first increment adds scripted reload/transition profiling through normal
-gameplay rendering, with retained event timings and state/resource checks.
+The forty-seventh increment adds per-world collision grid budgets, retaining full
+query capacity and validating overflow rollback and native transition memory savings.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
@@ -1700,11 +1700,30 @@ falls from 7,909,182 to 1,645,374 bytes (79.2%). Both malformed-level runs prese
 the live game and clean staging. Coverage is unchanged and timings carry no
 speedup claim. See [measurements and rollback evidence](../benchmarks/2026-10-20-collision-budgets-results.md).
 
+## Increment 47: collision grid-membership budgets
+
+- A third optional collision budget controls total grid memberships, retaining
+  the 16,384 default and 256-body query capacity. Zero supports query-only worlds;
+  above-maximum budgets are rejected before reservation.
+- Membership overflow preserves published spans, trigger history, statistics and
+  usage peaks, including failed initialization. Total overflow now throws
+  `length_error`; the existing per-body cap retains `invalid_argument`.
+- Feature Lab reserves 32 memberships, four times the eight-cell bound derived
+  from its two participating shapes. Moves and replacement paths retain budgets.
+  Saturation, rollback/retry and allocation-counted tests cover small/default grids.
+
+All 54 runtime groups pass in Debug and Release without skips; six focused CPU
+groups pass ASan/UBSan with leak detection. Three clean-source native runs match
+the CPU reference and previous gameplay states. Collision storage falls from
+293,888 to 32,256 bytes (89.0%); the largest covered transition peak falls from
+1,645,374 to 1,383,742 bytes (15.9%). Both malformed-level runs preserve live state
+and clean staging. Coverage is unchanged and timings carry no speedup claim. See
+[measurements and rollback evidence](../benchmarks/2026-10-21-collision-grid-budgets-results.md).
+
 ## Next increment
 
-Add per-world grid-membership budgets with the current default. Grid storage is
-now most of the sample world's reservation. Choose conservative sample headroom
-from collider bounds, retain body/query capacity, and validate saturation,
-rollback/retry and allocation-free updates before repeating measurements.
+Add scene core/component storage utilization to the spike reports, including
+reserved capacities and peak demand across published worlds. Validate collection
+and CPU/native agreement before proposing changes to the 4,096-entity default.
 Broader physical hardware/driver checks remain outstanding; asset tooling and
 background loading stay deferred.
