@@ -48,8 +48,63 @@ void budget_failure_preserves(CollisionWorld& world, std::span<const Body2D> inp
           world.stats().narrow_tests == stats.narrow_tests);
     CHECK(world.memory_usage() == usage && world.limits() == limits);
 }
+TEST(membership_budget_saturation_rollback_and_retry) {
+    CollisionWorld world(CollisionWorld::Limits{3, 6, 8});
+    std::array bodies{Body2D{1, Shape2D::circle({-4, 0}, 0.5F), 1, 1, true, true},
+                      Body2D{2, Shape2D::circle({-4, 0}, 0.5F), 1, 1, true, true},
+                      Body2D{3, Shape2D::circle({-4, 0}, 0.5F), 1, 0, true, true}};
+    world.update(bodies); // Negative/zero cell edges: four memberships per active body.
+    CHECK(world.stats().memberships == 8 && world.contacts().size() == 1);
+    const auto cells = world.memory_usage().groups[1];
+    CHECK(cells.peak_entries == 8 && cells.reserved_bytes == 8 * cells.entry_bytes);
+    auto changed = bodies;
+    changed[2].mask = 1;
+    for (bool prime : {false, true})
+        budget_failure_preserves(world, changed, prime,
+                                 "Collision grid membership budget exceeded");
+    changed = bodies;
+    changed[0].shape = Shape2D::box({}, {4, 4}); // Nine memberships in one valid body.
+    budget_failure_preserves(world, changed, false, "Collision grid membership budget exceeded");
+    bodies[1].shape.center.x = 4;
+    world.update(bodies);
+    CHECK(world.stats().memberships == 8 && world.contacts().empty());
+    CHECK(world.events().size() == 1 && world.events()[0].phase == TriggerPhase::exit);
+    world.prime(bodies);
+    CHECK(world.events().empty());
+}
+TEST(zero_membership_budget_retains_full_queries_and_default_budget_is_compatible) {
+    rejects([] { CollisionWorld invalid(CollisionWorld::Limits{0, 0, SIZE_MAX}); });
+    rejects([] {
+        CollisionWorld invalid(CollisionWorld::Limits{0, 0, CollisionWorld::max_memberships + 1});
+    });
+    CollisionWorld world(CollisionWorld::Limits{0, 0, 0});
+    std::array<Body2D, CollisionWorld::max_bodies> bodies;
+    for (std::size_t i = 0; i < bodies.size(); ++i)
+        bodies[i] = {i + 1, Shape2D::box({}, {29, 29}), 1, 0, false, false};
+    world.prime(bodies);
+    std::vector<std::uint64_t> hits;
+    world.query(Shape2D::circle({}, 1), hits);
+    CHECK(hits.size() == CollisionWorld::max_bodies);
+    CHECK(world.segment({-40, 0}, {40, 0})->id == 1);
+    CHECK(world.stats().memberships == 0 && world.memory_usage().groups[1].reserved_bytes == 0);
+    bodies[0].mask = 1; // Even a stationary non-reciprocal body requires memberships.
+    for (bool prime : {false, true})
+        budget_failure_preserves(world, bodies, prime, "Collision grid membership budget exceeded");
+    CollisionWorld defaults(CollisionWorld::Limits{0, 0});
+    CHECK(defaults.limits().memberships == CollisionWorld::max_memberships);
+    for (auto& body : bodies) {
+        body.mask = 1;
+        body.layer = 2; // Populate the grid without contacts.
+    }
+    defaults.update(std::span(bodies).first(64)); // 64 * 256 = 16,384 memberships.
+    CHECK(defaults.stats().memberships == CollisionWorld::max_memberships);
+    budget_failure_preserves(defaults, std::span(bodies).first(65), false,
+                             "Collision grid membership budget exceeded");
+    defaults.update({});
+    CHECK(defaults.bodies().empty());
+}
 TEST(contact_budget_saturation_rollback_retry_and_moves) {
-    const CollisionWorld::Limits limits{3, 6};
+    const CollisionWorld::Limits limits{3, 6, 8};
     CollisionWorld world(limits);
     std::array<Body2D, 4> bodies;
     for (std::size_t i = 0; i < bodies.size(); ++i)

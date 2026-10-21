@@ -71,7 +71,7 @@ using namespace feature_lab;
 using namespace testing;
 TEST(small_collision_budgets_reuse_storage_with_full_query_capacity) {
     using namespace engine;
-    CollisionWorld world(CollisionWorld::Limits{3, 6});
+    CollisionWorld world(CollisionWorld::Limits{3, 6, 12});
     std::array<Body2D, CollisionWorld::max_bodies> bodies;
     for (std::size_t i = 0; i < bodies.size(); ++i)
         bodies[i] = {i < 3 ? i + 1 : i + 1000, Shape2D::circle({2, 2}, 0.5F),
@@ -80,13 +80,30 @@ TEST(small_collision_budgets_reuse_storage_with_full_query_capacity) {
     const auto bytes = world.buffer_bytes();
     const auto calls = allocation_check::calls;
     for (int tick = 0; tick < 120; ++tick) {
-        for (std::size_t i = 0; i < 3; ++i)
+        for (std::size_t i = 0; i < 3; ++i) {
             bodies[i].id += 3;
+            bodies[i].shape.center = tick % 2 ? Vec2{2, 2} : Vec2{0, 0};
+        }
         world.update(bodies);
+        CHECK(world.stats().memberships == (tick % 2 ? 3U : 12U));
         CHECK(world.bodies().size() == CollisionWorld::max_bodies);
         CHECK(world.contacts().size() == 3 && world.events().size() == 6);
     }
     CHECK(allocation_check::calls == calls && world.buffer_bytes() == bytes);
+}
+TEST(default_grid_saturation_allocates_nothing_after_setup) {
+    using namespace engine;
+    CollisionWorld world;
+    std::array<Body2D, 64> bodies;
+    for (std::size_t i = 0; i < bodies.size(); ++i)
+        bodies[i] = {i + 1, Shape2D::box({}, {29, 29}), 2, 1, true, false};
+    const auto calls = allocation_check::calls;
+    for (int tick = 0; tick < 4; ++tick) {
+        world.update(bodies);
+        CHECK(world.stats().memberships == CollisionWorld::max_memberships);
+        world.update({});
+    }
+    CHECK(allocation_check::calls == calls);
 }
 TEST(collision_usage_and_worst_case_event_batches_allocate_nothing_after_setup) {
     using namespace engine;

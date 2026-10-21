@@ -74,6 +74,7 @@ class CollisionWorld {
     static constexpr float cell_size = 4;
     struct Limits {
         std::size_t contacts{max_pairs}, events{max_pairs * 2};
+        std::size_t memberships{max_memberships};
         bool operator==(const Limits&) const = default;
     };
     CollisionWorld();

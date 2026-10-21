@@ -9,7 +9,7 @@ TEST(tilemap_replacement_keeps_the_current_world_budgets) {
     auto game = load_game(f.root);
     const auto published = game.collisions.bodies();
     const std::vector<Body2D> bodies(published.begin(), published.end());
-    const CollisionWorld::Limits limits{4, 8};
+    const CollisionWorld::Limits limits{4, 8, 8};
     game.collisions = CollisionWorld(limits);
     game.collisions.prime(bodies);
     const auto bytes = game.collisions.buffer_bytes();

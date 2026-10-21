@@ -684,6 +684,9 @@ successful updates; see [the utilization results](benchmarks/2026-10-20-collisio
 Explicit per-world budgets now reduce Feature Lab's collision reservations by
 95.5% and its largest covered transition peak by 79.2% relative to that baseline;
 see [budget validation and measurements](benchmarks/2026-10-20-collision-budgets-results.md).
+Grid-membership budgets further reduce collision reservations to 32,256 bytes and
+the largest covered transition peak to 1,383,742 bytes;
+see [grid budget evidence](benchmarks/2026-10-21-collision-grid-budgets-results.md).
 Expected failures must preserve state/resources; unexpected outcomes save an
 incomplete report and return nonzero. See [the workload and timing contract](benchmarks/SPIKE_PROFILING.md).
 
