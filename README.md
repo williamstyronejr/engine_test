@@ -687,6 +687,8 @@ see [budget validation and measurements](benchmarks/2026-10-20-collision-budgets
 Grid-membership budgets further reduce collision reservations to 32,256 bytes and
 the largest covered transition peak to 1,383,742 bytes;
 see [grid budget evidence](benchmarks/2026-10-21-collision-grid-budgets-results.md).
+Scene/core and component counters now report reserved capacity and mutation peaks;
+see [scene utilization measurements](benchmarks/2026-10-21-scene-usage-results.md).
 Expected failures must preserve state/resources; unexpected outcomes save an
 incomplete report and return nonzero. See [the workload and timing contract](benchmarks/SPIKE_PROFILING.md).
 
