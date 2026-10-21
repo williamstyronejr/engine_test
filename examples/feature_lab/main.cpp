@@ -952,6 +952,7 @@ int main(int argc, char** argv) {
                 if (spikes) {
                     spikes->record(frame_ms, spike_resources());
                     spikes->observe_collision(static_cast<unsigned>(game.level), game.collisions);
+                    spikes->observe_scene(static_cast<unsigned>(game.level), game.world);
                     if (spikes->failed())
                         running = false;
                 }

@@ -13,6 +13,24 @@
 #include <utility>
 
 namespace engine {
+SceneMemoryUsage Scene::memory_usage() const {
+    SceneMemoryUsage usage;
+    usage.core = {{{slots_.capacity() * sizeof(Slot), sizeof(Slot), peak_entries_[0]},
+                   {nodes_.capacity() * sizeof(SceneNode), sizeof(SceneNode), peak_entries_[1]},
+                   {pending_.capacity() * sizeof(Entity), sizeof(Entity), peak_entries_[2]}}};
+    for (const auto& [type, pool] : components_) {
+        const auto part = pool->memory_usage();
+        auto& total = usage.components;
+        total.pools += part.pools;
+        total.dense_reserved_bytes += part.dense_reserved_bytes;
+        total.sparse_reserved_bytes += part.sparse_reserved_bytes;
+        total.dense_capacity_entries += part.dense_capacity_entries;
+        total.sparse_capacity_entries += part.sparse_capacity_entries;
+        total.peak_entries_sum += part.peak_entries_sum;
+        total.peak_dense_bytes_sum += part.peak_dense_bytes_sum;
+    }
+    return usage;
+}
 std::size_t Scene::buffer_bytes() const {
     auto bytes = slots_.capacity() * sizeof(Slot) + nodes_.capacity() * sizeof(SceneNode) +
                  pending_.capacity() * sizeof(Entity);
@@ -64,6 +82,7 @@ Scene& Scene::operator=(Scene&& other) {
     ids_ = std::move(other.ids_);
     pending_ = std::move(other.pending_);
     components_ = std::move(other.components_);
+    peak_entries_ = std::exchange(other.peak_entries_, {});
     other.slots_.clear();
     other.nodes_.clear();
     other.ids_.clear();
@@ -116,6 +135,8 @@ Entity Scene::create(std::uint64_t id, std::string name, std::string tag) {
     }
     slots_[index].alive = true;
     slots_[index].dense = static_cast<std::uint32_t>(nodes_.size() - 1);
+    peak_entries_[0] = std::max(peak_entries_[0], slots_.size());
+    peak_entries_[1] = std::max(peak_entries_[1], nodes_.size());
     return entity;
 }
 bool Scene::valid(Entity e) const {
@@ -219,6 +240,7 @@ void Scene::defer_destroy(Entity e) {
     get(e);
     if (std::find(pending_.begin(), pending_.end(), e) == pending_.end())
         pending_.push_back(e);
+    peak_entries_[2] = std::max(peak_entries_[2], pending_.size());
 }
 void Scene::flush() {
     require_mutable();

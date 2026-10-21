@@ -174,6 +174,32 @@ reload candidates preserve those budgets. Overflow rejects the candidate before
 publication and leaves successful utilization peaks unchanged. These reservations
 change reported bytes without changing either coverage definition.
 
+## Scene storage utilization
+
+`spikes.scene_memory` adds `successful_mutations_v1` coverage. Like collision
+collection, it observes only published worlds after each rendered frame, includes
+warmup and retains independent per-field maxima across replacement worlds for
+each level. World counters include successful mutations before first observation,
+so initialization, deletions and deferred queues flushed within a tick are visible.
+Unpublished transition candidates are excluded; partial reports list only observed
+levels. Native tests compare the entire object against the CPU route reference.
+
+Each level contains `reserved_bytes`, core groups `slots`, `nodes`, `pending`, and
+`components`. Core groups report `reserved_bytes`, `entry_bytes`, `peak_entries`.
+Components report `pools`, `dense_reserved_bytes`, `sparse_reserved_bytes`,
+`dense_capacity_entries`, `sparse_capacity_entries`, `peak_entries_sum`, and
+`peak_dense_bytes_sum`. Component peaks sum per-pool maxima; sparse capacities
+include missing-entry sentinels. Pool types are deliberately aggregated without
+implementation-specific type names or unordered registry ordering.
+
+Fields can peak in different worlds or at different times. The reported total
+sums independently retained reservation maxima, not a simultaneous process-memory
+peak. Entry demand and component peak-byte sums are likewise not simultaneous used
+bytes. Reads and bounded two-level aggregation allocate nothing. JSON serialization
+happens afterward. The existing staging coverage and engine reservations are
+unchanged; strings, registry nodes, allocator overhead and user-owned component
+allocations are outside these measurements. See [scene API details](../docs/FORMATS.md#runtime-component-pools).
+
 ## Completion and failures
 
 Success requires the frame limit, all ten verified events, a stable viewport/resource

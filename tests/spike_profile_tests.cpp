@@ -9,6 +9,24 @@
 namespace {
 using namespace feature_lab;
 using namespace testing;
+TEST(scene_profile_keeps_each_level_history_across_replacement) {
+    engine::Scene scene;
+    SpikeProfile profile;
+    const auto a = scene.create(1, "a");
+    scene.add_component<int>(a, 7);
+    scene.defer_destroy(a);
+    scene.flush(); // Demand before observation still appears in the report.
+    profile.observe_scene(0, scene);
+    profile.observe_scene(1, scene);
+    const auto before = profile.json();
+    scene = engine::Scene{};
+    profile.observe_scene(0, scene);
+    CHECK(profile.json() == before);
+    rejects([&] { profile.observe_scene(2, scene); });
+    CHECK(profile.json() == before);
+    CHECK(before.find("\"coverage\":\"successful_mutations_v1\"") != std::string::npos);
+    CHECK(before.find("\"peak_entries_sum\":1") != std::string::npos);
+}
 TEST(collision_profile_keeps_each_level_history_across_replacement) {
     engine::CollisionWorld world;
     SpikeProfile profile;
@@ -398,6 +416,7 @@ void reference(const char* path) {
         profile.record({}, 64, 64, {}, {}, static_cast<unsigned>(game.ticks > ticks));
         spikes.record({}, {});
         spikes.observe_collision(static_cast<unsigned>(game.level), game.collisions);
+        spikes.observe_scene(static_cast<unsigned>(game.level), game.world);
     }
     CHECK(spikes.complete() && game.won && game.level == Level::facility);
     profile.write(path, profile.json(replay_hash(game), game.ticks, level_name(game.level), {},

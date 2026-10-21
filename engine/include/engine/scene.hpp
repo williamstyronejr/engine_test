@@ -1,6 +1,7 @@
 #pragma once
 #include "engine/component_pool.hpp"
 #include "engine/math.hpp"
+#include <array>
 #include <cstdint>
 #include <functional>
 #include <memory>
@@ -36,6 +37,22 @@ struct SceneNode {
     Entity parent;
     std::optional<Sprite> sprite;
     std::optional<Collider> collider;
+};
+struct SceneBufferUsage {
+    std::size_t reserved_bytes{}, entry_bytes{}, peak_entries{};
+    bool operator==(const SceneBufferUsage&) const = default;
+};
+struct SceneMemoryUsage {
+    static constexpr std::array<std::string_view, 3> names{"slots", "nodes", "pending"};
+    std::array<SceneBufferUsage, 3> core{};
+    ComponentMemoryUsage components{};
+    std::size_t reserved_bytes() const {
+        auto bytes = components.dense_reserved_bytes + components.sparse_reserved_bytes;
+        for (const auto& group : core)
+            bytes += group.reserved_bytes;
+        return bytes;
+    }
+    bool operator==(const SceneMemoryUsage&) const = default;
 };
 class Scene {
   public:
@@ -135,6 +152,9 @@ class Scene {
     // Reserved node/handle/pool vector bytes; excludes allocator/registry overhead
     // and allocations owned by strings or user components.
     std::size_t buffer_bytes() const;
+    // Successful mutation peaks, retained through deletion. Components sum each
+    // pool's peak, not simultaneous usage. Moves reset the source's history.
+    SceneMemoryUsage memory_usage() const;
     std::size_t size() const { return nodes_.size(); }
     template <class F> void each(F&& function) const {
         IterationScope guard(*this);
@@ -194,6 +214,7 @@ class Scene {
     std::vector<Slot> slots_;
     std::vector<SceneNode> nodes_;
     std::vector<Entity> pending_;
+    std::array<std::size_t, 3> peak_entries_{};
     std::unordered_map<std::uint64_t, Entity> ids_;
     std::unordered_map<std::type_index, std::unique_ptr<detail::ComponentStorage>> components_;
     mutable unsigned int iteration_depth_{};

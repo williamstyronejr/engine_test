@@ -46,6 +46,57 @@ static_assert(!Component<const Health> && !Component<ThrowingMove>);
 static_assert(std::is_same_v<decltype(std::declval<const Scene&>().try_component<Health>({})),
                              const Health*>);
 
+TEST(scene_memory_tracks_core_and_independent_pool_peaks_through_moves) {
+    Scene scene;
+    CHECK(scene.memory_usage().reserved_bytes() == 0);
+    const auto a = scene.create(1, "a"), b = scene.create(2, "b"), c = scene.create(3, "c");
+    for (auto entity : {a, b, c})
+        scene.add_component<Health>(entity, 10);
+    for (auto entity : {a, b, c})
+        scene.remove_component<Health>(entity);
+    scene.add_component<Aligned>(a);
+    scene.defer_destroy(a);
+    scene.defer_destroy(a); // Duplicate requests do not increase demand.
+    scene.defer_destroy(b);
+    const auto usage = scene.memory_usage();
+    CHECK(usage.reserved_bytes() == scene.buffer_bytes());
+    CHECK(usage.core[0].peak_entries == 3 && usage.core[1].peak_entries == 3 &&
+          usage.core[2].peak_entries == 2);
+    for (const auto& group : usage.core)
+        CHECK(group.reserved_bytes == Scene::capacity * group.entry_bytes);
+    const auto& pools = usage.components;
+    CHECK(pools.pools == 2 && pools.peak_entries_sum == 4);
+    const auto health_entry = sizeof(detail::ComponentPool<Health>::Entry);
+    const auto aligned_entry = sizeof(detail::ComponentPool<Aligned>::Entry);
+    CHECK(pools.dense_reserved_bytes == Scene::capacity * (health_entry + aligned_entry));
+    CHECK(pools.peak_dense_bytes_sum == 3 * health_entry + aligned_entry);
+    CHECK(pools.sparse_reserved_bytes == 2 * Scene::capacity * sizeof(std::size_t));
+    CHECK(pools.dense_capacity_entries == 2 * Scene::capacity &&
+          pools.sparse_capacity_entries == 2 * Scene::capacity);
+    rejects([&] { scene.create(1, "duplicate"); });
+    rejects([&] { scene.add_component<Throws>(c, -1); }); // Unpublished new pool.
+    rejects([&] { scene.defer_destroy({}); });
+    rejects([&] { replace_scene(scene, "invalid"); });
+    CHECK(scene.memory_usage() == usage);
+    scene.flush();
+    CHECK(scene.size() == 1 && scene.memory_usage() == usage);
+    Scene moved(std::move(scene));
+    CHECK(moved.valid(c) && moved.memory_usage() == usage);
+    CHECK(scene.memory_usage().components.pools == 0);
+    for (const auto& group : scene.memory_usage().core)
+        CHECK(group.peak_entries == 0);
+    scene.create(7, "new history");
+    CHECK(scene.memory_usage().core[1].peak_entries == 1);
+    scene = std::move(moved);
+    CHECK(scene.memory_usage() == usage);
+    scene.add_component<Throws>(c, 1);
+    const auto published = scene.memory_usage();
+    const auto next = scene.create(4, "next");
+    const auto before = scene.memory_usage();
+    rejects([&] { scene.add_component<Throws>(next, -1); }); // Existing pool.
+    rejects([&] { scene.add_component<Throws>(c, 2); });
+    CHECK(scene.memory_usage() == before && before.components == published.components);
+}
 TEST(component_access_rejects_stale_foreign_and_missing_handles) {
     Scene scene, foreign;
     const auto a = scene.create(1, "a");

@@ -1,5 +1,6 @@
 #pragma once
 #include "engine/entity.hpp"
+#include <algorithm>
 #include <cstddef>
 #include <span>
 #include <stdexcept>
@@ -8,6 +9,13 @@
 #include <vector>
 
 namespace engine {
+// Sums over retained pools. Per-pool peaks can occur at different times.
+struct ComponentMemoryUsage {
+    std::size_t pools{}, dense_reserved_bytes{}, sparse_reserved_bytes{};
+    std::size_t dense_capacity_entries{}, sparse_capacity_entries{};
+    std::size_t peak_entries_sum{}, peak_dense_bytes_sum{};
+    bool operator==(const ComponentMemoryUsage&) const = default;
+};
 // Dense compaction and scene teardown must not throw. Components can own resources
 // and need not be default-constructible or copyable. Special members must not
 // access the owning scene. Pools and their payloads are confined to one thread.
@@ -23,6 +31,7 @@ class ComponentStorage {
     virtual ~ComponentStorage() = default;
     virtual void erase(Entity entity) noexcept = 0;
     virtual std::size_t buffer_bytes() const noexcept = 0;
+    virtual ComponentMemoryUsage memory_usage() const noexcept = 0;
 };
 
 template <Component T> class ComponentPool final : public ComponentStorage {
@@ -53,6 +62,7 @@ template <Component T> class ComponentPool final : public ComponentStorage {
         // construction succeeds, so a throwing user constructor leaves no record.
         dense_.emplace_back(entity, std::forward<Args>(args)...);
         sparse_[entity.index] = dense_.size() - 1;
+        peak_entries_ = std::max(peak_entries_, dense_.size());
         return dense_.back().value;
     }
     void erase(Entity entity) noexcept override {
@@ -72,6 +82,10 @@ template <Component T> class ComponentPool final : public ComponentStorage {
     std::size_t buffer_bytes() const noexcept override {
         return sparse_.capacity() * sizeof(std::size_t) + dense_.capacity() * sizeof(Entry);
     }
+    ComponentMemoryUsage memory_usage() const noexcept override {
+        return {1, dense_.capacity() * sizeof(Entry), sparse_.capacity() * sizeof(std::size_t),
+                dense_.capacity(), sparse_.capacity(), peak_entries_, peak_entries_ * sizeof(Entry)};
+    }
 
   private:
     static constexpr std::size_t missing = std::numeric_limits<std::size_t>::max();
@@ -83,6 +97,7 @@ template <Component T> class ComponentPool final : public ComponentStorage {
     }
     std::vector<std::size_t> sparse_;
     std::vector<Entry> dense_;
+    std::size_t peak_entries_{};
 };
 } // namespace detail
 } // namespace engine

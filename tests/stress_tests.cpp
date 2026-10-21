@@ -91,6 +91,27 @@ TEST(small_collision_budgets_reuse_storage_with_full_query_capacity) {
     }
     CHECK(allocation_check::calls == calls && world.buffer_bytes() == bytes);
 }
+TEST(scene_usage_and_component_peaks_allocate_nothing_after_setup) {
+    using namespace engine;
+    Scene scene;
+    SpikeProfile profile;
+    const auto a = scene.create(1, "a"), b = scene.create(2, "b");
+    scene.add_component<int>(a, 1);
+    const auto calls = allocation_check::calls;
+    for (unsigned tick = 0; tick < 100; ++tick) {
+        scene.add_component<int>(b, 2);
+        scene.remove_component<int>(b);
+        const auto usage = scene.memory_usage();
+        CHECK(usage.reserved_bytes() == scene.buffer_bytes());
+        CHECK(usage.components.peak_entries_sum == 2);
+        profile.observe_scene(tick % 2, scene);
+    }
+    scene.defer_destroy(a);
+    scene.defer_destroy(b);
+    scene.flush();
+    CHECK(scene.memory_usage().core[2].peak_entries == 2);
+    CHECK(allocation_check::calls == calls);
+}
 TEST(default_grid_saturation_allocates_nothing_after_setup) {
     using namespace engine;
     CollisionWorld world;
@@ -167,6 +188,8 @@ TEST(empty_scenes_and_scene_moves_do_not_allocate) {
         });
         CHECK(allocation_check::calls == queue_calls);
         CHECK(destination.buffer_bytes() == reserved);
+        for (const auto& group : destination.memory_usage().core)
+            CHECK(group.peak_entries == Scene::capacity);
     }
     CHECK(allocation_check::live == baseline);
 }
