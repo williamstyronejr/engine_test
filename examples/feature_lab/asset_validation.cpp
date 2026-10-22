@@ -12,6 +12,39 @@ std::size_t AssetValidation::failures() const {
     return static_cast<std::size_t>(std::count_if(checks.begin(), checks.end(),
                                                 [](const auto& c) { return !c.error.empty(); }));
 }
+AssetValidation validate_asset_file(const engine::AssetRoot& assets, AssetFormat format,
+                                    std::string_view key, engine::Scene::Limits limits) {
+    AssetCheck check{std::string(key), {}};
+    try {
+        if (format != AssetFormat::scene && limits != engine::Scene::Limits{})
+            throw std::invalid_argument("Scene budgets apply only to scene files");
+        switch (format) {
+        case AssetFormat::scene:
+            engine::parse_scene(assets.text(key), key, limits);
+            break;
+        case AssetFormat::tilemap:
+            engine::decode_tilemap(assets.read(key, 4 * 1024 * 1024), key);
+            break;
+        case AssetFormat::animation:
+            engine::decode_animations(assets.read(key, 1024 * 1024), key);
+            break;
+        case AssetFormat::texture:
+            engine::TextureCache(assets).load(key);
+            break;
+        case AssetFormat::font:
+            engine::load_font(assets, key);
+            break;
+        case AssetFormat::sound:
+            engine::decode_wav(assets.read(key, engine::SoundData::max_file_bytes), key);
+            break;
+        default:
+            throw std::invalid_argument("Unknown asset format");
+        }
+    } catch (const std::exception& failure) {
+        check.error = failure.what();
+    }
+    return {{std::move(check)}};
+}
 AssetValidation validate_assets(const engine::AssetRoot& assets) {
     AssetValidation result;
     const auto check = [&](std::string name, auto&& operation) {

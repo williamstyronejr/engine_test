@@ -83,6 +83,13 @@ function(package_headless root work)
   if(NOT result EQUAL 0 OR NOT output MATCHES "20 checks, 0 failed")
     message(FATAL_ERROR "Relocated asset validation failed: ${output}${error}")
   endif()
+  execute_process(COMMAND ${environment} "${root}/bin/validate_assets"
+    --type scene --file facility.scene --scene-budget 256
+    WORKING_DIRECTORY "${work}/unrelated cwd" RESULT_VARIABLE result OUTPUT_VARIABLE output ERROR_VARIABLE error)
+  file(WRITE "${work}/asset-file-validation.log" "${output}${error}")
+  if(NOT result EQUAL 0 OR NOT output MATCHES "1 check, 0 failed")
+    message(FATAL_ERROR "Relocated single-file validation failed: ${output}${error}")
+  endif()
   execute_process(COMMAND ${environment} "${root}/bin/feature_lab" --verify
     WORKING_DIRECTORY "${work}/unrelated cwd" RESULT_VARIABLE result OUTPUT_VARIABLE output ERROR_VARIABLE error)
   file(WRITE "${work}/game-verify.log" "${output}${error}")

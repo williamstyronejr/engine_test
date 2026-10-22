@@ -49,13 +49,17 @@ does not change their bindings. Keypad Enter stays reserved for menu activation.
 ./bin/feature_lab --no-audio
 ./bin/feature_lab --verify
 ./bin/validate_assets
+./bin/validate_assets --type scene --file facility.scene --scene-budget 256
 ./bin/stress_bench --frames 60 --warmup 10 --cycles 2 --report /tmp/stress.json
 ./bin/feature_lab --stress --help
 ```
 
 `--verify` runs the complete scripted gameplay simulation without creating a
 window. `validate_assets` checks content, scene budgets and level construction,
-returning nonzero for errors; it does not compile GLSL or prove route reachability.
+returning nonzero for errors. `--type TYPE --file KEY` validates a single root-relative
+scene, tilemap, animation, texture, font or sound file without checking dependencies
+or gameplay. Scene mode defaults to 4,096 entries; `--scene-budget` selects a smaller
+limit. Neither mode compiles GLSL or proves route reachability.
 The benchmark generates its own content and needs no asset directory.
 Stress reports are written to the requested existing parent directory. Stress
 mode uses offline mixing and changes no user settings.

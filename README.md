@@ -936,8 +936,12 @@ device:
 ```sh
 cmake --build --preset debug --target validate_assets -j2
 ./build/debug/validate_assets --assets assets
+./build/debug/validate_assets --assets /path/to/work --type scene --file draft.scene --scene-budget 256
 ```
 
+Use `--type` and `--file` to check one scene, tilemap, animation, texture, font or
+sound file without a complete game bundle. Single-file mode checks its format and
+optional scene budget; bundle mode also checks references and gameplay semantics.
 The release archive includes `bin/validate_assets`, which discovers its packaged
 assets automatically. Missing/corrupt assets, scene-budget overflow, gameplay
 construction errors and incompatible texture references return nonzero. Shader

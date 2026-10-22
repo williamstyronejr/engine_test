@@ -1,7 +1,7 @@
 # Implementation status
 
-The fiftieth increment adds an offline Feature Lab asset validator, including
-strict decoding, level semantics, scene budgets and transition texture checks.
+The fifty-first increment adds explicit single-file asset validation for six engine
+formats, with generic scene budgets and no dependency on a complete game bundle.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
@@ -59,7 +59,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
 | F06 | Implemented (v1) | EANI reader/writer; exact frame timing, loops, pause/restart, large advances; animated player/machine/door with exactly-once completion | Optional frame callbacks and richer animation types |
 | F07 | Implemented (v1) | Handle/compaction/hierarchy tests, scene round trips, deferred deletion; title/gameplay and Facility/Annex transitions; typed runtime pools with checked access, intersecting queries, ownership/exception/move tests, allocation-free steady queries and pickup integration | Optional custom component serialization codecs, query scheduling and broader ECS tooling |
-| F08 | Implemented (v1) | ETEX/ETMP/EANI/WAV/EFNT readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, transactional shader/texture/font/animation/tilemap/scene/audio reload with gameplay-content replay isolation; optional bounded inotify watching, debounce, metadata recovery and watched GPU pixel tests; CPU-only bundle validation with file/level diagnostics | Optional background loading and broader asset tooling |
+| F08 | Implemented (v1) | ETEX/ETMP/EANI/WAV/EFNT readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, transactional shader/texture/font/animation/tilemap/scene/audio reload with gameplay-content replay isolation; optional bounded inotify watching, debounce, metadata recovery and watched GPU pixel tests; CPU-only bundle and single-file validation with file/level diagnostics | Optional background loading and broader asset tooling |
 | F09 | Implemented (v1) | Swept player boxes; box/circle contacts; moving-body grid vs brute force; reciprocal filters; trigger history; overlap/segment queries; alarm/switch and restore tests | Rigid-body dynamics, rotating shapes and moving-body CCD are outside initial scope |
 | F10 | Partial | PCM16 WAV assets/resampling, loops, voice controls, gain ramps, master/music/effects controls, stereo emitter, null-device soundtrack/restart tests; deterministic transport recovery faults; real ALSA file-sink failure/fallback; recovery counters and listening probe | Physical disconnect/recovery, system suspend/resume and audible-output checks; see [audio validation](AUDIO_VALIDATION.md) |
 | F11 | Partial | Atlas bitmap text with authored metrics, bounded allocation-free layout, font fallback and visual gallery; clipped status panel, buttons/checkboxes/sliders, keyboard/pointer navigation, bounded layout, modal settings and title screen; `ui`, scene-flow and GPU pixel tests | Broader manual navigation checks |
@@ -1787,11 +1787,36 @@ hashes/inventory. Shipped content produces 20 checks with zero failures with dis
 variables unset. All three package checks pass, including relocated CPU validation
 and OpenGL gameplay. See [usage and validation boundaries](ASSET_VALIDATION.md).
 
+## Increment 51: single-file asset validation
+
+- `validate_assets --type TYPE --file KEY [--assets DIRECTORY]` explicitly selects
+  scene, tilemap, animation, texture, font or sound decoding, independently of the
+  filename extension. Only the root-relative file is checked; referenced assets
+  and Feature Lab gameplay/transition requirements are outside this mode.
+- Generic scene validation uses the 4,096-entry engine default. `--scene-budget N`
+  accepts 0..4,096 with scene mode, including zero for an empty scene. Bundle mode
+  retains its fixed 256-entry budget and rejects overrides.
+- Missing option pairs, duplicates, unknown types, malformed budgets and incompatible
+  flags return 2 before root discovery. Content/path/budget-exhaustion failures
+  return 1 with file context; scene failures retain source/line diagnostics.
+- The existing bounded readers, confinement, read-only operation and CPU-only
+  build/install path are retained. Reports identify the selected format and scene
+  budget and state that dependencies and gameplay were not checked.
+
+All 56 runtime groups pass in Debug and Release without skips. Both validator CPU
+groups pass ASan/UBSan with leak detection. Tests cover every format in an otherwise
+empty root, renamed extensions, truncated files and repair/retry, unchanged bytes,
+generic scenes without gameplay roles, 256/257 and zero budgets, wrong decoders,
+missing parents/files, size limits and escaping paths. CLI tests cover all six
+formats and option combinations, including duplicate zero-valued budgets. All three
+package checks pass; the relocated command validates a scene with an explicit
+256-entry budget alongside the existing bundle checks.
+See [single-file usage and boundaries](ASSET_VALIDATION.md#single-file-format-checks).
+
 ## Next increment
 
-Add explicit single-file validation modes for the existing scene, tilemap, animation,
-texture, font and sound formats, so content authors can check work in progress
-without supplying a complete Feature Lab bundle. Keep the bundle's gameplay and
-transition checks distinct from generic format validation.
+Add versioned JSON validation reports for automation, including mode, selected
+format/budget, check results and diagnostics. Preserve the existing human-readable
+output and exit codes, and test escaping, failure reports and packaged use.
 Broader physical hardware/driver and manual release checks remain outstanding;
 background loading remains deferred.
