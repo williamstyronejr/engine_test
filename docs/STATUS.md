@@ -1,7 +1,7 @@
 # Implementation status
 
-The forty-ninth increment adds per-scene capacity budgets, reducing Feature Lab
-scene reservations by 93.75% with tested overflow rollback and unchanged gameplay.
+The fiftieth increment adds an offline Feature Lab asset validator, including
+strict decoding, level semantics, scene budgets and transition texture checks.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
@@ -59,7 +59,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
 | F06 | Implemented (v1) | EANI reader/writer; exact frame timing, loops, pause/restart, large advances; animated player/machine/door with exactly-once completion | Optional frame callbacks and richer animation types |
 | F07 | Implemented (v1) | Handle/compaction/hierarchy tests, scene round trips, deferred deletion; title/gameplay and Facility/Annex transitions; typed runtime pools with checked access, intersecting queries, ownership/exception/move tests, allocation-free steady queries and pickup integration | Optional custom component serialization codecs, query scheduling and broader ECS tooling |
-| F08 | Implemented (v1) | ETEX/ETMP/EANI/WAV/EFNT readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, transactional shader/texture/font/animation/tilemap/scene/audio reload with gameplay-content replay isolation; optional bounded inotify watching, debounce, metadata recovery and watched GPU pixel tests | Optional background loading and broader asset tooling |
+| F08 | Implemented (v1) | ETEX/ETMP/EANI/WAV/EFNT readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, transactional shader/texture/font/animation/tilemap/scene/audio reload with gameplay-content replay isolation; optional bounded inotify watching, debounce, metadata recovery and watched GPU pixel tests; CPU-only bundle validation with file/level diagnostics | Optional background loading and broader asset tooling |
 | F09 | Implemented (v1) | Swept player boxes; box/circle contacts; moving-body grid vs brute force; reciprocal filters; trigger history; overlap/segment queries; alarm/switch and restore tests | Rigid-body dynamics, rotating shapes and moving-body CCD are outside initial scope |
 | F10 | Partial | PCM16 WAV assets/resampling, loops, voice controls, gain ramps, master/music/effects controls, stereo emitter, null-device soundtrack/restart tests; deterministic transport recovery faults; real ALSA file-sink failure/fallback; recovery counters and listening probe | Physical disconnect/recovery, system suspend/resume and audible-output checks; see [audio validation](AUDIO_VALIDATION.md) |
 | F11 | Partial | Atlas bitmap text with authored metrics, bounded allocation-free layout, font fallback and visual gallery; clipped status panel, buttons/checkboxes/sliders, keyboard/pointer navigation, bounded layout, modal settings and title screen; `ui`, scene-flow and GPU pixel tests | Broader manual navigation checks |
@@ -1760,10 +1760,38 @@ scene/tilemap and over-budget scene attempts preserve live state and clean stagi
 Coverage is unchanged and timings carry no speedup claim. See
 [measurements and budget-failure evidence](../benchmarks/2026-10-21-scene-budgets-results.md).
 
+## Increment 50: offline asset validation
+
+- `validate_assets [--assets DIRECTORY]` checks the fixed Feature Lab inventory,
+  textures referenced by successfully constructed levels, both level constructors
+  and both directions of texture residency. It reuses bounded engine decoders and
+  gameplay checks, including the 256-entry scene budget and required animation modes.
+- Independent failures retain file/level context and continue to a final summary.
+  Exit codes distinguish valid content (0), content/root failures (1) and argument
+  errors (2). Missing/corrupt assets never use fallback artwork or sounds.
+- The executable builds with `ENGINE_BUILD_PLATFORM=OFF` and has only C/C++ runtime
+  dependencies. It writes no assets/settings and opens no display or audio device.
+  Shader validation covers bounded, nonempty, NUL-free source reads; GLSL compilation,
+  rendering, audible output and route completion still require runtime checks.
+- Native and CPU-only installs include the command. The release archive validates
+  its assets after extraction and relocation before publication, checks working-
+  directory isolation, and exercises missing-root rejection and explicit overrides.
+
+All 56 runtime groups pass in Debug and Release without skips. The two validator
+CPU groups pass ASan/UBSan with leak detection in the platform-disabled build.
+Private-copy regressions cover independent malformed files, repair/retry, 256/257
+scene boundaries, missing gameplay roles, invalid spawns, required animation loops,
+atlas dimensions, missing references, cross-level residency, root confinement and
+shader size limits. CLI tests verify exit statuses, discovery and unchanged asset
+hashes/inventory. Shipped content produces 20 checks with zero failures with display
+variables unset. All three package checks pass, including relocated CPU validation
+and OpenGL gameplay. See [usage and validation boundaries](ASSET_VALIDATION.md).
+
 ## Next increment
 
-Add an offline asset-validation command using existing readers and Feature Lab
-semantic checks, with file diagnostics and malformed-fixture coverage. Validate
-shipped content and scene budgets without an OpenGL context.
+Add explicit single-file validation modes for the existing scene, tilemap, animation,
+texture, font and sound formats, so content authors can check work in progress
+without supplying a complete Feature Lab bundle. Keep the bundle's gameplay and
+transition checks distinct from generic format validation.
 Broader physical hardware/driver and manual release checks remain outstanding;
 background loading remains deferred.
