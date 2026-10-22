@@ -1,6 +1,7 @@
 # Feature Lab — Linux 2D engine example
 
-This archive contains a C++20/OpenGL 4.6 example game and an offline CPU benchmark.
+This archive contains a C++20/OpenGL 4.6 example game, an offline CPU benchmark
+and an asset validator.
 Move or rename the complete extracted directory freely. Keep `bin/` and `share/`
 together; copying only the executable loses the game assets. No installation or
 administrator access is needed. Run from the extracted directory:
@@ -24,7 +25,7 @@ using Linux `/proc/self/exe`. `--assets DIRECTORY` explicitly selects another ro
   visible play. Native Wayland is not implemented. Driver internals and dynamically
   loaded GL/ALSA plugins remain host-managed.
 - A working ALSA output device for audible play. `--no-audio` disables device
-  startup. The CPU-only benchmark needs neither a display nor an audio device.
+  startup. The CPU-only benchmark and asset validator need neither a display nor an audio device.
 
 This package is relocatable on compatible hosts. It is not a self-contained Linux
 runtime or a compatibility promise for older distributions. No system libraries,
@@ -47,12 +48,15 @@ does not change their bindings. Keypad Enter stays reserved for menu activation.
 ```sh
 ./bin/feature_lab --no-audio
 ./bin/feature_lab --verify
+./bin/validate_assets
 ./bin/stress_bench --frames 60 --warmup 10 --cycles 2 --report /tmp/stress.json
 ./bin/feature_lab --stress --help
 ```
 
 `--verify` runs the complete scripted gameplay simulation without creating a
-window. The benchmark generates its own content and needs no asset directory.
+window. `validate_assets` checks content, scene budgets and level construction,
+returning nonzero for errors; it does not compile GLSL or prove route reachability.
+The benchmark generates its own content and needs no asset directory.
 Stress reports are written to the requested existing parent directory. Stress
 mode uses offline mixing and changes no user settings.
 
@@ -72,7 +76,7 @@ with an explicit coverage manifest, not completion of every planned system.
 
 ## Package contents and diagnostics
 
-- `bin/feature_lab`, `bin/stress_bench`: dynamically linked Linux executables.
+- `bin/feature_lab`, `bin/stress_bench`, `bin/validate_assets`: Linux executables.
 - `share/feature_lab/`: scene, tilemap, animation, textures, WAV audio and shaders.
 - `share/doc/feature_lab/`: development README, engine plan, formats, coverage,
   packaging instructions and benchmark contracts/reference measurements.

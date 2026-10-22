@@ -24,7 +24,7 @@ find_program(CMAKE_GET_RUNTIME_DEPENDENCIES_COMMAND NAMES objdump REQUIRED)
 set(CMAKE_GET_RUNTIME_DEPENDENCIES_PLATFORM linux+elf)
 set(CMAKE_GET_RUNTIME_DEPENDENCIES_TOOL objdump)
 set(inventory "Build-host dependency inventory; these libraries are NOT bundled.\nDirect entries come from ELF NEEDED; resolved entries include transitive dependencies.\nDynamically selected GL/ALSA drivers and plugins are outside this static inventory.\n\n")
-foreach(program IN ITEMS feature_lab stress_bench)
+foreach(program IN ITEMS feature_lab stress_bench validate_assets)
   execute_process(COMMAND "${CMAKE_GET_RUNTIME_DEPENDENCIES_COMMAND}" -p "${prefix}/bin/${program}"
     RESULT_VARIABLE result OUTPUT_VARIABLE elf ERROR_VARIABLE error)
   if(NOT result EQUAL 0)
