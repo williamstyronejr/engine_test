@@ -10,12 +10,13 @@ using namespace engine;
 using namespace feature_lab;
 struct Fixture {
     std::filesystem::path path;
-    Fixture() {
+    explicit Fixture(bool bundle = true) {
         std::string pattern = (std::filesystem::temp_directory_path() / "engine-validate-XXXXXX").string();
         if (!mkdtemp(pattern.data()))
             throw std::runtime_error("Cannot create validation fixture");
         path = pattern;
-        std::filesystem::copy(TEST_ASSET_ROOT, path, std::filesystem::copy_options::recursive);
+        if (bundle)
+            std::filesystem::copy(TEST_ASSET_ROOT, path, std::filesystem::copy_options::recursive);
     }
     ~Fixture() {
         std::error_code ignored;
@@ -27,6 +28,71 @@ bool failure(const AssetValidation& report, std::string_view name, std::string_v
     return std::any_of(report.checks.begin(), report.checks.end(), [&](const auto& check) {
         return check.name == name && !check.error.empty() && check.error.find(text) != std::string::npos;
     });
+}
+TEST(single_files_validate_in_isolation_without_extension_inference) {
+    const AssetRoot shipped(TEST_ASSET_ROOT);
+    const std::array examples{
+        std::pair{AssetFormat::scene, "facility.scene"},
+        std::pair{AssetFormat::tilemap, "annex.etmp"},
+        std::pair{AssetFormat::animation, "facility.eani"},
+        std::pair{AssetFormat::texture, "textures/actors.etex"},
+        std::pair{AssetFormat::font, "fonts/ui.efnt"},
+        std::pair{AssetFormat::sound, "sounds/door.wav"}};
+    for (const auto& [format, source] : examples) {
+        Fixture fixture(false);
+        auto root = fixture.root();
+        const auto data = shipped.read(source, 64 * 1024 * 1024);
+        root.write_atomic("draft.data", data);
+        auto report = validate_asset_file(root, format, "draft.data");
+        CHECK(report.checks.size() == 1 && report.failures() == 0);
+        CHECK(report.checks.front().name == "draft.data");
+        // Only the selected file exists: even scene/animation/atlas references
+        // are deliberately unresolved. Bundle requirements are not applied.
+        CHECK(std::distance(std::filesystem::directory_iterator(fixture.path),
+                            std::filesystem::directory_iterator{}) == 1);
+        root.write_atomic("draft.data", std::span(data).first(data.size() / 2));
+        CHECK(validate_asset_file(root, format, "draft.data").failures() == 1);
+        root.write_atomic("draft.data", data);
+        CHECK(validate_asset_file(root, format, "draft.data").failures() == 0);
+        CHECK(root.read("draft.data", data.size()) == data);
+    }
+}
+TEST(single_scene_limits_and_format_semantics_are_independent_of_the_game) {
+    Fixture fixture(false);
+    auto root = fixture.root();
+    root.write_text("empty.scene", "scene 1\nend\n");
+    CHECK(validate_asset_file(root, AssetFormat::scene, "empty.scene", {0}).failures() == 0);
+    Scene scene;
+    for (std::size_t i = 0; i < 257; ++i)
+        scene.create(i + 1, "generic entity");
+    root.write_text("draft.scene", serialize_scene(scene));
+    CHECK(validate_asset_file(root, AssetFormat::scene, "draft.scene").failures() == 0);
+    CHECK(validate_asset_file(root, AssetFormat::scene, "draft.scene", {257}).failures() == 0);
+    CHECK(failure(validate_asset_file(root, AssetFormat::scene, "draft.scene", {256}),
+                  "draft.scene", "Scene entity budget exceeded"));
+    CHECK(failure(validate_asset_file(root, AssetFormat::scene, "draft.scene", {0}),
+                  "draft.scene", "Scene entity budget exceeded"));
+    CHECK(validate_asset_file(root, AssetFormat::scene, "draft.scene", {4097}).failures() == 1);
+    CHECK(validate_asset_file(root, AssetFormat::texture, "draft.scene").failures() == 1);
+    root.write_text("draft.scene", "scene 1\nentity 1 child decor 99 0 0 0 1 1\nend\n");
+    CHECK(failure(validate_asset_file(root, AssetFormat::scene, "draft.scene"),
+                  "draft.scene", "draft.scene:2:"));
+    CHECK(validate_asset_file(root, AssetFormat::font, "empty.scene", {1}).failures() == 1);
+}
+TEST(single_file_reads_preserve_path_confinement_and_file_size_bounds) {
+    Fixture fixture(false), outside(false);
+    auto root = fixture.root();
+    outside.root().write_text("external.scene", "scene 1\nend\n");
+    std::filesystem::create_symlink(outside.path / "external.scene", fixture.path / "link.scene");
+    CHECK(failure(validate_asset_file(root, AssetFormat::scene, "link.scene"),
+                  "link.scene", "escapes its root"));
+    CHECK(validate_asset_file(root, AssetFormat::scene, "../external.scene").failures() == 1);
+    CHECK(validate_asset_file(root, AssetFormat::scene,
+                              (outside.path / "external.scene").string()).failures() == 1);
+    CHECK(validate_asset_file(root, AssetFormat::scene, "missing.scene").failures() == 1);
+    root.write_text("huge.scene", std::string(4 * 1024 * 1024 + 1, ' '));
+    CHECK(failure(validate_asset_file(root, AssetFormat::scene, "huge.scene"),
+                  "huge.scene", "size limit"));
 }
 TEST(shipped_assets_pass_without_fallbacks_and_with_stable_order) {
     const AssetRoot root(TEST_ASSET_ROOT);
