@@ -2,6 +2,7 @@
 
 The `release_package` target stages a fresh install and creates a versioned `.tar.gz`
 archive plus a SHA-256 sidecar. It contains Feature Lab, the CPU stress runner,
+the offline asset validator,
 assets, documentation, build identity and a host dependency inventory. No engine
 libraries, system libraries or driver binaries need to be copied beside the
 executables. Engine code is linked into them; approved system libraries remain
@@ -51,9 +52,9 @@ cmake --install build/release --prefix "$PWD/build/package"
 (cd /tmp && /absolute/path/to/build/package/bin/feature_lab --verify)
 ```
 
-Normal installs include both executables, assets and linked documentation.
+Normal native installs include all three executables, assets and linked documentation.
 Top-level README/build/dependency/hash records are added by the archive target.
-CPU-only builds continue to install `stress_bench` and documentation; they do not
+CPU-only builds install `stress_bench`, `validate_assets` and documentation; they do not
 produce the full game archive. Debug, sanitizer and cross builds cannot use the
 full release archive target.
 
@@ -69,13 +70,17 @@ ctest --preset release -L packaging --output-on-failure
 ```
 
 - `package_build`: install/archive/hash, dependency inventory and mandatory
-  extracted/relocated CPU smoke checks before publication.
+  extracted/relocated CPU smoke checks, including strict asset validation, before publication.
 - `package_relocation`: verify compressed and payload checksums, move an extracted
   directory, execute gameplay verification through both the binary and a symlink,
   compare both CPU benchmark entry points, and reject changed/unlisted payloads.
 - `package_graphics`: from a relocated copy, complete a 1,600-frame OpenGL game,
   save a checkpoint and replay, verify that replay with DISPLAY unset, render two
   stress cycles with stable resources, and capture the final game/arena images.
+
+The installed validator checks both levels and their content without fallback assets;
+its missing-root rejection and explicit override are tested after relocation.
+See [validator coverage](ASSET_VALIDATION.md).
 
 The CPU smoke runs unset DISPLAY, LD_LIBRARY_PATH and LD_PRELOAD. Their working
 directory contains deliberately invalid `assets/` data. Removing the extracted

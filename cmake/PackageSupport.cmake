@@ -77,6 +77,12 @@ function(package_headless root work)
   file(MAKE_DIRECTORY "${work}/unrelated cwd/assets")
   file(WRITE "${work}/unrelated cwd/assets/facility.scene" "Not a facility; CWD must not be used.\n")
   set(environment "${CMAKE_COMMAND}" -E env --unset=DISPLAY --unset=LD_LIBRARY_PATH --unset=LD_PRELOAD)
+  execute_process(COMMAND ${environment} "${root}/bin/validate_assets"
+    WORKING_DIRECTORY "${work}/unrelated cwd" RESULT_VARIABLE result OUTPUT_VARIABLE output ERROR_VARIABLE error)
+  file(WRITE "${work}/asset-validation.log" "${output}${error}")
+  if(NOT result EQUAL 0 OR NOT output MATCHES "20 checks, 0 failed")
+    message(FATAL_ERROR "Relocated asset validation failed: ${output}${error}")
+  endif()
   execute_process(COMMAND ${environment} "${root}/bin/feature_lab" --verify
     WORKING_DIRECTORY "${work}/unrelated cwd" RESULT_VARIABLE result OUTPUT_VARIABLE output ERROR_VARIABLE error)
   file(WRITE "${work}/game-verify.log" "${output}${error}")
@@ -129,9 +135,17 @@ function(package_headless root work)
     WORKING_DIRECTORY "${work}/unrelated cwd" RESULT_VARIABLE missing_result ERROR_VARIABLE missing_error OUTPUT_QUIET)
   execute_process(COMMAND ${environment} "${root}/bin/feature_lab" --verify --assets "${root}/share/hidden-assets"
     WORKING_DIRECTORY "${work}/unrelated cwd" RESULT_VARIABLE override_result ERROR_VARIABLE override_error OUTPUT_QUIET)
+  execute_process(COMMAND ${environment} "${root}/bin/validate_assets"
+    WORKING_DIRECTORY "${work}/unrelated cwd" RESULT_VARIABLE validator_missing ERROR_VARIABLE validator_error OUTPUT_QUIET)
+  execute_process(COMMAND ${environment} "${root}/bin/validate_assets" --assets "${root}/share/hidden-assets"
+    WORKING_DIRECTORY "${work}/unrelated cwd" RESULT_VARIABLE validator_override OUTPUT_QUIET ERROR_VARIABLE override_diagnostic)
   file(RENAME "${root}/share/hidden-assets" "${root}/share/feature_lab")
   if(missing_result EQUAL 0 OR NOT missing_error MATCHES "Cannot find assets" OR NOT override_result EQUAL 0)
     message(FATAL_ERROR "Asset-root isolation/override failed: ${missing_error}${override_error}")
+  endif()
+  if(NOT validator_missing EQUAL 1 OR NOT validator_error MATCHES "Cannot find assets" OR
+     NOT validator_override EQUAL 0)
+    message(FATAL_ERROR "Validator asset-root isolation failed: ${validator_error}${override_diagnostic}")
   endif()
   package_verify("${root}")
 endfunction()

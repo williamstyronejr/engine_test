@@ -928,6 +928,21 @@ runs a packaged OpenGL gameplay/replay/stress smoke test when a display is prese
 System libraries and drivers remain host-provided; older distributions are not
 automatically compatible. See [package contents, tests and compatibility](docs/PACKAGING.md).
 
+## Offline asset validation
+
+Check both Feature Lab levels and their assets without opening a display or audio
+device:
+
+```sh
+cmake --build --preset debug --target validate_assets -j2
+./build/debug/validate_assets --assets assets
+```
+
+The release archive includes `bin/validate_assets`, which discovers its packaged
+assets automatically. Missing/corrupt assets, scene-budget overflow, gameplay
+construction errors and incompatible texture references return nonzero. Shader
+source checks do not compile GLSL. See [coverage, exit codes and limitations](docs/ASSET_VALIDATION.md).
+
 ## Repository workflow
 
 Develop new features on a dedicated branch. Run the relevant tests, commit the

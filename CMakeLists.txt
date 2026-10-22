@@ -38,7 +38,11 @@ target_link_libraries(feature_lab_stress PUBLIC engine_core)
 target_include_directories(feature_lab_stress PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/generated")
 add_executable(stress_bench tools/stress_bench.cpp)
 target_link_libraries(stress_bench PRIVATE feature_lab_stress)
-install(TARGETS stress_bench RUNTIME DESTINATION bin)
+add_library(feature_lab_validation STATIC examples/feature_lab/asset_validation.cpp)
+target_link_libraries(feature_lab_validation PUBLIC engine_core)
+add_executable(validate_assets tools/validate_assets.cpp)
+target_link_libraries(validate_assets PRIVATE feature_lab_validation)
+install(TARGETS stress_bench validate_assets RUNTIME DESTINATION bin)
 set(ENGINE_PACKAGE_TEST_ROOT "/tmp/feature-lab-package-tests" CACHE PATH
   "Scratch directory for extracted package tests (outside the source/build trees)")
 if(NOT IS_ABSOLUTE "${ENGINE_PACKAGE_TEST_ROOT}")
@@ -46,6 +50,16 @@ if(NOT IS_ABSOLUTE "${ENGINE_PACKAGE_TEST_ROOT}")
 endif()
 include(CTest)
 if(BUILD_TESTING)
+  add_executable(asset_validation_tests tests/asset_validation_tests.cpp)
+  target_link_libraries(asset_validation_tests PRIVATE feature_lab_validation)
+  target_compile_definitions(asset_validation_tests PRIVATE TEST_ASSET_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/assets")
+  add_test(NAME asset_validation COMMAND asset_validation_tests)
+  set_tests_properties(asset_validation PROPERTIES TIMEOUT 30 LABELS cpu)
+  add_test(NAME asset_validation_cli COMMAND ${CMAKE_COMMAND}
+    -DVALIDATOR=$<TARGET_FILE:validate_assets> -DASSET_ROOT=${CMAKE_CURRENT_SOURCE_DIR}/assets
+    -DWORK_ROOT=${CMAKE_CURRENT_BINARY_DIR}/asset-validation-cli
+    -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/check_asset_validation.cmake)
+  set_tests_properties(asset_validation_cli PROPERTIES TIMEOUT 30 LABELS cpu)
   add_executable(mixer_reload_tests tests/mixer_reload_tests.cpp)
   target_link_libraries(mixer_reload_tests PRIVATE engine_core)
   add_test(NAME mixer_reload COMMAND mixer_reload_tests)
@@ -333,7 +347,7 @@ if(ENGINE_BUILD_PLATFORM)
   set(ENGINE_PACKAGE_ARCHIVE "${CMAKE_CURRENT_BINARY_DIR}/dist/feature-lab-${PROJECT_VERSION}-Linux-${CMAKE_SYSTEM_PROCESSOR}-${STRESS_REVISION}.tar.gz")
   add_custom_target(release_package
     COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/generated/PackageBuild.cmake"
-    DEPENDS feature_lab stress_bench
+    DEPENDS feature_lab stress_bench validate_assets
     USES_TERMINAL COMMENT "Build and verify the relocatable release archive")
   if(BUILD_TESTING AND CMAKE_BUILD_TYPE STREQUAL "Release" AND NOT ENGINE_SANITIZERS)
     add_test(NAME package_build COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/generated/PackageBuild.cmake")
