@@ -117,24 +117,6 @@ Distribution Measurements::summary() const {
     result.maximum = sorted.back();
     return result;
 }
-std::string json_string(std::string_view text) {
-    std::string result = "\"";
-    constexpr std::string_view hex = "0123456789abcdef";
-    for (const char character : text) {
-        const auto c = static_cast<unsigned char>(character);
-        if (c == '"' || c == '\\') {
-            result += '\\';
-            result += static_cast<char>(c);
-        } else if (c < 32 || c >= 127) {
-            // Escape bytes rather than trusting external metadata to be valid UTF-8.
-            result += "\\u00";
-            result += hex[c >> 4];
-            result += hex[c & 15];
-        } else
-            result += static_cast<char>(c);
-    }
-    return result + '"';
-}
 std::size_t stress_rss_bytes() {
     std::ifstream input("/proc/self/statm");
     std::size_t size{}, resident{};

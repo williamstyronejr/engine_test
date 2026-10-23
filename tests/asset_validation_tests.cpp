@@ -1,7 +1,9 @@
 #include "../examples/feature_lab/asset_validation.hpp"
 #include "../examples/feature_lab/game.hpp"
+#include "../examples/feature_lab/json.hpp"
 #include "test.hpp"
 #include <filesystem>
+#include <locale>
 #include <unistd.h>
 
 namespace {
@@ -28,6 +30,38 @@ bool failure(const AssetValidation& report, std::string_view name, std::string_v
     return std::any_of(report.checks.begin(), report.checks.end(), [&](const auto& check) {
         return check.name == name && !check.error.empty() && check.error.find(text) != std::string::npos;
     });
+}
+TEST(json_escaping_preserves_external_bytes_and_locale_independent_numbers) {
+    const std::string bytes{'"', '\\', '\0', '\n', '\r', '\t', char(0x1f), char(0x7f),
+                            char(0x80), char(0xc3), char(0xa9), char(0xff)};
+    CHECK(json_string(bytes) == "\"\\\"\\\\\\u0000\\u000a\\u000d\\u0009\\u001f\\u007f"
+                                "\\u0080\\u00c3\\u00a9\\u00ff\"");
+    struct Grouped : std::numpunct<char> {
+        char do_thousands_sep() const override { return ','; }
+        std::string do_grouping() const override { return "\3"; }
+    };
+    struct RestoreLocale {
+        std::locale before{std::locale()};
+        ~RestoreLocale() { std::locale::global(before); }
+    } restore;
+    std::locale::global(std::locale(std::locale::classic(), new Grouped));
+    AssetValidationContext context;
+    context.format = AssetFormat::scene;
+    context.file = bytes;
+    context.requested_root = bytes;
+    context.asset_root = bytes;
+    const AssetValidation report{{{"good", ""}, {bytes, bytes}}};
+    const auto json = asset_validation_json(report, context);
+    CHECK(json.find("\"scene_budget\":4096") != std::string::npos);
+    CHECK(json.find("\"check_count\":2,\"failed_checks\":1") != std::string::npos);
+    CHECK(json.find("\"complete\":true,\"passed\":false") != std::string::npos);
+    CHECK(json.find("\"diagnostic\":" + json_string(bytes)) != std::string::npos);
+    CHECK(std::all_of(json.begin(), json.end(), [](unsigned char c) { return c >= 32 && c < 127; }));
+    CHECK(json == asset_validation_json(report, context));
+    const auto fatal = asset_validation_json(report, context, std::string{});
+    CHECK(fatal.find("\"complete\":false,\"passed\":false") != std::string::npos);
+    CHECK(fatal.find("\"check_count\":0,\"failed_checks\":0,\"checks\":[]") != std::string::npos);
+    CHECK(fatal.find("\"fatal_error\":\"\"") != std::string::npos);
 }
 TEST(single_files_validate_in_isolation_without_extension_inference) {
     const AssetRoot shipped(TEST_ASSET_ROOT);

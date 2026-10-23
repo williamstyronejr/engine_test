@@ -1,6 +1,7 @@
 #pragma once
 #include "engine/assets.hpp"
 #include "engine/scene.hpp"
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -22,4 +23,15 @@ enum class AssetFormat { scene, tilemap, animation, texture, font, sound };
 // Scene limits default to the engine maximum; other formats require default limits.
 AssetValidation validate_asset_file(const engine::AssetRoot& assets, AssetFormat format,
                                     std::string_view key, engine::Scene::Limits limits = {});
+struct AssetValidationContext {
+    std::optional<AssetFormat> format; // Absent selects Feature Lab bundle mode.
+    std::string file;
+    engine::Scene::Limits scene_limits{}; // Used only for single-file scenes.
+    std::optional<std::string> requested_root, asset_root;
+};
+// ASCII JSON, with external string bytes mapped reversibly to U+0000..U+00FF.
+// A fatal error means validation did not complete; its report has no checks.
+std::string asset_validation_json(const AssetValidation& result,
+                                  const AssetValidationContext& context,
+                                  std::optional<std::string> fatal_error = std::nullopt);
 } // namespace feature_lab

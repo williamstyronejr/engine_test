@@ -8,14 +8,16 @@
 
 namespace {
 constexpr std::string_view help =
-    "Usage: validate_assets [--assets DIRECTORY]\n"
-    "       validate_assets [--assets DIRECTORY] --type TYPE --file KEY [--scene-budget N]\n"
+    "Usage: validate_assets [--assets DIRECTORY] [--json]\n"
+    "       validate_assets [--assets DIRECTORY] --type TYPE --file KEY [--scene-budget N] [--json]\n"
     "       validate_assets --help\n"
     "Default: validate Feature Lab's shipped assets, references and both levels.\n"
     "Single file: TYPE is scene, tilemap, animation, texture, font or sound.\n"
     "KEY is relative to the asset root. Only the chosen format is checked;\n"
     "references and gameplay are not checked. Extensions do not select the format.\n"
     "Scene budget: 0..4096, default 4096; only valid with --type scene.\n"
+    "--json writes one engine_asset_validation_v1 report to stdout. Argument errors\n"
+    "remain text on stderr (exit 2); content/root failures produce JSON (exit 1).\n"
     "Uses assets beside the executable or ../share/feature_lab by default.\n"
     "Read-only; no display/audio device or fallback assets. Bundle shader checks\n"
     "read sources only; OpenGL compilation and playability need runtime tests.\n"
@@ -39,10 +41,16 @@ int main(int argc, char** argv) {
     std::optional<std::string> file;
     std::optional<std::size_t> budget;
     std::string_view type_name;
-    bool root_seen = false;
+    bool root_seen = false, json_output = false;
     try {
         for (int i = 1; i < argc; ++i) {
             const std::string_view option = argv[i];
+            if (option == "--json") {
+                if (json_output)
+                    throw std::invalid_argument("Repeated option: --json");
+                json_output = true;
+                continue;
+            }
             if (i + 1 >= argc || !*argv[i + 1])
                 throw std::invalid_argument("Missing option value");
             const std::string_view value = argv[++i];
@@ -78,11 +86,31 @@ int main(int argc, char** argv) {
         std::cerr << error.what() << '\n' << help;
         return 2;
     }
+    feature_lab::AssetValidationContext context;
+    context.format = format;
+    context.file = file.value_or("");
+    context.scene_limits = {budget.value_or(engine::Scene::capacity)};
+    if (root_seen)
+        context.requested_root = directory.native();
+    const auto emit_json = [&](const feature_lab::AssetValidation& report,
+                               std::optional<std::string> fatal = std::nullopt) {
+        const auto serialized = feature_lab::asset_validation_json(report, context, fatal);
+        std::cout << serialized << '\n';
+        std::cout.flush();
+        if (!std::cout) {
+            std::cerr << "Cannot write asset validation report\n";
+            return 1;
+        }
+        return fatal || report.failures() ? 1 : 0;
+    };
     try {
         const auto assets = engine::AssetRoot::discover(directory);
+        context.asset_root = assets.directory().native();
         const engine::Scene::Limits limits{budget.value_or(engine::Scene::capacity)};
         const auto report = format ? feature_lab::validate_asset_file(assets, *format, *file, limits)
                                    : feature_lab::validate_assets(assets);
+        if (json_output)
+            return emit_json(report);
         std::cout << "Asset root: " << assets.directory() << '\n';
         if (format) {
             std::cout << "Validation mode: " << type_name << " format";
@@ -103,6 +131,8 @@ int main(int argc, char** argv) {
                      "require runtime tests.\n";
         return failures ? 1 : 0;
     } catch (const std::exception& error) {
+        if (json_output)
+            return emit_json({}, std::string(error.what()));
         std::cerr << "Asset validation failed: " << std::quoted(error.what()) << '\n';
         return 1;
     }
