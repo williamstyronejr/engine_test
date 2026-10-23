@@ -1,9 +1,12 @@
 #include "asset_validation.hpp"
 #include "game.hpp"
+#include "json.hpp"
 #include "engine/font.hpp"
 #include "engine/renderer.hpp"
 #include "engine/sound.hpp"
+#include <locale>
 #include <map>
+#include <sstream>
 #include <numeric>
 #include <optional>
 
@@ -11,6 +14,53 @@ namespace feature_lab {
 std::size_t AssetValidation::failures() const {
     return static_cast<std::size_t>(std::count_if(checks.begin(), checks.end(),
                                                 [](const auto& c) { return !c.error.empty(); }));
+}
+std::string asset_validation_json(const AssetValidation& result,
+                                  const AssetValidationContext& context,
+                                  std::optional<std::string> fatal_error) {
+    const auto nullable = [](const std::optional<std::string>& value) {
+        return value ? json_string(*value) : std::string("null");
+    };
+    const auto format_name = [](AssetFormat format) -> std::string_view {
+        switch (format) {
+        case AssetFormat::scene: return "scene";
+        case AssetFormat::tilemap: return "tilemap";
+        case AssetFormat::animation: return "animation";
+        case AssetFormat::texture: return "texture";
+        case AssetFormat::font: return "font";
+        case AssetFormat::sound: return "sound";
+        }
+        throw std::invalid_argument("Unknown asset format");
+    };
+    const auto failed = fatal_error ? 0 : result.failures();
+    std::ostringstream out;
+    out.imbue(std::locale::classic());
+    out << "{\"schema\":\"engine_asset_validation_v1\",\"string_encoding\":\"byte_values\""
+        << ",\"mode\":" << json_string(context.format ? "file" : "bundle")
+        << ",\"format\":" << (context.format ? json_string(format_name(*context.format)) : "null")
+        << ",\"file\":" << (context.format ? json_string(context.file) : "null")
+        << ",\"scene_budget\":";
+    if (!context.format)
+        out << Game::scene_limits.entities;
+    else if (*context.format == AssetFormat::scene)
+        out << context.scene_limits.entities;
+    else
+        out << "null";
+    out << ",\"requested_root\":" << nullable(context.requested_root)
+        << ",\"asset_root\":" << nullable(context.asset_root)
+        << ",\"complete\":" << (fatal_error ? "false" : "true")
+        << ",\"passed\":" << (!fatal_error && !failed ? "true" : "false")
+        << ",\"check_count\":" << (fatal_error ? 0 : result.checks.size())
+        << ",\"failed_checks\":" << failed << ",\"checks\":[";
+    if (!fatal_error)
+        for (std::size_t i = 0; i < result.checks.size(); ++i) {
+            const auto& check = result.checks[i];
+            out << (i ? "," : "") << "{\"name\":" << json_string(check.name)
+                << ",\"passed\":" << (check.error.empty() ? "true" : "false")
+                << ",\"diagnostic\":" << (check.error.empty() ? "null" : json_string(check.error)) << '}';
+        }
+    out << "],\"fatal_error\":" << nullable(fatal_error) << '}';
+    return out.str();
 }
 AssetValidation validate_asset_file(const engine::AssetRoot& assets, AssetFormat format,
                                     std::string_view key, engine::Scene::Limits limits) {

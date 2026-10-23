@@ -1,5 +1,6 @@
 #pragma once
 #include "stress.hpp"
+#include "json.hpp"
 #include "engine/gpu_timer.hpp"
 #include <array>
 #include <chrono>
@@ -31,7 +32,6 @@ class Measurements {
     std::vector<double> values_;
     std::size_t limit_;
 };
-std::string json_string(std::string_view text);
 using StressClock = std::chrono::steady_clock;
 inline double stress_ms(StressClock::time_point start, StressClock::time_point end) {
     return std::chrono::duration<double, std::milli>(end - start).count();

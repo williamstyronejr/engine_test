@@ -81,7 +81,8 @@ ctest --preset release -L packaging --output-on-failure
 The installed validator checks both levels and their content without fallback assets;
 its missing-root rejection and explicit override are tested after relocation.
 A separate installed invocation validates one scene with an explicit 256-entry
-budget, exercising generic format mode from the relocated package.
+budget, exercising generic format mode from the relocated package. Another emits
+JSON; the package check parses its schema, mode, budget and success fields.
 See [validator coverage](ASSET_VALIDATION.md).
 
 The CPU smoke runs unset DISPLAY, LD_LIBRARY_PATH and LD_PRELOAD. Their working

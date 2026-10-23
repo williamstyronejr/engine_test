@@ -945,7 +945,9 @@ optional scene budget; bundle mode also checks references and gameplay semantics
 The release archive includes `bin/validate_assets`, which discovers its packaged
 assets automatically. Missing/corrupt assets, scene-budget overflow, gameplay
 construction errors and incompatible texture references return nonzero. Shader
-source checks do not compile GLSL. See [coverage, exit codes and limitations](docs/ASSET_VALIDATION.md).
+source checks do not compile GLSL. Add `--json` for a versioned report on stdout
+with mode, budgets, check results and failure diagnostics. See
+[coverage, exit codes and report schema](docs/ASSET_VALIDATION.md).
 
 ## Repository workflow
 

@@ -50,6 +50,7 @@ does not change their bindings. Keypad Enter stays reserved for menu activation.
 ./bin/feature_lab --verify
 ./bin/validate_assets
 ./bin/validate_assets --type scene --file facility.scene --scene-budget 256
+./bin/validate_assets --json > /tmp/asset-validation.json
 ./bin/stress_bench --frames 60 --warmup 10 --cycles 2 --report /tmp/stress.json
 ./bin/feature_lab --stress --help
 ```
@@ -59,7 +60,9 @@ window. `validate_assets` checks content, scene budgets and level construction,
 returning nonzero for errors. `--type TYPE --file KEY` validates a single root-relative
 scene, tilemap, animation, texture, font or sound file without checking dependencies
 or gameplay. Scene mode defaults to 4,096 entries; `--scene-budget` selects a smaller
-limit. Neither mode compiles GLSL or proves route reachability.
+limit. `--json` writes a versioned result to stdout for automation; content and
+root errors still return 1, while argument errors use stderr and return 2.
+Neither mode compiles GLSL or proves route reachability.
 The benchmark generates its own content and needs no asset directory.
 Stress reports are written to the requested existing parent directory. Stress
 mode uses offline mixing and changes no user settings.
