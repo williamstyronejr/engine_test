@@ -132,4 +132,6 @@ to be compatible on another machine. XWayland validation does not establish nati
 Wayland support. This package does not bundle a portable runtime, perform system
 installation, implement automatic updates or certify older Linux distributions.
 Broader hardware/manual gates and remaining engine features stay tracked in
-[STATUS.md](STATUS.md).
+[STATUS.md](STATUS.md). The [release-readiness audit](RELEASE_READINESS.md) records
+candidate validation, clean offline-build and physical acceptance requirements;
+successful packaging alone does not complete release acceptance.

@@ -2,9 +2,10 @@
 
 Status: implementation started. This document describes the target design, not a
 claim that every feature is complete. See [implementation status](docs/STATUS.md)
-for delivered capabilities, test evidence, and remaining work. The eighth delivered
-increment adds box/circle collision detection, spatial queries, filters, and triggers.
-Diagnostics and simulation controls remain planned.
+for delivered capabilities, test evidence, and remaining work. The engine now includes
+playable Feature Lab, diagnostics, simulation controls, asset validation and release
+packaging. The [release-readiness audit](docs/RELEASE_READINESS.md) identifies the
+remaining verification gates; this plan's requirements remain in force.
 
 ## 1. Goal and confirmed requirements
 
