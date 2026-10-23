@@ -1892,6 +1892,12 @@ changed, and all attempts passed. Physical display/audio, workload/memory accept
 persistence fault coverage and final support/coverage signoff remain open. See
 [results and limitations](../validation/2026-10-23/RESULTS.md).
 
+Documentation checks resolve 123 local links and validate all 21 command records
+and eight CTest XML reports. The evidence-bearing package at `711d764` passes all
+three package checks without skips; all 42 validation files match the installed
+archive byte-for-byte. Raw dependency inventories retain their generated trailing
+blank line unchanged.
+
 ## Next increment
 
 Add deterministic filesystem failure coverage for atomic saves: short/interrupted
