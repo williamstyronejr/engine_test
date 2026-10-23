@@ -1,7 +1,8 @@
 # Implementation status
 
-The fifty-second increment adds optional versioned JSON asset-validation reports,
-with explicit mode/budget context, per-check results and fatal-error reporting.
+The fifty-third increment audits release requirements, retained evidence and open
+gates. See [release readiness](RELEASE_READINESS.md) for the remaining automated
+and physical checks, commands, acceptance criteria and evidence requirements.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
@@ -121,7 +122,9 @@ not a controlled 1080p benchmark or a GPU/full-frame performance guarantee.
 - Bitmap text is an uppercase subset. Diagnostic strings and screenshot capture
   allocate; a whole-engine allocation-free guarantee has not been established.
 - CPU timing excludes swap waiting; asynchronous GPU intervals cover submitted
-  rendering. Controlled 1080p performance budgets remain future work.
+  rendering. Controlled 1080p synthetic stress and native-viewport gameplay reports
+  are available; candidate workload acceptance, broader display measurements and
+  remaining allocation coverage are tracked in [release readiness](RELEASE_READINESS.md).
   Tiling-window-manager sizing is honored.
 - Automated CPU and GPU checks complement rather than replace the pending manual
   focus, fullscreen, scaling, minimized-state, and audible-output checks.
@@ -1843,11 +1846,26 @@ CLI fields and completion/success semantics. All three package checks pass, incl
 relocated JSON validation and OpenGL gameplay. See
 [the report schema and byte convention](ASSET_VALIDATION.md#json-reports).
 
+## Increment 53: release-readiness audit
+
+- Audited the plan, F01–F16 manifest, current CTest inventories, retained validation
+  logs, platform/audio checklists and versioned benchmark evidence at `9b9b99f`.
+- Published eight release gates with commands and evidence requirements, separating
+  current passes, historical/subset evidence, unconfirmed behavior and missing checks.
+- Identified the current compiler/sanitizer matrix, concurrent audio TSan validation
+  and a clean network-isolated build as the next automatable gaps. The sanitizer
+  inventory contains 30 groups, with some binaries absent from the existing build;
+  the recent five-group pass does not certify the full suite.
+- Kept physical display/input, audible output/device lifecycle, performance/memory
+  acceptance and persistence fault/compatibility follow-up open. Optional extensions
+  are separate; no runtime behavior or release requirement changed.
+- Corrected stale overview language about delivered diagnostics and 1080p profiling.
+  The audit is installed with the existing documentation in release packages.
+
 ## Next increment
 
-Audit the remaining release requirements against the current implementation,
-coverage manifest and validation evidence. Identify concrete release blockers,
-separate automatable gaps from checks requiring physical hardware or user input,
-and document reproducible commands and expected evidence for each remaining gate.
-Broader hardware/driver, audible-output and manual release checks remain outstanding;
+Execute and retain the candidate compiler/sanitizer matrix, investigate concurrent
+audio under ThreadSanitizer, and validate a fresh offline build using the commands
+in [release readiness](RELEASE_READINESS.md). Resolve concrete failures before
+expanding scope. Physical display/audio checks remain pending until observed;
 background loading remains deferred.

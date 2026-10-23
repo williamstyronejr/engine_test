@@ -2,13 +2,15 @@
 
 A C++20/OpenGL 4.6 engine built in-house for Linux. It includes native windowing,
 batched textured quads, input, simulation, collision, audio, and a playable example.
-The thirty-sixth increment adds transactional audio reload, replacing WAV banks at
-mixer block boundaries while retaining voice handles, controls and playback progress.
-Feature Lab includes shader reload, paused stepping, collisions, settings, and saves.
+Feature Lab includes transactional asset reload, paused stepping, collisions,
+settings, saves, replay profiling and a relocatable release package. A CPU-only
+asset validator supports text and versioned JSON reports.
 
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
 [implementation status and feature coverage](docs/STATUS.md) distinguish working
-features from planned work.
+features from planned work. The [release-readiness audit](docs/RELEASE_READINESS.md)
+records outstanding compiler/sanitizer, offline-build, performance and physical
+display/audio gates with commands and expected evidence. Release acceptance remains open.
 
 ## Build
 
