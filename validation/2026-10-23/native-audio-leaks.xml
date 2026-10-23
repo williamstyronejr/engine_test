@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-c++"
+	tests="2"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="omarchy"
+	time="5"
+	timestamp="2026-10-23T12:41:30"
+	>
+	<testcase name="audio_reload" classname="audio_reload" time="1.82244" status="run">
+		<properties>
+			<property name="cmake_labels" value="platform"/>
+		</properties>
+		<system-out>PASS queued_chained_banks_retain_storage_until_ack_and_keep_voice_tickets
+PASS queue_rejection_and_invalid_batches_leave_bank_and_existing_voice_intact
+PASS retained_memory_budget_is_checked_before_publication
+[audio bank retained] revision=1
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank retained] revision=1
+sounds/door.wav: Not a regular asset file
+[audio bank retained] revision=1
+sounds/door.wav: Asset path escapes its root
+[audio bank queued] revision=2
+[audio bank queued] revision=3
+ALSA lib pcm_file.c:445:(snd_pcm_file_write_bytes) [error.pcm] /dev/full write failed, file data may be corrupt: No space left on device
+PASS soundtrack_failures_repair_pause_settings_and_completion_are_preserved
+PASS device_failure_rejects_reload_and_shutdown_safely_releases_pending_banks
+5 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="audio_transport" classname="audio_transport" time="3.41625" status="run">
+		<properties>
+			<property name="cmake_labels" value="platform"/>
+		</properties>
+		<system-out>ALSA lib pcm_file.c:445:(snd_pcm_file_write_bytes) [error.pcm] /dev/full write failed, file data may be corrupt: No space left on device
+ALSA lib pcm_file.c:445:(snd_pcm_file_write_bytes) [error.pcm] /dev/full write failed, file data may be corrupt: No space left on device
+PASS output_owns_clips_and_orders_controls
+PASS output_bank_bounds_foreign_handles_and_queue_pressure
+PASS feature_lab_audio_controls_restart_and_completion
+PASS settings_gain_validation_and_command_coalescing
+PASS checkpoint_restore_restarts_loops_without_historical_effects
+PASS single_step_keeps_audio_groups_paused_until_resume
+PASS title_audio_starts_paused_and_resumes_without_duplicate_voices
+[audio] Muted: Audio command rejected; playback disabled (device_error=-5)
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) [error.pcm] Unknown PCM engine_test_intentionally_missing_device
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) [error.pcm] Unknown PCM engine_test_intentionally_missing_device
+PASS real_alsa_write_failure_disables_output_and_retains_...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+</testsuite>

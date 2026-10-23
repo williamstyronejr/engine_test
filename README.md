@@ -9,8 +9,10 @@ asset validator supports text and versioned JSON reports.
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
 [implementation status and feature coverage](docs/STATUS.md) distinguish working
 features from planned work. The [release-readiness audit](docs/RELEASE_READINESS.md)
-records outstanding compiler/sanitizer, offline-build, performance and physical
-display/audio gates with commands and expected evidence. Release acceptance remains open.
+records remaining performance, persistence and physical display/audio gates with
+commands and expected evidence. [Candidate validation](validation/2026-10-23/RESULTS.md)
+retains full compiler/sanitizer results, audio ThreadSanitizer checks and a clean
+offline build with relocated package checks. Release acceptance remains open.
 
 ## Build
 

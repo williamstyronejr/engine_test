@@ -1,0 +1,405 @@
+{
+  "source_revision": "1dfba31fd210d3237bd3d61abc6f6a497d207baa",
+  "purpose": "Release gates R1, R2 and R3; fresh builds with installed tools; no automatic retries",
+  "runs": [
+    {
+      "name": "gcc-debug-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/gcc-debug",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {},
+      "started_utc": "2026-10-23T16:10:28.936644+00:00",
+      "log": "gcc-debug-configure.log",
+      "exit_code": 0,
+      "wall_seconds": 2.009
+    },
+    {
+      "name": "gcc-debug-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/gcc-debug",
+        "-j2"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {},
+      "started_utc": "2026-10-23T16:10:30.946577+00:00",
+      "log": "gcc-debug-build.log",
+      "exit_code": 0,
+      "wall_seconds": 187.158
+    },
+    {
+      "name": "gcc-debug-tests",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/release-validation/gcc-debug",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-23/gcc-debug-tests.xml",
+        "-LE",
+        "packaging"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {},
+      "started_utc": "2026-10-23T16:13:38.105838+00:00",
+      "log": "gcc-debug-tests.log",
+      "exit_code": 0,
+      "wall_seconds": 70.898
+    },
+    {
+      "name": "gcc-release-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/gcc-release",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Release"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {},
+      "started_utc": "2026-10-23T16:14:49.006035+00:00",
+      "log": "gcc-release-configure.log",
+      "exit_code": 0,
+      "wall_seconds": 2.482
+    },
+    {
+      "name": "gcc-release-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/gcc-release",
+        "-j2"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {},
+      "started_utc": "2026-10-23T16:14:51.488915+00:00",
+      "log": "gcc-release-build.log",
+      "exit_code": 0,
+      "wall_seconds": 365.744
+    },
+    {
+      "name": "gcc-release-tests",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/release-validation/gcc-release",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-23/gcc-release-tests.xml",
+        "-LE",
+        "packaging"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {},
+      "started_utc": "2026-10-23T16:20:57.233556+00:00",
+      "log": "gcc-release-tests.log",
+      "exit_code": 0,
+      "wall_seconds": 66.683
+    },
+    {
+      "name": "clang-debug-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/clang-debug",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_CXX_COMPILER=clang++"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {},
+      "started_utc": "2026-10-23T16:22:03.918776+00:00",
+      "log": "clang-debug-configure.log",
+      "exit_code": 0,
+      "wall_seconds": 2.82
+    },
+    {
+      "name": "clang-debug-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/clang-debug",
+        "-j2"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {},
+      "started_utc": "2026-10-23T16:22:06.739733+00:00",
+      "log": "clang-debug-build.log",
+      "exit_code": 0,
+      "wall_seconds": 184.648
+    },
+    {
+      "name": "clang-debug-tests",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/release-validation/clang-debug",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-23/clang-debug-tests.xml",
+        "-LE",
+        "packaging"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {},
+      "started_utc": "2026-10-23T16:25:11.388713+00:00",
+      "log": "clang-debug-tests.log",
+      "exit_code": 0,
+      "wall_seconds": 121.828
+    },
+    {
+      "name": "cpu-sanitize-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/cpu-sanitize",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DENGINE_SANITIZERS=ON",
+        "-DENGINE_BUILD_PLATFORM=OFF"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {},
+      "started_utc": "2026-10-23T16:27:13.224039+00:00",
+      "log": "cpu-sanitize-configure.log",
+      "exit_code": 0,
+      "wall_seconds": 0.79
+    },
+    {
+      "name": "cpu-sanitize-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/cpu-sanitize",
+        "-j2"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {},
+      "started_utc": "2026-10-23T16:27:14.014987+00:00",
+      "log": "cpu-sanitize-build.log",
+      "exit_code": 0,
+      "wall_seconds": 207.282
+    },
+    {
+      "name": "cpu-sanitize-tests",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/release-validation/cpu-sanitize",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-23/cpu-sanitize-tests.xml",
+        "-LE",
+        "packaging"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {
+        "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+        "UBSAN_OPTIONS": "halt_on_error=1"
+      },
+      "started_utc": "2026-10-23T16:30:41.303009+00:00",
+      "log": "cpu-sanitize-tests.log",
+      "exit_code": 0,
+      "wall_seconds": 39.827
+    },
+    {
+      "name": "native-sanitize-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/native-sanitize",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DENGINE_SANITIZERS=ON"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {},
+      "started_utc": "2026-10-23T16:31:21.131294+00:00",
+      "log": "native-sanitize-configure.log",
+      "exit_code": 0,
+      "wall_seconds": 1.817
+    },
+    {
+      "name": "native-sanitize-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/native-sanitize",
+        "-j2"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {},
+      "started_utc": "2026-10-23T16:31:22.949192+00:00",
+      "log": "native-sanitize-build.log",
+      "exit_code": 0,
+      "wall_seconds": 340.875
+    },
+    {
+      "name": "native-sanitize-tests",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/release-validation/native-sanitize",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-23/native-sanitize-tests.xml",
+        "-LE",
+        "packaging"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {
+        "ASAN_OPTIONS": "detect_leaks=0:halt_on_error=1",
+        "UBSAN_OPTIONS": "halt_on_error=1"
+      },
+      "started_utc": "2026-10-23T16:37:03.827703+00:00",
+      "log": "native-sanitize-tests.log",
+      "exit_code": 0,
+      "wall_seconds": 266.371
+    },
+    {
+      "name": "native-audio-leaks",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/release-validation/native-sanitize",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-23/native-audio-leaks.xml",
+        "-R",
+        "^(audio_transport|audio_reload)$"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {
+        "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+        "UBSAN_OPTIONS": "halt_on_error=1"
+      },
+      "started_utc": "2026-10-23T16:41:30.199486+00:00",
+      "log": "native-audio-leaks.log",
+      "exit_code": 0,
+      "wall_seconds": 5.396
+    },
+    {
+      "name": "tsan-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/tsan",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_CXX_COMPILER=clang++",
+        "-DENGINE_SANITIZERS=OFF",
+        "-DCMAKE_CXX_FLAGS=-fsanitize=thread -fno-omit-frame-pointer",
+        "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=thread"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {},
+      "started_utc": "2026-10-23T16:41:35.596139+00:00",
+      "log": "tsan-configure.log",
+      "exit_code": 0,
+      "wall_seconds": 4.498
+    },
+    {
+      "name": "tsan-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/tsan",
+        "-j2",
+        "--target",
+        "audio_tests",
+        "audio_reload_tests"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {},
+      "started_utc": "2026-10-23T16:41:40.095704+00:00",
+      "log": "tsan-build.log",
+      "exit_code": 0,
+      "wall_seconds": 30.912
+    },
+    {
+      "name": "tsan-tests",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/release-validation/tsan",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-23/tsan-tests.xml",
+        "-R",
+        "^(audio_transport|audio_reload)$"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {
+        "TSAN_OPTIONS": "halt_on_error=1"
+      },
+      "started_utc": "2026-10-23T16:42:11.009401+00:00",
+      "log": "tsan-tests.log",
+      "exit_code": 0,
+      "wall_seconds": 10.369
+    },
+    {
+      "name": "offline-build",
+      "command": [
+        "unshare",
+        "--user",
+        "--map-root-user",
+        "--net",
+        "sh",
+        "-c",
+        "set -eu\necho 'Isolated network namespace:'\nreadlink /proc/self/ns/net\ncat /proc/net/dev\ncat /proc/net/route\necho 'Configure fresh source snapshot'\ncmake -S \"$AUDIT_SOURCE\" -B \"$AUDIT_BUILD\" -G Ninja -DCMAKE_BUILD_TYPE=Release\necho 'Build every target'\ncmake --build \"$AUDIT_BUILD\" -j2\necho 'CPU tests inside isolated network namespace'\nctest --test-dir \"$AUDIT_BUILD\" -L cpu --output-on-failure\necho 'Build package and mandatory relocated CPU checks inside isolated network namespace'\ncmake --build \"$AUDIT_BUILD\" --target release_package\n"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {
+        "AUDIT_SOURCE": "/var/tmp/feature-lab-offline.adblyxpf/source",
+        "AUDIT_BUILD": "/var/tmp/feature-lab-offline.adblyxpf/build"
+      },
+      "started_utc": "2026-10-23T16:42:27.949912+00:00",
+      "log": "offline-build.log",
+      "exit_code": 0,
+      "wall_seconds": 361.103
+    },
+    {
+      "name": "offline-package-tests",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "/var/tmp/feature-lab-offline.adblyxpf/build",
+        "-L",
+        "packaging",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-23/offline-package-tests.xml"
+      ],
+      "cwd": "/home/zero/dev/engine_test",
+      "environment": {},
+      "started_utc": "2026-10-23T16:48:29.115895+00:00",
+      "log": "offline-package-tests.log",
+      "exit_code": 0,
+      "wall_seconds": 36.564
+    }
+  ]
+}

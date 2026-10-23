@@ -53,6 +53,9 @@ cmake --install build/release --prefix "$PWD/build/package"
 ```
 
 Normal native installs include all three executables, assets and linked documentation.
+The [release-validation records](../validation/README.md), including command logs
+and CTest XML, install under `share/doc/feature_lab/validation`. Each record names
+its tested source revision; it does not automatically certify later package revisions.
 Top-level README/build/dependency/hash records are added by the archive target.
 CPU-only builds install `stress_bench`, `validate_assets` and documentation; they do not
 produce the full game archive. Debug, sanitizer and cross builds cannot use the
