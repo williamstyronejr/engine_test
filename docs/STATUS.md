@@ -1,7 +1,7 @@
 # Implementation status
 
-The fifty-first increment adds explicit single-file asset validation for six engine
-formats, with generic scene budgets and no dependency on a complete game bundle.
+The fifty-second increment adds optional versioned JSON asset-validation reports,
+with explicit mode/budget context, per-check results and fatal-error reporting.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
@@ -59,7 +59,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F05 | Implemented (v1) | ETMP round trips, layer/atlas validation, chunk traversal vs brute-force reference, solid-cell union and swept query tests; large scrolling map | Optional editing/streaming tools |
 | F06 | Implemented (v1) | EANI reader/writer; exact frame timing, loops, pause/restart, large advances; animated player/machine/door with exactly-once completion | Optional frame callbacks and richer animation types |
 | F07 | Implemented (v1) | Handle/compaction/hierarchy tests, scene round trips, deferred deletion; title/gameplay and Facility/Annex transitions; typed runtime pools with checked access, intersecting queries, ownership/exception/move tests, allocation-free steady queries and pickup integration | Optional custom component serialization codecs, query scheduling and broader ECS tooling |
-| F08 | Implemented (v1) | ETEX/ETMP/EANI/WAV/EFNT readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, transactional shader/texture/font/animation/tilemap/scene/audio reload with gameplay-content replay isolation; optional bounded inotify watching, debounce, metadata recovery and watched GPU pixel tests; CPU-only bundle and single-file validation with file/level diagnostics | Optional background loading and broader asset tooling |
+| F08 | Implemented (v1) | ETEX/ETMP/EANI/WAV/EFNT readers, cache snapshots/reload tests, path validation, fallback demo, GPU lifetime tests, transactional shader/texture/font/animation/tilemap/scene/audio reload with gameplay-content replay isolation; optional bounded inotify watching, debounce, metadata recovery and watched GPU pixel tests; CPU-only bundle and single-file validation with file/level diagnostics and versioned JSON reports | Optional background loading and broader asset tooling |
 | F09 | Implemented (v1) | Swept player boxes; box/circle contacts; moving-body grid vs brute force; reciprocal filters; trigger history; overlap/segment queries; alarm/switch and restore tests | Rigid-body dynamics, rotating shapes and moving-body CCD are outside initial scope |
 | F10 | Partial | PCM16 WAV assets/resampling, loops, voice controls, gain ramps, master/music/effects controls, stereo emitter, null-device soundtrack/restart tests; deterministic transport recovery faults; real ALSA file-sink failure/fallback; recovery counters and listening probe | Physical disconnect/recovery, system suspend/resume and audible-output checks; see [audio validation](AUDIO_VALIDATION.md) |
 | F11 | Partial | Atlas bitmap text with authored metrics, bounded allocation-free layout, font fallback and visual gallery; clipped status panel, buttons/checkboxes/sliders, keyboard/pointer navigation, bounded layout, modal settings and title screen; `ui`, scene-flow and GPU pixel tests | Broader manual navigation checks |
@@ -1813,10 +1813,41 @@ package checks pass; the relocated command validates a scene with an explicit
 256-entry budget alongside the existing bundle checks.
 See [single-file usage and boundaries](ASSET_VALIDATION.md#single-file-format-checks).
 
+## Increment 52: versioned JSON asset-validation reports
+
+- `validate_assets --json` emits one `engine_asset_validation_v1` object to stdout
+  for bundle or single-file validation. Text remains the default. Reports include
+  mode, format/key, scene budget, requested/canonical roots, completion/success,
+  counts, ordered check results and diagnostics.
+- Content failures return complete failing reports; fatal root/validation errors
+  return incomplete reports with empty checks and retained request context. Argument
+  errors remain stderr text with exit 2. JSON output failures return 1 rather than
+  reporting success when stdout rejects the write.
+- The profiler's existing byte-escaping function is shared without adding a JSON
+  dependency or linking benchmark code into the validator. `string_encoding` names
+  its reversible byte-value convention; output stays ASCII even for invalid UTF-8
+  paths. Numeric serialization uses the classic locale and has no timestamps.
+- Package CPU checks emit and independently parse a JSON scene report from the
+  relocated executable. Existing text output, validation rules and asset formats
+  are preserved. Dependent checks remain omitted when their prerequisites fail;
+  the schema documents counts as performed checks and distinguishes completion
+  from success.
+
+All 56 runtime groups pass in Debug and Release without skips. Five CPU groups
+(`asset_validation`, `asset_validation_cli`, `stress_cpu`, `replay_profile`,
+`spike_profile`) pass ASan/UBSan with leak detection. Regressions cover all six
+formats, default/zero budgets, deterministic output, content/fatal errors, null
+fields, quotes/backslashes/newlines/control/non-ASCII bytes, numeric locale changes,
+argument errors and rejected stdout writes. An independent JSON reader validates
+CLI fields and completion/success semantics. All three package checks pass, including
+relocated JSON validation and OpenGL gameplay. See
+[the report schema and byte convention](ASSET_VALIDATION.md#json-reports).
+
 ## Next increment
 
-Add versioned JSON validation reports for automation, including mode, selected
-format/budget, check results and diagnostics. Preserve the existing human-readable
-output and exit codes, and test escaping, failure reports and packaged use.
-Broader physical hardware/driver and manual release checks remain outstanding;
+Audit the remaining release requirements against the current implementation,
+coverage manifest and validation evidence. Identify concrete release blockers,
+separate automatable gaps from checks requiring physical hardware or user input,
+and document reproducible commands and expected evidence for each remaining gate.
+Broader hardware/driver, audible-output and manual release checks remain outstanding;
 background loading remains deferred.
