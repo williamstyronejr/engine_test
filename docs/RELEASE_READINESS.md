@@ -7,13 +7,17 @@ requirements. [ENGINE_PLAN.md](../ENGINE_PLAN.md) defines the requirements;
 the [F01–F16 manifest](STATUS.md#feature-coverage-manifest) maps delivered behavior
 to scenarios and tests.
 
+Follow-up: [candidate validation at `1dfba31`](../validation/2026-10-23/RESULTS.md)
+retains fresh compiler/sanitizer, concurrent-audio and clean offline-build results. The evidence table
+below preserves the original audit snapshot; gate states reflect the follow-up.
+
 “Evidence available” below applies to the stated revision and environment only.
 “Open” means missing evidence or unfinished acceptance work, not a reproduced code
 failure. Unconfirmed WM minimization and rejected historical timing runs are called
 out separately. A skipped test, missing binary or sanitizer startup failure cannot
 close a gate. Earlier passing subsets do not certify later changes.
 
-## Evidence inspected
+## Evidence inspected in the original audit
 
 | Evidence | Result and limits |
 | --- | --- |
@@ -36,9 +40,9 @@ advertised; a second GPU is not a substitute for finishing checks on the testing
 
 | Gate | State | Required closure / evidence | Execution |
 | --- | --- | --- | --- |
-| R1: candidate compiler and sanitizer matrix | Open; current full GCC evidence, stale or partial other configurations | Build every test target on one recorded candidate revision. Retain GCC Debug/Release, Clang and full CPU ASan/UBSan results; run native ASan/UBSan with explicit leak policy. Reconcile discovered, executed, passed, failed and skipped counts. | Automatable with installed tools and display. |
-| R2: concurrent audio validation | Open; no retained TSan result found | Instrument the producer/worker queue, acknowledged buffer retirement and shutdown paths. Run the existing concurrent null-device tests under TSan and inspect failures. A runtime incompatibility is a blocker to investigate, not a clean race result. | Automatable; native ALSA development dependencies, no speakers needed. |
-| R3: clean offline build and candidate package | Open for clean offline rebuild; relocation evidence available | Build a committed source snapshot in an empty directory with networking disabled and installed tools only. Record toolchain, network-isolation method, exit codes and package identity. Run all three package checks; verify checksums and launch outside the source/build tree. | Automatable where network isolation is available. |
+| R1: candidate compiler and sanitizer matrix | Evidence available at `1dfba31` | Fresh GCC Debug/Release and Clang each passed 56 groups; CPU ASan/UBSan passed 30, native ASan/UBSan passed 56 and leak-enabled native audio passed two. No skips. Preserve the explicit leak policy and refresh evidence when implementation/toolchain changes. | Completed on the recorded host; [raw results](../validation/2026-10-23/RESULTS.md). |
+| R2: concurrent audio validation | Evidence available at `1dfba31` | Clang TSan passed both concurrent audio groups without reports, using null/failing sinks. This covers exercised queue, buffer-retirement and shutdown schedules, not all interleavings or uninstrumented ALSA internals. | Completed without physical sound output; [raw results](../validation/2026-10-23/tsan-tests.xml). |
+| R3: clean offline build and candidate package | Evidence available at `1dfba31` | A fresh archived source built every target with networking disabled; 32 CPU groups and mandatory package smoke checks passed inside isolation. All three package checks passed afterward in the display session. Source/archive hashes, build identity and dependency/payload inventories are retained; the archive's embedded revision is `unknown` because Git metadata was absent. | Completed on the recorded host; [offline results and provenance](../validation/2026-10-23/RESULTS.md#clean-offline-build). |
 | R4: display, input and interactive game acceptance | Open; WM minimize was unconfirmed (probe exit 2) | Finish physical scale/monitor, supported WM minimize/restore, focus, layout switching and title/settings/gameplay checks. Verify camera, clipping, rebinding, save/relaunch, level transitions and visible shader failure/recovery. Record each case, configuration and result. | Human observation and a suitable WM/monitor configuration. |
 | R5: physical sound and device lifecycle | Open | Listen to channel/gain/mute/pause/stop and gameplay cues. Exercise physical disconnect and system suspend/resume in an arranged session. Confirm continued play and useful disabled-audio diagnostics on terminal failure. Record device/backend and outcome; automatic reconnection is not implemented or required by the current contract. | Human observation and physical device access. |
 | R6: declared performance and memory acceptance | Open; bounded historical workloads available | Declare the release workload and budget, repeat it on the candidate, retain actual viewport/target sizes, timing scopes, warmup, queries, resource peaks and limits. Finish render/audio hot-path allocation coverage and document intentional exceptions. Audit remaining untracked storage before claiming whole-engine bounds. | Measurements can be automated; physical presentation/refresh checks require observation. |
@@ -68,8 +72,9 @@ Run from a clean candidate checkout with installed CMake, Ninja, GCC/Clang and t
 documented X11/GLX/ALSA development libraries. If using the local tool installation,
 prepend its absolute `.tools/bin` path. Preserve the session's actual `DISPLAY`;
 do not assume `:0` on another PC. Save stdout/stderr and exit status for each command
-in a new evidence directory. These recipes are remaining work, not claims that
-this audit ran the full matrix.
+in a new evidence directory. The original audit did not run these recipes. The
+[follow-up](../validation/2026-10-23/RESULTS.md) records actual commands and results
+in fresh build paths; use these recipes to refresh evidence for later candidates.
 
 ### R1: build every target before testing
 
@@ -209,7 +214,8 @@ mipmaps/anisotropy, a visual editor and advanced rigid-body simulation remain
 deferred or outside v1. None closes the open release checks above. Optional JSON
 validation/profiling reports do not add a JSON asset-format requirement.
 
-Next: execute and retain the candidate compiler/sanitizer matrix (R1), investigate
-the concurrent audio TSan run (R2), then perform the fresh offline build (R3).
-Keep physical R4/R5 cases pending until observed, and use the results to prioritize
-R6/R7 work. Do not mark milestone 6 complete from this audit alone.
+R1–R3 now have evidence for the named baseline. Next: add deterministic filesystem
+failure coverage for atomic saves (R7), checking cleanup and destination state
+before/after rename. R6 workload/memory acceptance and physical R4/R5 cases remain
+open; R8 requires their coverage/support record. Refresh automated evidence when
+the implementation or toolchain changes. These results do not complete milestone 6.

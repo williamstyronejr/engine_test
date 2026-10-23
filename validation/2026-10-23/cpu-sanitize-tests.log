@@ -1,0 +1,68 @@
+Test project /home/zero/dev/engine_test/build/release-validation/cpu-sanitize
+      Start  1: asset_validation
+ 1/30 Test  #1: asset_validation .................   Passed    2.05 sec
+      Start  2: asset_validation_cli
+ 2/30 Test  #2: asset_validation_cli .............   Passed    3.14 sec
+      Start  3: mixer_reload
+ 3/30 Test  #3: mixer_reload .....................   Passed    0.01 sec
+      Start  4: scene_reload
+ 4/30 Test  #4: scene_reload .....................   Passed    2.25 sec
+      Start  5: tilemap_reload
+ 5/30 Test  #5: tilemap_reload ...................   Passed    1.39 sec
+      Start  6: animation_reload
+ 6/30 Test  #6: animation_reload .................   Passed    0.99 sec
+      Start  7: audio_recovery
+ 7/30 Test  #7: audio_recovery ...................   Passed    0.02 sec
+      Start  8: fonts
+ 8/30 Test  #8: fonts ............................   Passed    0.26 sec
+      Start  9: asset_watch
+ 9/30 Test  #9: asset_watch ......................   Passed    0.45 sec
+      Start 10: components
+10/30 Test #10: components .......................   Passed    0.54 sec
+      Start 11: transforms
+11/30 Test #11: transforms .......................   Passed    1.07 sec
+      Start 12: package_manifest
+12/30 Test #12: package_manifest .................   Passed    0.14 sec
+      Start 13: stress_cpu
+13/30 Test #13: stress_cpu .......................   Passed    6.98 sec
+      Start 14: stress_report
+14/30 Test #14: stress_report ....................   Passed    0.21 sec
+      Start 15: replay_profile
+15/30 Test #15: replay_profile ...................   Passed    0.03 sec
+      Start 16: spike_profile
+16/30 Test #16: spike_profile ....................   Passed    0.28 sec
+      Start 17: replay_files
+17/30 Test #17: replay_files .....................   Passed    3.06 sec
+      Start 18: levels
+18/30 Test #18: levels ...........................   Passed    5.18 sec
+      Start 19: scene_flow
+19/30 Test #19: scene_flow .......................   Passed    0.59 sec
+      Start 20: international_bindings
+20/30 Test #20: international_bindings ...........   Passed    0.03 sec
+      Start 21: bindings
+21/30 Test #21: bindings .........................   Passed    0.12 sec
+      Start 22: gpu_timer_queue
+22/30 Test #22: gpu_timer_queue ..................   Passed    0.02 sec
+      Start 23: diagnostics
+23/30 Test #23: diagnostics ......................   Passed    1.90 sec
+      Start 24: collision
+24/30 Test #24: collision ........................   Passed    1.46 sec
+      Start 25: persistence
+25/30 Test #25: persistence ......................   Passed    3.17 sec
+      Start 26: ui
+26/30 Test #26: ui ...............................   Passed    0.07 sec
+      Start 27: sound
+27/30 Test #27: sound ............................   Passed    0.22 sec
+      Start 28: tile_animation
+28/30 Test #28: tile_animation ...................   Passed    0.69 sec
+      Start 29: content
+29/30 Test #29: content ..........................   Passed    1.07 sec
+      Start 30: core
+30/30 Test #30: core .............................   Passed    2.06 sec
+
+100% tests passed out of 30
+
+Label Time Summary:
+cpu    =  39.47 sec*proc (30 tests)
+
+Total Test time (real) =  39.49 sec

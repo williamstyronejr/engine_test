@@ -1,0 +1,9 @@
+{
+  "source_revision": "1dfba31fd210d3237bd3d61abc6f6a497d207baa",
+  "source_archive_sha256": "ea7f8957a8bf0346a0759adb892c340cfdc5df46338f3033b9cb4bceb48023aa",
+  "root": "/var/tmp/feature-lab-offline.adblyxpf",
+  "source": "/var/tmp/feature-lab-offline.adblyxpf/source",
+  "build": "/var/tmp/feature-lab-offline.adblyxpf/build",
+  "network_isolation": "unshare --user --map-root-user --net",
+  "prepared_only": false
+}

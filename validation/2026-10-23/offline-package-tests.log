@@ -1,0 +1,15 @@
+Test project /var/tmp/feature-lab-offline.adblyxpf/build
+    Start 57: package_build
+1/3 Test #57: package_build ....................   Passed    1.43 sec
+    Start 58: package_relocation
+2/3 Test #58: package_relocation ...............   Passed    0.58 sec
+    Start 59: package_graphics
+3/3 Test #59: package_graphics .................   Passed   34.35 sec
+
+100% tests passed out of 3
+
+Label Time Summary:
+hardware     =  34.35 sec*proc (1 test)
+packaging    =  36.37 sec*proc (3 tests)
+
+Total Test time (real) =  36.37 sec
