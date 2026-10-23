@@ -1862,6 +1862,12 @@ relocated JSON validation and OpenGL gameplay. See
 - Corrected stale overview language about delivered diagnostics and 1080p profiling.
   The audit is installed with the existing documentation in release packages.
 
+Documentation validation resolves 88 local links and syntax-checks all four audit
+shell blocks. All three Release package checks pass without skips at `6a6077d`
+(26.86 s), including relocated OpenGL gameplay; the archived audit matches the
+committed file. The full compiler/sanitizer and offline-build recipes were not run
+in this documentation increment and remain open gates.
+
 ## Next increment
 
 Execute and retain the candidate compiler/sanitizer matrix, investigate concurrent
