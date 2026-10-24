@@ -167,6 +167,13 @@ if(BUILD_TESTING)
   target_compile_definitions(persistence_tests PRIVATE TEST_ASSET_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/assets")
   add_test(NAME persistence COMMAND persistence_tests)
   set_tests_properties(persistence PROPERTIES TIMEOUT 30 LABELS cpu)
+  add_executable(atomic_write_tests tests/atomic_write_tests.cpp)
+  target_link_libraries(atomic_write_tests PRIVATE engine_core)
+  target_link_options(atomic_write_tests PRIVATE
+    -Wl,--wrap=mkstemp -Wl,--wrap=write -Wl,--wrap=fsync -Wl,--wrap=close
+    -Wl,--wrap=rename -Wl,--wrap=open -Wl,--wrap=unlink)
+  add_test(NAME atomic_write COMMAND atomic_write_tests)
+  set_tests_properties(atomic_write PROPERTIES TIMEOUT 20 LABELS cpu)
   add_executable(ui_tests tests/ui_tests.cpp)
   target_link_libraries(ui_tests PRIVATE engine_core)
   target_compile_definitions(ui_tests PRIVATE TEST_ASSET_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/assets")
