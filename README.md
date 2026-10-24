@@ -14,6 +14,10 @@ commands and expected evidence. [Candidate validation](validation/2026-10-23/RES
 retains full compiler/sanitizer results, audio ThreadSanitizer checks and a clean
 offline build with relocated package checks. Release acceptance remains open.
 
+Atomic saves also have [isolated filesystem-failure tests](docs/ATOMIC_SAVE_VALIDATION.md)
+covering short/interrupted writes, cleanup and failures before/after replacement.
+Zero-progress writes and directory-close errors now report failure reliably.
+
 ## Build
 
 Requirements: Linux, a C++20 compiler, CMake 3.21+, Ninja, X11 development headers,

@@ -142,6 +142,8 @@ void AssetRoot::write_atomic(std::string_view key, std::span<const std::uint8_t>
             const auto written = ::write(fd, bytes.data() + offset, bytes.size() - offset);
             if (written < 0 && errno == EINTR)
                 continue;
+            if (written == 0)
+                errno = EIO; // No progress is a failure even if errno is zero or stale.
             if (written <= 0)
                 system_failure("Write save temporary");
             offset += static_cast<std::size_t>(written);
@@ -162,11 +164,13 @@ void AssetRoot::write_atomic(std::string_view key, std::span<const std::uint8_t>
         if (directory < 0)
             system_failure("Open save directory");
         const int synced = fsync(directory), saved_errno = errno;
-        close(directory);
+        const int directory_closed = close(directory);
         if (synced != 0) {
             errno = saved_errno;
             system_failure("Sync save directory");
         }
+        if (directory_closed != 0)
+            system_failure("Close save directory");
     } catch (...) {
         if (fd >= 0)
             close(fd);

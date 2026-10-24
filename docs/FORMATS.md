@@ -23,8 +23,12 @@ build directory and installs them under `share/feature_lab`.
 `write_atomic` creates a unique temporary file in the destination directory, writes
 and syncs it, renames it onto the destination, and syncs the directory. Readers see
 either the old or complete new file. Failures before rename preserve the destination
-and remove the temporary. A directory-sync failure after rename reports an error
-but cannot undo the replacement; crash durability is then uncertain. Parent
+and attempt to remove the temporary; failed cleanup can leave an orphan without
+replacing the primary error. A directory-open/sync failure after rename reports an
+error but cannot undo the replacement; crash durability is then uncertain.
+Directory-close errors also report failure after replacement, even if sync succeeded.
+Zero-progress writes report `EIO`; interrupted writes retry the unwritten remainder.
+Close errors are never retried. See [fault cases and error precedence](ATOMIC_SAVE_VALIDATION.md). Parent
 directories must already exist. The utility does not create directory trees.
 
 ## ETEX texture
@@ -945,13 +949,16 @@ there is no multi-process conflict resolution.
 
 Writes validate the envelope, create missing directories, write a mode-0600 sibling
 temporary, sync its contents, rename over the destination, then sync the destination
-directory. Pre-rename errors preserve the old file and remove the temporary. A
-post-rename sync error may report failure after the complete new file is visible.
-Abrupt process exit can leave an orphan `.engine-save-*` temporary; reads ignore it
+directory. Pre-rename errors preserve the old file and attempt to remove the temporary.
+A post-rename directory open/sync/close error reports failure after the complete
+new file is visible. Abrupt process exit or failed cleanup can leave an orphan
+`.engine-save-*` temporary; reads ignore it
 and later writes use unique names. No automatic cleanup races other live writers.
-Interrupted-process tests cover both commit boundaries. Actual power loss and
-filesystem faults, including newly created ancestor-directory durability, remain
-untested. `AtomicWriteObserver` is an optional diagnostic/test callback at the two
+Interrupted-process tests cover both commit boundaries. The [atomic-write fault suite](ATOMIC_SAVE_VALIDATION.md)
+adds deterministic syscall errors, short/interrupted writes, error precedence,
+descriptor cleanup/reuse and retry checks. Actual power loss, filesystem-specific
+crash behavior and newly created ancestor-directory durability remain unverified.
+`AtomicWriteObserver` is an optional diagnostic/test callback at the two
 commit stages; ordinary engine/game writes do not install one.
 
 Saving through the panel replaces the selected slot and stores the pause state from

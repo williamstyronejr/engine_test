@@ -1,0 +1,30 @@
+{
+  "gcc-debug": {
+    "CMAKE_BUILD_TYPE": "Debug",
+    "CMAKE_CXX_COMPILER": "/usr/bin/c++",
+    "CMAKE_CXX_FLAGS": "",
+    "ENGINE_BUILD_PLATFORM": "ON",
+    "ENGINE_SANITIZERS": "OFF"
+  },
+  "gcc-release": {
+    "CMAKE_BUILD_TYPE": "Release",
+    "CMAKE_CXX_COMPILER": "/usr/bin/c++",
+    "CMAKE_CXX_FLAGS": "",
+    "ENGINE_BUILD_PLATFORM": "ON",
+    "ENGINE_SANITIZERS": "OFF"
+  },
+  "clang-debug": {
+    "CMAKE_BUILD_TYPE": "Debug",
+    "CMAKE_CXX_COMPILER": "/usr/bin/clang++",
+    "CMAKE_CXX_FLAGS": "",
+    "ENGINE_BUILD_PLATFORM": "ON",
+    "ENGINE_SANITIZERS": "OFF"
+  },
+  "cpu-sanitize": {
+    "CMAKE_BUILD_TYPE": "Debug",
+    "CMAKE_CXX_COMPILER": "/usr/bin/c++",
+    "CMAKE_CXX_FLAGS": "",
+    "ENGINE_BUILD_PLATFORM": "OFF",
+    "ENGINE_SANITIZERS": "ON"
+  }
+}

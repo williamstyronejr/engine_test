@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-c++"
+	tests="3"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="omarchy"
+	time="3"
+	timestamp="2026-10-23T22:08:59"
+	>
+	<testcase name="persistence" classname="persistence" time="2.92463" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS record_crc_reference_bounds_and_corruption
+PASS config_versions_ranges_and_exact_roundtrip
+PASS storage_slots_missing_limits_and_relaunch
+PASS user_paths_use_absolute_xdg_values_and_home_fallback
+PASS storage_failed_save_preserves_previous_slot
+PASS animation_restore_exact_boundary_and_failure_preservation
+PASS checkpoint_every_replay_phase_resumes_identically
+PASS checkpoint_invalid_state_never_replaces_live_game
+PASS checkpoint_decoder_bounds_versions_and_trailing_bytes
+PASS load_missing_or_corrupt_preserves_world
+PASS interrupted_atomic_writes_keep_old_or_new_complete_record
+PASS write_failure_retains_committed_file_and_cleans_temporary
+PASS menu_checkpoint_preserves_underlying_pause_state
+13 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="atomic_write" classname="atomic_write" time="0.0418552" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS short_and_interrupted_writes_publish_complete_payload_in_order
+PASS empty_payload_is_synced_and_replaces_existing_file
+PASS pre_rename_faults_preserve_old_or_absent_destination_and_allow_retry
+PASS zero_progress_write_reports_io_error_instead_of_stale_errno
+PASS post_rename_faults_report_error_but_keep_complete_new_destination
+PASS directory_sync_error_survives_close_and_cleanup_errors
+PASS failed_cleanup_preserves_primary_error_and_orphan_does_not_block_retry
+PASS failed_close_is_not_retried_after_descriptor_reuse
+8 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="content" classname="content" time="1.01283" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS scene_budgets_preserve_handles_on_overflow_and_replacement_failure
+PASS texture_roundtrip_and_exact_length
+PASS asset_root_paths_bounds_and_atomic_write
+PASS cache_shares_snapshots_and_preserves_failed_reload
+PASS entity_lifetime_compaction_and_foreign_handles
+PASS hierarchy_cycles_subtree_deletion_and_deferred_changes
+PASS scene_depth_capacity_and_transform_limits
+PASS scene_roundtrip_and_atomic_replacement
+PASS scene_rejects_malformed_records
+PASS scene_seeded_roundtrip_stress
+10 tests, 0 failed
+</system-out>
+	</testcase>
+</testsuite>
