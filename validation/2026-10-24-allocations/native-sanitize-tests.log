@@ -1,0 +1,17 @@
+Test project /home/zero/dev/engine_test/build/release-validation/native-sanitize
+    Start  1: allocation_counters
+1/4 Test  #1: allocation_counters ..............   Passed    0.02 sec
+    Start 34: audio_allocations
+2/4 Test #34: audio_allocations ................   Passed    1.29 sec
+    Start 44: audio_reload
+3/4 Test #44: audio_reload .....................   Passed    1.82 sec
+    Start 46: audio_transport
+4/4 Test #46: audio_transport ..................   Passed    3.55 sec
+
+100% tests passed out of 4
+
+Label Time Summary:
+cpu         =   0.02 sec*proc (1 test)
+platform    =   6.66 sec*proc (3 tests)
+
+Total Test time (real) =   6.69 sec

@@ -1,0 +1,58 @@
+[1/17] Building CXX object CMakeFiles/engine_core.dir/engine/src/persistence.cpp.o
+[2/17] Building CXX object CMakeFiles/engine_core.dir/engine/src/assets.cpp.o
+[3/17] Linking CXX static library libengine_core.a
+[4/17] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/stress_benchmark.cpp.o
+[5/17] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/replay_profile.cpp.o
+[6/17] Building CXX object CMakeFiles/engine_platform.dir/engine/src/audio.cpp.o
+[7/17] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/spike_profile.cpp.o
+[8/17] Linking CXX static library libfeature_lab_stress.a
+[9/17] Building CXX object CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o
+[10/17] Linking CXX static library libengine_platform.a
+[11/17] Building CXX object CMakeFiles/allocation_profile_tests.dir/tests/allocation_profile_tests.cpp.o
+[12/17] Building CXX object CMakeFiles/audio_allocations.dir/engine/src/audio.cpp.o
+[13/17] Linking CXX executable allocation_profile_tests
+FAILED: [code=1] allocation_profile_tests 
+: && /usr/bin/clang++ -fsanitize=thread -fno-omit-frame-pointer -g -fsanitize=thread -Xlinker --dependency-file=CMakeFiles/allocation_profile_tests.dir/link.d CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o CMakeFiles/allocation_profile_tests.dir/tests/allocation_profile_tests.cpp.o -o allocation_profile_tests   && :
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator new(unsigned long)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:77: multiple definition of `operator new(unsigned long)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._Znwm+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator new[](unsigned long)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:80: multiple definition of `operator new[](unsigned long)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._Znam+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator new(unsigned long, std::align_val_t)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:83: multiple definition of `operator new(unsigned long, std::align_val_t)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._ZnwmSt11align_val_t+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator new[](unsigned long, std::align_val_t)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:86: multiple definition of `operator new[](unsigned long, std::align_val_t)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._ZnamSt11align_val_t+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator new(unsigned long, std::nothrow_t const&)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:89: multiple definition of `operator new(unsigned long, std::nothrow_t const&)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._ZnwmRKSt9nothrow_t+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator new[](unsigned long, std::nothrow_t const&)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:96: multiple definition of `operator new[](unsigned long, std::nothrow_t const&)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._ZnamRKSt9nothrow_t+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator new(unsigned long, std::align_val_t, std::nothrow_t const&)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:99: multiple definition of `operator new(unsigned long, std::align_val_t, std::nothrow_t const&)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._ZnwmSt11align_val_tRKSt9nothrow_t+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator new[](unsigned long, std::align_val_t, std::nothrow_t const&)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:106: multiple definition of `operator new[](unsigned long, std::align_val_t, std::nothrow_t const&)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._ZnamSt11align_val_tRKSt9nothrow_t+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator delete(void*)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:109: multiple definition of `operator delete(void*)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._ZdlPv+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator delete[](void*)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:112: multiple definition of `operator delete[](void*)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._ZdaPv+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator delete(void*, unsigned long)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:115: multiple definition of `operator delete(void*, unsigned long)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._ZdlPvm+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator delete[](void*, unsigned long)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:118: multiple definition of `operator delete[](void*, unsigned long)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._ZdaPvm+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator delete(void*, std::align_val_t)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:121: multiple definition of `operator delete(void*, std::align_val_t)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._ZdlPvSt11align_val_t+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator delete[](void*, std::align_val_t)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:124: multiple definition of `operator delete[](void*, std::align_val_t)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._ZdaPvSt11align_val_t+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator delete(void*, unsigned long, std::align_val_t)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:127: multiple definition of `operator delete(void*, unsigned long, std::align_val_t)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._ZdlPvmSt11align_val_t+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator delete[](void*, unsigned long, std::align_val_t)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:130: multiple definition of `operator delete[](void*, unsigned long, std::align_val_t)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._ZdaPvmSt11align_val_t+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator delete(void*, std::nothrow_t const&)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:133: multiple definition of `operator delete(void*, std::nothrow_t const&)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._ZdlPvRKSt9nothrow_t+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator delete[](void*, std::nothrow_t const&)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:136: multiple definition of `operator delete[](void*, std::nothrow_t const&)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._ZdaPvRKSt9nothrow_t+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator delete(void*, std::align_val_t, std::nothrow_t const&)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:139: multiple definition of `operator delete(void*, std::align_val_t, std::nothrow_t const&)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._ZdlPvSt11align_val_tRKSt9nothrow_t+0x0): first defined here
+/usr/bin/ld: CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o: in function `operator delete[](void*, std::align_val_t, std::nothrow_t const&)':
+/home/zero/dev/engine_test/profiling/allocation_profile.cpp:142: multiple definition of `operator delete[](void*, std::align_val_t, std::nothrow_t const&)'; /usr/lib/clang/23/lib/x86_64-pc-linux-gnu/libclang_rt.tsan_cxx.a(tsan_new_delete.cpp.o):(.text._ZdaPvSt11align_val_tRKSt9nothrow_t+0x0): first defined here
+clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+[14/17] Building CXX object CMakeFiles/audio_allocations.dir/profiling/audio_allocations.cpp.o
+ninja: build stopped: subcommand failed.

@@ -3,7 +3,9 @@
 Each dated directory records a source revision, toolchain/environment, commands,
 exit codes, build/test logs and CTest XML results. These are correctness and build
 reproducibility records, not frame-time benchmark results. Performance workloads
-and raw measurements live in [benchmarks](../benchmarks/README.md).
+and raw measurements normally live in [benchmarks](../benchmarks/README.md).
+The allocation follow-up retains its raw reports beside the command/test evidence,
+with its measurement interpretation linked from benchmarks.
 
 - [2026-10-23 candidate validation](2026-10-23/RESULTS.md): compiler/sanitizer matrix,
   concurrent audio and a clean build with networking disabled.
@@ -11,6 +13,9 @@ and raw measurements live in [benchmarks](../benchmarks/README.md).
   reproduced syscall-failure bugs, fixes, full GCC and focused Clang/CPU sanitizer checks.
 - [2026-10-24 UTC directory preparation](2026-10-24-storage-directories/RESULTS.md):
   ancestor synchronization, creation/failure/retry cases and scoped validation.
+
+- [2026-10-24 allocation profiling](2026-10-24-allocations/RESULTS.md):
+  counter tests, gameplay/audio measurements and focused sanitizer/race checks.
 
 `commands.json` retains commands as argument arrays, explicit environment overrides,
 working directory, UTC start, duration and exit status. Other environment facts are

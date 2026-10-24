@@ -240,3 +240,8 @@ GPU timing defaults to `GL_TIME_ELAPSED` from increment 40. Reports include
 `GL_TIMESTAMP` pairs. Elapsed mode trusts the driver duration; its zero `invalid`
 count does not independently validate the clock. Timestamp diagnostics remain
 available through the C++ timer API; see [the timing contract](../docs/FORMATS.md#asynchronous-gpu-timing).
+
+For C++ allocation demand in actual gameplay rendering and the real audio worker,
+see [allocation profiling](ALLOCATION_PROFILING.md) and the
+[2026-10-24 results](2026-10-24-allocation-results.md). These scopes do not measure
+live heap size, C-library allocations or GPU/driver memory.

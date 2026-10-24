@@ -1,0 +1,17 @@
+Test project /home/zero/dev/engine_test/build/release-validation/tsan
+    Start  1: allocation_counters
+1/4 Test  #1: allocation_counters ..............   Passed    0.02 sec
+    Start 34: audio_allocations
+2/4 Test #34: audio_allocations ................   Passed    1.80 sec
+    Start 44: audio_reload
+3/4 Test #44: audio_reload .....................   Passed    2.72 sec
+    Start 46: audio_transport
+4/4 Test #46: audio_transport ..................   Passed    4.54 sec
+
+100% tests passed out of 4
+
+Label Time Summary:
+cpu         =   0.02 sec*proc (1 test)
+platform    =   9.05 sec*proc (3 tests)
+
+Total Test time (real) =   9.07 sec

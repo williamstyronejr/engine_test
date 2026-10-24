@@ -1,3 +1,6 @@
+#ifdef ENGINE_ALLOCATION_PROFILE
+#include "../../profiling/allocation_profile.hpp"
+#endif
 #include "engine/audio.hpp"
 #include "audio_queue.hpp"
 #include "audio_transport.hpp"
@@ -87,6 +90,9 @@ struct AudioOutput::Impl {
         std::uint64_t consumed = 0;
         while (running.load(std::memory_order_relaxed)) {
             if (writer.needs_block()) {
+#ifdef ENGINE_ALLOCATION_PROFILE
+                allocation_profile::Sample allocation_sample(allocation_profile::audio_mix);
+#endif
                 Command command;
                 // Bound work per block even if the producer keeps replenishing the queue.
                 for (std::size_t n = 0;
@@ -107,7 +113,13 @@ struct AudioOutput::Impl {
                 processed.store(consumed, std::memory_order_release);
                 writer.begin_block();
             }
+#ifdef ENGINE_ALLOCATION_PROFILE
+            { allocation_profile::Sample allocation_sample(allocation_profile::audio_transport);
+#endif
             writer.step(device, buffer);
+#ifdef ENGINE_ALLOCATION_PROFILE
+            }
+#endif
             const auto transport = writer.stats();
             written_frames.store(transport.written_frames, std::memory_order_relaxed);
             underruns.store(transport.underruns, std::memory_order_relaxed);

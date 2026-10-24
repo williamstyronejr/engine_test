@@ -1,0 +1,40 @@
+==================
+WARNING: ThreadSanitizer: data race (pid=1263294)
+  Write of size 4 at 0x720400000000 by thread T2:
+    #0 main::$_0::operator()() const /home/zero/dev/engine_test/build/allocation-validation/tsan-positive-control.cpp:10:48 (tsan-positive-control+0x27ad) (BuildId: 8fa384321e0545dd0757d96152ba52336aa59c36)
+    #1 void std::__invoke_impl<void, main::$_0>(std::__invoke_other, main::$_0&&) /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/16/../../../../include/c++/16/bits/invoke.h:63:14 (tsan-positive-control+0x27ad)
+    #2 std::__invoke_result<main::$_0>::type std::__invoke<main::$_0>(main::$_0&&) /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/16/../../../../include/c++/16/bits/invoke.h:98:14 (tsan-positive-control+0x27ad)
+    #3 void std::thread::_Invoker<std::tuple<main::$_0>>::_M_invoke<0ul>(std::_Index_tuple<0ul>) /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/16/../../../../include/c++/16/bits/std_thread.h:303:13 (tsan-positive-control+0x27ad)
+    #4 std::thread::_Invoker<std::tuple<main::$_0>>::operator()() /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/16/../../../../include/c++/16/bits/std_thread.h:310:11 (tsan-positive-control+0x27ad)
+    #5 std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::$_0>>>::_M_run() /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/16/../../../../include/c++/16/bits/std_thread.h:255:13 (tsan-positive-control+0x27ad)
+    #6 execute_native_thread_routine /usr/src/debug/gcc/gcc-build/x86_64-pc-linux-gnu/libstdc++-v3/src/c++11/../../../../../gcc/libstdc++-v3/src/c++11/thread.cc:105:18 (libstdc++.so.6+0xea858) (BuildId: 5b8d3de442de987b24d0e3679533068f2ae62497)
+
+  Previous write of size 4 at 0x720400000000 by thread T1:
+    #0 main::$_0::operator()() const /home/zero/dev/engine_test/build/allocation-validation/tsan-positive-control.cpp:10:48 (tsan-positive-control+0x27ad) (BuildId: 8fa384321e0545dd0757d96152ba52336aa59c36)
+    #1 void std::__invoke_impl<void, main::$_0>(std::__invoke_other, main::$_0&&) /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/16/../../../../include/c++/16/bits/invoke.h:63:14 (tsan-positive-control+0x27ad)
+    #2 std::__invoke_result<main::$_0>::type std::__invoke<main::$_0>(main::$_0&&) /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/16/../../../../include/c++/16/bits/invoke.h:98:14 (tsan-positive-control+0x27ad)
+    #3 void std::thread::_Invoker<std::tuple<main::$_0>>::_M_invoke<0ul>(std::_Index_tuple<0ul>) /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/16/../../../../include/c++/16/bits/std_thread.h:303:13 (tsan-positive-control+0x27ad)
+    #4 std::thread::_Invoker<std::tuple<main::$_0>>::operator()() /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/16/../../../../include/c++/16/bits/std_thread.h:310:11 (tsan-positive-control+0x27ad)
+    #5 std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::$_0>>>::_M_run() /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/16/../../../../include/c++/16/bits/std_thread.h:255:13 (tsan-positive-control+0x27ad)
+    #6 execute_native_thread_routine /usr/src/debug/gcc/gcc-build/x86_64-pc-linux-gnu/libstdc++-v3/src/c++11/../../../../../gcc/libstdc++-v3/src/c++11/thread.cc:105:18 (libstdc++.so.6+0xea858) (BuildId: 5b8d3de442de987b24d0e3679533068f2ae62497)
+
+  Location is heap block of size 4 at 0x720400000000 allocated by main thread:
+    #0 malloc /usr/src/debug/llvm/llvm-project-23.1.3.src/compiler-rt/lib/tsan/rtl/tsan_interceptors_posix.cpp:671:5 (libclang_rt.tsan.so+0x704a5) (BuildId: 7211e8c520072e5c186a74dfd437d212e49718d6)
+    #1 allocation_profile::allocate(unsigned long, unsigned long) /home/zero/dev/engine_test/profiling/allocation_profile.cpp:61:22 (tsan-positive-control+0x3144) (BuildId: 8fa384321e0545dd0757d96152ba52336aa59c36)
+    #2 operator new(unsigned long) /home/zero/dev/engine_test/profiling/allocation_profile.cpp:78:12 (tsan-positive-control+0x325a) (BuildId: 8fa384321e0545dd0757d96152ba52336aa59c36)
+    #3 main /home/zero/dev/engine_test/build/allocation-validation/tsan-positive-control.cpp:5:46 (tsan-positive-control+0x241e) (BuildId: 8fa384321e0545dd0757d96152ba52336aa59c36)
+
+  Thread T2 (tid=1263297, running) created by main thread at:
+    #0 pthread_create /usr/src/debug/llvm/llvm-project-23.1.3.src/compiler-rt/lib/tsan/rtl/tsan_interceptors_posix.cpp:1082:3 (libclang_rt.tsan.so+0x728ae) (BuildId: 7211e8c520072e5c186a74dfd437d212e49718d6)
+    #1 __gthread_create(unsigned long*, void* (*)(void*), void*) /usr/src/debug/gcc/gcc-build/x86_64-pc-linux-gnu/libstdc++-v3/include/x86_64-pc-linux-gnu/bits/gthr-default.h:709:35 (libstdc++.so.6+0xea961) (BuildId: 5b8d3de442de987b24d0e3679533068f2ae62497)
+    #2 std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State>>, void (*)()) /usr/src/debug/gcc/gcc-build/x86_64-pc-linux-gnu/libstdc++-v3/src/c++11/../../../../../gcc/libstdc++-v3/src/c++11/thread.cc:173:37 (libstdc++.so.6+0xea961)
+    #3 __libc_start_call_main /usr/src/debug/glibc/glibc/csu/../sysdeps/nptl/libc_start_call_main.h:59:16 (libc.so.6+0x27780) (BuildId: d320029ad1a23be2f4bce117fd321cbd23a2014b)
+
+  Thread T1 (tid=1263296, finished) created by main thread at:
+    #0 pthread_create /usr/src/debug/llvm/llvm-project-23.1.3.src/compiler-rt/lib/tsan/rtl/tsan_interceptors_posix.cpp:1082:3 (libclang_rt.tsan.so+0x728ae) (BuildId: 7211e8c520072e5c186a74dfd437d212e49718d6)
+    #1 __gthread_create(unsigned long*, void* (*)(void*), void*) /usr/src/debug/gcc/gcc-build/x86_64-pc-linux-gnu/libstdc++-v3/include/x86_64-pc-linux-gnu/bits/gthr-default.h:709:35 (libstdc++.so.6+0xea961) (BuildId: 5b8d3de442de987b24d0e3679533068f2ae62497)
+    #2 std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State>>, void (*)()) /usr/src/debug/gcc/gcc-build/x86_64-pc-linux-gnu/libstdc++-v3/src/c++11/../../../../../gcc/libstdc++-v3/src/c++11/thread.cc:173:37 (libstdc++.so.6+0xea961)
+    #3 __libc_start_call_main /usr/src/debug/glibc/glibc/csu/../sysdeps/nptl/libc_start_call_main.h:59:16 (libc.so.6+0x27780) (BuildId: d320029ad1a23be2f4bce117fd321cbd23a2014b)
+
+SUMMARY: ThreadSanitizer: data race /home/zero/dev/engine_test/build/allocation-validation/tsan-positive-control.cpp:10:48 in main::$_0::operator()() const
+==================

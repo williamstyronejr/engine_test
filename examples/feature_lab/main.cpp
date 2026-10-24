@@ -1,3 +1,6 @@
+#ifdef ENGINE_ALLOCATION_PROFILE
+#include "../../profiling/allocation_profile.hpp"
+#endif
 #include "animation_assets.hpp"
 #include "asset_reload.hpp"
 #include "collision_visuals.hpp"
@@ -50,7 +53,11 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
           bool settings_open, const KeyBindings& bindings, std::string_view replay_status,
           bool replay_session,
           bool playing_replay,
-          std::chrono::steady_clock::time_point* world_submitted = nullptr) {
+          std::chrono::steady_clock::time_point* world_submitted = nullptr
+#ifdef ENGINE_ALLOCATION_PROFILE
+          , allocation_profile::Count* world_allocations = nullptr
+#endif
+          ) {
     const auto extent = camera.extent(width, height) * 0.5F;
     const Rect view{camera.center - extent, camera.center + extent};
     const auto& map = game.map.data();
@@ -112,6 +119,9 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
     r.set_camera({{w * 0.5F, -h * 0.5F}, h});
     if (world_submitted)
         *world_submitted = std::chrono::steady_clock::now();
+#ifdef ENGINE_ALLOCATION_PROFILE
+    if (world_allocations) *world_allocations = allocation_profile::snapshot();
+#endif
     const float scale = feature_lab::hud_scale(width, height);
     const auto label = [&](float x, float y, float size, std::string_view text, Color color) {
         r.text({x * scale, -y * scale}, size * scale, text, color);
@@ -622,9 +632,15 @@ int main(int argc, char** argv) {
         double dropped = 0;
         bool running = true, suspended = false;
         while (running) {
+#ifdef ENGINE_ALLOCATION_PROFILE
+            const auto allocation_frame = allocation_profile::snapshot();
+#endif
             const auto frame_started = profile ? Clock::now() : Clock::time_point{};
             if (!window.poll(input))
                 break;
+#ifdef ENGINE_ALLOCATION_PROFILE
+            const auto allocation_simulation = allocation_profile::snapshot();
+#endif
             const auto now = Clock::now();
             if (!window.drawable()) {
                 if (!suspended)
@@ -884,20 +900,32 @@ int main(int argc, char** argv) {
             soundtrack.collect();
             if (asset_reload)
                 asset_reload->update(renderer, assets, shaders, textures, fonts, manual_reloads);
+#ifdef ENGINE_ALLOCATION_PROFILE
+            const auto allocation_simulated = allocation_profile::snapshot();
+#endif
             const auto simulated = profile ? Clock::now() : Clock::time_point{};
             const auto gpu_samples = diagnostics.collect_gpu(gpu_timer, frames + 1);
             if (profile)
                 profile->collect_gpu(gpu_samples);
             if (spikes)
                 spikes->collect_gpu(gpu_samples);
+#ifdef ENGINE_ALLOCATION_PROFILE
+            const auto allocation_rendering = allocation_profile::snapshot();
+#endif
             const auto rendering = profile ? Clock::now() : Clock::time_point{};
             gpu_timer.begin(frames + 1);
             const auto camera = game.camera(window.width(), window.height(), batch.alpha);
             if (!flow.title_open())
                 overlays.render_minimap(renderer, game, window.width(), window.height(),
                                         batch.alpha);
+#ifdef ENGINE_ALLOCATION_PROFILE
+            const auto allocation_minimap = allocation_profile::snapshot();
+#endif
             const auto minimap_submitted = profile ? Clock::now() : Clock::time_point{};
             Clock::time_point world_submitted{};
+#ifdef ENGINE_ALLOCATION_PROFILE
+            allocation_profile::Count allocation_world{};
+#endif
             renderer.begin(window.width(), window.height(), camera);
             if (flow.title_open()) {
                 flow.prepare(window.width(), window.height(), storage != nullptr);
@@ -916,7 +944,11 @@ int main(int argc, char** argv) {
                          : "36 / " + std::string(feature_lab::level_name(game.level)) +
                                (watch_assets ? " / AUTO RELOAD" : " / AUDIO BANK RELOAD"),
                      recorder.has_value() || playback.has_value(), playback.has_value(),
-                     profile ? &world_submitted : nullptr);
+                     profile ? &world_submitted : nullptr
+#ifdef ENGINE_ALLOCATION_PROFILE
+                     , &allocation_world
+#endif
+                     );
                 diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
                 settings.draw(renderer, window.width(), window.height());
             }
@@ -926,6 +958,9 @@ int main(int argc, char** argv) {
             gpu_timer.end();
             ++frames;
             ++report_frames;
+#ifdef ENGINE_ALLOCATION_PROFILE
+            const auto allocation_submitted = allocation_profile::snapshot();
+#endif
             const auto submitted = Clock::now();
             const double cpu_ms =
                 std::chrono::duration<double, std::milli>(submitted - now).count();
@@ -936,8 +971,14 @@ int main(int argc, char** argv) {
             if (!screenshot.empty() &&
                 (!running || frames == static_cast<std::size_t>(frame_limit)))
                 renderer.screenshot(screenshot);
+#ifdef ENGINE_ALLOCATION_PROFILE
+            const auto allocation_presenting = allocation_profile::snapshot();
+#endif
             const auto presenting = profile ? Clock::now() : Clock::time_point{};
             window.present();
+#ifdef ENGINE_ALLOCATION_PROFILE
+            const auto allocation_presented = allocation_profile::snapshot();
+#endif
             const auto presented = profile ? Clock::now() : Clock::time_point{};
             if (profile) {
                 const std::array<double, feature_lab::ReplayProfile::scope_count> frame_ms{
@@ -947,6 +988,17 @@ int main(int argc, char** argv) {
                     feature_lab::stress_ms(world_submitted, submitted),
                     feature_lab::stress_ms(presenting, presented),
                     feature_lab::stress_ms(frame_started, presented)};
+#ifdef ENGINE_ALLOCATION_PROFILE
+                if (frames > (spikes ? feature_lab::SpikeProfile::warmup : profile_warmup)) {
+                    using namespace allocation_profile;
+                    record(simulation, allocation_simulation, allocation_simulated);
+                    record(minimap, allocation_rendering, allocation_minimap);
+                    record(world, allocation_minimap, allocation_world);
+                    record(ui, allocation_world, allocation_submitted);
+                    record(present, allocation_presenting, allocation_presented);
+                    record(frame, allocation_frame, allocation_presented);
+                }
+#endif
                 profile->record(frame_ms, window.width(), window.height(), renderer.stats(),
                                 overlays.minimap_stats(), simulation_steps);
                 if (spikes) {
@@ -1082,9 +1134,13 @@ int main(int argc, char** argv) {
                       << window.height() << " (excludes swap wait; not GPU time)\n";
         }
         if (profile) {
-            profile->write(profile_path, profile->json(feature_lab::replay_hash(game), game.ticks,
+            auto report_json = profile->json(feature_lab::replay_hash(game), game.ticks,
                            feature_lab::level_name(game.level), renderer.graphics_info(),
-                           vsync_available, gpu_stats, gpu_failures, spikes ? &*spikes : nullptr));
+                           vsync_available, gpu_stats, gpu_failures, spikes ? &*spikes : nullptr);
+#ifdef ENGINE_ALLOCATION_PROFILE
+            report_json.insert(report_json.size() - 2, ",\"allocations\":" + allocation_profile::json());
+#endif
+            profile->write(profile_path, report_json);
             return profile->complete() && (!spikes || spikes->complete()) && gpu_stats.invalid == 0 ? 0 : 1;
         }
         return 0;

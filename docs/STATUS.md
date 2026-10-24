@@ -1962,9 +1962,45 @@ relocated OpenGL gameplay. The directory contract and 44 evidence files match th
 archive byte-for-byte. Documentation checks resolve 136 local links and validate
 24 command records, eight XML reports, retained failures and shell syntax.
 
+## Increment 57: gameplay and audio allocation profiling
+
+- Added development-only `feature_lab_allocations` and `audio_allocations`
+  executables. Production targets and packages retain their normal allocators.
+- Thread-local snapshots count successful C++ allocation calls/requested bytes;
+  fixed atomic aggregates report samples, nonzero samples, totals and maxima.
+  Tests cover all eight allocating forms, alignment, zero requests, nested scopes,
+  bookkeeping and thread isolation. Counters do not measure live heap or C/GPU memory.
+- Gameplay uses the existing verified Facility/Annex replay path and six frame
+  boundaries, excluding the 30-frame warmup. The enclosing frame includes its
+  subscopes. World submission includes replay-status argument formatting.
+- Audio uses the actual soundtrack producer and worker against ALSA `null`, with
+  separate producer, command/mix and transport scopes. Worker shutdown precedes
+  report aggregation. Startup decoding, physical devices, reloads and recovery
+  allocation coverage remain outside this workload.
+- Three Release repeats per level expose recurring HUD/status-string allocation
+  demand and the intentional restart sample. Three audio repeats observe zero
+  C++ allocations in the measured producer and worker scopes. Null sample counts
+  vary with scheduling and do not establish real-time or audibility acceptance.
+
+See [measurement contract](../benchmarks/ALLOCATION_PROFILING.md),
+[results](../benchmarks/2026-10-24-allocation-results.md) and
+[validation/provenance](../validation/2026-10-24-allocations/RESULTS.md).
+
+At `31861ad`, all 61 Debug and Release runtime groups pass without skips.
+Six focused Clang, three CPU ASan/UBSan, four native audio/counter ASan/UBSan and
+four shared-runtime TSan groups pass. The initial static TSan link conflict and
+an expected positive-control race remain in the evidence. Sanitizer leak checks
+are enabled; no suppressions were added. Documentation checks resolve 160 local
+links and validate 31 command records, six XML reports and all nine measurement reports.
+
+All three package checks pass without skips at `6ea4f73` (26.66 s), including
+relocated OpenGL gameplay. The 53 evidence files and two allocation documents match
+the archive byte-for-byte; profiling executables are absent from the package.
+
 ## Next increment
 
-Measure remaining allocations in normal gameplay rendering/audio processing, with
-explicit measurement scopes, intentional exceptions and repeatable reports before
-choosing optimizations. Physical display/audio, workload/memory acceptance and final
-support/coverage checks remain open; background loading remains deferred.
+Reduce the measured recurring HUD/status-string allocations, retaining the same
+scope boundaries and verified workloads for before/after comparison. Keep restart,
+loading and report-writing exceptions explicit. Physical display/audio, workload/
+memory acceptance and final support/coverage checks remain open; background loading
+remains deferred.
