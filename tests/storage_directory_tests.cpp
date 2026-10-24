@@ -320,6 +320,16 @@ TEST(existing_symlink_ancestors_sync_resolved_tree) {
     CHECK(load(paths, true) == record(1));
     CHECK(std::filesystem::is_regular_file(tmp.path / "actual/parent/config/settings.ecfg"));
 }
+TEST(reads_and_writes_resolve_the_same_missing_dotdot_path) {
+    Temporary tmp;
+    const UserPaths paths{tmp.path / "missing/../config", tmp.path / "missing/../state"};
+    for (bool config : {true, false}) {
+        Trace trace(tmp.path / (config ? "config" : "state"));
+        { Injection injection(trace); save(paths, config, record(1)); prepared(trace); }
+        CHECK(load(paths, config) == record(1));
+        CHECK(!std::filesystem::exists(tmp.path / "missing"));
+    }
+}
 TEST(eexist_race_is_accepted_only_for_real_directories) {
     for (auto race : {Race::directory, Race::file}) {
         Temporary tmp;

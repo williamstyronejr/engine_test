@@ -50,10 +50,11 @@ std::string slot_key(unsigned slot) {
 }
 std::optional<std::vector<std::uint8_t>> read(const std::filesystem::path& path,
                                               std::string_view key) {
-    if (!std::filesystem::exists(path))
+    const auto resolved = std::filesystem::weakly_canonical(path);
+    if (!std::filesystem::exists(resolved))
         return {};
-    const AssetRoot root(path);
-    if (!std::filesystem::exists(path / key))
+    const AssetRoot root(resolved);
+    if (!std::filesystem::exists(root.directory() / key))
         return {};
     return root.read(key, max_record_bytes);
 }
