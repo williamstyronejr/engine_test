@@ -102,17 +102,15 @@ class Overlays {
         r.pop_clip();
         box(x - 8, 284, 292, 156, {0.008F, 0.018F, 0.03F, 0.96F});
         text(x, 292, "STATUS / PGUP PGDN", accent);
-        const std::array<std::string, 9> rows = {
+        const std::array<std::string_view, 9> rows = {
             game.won      ? "MISSION COMPLETE"
             : game.paused ? "MISSION PAUSED"
                           : "MISSION ACTIVE",
-            "CORE A  " + std::string(game.collected[0] ? "RECOVERED" : "AWAITING PICKUP"),
-            "CORE B  " + std::string(game.collected.size() > 1 && game.collected[1]
-                                         ? "RECOVERED"
-                                         : "AWAITING PICKUP"),
-            "CORE C  " + std::string(game.collected.size() > 2 && game.collected[2]
-                                         ? "RECOVERED"
-                                         : "AWAITING PICKUP"),
+            game.collected[0] ? "CORE A  RECOVERED" : "CORE A  AWAITING PICKUP",
+            game.collected.size() > 1 && game.collected[1] ? "CORE B  RECOVERED"
+                                                           : "CORE B  AWAITING PICKUP",
+            game.collected.size() > 2 && game.collected[2] ? "CORE C  RECOVERED"
+                                                           : "CORE C  AWAITING PICKUP",
             game.door_open      ? "EXIT DOOR OPEN"
             : game.door_started ? "EXIT DOOR OPENING"
                                 : "EXIT DOOR LOCKED",

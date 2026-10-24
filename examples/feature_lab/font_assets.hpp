@@ -1,6 +1,7 @@
 #pragma once
 #include "engine/renderer.hpp"
 #include "engine/staging_memory.hpp"
+#include "hud_text.hpp"
 #include <iostream>
 #include <limits>
 
@@ -18,7 +19,8 @@ class FontAssets {
                 throw std::runtime_error("Font revision exhausted");
             const auto candidate = engine::load_font(assets, key);
             const engine::StagingBytes candidate_memory(candidate.data().atlas.rgba.capacity() +
-                candidate.data().glyphs.capacity() * sizeof(engine::FontGlyph));
+                                                        candidate.data().glyphs.capacity() *
+                                                            sizeof(engine::FontGlyph));
             renderer.set_font(candidate);
             ++revision_;
             embedded_ = false;
@@ -39,9 +41,14 @@ class FontAssets {
     bool applied() const { return applied_; }
     bool embedded() const { return embedded_; }
     const std::string& diagnostic() const { return diagnostic_; }
+    std::string_view status(std::string& output) const {
+        return format_text(output, applied_ ? "FONT READY R" : "FONT FAILED - KEPT R", revision_,
+                           embedded_ ? " / EMBEDDED" : " / FILE");
+    }
     std::string status() const {
-        return std::string(applied_ ? "FONT READY R" : "FONT FAILED - KEPT R") +
-               std::to_string(revision_) + (embedded_ ? " / EMBEDDED" : " / FILE");
+        std::string output;
+        status(output);
+        return output;
     }
 
   private:

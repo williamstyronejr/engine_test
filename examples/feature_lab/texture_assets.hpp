@@ -1,10 +1,11 @@
 #pragma once
-#include "engine/staging_memory.hpp"
 #include "engine/assets.hpp"
 #include "engine/atlas.hpp"
 #include "engine/input.hpp"
 #include "engine/renderer.hpp"
+#include "engine/staging_memory.hpp"
 #include "game.hpp"
+#include "hud_text.hpp"
 #include <algorithm>
 #include <iostream>
 #include <limits>
@@ -107,7 +108,7 @@ class TextureAssets {
             staged.reserve(texture_keys.size());
             replacements.reserve(texture_keys.size());
             const StagingBytes list_memory(staged.capacity() * sizeof(Staged) +
-                                          replacements.capacity() * sizeof(TextureReplacement));
+                                           replacements.capacity() * sizeof(TextureReplacement));
             StagingBytes decoded_memory;
             std::size_t decoded_bytes = 0;
             std::size_t bytes = 0;
@@ -165,9 +166,14 @@ class TextureAssets {
         }
         return false;
     }
+    std::string_view status(std::string& output) const {
+        return format_text(output, applied_ ? "TEXTURES READY R" : "TEXTURES FAILED - KEPT R",
+                           revision_, " / F7 RELOAD / F8 TEST ERROR");
+    }
     std::string status() const {
-        return std::string(applied_ ? "TEXTURES READY R" : "TEXTURES FAILED - KEPT R") +
-               std::to_string(revision_) + " / F7 RELOAD / F8 TEST ERROR";
+        std::string output;
+        status(output);
+        return output;
     }
 
   private:

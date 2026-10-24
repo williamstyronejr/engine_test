@@ -1,5 +1,6 @@
 #pragma once
 #include "game.hpp"
+#include "hud_text.hpp"
 #include <iostream>
 #include <limits>
 
@@ -44,11 +45,16 @@ class TilemapAssets {
     bool applied() const { return applied_; }
     std::uint64_t revision() const { return revision_; }
     const std::string& diagnostic() const { return diagnostic_; }
-    std::string status() const {
+    std::string_view status(std::string& output) const {
         if (locked_)
-            return "TILEMAP LOCKED / REPLAY CONTENT";
-        return std::string(applied_ ? "TILEMAP READY R" : "TILEMAP FAILED - KEPT R") +
-               std::to_string(revision_);
+            return format_text(output, "TILEMAP LOCKED / REPLAY CONTENT");
+        return format_text(output, applied_ ? "TILEMAP READY R" : "TILEMAP FAILED - KEPT R",
+                           revision_);
+    }
+    std::string status() const {
+        std::string output;
+        status(output);
+        return output;
     }
 
   private:

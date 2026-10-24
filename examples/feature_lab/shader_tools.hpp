@@ -2,6 +2,7 @@
 #include "engine/input.hpp"
 #include "engine/renderer.hpp"
 #include "engine/staging_memory.hpp"
+#include "hud_text.hpp"
 #include <iostream>
 
 namespace feature_lab {
@@ -41,9 +42,14 @@ class ShaderTools {
         }
         return false;
     }
+    std::string_view status(std::string& output) const {
+        return format_text(output, result_.applied ? "SHADER READY R" : "SHADER FAILED - KEPT R",
+                           result_.revision, " / F5 RELOAD / F6 TEST ERROR");
+    }
     std::string status() const {
-        return std::string(result_.applied ? "SHADER READY R" : "SHADER FAILED - KEPT R") +
-               std::to_string(result_.revision) + " / F5 RELOAD / F6 TEST ERROR";
+        std::string output;
+        status(output);
+        return output;
     }
 
   private:

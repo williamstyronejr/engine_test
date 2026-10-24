@@ -75,6 +75,14 @@ TEST(feature_lab_audio_controls_restart_and_completion) {
     track.update(game, controls, 0);
     CHECK(track.status().find("M MUTED") != std::string::npos);
     CHECK(track.status().find("MUSIC 15") != std::string::npos);
+    std::string text;
+    text.reserve(256);
+    CHECK(track.status(text) == "M MUTED / N MUSIC 15 / B EFFECTS 25");
+    KeyBindings rebound;
+    rebound.symbols[7] = 0xe9;
+    rebound.modifier_masks[7] = modifiers::control | modifiers::shift;
+    CHECK(track.status(text, rebound) == "C+S+EACUTE MUTED / N MUSIC 15 / B EFFECTS 25");
+    CHECK(track.reload_status(text) == "AUDIO BANK READY R1");
     controls = {};
     controls[static_cast<std::size_t>(Key::pause)].pressed = true;
     game.update(controls);
