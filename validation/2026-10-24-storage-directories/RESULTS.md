@@ -1,6 +1,7 @@
 # Save-directory preparation validation — 2026-10-24 UTC
 
-Implementation: **`51c25298dee5a895d3baa725059cdd47bbd64439`**, based on `ca433c0`.
+Final implementation: **`aa53ca43a022578ba5b87f38cbe6e37fa17c7c87`**.
+Initial directory preparation was committed at `51c2529`, based on `ca433c0`.
 `UserStorage` now creates the resolved storage chain and synchronizes every
 ancestor before creating a record temporary. Every attempt rechecks existing
 ancestors, including after a failed/interrupted attempt or reconstructed storage
@@ -8,12 +9,12 @@ object. See the [contract and limits](../../docs/STORAGE_DIRECTORY_VALIDATION.md
 
 ## Baseline comparison
 
-The previous implementation only called `create_directories` before the atomic
+The original implementation only called `create_directories` before the atomic
 file write. The initial eight-case draft produced seven failures against it;
-[that output](initial-before-tests.log) is retained. The final nine-case suite was
+[that output](initial-before-tests.log) is retained. The nine-case suite at `51c2529` was
 also compiled against exported `persistence.cpp` and `assets.cpp` from `ca433c0`,
 using unchanged public headers. It produced **eight failures and one pass**, as
-expected: [final comparison](baseline-final-tests.log),
+expected: [nine-case comparison](baseline-final-tests.log),
 [exact compile/run commands, revisions and source hashes](baseline.json).
 
 These are failures to meet the new preparation, interception and diagnostic
@@ -22,22 +23,34 @@ write trace demonstrates the central gap: the old implementation reaches record
 creation without the required ancestor synchronization. The new code passed the
 [focused Debug check](focused-debug-tests.log) before being committed.
 
-## Verification at the committed implementation
+## Read/write normalization regression
+
+Final review added a tenth case using `missing/../config` and `missing/../state`.
+Preparation normalized these paths and saved successfully, but reads still used
+the original spelling and returned no record. The [failing run](path-regression-before.log)
+and [reproduction context](path-regression.json) retain this one-case failure.
+`aa53ca4` resolves reads consistently with writes. The ten-case
+[focused Debug result](final/focused-debug-tests.log) passed, and the full/focused
+validation below was repeated at that revision. Reads still create/sync nothing.
+
+## Verification at the final committed implementation
 
 | Configuration | Passed | Evidence |
 | --- | --- | --- |
-| GCC 16.2.1 Debug, full runtime | 58/58 groups | [log](gcc-debug-tests.log), [XML](gcc-debug-tests.xml) |
-| GCC 16.2.1 Release, full runtime | 58/58 groups | [log](gcc-release-tests.log), [XML](gcc-release-tests.xml) |
-| Clang 23.1.3 Debug, storage/atomic-write/persistence/content | 4/4 groups | [log](clang-debug-tests.log), [XML](clang-debug-tests.xml) |
-| GCC CPU ASan/UBSan, same four groups, leak detection enabled | 4/4 groups | [log](cpu-sanitize-tests.log), [XML](cpu-sanitize-tests.xml) |
+| GCC 16.2.1 Debug, full runtime | 58/58 groups | [log](final/gcc-debug-tests.log), [XML](final/gcc-debug-tests.xml) |
+| GCC 16.2.1 Release, full runtime | 58/58 groups | [log](final/gcc-release-tests.log), [XML](final/gcc-release-tests.xml) |
+| Clang 23.1.3 Debug, storage/atomic-write/persistence/content | 4/4 groups | [log](final/clang-debug-tests.log), [XML](final/clang-debug-tests.xml) |
+| GCC CPU ASan/UBSan, same four groups, leak detection enabled | 4/4 groups | [log](final/cpu-sanitize-tests.log), [XML](final/cpu-sanitize-tests.xml) |
 
-All post-change runs passed with no skips, sanitizer findings, timeout increases
+All final-revision runs passed with no skips, sanitizer findings, timeout increases
 or suppressions. Existing build directories were reconfigured/rebuilt; these are
-incremental builds, not fresh/offline-build claims. [Commands](commands.json) retain
+incremental builds, not fresh/offline-build claims. [Commands](final/commands.json) retain
 the explicit compiler, configuration and platform/sanitizer options plus UTC start,
-duration and exit status. [Environment](environment.log) records the host/tools.
+duration and exit status. [Environment](final/environment.log) records the host/tools.
+The initial matrix at `51c2529` remains in the root-level logs/XML and
+[original command record](commands.json); it is not relabeled as final evidence.
 
-The new group contains **nine named cases** with loops over error points/codes,
+The new group contains **ten named cases** with loops over error points/codes,
 new versus existing records, and configuration versus slot storage. The full native
 inventory contains 34 CPU, 21 hardware and three platform groups. CPU-only builds
 discover 32 groups; only the four relevant groups were run under sanitizers here.

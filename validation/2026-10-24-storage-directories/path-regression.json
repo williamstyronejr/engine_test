@@ -1,0 +1,16 @@
+{
+  "base_revision": "9c2b5a077d416e02ad9c36216b9f95c82c9d77da",
+  "uncommitted_test_change": "Added reads_and_writes_resolve_the_same_missing_dotdot_path; test source is committed with the fix revision",
+  "test_command": [
+    "ctest",
+    "--test-dir",
+    "build/release-validation/gcc-debug",
+    "-R",
+    "^storage_directories$",
+    "--output-on-failure"
+  ],
+  "test_exit_code": 8,
+  "log": "path-regression-before.log",
+  "fix_revision": "aa53ca43a022578ba5b87f38cbe6e37fa17c7c87",
+  "expected_result": "10 cases, one failed: save succeeded at the normalized path but read used the original spelling"
+}

@@ -4,6 +4,8 @@
 before handing the record to `AssetRoot::write_atomic`. Record formats and public
 API signatures are unchanged. Reads and rejected envelopes/slot numbers create
 no directories and perform no directory synchronization.
+Reads resolve directory paths with the same normalization as writes, so an absolute
+path containing a missing component followed by `..` still reads the saved record.
 
 ## Preparation contract
 
@@ -75,7 +77,7 @@ The CPU-only `storage_directories` group links a dedicated executable with scope
 no interception flags. Real file operations run in private directories; injected
 failures target one preparation operation/path. Trace state checks every expected
 sync/close finishes before the first record temporary, and verifies descriptor
-release on error. The nine named cases cover:
+release on error. The ten named cases cover:
 
 - First and repeated configuration/slot saves, including reconstructed storage objects.
 - Creation errors leaving a partial tree, followed by successful full-chain retry.
@@ -84,6 +86,7 @@ release on error. The nine named cases cover:
 - Primary sync errors surviving secondary close errors, with immediate descriptor
   reuse proving that the new descriptor is not closed again.
 - Existing symlink components resolving to the real storage ancestry.
+- Reads and writes agreeing after normalization of a missing component followed by `..`.
 - `EEXIST` races producing either a directory or an obstructing regular file.
 - Read-only queries and invalid envelopes/slots producing no creation/sync side effects.
 - A preexisting unrelated file remaining intact when it blocks a directory path.

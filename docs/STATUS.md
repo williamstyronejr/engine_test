@@ -1939,15 +1939,18 @@ local links, parses the shell recipe and checks all 12 command records/four XML 
 - Preparation failures include operation/path context, preserve the old/absent
   record and create no record temporary. Sync errors survive secondary close errors;
   close is attempted once. Reads and invalid records/slots have no preparation effects.
-- Added nine CPU cases for config/slot paths, first/repeated saves, creation and
+- Added ten CPU cases for config/slot paths, first/repeated saves, creation and
   ancestor open/sync/close errors, descriptor reuse, symlinks, `EEXIST` races,
-  nondirectory obstructions, invalid input and retry after a child exits during sync.
+  nondirectory obstructions, invalid input, normalized read/write paths and retry
+  after a child exits during sync. A late regression caught a save/read mismatch
+  for `missing/../config`; reads now use the same path resolution as preparation.
 - No format/API changes or production fault hooks. Every resolved ancestor must
   allow directory open/sync; there is no unsupported-filesystem fallback. Preparation
   adds synchronous I/O and does not certify physical power-loss durability.
 
-The final suite against the old implementation fails eight of nine new-contract
-cases; that comparison and its source hashes are retained. At `51c2529`, all 58
+The initial nine-case suite against the old implementation fails eight new-contract
+cases; that comparison and its source hashes are retained. The subsequent tenth
+case reproduced one read/write normalization failure before its fix. At `aa53ca4`, all 58
 Debug and Release runtime groups pass without skips. Four relevant groups pass with
 Clang and CPU ASan/UBSan with leak detection. Earlier full native sanitizer, TSan
 and offline-build evidence retains its original revision/scope. See the

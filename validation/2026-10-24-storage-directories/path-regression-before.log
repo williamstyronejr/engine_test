@@ -1,0 +1,26 @@
+Test project /home/zero/dev/engine_test/build/release-validation/gcc-debug
+    Start 27: storage_directories
+1/1 Test #27: storage_directories ..............***Failed    0.03 sec
+PASS new_and_existing_config_and_slot_sync_every_ancestor_before_file_creation
+PASS mkdir_errors_leave_partial_tree_and_retry_prepares_it_again
+PASS directory_open_sync_close_errors_abort_before_new_or_existing_record_changes
+PASS sync_error_precedes_close_error_and_failed_close_does_not_close_reused_fd
+PASS existing_symlink_ancestors_sync_resolved_tree
+FAIL reads_and_writes_resolve_the_same_missing_dotdot_path: /home/zero/dev/engine_test/tests/storage_directory_tests.cpp:329: load(paths, config) == record(1)
+PASS eexist_race_is_accepted_only_for_real_directories
+PASS reads_invalid_envelopes_and_invalid_slots_have_no_creation_side_effects
+PASS existing_nondirectory_is_not_replaced_or_treated_as_prepared_storage
+PASS process_interruption_during_preparation_does_not_make_retry_skip_existing_chain
+10 tests, 1 failed
+
+
+0% tests passed, 1 tests failed out of 1
+
+Label Time Summary:
+cpu    =   0.03 sec*proc (1 test)
+
+Total Test time (real) =   0.03 sec
+
+The following tests FAILED:
+	 27 - storage_directories (Failed)                      cpu
+Errors while running CTest

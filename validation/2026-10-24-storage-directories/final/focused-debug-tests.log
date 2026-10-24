@@ -1,0 +1,10 @@
+Test project /home/zero/dev/engine_test/build/release-validation/gcc-debug
+    Start 27: storage_directories
+1/1 Test #27: storage_directories ..............   Passed    0.03 sec
+
+100% tests passed out of 1
+
+Label Time Summary:
+cpu    =   0.03 sec*proc (1 test)
+
+Total Test time (real) =   0.03 sec

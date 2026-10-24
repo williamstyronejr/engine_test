@@ -1,0 +1,16 @@
+Test project /home/zero/dev/engine_test/build/release-validation/clang-debug
+    Start 25: persistence
+1/4 Test #25: persistence ......................   Passed    0.61 sec
+    Start 26: atomic_write
+2/4 Test #26: atomic_write .....................   Passed    0.01 sec
+    Start 27: storage_directories
+3/4 Test #27: storage_directories ..............   Passed    0.02 sec
+    Start 31: content
+4/4 Test #31: content ..........................   Passed    0.31 sec
+
+100% tests passed out of 4
+
+Label Time Summary:
+cpu    =   0.95 sec*proc (4 tests)
+
+Total Test time (real) =   0.96 sec
