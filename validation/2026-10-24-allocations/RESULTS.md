@@ -91,3 +91,17 @@ No physical audible-device, display, power-loss or whole-process memory acceptan
 is implied. Direct C allocation, driver/GPU storage, allocator metadata and live
 heap peaks remain outside the counter contract. Timing values in instrumented
 reports are contextual and are not evidence of a speedup.
+
+## Package and documentation follow-up
+
+At documentation/evidence commit `6ea4f73`, all three Release package checks pass
+without skips (26.66 s), including relocation and OpenGL gameplay. All 53 files in
+this evidence directory and both allocation documents match the archived copies
+byte-for-byte. Profiling executables are not included. The package records GNU
+16.2.1, Release and sanitizers off. Local ignored logs are under
+`build/allocation-validation/package-*.log`.
+
+Documentation checks resolve 160 local links, parse the shell recipe, inspect all
+31 command records and six XML reports, and validate all nine raw measurements.
+The failed static TSan linker output retains Ninja's trailing space verbatim;
+no repository whitespace configuration was changed.

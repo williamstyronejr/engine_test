@@ -1993,6 +1993,10 @@ an expected positive-control race remain in the evidence. Sanitizer leak checks
 are enabled; no suppressions were added. Documentation checks resolve 160 local
 links and validate 31 command records, six XML reports and all nine measurement reports.
 
+All three package checks pass without skips at `6ea4f73` (26.66 s), including
+relocated OpenGL gameplay. The 53 evidence files and two allocation documents match
+the archive byte-for-byte; profiling executables are absent from the package.
+
 ## Next increment
 
 Reduce the measured recurring HUD/status-string allocations, retaining the same
