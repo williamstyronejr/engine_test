@@ -1,0 +1,57 @@
+{
+  "implementation_revision": "ca433c081132f499357b2e1ff64c6f253b7d8952",
+  "test_revision": "51c25298dee5a895d3baa725059cdd47bbd64439",
+  "cwd": "/home/zero/dev/engine_test",
+  "source_exports": [
+    {
+      "command": [
+        "git",
+        "show",
+        "ca433c0:engine/src/persistence.cpp"
+      ],
+      "stdout_file": "build/directory-validation/baseline-persistence.cpp"
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "ca433c0:engine/src/assets.cpp"
+      ],
+      "stdout_file": "build/directory-validation/baseline-assets.cpp"
+    }
+  ],
+  "compile_command": [
+    "g++",
+    "-std=c++20",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Wconversion",
+    "-Wshadow",
+    "-Werror",
+    "-g",
+    "-Iengine/include",
+    "tests/storage_directory_tests.cpp",
+    "build/directory-validation/baseline-persistence.cpp",
+    "build/directory-validation/baseline-assets.cpp",
+    "-Wl,--wrap=mkdir",
+    "-Wl,--wrap=open",
+    "-Wl,--wrap=fsync",
+    "-Wl,--wrap=close",
+    "-Wl,--wrap=mkstemp",
+    "-o",
+    "build/directory-validation/baseline-final"
+  ],
+  "compile_exit_code": 0,
+  "test_command": [
+    "./build/directory-validation/baseline-final"
+  ],
+  "test_exit_code": 1,
+  "expected_result": "nine new-contract cases, eight fail; no ancestor preparation in the baseline",
+  "log": "baseline-final-tests.log",
+  "sha256": {
+    "tests/storage_directory_tests.cpp": "e9bca4017692c1c1bd56d18a85571cd4cfd8cea77b57388a6d731959b067f418",
+    "build/directory-validation/baseline-persistence.cpp": "e73fc5b7dec0ab0b73334f4462e9b6feb918e859940492c58d24da1542443b44",
+    "build/directory-validation/baseline-assets.cpp": "ce8c992417f31736e0205c4dfdacdadcee7267475a933e1464584fd460b1b935"
+  }
+}

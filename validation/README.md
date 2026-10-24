@@ -9,15 +9,19 @@ and raw measurements live in [benchmarks](../benchmarks/README.md).
   concurrent audio and a clean build with networking disabled.
 - [2026-10-24 UTC atomic-save regression](2026-10-24-atomic-writes/RESULTS.md):
   reproduced syscall-failure bugs, fixes, full GCC and focused Clang/CPU sanitizer checks.
+- [2026-10-24 UTC directory preparation](2026-10-24-storage-directories/RESULTS.md):
+  ancestor synchronization, creation/failure/retry cases and scoped validation.
 
 `commands.json` retains commands as argument arrays, explicit environment overrides,
 working directory, UTC start, duration and exit status. Other environment facts are
-in `environment.log`; the inherited display is recorded there. The source archive
-hash and temporary build path for the offline check are in `offline-source.json`.
+in `environment.log`; the full-matrix run also records its inherited display there.
+For the offline check, the source archive hash and temporary build path are in
+that run's `offline-source.json`. Regression comparisons retain their own baseline
+method and expected failures in the dated results.
 Absolute temporary paths describe the original run and may no longer exist; logs
 and reports in this directory are the retained evidence.
-CTest XML timestamps use the host's local time (America/New_York for the October 23
-run); command timestamps explicitly use UTC. The runner prepended the repository's
+CTest XML timestamps use the host's local time (America/New_York on this development
+host); command timestamps explicitly use UTC. The runner prepended the repository's
 installed `.tools/bin` directory to PATH and used two compiler jobs sequentially.
 
 XML reports include output from successful tests as well as failures. Deliberate

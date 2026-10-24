@@ -1,0 +1,242 @@
+{
+  "source_revision": "aa53ca43a022578ba5b87f38cbe6e37fa17c7c87",
+  "runs": [
+    {
+      "name": "gcc-debug-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/gcc-debug",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_CXX_COMPILER=/usr/bin/c++",
+        "-DENGINE_SANITIZERS=OFF",
+        "-DENGINE_BUILD_PLATFORM=ON"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T09:57:04.906516+00:00",
+      "log": "gcc-debug-configure.log",
+      "exit_code": 0,
+      "wall_seconds": 0.397
+    },
+    {
+      "name": "gcc-debug-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/gcc-debug",
+        "-j2"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T09:57:05.303816+00:00",
+      "log": "gcc-debug-build.log",
+      "exit_code": 0,
+      "wall_seconds": 14.367
+    },
+    {
+      "name": "gcc-debug-tests",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/release-validation/gcc-debug",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-24-storage-directories/final/gcc-debug-tests.xml",
+        "-LE",
+        "packaging"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T09:57:19.671390+00:00",
+      "log": "gcc-debug-tests.log",
+      "exit_code": 0,
+      "wall_seconds": 70.069
+    },
+    {
+      "name": "gcc-release-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/gcc-release",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_CXX_COMPILER=/usr/bin/c++",
+        "-DENGINE_SANITIZERS=OFF",
+        "-DENGINE_BUILD_PLATFORM=ON"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T09:58:29.742644+00:00",
+      "log": "gcc-release-configure.log",
+      "exit_code": 0,
+      "wall_seconds": 0.603
+    },
+    {
+      "name": "gcc-release-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/gcc-release",
+        "-j2"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T09:58:30.346375+00:00",
+      "log": "gcc-release-build.log",
+      "exit_code": 0,
+      "wall_seconds": 17.15
+    },
+    {
+      "name": "gcc-release-tests",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/release-validation/gcc-release",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-24-storage-directories/final/gcc-release-tests.xml",
+        "-LE",
+        "packaging"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T09:58:47.497235+00:00",
+      "log": "gcc-release-tests.log",
+      "exit_code": 0,
+      "wall_seconds": 55.691
+    },
+    {
+      "name": "clang-debug-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/clang-debug",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_CXX_COMPILER=clang++",
+        "-DENGINE_SANITIZERS=OFF",
+        "-DENGINE_BUILD_PLATFORM=ON"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T09:59:43.189814+00:00",
+      "log": "clang-debug-configure.log",
+      "exit_code": 0,
+      "wall_seconds": 0.635
+    },
+    {
+      "name": "clang-debug-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/clang-debug",
+        "-j2",
+        "--target",
+        "storage_directory_tests",
+        "atomic_write_tests",
+        "persistence_tests",
+        "content_tests"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T09:59:43.829520+00:00",
+      "log": "clang-debug-build.log",
+      "exit_code": 0,
+      "wall_seconds": 3.736
+    },
+    {
+      "name": "clang-debug-tests",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/release-validation/clang-debug",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-24-storage-directories/final/clang-debug-tests.xml",
+        "-R",
+        "^(storage_directories|atomic_write|persistence|content)$"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T09:59:47.566333+00:00",
+      "log": "clang-debug-tests.log",
+      "exit_code": 0,
+      "wall_seconds": 1.13
+    },
+    {
+      "name": "cpu-sanitize-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/cpu-sanitize",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_CXX_COMPILER=/usr/bin/c++",
+        "-DENGINE_SANITIZERS=ON",
+        "-DENGINE_BUILD_PLATFORM=OFF"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T09:59:48.697411+00:00",
+      "log": "cpu-sanitize-configure.log",
+      "exit_code": 0,
+      "wall_seconds": 0.239
+    },
+    {
+      "name": "cpu-sanitize-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/cpu-sanitize",
+        "-j2",
+        "--target",
+        "storage_directory_tests",
+        "atomic_write_tests",
+        "persistence_tests",
+        "content_tests"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T09:59:48.936862+00:00",
+      "log": "cpu-sanitize-build.log",
+      "exit_code": 0,
+      "wall_seconds": 5.029
+    },
+    {
+      "name": "cpu-sanitize-tests",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/release-validation/cpu-sanitize",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-24-storage-directories/final/cpu-sanitize-tests.xml",
+        "-R",
+        "^(storage_directories|atomic_write|persistence|content)$"
+      ],
+      "environment": {
+        "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+        "UBSAN_OPTIONS": "halt_on_error=1"
+      },
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T09:59:53.966222+00:00",
+      "log": "cpu-sanitize-tests.log",
+      "exit_code": 0,
+      "wall_seconds": 4.043
+    }
+  ]
+}

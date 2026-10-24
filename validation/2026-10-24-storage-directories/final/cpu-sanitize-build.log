@@ -1,0 +1,7 @@
+[1/7] Building CXX object CMakeFiles/engine_core.dir/engine/src/persistence.cpp.o
+[2/7] Linking CXX static library libengine_core.a
+[3/7] Linking CXX executable persistence_tests
+[4/7] Linking CXX executable atomic_write_tests
+[5/7] Linking CXX executable content_tests
+[6/7] Building CXX object CMakeFiles/storage_directory_tests.dir/tests/storage_directory_tests.cpp.o
+[7/7] Linking CXX executable storage_directory_tests

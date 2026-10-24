@@ -1,0 +1,10 @@
+FAIL new_and_existing_config_and_slot_sync_every_ancestor_before_file_creation: tests/storage_directory_tests.cpp:101: !trace.early_publication && trace.publications == 1
+FAIL mkdir_errors_leave_partial_tree_and_retry_prepares_it_again: tests/storage_directory_tests.cpp:118: caught
+FAIL directory_open_sync_close_errors_abort_before_new_or_existing_record_changes: tests/storage_directory_tests.cpp:118: caught
+FAIL sync_error_precedes_close_error_and_failed_close_does_not_close_reused_fd: tests/storage_directory_tests.cpp:118: caught
+FAIL existing_symlink_ancestors_sync_resolved_tree: tests/storage_directory_tests.cpp:101: !trace.early_publication && trace.publications == 1
+FAIL eexist_race_is_accepted_only_for_real_directories: tests/storage_directory_tests.cpp:101: !trace.early_publication && trace.publications == 1
+PASS reads_invalid_envelopes_and_invalid_slots_have_no_creation_side_effects
+FAIL existing_nondirectory_is_not_replaced_or_treated_as_prepared_storage: tests/storage_directory_tests.cpp:114: std::string_view(e.what()).find(operation) != std::string_view::npos
+FAIL process_interruption_during_preparation_does_not_make_retry_skip_existing_chain: tests/storage_directory_tests.cpp:406: waitpid(child, &status, 0) == child && WIFEXITED(status) && WEXITSTATUS(status) == 91
+9 tests, 8 failed
