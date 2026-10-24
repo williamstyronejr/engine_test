@@ -1,0 +1,606 @@
+{
+  "source_revision": "31861ad5e2d14387ca16f91f91b8c7f77e8eb6ec",
+  "runs": [
+    {
+      "name": "gcc-debug-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/gcc-debug",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_CXX_COMPILER=/usr/bin/g++",
+        "-DENGINE_SANITIZERS=OFF",
+        "-DENGINE_BUILD_PLATFORM=ON"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T14:50:44.129821+00:00",
+      "log": "gcc-debug-configure.log",
+      "exit_code": 0,
+      "wall_seconds": 0.582
+    },
+    {
+      "name": "gcc-debug-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/gcc-debug",
+        "-j2"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T14:50:44.712547+00:00",
+      "log": "gcc-debug-build.log",
+      "exit_code": 0,
+      "wall_seconds": 201.133
+    },
+    {
+      "name": "gcc-debug-tests",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/release-validation/gcc-debug",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-24-allocations/gcc-debug-tests.xml",
+        "-LE",
+        "packaging"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T14:54:05.846262+00:00",
+      "log": "gcc-debug-tests.log",
+      "exit_code": 0,
+      "wall_seconds": 156.253
+    },
+    {
+      "name": "gcc-release-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/gcc-release",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_CXX_COMPILER=/usr/bin/c++",
+        "-DENGINE_SANITIZERS=OFF",
+        "-DENGINE_BUILD_PLATFORM=ON"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T14:56:42.100661+00:00",
+      "log": "gcc-release-configure.log",
+      "exit_code": 0,
+      "wall_seconds": 0.91
+    },
+    {
+      "name": "gcc-release-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/gcc-release",
+        "-j2"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T14:56:43.011837+00:00",
+      "log": "gcc-release-build.log",
+      "exit_code": 0,
+      "wall_seconds": 89.639
+    },
+    {
+      "name": "gcc-release-tests",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/release-validation/gcc-release",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-24-allocations/gcc-release-tests.xml",
+        "-LE",
+        "packaging"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T14:58:12.653100+00:00",
+      "log": "gcc-release-tests.log",
+      "exit_code": 0,
+      "wall_seconds": 120.862
+    },
+    {
+      "name": "facility-1",
+      "command": [
+        "build/release-validation/gcc-release/feature_lab_allocations",
+        "--replay",
+        "benchmarks/replays/facility.erpl",
+        "--profile-report",
+        "/home/zero/dev/engine_test/validation/2026-10-24-allocations/facility-1.json",
+        "--profile-warmup",
+        "30"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:00:13.516500+00:00",
+      "log": "facility-1.log",
+      "exit_code": 0,
+      "wall_seconds": 8.42
+    },
+    {
+      "name": "annex-1",
+      "command": [
+        "build/release-validation/gcc-release/feature_lab_allocations",
+        "--replay",
+        "benchmarks/replays/annex.erpl",
+        "--profile-report",
+        "/home/zero/dev/engine_test/validation/2026-10-24-allocations/annex-1.json",
+        "--profile-warmup",
+        "30"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:00:21.944645+00:00",
+      "log": "annex-1.log",
+      "exit_code": 0,
+      "wall_seconds": 8.189
+    },
+    {
+      "name": "audio-1",
+      "command": [
+        "build/release-validation/gcc-release/audio_allocations",
+        "/home/zero/dev/engine_test/validation/2026-10-24-allocations/audio-1.json"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:00:30.134977+00:00",
+      "log": "audio-1.log",
+      "exit_code": 0,
+      "wall_seconds": 0.402
+    },
+    {
+      "name": "facility-2",
+      "command": [
+        "build/release-validation/gcc-release/feature_lab_allocations",
+        "--replay",
+        "benchmarks/replays/facility.erpl",
+        "--profile-report",
+        "/home/zero/dev/engine_test/validation/2026-10-24-allocations/facility-2.json",
+        "--profile-warmup",
+        "30"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:00:30.540006+00:00",
+      "log": "facility-2.log",
+      "exit_code": 0,
+      "wall_seconds": 7.741
+    },
+    {
+      "name": "annex-2",
+      "command": [
+        "build/release-validation/gcc-release/feature_lab_allocations",
+        "--replay",
+        "benchmarks/replays/annex.erpl",
+        "--profile-report",
+        "/home/zero/dev/engine_test/validation/2026-10-24-allocations/annex-2.json",
+        "--profile-warmup",
+        "30"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:00:38.285297+00:00",
+      "log": "annex-2.log",
+      "exit_code": 0,
+      "wall_seconds": 8.32
+    },
+    {
+      "name": "audio-2",
+      "command": [
+        "build/release-validation/gcc-release/audio_allocations",
+        "/home/zero/dev/engine_test/validation/2026-10-24-allocations/audio-2.json"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:00:46.606845+00:00",
+      "log": "audio-2.log",
+      "exit_code": 0,
+      "wall_seconds": 0.42
+    },
+    {
+      "name": "facility-3",
+      "command": [
+        "build/release-validation/gcc-release/feature_lab_allocations",
+        "--replay",
+        "benchmarks/replays/facility.erpl",
+        "--profile-report",
+        "/home/zero/dev/engine_test/validation/2026-10-24-allocations/facility-3.json",
+        "--profile-warmup",
+        "30"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:00:47.029040+00:00",
+      "log": "facility-3.log",
+      "exit_code": 0,
+      "wall_seconds": 10.736
+    },
+    {
+      "name": "annex-3",
+      "command": [
+        "build/release-validation/gcc-release/feature_lab_allocations",
+        "--replay",
+        "benchmarks/replays/annex.erpl",
+        "--profile-report",
+        "/home/zero/dev/engine_test/validation/2026-10-24-allocations/annex-3.json",
+        "--profile-warmup",
+        "30"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:00:57.768228+00:00",
+      "log": "annex-3.log",
+      "exit_code": 0,
+      "wall_seconds": 10.507
+    },
+    {
+      "name": "audio-3",
+      "command": [
+        "build/release-validation/gcc-release/audio_allocations",
+        "/home/zero/dev/engine_test/validation/2026-10-24-allocations/audio-3.json"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:01:08.277352+00:00",
+      "log": "audio-3.log",
+      "exit_code": 0,
+      "wall_seconds": 0.42
+    },
+    {
+      "name": "clang-debug-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/clang-debug",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_CXX_COMPILER=clang++",
+        "-DENGINE_SANITIZERS=OFF",
+        "-DENGINE_BUILD_PLATFORM=ON"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:01:08.701549+00:00",
+      "log": "clang-debug-configure.log",
+      "exit_code": 0,
+      "wall_seconds": 0.728
+    },
+    {
+      "name": "clang-debug-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/clang-debug",
+        "-j2",
+        "--target",
+        "allocation_profile_tests",
+        "audio_allocations",
+        "feature_lab_allocations",
+        "make_profile_replay",
+        "replay_profile_tests",
+        "audio_tests",
+        "audio_reload_tests"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:01:09.432560+00:00",
+      "log": "clang-debug-build.log",
+      "exit_code": 0,
+      "wall_seconds": 23.586
+    },
+    {
+      "name": "clang-debug-tests",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/release-validation/clang-debug",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-24-allocations/clang-debug-tests.xml",
+        "-R",
+        "^(allocation_counters|audio_allocations|gameplay_allocations|replay_profile|audio_transport|audio_reload)$"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:01:33.019590+00:00",
+      "log": "clang-debug-tests.log",
+      "exit_code": 0,
+      "wall_seconds": 35.424
+    },
+    {
+      "name": "cpu-sanitize-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/cpu-sanitize",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_CXX_COMPILER=/usr/bin/c++",
+        "-DENGINE_SANITIZERS=ON",
+        "-DENGINE_BUILD_PLATFORM=OFF"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:02:08.444512+00:00",
+      "log": "cpu-sanitize-configure.log",
+      "exit_code": 0,
+      "wall_seconds": 0.407
+    },
+    {
+      "name": "cpu-sanitize-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/cpu-sanitize",
+        "-j2",
+        "--target",
+        "allocation_profile_tests",
+        "replay_profile_tests",
+        "stress_tests"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:02:08.852501+00:00",
+      "log": "cpu-sanitize-build.log",
+      "exit_code": 0,
+      "wall_seconds": 10.424
+    },
+    {
+      "name": "cpu-sanitize-tests",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/release-validation/cpu-sanitize",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-24-allocations/cpu-sanitize-tests.xml",
+        "-R",
+        "^(allocation_counters|replay_profile|stress_cpu)$"
+      ],
+      "environment": {
+        "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+        "UBSAN_OPTIONS": "halt_on_error=1"
+      },
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:02:19.277767+00:00",
+      "log": "cpu-sanitize-tests.log",
+      "exit_code": 0,
+      "wall_seconds": 6.566
+    },
+    {
+      "name": "native-sanitize-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/native-sanitize",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_CXX_COMPILER=/usr/bin/c++",
+        "-DENGINE_SANITIZERS=ON",
+        "-DENGINE_BUILD_PLATFORM=ON"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:02:25.844964+00:00",
+      "log": "native-sanitize-configure.log",
+      "exit_code": 0,
+      "wall_seconds": 0.362
+    },
+    {
+      "name": "native-sanitize-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/native-sanitize",
+        "-j2",
+        "--target",
+        "allocation_profile_tests",
+        "audio_allocations",
+        "audio_tests",
+        "audio_reload_tests"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:02:26.207926+00:00",
+      "log": "native-sanitize-build.log",
+      "exit_code": 0,
+      "wall_seconds": 26.171
+    },
+    {
+      "name": "native-sanitize-tests",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/release-validation/native-sanitize",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-24-allocations/native-sanitize-tests.xml",
+        "-R",
+        "^(allocation_counters|audio_allocations|audio_transport|audio_reload)$"
+      ],
+      "environment": {
+        "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+        "UBSAN_OPTIONS": "halt_on_error=1"
+      },
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:02:52.380071+00:00",
+      "log": "native-sanitize-tests.log",
+      "exit_code": 0,
+      "wall_seconds": 6.86
+    },
+    {
+      "name": "tsan-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/tsan",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_CXX_COMPILER=clang++",
+        "-DENGINE_SANITIZERS=OFF",
+        "-DENGINE_BUILD_PLATFORM=ON",
+        "-DCMAKE_CXX_FLAGS=-fsanitize=thread -fno-omit-frame-pointer",
+        "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=thread"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:02:59.241439+00:00",
+      "log": "tsan-configure.log",
+      "exit_code": 0,
+      "wall_seconds": 0.365
+    },
+    {
+      "name": "tsan-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/tsan",
+        "-j2",
+        "--target",
+        "allocation_profile_tests",
+        "audio_allocations",
+        "audio_tests",
+        "audio_reload_tests"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:02:59.606998+00:00",
+      "log": "tsan-build.log",
+      "exit_code": 1,
+      "wall_seconds": 20.01
+    },
+    {
+      "name": "tsan-shared-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/tsan",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_CXX_COMPILER=clang++",
+        "-DENGINE_SANITIZERS=OFF",
+        "-DENGINE_BUILD_PLATFORM=ON",
+        "-DCMAKE_CXX_FLAGS=-fsanitize=thread -fno-omit-frame-pointer",
+        "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=thread -shared-libsan -Wl,-rpath,/usr/lib/clang/23/lib/x86_64-pc-linux-gnu"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:06:27.711844+00:00",
+      "log": "tsan-shared-configure.log",
+      "expected_exit_code": 0,
+      "exit_code": 0,
+      "wall_seconds": 0.522
+    },
+    {
+      "name": "tsan-shared-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/tsan",
+        "-j2",
+        "--target",
+        "allocation_profile_tests",
+        "audio_allocations",
+        "audio_tests",
+        "audio_reload_tests"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:06:28.234487+00:00",
+      "log": "tsan-shared-build.log",
+      "expected_exit_code": 0,
+      "exit_code": 0,
+      "wall_seconds": 0.851
+    },
+    {
+      "name": "tsan-shared-tests",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/release-validation/tsan",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-24-allocations/tsan-shared-tests.xml",
+        "-R",
+        "^(allocation_counters|audio_allocations|audio_transport|audio_reload)$"
+      ],
+      "environment": {
+        "TSAN_OPTIONS": "halt_on_error=1"
+      },
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:06:29.086461+00:00",
+      "log": "tsan-shared-tests.log",
+      "expected_exit_code": 0,
+      "exit_code": 0,
+      "wall_seconds": 9.246
+    },
+    {
+      "name": "tsan-positive-control-build",
+      "command": [
+        "clang++",
+        "-std=c++20",
+        "-g",
+        "-O1",
+        "-fsanitize=thread",
+        "-shared-libsan",
+        "-Wl,-rpath,/usr/lib/clang/23/lib/x86_64-pc-linux-gnu",
+        "-pthread",
+        "/home/zero/dev/engine_test/build/allocation-validation/tsan-positive-control.cpp",
+        "profiling/allocation_profile.cpp",
+        "-o",
+        "build/allocation-validation/tsan-positive-control"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:06:38.333742+00:00",
+      "log": "tsan-positive-control-build.log",
+      "expected_exit_code": 0,
+      "exit_code": 0,
+      "wall_seconds": 2.442
+    },
+    {
+      "name": "tsan-positive-control-run",
+      "command": [
+        "build/allocation-validation/tsan-positive-control"
+      ],
+      "environment": {
+        "TSAN_OPTIONS": "halt_on_error=1:exitcode=66"
+      },
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T15:06:40.776847+00:00",
+      "log": "tsan-positive-control-run.log",
+      "expected_exit_code": 66,
+      "exit_code": 66,
+      "wall_seconds": 14.86
+    }
+  ]
+}

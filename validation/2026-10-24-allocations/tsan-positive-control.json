@@ -1,0 +1,4 @@
+{
+  "purpose": "Expected data race verifies shared TSan with profiler replacements; not an engine failure",
+  "source": "#include <atomic>\n#include <new>\n#include <thread>\nint main() {\n    auto* value = static_cast<volatile int*>(::operator new(sizeof(int)));\n    *value = 0;\n    std::atomic<bool> start{false};\n    const auto race = [&] {\n        while (!start.load()) std::this_thread::yield();\n        for (int i = 0; i < 10000; ++i) *value = *value + 1;\n    };\n    std::thread a(race), b(race);\n    start.store(true);\n    a.join(); b.join();\n    ::operator delete(const_cast<int*>(value));\n}\n"
+}

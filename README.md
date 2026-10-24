@@ -706,6 +706,11 @@ see [scene budget measurements](benchmarks/2026-10-21-scene-budgets-results.md).
 Expected failures must preserve state/resources; unexpected outcomes save an
 incomplete report and return nonzero. See [the workload and timing contract](benchmarks/SPIKE_PROFILING.md).
 
+Dedicated development executables now measure C++ allocation calls and requested
+bytes in the actual gameplay renderer and audio worker. Normal executables remain
+uninstrumented. See [scope and reproduction instructions](benchmarks/ALLOCATION_PROFILING.md)
+and [the three-repeat results](benchmarks/2026-10-24-allocation-results.md).
+
 ## Window lifecycle
 
 Fullscreen and minimize are asynchronous window-manager requests. The engine exposes

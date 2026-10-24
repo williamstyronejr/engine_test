@@ -1,0 +1,65 @@
+{
+  "command": [
+    "nm",
+    "-C",
+    "build/release-validation/gcc-debug/EXECUTABLE"
+  ],
+  "source_revision": "31861ad5e2d14387ca16f91f91b8c7f77e8eb6ec",
+  "results": {
+    "feature_lab": [
+      "                 U operator new(unsigned long)@GLIBCXX_3.4",
+      "0000000000018a58 W operator new(unsigned long, void*)",
+      "                 U operator new(unsigned long, std::align_val_t)@CXXABI_1.3.11"
+    ],
+    "feature_lab_allocations": [
+      "000000000000bb70 t (anonymous namespace)::draw(engine::Renderer&, feature_lab::Game const&, feature_lab::TextureAssets const&, float, int, int, engine::Camera, feature_lab::Overlays const&, feature_lab::Soundtrack const&, feature_lab::CollisionVisuals const&, feature_lab::SamplingGallery const&, feature_lab::Diagnostics const&, feature_lab::ShaderTools const&, feature_lab::FontAssets const&, feature_lab::AnimationAssets const&, feature_lab::TilemapAssets const&, feature_lab::SceneAssets const&, bool, engine::KeyBindings const&, std::basic_string_view<char, std::char_traits<char> >, bool, bool, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >*, allocation_profile::Count*)",
+      "0000000000140880 b allocation_profile::(anonymous namespace)::totals",
+      "0000000000000000 b allocation_profile::(anonymous namespace)::current",
+      "0000000000009c5a t allocation_profile::(anonymous namespace)::maximum(std::atomic<unsigned long>&, unsigned long)",
+      "000000000000a38c T allocation_profile::json[abi:cxx11]()",
+      "0000000000009e6e T allocation_profile::record(allocation_profile::Scope, allocation_profile::Count, allocation_profile::Count)",
+      "0000000000009fd7 T allocation_profile::summary(allocation_profile::Scope)",
+      "000000000000a6f4 T allocation_profile::allocate(unsigned long, unsigned long)",
+      "0000000000009dee T allocation_profile::snapshot()",
+      "0000000000019224 t engine::TileVisitStats engine::TileMap::visit_visible<(anonymous namespace)::draw(engine::Renderer&, feature_lab::Game const&, feature_lab::TextureAssets const&, float, int, int, engine::Camera, feature_lab::Overlays const&, feature_lab::Soundtrack const&, feature_lab::CollisionVisuals const&, feature_lab::SamplingGallery const&, feature_lab::Diagnostics const&, feature_lab::ShaderTools const&, feature_lab::FontAssets const&, feature_lab::AnimationAssets const&, feature_lab::TilemapAssets const&, feature_lab::SceneAssets const&, bool, engine::KeyBindings const&, std::basic_string_view<char, std::char_traits<char> >, bool, bool, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >*, allocation_profile::Count*)::{lambda()#1}::operator()() const::{lambda(engine::TileInstance)#1}>(unsigned long, engine::Rect, (anonymous namespace)::draw(engine::Renderer&, feature_lab::Game const&, feature_lab::TextureAssets const&, float, int, int, engine::Camera, feature_lab::Overlays const&, feature_lab::Soundtrack const&, feature_lab::CollisionVisuals const&, feature_lab::SamplingGallery const&, feature_lab::Diagnostics const&, feature_lab::ShaderTools const&, feature_lab::FontAssets const&, feature_lab::AnimationAssets const&, feature_lab::TilemapAssets const&, feature_lab::SceneAssets const&, bool, engine::KeyBindings const&, std::basic_string_view<char, std::char_traits<char> >, bool, bool, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >*, allocation_profile::Count*)::{lambda()#1}::operator()() const::{lambda(engine::TileInstance)#1}&&) const",
+      "0000000000009e06 t std::array<allocation_profile::(anonymous namespace)::Counters, 9ul>::operator[](unsigned long)",
+      "000000000000ba7a t (anonymous namespace)::draw(engine::Renderer&, feature_lab::Game const&, feature_lab::TextureAssets const&, float, int, int, engine::Camera, feature_lab::Overlays const&, feature_lab::Soundtrack const&, feature_lab::CollisionVisuals const&, feature_lab::SamplingGallery const&, feature_lab::Diagnostics const&, feature_lab::ShaderTools const&, feature_lab::FontAssets const&, feature_lab::AnimationAssets const&, feature_lab::TilemapAssets const&, feature_lab::SceneAssets const&, bool, engine::KeyBindings const&, std::basic_string_view<char, std::char_traits<char> >, bool, bool, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >*, allocation_profile::Count*)::{lambda(float, float, float, std::basic_string_view<char, std::char_traits<char> >, engine::Color)#1}::operator()(float, float, float, std::basic_string_view<char, std::char_traits<char> >, engine::Color) const",
+      "000000000000b9de t (anonymous namespace)::draw(engine::Renderer&, feature_lab::Game const&, feature_lab::TextureAssets const&, float, int, int, engine::Camera, feature_lab::Overlays const&, feature_lab::Soundtrack const&, feature_lab::CollisionVisuals const&, feature_lab::SamplingGallery const&, feature_lab::Diagnostics const&, feature_lab::ShaderTools const&, feature_lab::FontAssets const&, feature_lab::AnimationAssets const&, feature_lab::TilemapAssets const&, feature_lab::SceneAssets const&, bool, engine::KeyBindings const&, std::basic_string_view<char, std::char_traits<char> >, bool, bool, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >*, allocation_profile::Count*)::{lambda()#2}::operator()() const",
+      "000000000000b8ea t (anonymous namespace)::draw(engine::Renderer&, feature_lab::Game const&, feature_lab::TextureAssets const&, float, int, int, engine::Camera, feature_lab::Overlays const&, feature_lab::Soundtrack const&, feature_lab::CollisionVisuals const&, feature_lab::SamplingGallery const&, feature_lab::Diagnostics const&, feature_lab::ShaderTools const&, feature_lab::FontAssets const&, feature_lab::AnimationAssets const&, feature_lab::TilemapAssets const&, feature_lab::SceneAssets const&, bool, engine::KeyBindings const&, std::basic_string_view<char, std::char_traits<char> >, bool, bool, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >*, allocation_profile::Count*)::{lambda()#1}::operator()() const",
+      "000000000000b764 t (anonymous namespace)::draw(engine::Renderer&, feature_lab::Game const&, feature_lab::TextureAssets const&, float, int, int, engine::Camera, feature_lab::Overlays const&, feature_lab::Soundtrack const&, feature_lab::CollisionVisuals const&, feature_lab::SamplingGallery const&, feature_lab::Diagnostics const&, feature_lab::ShaderTools const&, feature_lab::FontAssets const&, feature_lab::AnimationAssets const&, feature_lab::TilemapAssets const&, feature_lab::SceneAssets const&, bool, engine::KeyBindings const&, std::basic_string_view<char, std::char_traits<char> >, bool, bool, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >*, allocation_profile::Count*)::{lambda()#1}::operator()() const::{lambda(engine::TileInstance)#1}::operator()(engine::TileInstance) const",
+      "000000000000a850 T operator new[](unsigned long)",
+      "000000000000a8f4 T operator new[](unsigned long, std::nothrow_t const&)",
+      "000000000000a88f T operator new[](unsigned long, std::align_val_t)",
+      "000000000000a964 T operator new[](unsigned long, std::align_val_t, std::nothrow_t const&)",
+      "000000000000a831 T operator new(unsigned long)",
+      "000000000001b7fe W operator new(unsigned long, void*)",
+      "000000000000a8b4 T operator new(unsigned long, std::nothrow_t const&)",
+      "000000000000a86a T operator new(unsigned long, std::align_val_t)",
+      "000000000000a919 T operator new(unsigned long, std::align_val_t, std::nothrow_t const&)"
+    ],
+    "audio_allocations": [
+      "000000000008e500 b allocation_profile::(anonymous namespace)::totals",
+      "0000000000000000 b allocation_profile::(anonymous namespace)::current",
+      "000000000000680a t allocation_profile::(anonymous namespace)::maximum(std::atomic<unsigned long>&, unsigned long)",
+      "0000000000006f3c T allocation_profile::json[abi:cxx11]()",
+      "0000000000011cd2 W allocation_profile::Sample::Sample(allocation_profile::Scope)",
+      "0000000000011cd2 W allocation_profile::Sample::Sample(allocation_profile::Scope)",
+      "0000000000011d06 W allocation_profile::Sample::~Sample()",
+      "0000000000011d06 W allocation_profile::Sample::~Sample()",
+      "0000000000006a1e T allocation_profile::record(allocation_profile::Scope, allocation_profile::Count, allocation_profile::Count)",
+      "0000000000006b87 T allocation_profile::summary(allocation_profile::Scope)",
+      "00000000000072a4 T allocation_profile::allocate(unsigned long, unsigned long)",
+      "000000000000699e T allocation_profile::snapshot()",
+      "00000000000069b6 t std::array<allocation_profile::(anonymous namespace)::Counters, 9ul>::operator[](unsigned long)",
+      "0000000000007400 T operator new[](unsigned long)",
+      "00000000000074a4 T operator new[](unsigned long, std::nothrow_t const&)",
+      "000000000000743f T operator new[](unsigned long, std::align_val_t)",
+      "0000000000007514 T operator new[](unsigned long, std::align_val_t, std::nothrow_t const&)",
+      "00000000000073e1 T operator new(unsigned long)",
+      "000000000000925f W operator new(unsigned long, void*)",
+      "0000000000007464 T operator new(unsigned long, std::nothrow_t const&)",
+      "000000000000741a T operator new(unsigned long, std::align_val_t)",
+      "00000000000074c9 T operator new(unsigned long, std::align_val_t, std::nothrow_t const&)"
+    ]
+  }
+}

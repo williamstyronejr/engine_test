@@ -1,0 +1,22 @@
+Test project /home/zero/dev/engine_test/build/release-validation/gcc-debug
+    Start  1: allocation_counters
+1/3 Test  #1: allocation_counters ..............   Passed    0.00 sec
+    Start 34: audio_allocations
+2/3 Test #34: audio_allocations ................***Failed    5.52 sec
+Audio allocation workload timed out
+
+    Start 35: gameplay_allocations
+3/3 Test #35: gameplay_allocations .............   Passed   19.78 sec
+
+67% tests passed, 1 tests failed out of 3
+
+Label Time Summary:
+cpu         =   0.00 sec*proc (1 test)
+hardware    =  19.78 sec*proc (1 test)
+platform    =   5.52 sec*proc (1 test)
+
+Total Test time (real) =  25.31 sec
+
+The following tests FAILED:
+	 34 - audio_allocations (Failed)                        platform
+Errors while running CTest

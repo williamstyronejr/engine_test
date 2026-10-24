@@ -1,0 +1,4 @@
+[1/4] Linking CXX executable allocation_profile_tests
+[2/4] Linking CXX executable audio_allocations
+[3/4] Linking CXX executable audio_reload_tests
+[4/4] Linking CXX executable audio_tests

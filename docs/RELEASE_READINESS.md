@@ -52,7 +52,7 @@ advertised; a second GPU is not a substitute for finishing checks on the testing
 | R3: clean offline build and candidate package | Evidence available at `1dfba31` | A fresh archived source built every target with networking disabled; 32 CPU groups and mandatory package smoke checks passed inside isolation. All three package checks passed afterward in the display session. Source/archive hashes, build identity and dependency/payload inventories are retained; the archive's embedded revision is `unknown` because Git metadata was absent. | Completed on the recorded host; [offline results and provenance](../validation/2026-10-23/RESULTS.md#clean-offline-build). |
 | R4: display, input and interactive game acceptance | Open; WM minimize was unconfirmed (probe exit 2) | Finish physical scale/monitor, supported WM minimize/restore, focus, layout switching and title/settings/gameplay checks. Verify camera, clipping, rebinding, save/relaunch, level transitions and visible shader failure/recovery. Record each case, configuration and result. | Human observation and a suitable WM/monitor configuration. |
 | R5: physical sound and device lifecycle | Open | Listen to channel/gain/mute/pause/stop and gameplay cues. Exercise physical disconnect and system suspend/resume in an arranged session. Confirm continued play and useful disabled-audio diagnostics on terminal failure. Record device/backend and outcome; automatic reconnection is not implemented or required by the current contract. | Human observation and physical device access. |
-| R6: declared performance and memory acceptance | Open; bounded historical workloads available | Declare the release workload and budget, repeat it on the candidate, retain actual viewport/target sizes, timing scopes, warmup, queries, resource peaks and limits. Finish render/audio hot-path allocation coverage and document intentional exceptions. Audit remaining untracked storage before claiming whole-engine bounds. | Measurements can be automated; physical presentation/refresh checks require observation. |
+| R6: declared performance and memory acceptance | Open; bounded historical workloads available | Declare the release workload and budget, repeat it on the candidate, retain actual viewport/target sizes, timing scopes, warmup, queries, resource peaks and limits. Use the scoped render/audio allocation evidence to prioritize measured costs; extend uncovered paths before broader claims. Audit remaining untracked storage before claiming whole-engine bounds. | Measurements can be automated; physical presentation/refresh checks require observation. |
 | R7: persistence failure and compatibility boundary | Implemented syscall contract has evidence; physical durability unverified | Atomic-write failures are covered at `be16f3e`; `aa53ca4` adds ten directory cases covering full resolved ancestry before publication, faults, retry after process exit and matching read/write normalization. Existing content rejection remains unchanged. Physical power-loss/filesystem qualification requires an isolated disposable fixture if that guarantee is claimed. | [Atomic faults](ATOMIC_SAVE_VALIDATION.md) and [directory preparation](STORAGE_DIRECTORY_VALIDATION.md); no physical power-loss guarantee established. |
 | R8: release coverage and support record | Open | Close applicable R1–R7 cases, map each supported subfeature to named checks, retain manual results and unresolved failures, then publish the supported configuration and candidate artifact hash. Review scenario substitutions against the plan instead of treating one passing room or test-group count as complete coverage. | Documentation after evidence collection; unresolved scope decisions remain explicit. |
 
@@ -113,10 +113,12 @@ ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 \
 Native graphics previously disabled leak detection because of driver allocations;
 that run checks address/undefined behavior only. Retain CPU and audio leak-enabled
 results separately. Do not suppress an engine report to make the aggregate pass.
-After adding `atomic_write` and `storage_directories`, the current inventory is 58
-Debug/Release/Clang runtime groups, 32 CPU-only sanitizer groups, 58 native sanitizer groups and two selected
-native audio groups. The full-matrix record at `1dfba31` predates this addition;
-the later storage validation records its own focused scope. Update counts from
+After adding storage tests and allocation profiling, the current inventory is 61
+native runtime groups (35 CPU, 22 hardware, four platform), plus three packaging
+fixtures; platform-disabled builds discover 33 CPU groups. Discovery is not execution.
+The full-matrix record at `1dfba31` predates these additions; later storage and
+[allocation validation](../validation/2026-10-24-allocations/RESULTS.md) record their
+own full/focused scopes. Update counts from
 the candidate's inventory if tests are added.
 
 ### R2: dedicated ThreadSanitizer build
@@ -187,8 +189,11 @@ ctest --preset release -R '^persistence$' --output-on-failure
 Use distinct filenames for repeats; retain failures and exact commands. Require
 complete reports, verified routes/checksums, bounded resource restoration and
 valid query accounting before comparing timings. Existing commands do not force a
-1080p managed gameplay viewport or add missing allocator/syscall instrumentation;
-those remain R6/R7 work. See [stress](../benchmarks/README.md),
+1080p managed gameplay viewport. Use the dedicated
+[allocation executables](../benchmarks/ALLOCATION_PROFILING.md) for C++ allocation
+counts; they exclude C-library allocators, driver/GPU storage and live-heap peaks.
+The storage fault/preparation tests now cover the documented syscall contracts;
+physical power-loss acceptance remains open. See [stress](../benchmarks/README.md),
 [replay](../benchmarks/REPLAY_PROFILING.md) and
 [spike](../benchmarks/SPIKE_PROFILING.md) contracts for measured scopes/exclusions.
 
@@ -224,8 +229,10 @@ deferred or outside v1. None closes the open release checks above. Optional JSON
 validation/profiling reports do not add a JSON asset-format requirement.
 
 R1–R3 retain evidence for their named baseline; the storage follow-ups supply newer
-scoped evidence for R7. Next: measure remaining allocations in normal gameplay
-rendering/audio processing with explicit scopes and repeatable reports before
-choosing optimizations (R6). Workload/memory acceptance and physical R4/R5 cases remain
+scoped evidence for R7. Increment 57 adds
+[repeatable render/audio C++ allocation measurements](../benchmarks/2026-10-24-allocation-results.md)
+for R6, with warmup, restart/formatting exceptions and explicit exclusions.
+Next: reduce the measured recurring HUD/status-string allocations and compare the
+same workloads before/after. Workload/memory acceptance and physical R4/R5 cases remain
 open; R8 requires their coverage/support record. Refresh automated evidence when
 the implementation or toolchain changes. These results do not complete milestone 6.
