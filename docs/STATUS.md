@@ -1957,6 +1957,11 @@ and offline-build evidence retains its original revision/scope. See the
 [preparation contract](STORAGE_DIRECTORY_VALIDATION.md) and
 [commands, logs and results](../validation/2026-10-24-storage-directories/RESULTS.md).
 
+All three package checks pass without skips at `34df29f` (23.87 s total), including
+relocated OpenGL gameplay. The directory contract and 44 evidence files match the
+archive byte-for-byte. Documentation checks resolve 136 local links and validate
+24 command records, eight XML reports, retained failures and shell syntax.
+
 ## Next increment
 
 Measure remaining allocations in normal gameplay rendering/audio processing, with
