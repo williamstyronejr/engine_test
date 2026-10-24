@@ -1923,6 +1923,11 @@ TSan and offline-build records retain their original revision and scope. See
 [fault contract](ATOMIC_SAVE_VALIDATION.md) and
 [regression results](../validation/2026-10-24-atomic-writes/RESULTS.md).
 
+All three package checks pass at `71beaa6` without skips, including relocated
+OpenGL gameplay (27.42 s total). The 22 new evidence files and atomic-save contract
+match the archived copies byte-for-byte. Documentation validation resolves 121
+local links, parses the shell recipe and checks all 12 command records/four XML reports.
+
 ## Next increment
 
 Review and harden durable creation of configuration/save directory chains, with
