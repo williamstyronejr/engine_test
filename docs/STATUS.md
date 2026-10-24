@@ -1,8 +1,8 @@
 # Implementation status
 
-The fifty-fourth increment records a fresh compiler/sanitizer matrix, concurrent
-audio ThreadSanitizer checks and a clean offline build with relocated package tests.
-See [retained results](../validation/2026-10-23/RESULTS.md) and
+The fifty-fifth increment adds deterministic atomic-save filesystem failures and
+fixes zero-progress write and directory-close error reporting.
+See [retained results](../validation/2026-10-24-atomic-writes/RESULTS.md) and
 [release readiness](RELEASE_READINESS.md) for the remaining gates.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
@@ -67,7 +67,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F11 | Partial | Atlas bitmap text with authored metrics, bounded allocation-free layout, font fallback and visual gallery; clipped status panel, buttons/checkboxes/sliders, keyboard/pointer navigation, bounded layout, modal settings and title screen; `ui`, scene-flow and GPU pixel tests | Broader manual navigation checks |
 | F12 | Implemented (v1) | Live minimap, clipped scrolling panel; seven GPU cases for pixels, alpha composition, clipping, resizing, resource limits and example integration | Optional multisampling, HDR and post-processing |
 | F13 | Implemented (v1) | Clock/catch-up, paused stepping, ERPL recording/playback, per-command state checks, seeded random state, save migration and full-game replay tests | Cross-machine float determinism and replaying menu/audio/render commands are outside v1 |
-| F14 | Implemented (v1) | Versioned scene/checkpoint/config formats; three-slot UI; CRC, bounds and semantic checks; unchanged live game on failed load; interrupted-process write tests | Power-loss/filesystem fault testing and content migration |
+| F14 | Implemented (v1) | Versioned scene/checkpoint/config formats; three-slot UI; CRC, bounds and semantic checks; unchanged live game on failed load; interrupted-process tests; isolated atomic-write syscall failures, cleanup/error precedence, descriptor reuse and retry checks | Newly created ancestor-directory durability, physical power-loss/filesystem crash behavior and content migration |
 | F15 | Partial | Console errors, GL callback, F2 rolling timing/counter overlay, F3 collision/camera outlines, target accounting, CPU percentiles, shader reload/failure recovery, GPU pixel/interface/lifetime tests, bounded asynchronous GPU timing with sample age/skips; separate preview/swap timing, [controlled stress results](../benchmarks/2026-10-16-validation.md) and [bounded failure evidence](../benchmarks/2026-10-17-gpu-timing.md); [recorded gameplay profiles](../benchmarks/2026-10-17-replay-results.md) | Broader drivers and manual fault scenarios |
 | F16 | Partial | Configurable stress arena, CPU/GPU repeated teardown checks, allocation-free steady CPU tests, tracked buffer/texture/target bytes, JSON benchmarks, repeated 1080p baselines and independent workload comparisons, installed CPU runner and hashed relocatable archives with CPU/OpenGL smoke tests | Full allocator/driver accounting, broader gameplay/display budgets and hardware/manual checks |
 
@@ -1898,10 +1898,35 @@ three package checks without skips; all 42 validation files match the installed
 archive byte-for-byte. Raw dependency inventories retain their generated trailing
 blank line unchanged.
 
+## Increment 55: atomic-save filesystem failures
+
+- Added the CPU-only `atomic_write` group with eight named cases and scoped Linux
+  linker wrappers. It exercises real private files with short/interrupted writes,
+  create/write/sync/close/rename/open errors, existing/absent destinations, cleanup
+  failure, retry, and immediate descriptor reuse after close errors.
+- Reproduced two failures before fixing them: zero-progress writes could report
+  zero/stale errno, and directory-close failures were ignored. Zero progress now
+  reports `EIO`; directory-close errors report failure after the new file is visible.
+- Verified primary errors survive secondary cleanup failures, old destinations
+  survive pre-rename failures, new destinations survive post-rename failures, and
+  failed close calls are not retried on a reused descriptor. Failed unlink may
+  leave an orphan; cleanup remains best effort with no automatic orphan deletion.
+- No format/API changes or production fault hooks. Tests do not fill disks, alter
+  mounts or exercise physical power loss. The new failure contract distinguishes
+  operation failure, published contents and uncertain crash durability.
+
+At `be16f3e`, all 57 Debug and Release runtime groups pass without skips. Atomic
+write, persistence and content groups pass with Clang and CPU ASan/UBSan with leak
+detection. The initial two failures and post-fix commands/logs/XML are retained in
+`validation/2026-10-24-atomic-writes/` (UTC date). Earlier full native sanitizer,
+TSan and offline-build records retain their original revision and scope. See
+[fault contract](ATOMIC_SAVE_VALIDATION.md) and
+[regression results](../validation/2026-10-24-atomic-writes/RESULTS.md).
+
 ## Next increment
 
-Add deterministic filesystem failure coverage for atomic saves: short/interrupted
-writes, write/sync/close/rename failures, temporary cleanup, and destination state
-before versus after rename. Keep the documented post-rename durability uncertainty
-explicit. Performance/memory acceptance and physical display/audio checks remain
-open; background loading remains deferred.
+Review and harden durable creation of configuration/save directory chains, with
+deterministic directory-creation/open/sync failure coverage and explicit retry
+semantics. Physical power-loss guarantees remain unverified. Performance/memory
+acceptance and physical display/audio checks remain open; background loading
+remains deferred.

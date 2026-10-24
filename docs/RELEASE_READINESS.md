@@ -10,6 +10,9 @@ to scenarios and tests.
 Follow-up: [candidate validation at `1dfba31`](../validation/2026-10-23/RESULTS.md)
 retains fresh compiler/sanitizer, concurrent-audio and clean offline-build results. The evidence table
 below preserves the original audit snapshot; gate states reflect the follow-up.
+The [atomic-save follow-up](../validation/2026-10-24-atomic-writes/RESULTS.md) adds
+deterministic filesystem failures and fixes at `be16f3e`; it retains separate
+full GCC and focused Clang/CPU sanitizer results without relabeling older evidence.
 
 “Evidence available” below applies to the stated revision and environment only.
 “Open” means missing evidence or unfinished acceptance work, not a reproduced code
@@ -46,7 +49,7 @@ advertised; a second GPU is not a substitute for finishing checks on the testing
 | R4: display, input and interactive game acceptance | Open; WM minimize was unconfirmed (probe exit 2) | Finish physical scale/monitor, supported WM minimize/restore, focus, layout switching and title/settings/gameplay checks. Verify camera, clipping, rebinding, save/relaunch, level transitions and visible shader failure/recovery. Record each case, configuration and result. | Human observation and a suitable WM/monitor configuration. |
 | R5: physical sound and device lifecycle | Open | Listen to channel/gain/mute/pause/stop and gameplay cues. Exercise physical disconnect and system suspend/resume in an arranged session. Confirm continued play and useful disabled-audio diagnostics on terminal failure. Record device/backend and outcome; automatic reconnection is not implemented or required by the current contract. | Human observation and physical device access. |
 | R6: declared performance and memory acceptance | Open; bounded historical workloads available | Declare the release workload and budget, repeat it on the candidate, retain actual viewport/target sizes, timing scopes, warmup, queries, resource peaks and limits. Finish render/audio hot-path allocation coverage and document intentional exceptions. Audit remaining untracked storage before claiming whole-engine bounds. | Measurements can be automated; physical presentation/refresh checks require observation. |
-| R7: persistence failure and compatibility boundary | Open audit follow-up; interrupted-process tests pass | Review write/fsync/rename/directory-sync error coverage and add deterministic filesystem failure injection where missing. Document the release durability boundary and content-compatibility policy. Physical power-loss testing needs an isolated disposable environment if that guarantee is to be claimed. | Deterministic failures are automatable; physical durability testing requires a separate fixture. |
+| R7: persistence failure and compatibility boundary | Deterministic syscall coverage available at `be16f3e`; remaining durability review open | Eight atomic-write cases cover short/interrupted/zero writes, create/sync/close/rename/open failures, cleanup error precedence, descriptor reuse and retry, alongside process-interruption tests. Review newly created ancestor-directory durability and retain the existing content-rejection boundary. Physical power-loss testing requires an isolated disposable fixture if that guarantee is claimed. | [Fault contract and results](ATOMIC_SAVE_VALIDATION.md); no power-loss guarantee established. |
 | R8: release coverage and support record | Open | Close applicable R1–R7 cases, map each supported subfeature to named checks, retain manual results and unresolved failures, then publish the supported configuration and candidate artifact hash. Review scenario substitutions against the plan instead of treating one passing room or test-group count as complete coverage. | Documentation after evidence collection; unresolved scope decisions remain explicit. |
 
 R6 does not require inventing a whole-process allocation-free promise or attributing
@@ -106,9 +109,11 @@ ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 \
 Native graphics previously disabled leak detection because of driver allocations;
 that run checks address/undefined behavior only. Retain CPU and audio leak-enabled
 results separately. Do not suppress an engine report to make the aggregate pass.
-At this baseline expect 56 Debug/Release/Clang runtime groups, 30 CPU-only sanitizer
-groups, 56 native sanitizer groups and two selected native audio groups. Update
-counts from the candidate's inventory if tests are added.
+After adding `atomic_write`, the current inventory is 57 Debug/Release/Clang runtime
+groups, 31 CPU-only sanitizer groups, 57 native sanitizer groups and two selected
+native audio groups. The full-matrix record at `1dfba31` predates this addition;
+the later atomic-save validation records its own focused scope. Update counts from
+the candidate's inventory if tests are added.
 
 ### R2: dedicated ThreadSanitizer build
 
@@ -214,8 +219,9 @@ mipmaps/anisotropy, a visual editor and advanced rigid-body simulation remain
 deferred or outside v1. None closes the open release checks above. Optional JSON
 validation/profiling reports do not add a JSON asset-format requirement.
 
-R1–R3 now have evidence for the named baseline. Next: add deterministic filesystem
-failure coverage for atomic saves (R7), checking cleanup and destination state
-before/after rename. R6 workload/memory acceptance and physical R4/R5 cases remain
+R1–R3 retain evidence for their named baseline; the atomic-save follow-up supplies
+newer scoped evidence for R7. Next: review durable creation of config/save directory
+chains and add deterministic failure coverage for that boundary. R6 workload/memory
+acceptance and physical R4/R5 cases remain
 open; R8 requires their coverage/support record. Refresh automated evidence when
 the implementation or toolchain changes. These results do not complete milestone 6.

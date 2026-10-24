@@ -1,0 +1,24 @@
+Test project /home/zero/dev/engine_test/build/debug
+    Start 26: atomic_write
+1/1 Test #26: atomic_write .....................***Failed    0.01 sec
+PASS short_and_interrupted_writes_publish_complete_payload_in_order
+PASS empty_payload_is_synced_and_replaces_existing_file
+PASS pre_rename_faults_preserve_old_or_absent_destination_and_allow_retry
+FAIL zero_progress_write_reports_io_error_instead_of_stale_errno: /home/zero/dev/engine_test/tests/atomic_write_tests.cpp:100: e.code() == std::error_code(code, std::generic_category())
+FAIL post_rename_faults_report_error_but_keep_complete_new_destination: /home/zero/dev/engine_test/tests/atomic_write_tests.cpp:104: caught
+PASS directory_sync_error_survives_close_and_cleanup_errors
+PASS failed_cleanup_preserves_primary_error_and_orphan_does_not_block_retry
+PASS failed_close_is_not_retried_after_descriptor_reuse
+8 tests, 2 failed
+
+
+0% tests passed, 1 tests failed out of 1
+
+Label Time Summary:
+cpu    =   0.01 sec*proc (1 test)
+
+Total Test time (real) =   0.01 sec
+
+The following tests FAILED:
+	 26 - atomic_write (Failed)                             cpu
+Errors while running CTest

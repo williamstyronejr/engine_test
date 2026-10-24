@@ -7,6 +7,8 @@ and raw measurements live in [benchmarks](../benchmarks/README.md).
 
 - [2026-10-23 candidate validation](2026-10-23/RESULTS.md): compiler/sanitizer matrix,
   concurrent audio and a clean build with networking disabled.
+- [2026-10-24 UTC atomic-save regression](2026-10-24-atomic-writes/RESULTS.md):
+  reproduced syscall-failure bugs, fixes, full GCC and focused Clang/CPU sanitizer checks.
 
 `commands.json` retains commands as argument arrays, explicit environment overrides,
 working directory, UTC start, duration and exit status. Other environment facts are
