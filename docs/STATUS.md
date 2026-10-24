@@ -1,8 +1,8 @@
 # Implementation status
 
-The fifty-fifth increment adds deterministic atomic-save filesystem failures and
-fixes zero-progress write and directory-close error reporting.
-See [retained results](../validation/2026-10-24-atomic-writes/RESULTS.md) and
+The fifty-sixth increment prepares and synchronizes the resolved save-directory
+chain before record creation, with deterministic errors and process-interruption retry tests.
+See [retained results](../validation/2026-10-24-storage-directories/RESULTS.md) and
 [release readiness](RELEASE_READINESS.md) for the remaining gates.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
@@ -67,7 +67,7 @@ entire plan feature ID when required subfeatures are still absent.
 | F11 | Partial | Atlas bitmap text with authored metrics, bounded allocation-free layout, font fallback and visual gallery; clipped status panel, buttons/checkboxes/sliders, keyboard/pointer navigation, bounded layout, modal settings and title screen; `ui`, scene-flow and GPU pixel tests | Broader manual navigation checks |
 | F12 | Implemented (v1) | Live minimap, clipped scrolling panel; seven GPU cases for pixels, alpha composition, clipping, resizing, resource limits and example integration | Optional multisampling, HDR and post-processing |
 | F13 | Implemented (v1) | Clock/catch-up, paused stepping, ERPL recording/playback, per-command state checks, seeded random state, save migration and full-game replay tests | Cross-machine float determinism and replaying menu/audio/render commands are outside v1 |
-| F14 | Implemented (v1) | Versioned scene/checkpoint/config formats; three-slot UI; CRC, bounds and semantic checks; unchanged live game on failed load; interrupted-process tests; isolated atomic-write syscall failures, cleanup/error precedence, descriptor reuse and retry checks | Newly created ancestor-directory durability, physical power-loss/filesystem crash behavior and content migration |
+| F14 | Implemented (v1) | Versioned scene/checkpoint/config formats; three-slot UI; CRC, bounds and semantic checks; unchanged live game on failed load; interrupted-process tests; atomic-write syscall faults, cleanup/error precedence and descriptor reuse; resolved ancestor synchronization before publication with preparation-fault and process-exit retry checks | Physical power-loss/filesystem crash behavior and content migration |
 | F15 | Partial | Console errors, GL callback, F2 rolling timing/counter overlay, F3 collision/camera outlines, target accounting, CPU percentiles, shader reload/failure recovery, GPU pixel/interface/lifetime tests, bounded asynchronous GPU timing with sample age/skips; separate preview/swap timing, [controlled stress results](../benchmarks/2026-10-16-validation.md) and [bounded failure evidence](../benchmarks/2026-10-17-gpu-timing.md); [recorded gameplay profiles](../benchmarks/2026-10-17-replay-results.md) | Broader drivers and manual fault scenarios |
 | F16 | Partial | Configurable stress arena, CPU/GPU repeated teardown checks, allocation-free steady CPU tests, tracked buffer/texture/target bytes, JSON benchmarks, repeated 1080p baselines and independent workload comparisons, installed CPU runner and hashed relocatable archives with CPU/OpenGL smoke tests | Full allocator/driver accounting, broader gameplay/display budgets and hardware/manual checks |
 
@@ -1928,10 +1928,35 @@ OpenGL gameplay (27.42 s total). The 22 new evidence files and atomic-save contr
 match the archived copies byte-for-byte. Documentation validation resolves 121
 local links, parses the shell recipe and checks all 12 command records/four XML reports.
 
+## Increment 56: save-directory chain preparation
+
+- `UserStorage` validates the record, resolves existing symlinks, creates the
+  directory chain top-down, then opens/syncs/closes every resolved ancestor from
+  leaf through `/` before calling the existing atomic-file primitive.
+- Existing ancestors are rechecked on every attempt: directory existence, a new
+  storage object or a previous process exit cannot bypass preparation. Partial
+  directories remain after failure for retry; unrelated files are never replaced.
+- Preparation failures include operation/path context, preserve the old/absent
+  record and create no record temporary. Sync errors survive secondary close errors;
+  close is attempted once. Reads and invalid records/slots have no preparation effects.
+- Added nine CPU cases for config/slot paths, first/repeated saves, creation and
+  ancestor open/sync/close errors, descriptor reuse, symlinks, `EEXIST` races,
+  nondirectory obstructions, invalid input and retry after a child exits during sync.
+- No format/API changes or production fault hooks. Every resolved ancestor must
+  allow directory open/sync; there is no unsupported-filesystem fallback. Preparation
+  adds synchronous I/O and does not certify physical power-loss durability.
+
+The final suite against the old implementation fails eight of nine new-contract
+cases; that comparison and its source hashes are retained. At `51c2529`, all 58
+Debug and Release runtime groups pass without skips. Four relevant groups pass with
+Clang and CPU ASan/UBSan with leak detection. Earlier full native sanitizer, TSan
+and offline-build evidence retains its original revision/scope. See the
+[preparation contract](STORAGE_DIRECTORY_VALIDATION.md) and
+[commands, logs and results](../validation/2026-10-24-storage-directories/RESULTS.md).
+
 ## Next increment
 
-Review and harden durable creation of configuration/save directory chains, with
-deterministic directory-creation/open/sync failure coverage and explicit retry
-semantics. Physical power-loss guarantees remain unverified. Performance/memory
-acceptance and physical display/audio checks remain open; background loading
-remains deferred.
+Measure remaining allocations in normal gameplay rendering/audio processing, with
+explicit measurement scopes, intentional exceptions and repeatable reports before
+choosing optimizations. Physical display/audio, workload/memory acceptance and final
+support/coverage checks remain open; background loading remains deferred.

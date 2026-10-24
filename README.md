@@ -17,6 +17,9 @@ offline build with relocated package checks. Release acceptance remains open.
 Atomic saves also have [isolated filesystem-failure tests](docs/ATOMIC_SAVE_VALIDATION.md)
 covering short/interrupted writes, cleanup and failures before/after replacement.
 Zero-progress writes and directory-close errors now report failure reliably.
+User storage also [prepares the full resolved directory chain](docs/STORAGE_DIRECTORY_VALIDATION.md)
+before creating a save temporary, including on retries. Every ancestor must support
+directory synchronization; preparation failures leave the old record unchanged.
 
 ## Build
 

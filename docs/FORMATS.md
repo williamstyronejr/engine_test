@@ -947,9 +947,17 @@ oversized files report errors. Storage roots are trusted local user directories,
 not an adversarial shared-filesystem sandbox. Concurrent writers use last-rename-wins;
 there is no multi-process conflict resolution.
 
-Writes validate the envelope, create missing directories, write a mode-0600 sibling
-temporary, sync its contents, rename over the destination, then sync the destination
-directory. Pre-rename errors preserve the old file and attempt to remove the temporary.
+Writes validate the envelope, resolve existing symlinks, create missing directories
+and sync/close the full resolved chain from leaf through `/` before creating a record
+temporary. Every attempt repeats preparation for existing ancestors, so a previous
+failed/interrupted creation does not bypass synchronization. All resolved ancestors
+must permit directory open/sync; errors stop before changing the record. Partial
+directories remain for retry, and this synchronous work can stall the caller.
+See [directory preparation and compatibility](STORAGE_DIRECTORY_VALIDATION.md).
+
+The file transaction then writes a mode-0600 sibling temporary, syncs its contents,
+renames over the destination and syncs/closes the destination directory again.
+Pre-rename errors preserve the old file and attempt to remove the temporary.
 A post-rename directory open/sync/close error reports failure after the complete
 new file is visible. Abrupt process exit or failed cleanup can leave an orphan
 `.engine-save-*` temporary; reads ignore it
@@ -957,7 +965,9 @@ and later writes use unique names. No automatic cleanup races other live writers
 Interrupted-process tests cover both commit boundaries. The [atomic-write fault suite](ATOMIC_SAVE_VALIDATION.md)
 adds deterministic syscall errors, short/interrupted writes, error precedence,
 descriptor cleanup/reuse and retry checks. Actual power loss, filesystem-specific
-crash behavior and newly created ancestor-directory durability remain unverified.
+crash behavior remain unverified. The `storage_directories` group separately checks
+ancestor synchronization ordering, preparation faults and retry after process exit;
+these checks do not certify storage hardware against power loss.
 `AtomicWriteObserver` is an optional diagnostic/test callback at the two
 commit stages; ordinary engine/game writes do not install one.
 

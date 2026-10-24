@@ -28,9 +28,10 @@ records. Record versions, data encoding and the public API are unchanged.
   retried by this API. The caller can retry the whole save. Concurrent writers still
   use last-rename-wins; there is no multi-file transaction or conflict resolution.
 
-The parent directory must already exist for `AssetRoot`; `UserStorage` creates its
-directories separately. Parent-ancestor durability, real power loss and device or
-filesystem behavior after an actual crash remain outside the simulated evidence.
+The parent directory must already exist for `AssetRoot`; `UserStorage` now
+[prepares and synchronizes its resolved ancestor chain](STORAGE_DIRECTORY_VALIDATION.md)
+before calling this primitive. Real power loss and device/filesystem behavior
+after an actual crash remain outside the simulated evidence.
 
 ## Isolated syscall tests
 
@@ -80,6 +81,6 @@ ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 \
 ```
 
 The new group contains eight named cases and needs no display or audio device.
-Full native runtime inventory is now 57 groups; CPU-only inventory is 31. Release
+Full native runtime inventory is now 58 groups; CPU-only inventory is 32. Release
 packaging adds three separate checks. See the [retained regression results](../validation/2026-10-24-atomic-writes/RESULTS.md)
 for the two reproduced failures, fixes, commands and validation scope.
