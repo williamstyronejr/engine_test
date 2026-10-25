@@ -2031,10 +2031,38 @@ At documentation commit `1204ae3`, all three Release packaging checks pass
 (27.59 s); all 91 evidence files and both new benchmark documents match the archive.
 Profiling executables remain excluded from installation.
 
+## Increment 59: UI allocation coverage
+
+- Added a development-only `ui_allocations` executable with nine states per level:
+  audio off/on, remapped audio/control labels, settings, controls, binding capture
+  and update, diagnostics, and debug shapes. Ordinary gameplay and the probe now
+  share the unchanged drawing body through `game_draw.hpp`.
+- Each frozen state renders 300 offscreen frames at 1280×800, with 30 warmup and
+  270 measured frames. Render-thread scopes separate settings update, minimap,
+  world, HUD, diagnostics, settings drawing and renderer end; the enclosing frame
+  equals their sum. Opening/rebuilding/rebinding costs have separate counters.
+- Three Release runs match in all report fields. Settings, controls and enabled-
+  audio HUD redraws record zero C++ allocations, including international/mouse
+  chords. Diagnostics records 16 calls / 537 requested bytes per measured frame
+  in both levels, with or without shapes. No performance or whole-engine bound.
+- The checker verifies all 18 states, real menu transitions, changed labels,
+  sample counts, nonempty stable renders and inclusive allocation accounting.
+  Eight before/after ordinary-game screenshot pairs match byte-for-byte.
+
+At `4e860f5`, all 63 Debug and Release runtime groups pass without skips. Seven
+focused Clang groups and three graphical ASan/UBSan groups also pass. Driver leak
+detection is disabled for the graphical checks; no leak/race acceptance is implied.
+Production has no allocation-profile symbols; the probe remains a development tool.
+
+See [workload contract](../benchmarks/UI_ALLOCATIONS.md),
+[results](../benchmarks/2026-10-25-ui-allocation-results.md) and
+[validation](../validation/2026-10-25-ui-allocations/RESULTS.md).
+
 ## Next increment
 
-Extend allocation coverage to open settings/diagnostics and the enabled-audio HUD,
-including remapped controls, before broader rendering claims. Keep startup, restart,
-loading, exceptional errors and reporting scopes explicit. Physical display/audio,
-declared workload/memory acceptance and final support/coverage checks remain open;
-background loading remains deferred.
+Reuse diagnostics text storage and compare the same workload before/after. Extend
+coverage to completed/changing GPU-timing labels and combined overlays before
+broader rendering claims. Keep startup, layout/rebinding, loading, exceptional
+errors and reporting costs explicit. Physical display/audio, declared workload/
+memory acceptance and final support/coverage checks remain open; background loading
+remains deferred.

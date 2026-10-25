@@ -1,0 +1,465 @@
+{
+  "baseline_revision": "5609e324ef4a2bf98ebc22593b7b39a4dd3c1334",
+  "comparisons": [
+    {
+      "level": "facility",
+      "state": "90",
+      "before": {
+        "command": [
+          "/home/zero/dev/engine_test/build/ui-validation/baseline-feature_lab",
+          "--assets",
+          "/home/zero/dev/engine_test/assets",
+          "--no-audio",
+          "--no-vsync",
+          "--screenshot",
+          "/home/zero/dev/engine_test/build/ui-validation/before-facility-90.ppm",
+          "--user-data",
+          "/home/zero/dev/engine_test/build/ui-validation/before-facility-90-user",
+          "--replay",
+          "/home/zero/dev/engine_test/benchmarks/replays/facility.erpl",
+          "--frames",
+          "90"
+        ],
+        "exit_code": 0,
+        "executable_sha256": "f9b9fe4c11dd61be009d1c59125912e8f996e9af01431dce08df17d547c9bfaf",
+        "image_sha256": "1771db68aa2200526b7116ee9758bf083b994c9261354840df27f0c9bd9c51c3",
+        "image_bytes": 4284017,
+        "header": [
+          "P6",
+          "1050 1360",
+          "255"
+        ]
+      },
+      "after": {
+        "command": [
+          "/home/zero/dev/engine_test/build/release-validation/gcc-release/feature_lab",
+          "--assets",
+          "/home/zero/dev/engine_test/assets",
+          "--no-audio",
+          "--no-vsync",
+          "--screenshot",
+          "/home/zero/dev/engine_test/build/ui-validation/after-facility-90.ppm",
+          "--user-data",
+          "/home/zero/dev/engine_test/build/ui-validation/after-facility-90-user",
+          "--replay",
+          "/home/zero/dev/engine_test/benchmarks/replays/facility.erpl",
+          "--frames",
+          "90"
+        ],
+        "exit_code": 0,
+        "executable_sha256": "6f5fd8b7c55c9eeca8685787d89fa88d1b1afbce347d18c993061ab12592872d",
+        "image_sha256": "1771db68aa2200526b7116ee9758bf083b994c9261354840df27f0c9bd9c51c3",
+        "image_bytes": 4284017,
+        "header": [
+          "P6",
+          "1050 1360",
+          "255"
+        ]
+      },
+      "byte_identical": true
+    },
+    {
+      "level": "facility",
+      "state": "121",
+      "before": {
+        "command": [
+          "/home/zero/dev/engine_test/build/ui-validation/baseline-feature_lab",
+          "--assets",
+          "/home/zero/dev/engine_test/assets",
+          "--no-audio",
+          "--no-vsync",
+          "--screenshot",
+          "/home/zero/dev/engine_test/build/ui-validation/before-facility-121.ppm",
+          "--user-data",
+          "/home/zero/dev/engine_test/build/ui-validation/before-facility-121-user",
+          "--replay",
+          "/home/zero/dev/engine_test/benchmarks/replays/facility.erpl",
+          "--frames",
+          "121"
+        ],
+        "exit_code": 0,
+        "executable_sha256": "f9b9fe4c11dd61be009d1c59125912e8f996e9af01431dce08df17d547c9bfaf",
+        "image_sha256": "e177bde509b9875067dd1825976157e7a7feb501630e43f089ccd4134bdb9225",
+        "image_bytes": 4284017,
+        "header": [
+          "P6",
+          "1050 1360",
+          "255"
+        ]
+      },
+      "after": {
+        "command": [
+          "/home/zero/dev/engine_test/build/release-validation/gcc-release/feature_lab",
+          "--assets",
+          "/home/zero/dev/engine_test/assets",
+          "--no-audio",
+          "--no-vsync",
+          "--screenshot",
+          "/home/zero/dev/engine_test/build/ui-validation/after-facility-121.ppm",
+          "--user-data",
+          "/home/zero/dev/engine_test/build/ui-validation/after-facility-121-user",
+          "--replay",
+          "/home/zero/dev/engine_test/benchmarks/replays/facility.erpl",
+          "--frames",
+          "121"
+        ],
+        "exit_code": 0,
+        "executable_sha256": "6f5fd8b7c55c9eeca8685787d89fa88d1b1afbce347d18c993061ab12592872d",
+        "image_sha256": "e177bde509b9875067dd1825976157e7a7feb501630e43f089ccd4134bdb9225",
+        "image_bytes": 4284017,
+        "header": [
+          "P6",
+          "1050 1360",
+          "255"
+        ]
+      },
+      "byte_identical": true
+    },
+    {
+      "level": "facility",
+      "state": "3000",
+      "before": {
+        "command": [
+          "/home/zero/dev/engine_test/build/ui-validation/baseline-feature_lab",
+          "--assets",
+          "/home/zero/dev/engine_test/assets",
+          "--no-audio",
+          "--no-vsync",
+          "--screenshot",
+          "/home/zero/dev/engine_test/build/ui-validation/before-facility-3000.ppm",
+          "--user-data",
+          "/home/zero/dev/engine_test/build/ui-validation/before-facility-3000-user",
+          "--replay",
+          "/home/zero/dev/engine_test/benchmarks/replays/facility.erpl",
+          "--frames",
+          "3000"
+        ],
+        "exit_code": 0,
+        "executable_sha256": "f9b9fe4c11dd61be009d1c59125912e8f996e9af01431dce08df17d547c9bfaf",
+        "image_sha256": "50dfef6a183a9d69c334a90e314cf8c33f0ce2df63d4d41ad444be1168fa9582",
+        "image_bytes": 4284017,
+        "header": [
+          "P6",
+          "1050 1360",
+          "255"
+        ]
+      },
+      "after": {
+        "command": [
+          "/home/zero/dev/engine_test/build/release-validation/gcc-release/feature_lab",
+          "--assets",
+          "/home/zero/dev/engine_test/assets",
+          "--no-audio",
+          "--no-vsync",
+          "--screenshot",
+          "/home/zero/dev/engine_test/build/ui-validation/after-facility-3000.ppm",
+          "--user-data",
+          "/home/zero/dev/engine_test/build/ui-validation/after-facility-3000-user",
+          "--replay",
+          "/home/zero/dev/engine_test/benchmarks/replays/facility.erpl",
+          "--frames",
+          "3000"
+        ],
+        "exit_code": 0,
+        "executable_sha256": "6f5fd8b7c55c9eeca8685787d89fa88d1b1afbce347d18c993061ab12592872d",
+        "image_sha256": "50dfef6a183a9d69c334a90e314cf8c33f0ce2df63d4d41ad444be1168fa9582",
+        "image_bytes": 4284017,
+        "header": [
+          "P6",
+          "1050 1360",
+          "255"
+        ]
+      },
+      "byte_identical": true
+    },
+    {
+      "level": "facility",
+      "state": "settings",
+      "before": {
+        "command": [
+          "/home/zero/dev/engine_test/build/ui-validation/baseline-feature_lab",
+          "--assets",
+          "/home/zero/dev/engine_test/assets",
+          "--no-audio",
+          "--no-vsync",
+          "--screenshot",
+          "/home/zero/dev/engine_test/build/ui-validation/before-facility-settings.ppm",
+          "--user-data",
+          "/home/zero/dev/engine_test/build/ui-validation/before-facility-settings-user",
+          "--level",
+          "facility",
+          "--settings-demo",
+          "--frames",
+          "90"
+        ],
+        "exit_code": 0,
+        "executable_sha256": "f9b9fe4c11dd61be009d1c59125912e8f996e9af01431dce08df17d547c9bfaf",
+        "image_sha256": "a5cf8caecc348fa7dd87621c21e544e3b4ded91a129b04bba4f8fb79b1de48e8",
+        "image_bytes": 4284017,
+        "header": [
+          "P6",
+          "1050 1360",
+          "255"
+        ]
+      },
+      "after": {
+        "command": [
+          "/home/zero/dev/engine_test/build/release-validation/gcc-release/feature_lab",
+          "--assets",
+          "/home/zero/dev/engine_test/assets",
+          "--no-audio",
+          "--no-vsync",
+          "--screenshot",
+          "/home/zero/dev/engine_test/build/ui-validation/after-facility-settings.ppm",
+          "--user-data",
+          "/home/zero/dev/engine_test/build/ui-validation/after-facility-settings-user",
+          "--level",
+          "facility",
+          "--settings-demo",
+          "--frames",
+          "90"
+        ],
+        "exit_code": 0,
+        "executable_sha256": "6f5fd8b7c55c9eeca8685787d89fa88d1b1afbce347d18c993061ab12592872d",
+        "image_sha256": "a5cf8caecc348fa7dd87621c21e544e3b4ded91a129b04bba4f8fb79b1de48e8",
+        "image_bytes": 4284017,
+        "header": [
+          "P6",
+          "1050 1360",
+          "255"
+        ]
+      },
+      "byte_identical": true
+    },
+    {
+      "level": "annex",
+      "state": "90",
+      "before": {
+        "command": [
+          "/home/zero/dev/engine_test/build/ui-validation/baseline-feature_lab",
+          "--assets",
+          "/home/zero/dev/engine_test/assets",
+          "--no-audio",
+          "--no-vsync",
+          "--screenshot",
+          "/home/zero/dev/engine_test/build/ui-validation/before-annex-90.ppm",
+          "--user-data",
+          "/home/zero/dev/engine_test/build/ui-validation/before-annex-90-user",
+          "--replay",
+          "/home/zero/dev/engine_test/benchmarks/replays/annex.erpl",
+          "--frames",
+          "90"
+        ],
+        "exit_code": 0,
+        "executable_sha256": "f9b9fe4c11dd61be009d1c59125912e8f996e9af01431dce08df17d547c9bfaf",
+        "image_sha256": "787772a1ad5f136c061e6b66ef370518a1c5997acb2415895d32970efb7a22a9",
+        "image_bytes": 4284017,
+        "header": [
+          "P6",
+          "1050 1360",
+          "255"
+        ]
+      },
+      "after": {
+        "command": [
+          "/home/zero/dev/engine_test/build/release-validation/gcc-release/feature_lab",
+          "--assets",
+          "/home/zero/dev/engine_test/assets",
+          "--no-audio",
+          "--no-vsync",
+          "--screenshot",
+          "/home/zero/dev/engine_test/build/ui-validation/after-annex-90.ppm",
+          "--user-data",
+          "/home/zero/dev/engine_test/build/ui-validation/after-annex-90-user",
+          "--replay",
+          "/home/zero/dev/engine_test/benchmarks/replays/annex.erpl",
+          "--frames",
+          "90"
+        ],
+        "exit_code": 0,
+        "executable_sha256": "6f5fd8b7c55c9eeca8685787d89fa88d1b1afbce347d18c993061ab12592872d",
+        "image_sha256": "787772a1ad5f136c061e6b66ef370518a1c5997acb2415895d32970efb7a22a9",
+        "image_bytes": 4284017,
+        "header": [
+          "P6",
+          "1050 1360",
+          "255"
+        ]
+      },
+      "byte_identical": true
+    },
+    {
+      "level": "annex",
+      "state": "121",
+      "before": {
+        "command": [
+          "/home/zero/dev/engine_test/build/ui-validation/baseline-feature_lab",
+          "--assets",
+          "/home/zero/dev/engine_test/assets",
+          "--no-audio",
+          "--no-vsync",
+          "--screenshot",
+          "/home/zero/dev/engine_test/build/ui-validation/before-annex-121.ppm",
+          "--user-data",
+          "/home/zero/dev/engine_test/build/ui-validation/before-annex-121-user",
+          "--replay",
+          "/home/zero/dev/engine_test/benchmarks/replays/annex.erpl",
+          "--frames",
+          "121"
+        ],
+        "exit_code": 0,
+        "executable_sha256": "f9b9fe4c11dd61be009d1c59125912e8f996e9af01431dce08df17d547c9bfaf",
+        "image_sha256": "265e99aa489d98a6fe6be5721758e516ca84cedbaf4cb2828b5924bcaa3a1398",
+        "image_bytes": 4284017,
+        "header": [
+          "P6",
+          "1050 1360",
+          "255"
+        ]
+      },
+      "after": {
+        "command": [
+          "/home/zero/dev/engine_test/build/release-validation/gcc-release/feature_lab",
+          "--assets",
+          "/home/zero/dev/engine_test/assets",
+          "--no-audio",
+          "--no-vsync",
+          "--screenshot",
+          "/home/zero/dev/engine_test/build/ui-validation/after-annex-121.ppm",
+          "--user-data",
+          "/home/zero/dev/engine_test/build/ui-validation/after-annex-121-user",
+          "--replay",
+          "/home/zero/dev/engine_test/benchmarks/replays/annex.erpl",
+          "--frames",
+          "121"
+        ],
+        "exit_code": 0,
+        "executable_sha256": "6f5fd8b7c55c9eeca8685787d89fa88d1b1afbce347d18c993061ab12592872d",
+        "image_sha256": "265e99aa489d98a6fe6be5721758e516ca84cedbaf4cb2828b5924bcaa3a1398",
+        "image_bytes": 4284017,
+        "header": [
+          "P6",
+          "1050 1360",
+          "255"
+        ]
+      },
+      "byte_identical": true
+    },
+    {
+      "level": "annex",
+      "state": "3000",
+      "before": {
+        "command": [
+          "/home/zero/dev/engine_test/build/ui-validation/baseline-feature_lab",
+          "--assets",
+          "/home/zero/dev/engine_test/assets",
+          "--no-audio",
+          "--no-vsync",
+          "--screenshot",
+          "/home/zero/dev/engine_test/build/ui-validation/before-annex-3000.ppm",
+          "--user-data",
+          "/home/zero/dev/engine_test/build/ui-validation/before-annex-3000-user",
+          "--replay",
+          "/home/zero/dev/engine_test/benchmarks/replays/annex.erpl",
+          "--frames",
+          "3000"
+        ],
+        "exit_code": 0,
+        "executable_sha256": "f9b9fe4c11dd61be009d1c59125912e8f996e9af01431dce08df17d547c9bfaf",
+        "image_sha256": "11d38d7de000d642b9350a63800fa3e845173a180cac9030b387b888ea129d2b",
+        "image_bytes": 4284017,
+        "header": [
+          "P6",
+          "1050 1360",
+          "255"
+        ]
+      },
+      "after": {
+        "command": [
+          "/home/zero/dev/engine_test/build/release-validation/gcc-release/feature_lab",
+          "--assets",
+          "/home/zero/dev/engine_test/assets",
+          "--no-audio",
+          "--no-vsync",
+          "--screenshot",
+          "/home/zero/dev/engine_test/build/ui-validation/after-annex-3000.ppm",
+          "--user-data",
+          "/home/zero/dev/engine_test/build/ui-validation/after-annex-3000-user",
+          "--replay",
+          "/home/zero/dev/engine_test/benchmarks/replays/annex.erpl",
+          "--frames",
+          "3000"
+        ],
+        "exit_code": 0,
+        "executable_sha256": "6f5fd8b7c55c9eeca8685787d89fa88d1b1afbce347d18c993061ab12592872d",
+        "image_sha256": "11d38d7de000d642b9350a63800fa3e845173a180cac9030b387b888ea129d2b",
+        "image_bytes": 4284017,
+        "header": [
+          "P6",
+          "1050 1360",
+          "255"
+        ]
+      },
+      "byte_identical": true
+    },
+    {
+      "level": "annex",
+      "state": "settings",
+      "before": {
+        "command": [
+          "/home/zero/dev/engine_test/build/ui-validation/baseline-feature_lab",
+          "--assets",
+          "/home/zero/dev/engine_test/assets",
+          "--no-audio",
+          "--no-vsync",
+          "--screenshot",
+          "/home/zero/dev/engine_test/build/ui-validation/before-annex-settings.ppm",
+          "--user-data",
+          "/home/zero/dev/engine_test/build/ui-validation/before-annex-settings-user",
+          "--level",
+          "annex",
+          "--settings-demo",
+          "--frames",
+          "90"
+        ],
+        "exit_code": 0,
+        "executable_sha256": "f9b9fe4c11dd61be009d1c59125912e8f996e9af01431dce08df17d547c9bfaf",
+        "image_sha256": "b28fc6542d67bdcf1068f7404d9a6f708b70cfc64e1ef1461fc958fe719a5f41",
+        "image_bytes": 4284017,
+        "header": [
+          "P6",
+          "1050 1360",
+          "255"
+        ]
+      },
+      "after": {
+        "command": [
+          "/home/zero/dev/engine_test/build/release-validation/gcc-release/feature_lab",
+          "--assets",
+          "/home/zero/dev/engine_test/assets",
+          "--no-audio",
+          "--no-vsync",
+          "--screenshot",
+          "/home/zero/dev/engine_test/build/ui-validation/after-annex-settings.ppm",
+          "--user-data",
+          "/home/zero/dev/engine_test/build/ui-validation/after-annex-settings-user",
+          "--level",
+          "annex",
+          "--settings-demo",
+          "--frames",
+          "90"
+        ],
+        "exit_code": 0,
+        "executable_sha256": "6f5fd8b7c55c9eeca8685787d89fa88d1b1afbce347d18c993061ab12592872d",
+        "image_sha256": "b28fc6542d67bdcf1068f7404d9a6f708b70cfc64e1ef1461fc958fe719a5f41",
+        "image_bytes": 4284017,
+        "header": [
+          "P6",
+          "1050 1360",
+          "255"
+        ]
+      },
+      "byte_identical": true
+    }
+  ]
+}

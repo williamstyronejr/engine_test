@@ -1,0 +1,10 @@
+{
+  "baseline_revision": "5609e324ef4a2bf98ebc22593b7b39a4dd3c1334",
+  "source_revision": "4e860f5a7136d96b7f91e43d058b37a79d65937b",
+  "baseline_executable_sha256": "f9b9fe4c11dd61be009d1c59125912e8f996e9af01431dce08df17d547c9bfaf",
+  "draw_body_ignoring_whitespace_matches": true,
+  "draw_body_sha256": "ca334637ff6a0417efa7bbee000fb58db671ca965dbb97a791b6b6917eaa5571",
+  "body_range": "From const auto extent through the draw function closing brace; colors moved inside the function with unchanged values.",
+  "color_constants_match": true,
+  "baseline_build_metadata": "Feature Lab 0.1.0\nRevision (at configure): 5609e32\nConfiguration: Release\nCompiler: GNU 16.2.1\nFlags:  -O3 -DNDEBUG; C++20; sanitizers=OFF\nTarget: Linux x86_64\nSystem libraries and drivers are not bundled. See RUNTIME_DEPENDENCIES.txt.\n"
+}

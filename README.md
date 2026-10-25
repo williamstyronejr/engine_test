@@ -716,6 +716,11 @@ workloads record zero C++ allocations in world/HUD submission with unchanged
 rendered output; restart allocations remain. See [the storage contract](benchmarks/HUD_TEXT.md)
 and [before/after measurements](benchmarks/2026-10-24-hud-text-results.md).
 
+The [UI allocation probe](benchmarks/UI_ALLOCATIONS.md) extends coverage to open
+settings, diagnostics and enabled-audio HUD labels, including remapped controls.
+[Recorded results](benchmarks/2026-10-25-ui-allocation-results.md) separate steady
+redraws from menu/rebinding transitions.
+
 ## Window lifecycle
 
 Fullscreen and minimize are asynchronous window-manager requests. The engine exposes

@@ -73,3 +73,7 @@ report serialization, window-title updates, direct C-library allocations, GPU/dr
 storage and allocator metadata retain their documented exclusions. Instrumented
 wall times are not used to claim a speedup. Physical display/audio and declared
 release workload/memory acceptance remain open.
+
+The subsequent [UI allocation coverage](UI_ALLOCATIONS.md) measures open settings,
+controls, diagnostics and enabled-audio HUD labels in separate frozen fixtures.
+It does not broaden the original two replay workloads or their exclusions.
