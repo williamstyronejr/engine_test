@@ -1,0 +1,819 @@
+{
+  "source_revision": "4e860f5a7136d96b7f91e43d058b37a79d65937b",
+  "identical_release_reports": 3,
+  "scenarios": [
+    {
+      "level": "facility",
+      "name": "audio_off",
+      "calls_per_frame": 0,
+      "requested_bytes_per_frame": 0,
+      "transitions": {
+        "open": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "controls": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "capture": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "rebind": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    {
+      "level": "facility",
+      "name": "audio_default",
+      "calls_per_frame": 0,
+      "requested_bytes_per_frame": 0,
+      "transitions": {
+        "open": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "controls": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "capture": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "rebind": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    {
+      "level": "facility",
+      "name": "audio_remapped",
+      "calls_per_frame": 0,
+      "requested_bytes_per_frame": 0,
+      "transitions": {
+        "open": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "controls": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "capture": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "rebind": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    {
+      "level": "facility",
+      "name": "settings_default",
+      "calls_per_frame": 0,
+      "requested_bytes_per_frame": 0,
+      "transitions": {
+        "open": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 5,
+          "requested_bytes": 983,
+          "max_calls": 5,
+          "max_requested_bytes": 983
+        },
+        "controls": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "capture": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "rebind": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    {
+      "level": "facility",
+      "name": "controls_remapped",
+      "calls_per_frame": 0,
+      "requested_bytes_per_frame": 0,
+      "transitions": {
+        "open": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 5,
+          "requested_bytes": 983,
+          "max_calls": 5,
+          "max_requested_bytes": 983
+        },
+        "controls": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 16,
+          "requested_bytes": 1884,
+          "max_calls": 16,
+          "max_requested_bytes": 1884
+        },
+        "capture": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "rebind": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    {
+      "level": "facility",
+      "name": "binding_capture",
+      "calls_per_frame": 0,
+      "requested_bytes_per_frame": 0,
+      "transitions": {
+        "open": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 5,
+          "requested_bytes": 983,
+          "max_calls": 5,
+          "max_requested_bytes": 983
+        },
+        "controls": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 16,
+          "requested_bytes": 1884,
+          "max_calls": 16,
+          "max_requested_bytes": 1884
+        },
+        "capture": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 1,
+          "requested_bytes": 33,
+          "max_calls": 1,
+          "max_requested_bytes": 33
+        },
+        "rebind": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    {
+      "level": "facility",
+      "name": "binding_updated",
+      "calls_per_frame": 0,
+      "requested_bytes_per_frame": 0,
+      "transitions": {
+        "open": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 5,
+          "requested_bytes": 983,
+          "max_calls": 5,
+          "max_requested_bytes": 983
+        },
+        "controls": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 16,
+          "requested_bytes": 1884,
+          "max_calls": 16,
+          "max_requested_bytes": 1884
+        },
+        "capture": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 1,
+          "requested_bytes": 33,
+          "max_calls": 1,
+          "max_requested_bytes": 33
+        },
+        "rebind": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 16,
+          "requested_bytes": 1880,
+          "max_calls": 16,
+          "max_requested_bytes": 1880
+        }
+      }
+    },
+    {
+      "level": "facility",
+      "name": "diagnostics",
+      "calls_per_frame": 16,
+      "requested_bytes_per_frame": 537,
+      "transitions": {
+        "open": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "controls": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "capture": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "rebind": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    {
+      "level": "facility",
+      "name": "diagnostics_shapes",
+      "calls_per_frame": 16,
+      "requested_bytes_per_frame": 537,
+      "transitions": {
+        "open": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "controls": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "capture": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "rebind": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    {
+      "level": "annex",
+      "name": "audio_off",
+      "calls_per_frame": 0,
+      "requested_bytes_per_frame": 0,
+      "transitions": {
+        "open": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "controls": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "capture": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "rebind": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    {
+      "level": "annex",
+      "name": "audio_default",
+      "calls_per_frame": 0,
+      "requested_bytes_per_frame": 0,
+      "transitions": {
+        "open": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "controls": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "capture": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "rebind": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    {
+      "level": "annex",
+      "name": "audio_remapped",
+      "calls_per_frame": 0,
+      "requested_bytes_per_frame": 0,
+      "transitions": {
+        "open": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "controls": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "capture": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "rebind": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    {
+      "level": "annex",
+      "name": "settings_default",
+      "calls_per_frame": 0,
+      "requested_bytes_per_frame": 0,
+      "transitions": {
+        "open": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 5,
+          "requested_bytes": 983,
+          "max_calls": 5,
+          "max_requested_bytes": 983
+        },
+        "controls": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "capture": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "rebind": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    {
+      "level": "annex",
+      "name": "controls_remapped",
+      "calls_per_frame": 0,
+      "requested_bytes_per_frame": 0,
+      "transitions": {
+        "open": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 5,
+          "requested_bytes": 983,
+          "max_calls": 5,
+          "max_requested_bytes": 983
+        },
+        "controls": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 16,
+          "requested_bytes": 1884,
+          "max_calls": 16,
+          "max_requested_bytes": 1884
+        },
+        "capture": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "rebind": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    {
+      "level": "annex",
+      "name": "binding_capture",
+      "calls_per_frame": 0,
+      "requested_bytes_per_frame": 0,
+      "transitions": {
+        "open": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 5,
+          "requested_bytes": 983,
+          "max_calls": 5,
+          "max_requested_bytes": 983
+        },
+        "controls": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 16,
+          "requested_bytes": 1884,
+          "max_calls": 16,
+          "max_requested_bytes": 1884
+        },
+        "capture": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 1,
+          "requested_bytes": 33,
+          "max_calls": 1,
+          "max_requested_bytes": 33
+        },
+        "rebind": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    {
+      "level": "annex",
+      "name": "binding_updated",
+      "calls_per_frame": 0,
+      "requested_bytes_per_frame": 0,
+      "transitions": {
+        "open": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 5,
+          "requested_bytes": 983,
+          "max_calls": 5,
+          "max_requested_bytes": 983
+        },
+        "controls": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 16,
+          "requested_bytes": 1884,
+          "max_calls": 16,
+          "max_requested_bytes": 1884
+        },
+        "capture": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 1,
+          "requested_bytes": 33,
+          "max_calls": 1,
+          "max_requested_bytes": 33
+        },
+        "rebind": {
+          "samples": 1,
+          "nonzero_samples": 1,
+          "calls": 16,
+          "requested_bytes": 1880,
+          "max_calls": 16,
+          "max_requested_bytes": 1880
+        }
+      }
+    },
+    {
+      "level": "annex",
+      "name": "diagnostics",
+      "calls_per_frame": 16,
+      "requested_bytes_per_frame": 537,
+      "transitions": {
+        "open": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "controls": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "capture": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "rebind": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    {
+      "level": "annex",
+      "name": "diagnostics_shapes",
+      "calls_per_frame": 16,
+      "requested_bytes_per_frame": 537,
+      "transitions": {
+        "open": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "controls": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "capture": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "rebind": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    }
+  ],
+  "production_byte_identical_pairs": 8,
+  "scenario_images": [
+    {
+      "path": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/ANNEX-audio_default.ppm",
+      "sha256": "578149fcc7d8d3cc43bb084eca67f528f4b9706378d334108b5cb36f0866abf8",
+      "bytes": 3072016
+    },
+    {
+      "path": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/ANNEX-audio_off.ppm",
+      "sha256": "2d1eab0daef4c043bcd3c14936a0ee04ebdb4e7e4b1d70baab479ce1fb68f071",
+      "bytes": 3072016
+    },
+    {
+      "path": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/ANNEX-audio_remapped.ppm",
+      "sha256": "b77452d0dd6d442167073cee8921a43a775374abbf35ea0f91e995ea60b4499c",
+      "bytes": 3072016
+    },
+    {
+      "path": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/ANNEX-binding_capture.ppm",
+      "sha256": "c3c8f07b1a6cfd70c778c59e1cc189b4d375c3f29067cc4e05fb3bcce849ac7d",
+      "bytes": 3072016
+    },
+    {
+      "path": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/ANNEX-binding_updated.ppm",
+      "sha256": "b35c692bb39d3a9c21fab3beb77f8a816f86e28fabe2482b94f96e188c0e9bef",
+      "bytes": 3072016
+    },
+    {
+      "path": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/ANNEX-controls_remapped.ppm",
+      "sha256": "fa01b1a73d05475b09c942dc045a708aa21a7bf8871e50b1b8c0c9bb925787eb",
+      "bytes": 3072016
+    },
+    {
+      "path": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/ANNEX-diagnostics.ppm",
+      "sha256": "3aee3b470fe575b15c5e8cb00378f6d15158e16b2ebb294cb7c3713797f75924",
+      "bytes": 3072016
+    },
+    {
+      "path": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/ANNEX-diagnostics_shapes.ppm",
+      "sha256": "996e4d8f3e8ccb13b5f12423d66844b3c382175a430a3f997510a6d48f93c2f4",
+      "bytes": 3072016
+    },
+    {
+      "path": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/ANNEX-settings_default.ppm",
+      "sha256": "6c339a0411f128850843ecae27ced544ec99c5efc09d320d613ad2a6f64f252d",
+      "bytes": 3072016
+    },
+    {
+      "path": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/FACILITY-audio_default.ppm",
+      "sha256": "6e5372a59f714b626e9beede0d99d8aa08c775fa609c7a27fa1a2db8b28c782d",
+      "bytes": 3072016
+    },
+    {
+      "path": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/FACILITY-audio_off.ppm",
+      "sha256": "ce750f04cd524048483f8023e7bc2538b58af749d5eade0125b693ab5e64544a",
+      "bytes": 3072016
+    },
+    {
+      "path": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/FACILITY-audio_remapped.ppm",
+      "sha256": "7c2acf4cc2eb489a6f69bebecb0ed95f513b519e6a8fcc51f317404d42d26488",
+      "bytes": 3072016
+    },
+    {
+      "path": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/FACILITY-binding_capture.ppm",
+      "sha256": "898c3c27bbb1fa10466959b65e573c73911a74e315acd8efd31985280998549b",
+      "bytes": 3072016
+    },
+    {
+      "path": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/FACILITY-binding_updated.ppm",
+      "sha256": "ab011d3628479caba9f7e6d8bbdaf0679a0912953cb0929ffd09a59a5864374f",
+      "bytes": 3072016
+    },
+    {
+      "path": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/FACILITY-controls_remapped.ppm",
+      "sha256": "30198a1f667b74d5ee43b72571d7e0dcf57ad1ac1c34f751377d860025610681",
+      "bytes": 3072016
+    },
+    {
+      "path": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/FACILITY-diagnostics.ppm",
+      "sha256": "5fa51b40461c4f31c7e32b31281c3adf1842f6db7ec62c0d0160b5584897a1ac",
+      "bytes": 3072016
+    },
+    {
+      "path": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/FACILITY-diagnostics_shapes.ppm",
+      "sha256": "280173171429eaabed67e42d0603766af520930a16d8c7f3be4332bc74ca84f7",
+      "bytes": 3072016
+    },
+    {
+      "path": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/FACILITY-settings_default.ppm",
+      "sha256": "f4f3d31cf9e5daca4b6c1a4e1c59ba16da049b266d4bd3b2a509c69e3411c587",
+      "bytes": 3072016
+    }
+  ]
+}

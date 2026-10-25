@@ -1,0 +1,16 @@
+[1/16] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/replay_profile.cpp.o
+[2/16] Stage Feature Lab assets
+[3/16] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/stress_benchmark.cpp.o
+[4/16] Linking CXX static library libfeature_lab_stress.a
+[5/16] Building CXX object CMakeFiles/allocation_profile_tests.dir/tests/allocation_profile_tests.cpp.o
+[6/16] Building CXX object CMakeFiles/hud_text_tests.dir/tests/hud_text_tests.cpp.o
+[7/16] Building CXX object CMakeFiles/feature_lab_allocations.dir/examples/feature_lab/main.cpp.o
+[8/16] Building CXX object CMakeFiles/ui_allocations.dir/profiling/ui_allocations.cpp.o
+[9/16] Linking CXX executable allocation_profile_tests
+[10/16] Linking CXX executable hud_text_tests
+[11/16] Linking CXX executable diagnostics_tests
+[12/16] Linking CXX executable ui_tests
+[13/16] Linking CXX executable feature_lab_allocations
+[14/16] Linking CXX executable ui_allocations
+[15/16] Building CXX object CMakeFiles/render_target_tests.dir/tests/render_target_tests.cpp.o
+[16/16] Linking CXX executable render_target_tests

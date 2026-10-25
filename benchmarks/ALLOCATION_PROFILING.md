@@ -90,6 +90,11 @@ steady simulation. The original HUD/status baseline allocates; the
 [buffer-reuse follow-up](2026-10-24-hud-text-results.md) records its reduction with
 the same scopes. Neither result chooses a whole-engine allocation or timing budget.
 
+The separate [UI allocation workload](UI_ALLOCATIONS.md) extends rendering coverage
+to settings, controls, diagnostics and enabled-audio labels. Its frozen offscreen
+frame and one-off transitions have their own report schema; they are not added to
+these replay or audio-worker totals.
+
 ## Audio scopes
 
 The `feature_lab_audio_allocations_v1` report records build identity, the

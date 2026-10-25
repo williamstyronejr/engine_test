@@ -1,0 +1,11 @@
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
+[assets] "/home/zero/dev/engine_test/assets" entities=11 GPU textures=9
+[replay] played commands=3000/3000 hash=3859428580428616961
+[session] frames=3000 ticks=1381 door_completions=1 collected=3 dropped_seconds=0 window_draws=17 minimap_draws=1 level=FACILITY level_changes=0 core_components=0 watched_shaders=0 watched_textures=0 watched_audio=0 audio_revision=1 audio_reload_applied=1 sound_bytes=0 retained_sound_bytes=0 watched_scenes=0 scene_revision=1 scene_applied=1 scene_locked=1 watched_tilemaps=0 tilemap_revision=1 tilemap_applied=1 tilemap_locked=1 watched_animations=0 animation_revision=1 animation_applied=1 animation_locked=1 watched_fonts=0 font_revision=2 font_applied=1 font_embedded=0 font_bytes=16384 scene=gameplay texture_revision=1 texture_applied=1 shader_revision=2 shader_applied=1 fullscreen=0 focused=1 targets=1 target_bytes=103968
+[gpu render interval ms] supported=1 method=time_elapsed counter_bits=64 mean=2.27681 p95=2.4672 max=2.51848 samples=240 last_frame=3000 age_frames=0 submitted=3000 completed=3000 pending=0 skipped=0 invalid=0
+[audio stats] enabled=0 started=0 completed=0 dropped=0 queue_rejections=0 written_frames=0 underruns=0 suspensions=0 recoveries=0 waits=0 device_error=0
+[cpu update+submit ms] median=1.23977 p95=2.65929 p99=4.28666 samples=2970 viewport=1050x1360 (excludes swap wait; not GPU time)

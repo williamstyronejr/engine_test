@@ -1,0 +1,136 @@
+Test project /home/zero/dev/engine_test/build/release-validation/gcc-release
+      Start  1: allocation_counters
+ 1/63 Test  #1: allocation_counters ..............   Passed    0.00 sec
+      Start  2: hud_text
+ 2/63 Test  #2: hud_text .........................   Passed    0.00 sec
+      Start  3: asset_validation
+ 3/63 Test  #3: asset_validation .................   Passed    0.07 sec
+      Start  4: asset_validation_cli
+ 4/63 Test  #4: asset_validation_cli .............   Passed    0.72 sec
+      Start  5: mixer_reload
+ 5/63 Test  #5: mixer_reload .....................   Passed    0.01 sec
+      Start  6: scene_reload
+ 6/63 Test  #6: scene_reload .....................   Passed    0.09 sec
+      Start  7: tilemap_reload
+ 7/63 Test  #7: tilemap_reload ...................   Passed    0.05 sec
+      Start  8: animation_reload
+ 8/63 Test  #8: animation_reload .................   Passed    0.04 sec
+      Start  9: audio_recovery
+ 9/63 Test  #9: audio_recovery ...................   Passed    0.01 sec
+      Start 10: fonts
+10/63 Test #10: fonts ............................   Passed    0.02 sec
+      Start 11: asset_watch
+11/63 Test #11: asset_watch ......................   Passed    0.17 sec
+      Start 12: components
+12/63 Test #12: components .......................   Passed    0.03 sec
+      Start 13: transforms
+13/63 Test #13: transforms .......................   Passed    0.04 sec
+      Start 14: package_manifest
+14/63 Test #14: package_manifest .................   Passed    0.09 sec
+      Start 15: stress_cpu
+15/63 Test #15: stress_cpu .......................   Passed    0.13 sec
+      Start 16: stress_report
+16/63 Test #16: stress_report ....................   Passed    0.04 sec
+      Start 17: replay_profile
+17/63 Test #17: replay_profile ...................   Passed    0.00 sec
+      Start 18: spike_profile
+18/63 Test #18: spike_profile ....................   Passed    0.03 sec
+      Start 19: replay_files
+19/63 Test #19: replay_files .....................   Passed    0.11 sec
+      Start 20: levels
+20/63 Test #20: levels ...........................   Passed    0.16 sec
+      Start 21: scene_flow
+21/63 Test #21: scene_flow .......................   Passed    0.02 sec
+      Start 22: international_bindings
+22/63 Test #22: international_bindings ...........   Passed    0.00 sec
+      Start 23: bindings
+23/63 Test #23: bindings .........................   Passed    0.01 sec
+      Start 24: gpu_timer_queue
+24/63 Test #24: gpu_timer_queue ..................   Passed    0.00 sec
+      Start 25: diagnostics
+25/63 Test #25: diagnostics ......................   Passed    0.06 sec
+      Start 26: collision
+26/63 Test #26: collision ........................   Passed    0.04 sec
+      Start 27: persistence
+27/63 Test #27: persistence ......................   Passed    0.10 sec
+      Start 28: atomic_write
+28/63 Test #28: atomic_write .....................   Passed    0.01 sec
+      Start 29: storage_directories
+29/63 Test #29: storage_directories ..............   Passed    0.03 sec
+      Start 30: ui
+30/63 Test #30: ui ...............................   Passed    0.01 sec
+      Start 31: sound
+31/63 Test #31: sound ............................   Passed    0.03 sec
+      Start 32: tile_animation
+32/63 Test #32: tile_animation ...................   Passed    0.04 sec
+      Start 33: content
+33/63 Test #33: content ..........................   Passed    0.04 sec
+      Start 34: core
+34/63 Test #34: core .............................   Passed    0.06 sec
+      Start 35: ui_allocations
+35/63 Test #35: ui_allocations ...................   Passed   21.57 sec
+      Start 36: audio_allocations
+36/63 Test #36: audio_allocations ................   Passed    0.36 sec
+      Start 37: gameplay_allocations
+37/63 Test #37: gameplay_allocations .............   Passed   35.23 sec
+      Start 38: platform_lifecycle
+38/63 Test #38: platform_lifecycle ...............   Passed    0.60 sec
+      Start 39: scene_watch
+39/63 Test #39: scene_watch ......................   Passed    0.22 sec
+      Start 40: tilemap_watch
+40/63 Test #40: tilemap_watch ....................   Passed    0.47 sec
+      Start 41: animation_watch
+41/63 Test #41: animation_watch ..................   Passed    0.35 sec
+      Start 42: font_reload
+42/63 Test #42: font_reload ......................   Passed    0.36 sec
+      Start 43: font_graphics
+43/63 Test #43: font_graphics ....................   Passed    0.25 sec
+      Start 44: texture_sampling
+44/63 Test #44: texture_sampling .................   Passed    0.31 sec
+      Start 45: stress_graphics
+45/63 Test #45: stress_graphics ..................   Passed    0.09 sec
+      Start 46: audio_reload
+46/63 Test #46: audio_reload .....................   Passed    0.24 sec
+      Start 47: audio_watch
+47/63 Test #47: audio_watch ......................   Passed    0.19 sec
+      Start 48: audio_transport
+48/63 Test #48: audio_transport ..................   Passed    0.31 sec
+      Start 49: platform_events
+49/63 Test #49: platform_events ..................   Passed    0.08 sec
+      Start 50: keyboard_maps
+50/63 Test #50: keyboard_maps ....................   Passed    0.01 sec
+      Start 51: platform_international
+51/63 Test #51: platform_international ...........   Passed    0.31 sec
+      Start 52: platform_chords
+52/63 Test #52: platform_chords ..................   Passed    0.49 sec
+      Start 53: render_targets
+53/63 Test #53: render_targets ...................   Passed    0.81 sec
+      Start 54: gpu_timers
+54/63 Test #54: gpu_timers .......................   Passed    0.35 sec
+      Start 55: texture_reload
+55/63 Test #55: texture_reload ...................   Passed    0.42 sec
+      Start 56: shaders
+56/63 Test #56: shaders ..........................   Passed    0.45 sec
+      Start 57: watched_reload
+57/63 Test #57: watched_reload ...................   Passed    0.13 sec
+      Start 58: graphics
+58/63 Test #58: graphics .........................   Passed    0.09 sec
+      Start 59: level_tour
+59/63 Test #59: level_tour .......................   Passed    8.97 sec
+      Start 60: replay_profile_native
+60/63 Test #60: replay_profile_native ............   Passed   17.56 sec
+      Start 61: spike_profile_native
+61/63 Test #61: spike_profile_native .............   Passed   24.08 sec
+      Start 62: game_replay
+62/63 Test #62: game_replay ......................   Passed    0.07 sec
+      Start 63: platform_no_display
+63/63 Test #63: platform_no_display ..............   Passed    0.01 sec
+
+100% tests passed out of 63
+
+Label Time Summary:
+cpu         =   2.33 sec*proc (36 tests)
+hardware    = 113.40 sec*proc (23 tests)
+platform    =   0.93 sec*proc (4 tests)
+
+Total Test time (real) = 116.75 sec

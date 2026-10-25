@@ -249,3 +249,7 @@ live heap size, C-library allocations or GPU/driver memory.
 The [HUD text follow-up](HUD_TEXT.md) replaces recurring label concatenation with
 reusable buffers; [measurements](2026-10-24-hud-text-results.md) retain the same
 replay scopes and compare rendered output.
+
+The [UI allocation probe](UI_ALLOCATIONS.md) measures settings, controls, diagnostics
+and enabled-audio HUD drawing in 18 frozen states, with separate transition costs.
+[Results](2026-10-25-ui-allocation-results.md) identify remaining diagnostics allocations.

@@ -1,0 +1,14 @@
+Test project /home/zero/dev/engine_test/build/release-validation/native-sanitize
+    Start 35: ui_allocations
+1/3 Test #35: ui_allocations ...................   Passed   84.07 sec
+    Start 37: gameplay_allocations
+2/3 Test #37: gameplay_allocations .............   Passed   88.58 sec
+    Start 53: render_targets
+3/3 Test #53: render_targets ...................   Passed    2.79 sec
+
+100% tests passed out of 3
+
+Label Time Summary:
+hardware    = 175.44 sec*proc (3 tests)
+
+Total Test time (real) = 175.44 sec

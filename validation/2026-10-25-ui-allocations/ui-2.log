@@ -1,0 +1,39 @@
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/dev/engine_test/assets
