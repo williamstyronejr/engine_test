@@ -239,6 +239,15 @@ if(ENGINE_BUILD_PLATFORM)
     target_compile_definitions(feature_lab_allocations PRIVATE ENGINE_ALLOCATION_PROFILE)
     target_link_libraries(feature_lab_allocations PRIVATE engine_platform feature_lab_stress allocation_profile)
     add_dependencies(feature_lab_allocations stage_assets)
+    add_executable(ui_allocations profiling/ui_allocations.cpp)
+    target_compile_definitions(ui_allocations PRIVATE ENGINE_ALLOCATION_PROFILE TEST_ASSET_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/assets")
+    target_include_directories(ui_allocations PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/generated")
+    target_link_libraries(ui_allocations PRIVATE engine_platform feature_lab_stress allocation_profile)
+    add_test(NAME ui_allocations COMMAND ${CMAKE_COMMAND}
+      -DPROBE=$<TARGET_FILE:ui_allocations> -DREPORT=${CMAKE_CURRENT_BINARY_DIR}/ui-allocations.json
+      -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/check_ui_allocations.cmake)
+    set_tests_properties(ui_allocations PROPERTIES TIMEOUT 150 LABELS hardware RUN_SERIAL TRUE
+      SKIP_REGULAR_EXPRESSION "SKIP: UI allocation workload")
     add_executable(audio_allocations profiling/audio_allocations.cpp engine/src/audio.cpp)
     target_compile_definitions(audio_allocations PRIVATE ENGINE_ALLOCATION_PROFILE TEST_ASSET_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/assets")
     target_include_directories(audio_allocations PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/generated")
