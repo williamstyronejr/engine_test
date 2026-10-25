@@ -44,7 +44,7 @@ Use the [same allocation executables and scope contract](ALLOCATION_PROFILING.md
 ```sh
 cmake --preset release
 cmake --build --preset release --target feature_lab feature_lab_allocations \
-  audio_allocations hud_text_tests -j2
+  audio_allocations hud_text_tests audio_tests make_profile_replay -j2
 ctest --preset release -R '^(hud_text|gameplay_allocations|audio_transport)$' --output-on-failure
 ./build/release/feature_lab_allocations --replay benchmarks/replays/facility.erpl \
   --profile-report build/facility-hud.json --profile-warmup 30

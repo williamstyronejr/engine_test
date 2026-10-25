@@ -83,3 +83,18 @@ whole-engine allocation-free behavior is claimed. Initial reservations, longer
 labels, open settings/diagnostics, enabled-audio HUD, direct C allocation and
 GPU/driver storage retain their stated exclusions. Next coverage should include
 settings/diagnostics and enabled-audio HUD with remapped controls.
+
+## Package and documentation follow-up
+
+At documentation/evidence commit `1204ae3`, all three Release packaging checks
+pass without skips (27.59 s), including relocation and OpenGL gameplay. All 91
+files in this evidence directory and both new benchmark documents match the
+archived copies byte-for-byte. Profiling executables are not installed. Build
+metadata records GNU 16.2.1, Release, sanitizers off. Ignored logs are retained
+under `build/hud-validation/package-feature-*.log`.
+
+Documentation checks resolve 172 local links, parse the shell recipe, inspect
+all 32 final command records and seven XML reports, and validate nine measurements
+and 17 screenshot pairs. The recipe now explicitly builds its audio-test and
+replay-fixture dependencies before invoking CTest. The initial raw build failure
+retains its trailing whitespace; no repository whitespace setting was changed.

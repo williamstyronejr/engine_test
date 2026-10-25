@@ -2027,6 +2027,10 @@ See [storage/lifetime contract](../benchmarks/HUD_TEXT.md),
 [before/after results](../benchmarks/2026-10-24-hud-text-results.md) and
 [validation](../validation/2026-10-24-hud-text/RESULTS.md).
 
+At documentation commit `1204ae3`, all three Release packaging checks pass
+(27.59 s); all 91 evidence files and both new benchmark documents match the archive.
+Profiling executables remain excluded from installation.
+
 ## Next increment
 
 Extend allocation coverage to open settings/diagnostics and the enabled-audio HUD,
