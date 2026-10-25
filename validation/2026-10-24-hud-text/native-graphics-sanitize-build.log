@@ -1,0 +1,5 @@
+[1/5] Stage Feature Lab assets
+[2/5] Linking CXX executable make_profile_replay
+[3/5] Building CXX object CMakeFiles/feature_lab_allocations.dir/examples/feature_lab/stress_mode.cpp.o
+[4/5] Building CXX object CMakeFiles/feature_lab_allocations.dir/examples/feature_lab/main.cpp.o
+[5/5] Linking CXX executable feature_lab_allocations

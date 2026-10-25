@@ -1,0 +1,21 @@
+[1/21] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/replay_profile.cpp.o
+[2/21] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/stress_benchmark.cpp.o
+[3/21] Stage Feature Lab assets
+[4/21] Linking CXX static library libfeature_lab_stress.a
+[5/21] Building CXX object CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o
+[6/21] Building CXX object CMakeFiles/engine_platform.dir/engine/src/audio.cpp.o
+[7/21] Building CXX object CMakeFiles/hud_text_tests.dir/tests/hud_text_tests.cpp.o
+[8/21] Building CXX object CMakeFiles/scene_reload_tests.dir/tests/scene_reload_tests.cpp.o
+[9/21] Building CXX object CMakeFiles/tilemap_reload_tests.dir/tests/tilemap_reload_tests.cpp.o
+[10/21] Linking CXX static library libengine_platform.a
+[11/21] Building CXX object CMakeFiles/animation_reload_tests.dir/tests/animation_reload_tests.cpp.o
+[12/21] Building CXX object CMakeFiles/font_reload_tests.dir/tests/font_reload_tests.cpp.o
+[13/21] Building CXX object CMakeFiles/feature_lab_allocations.dir/examples/feature_lab/main.cpp.o
+[14/21] Linking CXX executable hud_text_tests
+[15/21] Linking CXX executable scene_reload_tests
+[16/21] Linking CXX executable tilemap_reload_tests
+[17/21] Linking CXX executable animation_reload_tests
+[18/21] Linking CXX executable feature_lab_allocations
+[19/21] Linking CXX executable font_reload_tests
+[20/21] Building CXX object CMakeFiles/audio_tests.dir/tests/audio_tests.cpp.o
+[21/21] Linking CXX executable audio_tests

@@ -1,0 +1,22 @@
+{
+  "baseline_runtime_revision": "31861ad5e2d14387ca16f91f91b8c7f77e8eb6ec",
+  "prior_main_revision": "28b74a5d282684513296b2c7cfb43f55a11f4937",
+  "runtime_diff_command": [
+    "git",
+    "diff",
+    "--exit-code",
+    "31861ad",
+    "28b74a5",
+    "--",
+    "CMakeLists.txt",
+    "engine",
+    "examples",
+    "profiling",
+    "tests",
+    "assets"
+  ],
+  "runtime_diff_exit_code": 0,
+  "binary_sha256": "a6149a58e6a8a4bc22db9bc4a3ab052434bc5d914ba17a43c608b168bd391350",
+  "configure_metadata": "#pragma once\nnamespace feature_lab {\ninline constexpr auto stress_build_revision = R\"build(31861ad)build\";\ninline constexpr auto stress_build_compiler = R\"build(GNU 16.2.1)build\";\ninline constexpr auto stress_build_configuration = R\"build(Release)build\";\ninline constexpr auto stress_build_flags = R\"build( -O3 -DNDEBUG; C++20; sanitizers=OFF)build\";\n}\n",
+  "screenshots": "Commands and digests retained in screenshot-comparison.json; raw PPM files remain in ignored build/hud-validation."
+}

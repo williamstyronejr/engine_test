@@ -245,3 +245,7 @@ For C++ allocation demand in actual gameplay rendering and the real audio worker
 see [allocation profiling](ALLOCATION_PROFILING.md) and the
 [2026-10-24 results](2026-10-24-allocation-results.md). These scopes do not measure
 live heap size, C-library allocations or GPU/driver memory.
+
+The [HUD text follow-up](HUD_TEXT.md) replaces recurring label concatenation with
+reusable buffers; [measurements](2026-10-24-hud-text-results.md) retain the same
+replay scopes and compare rendered output.

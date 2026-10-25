@@ -4,8 +4,9 @@
 built when `BUILD_TESTING=ON`. They replace the executable's global C++ allocation
 functions and run the same gameplay renderer or audio worker source used by the game.
 Normal `feature_lab`, the engine libraries and installed packages do not include the
-replacement functions or collect allocation counters. No optimization is made by
-this increment. [Recorded results](2026-10-24-allocation-results.md) identify the
+replacement functions or collect allocation counters. Increment 57 introduced
+measurement; the later [HUD text follow-up](HUD_TEXT.md) optimizes the measured labels.
+[Recorded results](2026-10-24-allocation-results.md) identify the
 measured implementation, environment and repeatability limits.
 
 ```sh
@@ -85,8 +86,9 @@ retained allocation results cover only the two declared replay workloads.
 Each replay contains 3,000 frames, of which 2,970 are measured at warmup 30. Pauses,
 completion screens and a restart at zero-based index 1500 are intentional. Restart
 reconstructs scene/collision state and is an intentional allocation exception, not
-steady simulation. HUD/status string formatting currently allocates; measurement
-makes that demand visible without declaring it acceptable under an unchosen budget.
+steady simulation. The original HUD/status baseline allocates; the
+[buffer-reuse follow-up](2026-10-24-hud-text-results.md) records its reduction with
+the same scopes. Neither result chooses a whole-engine allocation or timing budget.
 
 ## Audio scopes
 

@@ -1,0 +1,10 @@
+Test project /home/zero/dev/engine_test/build/release-validation/native-sanitize
+    Start 36: gameplay_allocations
+1/1 Test #36: gameplay_allocations .............   Passed   64.06 sec
+
+100% tests passed out of 1
+
+Label Time Summary:
+hardware    =  64.06 sec*proc (1 test)
+
+Total Test time (real) =  64.06 sec

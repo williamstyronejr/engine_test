@@ -1,0 +1,24 @@
+Test project /home/zero/dev/engine_test/build/release-validation/clang-debug
+    Start  2: hud_text
+1/7 Test  #2: hud_text .........................   Passed    0.02 sec
+    Start  6: scene_reload
+2/7 Test  #6: scene_reload .....................   Passed    0.47 sec
+    Start  7: tilemap_reload
+3/7 Test  #7: tilemap_reload ...................   Passed    0.30 sec
+    Start  8: animation_reload
+4/7 Test  #8: animation_reload .................   Passed    0.21 sec
+    Start 36: gameplay_allocations
+5/7 Test #36: gameplay_allocations .............   Passed   33.55 sec
+    Start 41: font_reload
+6/7 Test #41: font_reload ......................   Passed    0.37 sec
+    Start 47: audio_transport
+7/7 Test #47: audio_transport ..................   Passed    1.23 sec
+
+100% tests passed out of 7
+
+Label Time Summary:
+cpu         =   1.00 sec*proc (4 tests)
+hardware    =  33.92 sec*proc (2 tests)
+platform    =   1.23 sec*proc (1 test)
+
+Total Test time (real) =  36.15 sec

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-c++"
+	tests="1"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="omarchy"
+	time="64"
+	timestamp="2026-10-25T07:35:04"
+	>
+	<testcase name="gameplay_allocations" classname="gameplay_allocations" time="64.057" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+</testsuite>

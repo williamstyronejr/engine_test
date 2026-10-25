@@ -1997,10 +1997,40 @@ All three package checks pass without skips at `6ea4f73` (26.66 s), including
 relocated OpenGL gameplay. The 53 evidence files and two allocation documents match
 the archive byte-for-byte; profiling executables are absent from the package.
 
+## Increment 58: reusable HUD/status text
+
+- Added caller-owned formatting that appends integer values directly with
+  `std::to_chars`. Gameplay reserves 256 and 128 characters in two persistent
+  strings before its frame loop; longer future labels grow without truncation.
+- Status helpers share the formatter through new caller-buffer overloads while
+  preserving their owning-string getters. Collision visualization retains its
+  convenience overload. No cache invalidation state or engine API/format change.
+- Replaced owning map-legend rows with literal views and reused storage for world
+  alarm labels, HUD counters/status, completion hints and replay/record progress.
+  Formatting stays inside the original measured scopes.
+- Four CPU cases cover integer limits, shorter/empty output, lossless growth/reuse,
+  zero-allocation repeated formatting and ready/failure/locked/replaced labels.
+  Audio tests cover changed settings and a rebound international chord.
+- Three Release repeats per level record zero C++ allocations in world/HUD
+  submission. Simulation/restart counts, gameplay hashes, viewports and render
+  totals match the earlier baseline. Seventeen before/after screenshot pairs
+  match byte-for-byte across gameplay, pause, step, restart, completion, recording
+  and reload-failure states.
+
+At `a1fe4f3`, all 62 Debug and Release runtime groups pass without skips. Focused
+Clang (seven), CPU ASan/UBSan (five), native ASan/UBSan (three) and shared-runtime
+TSan (three) groups pass. The graphical ASan/UBSan replay also passes with driver
+leak detection disabled; CPU/audio sanitizer checks retain leak detection.
+The initial build caught a missing convenience overload;
+its failure and correction are retained separately from final validation.
+See [storage/lifetime contract](../benchmarks/HUD_TEXT.md),
+[before/after results](../benchmarks/2026-10-24-hud-text-results.md) and
+[validation](../validation/2026-10-24-hud-text/RESULTS.md).
+
 ## Next increment
 
-Reduce the measured recurring HUD/status-string allocations, retaining the same
-scope boundaries and verified workloads for before/after comparison. Keep restart,
-loading and report-writing exceptions explicit. Physical display/audio, workload/
-memory acceptance and final support/coverage checks remain open; background loading
-remains deferred.
+Extend allocation coverage to open settings/diagnostics and the enabled-audio HUD,
+including remapped controls, before broader rendering claims. Keep startup, restart,
+loading, exceptional errors and reporting scopes explicit. Physical display/audio,
+declared workload/memory acceptance and final support/coverage checks remain open;
+background loading remains deferred.
