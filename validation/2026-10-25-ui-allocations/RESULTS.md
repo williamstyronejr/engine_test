@@ -72,3 +72,16 @@ excludes event polling, swap, live simulation/audio updates, startup and reporti
 GPU diagnostics use a fixed empty/default history; combined overlays and changing
 GPU labels remain additional coverage work. Requested bytes are cumulative demand,
 not peak/live heap or RSS.
+
+## Package and documentation follow-up
+
+At documentation/evidence commit `56492b9`, all three Release packaging checks
+pass without skips (48.85 s), including relocation and OpenGL gameplay. All 46
+files in this evidence directory and both new benchmark documents match their
+archived copies byte-for-byte. None of the three profiling executables is installed.
+Build metadata identifies GNU 16.2.1, Release, sanitizers off. Ignored logs are
+retained under `build/ui-validation/package-feature-*.log`.
+
+Documentation checks resolve 179 local links and parse the shell recipe. Evidence
+checks validate all 16 final command records, four XML reports, three identical
+measurements, eight production image comparisons and 18 scenario captures.

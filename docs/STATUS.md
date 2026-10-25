@@ -2058,6 +2058,10 @@ See [workload contract](../benchmarks/UI_ALLOCATIONS.md),
 [results](../benchmarks/2026-10-25-ui-allocation-results.md) and
 [validation](../validation/2026-10-25-ui-allocations/RESULTS.md).
 
+At documentation commit `56492b9`, all three Release packaging checks pass
+(48.85 s). All 46 evidence files and both new benchmark documents match the archive;
+all profiling executables remain excluded from installation.
+
 ## Next increment
 
 Reuse diagnostics text storage and compare the same workload before/after. Extend
