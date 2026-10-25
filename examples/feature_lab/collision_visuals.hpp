@@ -2,6 +2,7 @@
 #include "engine/bindings.hpp"
 #include "engine/renderer.hpp"
 #include "game.hpp"
+#include "hud_text.hpp"
 
 namespace feature_lab {
 class CollisionVisuals {
@@ -22,6 +23,11 @@ class CollisionVisuals {
     }
     void draw(engine::Renderer& r, const Game& game, float alpha,
               const engine::KeyBindings& bindings = {}) const {
+        std::string text;
+        draw(r, game, alpha, bindings, text);
+    }
+    void draw(engine::Renderer& r, const Game& game, float alpha,
+              const engine::KeyBindings& bindings, std::string& text) const {
         using namespace engine;
         const Color red{1, 0.12F, 0.07F, 1}, green{0.05F, 0.9F, 0.5F, 1};
         const auto center = game.alarm_position();
@@ -31,7 +37,7 @@ class CollisionVisuals {
                  game.alarm_disabled ? green : red);
         r.quad(game.switch_location(), {0.8F, 0.8F}, game.alarm_disabled ? green : red);
         r.text(game.switch_location() + Vec2{-1.4F, 1}, 0.035F,
-               bindings.key_name(Key::interact) + " / ALARM SWITCH", green);
+               format_text(text, bindings.key_name(Key::interact), " / ALARM SWITCH"), green);
         r.text(center + Vec2{0.9F, 0.2F}, 0.035F, game.alarm_disabled ? "SAFE" : "ALARM",
                game.alarm_disabled ? green : red);
         if (game.alarm_touching) {

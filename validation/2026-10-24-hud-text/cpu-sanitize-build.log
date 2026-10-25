@@ -1,0 +1,13 @@
+[1/13] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/replay_profile.cpp.o
+[2/13] Building CXX object CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o
+[3/13] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/stress_benchmark.cpp.o
+[4/13] Linking CXX static library libfeature_lab_stress.a
+[5/13] Building CXX object CMakeFiles/hud_text_tests.dir/tests/hud_text_tests.cpp.o
+[6/13] Building CXX object CMakeFiles/scene_reload_tests.dir/tests/scene_reload_tests.cpp.o
+[7/13] Building CXX object CMakeFiles/tilemap_reload_tests.dir/tests/tilemap_reload_tests.cpp.o
+[8/13] Linking CXX executable hud_text_tests
+[9/13] Linking CXX executable scene_reload_tests
+[10/13] Linking CXX executable tilemap_reload_tests
+[11/13] Linking CXX executable stress_tests
+[12/13] Building CXX object CMakeFiles/animation_reload_tests.dir/tests/animation_reload_tests.cpp.o
+[13/13] Linking CXX executable animation_reload_tests

@@ -17,6 +17,9 @@ with its measurement interpretation linked from benchmarks.
 - [2026-10-24 allocation profiling](2026-10-24-allocations/RESULTS.md):
   counter tests, gameplay/audio measurements and focused sanitizer/race checks.
 
+- [2026-10-24 HUD text reuse](2026-10-24-hud-text/RESULTS.md):
+  formatter/reload regressions, repeated allocation comparison and 17 rendered-image pairs.
+
 `commands.json` retains commands as argument arrays, explicit environment overrides,
 working directory, UTC start, duration and exit status. Other environment facts are
 in `environment.log`; the full-matrix run also records its inherited display there.

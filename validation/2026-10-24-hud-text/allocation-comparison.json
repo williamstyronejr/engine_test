@@ -1,0 +1,322 @@
+{
+  "facility": {
+    "before": {
+      "schema": "cpp_new_scopes_v1",
+      "unit": "requested_bytes",
+      "scopes": {
+        "simulation": {
+          "samples": 2970,
+          "nonzero_samples": 1,
+          "calls": 162,
+          "requested_bytes": 105756,
+          "max_calls": 162,
+          "max_requested_bytes": 105756
+        },
+        "minimap_submit": {
+          "samples": 2970,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "world_submit": {
+          "samples": 2970,
+          "nonzero_samples": 2970,
+          "calls": 5940,
+          "requested_bytes": 184140,
+          "max_calls": 2,
+          "max_requested_bytes": 62
+        },
+        "ui_submit": {
+          "samples": 2970,
+          "nonzero_samples": 2970,
+          "calls": 62278,
+          "requested_bytes": 2192022,
+          "max_calls": 23,
+          "max_requested_bytes": 794
+        },
+        "present": {
+          "samples": 2970,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "frame": {
+          "samples": 2970,
+          "nonzero_samples": 2970,
+          "calls": 68380,
+          "requested_bytes": 2481918,
+          "max_calls": 185,
+          "max_requested_bytes": 106555
+        },
+        "audio_producer": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "audio_commands_mix": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "audio_transport": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    "after": {
+      "schema": "cpp_new_scopes_v1",
+      "unit": "requested_bytes",
+      "scopes": {
+        "simulation": {
+          "samples": 2970,
+          "nonzero_samples": 1,
+          "calls": 162,
+          "requested_bytes": 105756,
+          "max_calls": 162,
+          "max_requested_bytes": 105756
+        },
+        "minimap_submit": {
+          "samples": 2970,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "world_submit": {
+          "samples": 2970,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "ui_submit": {
+          "samples": 2970,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "present": {
+          "samples": 2970,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "frame": {
+          "samples": 2970,
+          "nonzero_samples": 1,
+          "calls": 162,
+          "requested_bytes": 105756,
+          "max_calls": 162,
+          "max_requested_bytes": 105756
+        },
+        "audio_producer": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "audio_commands_mix": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "audio_transport": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    "repeats_match": true,
+    "workload_render_totals_hashes_viewports_match": true
+  },
+  "annex": {
+    "before": {
+      "schema": "cpp_new_scopes_v1",
+      "unit": "requested_bytes",
+      "scopes": {
+        "simulation": {
+          "samples": 2970,
+          "nonzero_samples": 1,
+          "calls": 132,
+          "requested_bytes": 101497,
+          "max_calls": 132,
+          "max_requested_bytes": 101497
+        },
+        "minimap_submit": {
+          "samples": 2970,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "world_submit": {
+          "samples": 2970,
+          "nonzero_samples": 2970,
+          "calls": 5940,
+          "requested_bytes": 184140,
+          "max_calls": 2,
+          "max_requested_bytes": 62
+        },
+        "ui_submit": {
+          "samples": 2970,
+          "nonzero_samples": 2970,
+          "calls": 63912,
+          "requested_bytes": 2229530,
+          "max_calls": 22,
+          "max_requested_bytes": 763
+        },
+        "present": {
+          "samples": 2970,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "frame": {
+          "samples": 2970,
+          "nonzero_samples": 2970,
+          "calls": 69984,
+          "requested_bytes": 2515167,
+          "max_calls": 155,
+          "max_requested_bytes": 102296
+        },
+        "audio_producer": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "audio_commands_mix": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "audio_transport": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    "after": {
+      "schema": "cpp_new_scopes_v1",
+      "unit": "requested_bytes",
+      "scopes": {
+        "simulation": {
+          "samples": 2970,
+          "nonzero_samples": 1,
+          "calls": 132,
+          "requested_bytes": 101497,
+          "max_calls": 132,
+          "max_requested_bytes": 101497
+        },
+        "minimap_submit": {
+          "samples": 2970,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "world_submit": {
+          "samples": 2970,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "ui_submit": {
+          "samples": 2970,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "present": {
+          "samples": 2970,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "frame": {
+          "samples": 2970,
+          "nonzero_samples": 1,
+          "calls": 132,
+          "requested_bytes": 101497,
+          "max_calls": 132,
+          "max_requested_bytes": 101497
+        },
+        "audio_producer": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "audio_commands_mix": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        },
+        "audio_transport": {
+          "samples": 0,
+          "nonzero_samples": 0,
+          "calls": 0,
+          "requested_bytes": 0,
+          "max_calls": 0,
+          "max_requested_bytes": 0
+        }
+      }
+    },
+    "repeats_match": true,
+    "workload_render_totals_hashes_viewports_match": true
+  }
+}

@@ -1,0 +1,1112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-c++"
+	tests="62"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="omarchy"
+	time="138"
+	timestamp="2026-10-24T18:54:06"
+	>
+	<testcase name="allocation_counters" classname="allocation_counters" time="0.00290369" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS replaceable_forms_count_requested_bytes_once
+PASS scopes_are_inclusive_and_bookkeeping_does_not_allocate
+PASS thread_snapshots_are_isolated_and_aggregates_join_cleanly
+3 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="hud_text" classname="hud_text" time="0.00623874" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS integer_extremes_and_shorter_replacements_preserve_exact_text
+PASS long_labels_grow_losslessly_and_then_reuse_capacity
+[scene applied] revision=2 source=facility.scene
+[scene retained] revision=2 source=facility.scene
+facility.scene: facility.scene: Not a regular asset file
+[tilemap applied] revision=2 source=facility.etmp
+[tilemap retained] revision=2 source=facility.etmp
+facility.etmp: facility.etmp: Not a regular asset file
+[animation applied] revision=2 source=facility.eani
+[animation retained] revision=2 source=facility.eani
+facility.eani: facility.eani: Not a regular asset file
+PASS reload_labels_follow_success_failure_lock_and_replacement
+PASS repeated_status_formatting_reuses_the_callers_storage
+4 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="asset_validation" classname="asset_validation" time="0.0647852" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS json_escaping_preserves_external_bytes_and_locale_independent_numbers
+PASS single_files_validate_in_isolation_without_extension_inference
+PASS single_scene_limits_and_format_semantics_are_independent_of_the_game
+PASS single_file_reads_preserve_path_confinement_and_file_size_bounds
+PASS shipped_assets_pass_without_fallbacks_and_with_stable_order
+PASS independent_malformed_files_are_all_reported_then_repaired
+PASS scene_budget_and_semantic_errors_have_level_context
+PASS required_walk_animation_and_atlas_dimensions_are_checked
+PASS missing_referenced_textures_and_transition_residency_are_rejected
+PASS asset_root_confinement_and_bounded_shader_read_are_preserved
+10 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="asset_validation_cli" classname="asset_validation_cli" time="0.647227" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="mixer_reload" classname="mixer_reload" time="0.00578533" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS replacement_preserves_phase_handles_and_stereo_channel_changes
+PASS paused_voices_groups_pan_and_gain_ramps_survive_without_restarts
+PASS one_shot_completion_is_exactly_once_and_never_resurrected
+PASS whole_batch_validation_and_simultaneous_swaps
+PASS queue_orders_old_play_replacement_new_play_and_controls
+5 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="scene_reload" classname="scene_reload" time="0.0762056" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS scene_budget_overflow_rejects_reload_then_valid_content_retries
+PASS commit_rebinds_handles_preserves_progress_and_changes_save_identity
+PASS scene_walls_affect_movement_queries_and_restart_uses_new_spawn
+PASS rejected_edits_and_preflight_leave_world_and_runtime_untouched
+PASS reordered_core_records_keep_persistent_collection_and_runtime_slots
+PASS alarm_contacts_are_primed_without_extra_enter_and_animation_snapshots_retained
+PASS opening_and_completed_door_never_replays_completion_after_reload
+[scene retained] revision=1 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene retained] revision=1 source=facility.scene
+facility.scene: facility.scene: Not a regular asset file
+[scene retained] revision=1 source=facility.scene
+facility.scene: facility.scene: Asset path escapes its root
+[scene applied] revision=2 source=facility.scene
+[scene applied] revision=3 source=facility.scene
+[scene applied] revision=4 source=facility.scene
+[scene applied] revision=5 source=facility.sce...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="tilemap_reload" classname="tilemap_reload" time="0.0472104" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS tilemap_replacement_keeps_the_current_world_budgets
+PASS tilemap_commit_preserves_game_and_entities_updates_collision_and_save_identity
+PASS player_and_restart_spawn_are_checked_before_any_publication
+PASS geometry_atlas_invalid_cells_and_body_capacity_rejections_are_atomic
+PASS reload_primes_sensor_contacts_without_manufacturing_alarm_entries
+[tilemap applied] revision=2 source=facility.etmp
+[tilemap applied] revision=2 source=annex.etmp
+PASS both_levels_reload_layers_and_restart_with_the_installed_map
+[tilemap retained] revision=1 source=facility.etmp
+facility.etmp: facility.etmp: Invalid ETMP header at byte 0
+[tilemap retained] revision=1 source=facility.etmp
+facility.etmp: facility.etmp: Not a regular asset file
+[tilemap retained] revision=1 source=facility.etmp
+facility.etmp: facility.etmp: Asset path escapes its root
+[tilemap applied] revision=2 source=facility.etmp
+[tilemap applied] revision=3 source=facility.etmp
+[tilemap applied] revision=4 source=facility.etmp
+[tilemap applied] revision=5 sourc...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="animation_reload" classname="animation_reload" time="0.0342701" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS player_replacement_preserves_phase_pause_name_and_old_snapshot
+PASS oneshot_replacement_preserves_completion_without_emitting_an_extra_event
+PASS maximum_duration_replacement_uses_exact_integer_progress
+[animation applied] revision=2 source=facility.eani
+PASS game_bank_swap_preserves_state_and_save_content_identity_rules
+[animation retained] revision=1 source=facility.eani
+facility.eani: Missing or incompatible required animation: walk
+[animation retained] revision=1 source=facility.eani
+facility.eani: Animation reload must retain the resident texture/atlas
+[animation retained] revision=1 source=facility.eani
+facility.eani: Animation reload must retain the resident texture/atlas
+[animation retained] revision=1 source=facility.eani
+facility.eani: Missing or incompatible required animation: door_open
+[animation retained] revision=1 source=facility.eani
+facility.eani: Missing or incompatible required animation: machine
+PASS required_future_clips_atlas_and_loop_modes_are_transactional
+[animation retained] re...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="audio_recovery" classname="audio_recovery" time="0.00665043" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS partial_writes_waits_and_interrupts_preserve_every_stereo_sample
+PASS underruns_from_write_and_wait_prepare_without_replaying_accepted_prefix
+PASS suspend_retries_are_bounded_and_resume_preserves_pending_tail
+PASS unsupported_resume_falls_back_to_prepare_once
+PASS device_and_prepare_failures_latch_original_error_and_stop_calls
+PASS invalid_backend_write_count_is_rejected_without_advancing
+PASS recovery_does_not_remix_or_advance_voice_cursors
+7 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="fonts" classname="fonts" time="0.015292" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS font_round_trip_and_shipped_asset
+PASS font_parser_rejects_truncation_headers_counts_and_trailing_data
+PASS font_validation_rejects_invalid_metrics_and_invisible_fallback
+PASS font_layout_offsets_advances_newlines_and_unsigned_fallback
+PASS font_layout_limits_and_snapshot_ownership
+PASS font_missing_and_corrupt_assets_have_readable_fallback
+6 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="asset_watch" classname="asset_watch" time="0.136153" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS watch_configuration_limits_and_descriptor_lifetime
+PASS startup_group_debounce_and_unrelated_files
+PASS atomic_saves_and_independent_group_deadlines
+PASS deleted_files_report_once_and_recreation_recovers
+PASS directory_loss_falls_back_and_rearms_after_recreation
+PASS metadata_recovers_alias_writes_and_ignores_escaped_symlink_targets
+PASS replacing_the_asset_root_reattaches_unchanged_child_paths
+PASS saturated_event_budget_resynchronizes_and_explicit_rescan_is_debounced
+PASS high_group_bit_and_initially_missing_directories
+9 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="components" classname="components" time="0.0267883" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS component_pools_follow_small_scene_budgets_and_slot_reuse
+PASS scene_memory_tracks_core_and_independent_pool_peaks_through_moves
+PASS component_access_rejects_stale_foreign_and_missing_handles
+PASS swap_erase_keeps_other_components_and_owned_resources_intact
+PASS component_queries_join_types_and_propagate_constness
+PASS nested_queries_guard_structure_and_release_guard_after_exceptions
+PASS deferred_subtree_destruction_removes_all_payloads_once
+PASS failed_construction_preserves_pools_and_prevents_structural_reentry
+PASS scene_moves_transfer_components_and_reject_active_source_or_destination
+PASS scene_serialization_excludes_runtime_pools_and_replacement_cleans_them
+PASS component_entity_and_type_limits_are_bounded
+PASS randomized_pool_operations_match_an_independent_entity_model
+12 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="transforms" classname="transforms" time="0.0345208" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS hierarchy_numeric_reference_and_read_only_sampling
+PASS camera_corners_resize_aspects_and_invalid_domains
+PASS follow_interpolation_edges_and_oversized_viewports
+PASS decorations_orbit_scale_mirror_shear_and_wrap
+PASS decorations_pause_step_restore_restart_and_large_ticks
+PASS decorations_replay_same_interpolated_pose_every_command
+PASS animated_subtrees_reject_gameplay_and_collision_nodes
+7 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="package_manifest" classname="package_manifest" time="0.0918948" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>-- Package manifest and archive integrity cases passed
+</system-out>
+	</testcase>
+	<testcase name="stress_cpu" classname="stress_cpu" time="0.118521" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS small_collision_budgets_reuse_storage_with_full_query_capacity
+PASS scene_usage_and_component_peaks_allocate_nothing_after_setup
+PASS stale_deletion_requests_do_not_grow_small_scene_buffers
+PASS default_grid_saturation_allocates_nothing_after_setup
+PASS collision_usage_and_worst_case_event_batches_allocate_nothing_after_setup
+PASS empty_scenes_and_scene_moves_do_not_allocate
+PASS font_measurement_and_layout_allocate_nothing_after_setup
+PASS component_queries_and_pool_reuse_allocate_nothing_after_setup
+PASS deterministic_workloads_and_exact_tile_occupancy
+PASS dense_collision_pairs_match_all_pairs_reference
+PASS steady_state_allocations_and_repeated_unload_baseline
+PASS capacities_empty_arena_and_rejected_overflow
+PASS percentiles_warmup_capacity_and_nonfinite_samples
+PASS options_bounds_json_escaping_and_resource_growth_detection
+PASS gpu_failure_report_preserves_uint64_values_and_omitted_count
+15 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="stress_report" classname="stress_report" time="0.055765" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="replay_profile" classname="replay_profile" time="0.00261265" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS warmup_counters_delayed_gpu_and_completion
+PASS bounds_invalid_samples_and_viewport_change
+PASS profile_option_isolation_and_fingerprint
+PASS incomplete_run_and_exact_gpu_failure_evidence
+4 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="spike_profile" classname="spike_profile" time="0.0223111" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS scene_profile_keeps_each_level_history_across_replacement
+PASS collision_profile_keeps_each_level_history_across_replacement
+PASS asset_staging_overlaps_encoded_and_decoded_payload_once
+PASS staging_overlap_transfer_unwind_and_overflow
+PASS transition_candidate_overlap_and_rejection_cleanup
+PASS parser_buffers_survive_until_validation_and_unwind_on_trailing_data
+PASS scene_parser_tracks_lazy_reservation_before_later_validation
+PASS malformed_transition_inputs_retain_live_game_and_release_staging
+PASS schedule_complete_evidence_and_delayed_gpu_correlation
+PASS failure_preserves_event_and_partial_neighborhood
+PASS rejection_must_preserve_state_and_resources
+PASS bounds_and_warmup_resource_baseline
+12 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="replay_files" classname="replay_files" time="0.0979009" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS random_reference_vectors_jump_and_restore
+PASS checkpoint_v2_migrates_random_state_and_v3_preserves_seed
+PASS full_game_file_roundtrip_replays_every_state
+PASS paused_initial_checkpoint_edges_restart_step_and_seed_divergence
+PASS replay_parser_rejects_corruption_versions_bounds_and_trailing_data
+PASS replay_rejects_content_tick_and_state_divergence
+PASS recording_limit_and_empty_replay
+PASS replay_atomic_file_roundtrip_and_failed_replacement
+8 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="levels" classname="levels" time="0.160336" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS sample_budgets_survive_restart_reload_restore_and_transition
+PASS authored_levels_have_distinct_content_spawns_and_complete_routes
+PASS core_components_follow_pickup_save_restart_and_level_replacement
+PASS level_commit_resets_world_and_blocks_held_input
+PASS missing_corrupt_and_invalid_spawn_levels_retain_the_live_world
+PASS resource_preparation_and_iteration_failures_are_transactional
+PASS cross_level_save_continue_and_new_game_preserve_content_identity
+PASS replay_recording_in_annex_resolves_from_a_facility_start
+8 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="scene_flow" classname="scene_flow" time="0.0346804" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS title_new_game_resume_and_paused_session
+[scene transition] Save slot is empty
+[scene transition] Invalid persistence record size
+PASS failed_continue_retains_session_and_success_restores_checkpoint
+[scene transition] Invalid checkpoint position, clock, camera or core count
+PASS new_game_and_invalid_checkpoint_are_transactional
+PASS title_input_is_captured_until_release_and_quit_is_explicit
+PASS title_layout_first_frame_resize_and_missing_storage
+PASS settings_return_to_title_restores_underlying_pause
+6 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="international_bindings" classname="international_bindings" time="0.00593469" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS legacy_and_unicode_character_aliases_have_one_identity
+PASS international_vocabulary_and_ascii_labels
+PASS noncharacters_and_non_graphic_unicode_are_rejected
+PASS layout_punctuation_has_labels_and_keeps_fixed_controls
+PASS v7_migration_preserves_v6_but_rejects_new_symbols_in_old_records
+5 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="bindings" classname="bindings" time="0.00904934" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS binding_assignment_is_validated_and_transactional
+PASS mouse_bindings_are_unique_and_have_readable_names
+PASS extended_keyboard_symbols_labels_and_conflicts
+PASS reserved_and_unsupported_keyboard_symbols_stay_unbindable
+PASS keypad_identity_names_and_normalization
+PASS raw_press_queue_cancellation_and_modal_capture
+PASS configuration_v7_roundtrip_and_legacy_migration
+PASS chord_specificity_conflicts_and_labels
+PASS raw_chord_snapshot_is_atomic_and_cleared_with_capture
+PASS settings_rebind_conflicts_capture_defaults_and_close
+PASS settings_capture_extended_keys_rejects_reserved_and_restores_defaults
+PASS settings_capture_keypad_chords_and_restore_defaults
+PASS settings_capture_chords_and_conflicts
+PASS mouse_capture_conflicts_and_held_actions_do_not_escape_the_menu
+PASS binding_capture_cancel_focus_loss_and_keyboard_activation
+PASS controls_layout_stays_inside_small_and_large_viewports
+16 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="gpu_timer_queue" classname="gpu_timer_queue" time="0.00526993" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS delayed_queries_never_read_unavailable_results
+PASS full_pool_skips_without_overwrite_and_recovers_in_fifo_order
+PASS scope_misuse_preserves_pending_results_and_tags
+PASS unsupported_counters_issue_no_queries
+PASS clock_reversal_zero_and_large_timestamps
+PASS failure_evidence_survives_slot_reuse_and_bounded_overflow
+PASS delayed_reversed_pair_keeps_original_tag_after_skipped_begin
+PASS repeated_pool_rollover_keeps_tags_and_bounds
+PASS elapsed_queries_poll_once_and_preserve_tags_across_pool_reuse
+PASS elapsed_conflict_is_transactional_and_unsigned_results_are_not_subtracted
+PASS gpu_history_uses_completed_samples_and_rejects_invalid_records
+11 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="diagnostics" classname="diagnostics" time="0.0669919" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS timing_history_statistics_and_rejection
+PASS timing_history_rollover_clear_and_large_samples
+PASS debug_toggle_edges_and_focus_cancel
+PASS single_step_consumes_one_edge_across_catchup
+PASS single_step_matches_complete_unpaused_replay
+PASS single_step_pause_and_restart_priority
+PASS settings_capture_step_and_debug_controls_until_release
+7 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="collision" classname="collision" time="0.0657639" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS membership_budget_saturation_rollback_and_retry
+PASS zero_membership_budget_retains_full_queries_and_default_budget_is_compatible
+PASS contact_budget_saturation_rollback_retry_and_moves
+PASS event_budget_preserves_history_including_failed_prime
+PASS zero_budgets_query_capacity_and_constructor_bounds
+PASS memory_usage_tracks_successful_candidates_including_prime_and_history
+PASS shape_pairs_touching_corners_and_validation
+PASS grid_matches_brute_force_under_motion_and_input_reordering
+PASS grid_cell_edges_deduplication_and_static_pairs
+PASS trigger_enter_stay_exit_filters_removal_and_prime
+PASS query_masks_ignore_sensor_and_order
+PASS segment_nearest_ties_normals_inside_and_degenerate
+PASS transactional_failure_and_capacity_bounds
+PASS feature_lab_alarm_switch_pause_and_checkpoint_continuation
+PASS feature_lab_switch_ray_occlusion_and_disabled_restore
+15 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="persistence" classname="persistence" time="0.0897252" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS record_crc_reference_bounds_and_corruption
+PASS config_versions_ranges_and_exact_roundtrip
+PASS storage_slots_missing_limits_and_relaunch
+PASS user_paths_use_absolute_xdg_values_and_home_fallback
+PASS storage_failed_save_preserves_previous_slot
+PASS animation_restore_exact_boundary_and_failure_preservation
+PASS checkpoint_every_replay_phase_resumes_identically
+PASS checkpoint_invalid_state_never_replaces_live_game
+PASS checkpoint_decoder_bounds_versions_and_trailing_bytes
+PASS load_missing_or_corrupt_preserves_world
+PASS interrupted_atomic_writes_keep_old_or_new_complete_record
+PASS write_failure_retains_committed_file_and_cleans_temporary
+PASS menu_checkpoint_preserves_underlying_pause_state
+13 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="atomic_write" classname="atomic_write" time="0.0128369" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS short_and_interrupted_writes_publish_complete_payload_in_order
+PASS empty_payload_is_synced_and_replaces_existing_file
+PASS pre_rename_faults_preserve_old_or_absent_destination_and_allow_retry
+PASS zero_progress_write_reports_io_error_instead_of_stale_errno
+PASS post_rename_faults_report_error_but_keep_complete_new_destination
+PASS directory_sync_error_survives_close_and_cleanup_errors
+PASS failed_cleanup_preserves_primary_error_and_orphan_does_not_block_retry
+PASS failed_close_is_not_retried_after_descriptor_reuse
+8 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="storage_directories" classname="storage_directories" time="0.0245061" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS new_and_existing_config_and_slot_sync_every_ancestor_before_file_creation
+PASS mkdir_errors_leave_partial_tree_and_retry_prepares_it_again
+PASS directory_open_sync_close_errors_abort_before_new_or_existing_record_changes
+PASS sync_error_precedes_close_error_and_failed_close_does_not_close_reused_fd
+PASS existing_symlink_ancestors_sync_resolved_tree
+PASS reads_and_writes_resolve_the_same_missing_dotdot_path
+PASS eexist_race_is_accepted_only_for_real_directories
+PASS reads_invalid_envelopes_and_invalid_slots_have_no_creation_side_effects
+PASS existing_nondirectory_is_not_replaced_or_treated_as_prepared_storage
+PASS process_interruption_during_preparation_does_not_make_retry_skip_existing_chain
+10 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="ui" classname="ui" time="0.00554" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS pointer_edges_and_focus_cancel
+PASS layout_validation_preserves_live_state
+PASS keyboard_focus_skips_disabled_and_wraps
+PASS pointer_activation_requires_matching_press_and_release
+PASS slider_capture_clamp_wheel_and_keyboard
+PASS clipping_overlap_and_resize_cancel_capture
+PASS input_gate_holds_capture_until_release
+PASS column_rejects_overflow_without_advancing
+PASS settings_pause_restore_and_gameplay_isolation
+PASS settings_actions_and_responsive_bounds
+PASS settings_buttons_checkboxes_and_disabled_audio
+PASS settings_save_load_and_slot_selection
+12 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="sound" classname="sound" time="0.0173773" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS initial_mixer_preferences_apply_from_first_sample
+PASS wav_pcm16_and_stereo_roundtrip
+PASS wav_chunk_padding_unknown_chunks_and_order
+PASS wav_rejects_truncation_corruption_and_resource_limits
+PASS wav_resampling_uses_rational_positions_and_preserves_channels
+PASS mixer_loop_boundaries_pause_stop_and_stale_handles
+PASS mixer_stereo_pan_gains_and_group_pause
+PASS mixer_ramps_and_output_are_block_size_independent
+PASS command_queue_fifo_pressure_and_voice_exhaustion
+PASS shipped_wav_assets_decode_and_mix_together
+10 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="tile_animation" classname="tile_animation" time="0.033653" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS texture_sampling_values_and_atlas_texel_centers
+PASS tilemap_binary_roundtrip_and_corruption
+PASS tilemap_validation
+PASS tile_visibility_matches_brute_force
+PASS tile_boundaries_and_chunk_culling
+PASS tile_decimal_boundaries_and_precision
+PASS tile_collision_union_and_swept_query
+PASS animation_binary_roundtrip_and_corruption
+PASS animation_boundaries_pause_and_completion
+PASS animation_large_delta_matches_single_ticks
+10 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="content" classname="content" time="0.0384922" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS scene_budgets_preserve_handles_on_overflow_and_replacement_failure
+PASS texture_roundtrip_and_exact_length
+PASS asset_root_paths_bounds_and_atomic_write
+PASS cache_shares_snapshots_and_preserves_failed_reload
+PASS entity_lifetime_compaction_and_foreign_handles
+PASS hierarchy_cycles_subtree_deletion_and_deferred_changes
+PASS scene_depth_capacity_and_transform_limits
+PASS scene_roundtrip_and_atomic_replacement
+PASS scene_rejects_malformed_records
+PASS scene_seeded_roundtrip_stress
+10 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="core" classname="core" time="0.0513389" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS camera_round_trip
+PASS transform_composition
+PASS input_edges_survive_until_consumed
+PASS quick_tap_and_focus_loss
+PASS fixed_clock_fraction_and_catchup
+PASS fixed_clock_conserves_time
+PASS swept_box_stops_at_wall
+PASS collision_contact_and_corner
+PASS mixer_pan_completion_and_reuse
+PASS mixer_voice_limit_clipping_and_invalid_input
+PASS game_pause_and_restart
+PASS game_door_pause_zoom_and_camera
+PASS game_route_completes
+13 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="audio_allocations" classname="audio_allocations" time="0.361816" status="run">
+		<properties>
+			<property name="cmake_labels" value="platform"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="gameplay_allocations" classname="gameplay_allocations" time="39.2307" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="platform_lifecycle" classname="platform_lifecycle" time="0.708019" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS fullscreen_observation_validates_property_and_tracks_removal
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS fullscreen_requests_are_explicit_flushed_and_do_not_predict_wm_acceptance
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS temporary_focus_grabs_preserve_input_real_focus_loss_cancels_it
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS real_unmap_restore_preserves_context_and_cancels_input
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[resize] requested=320x24...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="scene_watch" classname="scene_watch" time="0.240154" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[watch] enabled files=9
+[watch] notifications active
+[shader applied] revision=2 source=/tmp/scene-reload-2g7UTb
+[textures applied] revision=2 count=4
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[scene applied] revision=2 source=facility.scene
+[scene applied] revision=3 source=facility.scene
+[scene retained] revision=3 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene retained] revision=3 source=facility.scene
+facility.scene: facility.scene: Not a regular asset file
+[scene retained] revision=3 source=facility.scene
+facility.scene: unordered_map::at
+[scene retained] revision=3 source=facility.scene
+facility.scene: Minimap staging failure
+[scene applied] revision=4 source=facility.scene
+[scene applied] revision=5 source=facility.scene
+[scene applied] revision=6 source=facility.scene
+[scene applied] r...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="tilemap_watch" classname="tilemap_watch" time="0.439279" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[watch] enabled files=6
+[watch] notifications active
+[shader applied] revision=2 source=/tmp/tilemap-reload-sz6Vgy
+[textures applied] revision=2 count=1
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[tilemap applied] revision=2 source=facility.etmp
+[tilemap applied] revision=3 source=facility.etmp
+[tilemap retained] revision=3 source=facility.etmp
+facility.etmp: facility.etmp: Invalid ETMP header at byte 0
+[tilemap retained] revision=3 source=facility.etmp
+facility.etmp: Minimap staging failure
+[tilemap applied] revision=4 source=facility.etmp
+[tilemap applied] revision=5 source=facility.etmp
+[tilemap applied] revision=6 source=facility.etmp
+[tilemap applied] revision=7 source=facility.etmp
+[tilemap applied] revision=8 source=facility.etmp
+[tilemap applied] revision=9 source=facility.etmp
+[tilemap applied] revision=10 source=facility.etm...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="animation_watch" classname="animation_watch" time="0.450819" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[watch] enabled files=5
+[watch] notifications active
+[shader applied] revision=2 source=/tmp/animation-reload-lRg5bV
+[textures applied] revision=2 count=1
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[animation applied] revision=2 source=facility.eani
+[animation applied] revision=3 source=facility.eani
+[animation retained] revision=3 source=facility.eani
+facility.eani: facility.eani: Invalid EANI header at byte 0
+[animation retained] revision=3 source=facility.eani
+facility.eani: facility.eani: Not a regular asset file
+[animation applied] revision=4 source=facility.eani
+[animation applied] revision=5 source=facility.eani
+[animation applied] revision=6 source=facility.eani
+[animation applied] revision=7 source=facility.eani
+[animation applied] revision=8 source=facility.eani
+[animation applied] revision=9 source=facility.eani
+[animation ...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="font_reload" classname="font_reload" time="0.409917" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[font retained] revision=1 embedded=1 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Not a regular asset file
+[font applied] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+[font retained] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[font applied] revision=3 embedded=0 atlas_bytes=128 source=fonts/ui.efnt
+PASS font_reload_startup_fallback_strict_failure_retention_and_pass_boundary
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[font applied] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+[watch] enabled files=4
+[watch] notifications active
+[shader applied] revision=2 source=/tmp/font-reload-bxft3F
+[textures applied] revision=2 count=1
+[font applied] revision=3 embedded=0 atlas_bytes=64...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="font_graphics" classname="font_graphics" time="0.28843" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_atlas_pixels_offsets_spacing_fallback_and_batching
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_clipping_tint_ordering_and_offscreen_alpha
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_replacement_boundaries_lifetime_and_invalid_text
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_gallery_draws_at_small_and_large_viewports
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_builtin_retains_original_pixel_shapes
+5 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="texture_sampling" classname="texture_sampling" time="0.445394" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS nearest_linear_magnification_and_independent_minification
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS wrap_axes_negative_uv_flip_and_linear_seams
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS atlas_inset_removes_adjacent_cell_bleed_including_single_texels
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS state_changes_preserve_bindings_and_failed_changes_preserve_batches
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS mixed_sampling_keeps_painter_order_and_l...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="stress_graphics" classname="stress_graphics" time="0.103232" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS repeated_gpu_load_draw_unload_and_rollover
+PASS texture_byte_accounting_replacement_failure_and_cleanup
+2 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="audio_reload" classname="audio_reload" time="0.234695" status="run">
+		<properties>
+			<property name="cmake_labels" value="platform"/>
+		</properties>
+		<system-out>PASS queued_chained_banks_retain_storage_until_ack_and_keep_voice_tickets
+PASS queue_rejection_and_invalid_batches_leave_bank_and_existing_voice_intact
+PASS retained_memory_budget_is_checked_before_publication
+[audio bank retained] revision=1
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank retained] revision=1
+sounds/door.wav: Not a regular asset file
+[audio bank retained] revision=1
+sounds/door.wav: Asset path escapes its root
+[audio bank queued] revision=2
+[audio bank queued] revision=3
+ALSA lib pcm_file.c:445:(snd_pcm_file_write_bytes) [error.pcm] /dev/full write failed, file data may be corrupt: No space left on device
+PASS soundtrack_failures_repair_pause_settings_and_completion_are_preserved
+PASS device_failure_rejects_reload_and_shutdown_safely_releases_pending_banks
+5 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="audio_watch" classname="audio_watch" time="0.183162" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[watch] enabled files=8
+[watch] notifications active
+[shader applied] revision=2 source=/tmp/scene-reload-D6JoKK
+[textures applied] revision=2 count=1
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[audio bank queued] revision=2
+[audio bank retained] revision=2
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=3
+[audio bank queued] revision=4
+[audio bank queued] revision=5
+[audio bank queued] revision=6
+[audio bank queued] revision=7
+[audio bank queued] revision=8
+[audio bank queued] revision=9
+[audio bank queued] revision=10
+[audio bank queued] revision=11
+[audio bank queued] revision=12
+[audio bank queued] revision=13
+[audio bank queued] revision=14
+[audio bank queued] revision=15
+PASS watched_bank_is_atomic_recovers_and_preserves_recorded_simulation
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="audio_transport" classname="audio_transport" time="0.339586" status="run">
+		<properties>
+			<property name="cmake_labels" value="platform"/>
+		</properties>
+		<system-out>ALSA lib pcm_file.c:445:(snd_pcm_file_write_bytes) [error.pcm] /dev/full write failed, file data may be corrupt: No space left on device
+ALSA lib pcm_file.c:445:(snd_pcm_file_write_bytes) [error.pcm] /dev/full write failed, file data may be corrupt: No space left on device
+PASS output_owns_clips_and_orders_controls
+PASS output_bank_bounds_foreign_handles_and_queue_pressure
+PASS feature_lab_audio_controls_restart_and_completion
+PASS settings_gain_validation_and_command_coalescing
+PASS checkpoint_restore_restarts_loops_without_historical_effects
+PASS single_step_keeps_audio_groups_paused_until_resume
+PASS title_audio_starts_paused_and_resumes_without_duplicate_voices
+[audio] Muted: Audio command rejected; playback disabled (device_error=-5)
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) [error.pcm] Unknown PCM engine_test_intentionally_missing_device
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) [error.pcm] Unknown PCM engine_test_intentionally_missing_device
+PASS real_alsa_write_failure_disables_output_and_retains_...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="platform_events" classname="platform_events" time="0.0911871" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS native keys, pointer, wheel, repeat, aliases, focus loss and close
+</system-out>
+	</testcase>
+	<testcase name="keyboard_maps" classname="keyboard_maps" time="0.00695084" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS active_group_uses_its_own_unshifted_symbol
+PASS per_key_group_wrap_clamp_and_redirect
+PASS single_group_fixed_keys_and_keypad_survive_all_groups
+PASS unmapped_keys_and_absent_symbols_stay_unmapped
+4 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="platform_international" classname="platform_international" time="0.132873" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS native_active_groups_capture_canonical_international_chords
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS native_international_group_transition_blocks_repeat_until_release
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS feature_lab_captures_labels_and_roundtrips_international_input
+3 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="platform_chords" classname="platform_chords" time="0.552598" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS chord_specificity_is_latched_until_base_release
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS all_modifier_masks_and_right_hand_variants_capture
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS left_right_modifier_aliases_and_missing_modifier
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS mouse_chords_keep_fixed_aliases_and_primary_ui_clicks
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS remap_and_mapping_change_block_held_chords
+[platform] X11/GLX (may be XW...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="render_targets" classname="render_targets" time="0.927273" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS offscreen_orientation_and_composition
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS transparent_targets_preserve_linear_alpha
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS nested_clips_flush_and_restore
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS clip_limits_empty_and_error_recovery
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS target_lifetime_resize_and_failure_preservation
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graph...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="gpu_timers" classname="gpu_timers" time="0.378066" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS real_queries_return_ordered_finite_timings_without_changing_pixels
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS real_full_pool_skip_recovery_and_shader_reload
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS query_objects_are_deleted_with_pending_or_unfinished_scopes
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS elapsed_overlap_external_ownership_and_interrupted_scope_cleanup
+[platform] X11/GLX (may be XWayland)
+[gr...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="texture_reload" classname="texture_reload" time="0.466172" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS replacement_preserves_shared_handles_and_completed_pixels
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS invalid_batches_preserve_all_textures_and_pending_geometry
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS full_handle_capacity_and_repeated_reload_retire_gpu_objects
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS staging_budget_rejection_is_atomic
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS accounting_failure_after_partial_gpu_staging_is_atomic
+[platfo...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="shaders" classname="shaders" time="0.653544" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS shipped_shaders_match_fallback_and_compile
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS compile_and_link_errors_preserve_rendering_and_health
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS interface_rejects_incompatible_locations_types_and_resources
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS bounded_sources_and_reload_during_pass_are_transactional
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS success_changes_pixels_and_rebinds_sampler_and_premultiplie...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="watched_reload" classname="watched_reload" time="0.160901" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[shader applied] revision=2 source=/tmp/watched-reload-DaZAbU
+[watch] enabled files=4
+[watch] notifications active
+[shader applied] revision=3 source=/tmp/watched-reload-DaZAbU
+[textures applied] revision=2 count=1
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[shader applied] revision=4 source=/tmp/watched-reload-DaZAbU
+[textures applied] revision=3 count=1
+[shader retained] revision=4 source=/tmp/watched-reload-DaZAbU
+sprite.frag:
+0:2(1): preprocessor error: #error watched failure
+
+sprite.frag: compilation failed
+[textures retained] revision=3 count=1
+textures/test.etex: Expected ETEX texture header
+[shader applied] revision=5 source=/tmp/watched-reload-DaZAbU
+[textures applied] revision=4 count=1
+[textures applied] revision=5 count=1
+[textures applied] revision=6 count=1
+[textures applied] revision=7 count=1
+[textures applied] revisio...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="graphics" classname="graphics" time="0.0946663" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS GPU pixels, alpha/sRGB, atlas, ordering, culling, batch rollover, resize and clean GL state
+</system-out>
+	</testcase>
+	<testcase name="level_tour" classname="level_tour" time="14.6572" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>-- Both authored levels completed through the native game loop
+</system-out>
+	</testcase>
+	<testcase name="replay_profile_native" classname="replay_profile_native" time="39.8219" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="spike_profile_native" classname="spike_profile_native" time="35.1176" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="game_replay" classname="game_replay" time="0.133358" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>{"scenario":"collect_and_exit","passed":true,"collected":3,"ticks":1381}
+</system-out>
+	</testcase>
+	<testcase name="platform_no_display" classname="platform_no_display" time="0.0236457" status="run">
+		<properties>
+			<property name="cmake_labels" value="platform"/>
+		</properties>
+		<system-out>[fatal] Cannot open X11 display. Set DISPLAY and run under X11 or XWayland.
+</system-out>
+	</testcase>
+</testsuite>

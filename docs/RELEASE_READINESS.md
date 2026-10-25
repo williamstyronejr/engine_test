@@ -113,9 +113,9 @@ ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 \
 Native graphics previously disabled leak detection because of driver allocations;
 that run checks address/undefined behavior only. Retain CPU and audio leak-enabled
 results separately. Do not suppress an engine report to make the aggregate pass.
-After adding storage tests and allocation profiling, the current inventory is 61
-native runtime groups (35 CPU, 22 hardware, four platform), plus three packaging
-fixtures; platform-disabled builds discover 33 CPU groups. Discovery is not execution.
+After storage, allocation profiling and HUD text additions, the current inventory is 62
+native runtime groups (36 CPU, 22 hardware, four platform), plus three packaging
+fixtures; platform-disabled builds discover 34 CPU groups. Discovery is not execution.
 The full-matrix record at `1dfba31` predates these additions; later storage and
 [allocation validation](../validation/2026-10-24-allocations/RESULTS.md) record their
 own full/focused scopes. Update counts from
@@ -232,7 +232,9 @@ R1–R3 retain evidence for their named baseline; the storage follow-ups supply 
 scoped evidence for R7. Increment 57 adds
 [repeatable render/audio C++ allocation measurements](../benchmarks/2026-10-24-allocation-results.md)
 for R6, with warmup, restart/formatting exceptions and explicit exclusions.
-Next: reduce the measured recurring HUD/status-string allocations and compare the
-same workloads before/after. Workload/memory acceptance and physical R4/R5 cases remain
-open; R8 requires their coverage/support record. Refresh automated evidence when
+Increment 58 [reuses HUD storage](../benchmarks/2026-10-24-hud-text-results.md), with
+zero measured world/HUD C++ allocations in those replays and unchanged rendered
+output. Next: extend allocation coverage to open settings/diagnostics and the
+enabled-audio HUD before broader rendering claims. Workload/memory acceptance and
+physical R4/R5 cases remain open; R8 requires their coverage/support record. Refresh automated evidence when
 the implementation or toolchain changes. These results do not complete milestone 6.

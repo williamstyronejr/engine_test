@@ -1,0 +1,42 @@
+{
+  "source_revision": "078f185f6420559ba253e3ca3ed3c65c89cd9d12",
+  "runs": [
+    {
+      "name": "gcc-debug-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/gcc-debug",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_CXX_COMPILER=/usr/bin/g++",
+        "-DENGINE_SANITIZERS=OFF",
+        "-DENGINE_BUILD_PLATFORM=ON"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T22:47:01.410530+00:00",
+      "log": "gcc-debug-configure.log",
+      "exit_code": 0,
+      "wall_seconds": 0.524
+    },
+    {
+      "name": "gcc-debug-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/gcc-debug",
+        "-j2"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-24T22:47:01.934946+00:00",
+      "log": "gcc-debug-build.log",
+      "exit_code": 1,
+      "wall_seconds": 68.995
+    }
+  ]
+}

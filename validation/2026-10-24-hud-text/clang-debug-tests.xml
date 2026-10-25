@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-clang++"
+	tests="7"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="omarchy"
+	time="36"
+	timestamp="2026-10-24T18:57:49"
+	>
+	<testcase name="hud_text" classname="hud_text" time="0.0184194" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS integer_extremes_and_shorter_replacements_preserve_exact_text
+PASS long_labels_grow_losslessly_and_then_reuse_capacity
+[scene applied] revision=2 source=facility.scene
+[scene retained] revision=2 source=facility.scene
+facility.scene: facility.scene: Not a regular asset file
+[tilemap applied] revision=2 source=facility.etmp
+[tilemap retained] revision=2 source=facility.etmp
+facility.etmp: facility.etmp: Not a regular asset file
+[animation applied] revision=2 source=facility.eani
+[animation retained] revision=2 source=facility.eani
+facility.eani: facility.eani: Not a regular asset file
+PASS reload_labels_follow_success_failure_lock_and_replacement
+PASS repeated_status_formatting_reuses_the_callers_storage
+4 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="scene_reload" classname="scene_reload" time="0.472987" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS scene_budget_overflow_rejects_reload_then_valid_content_retries
+PASS commit_rebinds_handles_preserves_progress_and_changes_save_identity
+PASS scene_walls_affect_movement_queries_and_restart_uses_new_spawn
+PASS rejected_edits_and_preflight_leave_world_and_runtime_untouched
+PASS reordered_core_records_keep_persistent_collection_and_runtime_slots
+PASS alarm_contacts_are_primed_without_extra_enter_and_animation_snapshots_retained
+PASS opening_and_completed_door_never_replays_completion_after_reload
+[scene retained] revision=1 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene retained] revision=1 source=facility.scene
+facility.scene: facility.scene: Not a regular asset file
+[scene retained] revision=1 source=facility.scene
+facility.scene: facility.scene: Asset path escapes its root
+[scene applied] revision=2 source=facility.scene
+[scene applied] revision=3 source=facility.scene
+[scene applied] revision=4 source=facility.scene
+[scene applied] revision=5 source=facility.sce...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="tilemap_reload" classname="tilemap_reload" time="0.295282" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS tilemap_replacement_keeps_the_current_world_budgets
+PASS tilemap_commit_preserves_game_and_entities_updates_collision_and_save_identity
+PASS player_and_restart_spawn_are_checked_before_any_publication
+PASS geometry_atlas_invalid_cells_and_body_capacity_rejections_are_atomic
+PASS reload_primes_sensor_contacts_without_manufacturing_alarm_entries
+[tilemap applied] revision=2 source=facility.etmp
+[tilemap applied] revision=2 source=annex.etmp
+PASS both_levels_reload_layers_and_restart_with_the_installed_map
+[tilemap retained] revision=1 source=facility.etmp
+facility.etmp: facility.etmp: Invalid ETMP header at byte 0
+[tilemap retained] revision=1 source=facility.etmp
+facility.etmp: facility.etmp: Not a regular asset file
+[tilemap retained] revision=1 source=facility.etmp
+facility.etmp: facility.etmp: Asset path escapes its root
+[tilemap applied] revision=2 source=facility.etmp
+[tilemap applied] revision=3 source=facility.etmp
+[tilemap applied] revision=4 source=facility.etmp
+[tilemap applied] revision=5 sourc...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="animation_reload" classname="animation_reload" time="0.211977" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS player_replacement_preserves_phase_pause_name_and_old_snapshot
+PASS oneshot_replacement_preserves_completion_without_emitting_an_extra_event
+PASS maximum_duration_replacement_uses_exact_integer_progress
+[animation applied] revision=2 source=facility.eani
+PASS game_bank_swap_preserves_state_and_save_content_identity_rules
+[animation retained] revision=1 source=facility.eani
+facility.eani: Missing or incompatible required animation: walk
+[animation retained] revision=1 source=facility.eani
+facility.eani: Animation reload must retain the resident texture/atlas
+[animation retained] revision=1 source=facility.eani
+facility.eani: Animation reload must retain the resident texture/atlas
+[animation retained] revision=1 source=facility.eani
+facility.eani: Missing or incompatible required animation: door_open
+[animation retained] revision=1 source=facility.eani
+facility.eani: Missing or incompatible required animation: machine
+PASS required_future_clips_atlas_and_loop_modes_are_transactional
+[animation retained] re...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="gameplay_allocations" classname="gameplay_allocations" time="33.5505" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="font_reload" classname="font_reload" time="0.372094" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[font retained] revision=1 embedded=1 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Not a regular asset file
+[font applied] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+[font retained] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[font applied] revision=3 embedded=0 atlas_bytes=128 source=fonts/ui.efnt
+PASS font_reload_startup_fallback_strict_failure_retention_and_pass_boundary
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[font applied] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+[watch] enabled files=4
+[watch] notifications active
+[shader applied] revision=2 source=/tmp/font-reload-5cuVSl
+[textures applied] revision=2 count=1
+[font applied] revision=3 embedded=0 atlas_bytes=64...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="audio_transport" classname="audio_transport" time="1.22638" status="run">
+		<properties>
+			<property name="cmake_labels" value="platform"/>
+		</properties>
+		<system-out>ALSA lib pcm_file.c:445:(snd_pcm_file_write_bytes) [error.pcm] /dev/full write failed, file data may be corrupt: No space left on device
+ALSA lib pcm_file.c:445:(snd_pcm_file_write_bytes) [error.pcm] /dev/full write failed, file data may be corrupt: No space left on device
+PASS output_owns_clips_and_orders_controls
+PASS output_bank_bounds_foreign_handles_and_queue_pressure
+PASS feature_lab_audio_controls_restart_and_completion
+PASS settings_gain_validation_and_command_coalescing
+PASS checkpoint_restore_restarts_loops_without_historical_effects
+PASS single_step_keeps_audio_groups_paused_until_resume
+PASS title_audio_starts_paused_and_resumes_without_duplicate_voices
+[audio] Muted: Audio command rejected; playback disabled (device_error=-5)
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) [error.pcm] Unknown PCM engine_test_intentionally_missing_device
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) [error.pcm] Unknown PCM engine_test_intentionally_missing_device
+PASS real_alsa_write_failure_disables_output_and_retains_...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+</testsuite>

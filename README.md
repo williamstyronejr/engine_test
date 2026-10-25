@@ -711,6 +711,11 @@ bytes in the actual gameplay renderer and audio worker. Normal executables remai
 uninstrumented. See [scope and reproduction instructions](benchmarks/ALLOCATION_PROFILING.md)
 and [the three-repeat results](benchmarks/2026-10-24-allocation-results.md).
 
+HUD/status formatting now reuses caller-owned storage. The two verified replay
+workloads record zero C++ allocations in world/HUD submission with unchanged
+rendered output; restart allocations remain. See [the storage contract](benchmarks/HUD_TEXT.md)
+and [before/after measurements](benchmarks/2026-10-24-hud-text-results.md).
+
 ## Window lifecycle
 
 Fullscreen and minimize are asynchronous window-manager requests. The engine exposes

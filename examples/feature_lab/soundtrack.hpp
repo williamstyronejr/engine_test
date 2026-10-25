@@ -1,6 +1,7 @@
 #pragma once
 #include "engine/audio.hpp"
 #include "game.hpp"
+#include "hud_text.hpp"
 #include "settings.hpp"
 #include <iostream>
 #include <limits>
@@ -161,23 +162,37 @@ class Soundtrack {
     bool reload_applied() const { return reload_applied_; }
     const std::string& reload_diagnostic() const { return reload_diagnostic_; }
     std::size_t sound_bytes() const { return output_ ? output_->sound_bytes() : 0; }
-    std::size_t retained_sound_bytes() const { return output_ ? output_->retained_sound_bytes() : 0; }
-    std::string reload_status() const {
+    std::size_t retained_sound_bytes() const {
+        return output_ ? output_->retained_sound_bytes() : 0;
+    }
+    std::string_view reload_status(std::string& output) const {
         if (!output_)
-            return "AUDIO BANK OFF";
+            return format_text(output, "AUDIO BANK OFF");
         if (reload_applied_ && revision_ == 1)
-            return "AUDIO BANK READY R1";
-        return std::string(reload_applied_ ? "AUDIO BANK QUEUED R" : "AUDIO BANK FAILED - KEPT R") +
-               std::to_string(revision_);
+            return format_text(output, "AUDIO BANK READY R1");
+        return format_text(output,
+                           reload_applied_ ? "AUDIO BANK QUEUED R" : "AUDIO BANK FAILED - KEPT R",
+                           revision_);
+    }
+    std::string reload_status() const {
+        std::string output;
+        reload_status(output);
+        return output;
+    }
+    std::string_view status(std::string& output, const engine::KeyBindings& bindings = {}) const {
+        if (!output_)
+            return format_text(output, "AUDIO OFF");
+        return format_text(output, bindings.key_name(engine::Key::mute),
+                           settings_.muted ? " MUTED" : " SOUND ON", " / ",
+                           bindings.key_name(engine::Key::music_volume), " MUSIC ",
+                           static_cast<int>(settings_.music * 100), " / ",
+                           bindings.key_name(engine::Key::effects_volume), " EFFECTS ",
+                           static_cast<int>(settings_.effects * 100));
     }
     std::string status(const engine::KeyBindings& bindings = {}) const {
-        if (!output_)
-            return "AUDIO OFF";
-        return bindings.key_name(engine::Key::mute) + (settings_.muted ? " MUTED" : " SOUND ON") +
-               " / " + bindings.key_name(engine::Key::music_volume) + " MUSIC " +
-               std::to_string(static_cast<int>(settings_.music * 100)) + " / " +
-               bindings.key_name(engine::Key::effects_volume) + " EFFECTS " +
-               std::to_string(static_cast<int>(settings_.effects * 100));
+        std::string output;
+        status(output, bindings);
+        return output;
     }
     AudioSettings settings() const { return settings_; }
     void configure(AudioSettings value) {

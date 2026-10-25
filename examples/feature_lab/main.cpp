@@ -12,6 +12,7 @@
 #include "engine/window.hpp"
 #include "font_gallery.hpp"
 #include "game.hpp"
+#include "hud_text.hpp"
 #include "overlays.hpp"
 #include "persistence.hpp"
 #include "replay_file.hpp"
@@ -51,13 +52,13 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
           const feature_lab::FontAssets& fonts, const feature_lab::AnimationAssets& animations,
           const feature_lab::TilemapAssets& tilemaps, const feature_lab::SceneAssets& scenes,
           bool settings_open, const KeyBindings& bindings, std::string_view replay_status,
-          bool replay_session,
-          bool playing_replay,
+          bool replay_session, bool playing_replay, std::string& text,
           std::chrono::steady_clock::time_point* world_submitted = nullptr
 #ifdef ENGINE_ALLOCATION_PROFILE
-          , allocation_profile::Count* world_allocations = nullptr
+          ,
+          allocation_profile::Count* world_allocations = nullptr
 #endif
-          ) {
+) {
     const auto extent = camera.extent(width, height) * 0.5F;
     const Rect view{camera.center - extent, camera.center + extent};
     const auto& map = game.map.data();
@@ -111,7 +112,7 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
         draw_gallery();
     while (layer < map.layers.size())
         draw_layer();
-    collision_visuals.draw(r, game, alpha, bindings);
+    collision_visuals.draw(r, game, alpha, bindings, text);
     diagnostics.draw_world(r, game, camera, width, height);
     const auto goal = game.location(game.exit);
     r.text(goal + Vec2{-0.7F, 1.4F}, 0.045F, game.door_open ? "EXIT OPEN" : "LOCKED", cyan);
@@ -120,18 +121,19 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
     if (world_submitted)
         *world_submitted = std::chrono::steady_clock::now();
 #ifdef ENGINE_ALLOCATION_PROFILE
-    if (world_allocations) *world_allocations = allocation_profile::snapshot();
+    if (world_allocations)
+        *world_allocations = allocation_profile::snapshot();
 #endif
+    using feature_lab::format_text;
     const float scale = feature_lab::hud_scale(width, height);
-    const auto label = [&](float x, float y, float size, std::string_view text, Color color) {
-        r.text({x * scale, -y * scale}, size * scale, text, color);
+    const auto label = [&](float x, float y, float size, std::string_view value, Color color) {
+        r.text({x * scale, -y * scale}, size * scale, value, color);
     };
     r.quad({w * 0.5F, -48 * scale}, {w, 96 * scale}, {0.008F, 0.018F, 0.03F, 0.96F});
     label(24, 16, 4, "FEATURE LAB", white);
     label(25, 58, 1.7F, replay_status, cyan);
     const float right = w / scale - 360;
-    label(right, 18, 1.8F,
-          "CORES  " + std::to_string(game.count()) + " / " + std::to_string(game.total()), cyan);
+    label(right, 18, 1.8F, format_text(text, "CORES  ", game.count(), " / ", game.total()), cyan);
     label(right, 48, 1.5F,
           game.door_open      ? "EXIT READY"
           : game.door_started ? "DOOR OPENING"
@@ -140,57 +142,62 @@ void draw(Renderer& r, const feature_lab::Game& game, const Textures& textures, 
     r.quad({w * 0.5F, -h + 43 * scale}, {w, 86 * scale}, {0.008F, 0.018F, 0.03F, 0.96F});
     const float bottom = h / scale - 73;
     label(24, bottom, 1.55F,
-          playing_replay ? "RECORDED GAMEPLAY / LIVE MOVEMENT AND PAUSE DISABLED"
-                         : bindings.key_name(Key::up) + "/" + bindings.key_name(Key::left) + "/" +
-                               bindings.key_name(Key::down) + "/" + bindings.key_name(Key::right) +
-                               " / ARROWS  MOVE    +/-  ZOOM    SPACE  PAUSE",
-          white);
-    label(24, bottom + 24, 1.4F,
           playing_replay
-              ? "INPUT FROM REPLAY  F11 FULLSCREEN  ESC EXIT"
-              : bindings.key_name(Key::interact) +
-                    (replay_session
-                         ? " SWITCH  F1 LOCKED  F10 STEP  ESC SAVE REPLAY"
-                         : " SWITCH  F1 SETTINGS  F2 STATS  F3 SHAPES  F10 STEP  ESC QUIT"),
-          muted);
+              ? "RECORDED GAMEPLAY / LIVE MOVEMENT AND PAUSE DISABLED"
+              : format_text(text, bindings.key_name(Key::up), "/", bindings.key_name(Key::left),
+                            "/", bindings.key_name(Key::down), "/", bindings.key_name(Key::right),
+                            " / ARROWS  MOVE    +/-  ZOOM    SPACE  PAUSE"),
+          white);
+    label(
+        24, bottom + 24, 1.4F,
+        playing_replay
+            ? "INPUT FROM REPLAY  F11 FULLSCREEN  ESC EXIT"
+            : format_text(text, bindings.key_name(Key::interact),
+                          (replay_session
+                               ? " SWITCH  F1 LOCKED  F10 STEP  ESC SAVE REPLAY"
+                               : " SWITCH  F1 SETTINGS  F2 STATS  F3 SHAPES  F10 STEP  ESC QUIT")),
+        muted);
     label(24, bottom + 46, 1.4F,
-          "VISIBLE TILES " + std::to_string(visible.tiles) + " / " +
-              std::to_string(map.width * map.height * map.layers.size()) + "    CHUNKS " +
-              std::to_string(visible.chunks) + " / " + std::to_string(game.map.chunk_count()) +
-              "    COLLIDERS " + std::to_string(game.collision_candidates.size()),
+          format_text(text, "VISIBLE TILES ", visible.tiles, " / ",
+                      map.width * map.height * map.layers.size(), "    CHUNKS ", visible.chunks,
+                      " / ", game.map.chunk_count(), "    COLLIDERS ",
+                      game.collision_candidates.size()),
           cyan);
-    label(24, bottom - 174, 1.3F, soundtrack.reload_status(),
+    label(24, bottom - 174, 1.3F, soundtrack.reload_status(text),
           soundtrack.reload_applied() ? cyan : Color{1, 0.3F, 0.12F, 1});
-    label(24, bottom - 156, 1.3F, scenes.status(),
+    label(24, bottom - 156, 1.3F, scenes.status(text),
           scenes.applied() ? cyan : Color{1, 0.3F, 0.12F, 1});
-    label(24, bottom - 138, 1.3F, tilemaps.status(),
+    label(24, bottom - 138, 1.3F, tilemaps.status(text),
           tilemaps.applied() ? cyan : Color{1, 0.3F, 0.12F, 1});
-    label(24, bottom - 120, 1.3F, animations.status(),
+    label(24, bottom - 120, 1.3F, animations.status(text),
           animations.applied() ? cyan : Color{1, 0.3F, 0.12F, 1});
-    label(24, bottom - 102, 1.3F, fonts.status(),
+    label(24, bottom - 102, 1.3F, fonts.status(text),
           fonts.applied() ? cyan : Color{1, 0.3F, 0.12F, 1});
-    label(24, bottom - 84, 1.3F, textures.status(),
+    label(24, bottom - 84, 1.3F, textures.status(text),
           textures.applied() ? cyan : Color{1, 0.3F, 0.12F, 1});
-    label(24, bottom - 66, 1.3F, shaders.status(),
+    label(24, bottom - 66, 1.3F, shaders.status(text),
           shaders.result().applied ? cyan : Color{1, 0.3F, 0.12F, 1});
     label(24, bottom - 44, 1.3F,
-          "ALARM ENTRIES " + std::to_string(game.alarm_entries) + " / " +
-              (game.alarm_disabled ? "DISABLED" : "ACTIVE") + "    GRID PAIRS " +
-              std::to_string(game.collisions.stats().candidate_pairs),
+          format_text(text, "ALARM ENTRIES ", game.alarm_entries, " / ",
+                      game.alarm_disabled ? "DISABLED" : "ACTIVE", "    GRID PAIRS ",
+                      game.collisions.stats().candidate_pairs),
           cyan);
-    label(24, bottom - 22, 1.3F, soundtrack.status(bindings), cyan);
+    label(24, bottom - 22, 1.3F, soundtrack.status(text, bindings), cyan);
     overlays.draw(r, game, width, height);
     if (!settings_open && (game.won || (game.paused && !diagnostics.controls.visible))) {
         r.quad({w * 0.5F, -h * 0.5F}, {650 * scale, 150 * scale}, {0.008F, 0.014F, 0.022F, 0.96F});
         label(w / scale * 0.5F - (game.won ? 240 : 90), h / scale * 0.5F - 35, 3,
-              game.won ? std::string(feature_lab::level_name(game.level)) + " COMPLETE" : "PAUSED",
+              game.won ? format_text(text, feature_lab::level_name(game.level), " COMPLETE")
+                       : "PAUSED",
               cyan);
         label(w / scale * 0.5F - 140, h / scale * 0.5F + 20, 1.5F,
-              playing_replay                ? "RECORDED STATE / ESC EXIT"
-              : game.won && !replay_session ? bindings.key_name(Key::interact) + " NEXT / " +
-                                                  bindings.key_name(Key::restart) + " RESTART"
-              : game.won ? "PRESS " + bindings.key_name(Key::restart) + " TO PLAY AGAIN"
-                         : "SPACE RESUME / F10 STEP",
+              playing_replay ? "RECORDED STATE / ESC EXIT"
+              : game.won && !replay_session
+                  ? format_text(text, bindings.key_name(Key::interact), " NEXT / ",
+                                bindings.key_name(Key::restart), " RESTART")
+              : game.won
+                  ? format_text(text, "PRESS ", bindings.key_name(Key::restart), " TO PLAY AGAIN")
+                  : "SPACE RESUME / F10 STEP",
               white);
     }
 }
@@ -627,6 +634,11 @@ int main(int argc, char** argv) {
         using Clock = std::chrono::steady_clock;
         auto last = Clock::now(), report = last;
         std::size_t frames = 0, report_frames = 0;
+        // Separate owning buffers keep the status argument alive throughout draw.
+        // Current labels fit these reservations; growth remains lossless if they change.
+        std::string hud_text, replay_status_text;
+        hud_text.reserve(256);
+        replay_status_text.reserve(128);
         std::array<double, 8192> cpu_samples{};
         std::size_t sample_count = 0;
         double dropped = 0;
@@ -935,20 +947,24 @@ int main(int argc, char** argv) {
                      overlays, soundtrack, collision_visuals, sampling_gallery, diagnostics,
                      shaders, fonts, animation_assets, tilemap_assets, scene_assets,
                      settings.opened(), settings.bindings,
-                     recorder ? "15 / RECORD " + std::to_string(recorder->file().commands.size()) +
-                                    " / 36000"
-                     : playback ? "15 / REPLAY " + std::to_string(playback_index) + " / " +
-                                      std::to_string(playback->commands.size())
+                     recorder
+                         ? feature_lab::format_text(replay_status_text, "15 / RECORD ",
+                                                    recorder->file().commands.size(), " / 36000")
+                     : playback ? feature_lab::format_text(replay_status_text, "15 / REPLAY ",
+                                                           playback_index, " / ",
+                                                           playback->commands.size())
                      : !flow.notice.empty()
-                         ? flow.notice
-                         : "36 / " + std::string(feature_lab::level_name(game.level)) +
-                               (watch_assets ? " / AUTO RELOAD" : " / AUDIO BANK RELOAD"),
-                     recorder.has_value() || playback.has_value(), playback.has_value(),
+                         ? std::string_view(flow.notice)
+                         : feature_lab::format_text(
+                               replay_status_text, "36 / ", feature_lab::level_name(game.level),
+                               watch_assets ? " / AUTO RELOAD" : " / AUDIO BANK RELOAD"),
+                     recorder.has_value() || playback.has_value(), playback.has_value(), hud_text,
                      profile ? &world_submitted : nullptr
 #ifdef ENGINE_ALLOCATION_PROFILE
-                     , &allocation_world
+                     ,
+                     &allocation_world
 #endif
-                     );
+                );
                 diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
                 settings.draw(renderer, window.width(), window.height());
             }

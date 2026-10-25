@@ -1,0 +1,18 @@
+Test project /home/zero/dev/engine_test/build/release-validation/cpu-sanitize
+    Start  2: hud_text
+1/5 Test  #2: hud_text .........................   Passed    0.11 sec
+    Start  6: scene_reload
+2/5 Test  #6: scene_reload .....................   Passed    2.26 sec
+    Start  7: tilemap_reload
+3/5 Test  #7: tilemap_reload ...................   Passed    1.29 sec
+    Start  8: animation_reload
+4/5 Test  #8: animation_reload .................   Passed    0.91 sec
+    Start 15: stress_cpu
+5/5 Test #15: stress_cpu .......................   Passed    6.76 sec
+
+100% tests passed out of 5
+
+Label Time Summary:
+cpu    =  11.34 sec*proc (5 tests)
+
+Total Test time (real) =  11.34 sec

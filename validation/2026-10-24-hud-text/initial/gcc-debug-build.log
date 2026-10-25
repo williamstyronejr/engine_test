@@ -1,0 +1,40 @@
+[1/65] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/replay_profile.cpp.o
+[2/65] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/stress_benchmark.cpp.o
+[3/65] Stage Feature Lab assets
+[4/65] Linking CXX static library libfeature_lab_stress.a
+[5/65] Building CXX object CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o
+[6/65] Building CXX object CMakeFiles/engine_platform.dir/engine/src/audio.cpp.o
+[7/65] Building CXX object CMakeFiles/allocation_profile_tests.dir/tests/allocation_profile_tests.cpp.o
+[8/65] Building CXX object CMakeFiles/hud_text_tests.dir/tests/hud_text_tests.cpp.o
+[9/65] Building CXX object CMakeFiles/scene_reload_tests.dir/tests/scene_reload_tests.cpp.o
+[10/65] Building CXX object CMakeFiles/tilemap_reload_tests.dir/tests/tilemap_reload_tests.cpp.o
+[11/65] Building CXX object CMakeFiles/animation_reload_tests.dir/tests/animation_reload_tests.cpp.o
+[12/65] Linking CXX static library libengine_platform.a
+[13/65] Building CXX object CMakeFiles/spike_profile_tests.dir/tests/spike_profile_tests.cpp.o
+[14/65] Building CXX object CMakeFiles/feature_lab.dir/examples/feature_lab/main.cpp.o
+[15/65] Building CXX object CMakeFiles/feature_lab_allocations.dir/examples/feature_lab/main.cpp.o
+[16/65] Building CXX object CMakeFiles/audio_allocations.dir/profiling/audio_allocations.cpp.o
+[17/65] Building CXX object CMakeFiles/audio_allocations.dir/engine/src/audio.cpp.o
+[18/65] Building CXX object CMakeFiles/scene_watch_tests.dir/tests/scene_watch_tests.cpp.o
+[19/65] Building CXX object CMakeFiles/tilemap_watch_tests.dir/tests/tilemap_watch_tests.cpp.o
+[20/65] Building CXX object CMakeFiles/animation_watch_tests.dir/tests/animation_watch_tests.cpp.o
+[21/65] Building CXX object CMakeFiles/font_reload_tests.dir/tests/font_reload_tests.cpp.o
+[22/65] Building CXX object CMakeFiles/audio_reload_tests.dir/tests/audio_reload_tests.cpp.o
+[23/65] Building CXX object CMakeFiles/audio_watch_tests.dir/tests/audio_watch_tests.cpp.o
+[24/65] Building CXX object CMakeFiles/audio_tests.dir/tests/audio_tests.cpp.o
+[25/65] Building CXX object CMakeFiles/render_target_tests.dir/tests/render_target_tests.cpp.o
+FAILED: [code=1] CMakeFiles/render_target_tests.dir/tests/render_target_tests.cpp.o 
+/usr/bin/g++ -DTEST_ASSET_ROOT=\"/home/zero/dev/engine_test/assets\" -I/home/zero/dev/engine_test/engine/include -g -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Werror -MD -MT CMakeFiles/render_target_tests.dir/tests/render_target_tests.cpp.o -MF CMakeFiles/render_target_tests.dir/tests/render_target_tests.cpp.o.d -o CMakeFiles/render_target_tests.dir/tests/render_target_tests.cpp.o -c /home/zero/dev/engine_test/tests/render_target_tests.cpp
+/home/zero/dev/engine_test/tests/render_target_tests.cpp: In lambda function:
+/home/zero/dev/engine_test/tests/render_target_tests.cpp:401:21: error: no matching function for call to ‘feature_lab::CollisionVisuals::draw(engine::Renderer&, feature_lab::Game&, int)’
+  401 |         visuals.draw(renderer, game, 1);
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+  • there is 1 candidate
+In file included from /home/zero/dev/engine_test/tests/render_target_tests.cpp:1:
+    • candidate 1: ‘void feature_lab::CollisionVisuals::draw(engine::Renderer&, const feature_lab::Game&, float, const engine::KeyBindings&, std::string&) const’
+      /home/zero/dev/engine_test/tests/../examples/feature_lab/collision_visuals.hpp:24:10:
+         24 |     void draw(engine::Renderer& r, const Game& game, float alpha,
+            |          ^~~~
+      • candidate expects 5 arguments, 3 provided
+[26/65] Building CXX object CMakeFiles/gpu_timer_probe.dir/tools/gpu_timer_probe.cpp.o
+ninja: build stopped: subcommand failed.

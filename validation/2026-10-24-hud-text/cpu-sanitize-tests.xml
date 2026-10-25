@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-c++"
+	tests="5"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="omarchy"
+	time="11"
+	timestamp="2026-10-24T18:59:00"
+	>
+	<testcase name="hud_text" classname="hud_text" time="0.114821" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS integer_extremes_and_shorter_replacements_preserve_exact_text
+PASS long_labels_grow_losslessly_and_then_reuse_capacity
+[scene applied] revision=2 source=facility.scene
+[scene retained] revision=2 source=facility.scene
+facility.scene: facility.scene: Not a regular asset file
+[tilemap applied] revision=2 source=facility.etmp
+[tilemap retained] revision=2 source=facility.etmp
+facility.etmp: facility.etmp: Not a regular asset file
+[animation applied] revision=2 source=facility.eani
+[animation retained] revision=2 source=facility.eani
+facility.eani: facility.eani: Not a regular asset file
+PASS reload_labels_follow_success_failure_lock_and_replacement
+PASS repeated_status_formatting_reuses_the_callers_storage
+4 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="scene_reload" classname="scene_reload" time="2.25981" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS scene_budget_overflow_rejects_reload_then_valid_content_retries
+PASS commit_rebinds_handles_preserves_progress_and_changes_save_identity
+PASS scene_walls_affect_movement_queries_and_restart_uses_new_spawn
+PASS rejected_edits_and_preflight_leave_world_and_runtime_untouched
+PASS reordered_core_records_keep_persistent_collection_and_runtime_slots
+PASS alarm_contacts_are_primed_without_extra_enter_and_animation_snapshots_retained
+PASS opening_and_completed_door_never_replays_completion_after_reload
+[scene retained] revision=1 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene retained] revision=1 source=facility.scene
+facility.scene: facility.scene: Not a regular asset file
+[scene retained] revision=1 source=facility.scene
+facility.scene: facility.scene: Asset path escapes its root
+[scene applied] revision=2 source=facility.scene
+[scene applied] revision=3 source=facility.scene
+[scene applied] revision=4 source=facility.scene
+[scene applied] revision=5 source=facility.sce...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="tilemap_reload" classname="tilemap_reload" time="1.29275" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS tilemap_replacement_keeps_the_current_world_budgets
+PASS tilemap_commit_preserves_game_and_entities_updates_collision_and_save_identity
+PASS player_and_restart_spawn_are_checked_before_any_publication
+PASS geometry_atlas_invalid_cells_and_body_capacity_rejections_are_atomic
+PASS reload_primes_sensor_contacts_without_manufacturing_alarm_entries
+[tilemap applied] revision=2 source=facility.etmp
+[tilemap applied] revision=2 source=annex.etmp
+PASS both_levels_reload_layers_and_restart_with_the_installed_map
+[tilemap retained] revision=1 source=facility.etmp
+facility.etmp: facility.etmp: Invalid ETMP header at byte 0
+[tilemap retained] revision=1 source=facility.etmp
+facility.etmp: facility.etmp: Not a regular asset file
+[tilemap retained] revision=1 source=facility.etmp
+facility.etmp: facility.etmp: Asset path escapes its root
+[tilemap applied] revision=2 source=facility.etmp
+[tilemap applied] revision=3 source=facility.etmp
+[tilemap applied] revision=4 source=facility.etmp
+[tilemap applied] revision=5 sourc...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="animation_reload" classname="animation_reload" time="0.90866" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS player_replacement_preserves_phase_pause_name_and_old_snapshot
+PASS oneshot_replacement_preserves_completion_without_emitting_an_extra_event
+PASS maximum_duration_replacement_uses_exact_integer_progress
+[animation applied] revision=2 source=facility.eani
+PASS game_bank_swap_preserves_state_and_save_content_identity_rules
+[animation retained] revision=1 source=facility.eani
+facility.eani: Missing or incompatible required animation: walk
+[animation retained] revision=1 source=facility.eani
+facility.eani: Animation reload must retain the resident texture/atlas
+[animation retained] revision=1 source=facility.eani
+facility.eani: Animation reload must retain the resident texture/atlas
+[animation retained] revision=1 source=facility.eani
+facility.eani: Missing or incompatible required animation: door_open
+[animation retained] revision=1 source=facility.eani
+facility.eani: Missing or incompatible required animation: machine
+PASS required_future_clips_atlas_and_loop_modes_are_transactional
+[animation retained] re...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="stress_cpu" classname="stress_cpu" time="6.76096" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS small_collision_budgets_reuse_storage_with_full_query_capacity
+PASS scene_usage_and_component_peaks_allocate_nothing_after_setup
+PASS stale_deletion_requests_do_not_grow_small_scene_buffers
+PASS default_grid_saturation_allocates_nothing_after_setup
+PASS collision_usage_and_worst_case_event_batches_allocate_nothing_after_setup
+PASS empty_scenes_and_scene_moves_do_not_allocate
+PASS font_measurement_and_layout_allocate_nothing_after_setup
+PASS component_queries_and_pool_reuse_allocate_nothing_after_setup
+PASS deterministic_workloads_and_exact_tile_occupancy
+PASS dense_collision_pairs_match_all_pairs_reference
+PASS steady_state_allocations_and_repeated_unload_baseline
+PASS capacities_empty_arena_and_rejected_overflow
+PASS percentiles_warmup_capacity_and_nonfinite_samples
+PASS options_bounds_json_escaping_and_resource_growth_detection
+PASS gpu_failure_report_preserves_uint64_values_and_omitted_count
+15 tests, 0 failed
+</system-out>
+	</testcase>
+</testsuite>
