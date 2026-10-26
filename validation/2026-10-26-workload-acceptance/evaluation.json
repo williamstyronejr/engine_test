@@ -1,0 +1,2583 @@
+{
+  "schema": "feature_lab_acceptance_result_v1",
+  "source": "d4dbe22635013647b99118392f103cab03af738e",
+  "evidence_valid": true,
+  "automated_budgets_passed": false,
+  "release_accepted": false,
+  "attempts": [
+    {
+      "name": "combined",
+      "repeat": 1,
+      "frame": {
+        "samples": 1800,
+        "mean": 4.49528984,
+        "median": 3.138034,
+        "p95": 8.982151,
+        "p99": 12.148821,
+        "max": 36.856957
+      },
+      "checks": [
+        {
+          "name": "rss_peak_bytes",
+          "observed": 54951936,
+          "ceiling": 268435456,
+          "passed": true
+        },
+        {
+          "name": "frame_p99_ms",
+          "observed": 12.148821,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "frame_max_ms",
+          "observed": 36.856957,
+          "ceiling": 16.7,
+          "passed": false
+        },
+        {
+          "name": "tracked_cpu_buffer_bytes",
+          "observed": 8072232,
+          "ceiling": 9437184,
+          "passed": true
+        },
+        {
+          "name": "report_buffer_bytes",
+          "observed": 100824,
+          "ceiling": 131072,
+          "passed": true
+        }
+      ],
+      "passed": false
+    },
+    {
+      "name": "dense",
+      "repeat": 1,
+      "frame": {
+        "samples": 1800,
+        "mean": 3.01514401,
+        "median": 2.380849,
+        "p95": 6.260462,
+        "p99": 10.164412,
+        "max": 26.392658
+      },
+      "checks": [
+        {
+          "name": "rss_peak_bytes",
+          "observed": 18259968,
+          "ceiling": 268435456,
+          "passed": true
+        },
+        {
+          "name": "frame_p99_ms",
+          "observed": 10.164412,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "frame_max_ms",
+          "observed": 26.392658,
+          "ceiling": 16.7,
+          "passed": false
+        },
+        {
+          "name": "tracked_cpu_buffer_bytes",
+          "observed": 6774824,
+          "ceiling": 9437184,
+          "passed": true
+        },
+        {
+          "name": "report_buffer_bytes",
+          "observed": 100824,
+          "ceiling": 131072,
+          "passed": true
+        }
+      ],
+      "passed": false
+    },
+    {
+      "name": "mixer",
+      "repeat": 1,
+      "frame": {
+        "samples": 1800,
+        "mean": 0.188654206,
+        "median": 0.187117,
+        "p95": 0.233903,
+        "p99": 0.269501,
+        "max": 0.364663
+      },
+      "checks": [
+        {
+          "name": "rss_peak_bytes",
+          "observed": 18259968,
+          "ceiling": 268435456,
+          "passed": true
+        },
+        {
+          "name": "frame_p99_ms",
+          "observed": 0.269501,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "frame_max_ms",
+          "observed": 0.364663,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "tracked_cpu_buffer_bytes",
+          "observed": 6764584,
+          "ceiling": 9437184,
+          "passed": true
+        },
+        {
+          "name": "report_buffer_bytes",
+          "observed": 100824,
+          "ceiling": 131072,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "facility",
+      "repeat": 1,
+      "frame": {
+        "samples": 2970,
+        "mean": 3.21161639,
+        "median": 2.09605,
+        "p95": 7.777749,
+        "p99": 9.366526,
+        "max": 21.401264
+      },
+      "checks": [
+        {
+          "name": "rss_peak_bytes",
+          "observed": 55128064,
+          "ceiling": 268435456,
+          "passed": true
+        },
+        {
+          "name": "frame_p99_ms",
+          "observed": 9.366526,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "frame_max_ms",
+          "observed": 21.401264,
+          "ceiling": 16.7,
+          "passed": false
+        }
+      ],
+      "passed": false
+    },
+    {
+      "name": "annex",
+      "repeat": 1,
+      "frame": {
+        "samples": 2970,
+        "mean": 3.30518056,
+        "median": 2.082423,
+        "p95": 7.998406,
+        "p99": 9.62472,
+        "max": 17.666441
+      },
+      "checks": [
+        {
+          "name": "rss_peak_bytes",
+          "observed": 55451648,
+          "ceiling": 268435456,
+          "passed": true
+        },
+        {
+          "name": "frame_p99_ms",
+          "observed": 9.62472,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "frame_max_ms",
+          "observed": 17.666441,
+          "ceiling": 16.7,
+          "passed": false
+        }
+      ],
+      "passed": false
+    },
+    {
+      "name": "spikes",
+      "repeat": 1,
+      "frame": {
+        "samples": 3570,
+        "mean": 3.31523498,
+        "median": 2.101366,
+        "p95": 7.950285,
+        "p99": 10.34827,
+        "max": 19.129247
+      },
+      "checks": [
+        {
+          "name": "rss_peak_bytes",
+          "observed": 55820288,
+          "ceiling": 268435456,
+          "passed": true
+        },
+        {
+          "name": "frame_p99_ms",
+          "observed": 10.34827,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "frame_max_ms",
+          "observed": 19.129247,
+          "ceiling": 16.7,
+          "passed": false
+        },
+        {
+          "name": "event_120_cpu_bytes",
+          "observed": 809,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_120_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_120_combined_bytes",
+          "observed": 809,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_120_operation_ms",
+          "observed": 2.940403,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_120_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_120_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_120_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_120_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_120_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_120_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_240_cpu_bytes",
+          "observed": 0,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_240_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_240_combined_bytes",
+          "observed": 0,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_240_operation_ms",
+          "observed": 1.081825,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_240_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_240_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_240_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_240_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_240_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_240_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_360_cpu_bytes",
+          "observed": 809,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_360_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_360_combined_bytes",
+          "observed": 809,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_360_operation_ms",
+          "observed": 4.192671,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_360_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_360_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_360_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_360_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_360_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_360_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_480_cpu_bytes",
+          "observed": 49360,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_480_gpu_bytes",
+          "observed": 26132,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_480_combined_bytes",
+          "observed": 52456,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_480_operation_ms",
+          "observed": 2.120451,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_480_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_480_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_480_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_480_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_480_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_480_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_600_cpu_bytes",
+          "observed": 49360,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_600_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_600_combined_bytes",
+          "observed": 49360,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_600_operation_ms",
+          "observed": 1.124193,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_600_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_600_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_600_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_600_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_600_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_600_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_720_cpu_bytes",
+          "observed": 49360,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_720_gpu_bytes",
+          "observed": 26132,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_720_combined_bytes",
+          "observed": 52456,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_720_operation_ms",
+          "observed": 1.470054,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_720_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_720_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_720_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_720_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_720_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_720_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_840_cpu_bytes",
+          "observed": 35624,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_840_gpu_bytes",
+          "observed": 16384,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_840_combined_bytes",
+          "observed": 51968,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_840_operation_ms",
+          "observed": 1.073064,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_840_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_840_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_840_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_840_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_840_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_840_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_1382_cpu_bytes",
+          "observed": 144247,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_1382_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_1382_combined_bytes",
+          "observed": 144247,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_1382_operation_ms",
+          "observed": 0.785418,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_1382_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_1382_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_1382_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_1382_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_1382_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_1382_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_1383_cpu_bytes",
+          "observed": 144247,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_1383_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_1383_combined_bytes",
+          "observed": 144247,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_1383_operation_ms",
+          "observed": 0.698834,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_1383_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_1383_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_1383_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_1383_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_1383_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_1383_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_2086_cpu_bytes",
+          "observed": 154942,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_2086_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_2086_combined_bytes",
+          "observed": 154942,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_2086_operation_ms",
+          "observed": 1.064521,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_2086_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_2086_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_2086_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_2086_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_2086_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_2086_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "scene_level_0_bytes",
+          "observed": 81920,
+          "ceiling": 81920,
+          "passed": true
+        },
+        {
+          "name": "scene_level_1_bytes",
+          "observed": 81920,
+          "ceiling": 81920,
+          "passed": true
+        },
+        {
+          "name": "collision_level_0_bytes",
+          "observed": 32256,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "collision_level_1_bytes",
+          "observed": 32256,
+          "ceiling": 32768,
+          "passed": true
+        }
+      ],
+      "passed": false
+    },
+    {
+      "name": "combined",
+      "repeat": 2,
+      "frame": {
+        "samples": 1800,
+        "mean": 7.27195638,
+        "median": 6.680566,
+        "p95": 11.538453,
+        "p99": 18.154982,
+        "max": 29.496603
+      },
+      "checks": [
+        {
+          "name": "rss_peak_bytes",
+          "observed": 54644736,
+          "ceiling": 268435456,
+          "passed": true
+        },
+        {
+          "name": "frame_p99_ms",
+          "observed": 18.154982,
+          "ceiling": 16.7,
+          "passed": false
+        },
+        {
+          "name": "frame_max_ms",
+          "observed": 29.496603,
+          "ceiling": 16.7,
+          "passed": false
+        },
+        {
+          "name": "tracked_cpu_buffer_bytes",
+          "observed": 8072232,
+          "ceiling": 9437184,
+          "passed": true
+        },
+        {
+          "name": "report_buffer_bytes",
+          "observed": 100824,
+          "ceiling": 131072,
+          "passed": true
+        }
+      ],
+      "passed": false
+    },
+    {
+      "name": "dense",
+      "repeat": 2,
+      "frame": {
+        "samples": 1800,
+        "mean": 2.86077657,
+        "median": 2.285607,
+        "p95": 5.96307,
+        "p99": 8.434663,
+        "max": 14.418505
+      },
+      "checks": [
+        {
+          "name": "rss_peak_bytes",
+          "observed": 18259968,
+          "ceiling": 268435456,
+          "passed": true
+        },
+        {
+          "name": "frame_p99_ms",
+          "observed": 8.434663,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "frame_max_ms",
+          "observed": 14.418505,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "tracked_cpu_buffer_bytes",
+          "observed": 6774824,
+          "ceiling": 9437184,
+          "passed": true
+        },
+        {
+          "name": "report_buffer_bytes",
+          "observed": 100824,
+          "ceiling": 131072,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "mixer",
+      "repeat": 2,
+      "frame": {
+        "samples": 1800,
+        "mean": 0.178882731,
+        "median": 0.16901,
+        "p95": 0.213111,
+        "p99": 0.250518,
+        "max": 0.286861
+      },
+      "checks": [
+        {
+          "name": "rss_peak_bytes",
+          "observed": 18259968,
+          "ceiling": 268435456,
+          "passed": true
+        },
+        {
+          "name": "frame_p99_ms",
+          "observed": 0.250518,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "frame_max_ms",
+          "observed": 0.286861,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "tracked_cpu_buffer_bytes",
+          "observed": 6764584,
+          "ceiling": 9437184,
+          "passed": true
+        },
+        {
+          "name": "report_buffer_bytes",
+          "observed": 100824,
+          "ceiling": 131072,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "facility",
+      "repeat": 2,
+      "frame": {
+        "samples": 2970,
+        "mean": 3.54007564,
+        "median": 2.18111,
+        "p95": 8.331254,
+        "p99": 11.335008,
+        "max": 36.873742
+      },
+      "checks": [
+        {
+          "name": "rss_peak_bytes",
+          "observed": 55484416,
+          "ceiling": 268435456,
+          "passed": true
+        },
+        {
+          "name": "frame_p99_ms",
+          "observed": 11.335008,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "frame_max_ms",
+          "observed": 36.873742,
+          "ceiling": 16.7,
+          "passed": false
+        }
+      ],
+      "passed": false
+    },
+    {
+      "name": "annex",
+      "repeat": 2,
+      "frame": {
+        "samples": 2970,
+        "mean": 3.65621446,
+        "median": 2.161896,
+        "p95": 8.56172,
+        "p99": 10.617341,
+        "max": 20.890354
+      },
+      "checks": [
+        {
+          "name": "rss_peak_bytes",
+          "observed": 55418880,
+          "ceiling": 268435456,
+          "passed": true
+        },
+        {
+          "name": "frame_p99_ms",
+          "observed": 10.617341,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "frame_max_ms",
+          "observed": 20.890354,
+          "ceiling": 16.7,
+          "passed": false
+        }
+      ],
+      "passed": false
+    },
+    {
+      "name": "spikes",
+      "repeat": 2,
+      "frame": {
+        "samples": 3570,
+        "mean": 3.79901316,
+        "median": 2.352634,
+        "p95": 8.652718,
+        "p99": 11.178988,
+        "max": 23.007585
+      },
+      "checks": [
+        {
+          "name": "rss_peak_bytes",
+          "observed": 55832576,
+          "ceiling": 268435456,
+          "passed": true
+        },
+        {
+          "name": "frame_p99_ms",
+          "observed": 11.178988,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "frame_max_ms",
+          "observed": 23.007585,
+          "ceiling": 16.7,
+          "passed": false
+        },
+        {
+          "name": "event_120_cpu_bytes",
+          "observed": 809,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_120_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_120_combined_bytes",
+          "observed": 809,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_120_operation_ms",
+          "observed": 3.084173,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_120_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_120_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_120_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_120_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_120_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_120_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_240_cpu_bytes",
+          "observed": 0,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_240_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_240_combined_bytes",
+          "observed": 0,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_240_operation_ms",
+          "observed": 0.920088,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_240_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_240_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_240_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_240_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_240_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_240_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_360_cpu_bytes",
+          "observed": 809,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_360_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_360_combined_bytes",
+          "observed": 809,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_360_operation_ms",
+          "observed": 3.366357,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_360_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_360_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_360_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_360_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_360_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_360_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_480_cpu_bytes",
+          "observed": 49360,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_480_gpu_bytes",
+          "observed": 26132,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_480_combined_bytes",
+          "observed": 52456,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_480_operation_ms",
+          "observed": 3.146482,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_480_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_480_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_480_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_480_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_480_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_480_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_600_cpu_bytes",
+          "observed": 49360,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_600_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_600_combined_bytes",
+          "observed": 49360,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_600_operation_ms",
+          "observed": 1.478072,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_600_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_600_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_600_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_600_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_600_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_600_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_720_cpu_bytes",
+          "observed": 49360,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_720_gpu_bytes",
+          "observed": 26132,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_720_combined_bytes",
+          "observed": 52456,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_720_operation_ms",
+          "observed": 1.583148,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_720_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_720_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_720_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_720_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_720_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_720_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_840_cpu_bytes",
+          "observed": 35624,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_840_gpu_bytes",
+          "observed": 16384,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_840_combined_bytes",
+          "observed": 51968,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_840_operation_ms",
+          "observed": 1.721913,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_840_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_840_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_840_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_840_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_840_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_840_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_1382_cpu_bytes",
+          "observed": 144247,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_1382_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_1382_combined_bytes",
+          "observed": 144247,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_1382_operation_ms",
+          "observed": 1.027495,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_1382_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_1382_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_1382_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_1382_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_1382_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_1382_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_1383_cpu_bytes",
+          "observed": 144247,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_1383_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_1383_combined_bytes",
+          "observed": 144247,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_1383_operation_ms",
+          "observed": 1.779425,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_1383_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_1383_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_1383_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_1383_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_1383_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_1383_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_2086_cpu_bytes",
+          "observed": 154942,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_2086_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_2086_combined_bytes",
+          "observed": 154942,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_2086_operation_ms",
+          "observed": 1.106662,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_2086_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_2086_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_2086_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_2086_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_2086_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_2086_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "scene_level_0_bytes",
+          "observed": 81920,
+          "ceiling": 81920,
+          "passed": true
+        },
+        {
+          "name": "scene_level_1_bytes",
+          "observed": 81920,
+          "ceiling": 81920,
+          "passed": true
+        },
+        {
+          "name": "collision_level_0_bytes",
+          "observed": 32256,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "collision_level_1_bytes",
+          "observed": 32256,
+          "ceiling": 32768,
+          "passed": true
+        }
+      ],
+      "passed": false
+    },
+    {
+      "name": "combined",
+      "repeat": 3,
+      "frame": {
+        "samples": 1800,
+        "mean": 7.33492317,
+        "median": 6.933932,
+        "p95": 10.367217,
+        "p99": 15.568192,
+        "max": 37.019072
+      },
+      "checks": [
+        {
+          "name": "rss_peak_bytes",
+          "observed": 55136256,
+          "ceiling": 268435456,
+          "passed": true
+        },
+        {
+          "name": "frame_p99_ms",
+          "observed": 15.568192,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "frame_max_ms",
+          "observed": 37.019072,
+          "ceiling": 16.7,
+          "passed": false
+        },
+        {
+          "name": "tracked_cpu_buffer_bytes",
+          "observed": 8072232,
+          "ceiling": 9437184,
+          "passed": true
+        },
+        {
+          "name": "report_buffer_bytes",
+          "observed": 100824,
+          "ceiling": 131072,
+          "passed": true
+        }
+      ],
+      "passed": false
+    },
+    {
+      "name": "dense",
+      "repeat": 3,
+      "frame": {
+        "samples": 1800,
+        "mean": 3.16104905,
+        "median": 2.406219,
+        "p95": 6.515033,
+        "p99": 9.852321,
+        "max": 28.837883
+      },
+      "checks": [
+        {
+          "name": "rss_peak_bytes",
+          "observed": 18259968,
+          "ceiling": 268435456,
+          "passed": true
+        },
+        {
+          "name": "frame_p99_ms",
+          "observed": 9.852321,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "frame_max_ms",
+          "observed": 28.837883,
+          "ceiling": 16.7,
+          "passed": false
+        },
+        {
+          "name": "tracked_cpu_buffer_bytes",
+          "observed": 6774824,
+          "ceiling": 9437184,
+          "passed": true
+        },
+        {
+          "name": "report_buffer_bytes",
+          "observed": 100824,
+          "ceiling": 131072,
+          "passed": true
+        }
+      ],
+      "passed": false
+    },
+    {
+      "name": "mixer",
+      "repeat": 3,
+      "frame": {
+        "samples": 1800,
+        "mean": 0.187507671,
+        "median": 0.171283,
+        "p95": 0.255233,
+        "p99": 0.287746,
+        "max": 0.4078
+      },
+      "checks": [
+        {
+          "name": "rss_peak_bytes",
+          "observed": 18259968,
+          "ceiling": 268435456,
+          "passed": true
+        },
+        {
+          "name": "frame_p99_ms",
+          "observed": 0.287746,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "frame_max_ms",
+          "observed": 0.4078,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "tracked_cpu_buffer_bytes",
+          "observed": 6764584,
+          "ceiling": 9437184,
+          "passed": true
+        },
+        {
+          "name": "report_buffer_bytes",
+          "observed": 100824,
+          "ceiling": 131072,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "facility",
+      "repeat": 3,
+      "frame": {
+        "samples": 2970,
+        "mean": 4.21535388,
+        "median": 2.510833,
+        "p95": 9.446102,
+        "p99": 12.317676,
+        "max": 44.147747
+      },
+      "checks": [
+        {
+          "name": "rss_peak_bytes",
+          "observed": 55500800,
+          "ceiling": 268435456,
+          "passed": true
+        },
+        {
+          "name": "frame_p99_ms",
+          "observed": 12.317676,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "frame_max_ms",
+          "observed": 44.147747,
+          "ceiling": 16.7,
+          "passed": false
+        }
+      ],
+      "passed": false
+    },
+    {
+      "name": "annex",
+      "repeat": 3,
+      "frame": {
+        "samples": 2970,
+        "mean": 4.39442713,
+        "median": 2.378248,
+        "p95": 9.68893,
+        "p99": 12.407441,
+        "max": 36.412609
+      },
+      "checks": [
+        {
+          "name": "rss_peak_bytes",
+          "observed": 55132160,
+          "ceiling": 268435456,
+          "passed": true
+        },
+        {
+          "name": "frame_p99_ms",
+          "observed": 12.407441,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "frame_max_ms",
+          "observed": 36.412609,
+          "ceiling": 16.7,
+          "passed": false
+        }
+      ],
+      "passed": false
+    },
+    {
+      "name": "spikes",
+      "repeat": 3,
+      "frame": {
+        "samples": 3570,
+        "mean": 4.49260663,
+        "median": 2.528794,
+        "p95": 10.027819,
+        "p99": 11.923134,
+        "max": 25.471895
+      },
+      "checks": [
+        {
+          "name": "rss_peak_bytes",
+          "observed": 55685120,
+          "ceiling": 268435456,
+          "passed": true
+        },
+        {
+          "name": "frame_p99_ms",
+          "observed": 11.923134,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "frame_max_ms",
+          "observed": 25.471895,
+          "ceiling": 16.7,
+          "passed": false
+        },
+        {
+          "name": "event_120_cpu_bytes",
+          "observed": 809,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_120_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_120_combined_bytes",
+          "observed": 809,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_120_operation_ms",
+          "observed": 2.746018,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_120_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_120_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_120_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_120_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_120_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_120_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_240_cpu_bytes",
+          "observed": 0,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_240_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_240_combined_bytes",
+          "observed": 0,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_240_operation_ms",
+          "observed": 0.912069,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_240_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_240_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_240_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_240_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_240_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_240_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_360_cpu_bytes",
+          "observed": 809,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_360_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_360_combined_bytes",
+          "observed": 809,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_360_operation_ms",
+          "observed": 3.064431,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_360_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_360_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_360_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_360_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_360_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_360_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_480_cpu_bytes",
+          "observed": 49360,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_480_gpu_bytes",
+          "observed": 26132,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_480_combined_bytes",
+          "observed": 52456,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_480_operation_ms",
+          "observed": 2.373652,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_480_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_480_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_480_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_480_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_480_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_480_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_600_cpu_bytes",
+          "observed": 49360,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_600_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_600_combined_bytes",
+          "observed": 49360,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_600_operation_ms",
+          "observed": 0.930532,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_600_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_600_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_600_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_600_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_600_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_600_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_720_cpu_bytes",
+          "observed": 49360,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_720_gpu_bytes",
+          "observed": 26132,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_720_combined_bytes",
+          "observed": 52456,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_720_operation_ms",
+          "observed": 4.783432,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_720_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_720_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_720_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_720_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_720_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_720_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_840_cpu_bytes",
+          "observed": 35624,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_840_gpu_bytes",
+          "observed": 16384,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_840_combined_bytes",
+          "observed": 51968,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_840_operation_ms",
+          "observed": 0.958045,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_840_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_840_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_840_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_840_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_840_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_840_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_1382_cpu_bytes",
+          "observed": 144247,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_1382_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_1382_combined_bytes",
+          "observed": 144247,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_1382_operation_ms",
+          "observed": 1.211332,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_1382_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_1382_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_1382_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_1382_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_1382_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_1382_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_1383_cpu_bytes",
+          "observed": 144247,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_1383_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_1383_combined_bytes",
+          "observed": 144247,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_1383_operation_ms",
+          "observed": 0.693866,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_1383_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_1383_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_1383_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_1383_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_1383_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_1383_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_2086_cpu_bytes",
+          "observed": 154942,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_2086_gpu_bytes",
+          "observed": 0,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_2086_combined_bytes",
+          "observed": 154942,
+          "ceiling": 163840,
+          "passed": true
+        },
+        {
+          "name": "event_2086_operation_ms",
+          "observed": 1.075701,
+          "ceiling": 16.7,
+          "passed": true
+        },
+        {
+          "name": "event_2086_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_2086_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_2086_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "event_2086_texture_bytes",
+          "observed": 30292,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "event_2086_target_bytes",
+          "observed": 103968,
+          "ceiling": 131072,
+          "passed": true
+        },
+        {
+          "name": "event_2086_font_bytes",
+          "observed": 16384,
+          "ceiling": 16384,
+          "passed": true
+        },
+        {
+          "name": "scene_level_0_bytes",
+          "observed": 81920,
+          "ceiling": 81920,
+          "passed": true
+        },
+        {
+          "name": "scene_level_1_bytes",
+          "observed": 81920,
+          "ceiling": 81920,
+          "passed": true
+        },
+        {
+          "name": "collision_level_0_bytes",
+          "observed": 32256,
+          "ceiling": 32768,
+          "passed": true
+        },
+        {
+          "name": "collision_level_1_bytes",
+          "observed": 32256,
+          "ceiling": 32768,
+          "passed": true
+        }
+      ],
+      "passed": false
+    }
+  ]
+}

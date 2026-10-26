@@ -1,0 +1,17 @@
+Test project /home/zero/dev/engine_test/build/release
+    Start 16: stress_report
+1/4 Test #16: stress_report ....................   Passed    0.05 sec
+    Start 46: stress_graphics
+2/4 Test #46: stress_graphics ..................   Passed    0.09 sec
+    Start 61: replay_profile_native
+3/4 Test #61: replay_profile_native ............   Passed   15.70 sec
+    Start 62: spike_profile_native
+4/4 Test #62: spike_profile_native .............   Passed   23.63 sec
+
+100% tests passed out of 4
+
+Label Time Summary:
+cpu         =   0.05 sec*proc (1 test)
+hardware    =  39.42 sec*proc (3 tests)
+
+Total Test time (real) =  39.49 sec

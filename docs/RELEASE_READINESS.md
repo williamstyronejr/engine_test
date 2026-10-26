@@ -52,7 +52,7 @@ advertised; a second GPU is not a substitute for finishing checks on the testing
 | R3: clean offline build and candidate package | Evidence available at `1dfba31` | A fresh archived source built every target with networking disabled; 32 CPU groups and mandatory package smoke checks passed inside isolation. All three package checks passed afterward in the display session. Source/archive hashes, build identity and dependency/payload inventories are retained; the archive's embedded revision is `unknown` because Git metadata was absent. | Completed on the recorded host; [offline results and provenance](../validation/2026-10-23/RESULTS.md#clean-offline-build). |
 | R4: display, input and interactive game acceptance | Open; WM minimize was unconfirmed (probe exit 2) | Finish physical scale/monitor, supported WM minimize/restore, focus, layout switching and title/settings/gameplay checks. Verify camera, clipping, rebinding, save/relaunch, level transitions and visible shader failure/recovery. Record each case, configuration and result. | Human observation and a suitable WM/monitor configuration. |
 | R5: physical sound and device lifecycle | Open | Listen to channel/gain/mute/pause/stop and gameplay cues. Exercise physical disconnect and system suspend/resume in an arranged session. Confirm continued play and useful disabled-audio diagnostics on terminal failure. Record device/backend and outcome; automatic reconnection is not implemented or required by the current contract. | Human observation and physical device access. |
-| R6: declared performance and memory acceptance | Open; bounded historical workloads available | Declare the release workload and budget, repeat it on the candidate, retain actual viewport/target sizes, timing scopes, warmup, queries, resource peaks and limits. Use the scoped render/audio allocation evidence to prioritize measured costs; extend uncovered paths before broader claims. Audit remaining untracked storage before claiming whole-engine bounds. | Measurements can be automated; physical presentation/refresh checks require observation. |
+| R6: declared performance and memory acceptance | Open; declared memory checks pass, timing fails at `d4dbe22` | [Six workloads / 18 attempts](../benchmarks/2026-10-26-workload-acceptance-results.md) retain predeclared ceilings, kernel peak RSS and a storage coverage audit. All memory checks pass; one p99 and fourteen worst-frame checks exceed 16.7 ms. Investigate paired-frame causes, then repeat without discarding failures; extend interactive/audio/error/long-session coverage and physical 1080p acceptance. | Measurements are automated; physical presentation/refresh checks require observation. |
 | R7: persistence failure and compatibility boundary | Implemented syscall contract has evidence; physical durability unverified | Atomic-write failures are covered at `be16f3e`; `aa53ca4` adds ten directory cases covering full resolved ancestry before publication, faults, retry after process exit and matching read/write normalization. Existing content rejection remains unchanged. Physical power-loss/filesystem qualification requires an isolated disposable fixture if that guarantee is claimed. | [Atomic faults](ATOMIC_SAVE_VALIDATION.md) and [directory preparation](STORAGE_DIRECTORY_VALIDATION.md); no physical power-loss guarantee established. |
 | R8: release coverage and support record | Open | Close applicable R1–R7 cases, map each supported subfeature to named checks, retain manual results and unresolved failures, then publish the supported configuration and candidate artifact hash. Review scenario substitutions against the plan instead of treating one passing room or test-group count as complete coverage. | Documentation after evidence collection; unresolved scope decisions remain explicit. |
 
@@ -239,9 +239,12 @@ for open settings/controls, diagnostics and enabled-audio labels. Increment 60
 [reuses diagnostic text](../benchmarks/2026-10-26-diagnostic-text-results.md) and
 compares synthetic GPU-label and combined-overlay fixtures as well as the original
 UI workload. All measured render-thread scopes are zero after warmup in these
-fixtures; menu-transition costs remain separate. Next: complete the declared
-workload/memory acceptance record, keeping timing and peak-memory limits distinct
-from cumulative allocation counters.
-Workload/memory acceptance and physical R4/R5 cases remain open; R8 requires their
+fixtures; menu-transition costs remain separate. Increment 61 adds the
+[declared acceptance record](../benchmarks/2026-10-26-workload-acceptance-results.md):
+all 18 runs pass memory ceilings, while one p99 and fourteen frame maxima fail
+16.7 ms. The [coverage audit](../benchmarks/WORKLOAD_ACCEPTANCE.md#storage-coverage-audit)
+keeps process RSS, tracked payloads and cumulative allocation counts distinct.
+Next: retain paired samples to diagnose frame outliers before selecting an optimization.
+R6 timing/coverage and physical R4/R5 cases remain open; R8 requires their
 coverage/support record. Refresh automated evidence when the implementation or
 toolchain changes. These results do not complete milestone 6.

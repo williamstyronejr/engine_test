@@ -1,0 +1,18 @@
+{
+  "uname": [
+    "Linux",
+    "omarchy",
+    "7.2.8-9-omarchy",
+    "#1 SMP PREEMPT_DYNAMIC Sat, 17 Oct 2026 22:09:33 +0000",
+    "x86_64",
+    ""
+  ],
+  "display": ":0",
+  "session_type": "wayland",
+  "desktop": "Hyprland",
+  "python": "3.14.8",
+  "declaration_commit": "d4dbe22635013647b99118392f103cab03af738e",
+  "status": "?? .clang-format\n?? .gitignore\n",
+  "source_changes_from_previous_main": " benchmarks/WORKLOAD_ACCEPTANCE.md                  | 114 +++++\n .../2026-10-26-workload-acceptance/collect.py      |  77 ++++\n .../2026-10-26-workload-acceptance/evaluate.py     | 154 +++++++\n .../2026-10-26-workload-acceptance/policy.json     | 509 +++++++++++++++++++++\n 4 files changed, 854 insertions(+)\n",
+  "staged_assets_match": true
+}

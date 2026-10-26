@@ -1,0 +1,39 @@
+[
+  {
+    "name": "configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "release"
+    ],
+    "exit_code": 0,
+    "seconds": 0.5881332820281386
+  },
+  {
+    "name": "build",
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "-j2"
+    ],
+    "exit_code": 0,
+    "seconds": 164.7438582360046
+  },
+  {
+    "name": "tests",
+    "command": [
+      "ctest",
+      "--preset",
+      "release",
+      "-R",
+      "^(stress_cpu|stress_gl|replay_profile|spike_profile|gameplay_allocations|ui_allocations|diagnostics_allocations)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/build/acceptance-validation/tests.xml"
+    ],
+    "exit_code": 0,
+    "seconds": 34.80251989403041
+  }
+]

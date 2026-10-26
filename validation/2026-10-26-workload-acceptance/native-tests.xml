@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="4"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="39"
+	timestamp="2026-10-26T15:57:26"
+	>
+	<testcase name="stress_report" classname="stress_report" time="0.0476772" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="stress_graphics" classname="stress_graphics" time="0.0939964" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS repeated_gpu_load_draw_unload_and_rollover
+PASS texture_byte_accounting_replacement_failure_and_cleanup
+2 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="replay_profile_native" classname="replay_profile_native" time="15.6996" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="spike_profile_native" classname="spike_profile_native" time="23.6288" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+</testsuite>

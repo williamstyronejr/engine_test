@@ -1,0 +1,137 @@
+{
+  "synthetic_controls": true,
+  "cases": [
+    {
+      "case": "synthetic_all_budgets_pass",
+      "expected": "pass",
+      "observed": "pass",
+      "passed": true
+    },
+    {
+      "case": "missing_attempt",
+      "expected": "invalid_evidence",
+      "observed": "invalid_evidence",
+      "passed": true
+    },
+    {
+      "case": "duplicate_attempt",
+      "expected": "invalid_evidence",
+      "observed": "invalid_evidence",
+      "passed": true
+    },
+    {
+      "case": "missing_report",
+      "expected": "invalid_evidence",
+      "observed": "invalid_evidence",
+      "passed": true
+    },
+    {
+      "case": "wrong_policy_hash",
+      "expected": "invalid_evidence",
+      "observed": "invalid_evidence",
+      "passed": true
+    },
+    {
+      "case": "failed_process",
+      "expected": "invalid_evidence",
+      "observed": "invalid_evidence",
+      "passed": true
+    },
+    {
+      "case": "stale_build",
+      "expected": "invalid_evidence",
+      "observed": "invalid_evidence",
+      "passed": true
+    },
+    {
+      "case": "missing_samples",
+      "expected": "invalid_evidence",
+      "observed": "invalid_evidence",
+      "passed": true
+    },
+    {
+      "case": "nan_timing",
+      "expected": "invalid_evidence",
+      "observed": "invalid_evidence",
+      "passed": true
+    },
+    {
+      "case": "changed_workload",
+      "expected": "invalid_evidence",
+      "observed": "invalid_evidence",
+      "passed": true
+    },
+    {
+      "case": "changed_gameplay",
+      "expected": "invalid_evidence",
+      "observed": "invalid_evidence",
+      "passed": true
+    },
+    {
+      "case": "resized",
+      "expected": "invalid_evidence",
+      "observed": "invalid_evidence",
+      "passed": true
+    },
+    {
+      "case": "missing_gpu_support",
+      "expected": "invalid_evidence",
+      "observed": "invalid_evidence",
+      "passed": true
+    },
+    {
+      "case": "skipped_gpu",
+      "expected": "invalid_evidence",
+      "observed": "invalid_evidence",
+      "passed": true
+    },
+    {
+      "case": "unverified_event",
+      "expected": "invalid_evidence",
+      "observed": "invalid_evidence",
+      "passed": true
+    },
+    {
+      "case": "retained_staging",
+      "expected": "invalid_evidence",
+      "observed": "invalid_evidence",
+      "passed": true
+    },
+    {
+      "case": "rss_over_budget",
+      "expected": "budget_failure",
+      "observed": "budget_failure",
+      "passed": true
+    },
+    {
+      "case": "max_over_budget",
+      "expected": "budget_failure",
+      "observed": "budget_failure",
+      "passed": true
+    },
+    {
+      "case": "p99_over_budget",
+      "expected": "budget_failure",
+      "observed": "budget_failure",
+      "passed": true
+    },
+    {
+      "case": "operation_over_budget",
+      "expected": "budget_failure",
+      "observed": "budget_failure",
+      "passed": true
+    },
+    {
+      "case": "staging_over_budget",
+      "expected": "budget_failure",
+      "observed": "budget_failure",
+      "passed": true
+    },
+    {
+      "case": "inclusive_budget_boundary",
+      "expected": "pass",
+      "observed": "pass",
+      "passed": true
+    }
+  ]
+}

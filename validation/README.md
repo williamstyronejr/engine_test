@@ -26,6 +26,11 @@ with its measurement interpretation linked from benchmarks.
 - [2026-10-26 diagnostics text reuse](2026-10-26-diagnostics-text/RESULTS.md):
   decimal formatting, synthetic GPU presentation, repeated allocation reduction and 48 image pairs.
 
+- [2026-10-26 workload acceptance](2026-10-26-workload-acceptance/RESULTS.md):
+  predeclared timing/memory budgets, 18 runs with kernel peak RSS, retained timing
+  failures and evaluator controls. This record uses `manifest.json` for measurement
+  commands and separate preparation/native command records.
+
 `commands.json` retains commands as argument arrays, explicit environment overrides,
 working directory, UTC start, duration and exit status. Other environment facts are
 in `environment.log`; the full-matrix run also records its inherited display there.
