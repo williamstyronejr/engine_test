@@ -10,7 +10,8 @@ This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_
 [implementation status and feature coverage](docs/STATUS.md) distinguish working
 features from planned work. The [release-readiness audit](docs/RELEASE_READINESS.md)
 records remaining performance, persistence and physical display/audio gates with
-commands and expected evidence. [Candidate validation](validation/2026-10-23/RESULTS.md)
+commands and expected evidence. The [declared workload acceptance](benchmarks/2026-10-26-workload-acceptance-results.md)
+records passing memory budgets and remaining frame-time failures across 18 runs. [Candidate validation](validation/2026-10-23/RESULTS.md)
 retains full compiler/sanitizer results, audio ThreadSanitizer checks and a clean
 offline build with relocated package checks. Release acceptance remains open.
 

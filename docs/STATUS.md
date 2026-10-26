@@ -2092,10 +2092,29 @@ At documentation commit `016842c`, all three Release packaging checks pass
 (27.20 s). All 49 evidence files and both new benchmark documents match the archive;
 all four profiling executables remain excluded from installation.
 
+## Increment 61: declared workload and memory acceptance
+
+- Committed timing and memory budgets before collection: six workloads, three
+  repeats, explicit state/resource checks and separate p99/worst-frame decisions.
+- Added optional standard-library Python collection/evaluation utilities. Per-child
+  Linux peak RSS includes startup/teardown/reporting; payload ceilings and allocation
+  histories retain their separate coverage. Audited unitemized storage and limits.
+- At `d4dbe22`, all 18 ordinary Release runs complete with valid evidence. Every
+  memory budget passes (maximum RSS 53.25 MiB against 256 MiB). Seventeen p99 checks
+  pass, but only four worst-frame checks pass. Combined repeat 2 reaches p99
+  18.155 ms; the largest frame is 44.148 ms. Timing acceptance remains failed.
+- Ten focused Release groups pass without skips; 22 synthetic evaluator controls
+  distinguish invalid evidence, measured budget failures and inclusive limits.
+  Runtime code/assets are unchanged; this does not refresh the full sanitizer matrix.
+
+See [declaration and memory audit](../benchmarks/WORKLOAD_ACCEPTANCE.md),
+[results](../benchmarks/2026-10-26-workload-acceptance-results.md) and
+[retained evidence](../validation/2026-10-26-workload-acceptance/RESULTS.md).
+
 ## Next increment
 
-Complete the declared workload/memory acceptance record using the measured
-baselines. Keep timing budgets and peak-memory limits distinct from cumulative
-allocation counts, and retain startup, layout/rebinding, loading, errors and
-reporting exceptions. Physical display/audio and final support/coverage checks
-remain open; background loading remains deferred.
+Add paired frame samples for the failed workload to correlate CPU submission,
+presentation and delayed GPU durations by frame tag before choosing an optimization.
+Preserve the declared limits and failed attempts. Physical display/audio, broader
+memory-path coverage and the final support record remain open; background loading
+remains deferred.

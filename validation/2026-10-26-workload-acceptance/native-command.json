@@ -1,0 +1,14 @@
+{
+  "command": [
+    "ctest",
+    "--preset",
+    "release",
+    "-R",
+    "^(stress_report|stress_graphics|replay_profile_native|spike_profile_native)$",
+    "--output-on-failure",
+    "--output-junit",
+    "/home/zero/dev/engine_test/build/acceptance-validation/native-tests.xml"
+  ],
+  "exit_code": 0,
+  "seconds": 39.81816217099549
+}

@@ -258,3 +258,8 @@ The [diagnostics text follow-up](DIAGNOSTIC_TEXT.md) removes those recurring
 allocations and adds deterministic GPU-label/combined-overlay fixtures.
 [Before/after results](2026-10-26-diagnostic-text-results.md) retain matching pixels
 and separate menu-transition costs.
+
+The [candidate workload declaration](WORKLOAD_ACCEPTANCE.md) fixes timing and memory
+budgets before collection and audits storage exclusions. [Eighteen repeated runs](2026-10-26-workload-acceptance-results.md)
+pass memory checks but fail timing acceptance; peak RSS is kept separate from
+tracked payloads and allocation demand.

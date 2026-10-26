@@ -402,7 +402,7 @@ install(DIRECTORY docs/ DESTINATION share/doc/feature_lab/docs FILES_MATCHING PA
 install(DIRECTORY benchmarks/ DESTINATION share/doc/feature_lab/benchmarks
   FILES_MATCHING PATTERN "*.md" PATTERN "*.json" PATTERN "*.erpl")
 install(DIRECTORY validation/ DESTINATION share/doc/feature_lab/validation
-  FILES_MATCHING PATTERN "*.md" PATTERN "*.json" PATTERN "*.log" PATTERN "*.xml")
+  FILES_MATCHING PATTERN "*.md" PATTERN "*.json" PATTERN "*.log" PATTERN "*.xml" PATTERN "*.py")
 if(ENGINE_BUILD_PLATFORM)
   configure_file(cmake/package_build_info.txt.in generated/package-build-info.txt @ONLY)
   configure_file(cmake/PackageBuild.cmake.in generated/PackageBuild.cmake @ONLY)

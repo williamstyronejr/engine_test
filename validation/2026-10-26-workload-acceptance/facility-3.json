@@ -1,0 +1,9 @@
+{"schema":"feature_lab_replay_profile_v1","build":{"revision":"d4dbe22","compiler":"GNU 16.2.1","configuration":"Release","flags":" -O3 -DNDEBUG; C++20; sanitizers=OFF"},"machine":{"cpu":" Intel(R) Core(TM) i5-4300U CPU @ 1.90GHz","system":"Linux 7.2.8-9-omarchy x86_64","gl_vendor":"Intel","gl_device":"Mesa Intel(R) HD Graphics 4400 (HSW GT2)","gl_version":"4.6 (Core Profile) Mesa 26.2.5-arch1.1"},"workload":{"replay_fingerprint":"410620046671088085","commands":3000,"warmup":30,"level":"FACILITY"},"run":{"complete":true,"frames":3000,"measured_frames":2970,"final_hash":"3859428580428616961","ticks":1381,"width":1050,"height":1360,"resized":false,"audio_device":false,"vsync_requested":false,"vsync_disable_accepted":true},"totals":{"window_quads":2322687,"window_draws":50963,"minimap_quads":663508,"minimap_draws":2970,"simulation_steps":2734},"gpu_queries":{"supported":true,"method":"time_elapsed","counter_bits":64,"submitted":3000,"completed":2999,"pending":1,"skipped":0,"invalid":0,"failure_capacity":8,"failures_omitted":0,"failures":[]},"milliseconds":{
+"simulation":{"samples":2970,"mean":0.133310314,"median":0.123604,"p95":0.200311,"p99":0.550417,"max":3.18075},
+"minimap_submit":{"samples":2970,"mean":0.272983937,"median":0.243105,"p95":0.376441,"p99":0.978061,"max":3.883126},
+"world_submit":{"samples":2970,"mean":0.459015775,"median":0.365285,"p95":0.9059,"p99":2.134406,"max":7.167187},
+"ui_submit":{"samples":2970,"mean":0.624988176,"median":0.564539,"p95":1.046408,"p99":2.518866,"max":6.279946},
+"present":{"samples":2970,"mean":2.69342117,"median":1.014154,"p95":8.113745,"p99":10.45502,"max":42.74752},
+"frame":{"samples":2970,"mean":4.21535388,"median":2.510833,"p95":9.446102,"p99":12.317676,"max":44.147747},
+"gpu_render":{"samples":2969,"mean":2.08674937,"median":2.08896,"p95":2.27904,"p99":2.35792,"max":5.39336}
+}}
