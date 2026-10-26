@@ -1,0 +1,45 @@
+{
+  "revision": "9458a10",
+  "archive": "/home/zero/dev/engine_test/build/release/dist/feature-lab-0.1.0-Linux-x86_64-9458a10.tar.gz",
+  "archive_sha256": "814ddc8ece0edeebc565a223d18c0fac38a6c01626ad9f52d2e10ec96ea3ea99",
+  "matching_evidence_and_benchmark_files": 55,
+  "profilers_installed": false,
+  "commands": [
+    {
+      "command": [
+        "cmake",
+        "--preset",
+        "release"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4120082330191508
+    },
+    {
+      "command": [
+        "cmake",
+        "--build",
+        "--preset",
+        "release",
+        "--target",
+        "feature_lab",
+        "stress_bench",
+        "validate_assets",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "seconds": 7.381342938984744
+    },
+    {
+      "command": [
+        "ctest",
+        "--preset",
+        "release",
+        "-L",
+        "packaging",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "seconds": 27.449327367008664
+    }
+  ]
+}

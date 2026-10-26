@@ -85,3 +85,16 @@ The collector is intentionally separate from evaluation: all planned attempts ar
 retained even when an early run fails. Existing output files are refused. Neither
 passing tests nor a low RSS peak overrides failed performance criteria. Physical
 acceptance, long-session coverage and the final support record remain outstanding.
+
+## Feature package verification
+
+At documentation commit `9458a10`, all three Release packaging checks pass without
+skips (27.26 s), including relocated OpenGL gameplay. All 53 evidence files and
+both new benchmark documents match their archived copies byte-for-byte, including
+the optional Python utilities. The four allocation profiling executables remain
+excluded from installation. GNU 16.2.1, Release, sanitizers off.
+
+[Package identity and commands](package-feature.json),
+[configure](package-feature-configure.log), [build](package-feature-build.log),
+[tests](package-feature-tests.log). This follow-up records that earlier artifact;
+its own added logs and text are included by subsequent packaging.

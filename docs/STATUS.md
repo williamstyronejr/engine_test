@@ -2111,6 +2111,10 @@ See [declaration and memory audit](../benchmarks/WORKLOAD_ACCEPTANCE.md),
 [results](../benchmarks/2026-10-26-workload-acceptance-results.md) and
 [retained evidence](../validation/2026-10-26-workload-acceptance/RESULTS.md).
 
+At documentation commit `9458a10`, all three Release package checks pass (27.26 s).
+All 53 evidence files and both benchmark documents match their archived copies;
+optional Python evidence tools are included, and allocation profilers remain excluded.
+
 ## Next increment
 
 Add paired frame samples for the failed workload to correlate CPU submission,
