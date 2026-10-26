@@ -807,7 +807,8 @@ int main(int argc, char** argv) {
                     &allocation_world
 #endif
                 );
-                diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped);
+                diagnostics.draw_hud(renderer, game, window.width(), window.height(), dropped,
+                                     hud_text);
                 settings.draw(renderer, window.width(), window.height());
             }
             if (font_demo)

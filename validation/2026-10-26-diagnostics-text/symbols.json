@@ -1,0 +1,49 @@
+{
+  "feature_lab": {
+    "command": [
+      "nm",
+      "-C",
+      "/home/zero/dev/engine_test/build/release-validation/gcc-release/feature_lab"
+    ],
+    "lines": [
+      "                 U operator new(unsigned long)@GLIBCXX_3.4",
+      "                 U operator new(unsigned long, std::align_val_t)@CXXABI_1.3.11"
+    ]
+  },
+  "diagnostics_allocations": {
+    "command": [
+      "nm",
+      "-C",
+      "/home/zero/dev/engine_test/build/release-validation/gcc-release/diagnostics_allocations"
+    ],
+    "lines": [
+      "000000000001d620 t feature_lab::draw_game(engine::Renderer&, feature_lab::Game const&, feature_lab::TextureAssets const&, float, int, int, engine::Camera, feature_lab::Overlays const&, feature_lab::Soundtrack const&, feature_lab::CollisionVisuals const&, feature_lab::SamplingGallery const&, feature_lab::Diagnostics const&, feature_lab::ShaderTools const&, feature_lab::FontAssets const&, feature_lab::AnimationAssets const&, feature_lab::TilemapAssets const&, feature_lab::SceneAssets const&, bool, engine::KeyBindings const&, std::basic_string_view<char, std::char_traits<char> >, bool, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >*, allocation_profile::Count*) [clone .constprop.0]",
+      "000000000000725b t feature_lab::draw_game(engine::Renderer&, feature_lab::Game const&, feature_lab::TextureAssets const&, float, int, int, engine::Camera, feature_lab::Overlays const&, feature_lab::Soundtrack const&, feature_lab::CollisionVisuals const&, feature_lab::SamplingGallery const&, feature_lab::Diagnostics const&, feature_lab::ShaderTools const&, feature_lab::FontAssets const&, feature_lab::AnimationAssets const&, feature_lab::TilemapAssets const&, feature_lab::SceneAssets const&, bool, engine::KeyBindings const&, std::basic_string_view<char, std::char_traits<char> >, bool, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >*, allocation_profile::Count*) [clone .constprop.0] [clone .cold]",
+      "0000000000019af0 t (anonymous namespace)::summary(std::ostream&, allocation_profile::Summary const&)",
+      "0000000000086840 b allocation_profile::(anonymous namespace)::totals",
+      "0000000000000000 b allocation_profile::(anonymous namespace)::current",
+      "0000000000018bd0 T allocation_profile::json[abi:cxx11]()",
+      "0000000000006b7e t allocation_profile::json[abi:cxx11]() [clone .cold]",
+      "0000000000018870 T allocation_profile::record(allocation_profile::Scope, allocation_profile::Count, allocation_profile::Count)",
+      "00000000000188e0 T allocation_profile::summary(allocation_profile::Scope)",
+      "0000000000018930 T allocation_profile::allocate(unsigned long, unsigned long)",
+      "0000000000006aea t allocation_profile::allocate(unsigned long, unsigned long) [clone .cold]",
+      "00000000000187e0 t allocation_profile::allocate(unsigned long, unsigned long) [clone .constprop.0]",
+      "0000000000006ac0 t allocation_profile::allocate(unsigned long, unsigned long) [clone .constprop.0] [clone .cold]",
+      "0000000000018850 T allocation_profile::snapshot()",
+      "000000000002aaa0 W feature_lab::draw_game(engine::Renderer&, feature_lab::Game const&, feature_lab::TextureAssets const&, float, int, int, engine::Camera, feature_lab::Overlays const&, feature_lab::Soundtrack const&, feature_lab::CollisionVisuals const&, feature_lab::SamplingGallery const&, feature_lab::Diagnostics const&, feature_lab::ShaderTools const&, feature_lab::FontAssets const&, feature_lab::AnimationAssets const&, feature_lab::TilemapAssets const&, feature_lab::SceneAssets const&, bool, engine::KeyBindings const&, std::basic_string_view<char, std::char_traits<char> >, bool, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >*, allocation_profile::Count*)::{lambda()#1}::operator()() const",
+      "0000000000018a60 T operator new[](unsigned long)",
+      "0000000000018ab0 T operator new[](unsigned long, std::nothrow_t const&)",
+      "0000000000006b42 t operator new[](unsigned long, std::nothrow_t const&) [clone .cold]",
+      "0000000000018a80 T operator new[](unsigned long, std::align_val_t)",
+      "0000000000018af0 T operator new[](unsigned long, std::align_val_t, std::nothrow_t const&)",
+      "0000000000006b6a t operator new[](unsigned long, std::align_val_t, std::nothrow_t const&) [clone .cold]",
+      "0000000000018a50 T operator new(unsigned long)",
+      "0000000000018a90 T operator new(unsigned long, std::nothrow_t const&)",
+      "0000000000006b2e t operator new(unsigned long, std::nothrow_t const&) [clone .cold]",
+      "0000000000018a70 T operator new(unsigned long, std::align_val_t)",
+      "0000000000018ad0 T operator new(unsigned long, std::align_val_t, std::nothrow_t const&)",
+      "0000000000006b56 t operator new(unsigned long, std::align_val_t, std::nothrow_t const&) [clone .cold]"
+    ]
+  }
+}

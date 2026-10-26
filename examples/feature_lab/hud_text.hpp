@@ -7,9 +7,22 @@
 #include <string_view>
 
 namespace feature_lab {
+// Diagnostics' existing fixed-two-decimal format, including its overflow marker.
+struct Fixed2 {
+    double value{};
+};
 namespace text_detail {
 inline void append(std::string& output, std::string_view value) {
     output.append(value);
+}
+inline void append(std::string& output, Fixed2 number) {
+    std::array<char, 64> buffer{};
+    const auto [end, error] = std::to_chars(buffer.data(), buffer.data() + buffer.size(),
+                                            number.value, std::chars_format::fixed, 2);
+    if (error == std::errc{})
+        output.append(buffer.data(), static_cast<std::size_t>(end - buffer.data()));
+    else
+        output.append("OVERFLOW");
 }
 template <std::integral T>
     requires(!std::same_as<T, bool>)

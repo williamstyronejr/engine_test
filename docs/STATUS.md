@@ -2062,11 +2062,40 @@ At documentation commit `56492b9`, all three Release packaging checks pass
 (48.85 s). All 46 evidence files and both new benchmark documents match the archive;
 all profiling executables remain excluded from installation.
 
+## Increment 60: reusable diagnostics text
+
+- Diagnostic rows now reuse the existing 256-character HUD buffer. `Fixed2`
+  appends two-decimal values directly with `std::to_chars`, preserving negative
+  zero, rounding, nonfinite spellings and the old 64-character `OVERFLOW` behavior.
+  The convenience drawing overload remains available and may allocate.
+- Live GPU collection delegates to a shared ingestion method. A development-only
+  `diagnostics_allocations` target exercises unsupported/waiting/completed and
+  changing synthetic GPU labels, alone and behind settings/remapped controls.
+  Its 12 cases have a separate workload identity from the original 18 UI cases.
+- Three before/after Release repeats preserve state, rendering totals/fingerprints
+  and transition costs. All measured render-thread scopes now record zero C++
+  allocations in both workloads; the original diagnostics cases drop from 16
+  calls / 537 bytes per frame to zero. Synthetic history setup stays excluded.
+- Forty-eight PPM pairs are byte-identical. CPU cases cover decimal edge values,
+  shorter replacements and delayed GPU ingestion without allocation. The shared
+  checker guards zero recurring diagnostic calls after warmup in these fixtures.
+
+At `eabf433`, all 64 Debug and Release runtime groups pass without skips. Eight
+focused Clang, four CPU ASan/UBSan and four graphical ASan/UBSan groups also pass.
+CPU leak detection is enabled; driver leak detection is disabled for graphics.
+
+See [storage and workload contract](../benchmarks/DIAGNOSTIC_TEXT.md),
+[measurements](../benchmarks/2026-10-26-diagnostic-text-results.md) and
+[validation](../validation/2026-10-26-diagnostics-text/RESULTS.md).
+
+At documentation commit `016842c`, all three Release packaging checks pass
+(27.20 s). All 49 evidence files and both new benchmark documents match the archive;
+all four profiling executables remain excluded from installation.
+
 ## Next increment
 
-Reuse diagnostics text storage and compare the same workload before/after. Extend
-coverage to completed/changing GPU-timing labels and combined overlays before
-broader rendering claims. Keep startup, layout/rebinding, loading, exceptional
-errors and reporting costs explicit. Physical display/audio, declared workload/
-memory acceptance and final support/coverage checks remain open; background loading
-remains deferred.
+Complete the declared workload/memory acceptance record using the measured
+baselines. Keep timing budgets and peak-memory limits distinct from cumulative
+allocation counts, and retain startup, layout/rebinding, loading, errors and
+reporting exceptions. Physical display/audio and final support/coverage checks
+remain open; background loading remains deferred.

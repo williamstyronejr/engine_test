@@ -1,0 +1,25 @@
+Test project /home/zero/dev/engine_test/build/release-validation/clang-debug
+    Start  1: allocation_counters
+1/8 Test  #1: allocation_counters ..............   Passed    0.00 sec
+    Start  2: hud_text
+2/8 Test  #2: hud_text .........................   Passed    0.02 sec
+    Start 25: diagnostics
+3/8 Test #25: diagnostics ......................   Passed    0.41 sec
+    Start 30: ui
+4/8 Test #30: ui ...............................   Passed    0.02 sec
+    Start 35: diagnostics_allocations
+5/8 Test #35: diagnostics_allocations ..........   Passed   21.03 sec
+    Start 36: ui_allocations
+6/8 Test #36: ui_allocations ...................   Passed   29.32 sec
+    Start 38: gameplay_allocations
+7/8 Test #38: gameplay_allocations .............   Passed   36.97 sec
+    Start 54: render_targets
+8/8 Test #54: render_targets ...................   Passed    1.27 sec
+
+100% tests passed out of 8
+
+Label Time Summary:
+cpu         =   0.45 sec*proc (4 tests)
+hardware    =  88.60 sec*proc (4 tests)
+
+Total Test time (real) =  89.06 sec

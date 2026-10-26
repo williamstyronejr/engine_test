@@ -239,6 +239,15 @@ if(ENGINE_BUILD_PLATFORM)
     target_compile_definitions(feature_lab_allocations PRIVATE ENGINE_ALLOCATION_PROFILE)
     target_link_libraries(feature_lab_allocations PRIVATE engine_platform feature_lab_stress allocation_profile)
     add_dependencies(feature_lab_allocations stage_assets)
+    add_executable(diagnostics_allocations profiling/ui_allocations.cpp)
+    target_compile_definitions(diagnostics_allocations PRIVATE ENGINE_ALLOCATION_PROFILE DIAGNOSTICS_MATRIX TEST_ASSET_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/assets")
+    target_include_directories(diagnostics_allocations PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/generated")
+    target_link_libraries(diagnostics_allocations PRIVATE engine_platform feature_lab_stress allocation_profile)
+    add_test(NAME diagnostics_allocations COMMAND ${CMAKE_COMMAND}
+      -DPROBE=$<TARGET_FILE:diagnostics_allocations> -DREPORT=${CMAKE_CURRENT_BINARY_DIR}/diagnostics-allocations.json
+      -DDIAGNOSTICS_MATRIX=ON -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/check_ui_allocations.cmake)
+    set_tests_properties(diagnostics_allocations PROPERTIES TIMEOUT 150 LABELS hardware RUN_SERIAL TRUE
+      SKIP_REGULAR_EXPRESSION "SKIP: UI allocation workload")
     add_executable(ui_allocations profiling/ui_allocations.cpp)
     target_compile_definitions(ui_allocations PRIVATE ENGINE_ALLOCATION_PROFILE TEST_ASSET_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/assets")
     target_include_directories(ui_allocations PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/generated")

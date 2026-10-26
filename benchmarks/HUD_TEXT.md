@@ -77,3 +77,7 @@ release workload/memory acceptance remain open.
 The subsequent [UI allocation coverage](UI_ALLOCATIONS.md) measures open settings,
 controls, diagnostics and enabled-audio HUD labels in separate frozen fixtures.
 It does not broaden the original two replay workloads or their exclusions.
+
+[Diagnostics text reuse](DIAGNOSTIC_TEXT.md) adds the explicit `Fixed2` decimal
+fragment and shares the same caller buffer. Its preserved 64-character numeric
+conversion limit still displays `OVERFLOW`; whole label storage remains growable.
