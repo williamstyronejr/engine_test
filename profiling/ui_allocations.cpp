@@ -239,7 +239,7 @@ Result run(const AssetRoot& assets, Level level, Scenario scenario,
                   scenes, menu.opened(), menu.bindings, status, false, false, text, nullptr,
                   &world_done);
         const auto hud_done = allocation_profile::snapshot();
-        debug.draw_hud(renderer, game, width, height, 0.125);
+        debug.draw_hud(renderer, game, width, height, 0.125, text);
         const auto debug_done = allocation_profile::snapshot();
         menu.draw(renderer, width, height);
         const auto menu_done = allocation_profile::snapshot();

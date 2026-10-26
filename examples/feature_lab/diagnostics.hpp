@@ -2,23 +2,24 @@
 #include "engine/debug_draw.hpp"
 #include "engine/diagnostics.hpp"
 #include "game.hpp"
+#include "hud_text.hpp"
 #include "overlays.hpp"
-#include <charconv>
 #include <string>
 
 namespace feature_lab {
 class Diagnostics {
   public:
     engine::DebugControls controls;
-    std::span<const engine::GpuTimingSample> collect_gpu(engine::GpuTimer& timer, std::uint64_t frame) {
+    std::span<const engine::GpuTimingSample> collect_gpu(engine::GpuTimer& timer,
+                                                         std::uint64_t frame) {
         const auto samples = timer.collect();
         record_gpu(samples, timer.stats(), frame);
         return samples;
     }
     // Ingest already-collected timing data; also allows deterministic presentation fixtures.
     // Samples must be ordered, valid and no newer than frame, as returned by GpuTimer.
-    void record_gpu(std::span<const engine::GpuTimingSample> samples,
-                    engine::GpuTimingStats stats, std::uint64_t frame) {
+    void record_gpu(std::span<const engine::GpuTimingSample> samples, engine::GpuTimingStats stats,
+                    std::uint64_t frame) {
         for (const auto sample : samples)
             gpu_history_.record(sample);
         gpu_stats_ = stats;
@@ -55,6 +56,11 @@ class Diagnostics {
     // Uses the caller's pixel camera. Completed-pass counters lag by one rendered frame.
     void draw_hud(engine::Renderer& renderer, const Game& game, int width, int height,
                   double dropped_seconds) const {
+        std::string text;
+        draw_hud(renderer, game, width, height, dropped_seconds, text);
+    }
+    void draw_hud(engine::Renderer& renderer, const Game& game, int width, int height,
+                  double dropped_seconds, std::string& text) const {
         using namespace engine;
         if (!controls.visible)
             return;
@@ -72,52 +78,44 @@ class Diagnostics {
         const auto collision = game.collisions.stats();
         row("DIAGNOSTICS / F2", {0.04F, 0.85F, 0.7F, 1});
         row(game.won ? "COMPLETE" : game.paused ? "PAUSED / F10 SINGLE STEP" : "RUNNING / 60 HZ");
-        row("TICK " + std::to_string(game.ticks) + "  STEPS/FRAME " + std::to_string(steps_));
-        row("WINDOW " + std::to_string(frames.samples) + "/240 FRAMES");
-        row("WALL MEAN " + number(frames.wall_mean_ms) + " MS");
-        row("CPU MEAN " + number(frames.cpu_mean_ms) + "  P95 " + number(frames.cpu_p95_ms) +
-            " MS");
+        row(format_text(text, "TICK ", game.ticks, "  STEPS/FRAME ", steps_));
+        row(format_text(text, "WINDOW ", frames.samples, "/240 FRAMES"));
+        row(format_text(text, "WALL MEAN ", Fixed2{frames.wall_mean_ms}, " MS"));
+        row(format_text(text, "CPU MEAN ", Fixed2{frames.cpu_mean_ms}, "  P95 ",
+                        Fixed2{frames.cpu_p95_ms}, " MS"));
         row("CPU = UPDATE + SUBMIT / NO SWAP WAIT");
         const auto gpu = gpu_history_.summary();
         row(!gpu_stats_.supported ? "GPU TIMING UNAVAILABLE / NEEDS 64 BITS"
-            : !gpu.samples
-                ? "GPU WAITING FOR COMPLETED SAMPLE"
-                : "GPU MEAN " + number(gpu.mean_ms) + "  P95 " + number(gpu.p95_ms) + " MS");
-        row(gpu.samples ? "GPU SAMPLES " + std::to_string(gpu.samples) + "  AGE " +
-                              std::to_string(frame_ - gpu.last_frame) + " FRAMES"
+            : !gpu.samples        ? "GPU WAITING FOR COMPLETED SAMPLE"
+                                  : format_text(text, "GPU MEAN ", Fixed2{gpu.mean_ms}, "  P95 ",
+                                                Fixed2{gpu.p95_ms}, " MS"));
+        row(gpu.samples ? format_text(text, "GPU SAMPLES ", gpu.samples, "  AGE ",
+                                      frame_ - gpu.last_frame, " FRAMES")
                         : "GPU SAMPLES 0 / ASYNC READBACK");
-        row("GPU PENDING " + std::to_string(gpu_stats_.pending) + "/8 SKIP " +
-            std::to_string(gpu_stats_.skipped) + " BAD " + std::to_string(gpu_stats_.invalid));
-        row("CLOCK DROPPED " + number(dropped_seconds * 1000) + " MS TOTAL");
-        row("QUADS WIN " + std::to_string(window_.quads) + "  MAP " +
-            std::to_string(minimap_.quads));
-        row("DRAWS WIN " + std::to_string(window_.draws) + "  MAP " +
-            std::to_string(minimap_.draws));
-        row("CULLED " + std::to_string(window_.culled + minimap_.culled) +
-            " / GPU = RENDER INTERVAL");
-        row("TEXTURES " + std::to_string(renderer.live_textures()) + "  TARGETS " +
-            std::to_string(renderer.live_targets()) + "  KB " +
-            number(static_cast<double>(renderer.target_bytes()) / 1024) + " FONT KB " +
-            number(static_cast<double>(renderer.font_bytes()) / 1024));
-        row("BODIES " + std::to_string(game.collisions.bodies().size()) + "  CONTACTS " +
-            std::to_string(game.collisions.contacts().size()));
-        row("GRID PAIRS " + std::to_string(collision.candidate_pairs) + "  TESTS " +
-            std::to_string(collision.narrow_tests));
+        row(format_text(text, "GPU PENDING ", gpu_stats_.pending, "/8 SKIP ", gpu_stats_.skipped,
+                        " BAD ", gpu_stats_.invalid));
+        row(format_text(text, "CLOCK DROPPED ", Fixed2{dropped_seconds * 1000}, " MS TOTAL"));
+        row(format_text(text, "QUADS WIN ", window_.quads, "  MAP ", minimap_.quads));
+        row(format_text(text, "DRAWS WIN ", window_.draws, "  MAP ", minimap_.draws));
+        row(format_text(text, "CULLED ", window_.culled + minimap_.culled,
+                        " / GPU = RENDER INTERVAL"));
+        row(format_text(text, "TEXTURES ", renderer.live_textures(), "  TARGETS ",
+                        renderer.live_targets(), "  KB ",
+                        Fixed2{static_cast<double>(renderer.target_bytes()) / 1024}, " FONT KB ",
+                        Fixed2{static_cast<double>(renderer.font_bytes()) / 1024}));
+        row(format_text(text, "BODIES ", game.collisions.bodies().size(), "  CONTACTS ",
+                        game.collisions.contacts().size()));
+        row(format_text(text, "GRID PAIRS ", collision.candidate_pairs, "  TESTS ",
+                        collision.narrow_tests));
         row(controls.shapes ? "F3 SHAPES ON / RED CONTACT GOLD SENSOR"
                             : "F3 COLLISION / CAMERA SHAPES OFF");
         row("BLUE STATIC / CYAN MOVING AND CAMERA");
-        row("ENTITIES " + std::to_string(game.world.size()) + "  PICKUPS " +
-            std::to_string(game.world.component_count<CorePickup>()));
+        row(format_text(text, "ENTITIES ", game.world.size(), "  PICKUPS ",
+                        game.world.component_count<CorePickup>()));
         renderer.pop_clip();
     }
 
   private:
-    static std::string number(double value) {
-        std::array<char, 64> buffer{};
-        const auto [end, error] = std::to_chars(buffer.data(), buffer.data() + buffer.size(), value,
-                                                std::chars_format::fixed, 2);
-        return error == std::errc{} ? std::string(buffer.data(), end) : "OVERFLOW";
-    }
     engine::FrameHistory history_;
     engine::GpuTimingHistory gpu_history_;
     engine::GpuTimingStats gpu_stats_;

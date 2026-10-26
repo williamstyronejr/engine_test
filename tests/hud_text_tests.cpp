@@ -1,4 +1,5 @@
 #include "../examples/feature_lab/animation_assets.hpp"
+#include "../examples/feature_lab/diagnostics.hpp"
 #include "../examples/feature_lab/font_assets.hpp"
 #include "../examples/feature_lab/hud_text.hpp"
 #include "../examples/feature_lab/scene_assets.hpp"
@@ -20,6 +21,45 @@ TEST(integer_extremes_and_shorter_replacements_preserve_exact_text) {
     CHECK(format_text(text, "PAUSED") == "PAUSED");
     CHECK(format_text(text, "", 42U, " / ", -17) == "42 / -17");
     CHECK(format_text(text).empty());
+    CHECK(allocation_profile::snapshot().calls == before.calls);
+}
+TEST(fixed_decimals_preserve_rounding_zero_and_overflow_without_allocations) {
+    std::string text;
+    text.reserve(256);
+    const auto before = allocation_profile::snapshot();
+    for (int i = 0; i < 1000; ++i) {
+        CHECK(format_text(text, Fixed2{-0.0}, " / ", Fixed2{12.125}, " / ", Fixed2{9999.5}) ==
+              "-0.00 / 12.12 / 9999.50");
+        CHECK(format_text(text, "CPU ", Fixed2{std::numeric_limits<double>::max()}, " MS") ==
+              "CPU OVERFLOW MS");
+        CHECK(format_text(text, Fixed2{std::numeric_limits<double>::denorm_min()}) == "0.00");
+        CHECK(format_text(text, Fixed2{-12.5}) == "-12.50");
+        CHECK(format_text(text, Fixed2{std::numeric_limits<double>::infinity()}) == "inf");
+        CHECK(format_text(text, Fixed2{std::numeric_limits<double>::quiet_NaN()}) == "nan");
+        CHECK(format_text(text, "GPU MEAN ", Fixed2{0}, "  P95 ", Fixed2{0}, " MS") ==
+              "GPU MEAN 0.00  P95 0.00 MS");
+    }
+    CHECK(allocation_profile::snapshot().calls == before.calls);
+}
+TEST(diagnostic_gpu_ingestion_preserves_delayed_samples_without_allocations) {
+    Diagnostics debug;
+    engine::GpuTimingStats stats;
+    stats.supported = true;
+    stats.counter_bits = 64;
+    stats.pending = 8;
+    const auto before = allocation_profile::snapshot();
+    debug.record_gpu({}, stats, 1);
+    CHECK(debug.gpu_summary().samples == 0);
+    const std::array samples{engine::GpuTimingSample{1, 12.125},
+                             engine::GpuTimingSample{2, 9999.5}};
+    stats.pending = 0;
+    stats.completed = 2;
+    debug.record_gpu(samples, stats, 8);
+    const auto result = debug.gpu_summary();
+    CHECK(result.samples == 2 && result.last_frame == 2 && result.last_ms == 9999.5);
+    CHECK(result.mean_ms == 5005.8125 && result.p95_ms == 12.125);
+    debug.record_gpu({}, stats, 20);
+    CHECK(debug.gpu_summary().samples == 2 && debug.gpu_summary().last_frame == 2);
     CHECK(allocation_profile::snapshot().calls == before.calls);
 }
 TEST(long_labels_grow_losslessly_and_then_reuse_capacity) {
