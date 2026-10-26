@@ -23,7 +23,20 @@ constexpr std::array scope_names{
 struct Scenario {
     const char* name;
     bool audio{}, remap{}, menu{}, controls{}, capture{}, rebind{}, stats{}, shapes{};
+    unsigned gpu_mode{};
 };
+#ifdef DIAGNOSTICS_MATRIX
+constexpr std::array scenarios{
+    Scenario{"gpu_unsupported", true, false, false, false, false, false, true},
+    Scenario{"gpu_waiting", true, false, false, false, false, false, true, false, 1},
+    Scenario{"gpu_completed", true, false, false, false, false, false, true, false, 2},
+    Scenario{"gpu_changing", true, false, false, false, false, false, true, true, 3},
+    Scenario{"combined_settings", true, false, true, false, false, false, true, true, 3},
+    Scenario{"combined_controls", true, true, true, true, false, false, true, true, 3}};
+constexpr const char* usage = "Usage: diagnostics_allocations REPORT.json [SCREENSHOT_DIRECTORY]";
+constexpr const char* workload = "diagnostics_ui_states_v1";
+constexpr const char* gpu_history = "synthetic";
+#else
 constexpr std::array scenarios{
     Scenario{"audio_off"},
     Scenario{"audio_default", true},
@@ -34,6 +47,10 @@ constexpr std::array scenarios{
     Scenario{"binding_updated", true, true, true, true, true, true},
     Scenario{"diagnostics", true, false, false, false, false, false, true},
     Scenario{"diagnostics_shapes", true, false, false, false, false, false, true, true}};
+constexpr const char* usage = "Usage: ui_allocations REPORT.json [SCREENSHOT_DIRECTORY]";
+constexpr const char* workload = "frozen_ui_states_v1";
+constexpr const char* gpu_history = "none";
+#endif
 using Summary = allocation_profile::Summary;
 using Count = allocation_profile::Count;
 void accumulate(Summary& out, Count before, Count after) {
@@ -58,6 +75,8 @@ struct Result {
     std::uint64_t hash{}, ticks{};
     bool audio{}, menu{}, controls{}, capture{}, stats{}, shapes{};
     std::string audio_label, binding_label;
+    std::array<unsigned, 3> gpu_phases{};
+    std::uint64_t render_fingerprint{1469598103934665603ULL};
 };
 void click(Settings& menu, Game& game, UiId id, bool audio) {
     const auto widgets = menu.ui().widgets();
@@ -73,6 +92,37 @@ void click(Settings& menu, Game& game, UiId id, bool audio) {
     input.pointer.primary = {false, false, true};
     menu.update(game, input, width, height, audio);
 }
+#ifdef DIAGNOSTICS_MATRIX
+// Rebuild synthetic history outside measured rendering. Values intentionally cross
+// text-width/overflow boundaries; no GL timing or real-time performance is claimed.
+unsigned prepare_diagnostics(Diagnostics& debug, Scenario scenario, unsigned iteration) {
+    debug = {};
+    debug.controls = {scenario.stats, scenario.shapes};
+    const unsigned phase = scenario.gpu_mode == 3 ? iteration % 30 / 10 : scenario.gpu_mode;
+    const unsigned variation = scenario.gpu_mode == 3 ? iteration % 4 : 2;
+    constexpr std::array values{0.0, 12.125, 9999.5, std::numeric_limits<double>::max()};
+    const double value = values[variation];
+    for (unsigned i = 0; i < 240; ++i)
+        debug.record({value, value}, {1234 + iteration, 12, 8}, {456, 0, 3}, iteration % 10);
+    GpuTimingStats stats;
+    stats.supported = phase != 0;
+    stats.counter_bits = stats.supported ? 64 : 0;
+    stats.pending = phase == 1 ? 8 : iteration % 9;
+    stats.submitted = 1000 + iteration;
+    stats.skipped = iteration * 17;
+    stats.invalid = iteration / 17;
+    const auto tag = std::uint64_t{4} * iteration + 2;
+    const std::array samples{GpuTimingSample{tag - 1, value}, GpuTimingSample{tag, value}};
+    if (phase == 2) {
+        stats.completed = 2;
+        debug.record_gpu(samples, stats, tag + iteration % 15);
+    } else {
+        debug.record_gpu({}, stats, tag);
+    }
+    require(debug.gpu_summary().samples == (phase == 2 ? 2U : 0U), "Wrong synthetic GPU history");
+    return phase;
+}
+#endif
 Result run(const AssetRoot& assets, Level level, Scenario scenario,
            const std::filesystem::path& screenshots, GraphicsInfo& graphics) {
     Renderer renderer;
@@ -173,6 +223,10 @@ Result run(const AssetRoot& assets, Level level, Scenario scenario,
     format_text(status, "36 / ", level_name(level), " / AUDIO BANK RELOAD");
     const auto camera = game.camera(width, height, 1);
     for (unsigned i = 0; i < frames; ++i) {
+#ifdef DIAGNOSTICS_MATRIX
+        const auto phase = prepare_diagnostics(debug, scenario, scenario.gpu_mode == 3 ? i : 0);
+        ++result.gpu_phases[phase];
+#endif
         const auto start = allocation_profile::snapshot();
         menu.update(game, {}, width, height, scenario.audio);
         const auto updated = allocation_profile::snapshot();
@@ -200,13 +254,24 @@ Result run(const AssetRoot& assets, Level level, Scenario scenario,
         }
         const auto drawn = renderer.stats();
         require(drawn.quads > 100 && drawn.draws > 0 && renderer.healthy(), "Empty/unhealthy draw");
-        if (i) {
+        if (i && scenario.gpu_mode != 3) {
             require(result.window.quads == drawn.quads && result.window.draws == drawn.draws &&
                         result.window.culled == drawn.culled,
                     "Frozen fixture render totals changed");
         }
         result.window = drawn;
         result.map = overlays.minimap_stats();
+        for (const auto value : {drawn.quads, drawn.draws, drawn.culled}) {
+            result.render_fingerprint ^= value;
+            result.render_fingerprint *= 1099511628211ULL;
+        }
+#ifdef DIAGNOSTICS_MATRIX
+        if (!screenshots.empty() && scenario.gpu_mode == 3 && (i == 0 || i == 10 || i == 20)) {
+            const auto name = std::string(level_name(level)) + "-" + scenario.name + "-" +
+                              std::to_string(i) + ".ppm";
+            renderer.screenshot((screenshots / name).string());
+        }
+#endif
     }
     require(replay_hash(game) == result.hash && game.ticks == result.ticks,
             "Idle UI workload changed gameplay");
@@ -231,7 +296,7 @@ void summary(std::ostream& out, const Summary& value) {
 int main(int argc, char** argv) {
     try {
         if (argc != 2 && argc != 3)
-            throw std::invalid_argument("Usage: ui_allocations REPORT.json [SCREENSHOT_DIRECTORY]");
+            throw std::invalid_argument(usage);
         if (!std::getenv("DISPLAY") || !*std::getenv("DISPLAY")) {
             std::cout << "SKIP: UI allocation workload DISPLAY unavailable\n";
             return 77;
@@ -254,10 +319,12 @@ int main(int argc, char** argv) {
             << ",\"compiler\":" << json_string(stress_build_compiler)
             << ",\"configuration\":" << json_string(stress_build_configuration)
             << ",\"flags\":" << json_string(stress_build_flags)
-            << ",\"workload\":\"frozen_ui_states_v1\",\"complete\":true,\"frames\":" << frames
-            << ",\"warmup\":" << warmup << ",\"measured_frames\":" << frames - warmup
-            << ",\"width\":" << width << ",\"height\":" << height
-            << ",\"audio_device\":\"null\",\"thread\":\"render\",\"gpu_history\":\"none\""
+            << ",\"workload\":" << json_string(workload)
+            << ",\"complete\":true,\"frames\":" << frames << ",\"warmup\":" << warmup
+            << ",\"measured_frames\":" << frames - warmup << ",\"width\":" << width
+            << ",\"height\":" << height
+            << ",\"audio_device\":\"null\",\"thread\":\"render\",\"gpu_history\":"
+            << json_string(gpu_history)
             << ",\"graphics\":{\"vendor\":" << json_string(graphics.vendor)
             << ",\"device\":" << json_string(graphics.device)
             << ",\"version\":" << json_string(graphics.version) << "},\"scenarios\":[";
@@ -282,7 +349,13 @@ int main(int argc, char** argv) {
                 out << (j ? "," : "") << json_string(scope_names[j]) << ':';
                 summary(out, r.scopes[j]);
             }
+#ifdef DIAGNOSTICS_MATRIX
+            out << "},\"gpu_phases\":[" << r.gpu_phases[0] << ',' << r.gpu_phases[1] << ','
+                << r.gpu_phases[2] << "],\"render_fingerprint\":" << r.render_fingerprint;
+            out << ",\"transitions\":{";
+#else
             out << "},\"transitions\":{";
+#endif
             constexpr std::array names{"open", "controls", "capture", "rebind"};
             for (std::size_t j = 0; j < names.size(); ++j) {
                 out << (j ? "," : "") << json_string(names[j]) << ':';

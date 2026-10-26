@@ -12,11 +12,17 @@ class Diagnostics {
     engine::DebugControls controls;
     std::span<const engine::GpuTimingSample> collect_gpu(engine::GpuTimer& timer, std::uint64_t frame) {
         const auto samples = timer.collect();
+        record_gpu(samples, timer.stats(), frame);
+        return samples;
+    }
+    // Ingest already-collected timing data; also allows deterministic presentation fixtures.
+    // Samples must be ordered, valid and no newer than frame, as returned by GpuTimer.
+    void record_gpu(std::span<const engine::GpuTimingSample> samples,
+                    engine::GpuTimingStats stats, std::uint64_t frame) {
         for (const auto sample : samples)
             gpu_history_.record(sample);
-        gpu_stats_ = timer.stats();
+        gpu_stats_ = stats;
         frame_ = frame;
-        return samples;
     }
     engine::GpuTimingSummary gpu_summary() const { return gpu_history_.summary(); }
     void record(engine::FrameSample sample, engine::RenderStats window, engine::RenderStats minimap,
