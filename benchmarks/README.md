@@ -253,3 +253,8 @@ replay scopes and compare rendered output.
 The [UI allocation probe](UI_ALLOCATIONS.md) measures settings, controls, diagnostics
 and enabled-audio HUD drawing in 18 frozen states, with separate transition costs.
 [Results](2026-10-25-ui-allocation-results.md) identify remaining diagnostics allocations.
+
+The [diagnostics text follow-up](DIAGNOSTIC_TEXT.md) removes those recurring
+allocations and adds deterministic GPU-label/combined-overlay fixtures.
+[Before/after results](2026-10-26-diagnostic-text-results.md) retain matching pixels
+and separate menu-transition costs.

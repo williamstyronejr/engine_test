@@ -721,6 +721,11 @@ settings, diagnostics and enabled-audio HUD labels, including remapped controls.
 [Recorded results](benchmarks/2026-10-25-ui-allocation-results.md) separate steady
 redraws from menu/rebinding transitions.
 
+Diagnostics now shares the reusable HUD buffer, preserving decimal labels and
+rendered output. The [diagnostics storage contract](benchmarks/DIAGNOSTIC_TEXT.md)
+and [measurements](benchmarks/2026-10-26-diagnostic-text-results.md) cover changing
+GPU labels and combined settings/controls overlays as well as the original UI states.
+
 ## Window lifecycle
 
 Fullscreen and minimize are asynchronous window-manager requests. The engine exposes

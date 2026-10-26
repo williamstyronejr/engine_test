@@ -1,0 +1,103 @@
+{
+  "source_revision": "e6533f591ada0ef5e8b36a15ef1911f895af6962",
+  "runs": [
+    {
+      "name": "baseline-configure",
+      "command": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build/release-validation/gcc-release",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_CXX_COMPILER=/usr/bin/c++",
+        "-DENGINE_SANITIZERS=OFF",
+        "-DENGINE_BUILD_PLATFORM=ON"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-26T13:05:48.508853+00:00",
+      "log": "baseline-configure.log",
+      "exit_code": 0,
+      "wall_seconds": 0.409
+    },
+    {
+      "name": "baseline-build",
+      "command": [
+        "cmake",
+        "--build",
+        "build/release-validation/gcc-release",
+        "--target",
+        "diagnostics_allocations",
+        "-j2"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-26T13:05:48.917489+00:00",
+      "log": "baseline-build.log",
+      "exit_code": 0,
+      "wall_seconds": 19.377
+    },
+    {
+      "name": "baseline-tests",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/release-validation/gcc-release",
+        "--output-on-failure",
+        "--output-junit",
+        "/home/zero/dev/engine_test/validation/2026-10-26-diagnostics-text/baseline-tests.xml",
+        "-R",
+        "^diagnostics_allocations$"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-26T13:06:08.294838+00:00",
+      "log": "baseline-tests.log",
+      "exit_code": 0,
+      "wall_seconds": 6.438
+    },
+    {
+      "name": "before-1",
+      "command": [
+        "build/release-validation/gcc-release/diagnostics_allocations",
+        "/home/zero/dev/engine_test/validation/2026-10-26-diagnostics-text/before-1.json",
+        "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-26T13:06:14.742435+00:00",
+      "log": "before-1.log",
+      "exit_code": 0,
+      "wall_seconds": 6.26
+    },
+    {
+      "name": "before-2",
+      "command": [
+        "build/release-validation/gcc-release/diagnostics_allocations",
+        "/home/zero/dev/engine_test/validation/2026-10-26-diagnostics-text/before-2.json"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-26T13:06:21.002499+00:00",
+      "log": "before-2.log",
+      "exit_code": 0,
+      "wall_seconds": 5.928
+    },
+    {
+      "name": "before-3",
+      "command": [
+        "build/release-validation/gcc-release/diagnostics_allocations",
+        "/home/zero/dev/engine_test/validation/2026-10-26-diagnostics-text/before-3.json"
+      ],
+      "environment": {},
+      "cwd": "/home/zero/dev/engine_test",
+      "started_utc": "2026-10-26T13:06:26.930669+00:00",
+      "log": "before-3.log",
+      "exit_code": 0,
+      "wall_seconds": 6.029
+    }
+  ]
+}

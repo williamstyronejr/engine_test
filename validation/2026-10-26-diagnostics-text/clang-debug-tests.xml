@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-clang++"
+	tests="8"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="omarchy"
+	time="89"
+	timestamp="2026-10-26T09:23:50"
+	>
+	<testcase name="allocation_counters" classname="allocation_counters" time="0.00339962" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS replaceable_forms_count_requested_bytes_once
+PASS scopes_are_inclusive_and_bookkeeping_does_not_allocate
+PASS thread_snapshots_are_isolated_and_aggregates_join_cleanly
+3 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="hud_text" classname="hud_text" time="0.0235833" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS integer_extremes_and_shorter_replacements_preserve_exact_text
+PASS fixed_decimals_preserve_rounding_zero_and_overflow_without_allocations
+PASS diagnostic_gpu_ingestion_preserves_delayed_samples_without_allocations
+PASS long_labels_grow_losslessly_and_then_reuse_capacity
+[scene applied] revision=2 source=facility.scene
+[scene retained] revision=2 source=facility.scene
+facility.scene: facility.scene: Not a regular asset file
+[tilemap applied] revision=2 source=facility.etmp
+[tilemap retained] revision=2 source=facility.etmp
+facility.etmp: facility.etmp: Not a regular asset file
+[animation applied] revision=2 source=facility.eani
+[animation retained] revision=2 source=facility.eani
+facility.eani: facility.eani: Not a regular asset file
+PASS reload_labels_follow_success_failure_lock_and_replacement
+PASS repeated_status_formatting_reuses_the_callers_storage
+6 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="diagnostics" classname="diagnostics" time="0.4081" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS timing_history_statistics_and_rejection
+PASS timing_history_rollover_clear_and_large_samples
+PASS debug_toggle_edges_and_focus_cancel
+PASS single_step_consumes_one_edge_across_catchup
+PASS single_step_matches_complete_unpaused_replay
+PASS single_step_pause_and_restart_priority
+PASS settings_capture_step_and_debug_controls_until_release
+7 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="ui" classname="ui" time="0.017293" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS pointer_edges_and_focus_cancel
+PASS layout_validation_preserves_live_state
+PASS keyboard_focus_skips_disabled_and_wraps
+PASS pointer_activation_requires_matching_press_and_release
+PASS slider_capture_clamp_wheel_and_keyboard
+PASS clipping_overlap_and_resize_cancel_capture
+PASS input_gate_holds_capture_until_release
+PASS column_rejects_overflow_without_advancing
+PASS settings_pause_restore_and_gameplay_isolation
+PASS settings_actions_and_responsive_bounds
+PASS settings_buttons_checkboxes_and_disabled_audio
+PASS settings_save_load_and_slot_selection
+12 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="diagnostics_allocations" classname="diagnostics_allocations" time="21.0345" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>-- 0 UI scenarios: states, labels, samples and inclusive counters verified
+</system-out>
+	</testcase>
+	<testcase name="ui_allocations" classname="ui_allocations" time="29.3198" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>-- 0 UI scenarios: states, labels, samples and inclusive counters verified
+</system-out>
+	</testcase>
+	<testcase name="gameplay_allocations" classname="gameplay_allocations" time="36.9686" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="render_targets" classname="render_targets" time="1.27361" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS offscreen_orientation_and_composition
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS transparent_targets_preserve_linear_alpha
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS nested_clips_flush_and_restore
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS clip_limits_empty_and_error_recovery
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS target_lifetime_resize_and_failure_preservation
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graph...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+</testsuite>

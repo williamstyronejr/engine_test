@@ -1,0 +1,16 @@
+Test project /home/zero/dev/engine_test/build/release-validation/cpu-sanitize
+    Start  1: allocation_counters
+1/4 Test  #1: allocation_counters ..............   Passed    0.02 sec
+    Start  2: hud_text
+2/4 Test  #2: hud_text .........................   Passed    0.12 sec
+    Start 25: diagnostics
+3/4 Test #25: diagnostics ......................   Passed    1.66 sec
+    Start 30: ui
+4/4 Test #30: ui ...............................   Passed    0.06 sec
+
+100% tests passed out of 4
+
+Label Time Summary:
+cpu    =   1.86 sec*proc (4 tests)
+
+Total Test time (real) =   1.86 sec

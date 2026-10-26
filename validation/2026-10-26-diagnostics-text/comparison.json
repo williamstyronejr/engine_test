@@ -1,0 +1,1036 @@
+{
+  "source_revision": "eabf4332e1cb1cfc4c3a50c7123357f4754eb679",
+  "baseline_source_revision": "e6533f591ada0ef5e8b36a15ef1911f895af6962",
+  "three_repeats_match": true,
+  "scenarios": [
+    {
+      "workload": "frozen_ui_states_v1",
+      "level": "facility",
+      "name": "audio_off",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "frozen_ui_states_v1",
+      "level": "facility",
+      "name": "audio_default",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "frozen_ui_states_v1",
+      "level": "facility",
+      "name": "audio_remapped",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "frozen_ui_states_v1",
+      "level": "facility",
+      "name": "settings_default",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "frozen_ui_states_v1",
+      "level": "facility",
+      "name": "controls_remapped",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "frozen_ui_states_v1",
+      "level": "facility",
+      "name": "binding_capture",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "frozen_ui_states_v1",
+      "level": "facility",
+      "name": "binding_updated",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "frozen_ui_states_v1",
+      "level": "facility",
+      "name": "diagnostics",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 270,
+        "calls": 4320,
+        "requested_bytes": 144990,
+        "max_calls": 16,
+        "max_requested_bytes": 537
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "frozen_ui_states_v1",
+      "level": "facility",
+      "name": "diagnostics_shapes",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 270,
+        "calls": 4320,
+        "requested_bytes": 144990,
+        "max_calls": 16,
+        "max_requested_bytes": 537
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "frozen_ui_states_v1",
+      "level": "annex",
+      "name": "audio_off",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "frozen_ui_states_v1",
+      "level": "annex",
+      "name": "audio_default",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "frozen_ui_states_v1",
+      "level": "annex",
+      "name": "audio_remapped",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "frozen_ui_states_v1",
+      "level": "annex",
+      "name": "settings_default",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "frozen_ui_states_v1",
+      "level": "annex",
+      "name": "controls_remapped",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "frozen_ui_states_v1",
+      "level": "annex",
+      "name": "binding_capture",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "frozen_ui_states_v1",
+      "level": "annex",
+      "name": "binding_updated",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "frozen_ui_states_v1",
+      "level": "annex",
+      "name": "diagnostics",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 270,
+        "calls": 4320,
+        "requested_bytes": 144990,
+        "max_calls": 16,
+        "max_requested_bytes": 537
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "frozen_ui_states_v1",
+      "level": "annex",
+      "name": "diagnostics_shapes",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 270,
+        "calls": 4320,
+        "requested_bytes": 144990,
+        "max_calls": 16,
+        "max_requested_bytes": 537
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "diagnostics_ui_states_v1",
+      "level": "facility",
+      "name": "gpu_unsupported",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 270,
+        "calls": 4590,
+        "requested_bytes": 161460,
+        "max_calls": 17,
+        "max_requested_bytes": 598
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "diagnostics_ui_states_v1",
+      "level": "facility",
+      "name": "gpu_waiting",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 270,
+        "calls": 4590,
+        "requested_bytes": 159840,
+        "max_calls": 17,
+        "max_requested_bytes": 592
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "diagnostics_ui_states_v1",
+      "level": "facility",
+      "name": "gpu_completed",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 270,
+        "calls": 4860,
+        "requested_bytes": 175770,
+        "max_calls": 18,
+        "max_requested_bytes": 651
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "diagnostics_ui_states_v1",
+      "level": "facility",
+      "name": "gpu_changing",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 270,
+        "calls": 4743,
+        "requested_bytes": 169533,
+        "max_calls": 19,
+        "max_requested_bytes": 712
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "diagnostics_ui_states_v1",
+      "level": "facility",
+      "name": "combined_settings",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 270,
+        "calls": 4743,
+        "requested_bytes": 169533,
+        "max_calls": 19,
+        "max_requested_bytes": 712
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "diagnostics_ui_states_v1",
+      "level": "facility",
+      "name": "combined_controls",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 270,
+        "calls": 4743,
+        "requested_bytes": 169533,
+        "max_calls": 19,
+        "max_requested_bytes": 712
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "diagnostics_ui_states_v1",
+      "level": "annex",
+      "name": "gpu_unsupported",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 270,
+        "calls": 4590,
+        "requested_bytes": 161460,
+        "max_calls": 17,
+        "max_requested_bytes": 598
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "diagnostics_ui_states_v1",
+      "level": "annex",
+      "name": "gpu_waiting",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 270,
+        "calls": 4590,
+        "requested_bytes": 159840,
+        "max_calls": 17,
+        "max_requested_bytes": 592
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "diagnostics_ui_states_v1",
+      "level": "annex",
+      "name": "gpu_completed",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 270,
+        "calls": 4860,
+        "requested_bytes": 175770,
+        "max_calls": 18,
+        "max_requested_bytes": 651
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "diagnostics_ui_states_v1",
+      "level": "annex",
+      "name": "gpu_changing",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 270,
+        "calls": 4743,
+        "requested_bytes": 169533,
+        "max_calls": 19,
+        "max_requested_bytes": 712
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "diagnostics_ui_states_v1",
+      "level": "annex",
+      "name": "combined_settings",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 270,
+        "calls": 4743,
+        "requested_bytes": 169533,
+        "max_calls": 19,
+        "max_requested_bytes": 712
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    },
+    {
+      "workload": "diagnostics_ui_states_v1",
+      "level": "annex",
+      "name": "combined_controls",
+      "before": {
+        "samples": 270,
+        "nonzero_samples": 270,
+        "calls": 4743,
+        "requested_bytes": 169533,
+        "max_calls": 19,
+        "max_requested_bytes": 712
+      },
+      "after": {
+        "samples": 270,
+        "nonzero_samples": 0,
+        "calls": 0,
+        "requested_bytes": 0,
+        "max_calls": 0,
+        "max_requested_bytes": 0
+      },
+      "render_and_state_match": true,
+      "transitions_unchanged": true
+    }
+  ],
+  "byte_identical_pairs": 48,
+  "images": [
+    {
+      "before": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/ANNEX-audio_default.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/ui-screens/ANNEX-audio_default.ppm",
+      "sha256": "578149fcc7d8d3cc43bb084eca67f528f4b9706378d334108b5cb36f0866abf8",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/ANNEX-audio_off.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/ui-screens/ANNEX-audio_off.ppm",
+      "sha256": "2d1eab0daef4c043bcd3c14936a0ee04ebdb4e7e4b1d70baab479ce1fb68f071",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/ANNEX-audio_remapped.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/ui-screens/ANNEX-audio_remapped.ppm",
+      "sha256": "b77452d0dd6d442167073cee8921a43a775374abbf35ea0f91e995ea60b4499c",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/ANNEX-binding_capture.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/ui-screens/ANNEX-binding_capture.ppm",
+      "sha256": "c3c8f07b1a6cfd70c778c59e1cc189b4d375c3f29067cc4e05fb3bcce849ac7d",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/ANNEX-binding_updated.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/ui-screens/ANNEX-binding_updated.ppm",
+      "sha256": "b35c692bb39d3a9c21fab3beb77f8a816f86e28fabe2482b94f96e188c0e9bef",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/ANNEX-controls_remapped.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/ui-screens/ANNEX-controls_remapped.ppm",
+      "sha256": "fa01b1a73d05475b09c942dc045a708aa21a7bf8871e50b1b8c0c9bb925787eb",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/ANNEX-diagnostics.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/ui-screens/ANNEX-diagnostics.ppm",
+      "sha256": "3aee3b470fe575b15c5e8cb00378f6d15158e16b2ebb294cb7c3713797f75924",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/ANNEX-diagnostics_shapes.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/ui-screens/ANNEX-diagnostics_shapes.ppm",
+      "sha256": "996e4d8f3e8ccb13b5f12423d66844b3c382175a430a3f997510a6d48f93c2f4",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/ANNEX-settings_default.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/ui-screens/ANNEX-settings_default.ppm",
+      "sha256": "6c339a0411f128850843ecae27ced544ec99c5efc09d320d613ad2a6f64f252d",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/FACILITY-audio_default.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/ui-screens/FACILITY-audio_default.ppm",
+      "sha256": "6e5372a59f714b626e9beede0d99d8aa08c775fa609c7a27fa1a2db8b28c782d",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/FACILITY-audio_off.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/ui-screens/FACILITY-audio_off.ppm",
+      "sha256": "ce750f04cd524048483f8023e7bc2538b58af749d5eade0125b693ab5e64544a",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/FACILITY-audio_remapped.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/ui-screens/FACILITY-audio_remapped.ppm",
+      "sha256": "7c2acf4cc2eb489a6f69bebecb0ed95f513b519e6a8fcc51f317404d42d26488",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/FACILITY-binding_capture.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/ui-screens/FACILITY-binding_capture.ppm",
+      "sha256": "898c3c27bbb1fa10466959b65e573c73911a74e315acd8efd31985280998549b",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/FACILITY-binding_updated.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/ui-screens/FACILITY-binding_updated.ppm",
+      "sha256": "ab011d3628479caba9f7e6d8bbdaf0679a0912953cb0929ffd09a59a5864374f",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/FACILITY-controls_remapped.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/ui-screens/FACILITY-controls_remapped.ppm",
+      "sha256": "30198a1f667b74d5ee43b72571d7e0dcf57ad1ac1c34f751377d860025610681",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/FACILITY-diagnostics.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/ui-screens/FACILITY-diagnostics.ppm",
+      "sha256": "5fa51b40461c4f31c7e32b31281c3adf1842f6db7ec62c0d0160b5584897a1ac",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/FACILITY-diagnostics_shapes.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/ui-screens/FACILITY-diagnostics_shapes.ppm",
+      "sha256": "280173171429eaabed67e42d0603766af520930a16d8c7f3be4332bc74ca84f7",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/ui-validation/scenario-screens/FACILITY-settings_default.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/ui-screens/FACILITY-settings_default.ppm",
+      "sha256": "f4f3d31cf9e5daca4b6c1a4e1c59ba16da049b266d4bd3b2a509c69e3411c587",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/ANNEX-combined_controls-0.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/ANNEX-combined_controls-0.ppm",
+      "sha256": "65cc20dd31ae8b6e890039af0522ca6af44624608cb33fe8887040b6a65bd9f4",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/ANNEX-combined_controls-10.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/ANNEX-combined_controls-10.ppm",
+      "sha256": "f90e0631fc5afe842ed96e17d0ed6afe945a6c14f2380617df2c7720bbc14728",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/ANNEX-combined_controls-20.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/ANNEX-combined_controls-20.ppm",
+      "sha256": "bd70f9aac328beade097cb6de64897012797e9102c5c27f350bf55de12fa2a67",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/ANNEX-combined_controls.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/ANNEX-combined_controls.ppm",
+      "sha256": "85b3500115f6a6d19e5d7446a5eb5d3940a551726bc6993c86996ef16395bcc6",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/ANNEX-combined_settings-0.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/ANNEX-combined_settings-0.ppm",
+      "sha256": "fbdeed31024f8eebe1b6a04bef5d3407dedeac5cfbd1ce65a100018848e3174d",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/ANNEX-combined_settings-10.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/ANNEX-combined_settings-10.ppm",
+      "sha256": "3093dd9832db3db8507dc4d9db417202eead0507c9489859f0ec554cd72e5f6f",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/ANNEX-combined_settings-20.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/ANNEX-combined_settings-20.ppm",
+      "sha256": "834e70cb3911de36f3f5487a20de2fc672ecbef8213c8267c13e97be2fe3f460",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/ANNEX-combined_settings.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/ANNEX-combined_settings.ppm",
+      "sha256": "4c614ff89eb73dbe10db185a38aa855fcc9dc08abefe344aedba5edfb9c0474f",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/ANNEX-gpu_changing-0.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/ANNEX-gpu_changing-0.ppm",
+      "sha256": "7ac3ec3bc9ce9041aa30e17bdd1387634c3271243b2bcba1222103244b31f271",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/ANNEX-gpu_changing-10.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/ANNEX-gpu_changing-10.ppm",
+      "sha256": "5ed996ad8b3cd57b38bb85cf055b9bb31b2b4ef1dc9c7bbcd513c445bb79f6a8",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/ANNEX-gpu_changing-20.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/ANNEX-gpu_changing-20.ppm",
+      "sha256": "f9feac8cbf1a2c712699edea6ed49fb4c1fc197b29e7386c68f229a0a73c95ef",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/ANNEX-gpu_changing.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/ANNEX-gpu_changing.ppm",
+      "sha256": "e5cae9f2c72f3cb588cc6be88737760cbd94ab8ffe92b13a75510a8b7c4524c7",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/ANNEX-gpu_completed.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/ANNEX-gpu_completed.ppm",
+      "sha256": "e098efdce0a66589213e9b1d42fec8c4ffc32f87bf79b62ec70d923fe0399f0f",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/ANNEX-gpu_unsupported.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/ANNEX-gpu_unsupported.ppm",
+      "sha256": "b7fe88f865db01eab464a22e5c674574c6a79290bedc76c7ea9008019a536a85",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/ANNEX-gpu_waiting.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/ANNEX-gpu_waiting.ppm",
+      "sha256": "eff6856351512c848a69f978b83798f72dd434a50b8e18a6a5eef916ff1675c9",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/FACILITY-combined_controls-0.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/FACILITY-combined_controls-0.ppm",
+      "sha256": "efb4f4886abe48444c0801dbe5fa73130e0643ebb49179fdc91c7619490006d5",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/FACILITY-combined_controls-10.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/FACILITY-combined_controls-10.ppm",
+      "sha256": "508a3fbcbcf7dde966db0c416b80e53706f9ac8d731a1ba805b22235169b729c",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/FACILITY-combined_controls-20.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/FACILITY-combined_controls-20.ppm",
+      "sha256": "01c3d9823ee0a1521ac28cd9739ab08b5a6090869f5d4d35e695db4d713c0065",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/FACILITY-combined_controls.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/FACILITY-combined_controls.ppm",
+      "sha256": "7916187b44610c42f1d581b75d8a6ff90ec691a6b5e9f8d8eb7818c9bacce3b4",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/FACILITY-combined_settings-0.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/FACILITY-combined_settings-0.ppm",
+      "sha256": "34a5b9935ff03226bfc7fb16f947e3d483af22d32f99ec01b1125c463973460e",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/FACILITY-combined_settings-10.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/FACILITY-combined_settings-10.ppm",
+      "sha256": "32ffa23560c640e00bcefa3aa9463eb74f454c167fe5e215b16b4e4d05bf54db",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/FACILITY-combined_settings-20.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/FACILITY-combined_settings-20.ppm",
+      "sha256": "9b506f308b6cb952069edd44e830f203c250c691d132311328bf48523fca78d5",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/FACILITY-combined_settings.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/FACILITY-combined_settings.ppm",
+      "sha256": "b614a1edc077169d0faed45d1eb70b73c6cf7e390d67c134172cb42756d52ea9",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/FACILITY-gpu_changing-0.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/FACILITY-gpu_changing-0.ppm",
+      "sha256": "935e7521a11f56d701a41bc66a9b78597a6ff46adeac57cf9f381f161363d52e",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/FACILITY-gpu_changing-10.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/FACILITY-gpu_changing-10.ppm",
+      "sha256": "b166dcb96cddc9c69cf78583cc6f3667f62d564683d894c7ea8c8bcc5c04ea48",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/FACILITY-gpu_changing-20.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/FACILITY-gpu_changing-20.ppm",
+      "sha256": "1805770f426d7b771fcf878832fbad981730cf8544a9babb816c14523c9ac953",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/FACILITY-gpu_changing.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/FACILITY-gpu_changing.ppm",
+      "sha256": "63f334e615cc813ddc76a1af198a20f6aeddc52689d78ab69df692db2e555039",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/FACILITY-gpu_completed.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/FACILITY-gpu_completed.ppm",
+      "sha256": "ed978bcd3556f3694a945f53b4e590c2817a5cb797a67d3b036e95f1f297408c",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/FACILITY-gpu_unsupported.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/FACILITY-gpu_unsupported.ppm",
+      "sha256": "c8de2026fa11a0447e9d0289eb53964ccdb97ab00f41c41a537f009fd1387402",
+      "bytes": 3072016,
+      "byte_identical": true
+    },
+    {
+      "before": "/home/zero/dev/engine_test/build/diagnostics-validation/before-screens/FACILITY-gpu_waiting.ppm",
+      "after": "/home/zero/dev/engine_test/build/diagnostics-validation/after-screens/FACILITY-gpu_waiting.ppm",
+      "sha256": "70de994ae22addb53db00f1263ab5b02620a7ec3e2267bc074fd4aaeb0a09e5e",
+      "bytes": 3072016,
+      "byte_identical": true
+    }
+  ]
+}

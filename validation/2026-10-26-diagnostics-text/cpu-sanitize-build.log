@@ -1,0 +1,6 @@
+[1/6] Building CXX object CMakeFiles/allocation_profile_tests.dir/tests/allocation_profile_tests.cpp.o
+[2/6] Linking CXX executable allocation_profile_tests
+[3/6] Linking CXX executable diagnostics_tests
+[4/6] Linking CXX executable ui_tests
+[5/6] Building CXX object CMakeFiles/hud_text_tests.dir/tests/hud_text_tests.cpp.o
+[6/6] Linking CXX executable hud_text_tests

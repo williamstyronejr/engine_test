@@ -23,6 +23,9 @@ with its measurement interpretation linked from benchmarks.
 - [2026-10-25 UI allocation coverage](2026-10-25-ui-allocations/RESULTS.md):
   settings/controls, diagnostics, enabled-audio labels, transition costs and shared-draw validation.
 
+- [2026-10-26 diagnostics text reuse](2026-10-26-diagnostics-text/RESULTS.md):
+  decimal formatting, synthetic GPU presentation, repeated allocation reduction and 48 image pairs.
+
 `commands.json` retains commands as argument arrays, explicit environment overrides,
 working directory, UTC start, duration and exit status. Other environment facts are
 in `environment.log`; the full-matrix run also records its inherited display there.

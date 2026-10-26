@@ -1,0 +1,15 @@
+{
+  "previous_main": "3a27affa6eb964f0761c2cd22a16f47a9371a8cc",
+  "ui_baseline_runtime": "4e860f5",
+  "diagnostics_baseline_runtime": "e6533f5",
+  "binaries": {
+    "baseline-ui_allocations": {
+      "path": "build/diagnostics-validation/baseline-ui_allocations",
+      "sha256": "07a18aa26f0a471df6add9b1dd8c866994042539340b17fe9ae5ea3aa298610d"
+    },
+    "baseline-diagnostics_allocations": {
+      "path": "build/diagnostics-validation/baseline-diagnostics_allocations",
+      "sha256": "18dab5678733907ccbe732491532b3a98d494c62e4785bede9f6354a3f454ecb"
+    }
+  }
+}

@@ -101,11 +101,18 @@ counts, measured scopes and separate transition counters. Byte values are cumula
 successful requests, not live/peak heap usage. The checker verifies scenario/state
 coverage, labels after rebinding, sample counts, nonempty rendering and equality
 between inclusive-frame totals and their subscopes. Menu opening provides a positive
-allocation control; exact allocation totals are measurements, not portable budgets.
+allocation control. The [diagnostics follow-up](DIAGNOSTIC_TEXT.md) additionally
+requires zero measured `diagnostics_submit` calls after warmup in the reserved-buffer
+fixtures; other exact totals remain measurements, not whole-engine budgets.
 
 [Recorded results](2026-10-25-ui-allocation-results.md) retain three repeated Release
-runs. This probe extends the HUD coverage; it does not optimize diagnostics or
-establish whole-engine allocation-free behavior. Direct C allocation, driver/GPU
+runs from the original measurement increment. The subsequent
+[diagnostics optimization](2026-10-26-diagnostic-text-results.md) compares the same
+workload; neither establishes whole-engine allocation-free behavior. Direct C allocation, driver/GPU
 memory, allocator metadata, physical audio/display acceptance, live input/window
 processing, simultaneous menus/diagnostics and changing GPU-timing labels remain
 outside this workload. No speedup, lower RSS or frame-time budget follows.
+
+The separate `diagnostics_allocations` executable extends presentation coverage to
+synthetic GPU-timing histories and combined overlays; see its distinct
+[workload and exclusions](DIAGNOSTIC_TEXT.md). It leaves this original workload intact.
