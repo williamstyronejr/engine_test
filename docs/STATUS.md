@@ -2088,6 +2088,10 @@ See [storage and workload contract](../benchmarks/DIAGNOSTIC_TEXT.md),
 [measurements](../benchmarks/2026-10-26-diagnostic-text-results.md) and
 [validation](../validation/2026-10-26-diagnostics-text/RESULTS.md).
 
+At documentation commit `016842c`, all three Release packaging checks pass
+(27.20 s). All 49 evidence files and both new benchmark documents match the archive;
+all four profiling executables remain excluded from installation.
+
 ## Next increment
 
 Complete the declared workload/memory acceptance record using the measured

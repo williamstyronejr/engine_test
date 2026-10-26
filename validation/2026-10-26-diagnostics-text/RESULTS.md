@@ -88,3 +88,17 @@ reports, live updates, event polling, swap and background audio are outside thes
 offscreen frame scopes. Direct C allocation and GPU/driver storage remain excluded.
 Menu-opening/rebinding costs are retained separately and unchanged. Workload/memory
 budgets, physical display/audio and the final support/coverage record remain open.
+
+## Package and documentation follow-up
+
+At documentation/evidence commit `016842c`, all three Release packaging checks
+pass without skips (27.20 s), including relocation and OpenGL gameplay. All 49
+files in this evidence directory and both new benchmark documents match their
+archived copies byte-for-byte. All four profiling executables remain excluded
+from installation. Build metadata records GNU 16.2.1, Release, sanitizers off.
+Ignored logs are under `build/diagnostics-validation/package-feature-*.log`.
+
+Documentation checks resolve 193 local links and parse the shell recipe. Evidence
+checks validate six baseline and 21 final command records, six XML reports, nine
+raw measurements here plus three historical UI reports, and all 48 image pairs.
+The original UI images also match their previously recorded hashes.
