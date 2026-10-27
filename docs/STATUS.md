@@ -2206,6 +2206,10 @@ See [contract](../benchmarks/STRESS_PREPARATION.md),
 [findings](../benchmarks/2026-10-27-preparation-results.md) and
 [evidence](../validation/2026-10-27-preparation/RESULTS.md).
 
+At documentation commit `82b6b2f`, all three Release package checks pass (33.45 s).
+All 42 evidence files and both new benchmark documents match their archived copies;
+the allocation profilers remain excluded from installation.
+
 ## Next increment
 
 Correlate the paired gaps with render-thread voluntary/involuntary context-switch
