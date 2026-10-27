@@ -2165,10 +2165,35 @@ At documentation commit `3fd78d9`, all three Release package checks pass (25.50 
 All 40 evidence files and both new benchmark documents match their archived copies;
 the allocation profilers remain excluded from installation.
 
+## Increment 64: opt-in submission timing split
+
+- Added `--submission-samples`, requiring graphics and `--frame-samples`. The
+  offscreen pass records GL setup and nonempty batch upload/draw CPU intervals;
+  preparation/bookkeeping is the enclosing render interval minus those measurements.
+  Existing asynchronous GPU, preview and presentation timings remain separate.
+- Disabled runs add no timing reads or row payload. Enabled storage is bounded to
+  60,000 rows and records without allocation after reserve. Reports expose actual
+  storage bytes and per-frame batch/upload counts; invalid CPU/unpaired requests
+  preserve prior reports.
+- All six declared on/off attempts complete with identical workload/state/render
+  counts and validated nested partitions. No buffer-streaming strategy changes.
+- Nine focused groups pass in GNU Debug/Release and Clang; five CPU and four native
+  sanitizer groups pass, with no skips. Sixteen image comparisons match.
+
+See [contract](../benchmarks/STRESS_SUBMISSION.md),
+[results](../benchmarks/2026-10-27-submission-results.md) and
+[evidence](../validation/2026-10-27-submission/RESULTS.md).
+
+At documentation commit `1b21565`, all three Release package checks pass (33.55 s).
+All 42 evidence files and both new benchmark documents match their archived copies;
+the allocation profilers remain excluded from installation.
+
 ## Next increment
 
-Separate CPU geometry preparation from GL upload/draw time within the submission
-interval using opt-in measurements, before choosing a buffer-streaming change.
+Profile CPU preparation (tile traversal, culling and vertex generation) and
+distinguish execution from scheduling delay before selecting an optimization.
+Preparation/other dominates 29 of 30 retained largest submissions; all six frame
+maxima still exceed 16.7 ms.
 Keep presentation timing, workload identities, declared limits and failed attempts.
 Physical display/audio, broader memory-path coverage and the final support record
 remain open; background loading remains deferred.

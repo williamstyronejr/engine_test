@@ -15,7 +15,14 @@ TEST(repeated_gpu_load_draw_unload_and_rollover) {
             StressGraphics graphics(*renderer, 256, 144);
             CHECK(renderer->texture_bytes() == baseline.texture_bytes + 16);
             CHECK(renderer->target_bytes() == baseline.target_bytes + 256 * 144 * 4);
+            renderer->set_cpu_timing(cycle % 2 == 0);
             CHECK(graphics.render(arena) == 1024);
+            const auto timing = renderer->cpu_timing();
+            CHECK(timing.setup_ms >= 0 && timing.upload_draw_ms >= 0);
+            CHECK(timing.batches == (cycle % 2 == 0 ? 2 : 0));
+            CHECK(timing.upload_bytes == (cycle % 2 == 0 ? (1024 + 6144) * 6 * 32 : 0));
+            if (cycle % 2)
+                CHECK(timing.setup_ms == 0 && timing.upload_draw_ms == 0);
             CHECK(renderer->stats().quads == 1024 + 6144);
             CHECK(renderer->stats().culled == 2048);
             CHECK(renderer->stats().draws == 2);
@@ -25,6 +32,21 @@ TEST(repeated_gpu_load_draw_unload_and_rollover) {
         CHECK(stress_gpu_resources(*renderer) == baseline);
     }
     CHECK(renderer->healthy());
+}
+TEST(cpu_timing_empty_pass_and_active_pass_contract) {
+    renderer->set_cpu_timing(true);
+    renderer->begin(256, 144, {{0, 0}, 36});
+    rejects([&] { renderer->set_cpu_timing(false); });
+    renderer->end();
+    const auto timing = renderer->cpu_timing();
+    CHECK(timing.setup_ms >= 0 && timing.upload_draw_ms == 0);
+    CHECK(timing.batches == 0 && timing.upload_bytes == 0);
+    renderer->set_cpu_timing(false);
+    renderer->begin(256, 144, {{0, 0}, 36});
+    renderer->quad({0, 0}, {1, 1}, {});
+    renderer->end();
+    CHECK(renderer->cpu_timing().setup_ms == 0 && renderer->cpu_timing().upload_draw_ms == 0);
+    CHECK(renderer->cpu_timing().batches == 0 && renderer->cpu_timing().upload_bytes == 0);
 }
 TEST(texture_byte_accounting_replacement_failure_and_cleanup) {
     const auto baseline = renderer->texture_bytes();

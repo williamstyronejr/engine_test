@@ -544,6 +544,51 @@ TEST(frame_sample_report_is_opt_in_and_preserves_partial_and_missing_results) {
     char* args[] = {program, flag};
     CHECK(parse_stress_options(2, args).frame_samples);
 }
+TEST(submission_samples_bounds_partitions_and_allocation_free_recording) {
+    rejects([] { StressSubmission trace(0, 0, 1, true); });
+    rejects([] { StressSubmission trace(10000, 0, 7, true); });
+    const auto calls = allocation_check::calls;
+    StressSubmission disabled(1, 0, 1, false);
+    disabled.record(0, -1, -1, -1, 0, 1);
+    CHECK(disabled.buffer_bytes() == 0 && disabled.samples().empty());
+    CHECK(allocation_check::calls == calls);
+    StressSubmission trace(1, 2, 2, true);
+    rejects([&] { trace.record(1, 3, 1, 1, 1, 192); });
+    rejects([&] { trace.record(3, 1, 1, 1, 1, 192); });
+    rejects([&] { trace.record(3, -1, 0, 0, 0, 0); });
+    rejects([&] { trace.record(3, std::numeric_limits<double>::infinity(), 0, 0, 0, 0); });
+    rejects([&] { trace.record(3, 3, 1, 1, 0, 192); });
+    trace.record(3, 3, 1, 1, 1, 192);
+    CHECK(trace.samples()[0].prepare_other == 1);
+    rejects([&] { trace.record(3, 0, 0, 0, 0, 0); });
+    trace.record(6, 0, 0, 0, 0, 0);
+    rejects([&] { trace.record(9, 0, 0, 0, 0, 0); });
+    StressSubmission full(10000, 600, 6, true);
+    const auto recording = allocation_check::calls;
+    for (std::uint64_t cycle = 0; cycle < 6; ++cycle)
+        for (std::uint64_t step = 601; step <= 10600; ++step)
+            full.record(cycle * 10600 + step, 3, 1, 1, 1, 192);
+    CHECK(full.samples().size() == 60000 && allocation_check::calls == recording);
+    CHECK(full.buffer_bytes() == 60000 * sizeof(StressSubmission::Sample));
+}
+TEST(submission_samples_require_graphics_and_paired_frames) {
+    char program[] = "stress", flag[] = "--submission-samples", frames[] = "--frame-samples",
+         cpu[] = "--cpu-only";
+    char* args[] = {program, flag, frames, cpu};
+    rejects([&] { parse_stress_options(2, args); });
+    auto options = parse_stress_options(3, args);
+    CHECK(options.submission_samples && options.frame_samples);
+    rejects([&] { parse_stress_options(4, args); });
+    StressReport report(options);
+    report.submission_samples.record(61, 3, 1, 1, 1, 192);
+    const auto json = report.json(options);
+    CHECK(json.find("stress_submission_samples_v1") != std::string::npos);
+    CHECK(json.find("\"cpu_ms\":[1,1,1],\"render_ms\":3,\"batches\":1,\"upload_bytes\":192") !=
+          std::string::npos);
+    options.submission_samples = false;
+    StressReport plain(options);
+    CHECK(plain.json(options).find("submission_sample") == std::string::npos);
+}
 TEST(gpu_failure_report_preserves_uint64_values_and_omitted_count) {
     StressOptions options;
     StressReport report(options);

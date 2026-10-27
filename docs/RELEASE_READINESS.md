@@ -250,8 +250,12 @@ have submission. This localizes elapsed time without proving its underlying caus
 Increment 63 [compares explicit presentation requests](../benchmarks/2026-10-27-presentation-results.md):
 immediate medians are 3.18–3.50 ms and requested VSync medians 16.66–16.67 ms,
 with all maxima still above 16.7 ms. Issued requests do not confirm physical synchronization.
-Next: separate CPU preparation from GL upload/draw time for the remaining submission
-outliers before selecting an optimization.
+Increment 64 [splits submission CPU intervals](../benchmarks/2026-10-27-submission-results.md)
+into preparation/bookkeeping, GL setup and batch upload/draw, with six retained
+on/off attempts. These are CPU wall intervals, not isolated GPU execution costs.
+Preparation/other dominates 29 of 30 retained largest submissions; all maxima still
+fail the frame reference. Next: profile preparation and distinguish execution from
+scheduling delay before selecting an optimization.
 R6 timing/coverage and physical R4/R5 cases remain open; R8 requires their
 coverage/support record. Refresh automated evidence when the implementation or
 toolchain changes. These results do not complete milestone 6.

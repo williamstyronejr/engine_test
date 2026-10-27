@@ -36,6 +36,9 @@ with its measurement interpretation linked from benchmarks.
   unchanged pixels and six retained plain/traced runs. The directory uses the
   October 26 local session date.
 
+- [2026-10-27 submission timing](2026-10-27-submission/RESULTS.md):
+  six retained on/off attempts, reconstructed nested CPU partitions, batch/upload
+  accounting, focused compiler/sanitizer checks and sixteen identical image pairs.
 - [2026-10-27 presentation requests](2026-10-27-presentation/RESULTS.md):
   immediate/VSync metadata and argument checks, eight matching image pairs, focused
   compiler/sanitizer validation and six alternating traced workload attempts.

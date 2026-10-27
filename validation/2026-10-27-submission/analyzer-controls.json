@@ -1,0 +1,57 @@
+[
+  {
+    "control": "valid",
+    "exit_code": 0,
+    "expected_accept": true
+  },
+  {
+    "control": "frame_tag",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "negative",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "partition",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "enclosing",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "batch_count",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "upload_bytes",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "row_count",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "payload_bytes",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "checksum",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "aggregate",
+    "exit_code": 1,
+    "expected_accept": false
+  }
+]

@@ -93,3 +93,10 @@ foreach(mode immediate vsync)
     message(FATAL_ERROR "Rejected presentation option replaced a report")
   endif()
 endforeach()
+
+execute_process(COMMAND "${STRESS_EXE}" --frame-samples --submission-samples --report "${REPORT_PATH}"
+  RESULT_VARIABLE result OUTPUT_QUIET ERROR_QUIET)
+file(READ "${REPORT_PATH}" after)
+if(result EQUAL 0 OR NOT after STREQUAL report)
+  message(FATAL_ERROR "CPU submission trace accepted or replaced a valid report")
+endif()

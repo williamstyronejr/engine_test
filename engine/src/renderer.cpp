@@ -4,6 +4,7 @@
 #include "shader_program.hpp"
 #include <algorithm>
 #include <atomic>
+#include <chrono>
 #include <cmath>
 #include <fstream>
 #include <iostream>
@@ -84,6 +85,12 @@ struct Renderer::Impl {
     int width{}, height{};
     bool recording{};
     RenderStats stats;
+    bool cpu_timing_enabled{};
+    RenderCpuTiming cpu_timing;
+    using Clock = std::chrono::steady_clock;
+    static double elapsed(Clock::time_point start) {
+        return std::chrono::duration<double, std::milli>(Clock::now() - start).count();
+    }
     ~Impl() {
         gl.DebugMessageCallback(nullptr, nullptr);
         gl.BindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -269,8 +276,10 @@ struct Renderer::Impl {
         destination_texture = attachment;
         recording = true;
         stats = {};
+        cpu_timing = {};
         clip_depth = 0;
         vertices.clear();
+        const auto started = cpu_timing_enabled ? Clock::now() : Clock::time_point{};
         gl.BindFramebuffer(GL_FRAMEBUFFER, framebuffer);
         gl.Viewport(0, 0, w, h);
         gl.Disable(GL_SCISSOR_TEST);
@@ -282,6 +291,8 @@ struct Renderer::Impl {
         const float alpha = attachment ? clear.a : 1.0F;
         gl.ClearColor(clear.r * alpha, clear.g * alpha, clear.b * alpha, clear.a);
         gl.Clear(GL_COLOR_BUFFER_BIT);
+        if (cpu_timing_enabled)
+            cpu_timing.setup_ms = elapsed(started);
     }
     void apply_clip() {
         if (!clip_depth) {
@@ -297,6 +308,7 @@ struct Renderer::Impl {
     void flush() {
         if (vertices.empty())
             return;
+        const auto started = cpu_timing_enabled ? Clock::now() : Clock::time_point{};
         gl.UseProgram(program);
         gl.Uniform1i(premultiplied_location, batch_premultiplied ? 1 : 0);
         gl.BlendFuncSeparate(batch_premultiplied ? GL_ONE : GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA,
@@ -312,6 +324,11 @@ struct Renderer::Impl {
                          static_cast<GLsizeiptr>(vertices.size() * sizeof(Vertex)),
                          vertices.data());
         gl.DrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
+        if (cpu_timing_enabled) {
+            cpu_timing.upload_draw_ms += elapsed(started);
+            ++cpu_timing.batches;
+            cpu_timing.upload_bytes += vertices.size() * sizeof(Vertex);
+        }
         vertices.clear();
         ++stats.draws;
     }
@@ -689,6 +706,14 @@ void Renderer::end() {
         for (auto& target : impl_->targets)
             if (target.framebuffer == impl_->framebuffer)
                 target.ready = true;
+}
+void Renderer::set_cpu_timing(bool enabled) {
+    if (impl_->recording)
+        throw std::logic_error("CPU timing changed during render pass");
+    impl_->cpu_timing_enabled = enabled;
+}
+RenderCpuTiming Renderer::cpu_timing() const {
+    return impl_->cpu_timing;
 }
 RenderStats Renderer::stats() const {
     return impl_->stats;

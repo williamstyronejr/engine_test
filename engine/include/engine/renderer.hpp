@@ -44,6 +44,12 @@ struct GraphicsInfo {
 struct RenderStats {
     std::size_t quads{}, culled{}, draws{};
 };
+// Optional CPU wall time inside begin-pass GL setup and nonempty batch flushes.
+// These are driver-call intervals, not GPU execution times. Reset by each begin().
+struct RenderCpuTiming {
+    double setup_ms{}, upload_draw_ms{};
+    std::size_t batches{}, upload_bytes{};
+};
 // Must be constructed/destroyed while the owning window's context is current.
 class Renderer {
   public:
@@ -102,6 +108,9 @@ class Renderer {
     void text(Vec2 top_left, float pixel_size, std::string_view value, Color color);
     void end();
     RenderStats stats() const;
+    // Between passes only. Disabled by default; disabled passes perform no timing reads.
+    void set_cpu_timing(bool enabled);
+    RenderCpuTiming cpu_timing() const;
     std::array<unsigned char, 4> pixel(int x, int y) const;
     void screenshot(
         std::string_view path) const; // PPM of last completed pass; before present for window.

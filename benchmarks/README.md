@@ -273,3 +273,8 @@ Stress mode now supports explicit [immediate/VSync presentation requests](STRESS
 The [alternating comparison](2026-10-27-presentation-results.md) retains matching
 workloads and paired rows, reports request issuance, and keeps physical synchronization
 and release acceptance unverified.
+
+Opt-in [submission samples](STRESS_SUBMISSION.md) separate CPU preparation and
+bookkeeping from GL setup and batch upload/draw intervals. The
+[2026-10-27 on/off collection](2026-10-27-submission-results.md) retains paired
+outliers, workload identity, image checks and existing acceptance limits.
