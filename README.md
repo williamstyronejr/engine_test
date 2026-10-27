@@ -736,7 +736,10 @@ keep requested pacing separate from physical synchronization.
 Stress diagnostics also support `--frame-samples --submission-samples` to split
 CPU preparation/bookkeeping from GL pass setup and batch upload/draw. See the
 [measurement contract](benchmarks/STRESS_SUBMISSION.md) and
-[retained results](benchmarks/2026-10-27-submission-results.md).
+[retained results](benchmarks/2026-10-27-submission-results.md). Add
+`--preparation-samples` for coarse phase wall/thread-CPU measurements; see the
+[clock and phase contract](benchmarks/STRESS_PREPARATION.md) and
+[profile findings](benchmarks/2026-10-27-preparation-results.md).
 
 ## Window lifecycle
 

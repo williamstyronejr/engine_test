@@ -2188,12 +2188,31 @@ At documentation commit `1b21565`, all three Release package checks pass (33.55 
 All 42 evidence files and both new benchmark documents match their archived copies;
 the allocation profilers remain excluded from installation.
 
+## Increment 65: preparation phases and calling-thread CPU time
+
+- Added opt-in `--preparation-samples`, requiring frame and submission samples.
+  Four coarse phases record wall and calling-thread CPU time, with nested GL
+  intervals. Signed wall-minus-CPU differences remain visible; no GPU waits or
+  per-sprite timers are added. Existing report rows and payloads are unchanged.
+- Separate storage bounds 60,000 rows and records without further allocation.
+  Clock failures report errors; nominal clock resolution does not claim accuracy.
+  Off-phase wall time remains explicit rather than inventing a CPU measurement.
+- All six declared on/off runs complete with matching workload/state/render counts
+  and validated phase/GL partitions. Nine focused groups pass in GNU Debug/Release
+  and Clang; five CPU and four native sanitizer groups pass, without skips.
+  Twenty-four final-image comparisons match byte-for-byte.
+
+See [contract](../benchmarks/STRESS_PREPARATION.md),
+[findings](../benchmarks/2026-10-27-preparation-results.md) and
+[evidence](../validation/2026-10-27-preparation/RESULTS.md).
+
 ## Next increment
 
-Profile CPU preparation (tile traversal, culling and vertex generation) and
-distinguish execution from scheduling delay before selecting an optimization.
-Preparation/other dominates 29 of 30 retained largest submissions; all six frame
-maxima still exceed 16.7 ms.
+Correlate the paired gaps with render-thread voluntary/involuntary context-switch
+counters before choosing a tail-latency fix. The wall-minus-CPU gap exceeds CPU
+time in 23 of 30 largest profiled submissions; three p99 values and all six maxima
+still fail 16.7 ms. Counter deltas do not identify wait durations or blocking causes.
+Keep steady CPU optimization separate, with the scalar path as a reference.
 Keep presentation timing, workload identities, declared limits and failed attempts.
 Physical display/audio, broader memory-path coverage and the final support record
 remain open; background loading remains deferred.

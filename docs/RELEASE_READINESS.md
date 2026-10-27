@@ -254,8 +254,14 @@ Increment 64 [splits submission CPU intervals](../benchmarks/2026-10-27-submissi
 into preparation/bookkeeping, GL setup and batch upload/draw, with six retained
 on/off attempts. These are CPU wall intervals, not isolated GPU execution costs.
 Preparation/other dominates 29 of 30 retained largest submissions; all maxima still
-fail the frame reference. Next: profile preparation and distinguish execution from
-scheduling delay before selecting an optimization.
+fail the frame reference. Increment 65 [profiles preparation phases](../benchmarks/2026-10-27-preparation-results.md)
+with calling-thread CPU time and signed wall-minus-CPU gaps. All six attempts and
+nested phase/GL partitions are retained; these do not establish a hot instruction
+or attribute a gap specifically to scheduler delay. In 23 of 30 largest profiled
+submissions the preparation wall-minus-CPU gap exceeds its CPU duration. Three p99
+values and all six maxima fail 16.7 ms. Next: correlate voluntary/involuntary
+context-switch counters with these gaps before choosing a tail-latency fix;
+steady CPU optimization remains a separate experiment.
 R6 timing/coverage and physical R4/R5 cases remain open; R8 requires their
 coverage/support record. Refresh automated evidence when the implementation or
 toolchain changes. These results do not complete milestone 6.
