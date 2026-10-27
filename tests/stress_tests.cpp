@@ -1,5 +1,5 @@
-#include "../examples/feature_lab/stress_benchmark.hpp"
 #include "../examples/feature_lab/spike_profile.hpp"
+#include "../examples/feature_lab/stress_benchmark.hpp"
 #include "engine/font.hpp"
 #include "test.hpp"
 #include <array>
@@ -74,8 +74,12 @@ TEST(small_collision_budgets_reuse_storage_with_full_query_capacity) {
     CollisionWorld world(CollisionWorld::Limits{3, 6, 12});
     std::array<Body2D, CollisionWorld::max_bodies> bodies;
     for (std::size_t i = 0; i < bodies.size(); ++i)
-        bodies[i] = {i < 3 ? i + 1 : i + 1000, Shape2D::circle({2, 2}, 0.5F),
-                     1, i < 3 ? 1U : 0U, true, true};
+        bodies[i] = {i < 3 ? i + 1 : i + 1000,
+                     Shape2D::circle({2, 2}, 0.5F),
+                     1,
+                     i < 3 ? 1U : 0U,
+                     true,
+                     true};
     world.prime(bodies);
     const auto bytes = world.buffer_bytes();
     const auto calls = allocation_check::calls;
@@ -397,6 +401,100 @@ TEST(options_bounds_json_escaping_and_resource_growth_detection) {
     char program[] = "stress_bench", frames[] = "--frames", bad[] = "18446744073709551616";
     char* arguments[] = {program, frames, bad};
     rejects([&] { parse_stress_options(3, arguments); });
+}
+TEST(frame_samples_pair_delayed_gpu_across_warmup_without_allocating) {
+    StressFrames trace(2, 2, 2, true);
+    const auto calls = allocation_check::calls;
+    const std::array<double, StressFrames::scope_count> cpu{1, 2, 3, 4, 5, 6, 21};
+    trace.record(3, cpu, true);
+    trace.collect({1, 99}, 3); // Warmup result is never paired to a measured row.
+    trace.record(4, cpu, true);
+    trace.collect({3, 0}, 5); // Valid zero duration, collected during next cycle's warmup.
+    trace.collect({4, 8}, 6);
+    trace.record(7, cpu, false); // Skipped/unsupported query.
+    trace.record(8, cpu, true);  // Still uncollected at shutdown.
+    CHECK(allocation_check::calls == calls);
+    const auto rows = trace.samples();
+    CHECK(rows.size() == 4 && rows[0].tag == 3 && rows[2].tag == 7);
+    CHECK(rows[0].gpu_ms == 0 && rows[0].collected_after == 5);
+    CHECK(rows[1].gpu_ms == 8 && rows[1].collected_after == 6);
+    CHECK(rows[2].gpu_ms == -1 && !rows[2].submitted);
+    CHECK(rows[3].gpu_ms == -1 && rows[3].submitted);
+    CHECK(trace.buffer_bytes() == 4 * sizeof(StressFrames::Sample));
+}
+TEST(frame_samples_reject_invalid_tags_values_duplicates_and_overflow) {
+    rejects([] { StressFrames trace(0, 0, 1, true); });
+    rejects([] { StressFrames trace(10000, 0, 7, true); });
+    StressFrames trace(2, 0, 1, true);
+    std::array<double, StressFrames::scope_count> cpu{};
+    rejects([&] { trace.record(0, cpu, true); });
+    rejects([&] { trace.record(2, cpu, true); });
+    cpu[0] = std::numeric_limits<double>::quiet_NaN();
+    rejects([&] { trace.record(1, cpu, true); });
+    cpu[0] = -1;
+    rejects([&] { trace.record(1, cpu, true); });
+    CHECK(trace.samples().empty());
+    cpu[0] = 0;
+    trace.record(1, cpu, true);
+    rejects([&] { trace.collect({0, 1}, 1); });
+    rejects([&] { trace.collect({1, 1}, 0); });
+    rejects([&] { trace.collect({1, 1}, 3); });
+    rejects([&] { trace.collect({2, 1}, 2); });
+    rejects([&] { trace.collect({1, -1}, 1); });
+    rejects([&] { trace.collect({1, std::numeric_limits<double>::infinity()}, 1); });
+    CHECK(trace.samples()[0].gpu_ms == -1);
+    trace.collect({1, 3}, 1);
+    rejects([&] { trace.collect({1, 4}, 1); });
+    CHECK(trace.samples()[0].gpu_ms == 3);
+    trace.record(2, cpu, false);
+    rejects([&] { trace.collect({2, 1}, 2); });
+    rejects([&] { trace.record(3, cpu, false); });
+    CHECK(trace.samples().size() == 2);
+}
+TEST(frame_samples_disabled_and_maximum_capacity_have_bounded_storage) {
+    const auto baseline = allocation_check::live;
+    {
+        const auto calls = allocation_check::calls;
+        StressFrames disabled(10000, 600, 6, false);
+        disabled.record(0, {}, false);
+        disabled.collect({}, 0);
+        CHECK(!disabled.enabled() && disabled.buffer_bytes() == 0 && disabled.samples().empty());
+        CHECK(allocation_check::calls == calls);
+        StressFrames full(10000, 600, 6, true);
+        const auto recording = allocation_check::calls;
+        for (std::uint64_t cycle = 0; cycle < 6; ++cycle)
+            for (std::uint64_t step = 601; step <= 10600; ++step) {
+                const auto tag = cycle * 10600 + step;
+                full.record(tag, {}, true);
+                full.collect({tag, 0.5}, tag);
+            }
+        CHECK(allocation_check::calls == recording && full.samples().size() == 60000);
+        CHECK(full.samples().back().tag == 63600);
+    }
+    CHECK(allocation_check::live == baseline);
+}
+TEST(frame_sample_report_is_opt_in_and_preserves_partial_and_missing_results) {
+    StressOptions options;
+    options.frames = 3;
+    options.warmup = 0;
+    options.cycles = 1;
+    StressReport plain(options);
+    CHECK(plain.json(options).find("frame_samples") == std::string::npos);
+    options.frame_samples = true;
+    StressReport report(options);
+    report.frame_samples.record(1, {}, true);
+    report.frame_samples.collect({1, 0}, 1);
+    report.frame_samples.record(2, {}, false);
+    const auto partial = report.json(options);
+    CHECK(partial.find("\"complete\":false") != std::string::npos);
+    CHECK(partial.find("\"gpu_status\":\"completed\",\"gpu_ms\":0") != std::string::npos);
+    CHECK(partial.find("\"gpu_status\":\"not_submitted\",\"gpu_ms\":null") != std::string::npos);
+    report.frame_samples.record(3, {}, true);
+    CHECK(report.json(options).find("\"gpu_status\":\"uncollected\",\"gpu_ms\":null") !=
+          std::string::npos);
+    char program[] = "stress_bench", flag[] = "--frame-samples";
+    char* args[] = {program, flag};
+    CHECK(parse_stress_options(2, args).frame_samples);
 }
 TEST(gpu_failure_report_preserves_uint64_values_and_omitted_count) {
     StressOptions options;
