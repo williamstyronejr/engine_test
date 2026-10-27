@@ -1,7 +1,8 @@
 #pragma once
-#include "stress.hpp"
-#include "json.hpp"
 #include "engine/gpu_timer.hpp"
+#include "json.hpp"
+#include "stress.hpp"
+#include "stress_frames.hpp"
 #include <array>
 #include <chrono>
 #include <string>
@@ -11,7 +12,7 @@ struct StressOptions {
     StressConfig workload;
     std::size_t frames{600}, warmup{60}, cycles{3};
     int width{1280}, height{720};
-    bool cpu_only{}, help{};
+    bool cpu_only{}, help{}, frame_samples{};
     std::string report, screenshot, label;
     void validate() const;
 };
@@ -39,6 +40,7 @@ inline double stress_ms(StressClock::time_point start, StressClock::time_point e
 struct StressReport {
     explicit StressReport(const StressOptions& options);
     Measurements load, simulation, audio, submission, preview, present, frame, gpu;
+    StressFrames frame_samples;
     StressResources resources;
     std::uint64_t checksum{}, quads{}, culled{}, draws{}, tiles{}, pairs{}, contacts{};
     std::size_t completed_cycles{}, measured_frames{}, rss_start{}, rss_end{}, rss_peak{};

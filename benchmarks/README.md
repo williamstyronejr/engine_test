@@ -263,3 +263,8 @@ The [candidate workload declaration](WORKLOAD_ACCEPTANCE.md) fixes timing and me
 budgets before collection and audits storage exclusions. [Eighteen repeated runs](2026-10-26-workload-acceptance-results.md)
 pass memory checks but fail timing acceptance; peak RSS is kept separate from
 tracked payloads and allocation demand.
+
+Optional [paired frame samples](STRESS_FRAME_SAMPLES.md) retain CPU intervals and
+GPU results by original tag. The [first investigation](2026-10-27-frame-samples-results.md)
+locates 15 of 17 traced outliers primarily in presentation and two in submission;
+it does not identify the underlying driver/scheduler cause or close acceptance.

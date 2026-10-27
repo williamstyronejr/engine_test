@@ -28,9 +28,12 @@ int run_stress_mode(int argc, char** argv) {
     std::uint64_t frame = 0;
     bool running = true;
     const auto collect = [&] {
-        for (const auto& sample : timer.collect())
+        for (const auto& sample : timer.collect()) {
             if ((sample.frame - 1) % (options.warmup + options.frames) >= options.warmup)
                 report.gpu.add(sample.milliseconds);
+            if (options.frame_samples)
+                report.frame_samples.collect(sample, frame);
+        }
     };
     for (std::size_t cycle = 0; cycle < options.cycles && running; ++cycle) {
         {
@@ -63,7 +66,7 @@ int run_stress_mode(int argc, char** argv) {
                 const auto simulated = StressClock::now();
                 arena.mix();
                 const auto mixed = StressClock::now();
-                timer.begin(++frame);
+                const bool gpu_submitted = timer.begin(++frame);
                 const auto tiles = graphics.render(arena);
                 timer.end();
                 const auto submitted = StressClock::now();
@@ -121,6 +124,15 @@ int run_stress_mode(int argc, char** argv) {
                     report.present.add(stress_ms(after_capture, end));
                     report.frame.add(stress_ms(frame_start, end) -
                                      stress_ms(before_capture, after_capture));
+                    if (options.frame_samples)
+                        report.frame_samples.record(
+                            frame,
+                            {stress_ms(frame_start, begin), stress_ms(begin, simulated),
+                             stress_ms(simulated, mixed), stress_ms(mixed, submitted),
+                             stress_ms(submitted, before_capture), stress_ms(after_capture, end),
+                             stress_ms(frame_start, end) -
+                                 stress_ms(before_capture, after_capture)},
+                            gpu_submitted);
                     report.quads += stats.quads;
                     report.culled += stats.culled;
                     report.draws += stats.draws;

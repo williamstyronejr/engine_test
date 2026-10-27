@@ -1,0 +1,614 @@
+{
+  "schema": "stress_frame_analysis_v1",
+  "source": "271053fd1c7c024237e3b2144321327d54d9efd3",
+  "all_attempts_valid": true,
+  "attempts": [
+    {
+      "mode": "plain",
+      "repeat": 1,
+      "frame": {
+        "samples": 1800,
+        "mean": 4.37270275,
+        "median": 3.44895,
+        "p95": 7.902617,
+        "p99": 13.407315,
+        "max": 37.704499
+      },
+      "rss_peak_bytes": 55816192
+    },
+    {
+      "mode": "traced",
+      "repeat": 1,
+      "frame": {
+        "samples": 1800,
+        "mean": 4.2360989,
+        "median": 3.399498,
+        "p95": 7.436535,
+        "p99": 11.132567,
+        "max": 32.828198
+      },
+      "rss_peak_bytes": 56619008,
+      "aggregates_reconstructed": true,
+      "cpu_partition_verified": true,
+      "over_16_7_ms": 2,
+      "over_16_7_percent": 0.1111111111111111,
+      "largest_interval_on_slow_frames": {
+        "poll_collect": 0,
+        "simulation": 0,
+        "mixer": 0,
+        "render_submit": 1,
+        "preview_submit": 0,
+        "present": 1
+      },
+      "worst_ten": [
+        {
+          "frame": "299",
+          "cpu_ms": {
+            "poll_collect": 0.012661,
+            "simulation": 0.607506,
+            "mixer": 0.186923,
+            "render_submit": 4.782398,
+            "preview_submit": 0.164311,
+            "present": 27.074399,
+            "frame": 32.828198
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 0.91736,
+          "gpu_collected_after": "300",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "308",
+          "cpu_ms": {
+            "poll_collect": 0.02169,
+            "simulation": 3.258276,
+            "mixer": 0.705928,
+            "render_submit": 14.101179,
+            "preview_submit": 0.489363,
+            "present": 0.701007,
+            "frame": 19.277443
+          },
+          "largest_cpu_interval": "render_submit",
+          "gpu_ms": 0.87232,
+          "gpu_collected_after": "309",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "297",
+          "cpu_ms": {
+            "poll_collect": 0.009911,
+            "simulation": 0.199561,
+            "mixer": 0.165681,
+            "render_submit": 4.344589,
+            "preview_submit": 0.12091,
+            "present": 9.870378,
+            "frame": 14.71103
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 0.9576,
+          "gpu_collected_after": "298",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "300",
+          "cpu_ms": {
+            "poll_collect": 0.027747,
+            "simulation": 0.335038,
+            "mixer": 0.3809,
+            "render_submit": 10.205211,
+            "preview_submit": 2.572205,
+            "present": 1.128135,
+            "frame": 14.649236
+          },
+          "largest_cpu_interval": "render_submit",
+          "gpu_ms": 0.89512,
+          "gpu_collected_after": "301",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "301",
+          "cpu_ms": {
+            "poll_collect": 0.030875,
+            "simulation": 0.684847,
+            "mixer": 0.373931,
+            "render_submit": 4.614606,
+            "preview_submit": 0.252426,
+            "present": 8.427411,
+            "frame": 14.384096
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 0.99272,
+          "gpu_collected_after": "301",
+          "collection_age_frames": 0
+        },
+        {
+          "frame": "148",
+          "cpu_ms": {
+            "poll_collect": 0.011894,
+            "simulation": 0.215877,
+            "mixer": 0.230114,
+            "render_submit": 3.976182,
+            "preview_submit": 0.364127,
+            "present": 9.066419,
+            "frame": 13.864613
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 0.9144,
+          "gpu_collected_after": "149",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "145",
+          "cpu_ms": {
+            "poll_collect": 0.012366,
+            "simulation": 0.19639,
+            "mixer": 0.176991,
+            "render_submit": 3.346309,
+            "preview_submit": 0.605631,
+            "present": 9.51864,
+            "frame": 13.856327
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 0.99976,
+          "gpu_collected_after": "146",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "147",
+          "cpu_ms": {
+            "poll_collect": 0.01319,
+            "simulation": 0.246204,
+            "mixer": 0.219962,
+            "render_submit": 4.514812,
+            "preview_submit": 0.31587,
+            "present": 8.405349,
+            "frame": 13.715387
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 0.87104,
+          "gpu_collected_after": "148",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "323",
+          "cpu_ms": {
+            "poll_collect": 0.0249,
+            "simulation": 0.453009,
+            "mixer": 2.38345,
+            "render_submit": 9.630503,
+            "preview_submit": 0.501727,
+            "present": 0.477927,
+            "frame": 13.471516
+          },
+          "largest_cpu_interval": "render_submit",
+          "gpu_ms": 0.92744,
+          "gpu_collected_after": "324",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "306",
+          "cpu_ms": {
+            "poll_collect": 0.024382,
+            "simulation": 0.340867,
+            "mixer": 0.224646,
+            "render_submit": 8.806041,
+            "preview_submit": 2.549929,
+            "present": 0.577753,
+            "frame": 12.523618
+          },
+          "largest_cpu_interval": "render_submit",
+          "gpu_ms": 0.96856,
+          "gpu_collected_after": "307",
+          "collection_age_frames": 1
+        }
+      ],
+      "missing_gpu_rows": 1,
+      "frame_sample_buffer_bytes": 158400
+    },
+    {
+      "mode": "traced",
+      "repeat": 2,
+      "frame": {
+        "samples": 1800,
+        "mean": 4.28580626,
+        "median": 3.480144,
+        "p95": 7.381238,
+        "p99": 11.566785,
+        "max": 22.733516
+      },
+      "rss_peak_bytes": 56930304,
+      "aggregates_reconstructed": true,
+      "cpu_partition_verified": true,
+      "over_16_7_ms": 4,
+      "over_16_7_percent": 0.2222222222222222,
+      "largest_interval_on_slow_frames": {
+        "poll_collect": 0,
+        "simulation": 0,
+        "mixer": 0,
+        "render_submit": 1,
+        "preview_submit": 0,
+        "present": 3
+      },
+      "worst_ten": [
+        {
+          "frame": "294",
+          "cpu_ms": {
+            "poll_collect": 0.010259,
+            "simulation": 0.210156,
+            "mixer": 0.165374,
+            "render_submit": 1.781992,
+            "preview_submit": 0.097164,
+            "present": 20.468571,
+            "frame": 22.733516
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 0.88288,
+          "gpu_collected_after": "295",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "314",
+          "cpu_ms": {
+            "poll_collect": 0.016695,
+            "simulation": 0.395431,
+            "mixer": 0.353793,
+            "render_submit": 16.756617,
+            "preview_submit": 0.249808,
+            "present": 2.833742,
+            "frame": 20.606086
+          },
+          "largest_cpu_interval": "render_submit",
+          "gpu_ms": 0.98,
+          "gpu_collected_after": "315",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "292",
+          "cpu_ms": {
+            "poll_collect": 0.010953,
+            "simulation": 0.223239,
+            "mixer": 0.200355,
+            "render_submit": 2.573702,
+            "preview_submit": 0.143262,
+            "present": 16.6008,
+            "frame": 19.752311
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 0.91392,
+          "gpu_collected_after": "293",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "293",
+          "cpu_ms": {
+            "poll_collect": 0.012038,
+            "simulation": 0.237823,
+            "mixer": 0.168814,
+            "render_submit": 2.675789,
+            "preview_submit": 0.160214,
+            "present": 16.364013,
+            "frame": 19.618691
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 0.88384,
+          "gpu_collected_after": "294",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "326",
+          "cpu_ms": {
+            "poll_collect": 0.03467,
+            "simulation": 0.501341,
+            "mixer": 0.235279,
+            "render_submit": 13.794485,
+            "preview_submit": 0.173753,
+            "present": 1.484227,
+            "frame": 16.223755
+          },
+          "largest_cpu_interval": "render_submit",
+          "gpu_ms": 0.91968,
+          "gpu_collected_after": "326",
+          "collection_age_frames": 0
+        },
+        {
+          "frame": "130",
+          "cpu_ms": {
+            "poll_collect": 0.011196,
+            "simulation": 0.251112,
+            "mixer": 0.218486,
+            "render_submit": 2.743192,
+            "preview_submit": 0.210888,
+            "present": 11.892913,
+            "frame": 15.327787
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 0.98288,
+          "gpu_collected_after": "131",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "132",
+          "cpu_ms": {
+            "poll_collect": 0.010669,
+            "simulation": 0.221526,
+            "mixer": 0.215056,
+            "render_submit": 2.671295,
+            "preview_submit": 0.172951,
+            "present": 11.576199,
+            "frame": 14.867696
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 0.9592,
+          "gpu_collected_after": "133",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "325",
+          "cpu_ms": {
+            "poll_collect": 0.053971,
+            "simulation": 5.052998,
+            "mixer": 3.0538,
+            "render_submit": 5.374223,
+            "preview_submit": 0.196277,
+            "present": 0.727829,
+            "frame": 14.459098
+          },
+          "largest_cpu_interval": "render_submit",
+          "gpu_ms": 0.89896,
+          "gpu_collected_after": "326",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "135",
+          "cpu_ms": {
+            "poll_collect": 0.014215,
+            "simulation": 0.328083,
+            "mixer": 0.179421,
+            "render_submit": 3.683845,
+            "preview_submit": 0.331402,
+            "present": 9.708064,
+            "frame": 14.24503
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 0.9504,
+          "gpu_collected_after": "136",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "305",
+          "cpu_ms": {
+            "poll_collect": 0.019156,
+            "simulation": 0.509701,
+            "mixer": 0.265025,
+            "render_submit": 4.006547,
+            "preview_submit": 0.303575,
+            "present": 8.708265,
+            "frame": 13.812269
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 0.9344,
+          "gpu_collected_after": "306",
+          "collection_age_frames": 1
+        }
+      ],
+      "missing_gpu_rows": 0,
+      "frame_sample_buffer_bytes": 158400
+    },
+    {
+      "mode": "plain",
+      "repeat": 2,
+      "frame": {
+        "samples": 1800,
+        "mean": 4.33837018,
+        "median": 3.480505,
+        "p95": 7.721155,
+        "p99": 9.579611,
+        "max": 23.455905
+      },
+      "rss_peak_bytes": 56205312
+    },
+    {
+      "mode": "plain",
+      "repeat": 3,
+      "frame": {
+        "samples": 1800,
+        "mean": 4.60134712,
+        "median": 3.27614,
+        "p95": 8.797713,
+        "p99": 12.146887,
+        "max": 37.885048
+      },
+      "rss_peak_bytes": 55668736
+    },
+    {
+      "mode": "traced",
+      "repeat": 3,
+      "frame": {
+        "samples": 1800,
+        "mean": 4.64591753,
+        "median": 3.269767,
+        "p95": 9.079549,
+        "p99": 13.291204,
+        "max": 31.071386
+      },
+      "rss_peak_bytes": 56619008,
+      "aggregates_reconstructed": true,
+      "cpu_partition_verified": true,
+      "over_16_7_ms": 11,
+      "over_16_7_percent": 0.6111111111111112,
+      "largest_interval_on_slow_frames": {
+        "poll_collect": 0,
+        "simulation": 0,
+        "mixer": 0,
+        "render_submit": 0,
+        "preview_submit": 0,
+        "present": 11
+      },
+      "worst_ten": [
+        {
+          "frame": "109",
+          "cpu_ms": {
+            "poll_collect": 0.009226,
+            "simulation": 0.207387,
+            "mixer": 0.167488,
+            "render_submit": 1.93637,
+            "preview_submit": 0.110533,
+            "present": 28.640382,
+            "frame": 31.071386
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 1.07632,
+          "gpu_collected_after": "110",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "263",
+          "cpu_ms": {
+            "poll_collect": 0.010949,
+            "simulation": 0.154021,
+            "mixer": 0.139261,
+            "render_submit": 1.771468,
+            "preview_submit": 0.131322,
+            "present": 27.57784,
+            "frame": 29.784861
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 1.0216,
+          "gpu_collected_after": "264",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "734",
+          "cpu_ms": {
+            "poll_collect": 0.011516,
+            "simulation": 0.140649,
+            "mixer": 0.131963,
+            "render_submit": 1.339973,
+            "preview_submit": 0.080447,
+            "present": 26.544631,
+            "frame": 28.249179
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 2.13224,
+          "gpu_collected_after": "735",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "111",
+          "cpu_ms": {
+            "poll_collect": 0.009809,
+            "simulation": 0.283619,
+            "mixer": 0.125195,
+            "render_submit": 1.951351,
+            "preview_submit": 0.185298,
+            "present": 25.124229,
+            "frame": 27.679501
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 1.02472,
+          "gpu_collected_after": "112",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "81",
+          "cpu_ms": {
+            "poll_collect": 0.009829,
+            "simulation": 0.132968,
+            "mixer": 0.165209,
+            "render_submit": 1.982846,
+            "preview_submit": 0.144162,
+            "present": 24.612545,
+            "frame": 27.047559
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 2.36912,
+          "gpu_collected_after": "82",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "107",
+          "cpu_ms": {
+            "poll_collect": 0.008133,
+            "simulation": 0.345832,
+            "mixer": 0.143658,
+            "render_submit": 1.809685,
+            "preview_submit": 0.105664,
+            "present": 22.10201,
+            "frame": 24.514982
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 0.99192,
+          "gpu_collected_after": "108",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "264",
+          "cpu_ms": {
+            "poll_collect": 0.01184,
+            "simulation": 0.119685,
+            "mixer": 0.106686,
+            "render_submit": 1.343222,
+            "preview_submit": 0.080347,
+            "present": 20.622917,
+            "frame": 22.284697
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 0.90944,
+          "gpu_collected_after": "265",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "884",
+          "cpu_ms": {
+            "poll_collect": 0.008639,
+            "simulation": 0.116413,
+            "mixer": 0.105876,
+            "render_submit": 1.153018,
+            "preview_submit": 0.06826,
+            "present": 19.051219,
+            "frame": 20.503425
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 1.85192,
+          "gpu_collected_after": "885",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "180",
+          "cpu_ms": {
+            "poll_collect": 0.014796,
+            "simulation": 0.129763,
+            "mixer": 0.182451,
+            "render_submit": 4.028063,
+            "preview_submit": 0.143012,
+            "present": 13.200842,
+            "frame": 17.698927
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 1.89456,
+          "gpu_collected_after": "181",
+          "collection_age_frames": 1
+        },
+        {
+          "frame": "105",
+          "cpu_ms": {
+            "poll_collect": 0.008618,
+            "simulation": 0.183887,
+            "mixer": 0.139614,
+            "render_submit": 2.118127,
+            "preview_submit": 0.203501,
+            "present": 14.560224,
+            "frame": 17.213971
+          },
+          "largest_cpu_interval": "present",
+          "gpu_ms": 1.1292,
+          "gpu_collected_after": "106",
+          "collection_age_frames": 1
+        }
+      ],
+      "missing_gpu_rows": 1,
+      "frame_sample_buffer_bytes": 158400
+    }
+  ],
+  "release_accepted": false
+}

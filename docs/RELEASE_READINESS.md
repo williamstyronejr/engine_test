@@ -113,8 +113,8 @@ ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 \
 Native graphics previously disabled leak detection because of driver allocations;
 that run checks address/undefined behavior only. Retain CPU and audio leak-enabled
 results separately. Do not suppress an engine report to make the aggregate pass.
-After storage, allocation profiling and UI coverage additions, the current inventory is 64
-native runtime groups (36 CPU, 24 hardware, four platform), plus three packaging
+After storage, allocation profiling, UI coverage and paired stress-frame additions, the current inventory is 65
+native runtime groups (36 CPU, 25 hardware, four platform), plus three packaging
 fixtures; platform-disabled builds discover 34 CPU groups. Discovery is not execution.
 The full-matrix record at `1dfba31` predates these additions; later storage and
 [allocation validation](../validation/2026-10-24-allocations/RESULTS.md) record their
@@ -244,7 +244,10 @@ fixtures; menu-transition costs remain separate. Increment 61 adds the
 all 18 runs pass memory ceilings, while one p99 and fourteen frame maxima fail
 16.7 ms. The [coverage audit](../benchmarks/WORKLOAD_ACCEPTANCE.md#storage-coverage-audit)
 keeps process RSS, tracked payloads and cumulative allocation counts distinct.
-Next: retain paired samples to diagnose frame outliers before selecting an optimization.
+Increment 62 [retains paired stress frames](../benchmarks/2026-10-27-frame-samples-results.md):
+15 of 17 traced outliers have presentation as their largest CPU interval and two
+have submission. This localizes elapsed time without proving its underlying cause.
+Next: compare explicit presentation pacing modes before selecting an optimization.
 R6 timing/coverage and physical R4/R5 cases remain open; R8 requires their
 coverage/support record. Refresh automated evidence when the implementation or
 toolchain changes. These results do not complete milestone 6.

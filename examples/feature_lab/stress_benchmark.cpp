@@ -44,6 +44,8 @@ StressOptions parse_stress_options(int argc, char** argv) {
         if (arg == "--stress" || arg == "--no-audio" || arg == "--no-vsync") {
         } else if (arg == "--help")
             result.help = true;
+        else if (arg == "--frame-samples")
+            result.frame_samples = true;
         else if (arg == "--cpu-only")
             result.cpu_only = true;
         else if (arg == "--dense")
@@ -89,7 +91,7 @@ std::string stress_help() {
            "--bodies 0..256 [--dense] --voices 0..16 --seed UINT64\n"
            "--frames 1..10000 --warmup 0..600 --cycles 1..50 (at most 60000 measured frames)\n"
            "--width 64..4096 --height 64..4096 --report FILE.json --label TEXT --screenshot "
-           "FILE.ppm\n"
+           "FILE.ppm [--frame-samples]\n"
            "Defaults: 8192 sprites, 4096 tiles, 1024 entities, 128 sparse bodies, 8 voices;\n"
            "600 frames after 60 warmup steps per cycle, 3 cycles, 1280x720 offscreen.\n"
            "Mixer runs offline; no audio device. VSync disable is requested. Escape aborts.\n"
@@ -129,7 +131,8 @@ StressReport::StressReport(const StressOptions& options)
     : load((options.validate(), options.cycles)), simulation(options.frames * options.cycles),
       audio(options.frames * options.cycles), submission(options.frames * options.cycles),
       preview(options.frames * options.cycles), present(options.frames * options.cycles),
-      frame(options.frames * options.cycles), gpu(options.frames * options.cycles) {
+      frame(options.frames * options.cycles), gpu(options.frames * options.cycles),
+      frame_samples(options.frames, options.warmup, options.cycles, options.frame_samples) {
     rss_start = rss_peak = stress_rss_bytes();
 }
 void StressReport::observe(const StressArena& arena, const StressResources& baseline) {
@@ -195,6 +198,9 @@ std::string StressReport::json(const StressOptions& options) const {
         << load.buffer_bytes() + simulation.buffer_bytes() + audio.buffer_bytes() +
                submission.buffer_bytes() + preview.buffer_bytes() + present.buffer_bytes() +
                frame.buffer_bytes() + gpu.buffer_bytes()
+        << (frame_samples.enabled()
+                ? ",\"frame_sample_buffer_bytes\":" + std::to_string(frame_samples.buffer_bytes())
+                : "")
         << ",\"rss_start\":" << rss_start << ",\"rss_end\":" << rss_end
         << ",\"rss_peak_at_cycle_boundary\":" << rss_peak
         << ",\"peak_uploaded_textures\":" << texture_peak
@@ -202,19 +208,18 @@ std::string StressReport::json(const StressOptions& options) const {
         << ",\"peak_targets\":" << target_peak << ",\"peak_target_bytes\":" << target_bytes_peak
         << "},\n  \"gpu_queries\":{\"supported\":" << gpu_supported
         << ",\"method\":" << json_string(engine::gpu_timing_method_name(gpu_method))
-        << ",\"counter_bits\":" << gpu_counter_bits
-        << ",\"submitted\":" << gpu_submitted << ",\"completed\":" << gpu_completed
-        << ",\"pending\":" << gpu_pending << ",\"skipped\":" << gpu_skipped
-        << ",\"invalid\":" << gpu_invalid
+        << ",\"counter_bits\":" << gpu_counter_bits << ",\"submitted\":" << gpu_submitted
+        << ",\"completed\":" << gpu_completed << ",\"pending\":" << gpu_pending
+        << ",\"skipped\":" << gpu_skipped << ",\"invalid\":" << gpu_invalid
         << ",\"failure_capacity\":" << engine::GpuTimer::failure_capacity
-        << ",\"failures_omitted\":" << gpu_invalid - gpu_failure_count
-        << ",\"failures\":[";
+        << ",\"failures_omitted\":" << gpu_invalid - gpu_failure_count << ",\"failures\":[";
     for (std::size_t i = 0; i < gpu_failure_count; ++i) {
         const auto& failure = gpu_failures[i];
         out << (i ? "," : "") << "{\"frame\":" << json_string(std::to_string(failure.frame))
             << ",\"start_ns\":" << json_string(std::to_string(failure.start_ns))
             << ",\"end_ns\":" << json_string(std::to_string(failure.end_ns))
-            << ",\"last_attempted_frame\":" << json_string(std::to_string(failure.last_attempted_frame))
+            << ",\"last_attempted_frame\":"
+            << json_string(std::to_string(failure.last_attempted_frame))
             << ",\"slot\":" << failure.slot << '}';
     }
     out << "]},\n  \"milliseconds\":{";
@@ -233,7 +238,33 @@ std::string StressReport::json(const StressOptions& options) const {
     metric("present", present, true);
     metric("frame", frame, true);
     metric("gpu_render", gpu, true);
-    return out.str() + "\n  }\n}\n";
+    out << "\n  }";
+    if (frame_samples.enabled()) {
+        out << ",\n  \"frame_samples\":{\"schema\":\"stress_frame_samples_v1\","
+               "\"cpu_scope_order\":[\"poll_collect\",\"simulation\",\"mixer\","
+               "\"render_submit\",\"preview_submit\",\"present\",\"frame\"],\"rows\":[";
+        bool comma = false;
+        for (const auto& sample : frame_samples.samples()) {
+            out << (comma ? "," : "") << "\n{\"frame\":" << json_string(std::to_string(sample.tag))
+                << ",\"cpu_ms\":[";
+            comma = true;
+            for (std::size_t i = 0; i < sample.cpu.size(); ++i)
+                out << (i ? "," : "") << sample.cpu[i];
+            out << "],\"gpu_status\":"
+                << json_string(sample.gpu_ms >= 0 ? "completed"
+                               : sample.submitted ? "uncollected"
+                                                  : "not_submitted")
+                << ",\"gpu_ms\":";
+            if (sample.gpu_ms >= 0)
+                out << sample.gpu_ms << ",\"gpu_collected_after\":"
+                    << json_string(std::to_string(sample.collected_after));
+            else
+                out << "null,\"gpu_collected_after\":null";
+            out << '}';
+        }
+        out << "]}";
+    }
+    return out.str() + "\n}\n";
 }
 void StressReport::write(const StressOptions& options) const {
     const auto text = json(options);
@@ -263,6 +294,12 @@ int run_cpu_stress(const StressOptions& requested) {
                 report.simulation.add(stress_ms(begin, simulated));
                 report.audio.add(stress_ms(simulated, mixed));
                 report.frame.add(stress_ms(begin, mixed));
+                if (options.frame_samples)
+                    report.frame_samples.record(
+                        cycle * (options.warmup + options.frames) + step + 1,
+                        {0, stress_ms(begin, simulated), stress_ms(simulated, mixed), 0, 0, 0,
+                         stress_ms(begin, mixed)},
+                        false);
                 report.pairs += arena.collisions().stats().candidate_pairs;
                 report.contacts += arena.collisions().contacts().size();
                 ++report.measured_frames;

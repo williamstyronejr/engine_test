@@ -300,6 +300,12 @@ if(ENGINE_BUILD_PLATFORM)
     target_link_libraries(sampling_tests PRIVATE engine_platform OpenGL::GL)
     add_test(NAME texture_sampling COMMAND sampling_tests)
     set_tests_properties(texture_sampling PROPERTIES TIMEOUT 30 SKIP_RETURN_CODE 77 LABELS hardware RUN_SERIAL TRUE)
+    add_test(NAME stress_frame_samples COMMAND ${CMAKE_COMMAND}
+      -DGAME_EXE=$<TARGET_FILE:feature_lab>
+      -DOUTPUT_DIR=${CMAKE_CURRENT_BINARY_DIR}/stress-frame-tests
+      -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/check_stress_frames.cmake)
+    set_tests_properties(stress_frame_samples PROPERTIES TIMEOUT 30 LABELS hardware RUN_SERIAL TRUE
+      SKIP_REGULAR_EXPRESSION "SKIP: stress frame samples")
     add_executable(stress_graphics_tests tests/stress_graphics_tests.cpp)
     target_link_libraries(stress_graphics_tests PRIVATE engine_platform)
     add_test(NAME stress_graphics COMMAND stress_graphics_tests)
