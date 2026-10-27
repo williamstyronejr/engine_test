@@ -13,6 +13,8 @@
 namespace feature_lab {
 void StressOptions::validate() const {
     workload.validate();
+    if (submission_samples && (cpu_only || !frame_samples))
+        throw std::invalid_argument("Submission samples require graphics and --frame-samples");
     if (presentation != StressPresentation::immediate && presentation != StressPresentation::vsync)
         throw std::invalid_argument("Invalid stress presentation mode");
     if (cpu_only && (presentation_explicit || presentation != StressPresentation::immediate))
@@ -64,6 +66,8 @@ StressOptions parse_stress_options(int argc, char** argv) {
             result.help = true;
         else if (arg == "--frame-samples")
             result.frame_samples = true;
+        else if (arg == "--submission-samples")
+            result.submission_samples = true;
         else if (arg == "--cpu-only")
             result.cpu_only = true;
         else if (arg == "--dense")
@@ -112,6 +116,7 @@ std::string stress_help() {
            "--frames 1..10000 --warmup 0..600 --cycles 1..50 (at most 60000 measured frames)\n"
            "--width 64..4096 --height 64..4096 --report FILE.json --label TEXT --screenshot "
            "FILE.ppm [--frame-samples] [--presentation immediate|vsync]\n"
+           "--submission-samples requires --frame-samples and graphics; CPU driver-call timing.\n"
            "Defaults: 8192 sprites, 4096 tiles, 1024 entities, 128 sparse bodies, 8 voices;\n"
            "600 frames after 60 warmup steps per cycle, 3 cycles, 1280x720 offscreen.\n"
            "Mixer runs offline; no audio device. Presentation requests interval 0 (default) or 1.\n"
@@ -153,7 +158,9 @@ StressReport::StressReport(const StressOptions& options)
       audio(options.frames * options.cycles), submission(options.frames * options.cycles),
       preview(options.frames * options.cycles), present(options.frames * options.cycles),
       frame(options.frames * options.cycles), gpu(options.frames * options.cycles),
-      frame_samples(options.frames, options.warmup, options.cycles, options.frame_samples) {
+      frame_samples(options.frames, options.warmup, options.cycles, options.frame_samples),
+      submission_samples(options.frames, options.warmup, options.cycles,
+                         options.submission_samples) {
     rss_start = rss_peak = stress_rss_bytes();
 }
 void StressReport::observe(const StressArena& arena, const StressResources& baseline) {
@@ -235,6 +242,9 @@ std::string StressReport::json(const StressOptions& options) const {
         << (frame_samples.enabled()
                 ? ",\"frame_sample_buffer_bytes\":" + std::to_string(frame_samples.buffer_bytes())
                 : "")
+        << (submission_samples.enabled() ? ",\"submission_sample_buffer_bytes\":" +
+                                               std::to_string(submission_samples.buffer_bytes())
+                                         : "")
         << ",\"rss_start\":" << rss_start << ",\"rss_end\":" << rss_end
         << ",\"rss_peak_at_cycle_boundary\":" << rss_peak
         << ",\"peak_uploaded_textures\":" << texture_peak
@@ -295,6 +305,20 @@ std::string StressReport::json(const StressOptions& options) const {
             else
                 out << "null,\"gpu_collected_after\":null";
             out << '}';
+        }
+        out << "]}";
+    }
+    if (submission_samples.enabled()) {
+        out << ",\n  \"submission_samples\":{\"schema\":\"stress_submission_samples_v1\","
+               "\"cpu_scope_order\":[\"prepare_other\",\"gl_setup\",\"gl_upload_draw\"],\"rows\":[";
+        bool comma = false;
+        for (const auto& sample : submission_samples.samples()) {
+            out << (comma ? "," : "") << "\n{\"frame\":" << json_string(std::to_string(sample.tag))
+                << ",\"cpu_ms\":[" << sample.prepare_other << ',' << sample.setup << ','
+                << sample.upload_draw << "],\"render_ms\":" << sample.render
+                << ",\"batches\":" << sample.batches << ",\"upload_bytes\":" << sample.upload_bytes
+                << '}';
+            comma = true;
         }
         out << "]}";
     }

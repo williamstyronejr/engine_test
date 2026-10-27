@@ -3,6 +3,7 @@
 #include "json.hpp"
 #include "stress.hpp"
 #include "stress_frames.hpp"
+#include "stress_submission.hpp"
 #include <array>
 #include <chrono>
 #include <string>
@@ -13,7 +14,7 @@ struct StressOptions {
     StressConfig workload;
     std::size_t frames{600}, warmup{60}, cycles{3};
     int width{1280}, height{720};
-    bool cpu_only{}, help{}, frame_samples{}, presentation_explicit{};
+    bool cpu_only{}, help{}, frame_samples{}, submission_samples{}, presentation_explicit{};
     StressPresentation presentation{StressPresentation::immediate};
     std::string report, screenshot, label;
     void validate() const;
@@ -43,6 +44,7 @@ struct StressReport {
     explicit StressReport(const StressOptions& options);
     Measurements load, simulation, audio, submission, preview, present, frame, gpu;
     StressFrames frame_samples;
+    StressSubmission submission_samples;
     StressResources resources;
     std::uint64_t checksum{}, quads{}, culled{}, draws{}, tiles{}, pairs{}, contacts{},
         present_calls{};
