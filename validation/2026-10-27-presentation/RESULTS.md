@@ -92,3 +92,15 @@ Every run's maximum exceeds that reference interval. The VSync workload intentio
 allows presentation waiting; its results do not replace the declared immediate
 release workload or prove physical refresh. Earlier failures, physical acceptance,
 broader memory-path coverage and the final support record remain open.
+
+## Feature package verification
+
+At documentation commit `3fd78d9`, all three Release package checks pass without
+skips (25.50 s), including relocated OpenGL gameplay. All 40 evidence files and
+both new benchmark documents match the archive byte-for-byte. Optional Python
+evidence utilities are included; the four allocation profilers remain excluded.
+Build identity is GNU 16.2.1, Release, sanitizers off.
+
+[Identity and commands](package-feature.json), [configure](package-feature-configure.log),
+[build](package-feature-build.log), [tests](package-feature-tests.log). This follow-up
+records that prior archive; its added logs and text are included in later packaging.

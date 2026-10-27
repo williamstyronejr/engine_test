@@ -2161,6 +2161,10 @@ See [mode contract](../benchmarks/STRESS_PRESENTATION.md),
 [comparison](../benchmarks/2026-10-27-presentation-results.md) and
 [evidence](../validation/2026-10-27-presentation/RESULTS.md).
 
+At documentation commit `3fd78d9`, all three Release package checks pass (25.50 s).
+All 40 evidence files and both new benchmark documents match their archived copies;
+the allocation profilers remain excluded from installation.
+
 ## Next increment
 
 Separate CPU geometry preparation from GL upload/draw time within the submission
