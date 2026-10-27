@@ -2140,10 +2140,31 @@ At documentation commit `328c41f`, all three Release package checks pass (27.29 
 All 40 evidence files and both new benchmark documents match their archived copies;
 the allocation profilers remain excluded from installation.
 
+## Increment 63: explicit stress presentation requests
+
+- Added `--presentation immediate|vsync` for stress mode using the existing GLX
+  swap-interval API. Immediate remains default; gameplay settings are unchanged.
+  Reports distinguish request issuance from physical confirmation, count all
+  presentation calls, and preserve truthful legacy VSync flags.
+- Conflicting/duplicate/unknown arguments and presentation options in CPU-only
+  runs are rejected before replacing reports. The legacy `--no-vsync` alias stays
+  compatible with immediate and CPU modes.
+- At `5a6f1b2`, all six alternating traced runs complete with identical workloads,
+  state/render counts and tracked payloads. Immediate median frames are 3.18–3.50 ms;
+  requested VSync medians are 16.66–16.67 ms. All six maxima still exceed 16.7 ms.
+  Requests are issued, but physical synchronization is not verified.
+- Eight focused groups pass in GNU Debug/Release and Clang; five CPU and three
+  native sanitizer groups pass, without skips. Eight default/explicit-mode image
+  pairs match. These are focused checks, not a refreshed full validation matrix.
+
+See [mode contract](../benchmarks/STRESS_PRESENTATION.md),
+[comparison](../benchmarks/2026-10-27-presentation-results.md) and
+[evidence](../validation/2026-10-27-presentation/RESULTS.md).
+
 ## Next increment
 
-Compare presentation pacing under explicit benchmark modes with the same paired
-records; investigate submission outliers separately before changing renderer
-streaming. Preserve workload identities, declared limits and failed attempts.
+Separate CPU geometry preparation from GL upload/draw time within the submission
+interval using opt-in measurements, before choosing a buffer-streaming change.
+Keep presentation timing, workload identities, declared limits and failed attempts.
 Physical display/audio, broader memory-path coverage and the final support record
 remain open; background loading remains deferred.

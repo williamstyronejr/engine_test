@@ -729,7 +729,9 @@ GPU labels and combined settings/controls overlays as well as the original UI st
 
 For stress-frame outliers, `--stress --frame-samples` retains paired CPU/GPU
 intervals with original frame tags. See [the opt-in contract](benchmarks/STRESS_FRAME_SAMPLES.md)
-and [the recorded investigation](benchmarks/2026-10-27-frame-samples-results.md).
+and [the recorded investigation](benchmarks/2026-10-27-frame-samples-results.md). Stress mode also
+accepts `--presentation immediate|vsync`; [request semantics and comparison](benchmarks/STRESS_PRESENTATION.md)
+keep requested pacing separate from physical synchronization.
 
 ## Window lifecycle
 

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-c++"
+	tests="3"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="omarchy"
+	time="4"
+	timestamp="2026-10-27T07:32:18"
+	>
+	<testcase name="stress_frame_samples" classname="stress_frame_samples" time="2.56344" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="stress_graphics" classname="stress_graphics" time="0.919131" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS repeated_gpu_load_draw_unload_and_rollover
+PASS texture_byte_accounting_replacement_failure_and_cleanup
+2 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="gpu_timers" classname="gpu_timers" time="0.565729" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS real_queries_return_ordered_finite_timings_without_changing_pixels
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS real_full_pool_skip_recovery_and_shader_reload
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS query_objects_are_deleted_with_pending_or_unfinished_scopes
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS elapsed_overlap_external_ownership_and_interrupted_scope_cleanup
+[platform] X11/GLX (may be XWayland)
+[gr...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+</testsuite>

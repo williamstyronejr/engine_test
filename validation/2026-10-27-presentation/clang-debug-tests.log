@@ -1,0 +1,25 @@
+Test project /home/zero/dev/engine_test/build/clang
+    Start 15: stress_cpu
+1/8 Test #15: stress_cpu .......................   Passed    1.80 sec
+    Start 16: stress_report
+2/8 Test #16: stress_report ....................   Passed    0.10 sec
+    Start 17: replay_profile
+3/8 Test #17: replay_profile ...................   Passed    0.00 sec
+    Start 18: spike_profile
+4/8 Test #18: spike_profile ....................   Passed    0.06 sec
+    Start 24: gpu_timer_queue
+5/8 Test #24: gpu_timer_queue ..................   Passed    0.01 sec
+    Start 46: stress_frame_samples
+6/8 Test #46: stress_frame_samples .............   Passed    1.79 sec
+    Start 47: stress_graphics
+7/8 Test #47: stress_graphics ..................   Passed    0.19 sec
+    Start 56: gpu_timers
+8/8 Test #56: gpu_timers .......................   Passed    0.30 sec
+
+100% tests passed out of 8
+
+Label Time Summary:
+cpu         =   1.97 sec*proc (5 tests)
+hardware    =   2.28 sec*proc (3 tests)
+
+Total Test time (real) =   4.26 sec
