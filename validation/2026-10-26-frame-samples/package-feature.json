@@ -1,0 +1,45 @@
+{
+  "revision": "328c41f",
+  "archive": "/home/zero/dev/engine_test/build/release/dist/feature-lab-0.1.0-Linux-x86_64-328c41f.tar.gz",
+  "archive_sha256": "b9eb92c7e581c6cb7610779665456e0a8d58d7952409220a42145dbaf635ffec",
+  "matching_evidence_and_benchmark_files": 42,
+  "profilers_installed": false,
+  "commands": [
+    {
+      "command": [
+        "cmake",
+        "--preset",
+        "release"
+      ],
+      "exit_code": 0,
+      "seconds": 0.49666679999791086
+    },
+    {
+      "command": [
+        "cmake",
+        "--build",
+        "--preset",
+        "release",
+        "--target",
+        "feature_lab",
+        "stress_bench",
+        "validate_assets",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "seconds": 7.725168889970519
+    },
+    {
+      "command": [
+        "ctest",
+        "--preset",
+        "release",
+        "-L",
+        "packaging",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "seconds": 27.532954608032014
+    }
+  ]
+}

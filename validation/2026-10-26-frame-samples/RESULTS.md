@@ -90,3 +90,15 @@ exceed 16.7 ms. Prior acceptance failures remain in their original record. The
 17 measured traced outliers locate elapsed time, without proving a scheduler,
 driver or compositor cause. Physical presentation/audio and broad memory/support
 acceptance remain open.
+
+## Feature package verification
+
+At documentation commit `328c41f`, all three Release package checks pass without
+skips (27.29 s), including relocated OpenGL gameplay. All 40 evidence files and
+both new benchmark documents match the archive byte-for-byte. Python evidence
+utilities are included; the four allocation profiling executables remain excluded.
+The package records GNU 16.2.1, Release, sanitizers off.
+
+[Identity and commands](package-feature.json), [configure](package-feature-configure.log),
+[build](package-feature-build.log), [tests](package-feature-tests.log). This follow-up
+records that prior archive; its added logs and text are included in later packaging.

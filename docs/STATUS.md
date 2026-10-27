@@ -2136,6 +2136,10 @@ See [trace contract](../benchmarks/STRESS_FRAME_SAMPLES.md),
 [evidence](../validation/2026-10-26-frame-samples/RESULTS.md). All six maxima still
 exceed the frame budget; neither prior failures nor physical acceptance are waived.
 
+At documentation commit `328c41f`, all three Release package checks pass (27.29 s).
+All 40 evidence files and both new benchmark documents match their archived copies;
+the allocation profilers remain excluded from installation.
+
 ## Next increment
 
 Compare presentation pacing under explicit benchmark modes with the same paired
