@@ -1,0 +1,72 @@
+[
+  {
+    "control": "valid",
+    "exit_code": 0,
+    "expected_accept": true
+  },
+  {
+    "control": "signed_difference",
+    "exit_code": 0,
+    "expected_accept": true
+  },
+  {
+    "control": "frame_tag",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "negative",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "nonfinite",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "phase_count",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "metric_count",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "gl_cpu_nesting",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "gl_wall_nesting",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "outer_wall",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "gl_reconstruction",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "payload_bytes",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "clock_identity",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "row_count",
+    "exit_code": 1,
+    "expected_accept": false
+  }
+]

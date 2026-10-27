@@ -1,6 +1,7 @@
 #include "../examples/feature_lab/spike_profile.hpp"
 #include "../examples/feature_lab/stress_benchmark.hpp"
 #include "engine/font.hpp"
+#include "engine/thread_cpu_clock.hpp"
 #include "test.hpp"
 #include <array>
 #include <cstddef>
@@ -588,6 +589,67 @@ TEST(submission_samples_require_graphics_and_paired_frames) {
     options.submission_samples = false;
     StressReport plain(options);
     CHECK(plain.json(options).find("submission_sample") == std::string::npos);
+}
+TEST(preparation_samples_preserve_clock_differences_and_reject_bad_partitions) {
+    CHECK(engine::thread_cpu_resolution_nanoseconds() > 0);
+    const auto first = engine::thread_cpu_nanoseconds();
+    CHECK(engine::thread_cpu_nanoseconds() >= first);
+    rejects([] { StressPreparation trace(0, 0, 1, true); });
+    rejects([] { StressPreparation trace(10000, 0, 7, true); });
+    StressPreparation trace(1, 2, 2, true);
+    StressPreparationPhases phases{};
+    phases[1] = {2, 2.001, 1, 1}; // Signed wall-CPU residual must survive.
+    rejects([&] { trace.record(1, phases); });
+    auto bad = phases;
+    bad[0].wall = -1;
+    rejects([&] { trace.record(3, bad); });
+    bad = phases;
+    bad[1].gl_cpu = 3;
+    rejects([&] { trace.record(3, bad); });
+    bad = phases;
+    bad[1].gl_wall = 3;
+    rejects([&] { trace.record(3, bad); });
+    bad = phases;
+    bad[1].cpu = std::numeric_limits<double>::quiet_NaN();
+    rejects([&] { trace.record(3, bad); });
+    trace.record(3, phases);
+    CHECK(trace.samples()[0].phases[1].cpu > trace.samples()[0].phases[1].wall);
+    rejects([&] { trace.record(3, phases); });
+    trace.record(6, {});
+    rejects([&] { trace.record(9, phases); });
+    const auto calls = allocation_check::calls;
+    StressPreparation disabled(1, 0, 1, false);
+    disabled.record(0, bad);
+    CHECK(disabled.buffer_bytes() == 0 && disabled.samples().empty());
+    CHECK(allocation_check::calls == calls);
+    StressPreparation full(10000, 600, 6, true);
+    const auto recording = allocation_check::calls;
+    for (std::uint64_t cycle = 0; cycle < 6; ++cycle)
+        for (std::uint64_t step = 601; step <= 10600; ++step)
+            full.record(cycle * 10600 + step, phases);
+    CHECK(full.samples().size() == 60000 && allocation_check::calls == recording);
+    CHECK(full.buffer_bytes() == 60000 * sizeof(StressPreparation::Sample));
+}
+TEST(preparation_options_and_partial_report_are_explicit) {
+    char program[] = "stress", prep[] = "--preparation-samples", split[] = "--submission-samples",
+         frames[] = "--frame-samples", cpu[] = "--cpu-only";
+    char* args[] = {program, prep, split, frames, cpu};
+    rejects([&] { parse_stress_options(2, args); });
+    rejects([&] { parse_stress_options(3, args); });
+    auto options = parse_stress_options(4, args);
+    CHECK(options.preparation_samples);
+    rejects([&] { parse_stress_options(5, args); });
+    StressReport report(options);
+    report.preparation_samples.record(61, {});
+    const auto text = report.json(options);
+    CHECK(text.find("stress_preparation_samples_v1") != std::string::npos);
+    CHECK(text.find("CLOCK_THREAD_CPUTIME_ID") != std::string::npos);
+    CHECK(text.find("\"phases\":[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]") != std::string::npos);
+    CHECK(text.find("\"complete\":false") != std::string::npos);
+    options.preparation_samples = false;
+    StressReport plain(options);
+    CHECK(plain.json(options).find("preparation_sample") == std::string::npos);
+    CHECK(plain.thread_clock_resolution_ns == 0);
 }
 TEST(gpu_failure_report_preserves_uint64_values_and_omitted_count) {
     StressOptions options;

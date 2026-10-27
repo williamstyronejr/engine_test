@@ -1,0 +1,261 @@
+{
+  "schema": "stress_preparation_collection_v1",
+  "source": "25ed4c843a2be3037d1f1121741d31fd2e88a8be",
+  "started_utc": "2026-10-27T22:10:49.771276+00:00",
+  "executable_sha256": "4b3a58a6816da6184602a4c9b2ac46762fddaddaa7a18fccd9247889fa27c9bf",
+  "declaration_sha256": "80722d41b3a7d4d01a75134acbfd9b65f9619ca275f03dd83b83a7c0d8aaeb2a",
+  "collector_sha256": "247760c165d368c2452649ce9e512fbf95d46e1f20b4b0685b13cbdd00ddd2ae",
+  "display": ":0",
+  "runs": [
+    {
+      "mode": "baseline",
+      "repeat": 1,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--submission-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-27-preparation/baseline-1.json"
+      ],
+      "report": "baseline-1.json",
+      "log": "baseline-1.log",
+      "started_utc": "2026-10-27T22:10:49.775821+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -265700,
+        "/sys/class/thermal/thermal_zone1/temp": 78000
+      },
+      "exit_code": 0,
+      "seconds": 13.748005101999297,
+      "rss_peak_bytes": 57626624,
+      "finished_utc": "2026-10-27T22:11:03.525381+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -265700,
+        "/sys/class/thermal/thermal_zone1/temp": 72000
+      },
+      "report_sha256": "03830147f6a56054c59b30194d409dc9831200ad50fd555fd57d4ac9944d5ffa",
+      "log_sha256": "d844d816a39fdd785809566e86e008c4b2097a1b2bee3fb20d4a134189a19765"
+    },
+    {
+      "mode": "profile",
+      "repeat": 1,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--submission-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-27-preparation/profile-1.json",
+        "--preparation-samples"
+      ],
+      "report": "profile-1.json",
+      "log": "profile-1.log",
+      "started_utc": "2026-10-27T22:11:03.548231+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -265700,
+        "/sys/class/thermal/thermal_zone1/temp": 73000
+      },
+      "exit_code": 0,
+      "seconds": 14.195349408000766,
+      "rss_peak_bytes": 58437632,
+      "finished_utc": "2026-10-27T22:11:17.748627+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -265800,
+        "/sys/class/thermal/thermal_zone1/temp": 71000
+      },
+      "report_sha256": "1a1718911ffae35041fdac685b8f8257324cf023e895c46bdb1d6fdc0a92a427",
+      "log_sha256": "a06ed454a2b76956ae315753ea79ffb3da4d0ea10391fbc9a62d683ef4c254c9"
+    },
+    {
+      "mode": "profile",
+      "repeat": 2,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--submission-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-27-preparation/profile-2.json",
+        "--preparation-samples"
+      ],
+      "report": "profile-2.json",
+      "log": "profile-2.log",
+      "started_utc": "2026-10-27T22:11:17.767668+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -265800,
+        "/sys/class/thermal/thermal_zone1/temp": 72000
+      },
+      "exit_code": 0,
+      "seconds": 14.14143177599908,
+      "rss_peak_bytes": 58085376,
+      "finished_utc": "2026-10-27T22:11:31.912443+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -265900,
+        "/sys/class/thermal/thermal_zone1/temp": 71000
+      },
+      "report_sha256": "dc83a4dbdee6b6cf40476ecd4bdd483f988043c265aae5f10a8c103ee458afa5",
+      "log_sha256": "d42392170f929d496a7a35459cc759a6b7c2dc7faa4da86aaf3ed1adb6ef784d"
+    },
+    {
+      "mode": "baseline",
+      "repeat": 2,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--submission-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-27-preparation/baseline-2.json"
+      ],
+      "report": "baseline-2.json",
+      "log": "baseline-2.log",
+      "started_utc": "2026-10-27T22:11:31.936515+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -265900,
+        "/sys/class/thermal/thermal_zone1/temp": 71000
+      },
+      "exit_code": 0,
+      "seconds": 14.385053883001092,
+      "rss_peak_bytes": 57798656,
+      "finished_utc": "2026-10-27T22:11:46.326125+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -266000,
+        "/sys/class/thermal/thermal_zone1/temp": 69000
+      },
+      "report_sha256": "ff0bfc917c5a10e9d0c0ef056e13996c0a400a94abcd6e8ef7574c6abaa78a45",
+      "log_sha256": "2a0ac26d8526a2fa3187ede4ba0a14b288c00c0f1ca567c1bcf7e4ac5e7c47d1"
+    },
+    {
+      "mode": "baseline",
+      "repeat": 3,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--submission-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-27-preparation/baseline-3.json"
+      ],
+      "report": "baseline-3.json",
+      "log": "baseline-3.log",
+      "started_utc": "2026-10-27T22:11:46.344406+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -266000,
+        "/sys/class/thermal/thermal_zone1/temp": 71000
+      },
+      "exit_code": 0,
+      "seconds": 15.64034415399874,
+      "rss_peak_bytes": 57712640,
+      "finished_utc": "2026-10-27T22:12:01.989192+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -266100,
+        "/sys/class/thermal/thermal_zone1/temp": 69000
+      },
+      "report_sha256": "d54edd1278015d17ca28673492ccd7e300aea54ad85a77a22c20c2d6eebab9fb",
+      "log_sha256": "cfb8962c46de0fdf707c23f0bad87efad05788397ae5d80879b53a289317253e"
+    },
+    {
+      "mode": "profile",
+      "repeat": 3,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--submission-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-27-preparation/profile-3.json",
+        "--preparation-samples"
+      ],
+      "report": "profile-3.json",
+      "log": "profile-3.log",
+      "started_utc": "2026-10-27T22:12:02.013354+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -266100,
+        "/sys/class/thermal/thermal_zone1/temp": 69000
+      },
+      "exit_code": 0,
+      "seconds": 15.828332314998988,
+      "rss_peak_bytes": 58449920,
+      "finished_utc": "2026-10-27T22:12:17.845019+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -266200,
+        "/sys/class/thermal/thermal_zone1/temp": 67000
+      },
+      "report_sha256": "c6829179e57d3403dd08e7c8dcdaa5e8f192cb000c5bd45105dc44bd5b2083c3",
+      "log_sha256": "243feaaba21e8ca22233abef1c9f97361eef6a028573710ea137db2763476d90"
+    }
+  ],
+  "finished_utc": "2026-10-27T22:12:17.867244+00:00"
+}

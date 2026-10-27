@@ -48,6 +48,7 @@ struct RenderStats {
 // These are driver-call intervals, not GPU execution times. Reset by each begin().
 struct RenderCpuTiming {
     double setup_ms{}, upload_draw_ms{};
+    double setup_cpu_ms{}, upload_draw_cpu_ms{}; // Optional calling-thread CPU, not GPU time.
     std::size_t batches{}, upload_bytes{};
 };
 // Must be constructed/destroyed while the owning window's context is current.
@@ -109,7 +110,8 @@ class Renderer {
     void end();
     RenderStats stats() const;
     // Between passes only. Disabled by default; disabled passes perform no timing reads.
-    void set_cpu_timing(bool enabled);
+    // thread_cpu additionally samples CLOCK_THREAD_CPUTIME_ID; requires enabled.
+    void set_cpu_timing(bool enabled, bool thread_cpu = false);
     RenderCpuTiming cpu_timing() const;
     std::array<unsigned char, 4> pixel(int x, int y) const;
     void screenshot(

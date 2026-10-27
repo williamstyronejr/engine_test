@@ -36,6 +36,9 @@ with its measurement interpretation linked from benchmarks.
   unchanged pixels and six retained plain/traced runs. The directory uses the
   October 26 local session date.
 
+- [2026-10-27 preparation profiling](2026-10-27-preparation/RESULTS.md):
+  six retained on/off runs, coarse phase wall/thread-CPU measurements, nested GL
+  reconstruction, signed gaps, focused checks and twenty-four identical image pairs.
 - [2026-10-27 submission timing](2026-10-27-submission/RESULTS.md):
   six retained on/off attempts, reconstructed nested CPU partitions, batch/upload
   accounting, focused compiler/sanitizer checks and sixteen identical image pairs.

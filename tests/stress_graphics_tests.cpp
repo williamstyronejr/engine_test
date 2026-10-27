@@ -48,6 +48,34 @@ TEST(cpu_timing_empty_pass_and_active_pass_contract) {
     CHECK(renderer->cpu_timing().setup_ms == 0 && renderer->cpu_timing().upload_draw_ms == 0);
     CHECK(renderer->cpu_timing().batches == 0 && renderer->cpu_timing().upload_bytes == 0);
 }
+TEST(thread_cpu_phases_cover_nested_gl_and_reset_for_empty_passes) {
+    rejects([&] { renderer->set_cpu_timing(false, true); });
+    for (bool empty : {false, true}) {
+        StressArena arena({empty ? 0U : 8192U, empty ? 0U : 1024U, 0, 0, 0, 1, false});
+        StressGraphics graphics(*renderer, 256, 144);
+        renderer->set_cpu_timing(true, true);
+        StressPreparationPhases phases{};
+        CHECK(graphics.render(arena, &phases) == (empty ? 0 : 1024));
+        StressPreparation trace(1, 0, 1, true);
+        trace.record(1, phases); // Checks finite, nonnegative and nested same-clock intervals.
+        const auto timing = renderer->cpu_timing();
+        double gl_wall{}, gl_cpu{};
+        for (const auto& p : phases) {
+            gl_wall += p.gl_wall;
+            gl_cpu += p.gl_cpu;
+        }
+        CHECK(std::abs(gl_wall - timing.setup_ms - timing.upload_draw_ms) < 1e-8);
+        CHECK(std::abs(gl_cpu - timing.setup_cpu_ms - timing.upload_draw_cpu_ms) < 1e-8);
+        CHECK(timing.batches == (empty ? 0 : 2));
+        if (empty)
+            CHECK(timing.upload_draw_cpu_ms == 0);
+        renderer->set_cpu_timing(true); // Wall-only remains the original mode.
+        graphics.render(arena);
+        CHECK(renderer->cpu_timing().setup_cpu_ms == 0);
+        CHECK(renderer->cpu_timing().upload_draw_cpu_ms == 0);
+        renderer->set_cpu_timing(false);
+    }
+}
 TEST(texture_byte_accounting_replacement_failure_and_cleanup) {
     const auto baseline = renderer->texture_bytes();
     const auto first = renderer->upload({1, 1, {255, 0, 0, 255}});

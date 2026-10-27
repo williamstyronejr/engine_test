@@ -278,3 +278,8 @@ Opt-in [submission samples](STRESS_SUBMISSION.md) separate CPU preparation and
 bookkeeping from GL setup and batch upload/draw intervals. The
 [2026-10-27 on/off collection](2026-10-27-submission-results.md) retains paired
 outliers, workload identity, image checks and existing acceptance limits.
+
+[Preparation profiling](STRESS_PREPARATION.md) adds coarse phase wall/thread-CPU
+measurements and nested GL accounting. The [on/off collection](2026-10-27-preparation-results.md)
+retains signed wall-minus-CPU differences and unmeasured wall time without treating
+them as exact scheduler latency or isolated GPU work.

@@ -1,6 +1,9 @@
 #pragma once
 #include "engine/renderer.hpp"
+#include "engine/thread_cpu_clock.hpp"
 #include "stress.hpp"
+#include "stress_preparation.hpp"
+#include <chrono>
 
 namespace feature_lab {
 struct StressGpuResources {
@@ -35,22 +38,51 @@ class StressGraphics {
     }
     StressGraphics(const StressGraphics&) = delete;
     StressGraphics& operator=(const StressGraphics&) = delete;
-    std::size_t render(const StressArena& arena) {
+    std::size_t render(const StressArena& arena, StressPreparationPhases* phases = nullptr) {
+        const auto phase = [&](std::size_t index, auto&& work) {
+            if (!phases) {
+                work();
+                return;
+            }
+            // begin() resets cumulative GL measurements; subsequent phases use deltas.
+            const auto before = index ? renderer_.cpu_timing() : engine::RenderCpuTiming{};
+            const auto start = std::chrono::steady_clock::now();
+            const auto cpu_start = engine::thread_cpu_nanoseconds();
+            work();
+            const auto cpu_end = engine::thread_cpu_nanoseconds();
+            const auto end = std::chrono::steady_clock::now();
+            const auto after = renderer_.cpu_timing();
+            (*phases)[index] = {std::chrono::duration<double, std::milli>(end - start).count(),
+                                static_cast<double>(cpu_end - cpu_start) / 1e6,
+                                (after.setup_ms + after.upload_draw_ms) -
+                                    (before.setup_ms + before.upload_draw_ms),
+                                (after.setup_cpu_ms + after.upload_draw_cpu_ms) -
+                                    (before.setup_cpu_ms + before.upload_draw_cpu_ms)};
+        };
         const engine::Camera camera{{0, 0}, 36};
         const auto size = renderer_.target_size(target_);
         const auto half = camera.extent(size.width, size.height) * 0.5F;
-        renderer_.begin(target_, camera, {0.01F, 0.025F, 0.04F, 1});
-        const auto visited =
-            arena.tiles().visit_visible(0, {{-half.x, -half.y}, half}, [&](const auto& tile) {
+        phase(0, [&] { renderer_.begin(target_, camera, {0.01F, 0.025F, 0.04F, 1}); });
+        std::size_t tiles{};
+        phase(1, [&] {
+            tiles = arena.tiles()
+                        .visit_visible(0, {{-half.x, -half.y}, half},
+                                       [&](const auto& tile) {
+                                           renderer_.sprite(texture_,
+                                                            engine::Transform::from(
+                                                                tile.center, 0, {0.125F, 0.125F}),
+                                                            {}, tile.uv);
+                                       })
+                        .tiles;
+        });
+        phase(2, [&] {
+            for (const auto& sprite : arena.sprites())
                 renderer_.sprite(texture_,
-                                 engine::Transform::from(tile.center, 0, {0.125F, 0.125F}), {},
-                                 tile.uv);
-            });
-        for (const auto& sprite : arena.sprites())
-            renderer_.sprite(texture_, engine::Transform::from(sprite.position, 0, {0.12F, 0.12F}),
-                             {}, engine::atlas_uv(sprite.cell, 2, 2));
-        renderer_.end();
-        return visited.tiles;
+                                 engine::Transform::from(sprite.position, 0, {0.12F, 0.12F}), {},
+                                 engine::atlas_uv(sprite.cell, 2, 2));
+        });
+        phase(3, [&] { renderer_.end(); });
+        return tiles;
     }
     engine::RenderTargetHandle target() const { return target_; }
 

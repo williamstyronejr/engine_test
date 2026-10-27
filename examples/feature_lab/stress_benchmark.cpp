@@ -1,5 +1,6 @@
 #include "stress_benchmark.hpp"
 #include "engine/assets.hpp"
+#include "engine/thread_cpu_clock.hpp"
 #include "stress_build.hpp"
 #include <charconv>
 #include <fstream>
@@ -13,6 +14,8 @@
 namespace feature_lab {
 void StressOptions::validate() const {
     workload.validate();
+    if (preparation_samples && !submission_samples)
+        throw std::invalid_argument("Preparation samples require --submission-samples");
     if (submission_samples && (cpu_only || !frame_samples))
         throw std::invalid_argument("Submission samples require graphics and --frame-samples");
     if (presentation != StressPresentation::immediate && presentation != StressPresentation::vsync)
@@ -68,6 +71,8 @@ StressOptions parse_stress_options(int argc, char** argv) {
             result.frame_samples = true;
         else if (arg == "--submission-samples")
             result.submission_samples = true;
+        else if (arg == "--preparation-samples")
+            result.preparation_samples = true;
         else if (arg == "--cpu-only")
             result.cpu_only = true;
         else if (arg == "--dense")
@@ -117,6 +122,7 @@ std::string stress_help() {
            "--width 64..4096 --height 64..4096 --report FILE.json --label TEXT --screenshot "
            "FILE.ppm [--frame-samples] [--presentation immediate|vsync]\n"
            "--submission-samples requires --frame-samples and graphics; CPU driver-call timing.\n"
+           "--preparation-samples additionally profiles phases and calling-thread CPU time.\n"
            "Defaults: 8192 sprites, 4096 tiles, 1024 entities, 128 sparse bodies, 8 voices;\n"
            "600 frames after 60 warmup steps per cycle, 3 cycles, 1280x720 offscreen.\n"
            "Mixer runs offline; no audio device. Presentation requests interval 0 (default) or 1.\n"
@@ -160,7 +166,11 @@ StressReport::StressReport(const StressOptions& options)
       frame(options.frames * options.cycles), gpu(options.frames * options.cycles),
       frame_samples(options.frames, options.warmup, options.cycles, options.frame_samples),
       submission_samples(options.frames, options.warmup, options.cycles,
-                         options.submission_samples) {
+                         options.submission_samples),
+      preparation_samples(options.frames, options.warmup, options.cycles,
+                          options.preparation_samples) {
+    if (options.preparation_samples)
+        thread_clock_resolution_ns = engine::thread_cpu_resolution_nanoseconds();
     rss_start = rss_peak = stress_rss_bytes();
 }
 void StressReport::observe(const StressArena& arena, const StressResources& baseline) {
@@ -245,6 +255,9 @@ std::string StressReport::json(const StressOptions& options) const {
         << (submission_samples.enabled() ? ",\"submission_sample_buffer_bytes\":" +
                                                std::to_string(submission_samples.buffer_bytes())
                                          : "")
+        << (preparation_samples.enabled() ? ",\"preparation_sample_buffer_bytes\":" +
+                                                std::to_string(preparation_samples.buffer_bytes())
+                                          : "")
         << ",\"rss_start\":" << rss_start << ",\"rss_end\":" << rss_end
         << ",\"rss_peak_at_cycle_boundary\":" << rss_peak
         << ",\"peak_uploaded_textures\":" << texture_peak
@@ -319,6 +332,27 @@ std::string StressReport::json(const StressOptions& options) const {
                 << ",\"batches\":" << sample.batches << ",\"upload_bytes\":" << sample.upload_bytes
                 << '}';
             comma = true;
+        }
+        out << "]}";
+    }
+    if (preparation_samples.enabled()) {
+        out << ",\n  \"preparation_samples\":{\"schema\":\"stress_preparation_samples_v1\","
+               "\"clock\":\"CLOCK_THREAD_CPUTIME_ID\",\"resolution_ns\":"
+            << thread_clock_resolution_ns
+            << ",\"phase_order\":[\"begin\",\"tiles\",\"sprites\",\"end\"],"
+               "\"metric_order\":[\"wall_ms\",\"thread_cpu_ms\",\"gl_wall_ms\",\"gl_thread_cpu_"
+               "ms\"],\"rows\":[";
+        bool comma = false;
+        for (const auto& sample : preparation_samples.samples()) {
+            out << (comma ? "," : "") << "\n{\"frame\":" << json_string(std::to_string(sample.tag))
+                << ",\"phases\":[";
+            comma = true;
+            for (std::size_t i = 0; i < sample.phases.size(); ++i) {
+                const auto& p = sample.phases[i];
+                out << (i ? "," : "") << '[' << p.wall << ',' << p.cpu << ',' << p.gl_wall << ','
+                    << p.gl_cpu << ']';
+            }
+            out << "]}";
         }
         out << "]}";
     }
