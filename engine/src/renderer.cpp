@@ -1,5 +1,6 @@
 #include "engine/renderer.hpp"
 #include "engine/staging_memory.hpp"
+#include "engine/thread_cpu_clock.hpp"
 #include "gl.hpp"
 #include "shader_program.hpp"
 #include <algorithm>
@@ -85,7 +86,7 @@ struct Renderer::Impl {
     int width{}, height{};
     bool recording{};
     RenderStats stats;
-    bool cpu_timing_enabled{};
+    bool cpu_timing_enabled{}, thread_cpu_timing_enabled{};
     RenderCpuTiming cpu_timing;
     using Clock = std::chrono::steady_clock;
     static double elapsed(Clock::time_point start) {
@@ -280,6 +281,7 @@ struct Renderer::Impl {
         clip_depth = 0;
         vertices.clear();
         const auto started = cpu_timing_enabled ? Clock::now() : Clock::time_point{};
+        const auto cpu_started = thread_cpu_timing_enabled ? thread_cpu_nanoseconds() : 0;
         gl.BindFramebuffer(GL_FRAMEBUFFER, framebuffer);
         gl.Viewport(0, 0, w, h);
         gl.Disable(GL_SCISSOR_TEST);
@@ -291,6 +293,9 @@ struct Renderer::Impl {
         const float alpha = attachment ? clear.a : 1.0F;
         gl.ClearColor(clear.r * alpha, clear.g * alpha, clear.b * alpha, clear.a);
         gl.Clear(GL_COLOR_BUFFER_BIT);
+        if (thread_cpu_timing_enabled)
+            cpu_timing.setup_cpu_ms =
+                static_cast<double>(thread_cpu_nanoseconds() - cpu_started) / 1e6;
         if (cpu_timing_enabled)
             cpu_timing.setup_ms = elapsed(started);
     }
@@ -309,6 +314,7 @@ struct Renderer::Impl {
         if (vertices.empty())
             return;
         const auto started = cpu_timing_enabled ? Clock::now() : Clock::time_point{};
+        const auto cpu_started = thread_cpu_timing_enabled ? thread_cpu_nanoseconds() : 0;
         gl.UseProgram(program);
         gl.Uniform1i(premultiplied_location, batch_premultiplied ? 1 : 0);
         gl.BlendFuncSeparate(batch_premultiplied ? GL_ONE : GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA,
@@ -324,6 +330,9 @@ struct Renderer::Impl {
                          static_cast<GLsizeiptr>(vertices.size() * sizeof(Vertex)),
                          vertices.data());
         gl.DrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
+        if (thread_cpu_timing_enabled)
+            cpu_timing.upload_draw_cpu_ms +=
+                static_cast<double>(thread_cpu_nanoseconds() - cpu_started) / 1e6;
         if (cpu_timing_enabled) {
             cpu_timing.upload_draw_ms += elapsed(started);
             ++cpu_timing.batches;
@@ -707,10 +716,13 @@ void Renderer::end() {
             if (target.framebuffer == impl_->framebuffer)
                 target.ready = true;
 }
-void Renderer::set_cpu_timing(bool enabled) {
+void Renderer::set_cpu_timing(bool enabled, bool thread_cpu) {
     if (impl_->recording)
         throw std::logic_error("CPU timing changed during render pass");
+    if (thread_cpu && !enabled)
+        throw std::invalid_argument("Thread CPU timing requires wall timing");
     impl_->cpu_timing_enabled = enabled;
+    impl_->thread_cpu_timing_enabled = thread_cpu;
 }
 RenderCpuTiming Renderer::cpu_timing() const {
     return impl_->cpu_timing;

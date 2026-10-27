@@ -69,10 +69,12 @@ int run_stress_mode(int argc, char** argv) {
                 const auto mixed = StressClock::now();
                 const bool gpu_submitted = timer.begin(++frame);
                 if (options.submission_samples)
-                    renderer.set_cpu_timing(true);
+                    renderer.set_cpu_timing(true, options.preparation_samples);
                 const auto render_start =
                     options.submission_samples ? StressClock::now() : StressClock::time_point{};
-                const auto tiles = graphics.render(arena);
+                StressPreparationPhases preparation{};
+                const auto tiles =
+                    graphics.render(arena, options.preparation_samples ? &preparation : nullptr);
                 const auto render_end =
                     options.submission_samples ? StressClock::now() : StressClock::time_point{};
                 const auto render_timing =
@@ -150,6 +152,8 @@ int run_stress_mode(int argc, char** argv) {
                             frame, stress_ms(render_start, render_end), render_timing.setup_ms,
                             render_timing.upload_draw_ms, render_timing.batches,
                             render_timing.upload_bytes);
+                    if (options.preparation_samples)
+                        report.preparation_samples.record(frame, preparation);
                     report.quads += stats.quads;
                     report.culled += stats.culled;
                     report.draws += stats.draws;

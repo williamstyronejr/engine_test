@@ -100,3 +100,10 @@ file(READ "${REPORT_PATH}" after)
 if(result EQUAL 0 OR NOT after STREQUAL report)
   message(FATAL_ERROR "CPU submission trace accepted or replaced a valid report")
 endif()
+
+execute_process(COMMAND "${STRESS_EXE}" --frame-samples --submission-samples --preparation-samples --report "${REPORT_PATH}"
+  RESULT_VARIABLE result OUTPUT_QUIET ERROR_QUIET)
+file(READ "${REPORT_PATH}" after)
+if(result EQUAL 0 OR NOT after STREQUAL report)
+  message(FATAL_ERROR "CPU preparation trace accepted or replaced a valid report")
+endif()
