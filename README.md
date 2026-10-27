@@ -727,6 +727,10 @@ rendered output. The [diagnostics storage contract](benchmarks/DIAGNOSTIC_TEXT.m
 and [measurements](benchmarks/2026-10-26-diagnostic-text-results.md) cover changing
 GPU labels and combined settings/controls overlays as well as the original UI states.
 
+For stress-frame outliers, `--stress --frame-samples` retains paired CPU/GPU
+intervals with original frame tags. See [the opt-in contract](benchmarks/STRESS_FRAME_SAMPLES.md)
+and [the recorded investigation](benchmarks/2026-10-27-frame-samples-results.md).
+
 ## Window lifecycle
 
 Fullscreen and minimize are asynchronous window-manager requests. The engine exposes

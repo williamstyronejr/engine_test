@@ -31,6 +31,11 @@ with its measurement interpretation linked from benchmarks.
   failures and evaluator controls. This record uses `manifest.json` for measurement
   commands and separate preparation/native command records.
 
+- [2026-10-27 UTC paired stress frames](2026-10-26-frame-samples/RESULTS.md):
+  opt-in bounded timing rows, delayed GPU pairing, compiler/sanitizer checks,
+  unchanged pixels and six retained plain/traced runs. The directory uses the
+  October 26 local session date.
+
 `commands.json` retains commands as argument arrays, explicit environment overrides,
 working directory, UTC start, duration and exit status. Other environment facts are
 in `environment.log`; the full-matrix run also records its inherited display there.

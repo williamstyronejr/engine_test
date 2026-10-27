@@ -2115,10 +2115,31 @@ At documentation commit `9458a10`, all three Release package checks pass (27.26 
 All 53 evidence files and both benchmark documents match their archived copies;
 optional Python evidence tools are included, and allocation profilers remain excluded.
 
+## Increment 62: paired stress-frame timings
+
+- Added opt-in `--stress --frame-samples` records. CPU intervals reuse existing
+  clock boundaries; delayed GPU results join by original frame tag across warmup
+  and cycle boundaries. Missing results remain null and no GPU waits are added.
+- Preallocated storage is bounded to 60,000 rows, with actual capacity bytes
+  reported separately. Recording and pairing allocate nothing after reserve.
+  Default reports omit the new fields and reserve no row payload.
+- At `271053f`, three traced and three plain combined-workload attempts complete.
+  All trace aggregates reconstruct from rows; workload/state/render totals match.
+  Among 5,400 traced frames, 17 exceed 16.7 ms: presentation is the largest CPU
+  interval in 15, submission in two. Paired GPU intervals are 0.872–2.369 ms.
+- Eight focused groups pass in GNU Debug/Release and Clang; five CPU and three
+  native ASan/UBSan groups pass, without skips. Four on/off image pairs match.
+  These are focused checks, not a new full validation matrix.
+
+See [trace contract](../benchmarks/STRESS_FRAME_SAMPLES.md),
+[findings](../benchmarks/2026-10-27-frame-samples-results.md) and
+[evidence](../validation/2026-10-26-frame-samples/RESULTS.md). All six maxima still
+exceed the frame budget; neither prior failures nor physical acceptance are waived.
+
 ## Next increment
 
-Add paired frame samples for the failed workload to correlate CPU submission,
-presentation and delayed GPU durations by frame tag before choosing an optimization.
-Preserve the declared limits and failed attempts. Physical display/audio, broader
-memory-path coverage and the final support record remain open; background loading
-remains deferred.
+Compare presentation pacing under explicit benchmark modes with the same paired
+records; investigate submission outliers separately before changing renderer
+streaming. Preserve workload identities, declared limits and failed attempts.
+Physical display/audio, broader memory-path coverage and the final support record
+remain open; background loading remains deferred.

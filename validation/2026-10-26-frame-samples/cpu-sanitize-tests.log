@@ -1,0 +1,18 @@
+Test project /home/zero/dev/engine_test/build/sanitize
+    Start 15: stress_cpu
+1/5 Test #15: stress_cpu .......................   Passed    6.09 sec
+    Start 16: stress_report
+2/5 Test #16: stress_report ....................   Passed    0.26 sec
+    Start 17: replay_profile
+3/5 Test #17: replay_profile ...................   Passed    0.02 sec
+    Start 18: spike_profile
+4/5 Test #18: spike_profile ....................   Passed    0.29 sec
+    Start 24: gpu_timer_queue
+5/5 Test #24: gpu_timer_queue ..................   Passed    0.02 sec
+
+100% tests passed out of 5
+
+Label Time Summary:
+cpu    =   6.67 sec*proc (5 tests)
+
+Total Test time (real) =   6.67 sec
