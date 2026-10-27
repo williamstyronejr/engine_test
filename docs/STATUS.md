@@ -2184,6 +2184,10 @@ See [contract](../benchmarks/STRESS_SUBMISSION.md),
 [results](../benchmarks/2026-10-27-submission-results.md) and
 [evidence](../validation/2026-10-27-submission/RESULTS.md).
 
+At documentation commit `1b21565`, all three Release package checks pass (33.55 s).
+All 42 evidence files and both new benchmark documents match their archived copies;
+the allocation profilers remain excluded from installation.
+
 ## Next increment
 
 Profile CPU preparation (tile traversal, culling and vertex generation) and

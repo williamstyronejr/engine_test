@@ -50,3 +50,14 @@ python3 validation/2026-10-27-submission/analyze.py \
 ```
 
 All existing workload, frame, presentation and GPU timing semantics are preserved. Optional split storage is separate from timing vectors and old frame records. Earlier timing failures and physical/coverage gates remain open.
+
+## Feature package verification
+
+At documentation commit `1b21565`, all three Release package checks pass without
+skips (33.55 s), including relocated OpenGL gameplay. All 42 evidence files and
+both new benchmark documents match their archived copies byte-for-byte. The four
+allocation profilers remain excluded. Build identity is GNU 16.2.1, Release,
+sanitizers off. These follow-up package records are included in the later archive.
+
+[Identity and commands](package-feature.json), [configure](package-feature-configure.log),
+[build](package-feature-build.log), [tests](package-feature-tests.log).
