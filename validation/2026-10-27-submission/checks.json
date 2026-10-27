@@ -1,0 +1,173 @@
+{
+  "tests": [
+    {
+      "configuration": "gcc-debug",
+      "name": "(empty)",
+      "tests": "9",
+      "failures": "0",
+      "disabled": "0",
+      "skipped": "0",
+      "hostname": "",
+      "time": "7",
+      "timestamp": "2026-10-27T12:51:21"
+    },
+    {
+      "configuration": "gcc-release",
+      "name": "(empty)",
+      "tests": "9",
+      "failures": "0",
+      "disabled": "0",
+      "skipped": "0",
+      "hostname": "",
+      "time": "4",
+      "timestamp": "2026-10-27T12:52:29"
+    },
+    {
+      "configuration": "clang-debug",
+      "name": "(empty)",
+      "tests": "9",
+      "failures": "0",
+      "disabled": "0",
+      "skipped": "0",
+      "hostname": "",
+      "time": "8",
+      "timestamp": "2026-10-27T12:53:12"
+    },
+    {
+      "configuration": "cpu-sanitize",
+      "name": "(empty)",
+      "tests": "5",
+      "failures": "0",
+      "disabled": "0",
+      "skipped": "0",
+      "hostname": "",
+      "time": "7",
+      "timestamp": "2026-10-27T12:53:49"
+    },
+    {
+      "configuration": "native-sanitize",
+      "name": "Linux-c++",
+      "tests": "4",
+      "failures": "0",
+      "disabled": "0",
+      "skipped": "0",
+      "hostname": "omarchy",
+      "time": "7",
+      "timestamp": "2026-10-27T12:54:43"
+    }
+  ],
+  "identical_image_pairs": [
+    {
+      "configuration": "debug",
+      "plain": "build/debug/stress-frame-tests/plain.ppm",
+      "comparison": "build/debug/stress-frame-tests/traced.ppm",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+      "bytes": 4284017
+    },
+    {
+      "configuration": "debug",
+      "plain": "build/debug/stress-frame-tests/plain.ppm",
+      "comparison": "build/debug/stress-frame-tests/vsync.ppm",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+      "bytes": 4284017
+    },
+    {
+      "configuration": "debug",
+      "plain": "build/debug/stress-frame-tests/plain.ppm",
+      "comparison": "build/debug/stress-frame-tests/split.ppm",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+      "bytes": 4284017
+    },
+    {
+      "configuration": "debug",
+      "plain": "build/debug/stress-frame-tests/plain.ppm",
+      "comparison": "build/debug/stress-frame-tests/split_vsync.ppm",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+      "bytes": 4284017
+    },
+    {
+      "configuration": "release",
+      "plain": "build/release/stress-frame-tests/plain.ppm",
+      "comparison": "build/release/stress-frame-tests/traced.ppm",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+      "bytes": 4284017
+    },
+    {
+      "configuration": "release",
+      "plain": "build/release/stress-frame-tests/plain.ppm",
+      "comparison": "build/release/stress-frame-tests/vsync.ppm",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+      "bytes": 4284017
+    },
+    {
+      "configuration": "release",
+      "plain": "build/release/stress-frame-tests/plain.ppm",
+      "comparison": "build/release/stress-frame-tests/split.ppm",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+      "bytes": 4284017
+    },
+    {
+      "configuration": "release",
+      "plain": "build/release/stress-frame-tests/plain.ppm",
+      "comparison": "build/release/stress-frame-tests/split_vsync.ppm",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+      "bytes": 4284017
+    },
+    {
+      "configuration": "clang",
+      "plain": "build/clang/stress-frame-tests/plain.ppm",
+      "comparison": "build/clang/stress-frame-tests/traced.ppm",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+      "bytes": 4284017
+    },
+    {
+      "configuration": "clang",
+      "plain": "build/clang/stress-frame-tests/plain.ppm",
+      "comparison": "build/clang/stress-frame-tests/vsync.ppm",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+      "bytes": 4284017
+    },
+    {
+      "configuration": "clang",
+      "plain": "build/clang/stress-frame-tests/plain.ppm",
+      "comparison": "build/clang/stress-frame-tests/split.ppm",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+      "bytes": 4284017
+    },
+    {
+      "configuration": "clang",
+      "plain": "build/clang/stress-frame-tests/plain.ppm",
+      "comparison": "build/clang/stress-frame-tests/split_vsync.ppm",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+      "bytes": 4284017
+    },
+    {
+      "configuration": "sanitize-platform",
+      "plain": "build/sanitize-platform/stress-frame-tests/plain.ppm",
+      "comparison": "build/sanitize-platform/stress-frame-tests/traced.ppm",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+      "bytes": 4284017
+    },
+    {
+      "configuration": "sanitize-platform",
+      "plain": "build/sanitize-platform/stress-frame-tests/plain.ppm",
+      "comparison": "build/sanitize-platform/stress-frame-tests/vsync.ppm",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+      "bytes": 4284017
+    },
+    {
+      "configuration": "sanitize-platform",
+      "plain": "build/sanitize-platform/stress-frame-tests/plain.ppm",
+      "comparison": "build/sanitize-platform/stress-frame-tests/split.ppm",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+      "bytes": 4284017
+    },
+    {
+      "configuration": "sanitize-platform",
+      "plain": "build/sanitize-platform/stress-frame-tests/plain.ppm",
+      "comparison": "build/sanitize-platform/stress-frame-tests/split_vsync.ppm",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+      "bytes": 4284017
+    }
+  ]
+}

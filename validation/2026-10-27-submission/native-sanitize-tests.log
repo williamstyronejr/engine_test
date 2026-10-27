@@ -1,0 +1,16 @@
+Test project /home/zero/dev/engine_test/build/sanitize-platform
+    Start 46: stress_frame_samples
+1/4 Test #46: stress_frame_samples .............   Passed    4.60 sec
+    Start 47: stress_graphics
+2/4 Test #47: stress_graphics ..................   Passed    0.69 sec
+    Start 55: render_targets
+3/4 Test #55: render_targets ...................   Passed    2.18 sec
+    Start 56: gpu_timers
+4/4 Test #56: gpu_timers .......................   Passed    0.52 sec
+
+100% tests passed out of 4
+
+Label Time Summary:
+hardware    =   7.98 sec*proc (4 tests)
+
+Total Test time (real) =   7.99 sec

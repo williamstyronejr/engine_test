@@ -1,0 +1,29 @@
+{
+  "source": "e59ec90b15eb0d2c85adb1158ccfe9be5b1b7120",
+  "cwd": "/home/zero/dev/engine_test",
+  "platform": [
+    "Linux",
+    "omarchy",
+    "7.2.8-9-omarchy",
+    "#1 SMP PREEMPT_DYNAMIC Sat, 17 Oct 2026 22:09:33 +0000",
+    "x86_64",
+    ""
+  ],
+  "python": "3.14.8",
+  "display": ":0",
+  "session": "wayland",
+  "compiler_commands": [
+    {
+      "name": "gcc-debug-configure",
+      "command": [
+        "cmake",
+        "--preset",
+        "debug"
+      ],
+      "environment_overrides": {},
+      "started_utc": "2026-10-27T16:50:26.661256+00:00",
+      "seconds": 0.41681972400010636,
+      "exit_code": 0
+    }
+  ]
+}

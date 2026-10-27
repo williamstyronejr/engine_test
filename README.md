@@ -733,6 +733,11 @@ and [the recorded investigation](benchmarks/2026-10-27-frame-samples-results.md)
 accepts `--presentation immediate|vsync`; [request semantics and comparison](benchmarks/STRESS_PRESENTATION.md)
 keep requested pacing separate from physical synchronization.
 
+Stress diagnostics also support `--frame-samples --submission-samples` to split
+CPU preparation/bookkeeping from GL pass setup and batch upload/draw. See the
+[measurement contract](benchmarks/STRESS_SUBMISSION.md) and
+[retained results](benchmarks/2026-10-27-submission-results.md).
+
 ## Window lifecycle
 
 Fullscreen and minimize are asynchronous window-manager requests. The engine exposes

@@ -1,0 +1,255 @@
+{
+  "schema": "stress_submission_collection_v1",
+  "source": "e59ec90b15eb0d2c85adb1158ccfe9be5b1b7120",
+  "started_utc": "2026-10-27T16:54:56.829254+00:00",
+  "executable_sha256": "4d06e9f9ed9afa0a50e88cac03b7e9e506f9ca66890cab1bbad5e1510ab068a3",
+  "declaration_sha256": "416d4c6e5b2645aa8b9fa8ade16c8fe8da8e257b37332da89a040784433df292",
+  "collector_sha256": "2c3215a576ebdd476c02dbe3a2d2b2a0730d8e1d67d31f8453cb88e77ea4b599",
+  "display": ":0",
+  "runs": [
+    {
+      "mode": "baseline",
+      "repeat": 1,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-27-submission/baseline-1.json"
+      ],
+      "report": "baseline-1.json",
+      "log": "baseline-1.log",
+      "started_utc": "2026-10-27T16:54:56.834347+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -265900,
+        "/sys/class/thermal/thermal_zone1/temp": 77000
+      },
+      "exit_code": 0,
+      "seconds": 8.472766305000277,
+      "rss_peak_bytes": 56401920,
+      "finished_utc": "2026-10-27T16:55:05.309067+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264300,
+        "/sys/class/thermal/thermal_zone1/temp": 82000
+      },
+      "report_sha256": "3838ec117ded4d3f3a359c0fc530811c50b3b22f016809682be59b2e88e8ebb4",
+      "log_sha256": "3164cfa6946e8aea5d7b06eed111c26a6cf72fa2c4d77a86143e7a1f6dc1b77f"
+    },
+    {
+      "mode": "split",
+      "repeat": 1,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-27-submission/split-1.json",
+        "--submission-samples"
+      ],
+      "report": "split-1.json",
+      "log": "split-1.log",
+      "started_utc": "2026-10-27T16:55:05.317401+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264300,
+        "/sys/class/thermal/thermal_zone1/temp": 84000
+      },
+      "exit_code": 0,
+      "seconds": 11.108127380000042,
+      "rss_peak_bytes": 57872384,
+      "finished_utc": "2026-10-27T16:55:16.427881+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -265100,
+        "/sys/class/thermal/thermal_zone1/temp": 77000
+      },
+      "report_sha256": "dbd725e755bb34f357b98a9d8fb47ab48c4153d64c3ab8df5b1af15e863b0b90",
+      "log_sha256": "38d9180e2d0de6869db18891f41b0b016c53ca39119b1fe6c0cc2bcf9d8efdab"
+    },
+    {
+      "mode": "split",
+      "repeat": 2,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-27-submission/split-2.json",
+        "--submission-samples"
+      ],
+      "report": "split-2.json",
+      "log": "split-2.log",
+      "started_utc": "2026-10-27T16:55:16.439565+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -265100,
+        "/sys/class/thermal/thermal_zone1/temp": 78000
+      },
+      "exit_code": 0,
+      "seconds": 14.119521845000236,
+      "rss_peak_bytes": 57585664,
+      "finished_utc": "2026-10-27T16:55:30.562311+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -265200,
+        "/sys/class/thermal/thermal_zone1/temp": 76000
+      },
+      "report_sha256": "ad35cb0082b4a69d294e10479c19d18c162356e0a9779ce9aa03513af569c258",
+      "log_sha256": "7bf8c7638c2acebaaf6f5a630377bf00e27899285fd6be610407e648711226e2"
+    },
+    {
+      "mode": "baseline",
+      "repeat": 2,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-27-submission/baseline-2.json"
+      ],
+      "report": "baseline-2.json",
+      "log": "baseline-2.log",
+      "started_utc": "2026-10-27T16:55:30.581796+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -265400,
+        "/sys/class/thermal/thermal_zone1/temp": 76000
+      },
+      "exit_code": 0,
+      "seconds": 13.765836333000152,
+      "rss_peak_bytes": 56811520,
+      "finished_utc": "2026-10-27T16:55:44.354164+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -265400,
+        "/sys/class/thermal/thermal_zone1/temp": 74000
+      },
+      "report_sha256": "0edfee385816ef8fd930a08dc8c9865cc10ac7130c768a66a9b3d1913938b069",
+      "log_sha256": "f2b474aef191b88cea02afac1aea08c310ccb9d51976a0f224e5d8e84594561a"
+    },
+    {
+      "mode": "baseline",
+      "repeat": 3,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-27-submission/baseline-3.json"
+      ],
+      "report": "baseline-3.json",
+      "log": "baseline-3.log",
+      "started_utc": "2026-10-27T16:55:44.368296+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -265400,
+        "/sys/class/thermal/thermal_zone1/temp": 74000
+      },
+      "exit_code": 0,
+      "seconds": 14.319855185999586,
+      "rss_peak_bytes": 56619008,
+      "finished_utc": "2026-10-27T16:55:58.691414+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -265500,
+        "/sys/class/thermal/thermal_zone1/temp": 73000
+      },
+      "report_sha256": "411eee31d03cf1c2f67fe3f680847a85455a3588894d29a079b4a0d0099c6933",
+      "log_sha256": "0f34fd8abf1b8d149fbdecdbb8502e1978e951b8a0da56c301fcf1e62c37a43d"
+    },
+    {
+      "mode": "split",
+      "repeat": 3,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-27-submission/split-3.json",
+        "--submission-samples"
+      ],
+      "report": "split-3.json",
+      "log": "split-3.log",
+      "started_utc": "2026-10-27T16:55:58.709036+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -265500,
+        "/sys/class/thermal/thermal_zone1/temp": 73000
+      },
+      "exit_code": 0,
+      "seconds": 14.186807563000002,
+      "rss_peak_bytes": 57565184,
+      "finished_utc": "2026-10-27T16:56:12.899526+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -265600,
+        "/sys/class/thermal/thermal_zone1/temp": 73000
+      },
+      "report_sha256": "6eae735f74052682537b97fc8e2f4d5101574c9eabeaf2086cc101fb2461c3f5",
+      "log_sha256": "204701c612da85064f70e95c02a88aadc0e6cc4d99297050dce771576e4ac65c"
+    }
+  ],
+  "finished_utc": "2026-10-27T16:56:12.917777+00:00"
+}
