@@ -1,0 +1,265 @@
+[
+  {
+    "name": "gcc-debug-configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "debug"
+    ],
+    "environment_overrides": {},
+    "started_utc": "2026-10-27T11:29:25.019744+00:00",
+    "seconds": 0.42838690197095275,
+    "exit_code": 0
+  },
+  {
+    "name": "gcc-debug-build",
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "debug",
+      "--target",
+      "feature_lab",
+      "stress_bench",
+      "stress_tests",
+      "stress_graphics_tests",
+      "gpu_timer_queue_tests",
+      "gpu_timer_tests",
+      "replay_profile_tests",
+      "spike_profile_tests",
+      "-j2"
+    ],
+    "environment_overrides": {},
+    "started_utc": "2026-10-27T11:29:25.448411+00:00",
+    "seconds": 51.13761274598073,
+    "exit_code": 0
+  },
+  {
+    "name": "gcc-debug-tests",
+    "command": [
+      "ctest",
+      "--preset",
+      "debug",
+      "-R",
+      "^(stress_cpu|stress_report|stress_frame_samples|stress_graphics|gpu_timer_queue|gpu_timers|replay_profile|spike_profile)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-27-presentation/gcc-debug-tests.xml"
+    ],
+    "environment_overrides": {},
+    "started_utc": "2026-10-27T11:30:16.586392+00:00",
+    "seconds": 4.714797322987579,
+    "exit_code": 0
+  },
+  {
+    "name": "gcc-release-configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "release"
+    ],
+    "environment_overrides": {},
+    "started_utc": "2026-10-27T11:30:21.301543+00:00",
+    "seconds": 0.3464383340324275,
+    "exit_code": 0
+  },
+  {
+    "name": "gcc-release-build",
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "--target",
+      "feature_lab",
+      "stress_bench",
+      "stress_tests",
+      "stress_graphics_tests",
+      "gpu_timer_queue_tests",
+      "gpu_timer_tests",
+      "replay_profile_tests",
+      "spike_profile_tests",
+      "-j2"
+    ],
+    "environment_overrides": {},
+    "started_utc": "2026-10-27T11:30:21.648410+00:00",
+    "seconds": 19.030032066977583,
+    "exit_code": 0
+  },
+  {
+    "name": "gcc-release-tests",
+    "command": [
+      "ctest",
+      "--preset",
+      "release",
+      "-R",
+      "^(stress_cpu|stress_report|stress_frame_samples|stress_graphics|gpu_timer_queue|gpu_timers|replay_profile|spike_profile)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-27-presentation/gcc-release-tests.xml"
+    ],
+    "environment_overrides": {},
+    "started_utc": "2026-10-27T11:30:40.678769+00:00",
+    "seconds": 2.838566766004078,
+    "exit_code": 0
+  },
+  {
+    "name": "clang-debug-configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "clang"
+    ],
+    "environment_overrides": {},
+    "started_utc": "2026-10-27T11:30:43.517677+00:00",
+    "seconds": 0.5212821519817226,
+    "exit_code": 0
+  },
+  {
+    "name": "clang-debug-build",
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "clang",
+      "--target",
+      "feature_lab",
+      "stress_bench",
+      "stress_tests",
+      "stress_graphics_tests",
+      "gpu_timer_queue_tests",
+      "gpu_timer_tests",
+      "replay_profile_tests",
+      "spike_profile_tests",
+      "-j2"
+    ],
+    "environment_overrides": {},
+    "started_utc": "2026-10-27T11:30:44.039335+00:00",
+    "seconds": 25.391107102972455,
+    "exit_code": 0
+  },
+  {
+    "name": "clang-debug-tests",
+    "command": [
+      "ctest",
+      "--preset",
+      "clang",
+      "-R",
+      "^(stress_cpu|stress_report|stress_frame_samples|stress_graphics|gpu_timer_queue|gpu_timers|replay_profile|spike_profile)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-27-presentation/clang-debug-tests.xml"
+    ],
+    "environment_overrides": {},
+    "started_utc": "2026-10-27T11:31:09.430818+00:00",
+    "seconds": 4.422551310970448,
+    "exit_code": 0
+  },
+  {
+    "name": "cpu-sanitize-configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "sanitize"
+    ],
+    "environment_overrides": {},
+    "started_utc": "2026-10-27T11:31:13.853752+00:00",
+    "seconds": 0.24517105700215325,
+    "exit_code": 0
+  },
+  {
+    "name": "cpu-sanitize-build",
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "sanitize",
+      "--target",
+      "stress_tests",
+      "stress_bench",
+      "gpu_timer_queue_tests",
+      "replay_profile_tests",
+      "spike_profile_tests",
+      "-j2"
+    ],
+    "environment_overrides": {},
+    "started_utc": "2026-10-27T11:31:14.099359+00:00",
+    "seconds": 27.09462974499911,
+    "exit_code": 0
+  },
+  {
+    "name": "cpu-sanitize-tests",
+    "command": [
+      "ctest",
+      "--preset",
+      "sanitize",
+      "-R",
+      "^(stress_cpu|stress_report|gpu_timer_queue|replay_profile|spike_profile)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-27-presentation/cpu-sanitize-tests.xml"
+    ],
+    "environment_overrides": {
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1"
+    },
+    "started_utc": "2026-10-27T11:31:41.194542+00:00",
+    "seconds": 7.1360581970075145,
+    "exit_code": 0
+  },
+  {
+    "name": "native-sanitize-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/sanitize-platform",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_SANITIZERS=ON"
+    ],
+    "environment_overrides": {},
+    "started_utc": "2026-10-27T11:31:48.330970+00:00",
+    "seconds": 0.38757008995162323,
+    "exit_code": 0
+  },
+  {
+    "name": "native-sanitize-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/sanitize-platform",
+      "--target",
+      "feature_lab",
+      "stress_graphics_tests",
+      "gpu_timer_tests",
+      "-j2"
+    ],
+    "environment_overrides": {},
+    "started_utc": "2026-10-27T11:31:48.718966+00:00",
+    "seconds": 29.508622560999356,
+    "exit_code": 0
+  },
+  {
+    "name": "native-sanitize-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/sanitize-platform",
+      "-R",
+      "^(stress_frame_samples|stress_graphics|gpu_timers)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-27-presentation/native-sanitize-tests.xml"
+    ],
+    "environment_overrides": {
+      "ASAN_OPTIONS": "detect_leaks=0:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1"
+    },
+    "started_utc": "2026-10-27T11:32:18.228088+00:00",
+    "seconds": 4.223082663025707,
+    "exit_code": 0
+  }
+]

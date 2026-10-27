@@ -5,6 +5,7 @@
 #include <array>
 #include <cstddef>
 #include <cstdlib>
+#include <initializer_list>
 #include <new>
 
 // CPU-only executable: count C++ heap allocations and live blocks, including
@@ -401,6 +402,53 @@ TEST(options_bounds_json_escaping_and_resource_growth_detection) {
     char program[] = "stress_bench", frames[] = "--frames", bad[] = "18446744073709551616";
     char* arguments[] = {program, frames, bad};
     rejects([&] { parse_stress_options(3, arguments); });
+}
+TEST(presentation_options_defaults_conflicts_and_cpu_rejection) {
+    const auto parse = [](std::initializer_list<const char*> values) {
+        std::vector<char*> args;
+        for (const auto* value : values)
+            args.push_back(const_cast<char*>(value));
+        return parse_stress_options(static_cast<int>(args.size()), args.data());
+    };
+    CHECK(parse({"stress"}).presentation == StressPresentation::immediate);
+    CHECK(!parse({"stress"}).presentation_explicit);
+    CHECK(parse({"stress", "--presentation", "vsync"}).presentation == StressPresentation::vsync);
+    CHECK(parse({"stress", "--presentation", "immediate", "--no-vsync"}).presentation_explicit);
+    CHECK(parse({"stress", "--no-vsync", "--cpu-only"}).cpu_only);
+    rejects([&] { parse({"stress", "--presentation"}); });
+    rejects([&] { parse({"stress", "--presentation", "adaptive"}); });
+    rejects([&] { parse({"stress", "--presentation", "vsync", "--presentation", "immediate"}); });
+    rejects([&] { parse({"stress", "--no-vsync", "--presentation", "vsync"}); });
+    rejects([&] { parse({"stress", "--presentation", "vsync", "--no-vsync"}); });
+    rejects([&] { parse({"stress", "--cpu-only", "--presentation", "immediate"}); });
+    rejects([&] { parse({"stress", "--presentation", "vsync", "--cpu-only"}); });
+    StressOptions invalid;
+    invalid.presentation = static_cast<StressPresentation>(99);
+    rejects([&] { invalid.validate(); });
+}
+TEST(presentation_report_distinguishes_request_from_confirmation) {
+    StressOptions options;
+    options.presentation = StressPresentation::vsync;
+    StressReport report(options);
+    auto json = report.json(options);
+    CHECK(json.find("\"vsync_requested\":true,\"vsync_disable_accepted\":false") !=
+          std::string::npos);
+    CHECK(json.find("\"mode\":\"vsync\",\"swap_interval_requested\":1,\"request_issued\":false") !=
+          std::string::npos);
+    report.presentation_request_issued = true;
+    report.present_calls = 30;
+    json = report.json(options);
+    CHECK(json.find("\"request_issued\":true,\"present_calls\":30") != std::string::npos);
+    options.presentation = StressPresentation::immediate;
+    json = report.json(options);
+    CHECK(json.find("\"vsync_requested\":false,\"vsync_disable_accepted\":true") !=
+          std::string::npos);
+    CHECK(json.find("\"mode\":\"immediate\",\"swap_interval_requested\":0") != std::string::npos);
+    options.cpu_only = true;
+    StressReport cpu(options);
+    json = cpu.json(options);
+    CHECK(json.find("\"mode\":\"none\",\"swap_interval_requested\":null,\"request_issued\":false,"
+                    "\"present_calls\":0") != std::string::npos);
 }
 TEST(frame_samples_pair_delayed_gpu_across_warmup_without_allocating) {
     StressFrames trace(2, 2, 2, true);

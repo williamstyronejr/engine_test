@@ -8,11 +8,13 @@
 #include <string>
 
 namespace feature_lab {
+enum class StressPresentation { immediate, vsync };
 struct StressOptions {
     StressConfig workload;
     std::size_t frames{600}, warmup{60}, cycles{3};
     int width{1280}, height{720};
-    bool cpu_only{}, help{}, frame_samples{};
+    bool cpu_only{}, help{}, frame_samples{}, presentation_explicit{};
+    StressPresentation presentation{StressPresentation::immediate};
     std::string report, screenshot, label;
     void validate() const;
 };
@@ -42,7 +44,8 @@ struct StressReport {
     Measurements load, simulation, audio, submission, preview, present, frame, gpu;
     StressFrames frame_samples;
     StressResources resources;
-    std::uint64_t checksum{}, quads{}, culled{}, draws{}, tiles{}, pairs{}, contacts{};
+    std::uint64_t checksum{}, quads{}, culled{}, draws{}, tiles{}, pairs{}, contacts{},
+        present_calls{};
     std::size_t completed_cycles{}, measured_frames{}, rss_start{}, rss_end{}, rss_peak{};
     std::size_t texture_peak{}, texture_bytes_peak{}, target_peak{}, target_bytes_peak{};
     std::uint64_t gpu_submitted{}, gpu_completed{}, gpu_skipped{}, gpu_invalid{};
@@ -51,7 +54,7 @@ struct StressReport {
     int gpu_counter_bits{};
     std::array<engine::GpuTimingFailure, engine::GpuTimer::failure_capacity> gpu_failures{};
     std::size_t gpu_failure_count{};
-    bool complete{}, resources_stable{true}, gpu_supported{}, vsync_disable_accepted{};
+    bool complete{}, resources_stable{true}, gpu_supported{}, presentation_request_issued{};
     int window_width{}, window_height{};
     std::string vendor, device, gl_version;
     void observe(const StressArena& arena, const StressResources& baseline);

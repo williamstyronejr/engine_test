@@ -247,7 +247,11 @@ keeps process RSS, tracked payloads and cumulative allocation counts distinct.
 Increment 62 [retains paired stress frames](../benchmarks/2026-10-27-frame-samples-results.md):
 15 of 17 traced outliers have presentation as their largest CPU interval and two
 have submission. This localizes elapsed time without proving its underlying cause.
-Next: compare explicit presentation pacing modes before selecting an optimization.
+Increment 63 [compares explicit presentation requests](../benchmarks/2026-10-27-presentation-results.md):
+immediate medians are 3.18–3.50 ms and requested VSync medians 16.66–16.67 ms,
+with all maxima still above 16.7 ms. Issued requests do not confirm physical synchronization.
+Next: separate CPU preparation from GL upload/draw time for the remaining submission
+outliers before selecting an optimization.
 R6 timing/coverage and physical R4/R5 cases remain open; R8 requires their
 coverage/support record. Refresh automated evidence when the implementation or
 toolchain changes. These results do not complete milestone 6.

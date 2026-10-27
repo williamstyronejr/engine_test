@@ -1,0 +1,252 @@
+{
+  "schema": "stress_presentation_collection_v1",
+  "source": "5a6f1b2caa36b0fb4aea2d76acf556f10490d86a",
+  "started_utc": "2026-10-27T11:32:45.706328+00:00",
+  "executable_sha256": "42a51bfce8b0248fb10514788899a6c840cc460f42b6b60f948425cccca0edd8",
+  "declaration_sha256": "f6d2946657d58cb9a840f344de0a0eb197d7c82f8345b1edd360fbf99d223ccb",
+  "collector_sha256": "36afaa18cba2a2beceeec0d2c2ded07966b4a3d4bd7f166c714a0f59766d2293",
+  "display": ":0",
+  "runs": [
+    {
+      "mode": "immediate",
+      "repeat": 1,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-27-presentation/immediate-1.json"
+      ],
+      "report": "immediate-1.json",
+      "log": "immediate-1.log",
+      "started_utc": "2026-10-27T11:32:45.714638+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -266900,
+        "/sys/class/thermal/thermal_zone1/temp": 68000
+      },
+      "exit_code": 0,
+      "seconds": 8.572316631034482,
+      "rss_peak_bytes": 56385536,
+      "finished_utc": "2026-10-27T11:32:54.296193+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -265000,
+        "/sys/class/thermal/thermal_zone1/temp": 76000
+      },
+      "report_sha256": "62ee276d49f9ca3389c53c0a6cfbcea08a7a077e10df1c2b24deb943f0584810",
+      "log_sha256": "2d2dccf3b357f394fb2d9adf83dd072dc928a3969020651b46afd96187061b10"
+    },
+    {
+      "mode": "vsync",
+      "repeat": 1,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--presentation",
+        "vsync",
+        "--report",
+        "validation/2026-10-27-presentation/vsync-1.json"
+      ],
+      "report": "vsync-1.json",
+      "log": "vsync-1.log",
+      "started_utc": "2026-10-27T11:32:54.302456+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -265000,
+        "/sys/class/thermal/thermal_zone1/temp": 76000
+      },
+      "exit_code": 0,
+      "seconds": 33.35314435802866,
+      "rss_peak_bytes": 57159680,
+      "finished_utc": "2026-10-27T11:33:27.658906+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -266700,
+        "/sys/class/thermal/thermal_zone1/temp": 65000
+      },
+      "report_sha256": "f305c4353319b5c5d2652d2d91b1a863d3dd1438fe708017c133fe139da16251",
+      "log_sha256": "1e6b8b69a483a26a3cabe9a0221c6ab829a67bdf9c8467bf6756cca3085bf897"
+    },
+    {
+      "mode": "vsync",
+      "repeat": 2,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--presentation",
+        "vsync",
+        "--report",
+        "validation/2026-10-27-presentation/vsync-2.json"
+      ],
+      "report": "vsync-2.json",
+      "log": "vsync-2.log",
+      "started_utc": "2026-10-27T11:33:27.666537+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -266700,
+        "/sys/class/thermal/thermal_zone1/temp": 66000
+      },
+      "exit_code": 0,
+      "seconds": 33.46042513300199,
+      "rss_peak_bytes": 56733696,
+      "finished_utc": "2026-10-27T11:34:01.130014+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -266900,
+        "/sys/class/thermal/thermal_zone1/temp": 64000
+      },
+      "report_sha256": "42ef3f1ce0e56414e09986c473536ab536c65bcd5395049bb73780e396c00799",
+      "log_sha256": "625c54105ec272ffffa0ceda6e3166ebb246a944ed88b6640f23df2307fce700"
+    },
+    {
+      "mode": "immediate",
+      "repeat": 2,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-27-presentation/immediate-2.json"
+      ],
+      "report": "immediate-2.json",
+      "log": "immediate-2.log",
+      "started_utc": "2026-10-27T11:34:01.139841+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -266900,
+        "/sys/class/thermal/thermal_zone1/temp": 64000
+      },
+      "exit_code": 0,
+      "seconds": 8.681134980986826,
+      "rss_peak_bytes": 56557568,
+      "finished_utc": "2026-10-27T11:34:09.825086+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264800,
+        "/sys/class/thermal/thermal_zone1/temp": 78000
+      },
+      "report_sha256": "342c1e2e7aa72231c27347746af8ae37ca823baca6f5180c539b86f9a4ea8bee",
+      "log_sha256": "515bb10905f0916cf0df84c77dec8da2cb71bb47b374ee9179ecf5e38a741ace"
+    },
+    {
+      "mode": "immediate",
+      "repeat": 3,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-27-presentation/immediate-3.json"
+      ],
+      "report": "immediate-3.json",
+      "log": "immediate-3.log",
+      "started_utc": "2026-10-27T11:34:09.831221+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264800,
+        "/sys/class/thermal/thermal_zone1/temp": 78000
+      },
+      "exit_code": 0,
+      "seconds": 8.911937712982763,
+      "rss_peak_bytes": 56541184,
+      "finished_utc": "2026-10-27T11:34:18.744847+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264600,
+        "/sys/class/thermal/thermal_zone1/temp": 83000
+      },
+      "report_sha256": "42262ee0831d5ff8b28d2bff2da260ea97d97d8476de32d6e7a698be0c9a7c1c",
+      "log_sha256": "f25a9958b332abeafc33e87f3f450b7bf2028373776ff1cdc68415a94c81ec03"
+    },
+    {
+      "mode": "vsync",
+      "repeat": 3,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--presentation",
+        "vsync",
+        "--report",
+        "validation/2026-10-27-presentation/vsync-3.json"
+      ],
+      "report": "vsync-3.json",
+      "log": "vsync-3.log",
+      "started_utc": "2026-10-27T11:34:18.750417+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264600,
+        "/sys/class/thermal/thermal_zone1/temp": 83000
+      },
+      "exit_code": 0,
+      "seconds": 33.29433180799242,
+      "rss_peak_bytes": 56840192,
+      "finished_utc": "2026-10-27T11:34:52.046851+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -266800,
+        "/sys/class/thermal/thermal_zone1/temp": 64000
+      },
+      "report_sha256": "5de99aec9d4fb6969b126220a3f244f5670f27e83b71c4d0113a32ccd3b847be",
+      "log_sha256": "7b0bcf02783af9c77592289be1308d4121bb6231973b331aa845df596f1d9e68"
+    }
+  ],
+  "finished_utc": "2026-10-27T11:34:52.053692+00:00"
+}

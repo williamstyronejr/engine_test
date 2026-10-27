@@ -18,7 +18,8 @@ int run_stress_mode(int argc, char** argv) {
     engine::Renderer renderer;
     engine::GpuTimer timer;
     StressReport report(options);
-    report.vsync_disable_accepted = window.set_vsync(false);
+    report.presentation_request_issued =
+        window.set_vsync(options.presentation == StressPresentation::vsync);
     const auto device = renderer.graphics_info();
     report.vendor = device.vendor;
     report.device = device.device;
@@ -114,6 +115,7 @@ int run_stress_mode(int argc, char** argv) {
                 const auto after_capture = StressClock::now();
                 window.present();
                 const auto end = StressClock::now();
+                ++report.present_calls;
                 if (!renderer.healthy())
                     throw std::runtime_error("Stress arena OpenGL validation failed");
                 if (step >= options.warmup) {

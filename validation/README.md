@@ -36,6 +36,10 @@ with its measurement interpretation linked from benchmarks.
   unchanged pixels and six retained plain/traced runs. The directory uses the
   October 26 local session date.
 
+- [2026-10-27 presentation requests](2026-10-27-presentation/RESULTS.md):
+  immediate/VSync metadata and argument checks, eight matching image pairs, focused
+  compiler/sanitizer validation and six alternating traced workload attempts.
+
 `commands.json` retains commands as argument arrays, explicit environment overrides,
 working directory, UTC start, duration and exit status. Other environment facts are
 in `environment.log`; the full-matrix run also records its inherited display there.

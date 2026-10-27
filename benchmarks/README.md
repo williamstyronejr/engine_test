@@ -268,3 +268,8 @@ Optional [paired frame samples](STRESS_FRAME_SAMPLES.md) retain CPU intervals an
 GPU results by original tag. The [first investigation](2026-10-27-frame-samples-results.md)
 locates 15 of 17 traced outliers primarily in presentation and two in submission;
 it does not identify the underlying driver/scheduler cause or close acceptance.
+
+Stress mode now supports explicit [immediate/VSync presentation requests](STRESS_PRESENTATION.md).
+The [alternating comparison](2026-10-27-presentation-results.md) retains matching
+workloads and paired rows, reports request issuance, and keeps physical synchronization
+and release acceptance unverified.
