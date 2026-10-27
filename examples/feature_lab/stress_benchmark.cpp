@@ -13,6 +13,10 @@
 namespace feature_lab {
 void StressOptions::validate() const {
     workload.validate();
+    if (presentation != StressPresentation::immediate && presentation != StressPresentation::vsync)
+        throw std::invalid_argument("Invalid stress presentation mode");
+    if (cpu_only && (presentation_explicit || presentation != StressPresentation::immediate))
+        throw std::invalid_argument("CPU-only stress has no presentation mode");
     if (frames < 1 || frames > 10000 || warmup > 600 || cycles < 1 || cycles > 50 ||
         frames * cycles > 60000 || width < 64 || height < 64 || width > 4096 || height > 4096)
         throw std::invalid_argument(
@@ -25,6 +29,7 @@ void StressOptions::validate() const {
 }
 StressOptions parse_stress_options(int argc, char** argv) {
     StressOptions result;
+    bool no_vsync = false;
     for (int i = 1; i < argc; ++i) {
         const std::string_view arg(argv[i]);
         const auto text = [&]() -> std::string_view {
@@ -41,7 +46,20 @@ StressOptions parse_stress_options(int argc, char** argv) {
                 throw std::invalid_argument("Stress options require unsigned decimal integers");
             return parsed;
         };
-        if (arg == "--stress" || arg == "--no-audio" || arg == "--no-vsync") {
+        if (arg == "--stress" || arg == "--no-audio") {
+        } else if (arg == "--no-vsync")
+            no_vsync = true;
+        else if (arg == "--presentation") {
+            if (result.presentation_explicit)
+                throw std::invalid_argument("Duplicate stress presentation option");
+            const auto mode = text();
+            if (mode == "immediate")
+                result.presentation = StressPresentation::immediate;
+            else if (mode == "vsync")
+                result.presentation = StressPresentation::vsync;
+            else
+                throw std::invalid_argument("Stress presentation must be immediate or vsync");
+            result.presentation_explicit = true;
         } else if (arg == "--help")
             result.help = true;
         else if (arg == "--frame-samples")
@@ -82,19 +100,22 @@ StressOptions parse_stress_options(int argc, char** argv) {
         else
             throw std::invalid_argument("Unknown/incompatible stress option: " + std::string(arg));
     }
+    if (no_vsync && result.presentation == StressPresentation::vsync)
+        throw std::invalid_argument("--no-vsync conflicts with --presentation vsync");
     result.validate();
     return result;
 }
 std::string stress_help() {
-    return "Feature Lab stress arena v1: one 60 Hz tick per frame, unpaced.\n"
+    return "Feature Lab stress arena v1: one 60 Hz tick per frame, unpaced by default.\n"
            "--stress [--cpu-only] --sprites 0..65536 --tiles 0..65536 --entities 0..4096\n"
            "--bodies 0..256 [--dense] --voices 0..16 --seed UINT64\n"
            "--frames 1..10000 --warmup 0..600 --cycles 1..50 (at most 60000 measured frames)\n"
            "--width 64..4096 --height 64..4096 --report FILE.json --label TEXT --screenshot "
-           "FILE.ppm [--frame-samples]\n"
+           "FILE.ppm [--frame-samples] [--presentation immediate|vsync]\n"
            "Defaults: 8192 sprites, 4096 tiles, 1024 entities, 128 sparse bodies, 8 voices;\n"
            "600 frames after 60 warmup steps per cycle, 3 cycles, 1280x720 offscreen.\n"
-           "Mixer runs offline; no audio device. VSync disable is requested. Escape aborts.\n"
+           "Mixer runs offline; no audio device. Presentation requests interval 0 (default) or 1.\n"
+           "Swap request issuance does not prove physical synchronization. Escape aborts.\n"
            "CPU mode omits rendering/tile traversal. --no-audio/--no-vsync are accepted aliases.\n";
 }
 void Measurements::add(double value) {
@@ -188,10 +209,23 @@ std::string StressReport::json(const StressOptions& options) const {
         << ",\"measured_frames\":" << measured_frames
         << ",\"checksum\":" << json_string(std::to_string(checksum))
         << ",\"window_width\":" << window_width << ",\"window_height\":" << window_height
-        << ",\"vsync_requested\":false,\"vsync_disable_accepted\":" << vsync_disable_accepted
+        << ",\"vsync_requested\":"
+        << (!options.cpu_only && options.presentation == StressPresentation::vsync)
+        << ",\"vsync_disable_accepted\":"
+        << (!options.cpu_only && options.presentation == StressPresentation::immediate &&
+            presentation_request_issued)
         << ",\"audio_device\":false,\"capture_requested\":" << !options.screenshot.empty()
-        << "},\n  \"totals\":{\"quads\":" << quads << ",\"culled\":" << culled
-        << ",\"draws\":" << draws << ",\"visible_tiles\":" << tiles
+        << "},\n  \"presentation\":{\"mode\":"
+        << json_string(options.cpu_only                                    ? "none"
+                       : options.presentation == StressPresentation::vsync ? "vsync"
+                                                                           : "immediate")
+        << ",\"swap_interval_requested\":"
+        << (options.cpu_only                                    ? "null"
+            : options.presentation == StressPresentation::vsync ? "1"
+                                                                : "0")
+        << ",\"request_issued\":" << (!options.cpu_only && presentation_request_issued)
+        << ",\"present_calls\":" << present_calls << "},\n  \"totals\":{\"quads\":" << quads
+        << ",\"culled\":" << culled << ",\"draws\":" << draws << ",\"visible_tiles\":" << tiles
         << ",\"collision_candidates\":" << pairs << ",\"contacts\":" << contacts
         << "},\n  \"memory\":{\"tracked_cpu_buffer_bytes\":" << resources.buffer_bytes
         << ",\"report_buffer_bytes\":"
