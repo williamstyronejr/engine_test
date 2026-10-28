@@ -1,0 +1,1083 @@
+                 U XCloseDisplay
+                 U XCreateColormap
+                 U XCreateWindow
+                 U XDestroyWindow
+                 U XFlush
+                 U XFree
+                 U XFreeColormap
+                 U XGetWindowProperty
+                 U XIconifyWindow
+                 U XInternAtom
+                 U XMapRaised
+                 U XMapWindow
+                 U XNextEvent
+                 U XOpenDisplay
+                 U XPeekEvent
+                 U XPending
+                 U XRefreshKeyboardMapping
+                 U XResizeWindow
+                 U XSendEvent
+                 U XSetErrorHandler
+                 U XSetWMProtocols
+                 U XStoreName
+                 U XSync
+                 U XkbFreeKeyboard
+                 U XkbGetMap
+                 U XkbGetState
+                 U XkbQueryExtension
+                 U XkbSelectEventDetails
+                 U XkbSelectEvents
+                 U XkbSetDetectableAutoRepeat
+                 w _ITM_deregisterTMCloneTable
+                 w _ITM_registerTMCloneTable
+                 U _Unwind_Resume@GCC_3.0
+                 U std::filesystem::__cxx11::path::parent_path() const@GLIBCXX_3.4.26
+                 U std::filesystem::__cxx11::path::lexically_normal() const@GLIBCXX_3.4.26
+                 U std::filesystem::__cxx11::path::has_root_directory() const@GLIBCXX_3.4.26
+                 U std::filesystem::__cxx11::path::lexically_relative(std::filesystem::__cxx11::path const&) const@GLIBCXX_3.4.26
+                 U std::filesystem::__cxx11::path::_List::_Impl_deleter::operator()(std::filesystem::__cxx11::path::_List::_Impl*) const@GLIBCXX_3.4.26
+                 U std::filesystem::__cxx11::path::_List::end() const@GLIBCXX_3.4.26
+                 U std::filesystem::__cxx11::path::_List::begin() const@GLIBCXX_3.4.26
+                 U std::filesystem::__cxx11::path::compare(std::filesystem::__cxx11::path const&) const@GLIBCXX_3.4.26
+                 U std::filesystem::__cxx11::path::root_path() const@GLIBCXX_3.4.26
+                 U std::ctype<char>::_M_widen_init() const@GLIBCXX_3.4.11
+                 U std::__detail::_Prime_rehash_policy::_M_need_rehash(unsigned long, unsigned long, unsigned long) const@GLIBCXX_3.4.18
+                 U std::istream& std::istream::_M_extract<unsigned long>(unsigned long&)@GLIBCXX_3.4.9
+                 U std::istream::peek()@GLIBCXX_3.4
+                 U std::istream::read(char*, long)@GLIBCXX_3.4
+                 U std::istream::seekg(std::fpos<__mbstate_t>)@GLIBCXX_3.4
+                 U std::istream::tellg()@GLIBCXX_3.4
+                 U std::ostream::put(char)@GLIBCXX_3.4
+                 U std::ostream::flush()@GLIBCXX_3.4
+                 U std::ostream::write(char const*, long)@GLIBCXX_3.4
+                 U std::ostream& std::ostream::_M_insert<bool>(bool)@GLIBCXX_3.4.9
+                 U std::ostream& std::ostream::_M_insert<double>(double)@GLIBCXX_3.4.9
+                 U std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)@GLIBCXX_3.4.9
+                 U std::ostream::operator<<(int)@GLIBCXX_3.4
+                 U std::filesystem::equivalent(std::filesystem::__cxx11::path const&, std::filesystem::__cxx11::path const&, std::error_code&)@GLIBCXX_3.4.26
+                 U std::filesystem::read_symlink(std::filesystem::__cxx11::path const&)@GLIBCXX_3.4.26
+                 U std::filesystem::weakly_canonical(std::filesystem::__cxx11::path const&)@GLIBCXX_3.4.26
+                 U std::filesystem::weakly_canonical(std::filesystem::__cxx11::path const&, std::error_code&)@GLIBCXX_3.4.26
+                 U std::filesystem::status(std::filesystem::__cxx11::path const&)@GLIBCXX_3.4.26
+                 U std::filesystem::__cxx11::path::_M_split_cmpts()@GLIBCXX_3.4.26
+                 U std::filesystem::__cxx11::path::_List::_List(std::filesystem::__cxx11::path::_List const&)@GLIBCXX_3.4.26
+                 U std::filesystem::__cxx11::path::_List::_List()@GLIBCXX_3.4.26
+                 U std::filesystem::__cxx11::path::operator/=(std::filesystem::__cxx11::path const&)@GLIBCXX_3.4.26
+                 U std::filesystem::absolute(std::filesystem::__cxx11::path const&)@GLIBCXX_3.4.26
+                 U std::filesystem::canonical(std::filesystem::__cxx11::path const&)@GLIBCXX_3.4.26
+                 U std::logic_error::logic_error(char const*)@GLIBCXX_3.4.21
+                 U std::logic_error::~logic_error()@GLIBCXX_3.4
+                 U std::__basic_file<char>::~__basic_file()@GLIBCXX_3.4
+                 U std::length_error::length_error(char const*)@GLIBCXX_3.4.21
+                 U std::length_error::~length_error()@GLIBCXX_3.4
+                 U std::out_of_range::out_of_range(char const*)@GLIBCXX_3.4.21
+                 U std::out_of_range::~out_of_range()@GLIBCXX_3.4
+                 U std::system_error::~system_error()@GLIBCXX_3.4.11
+                 U std::basic_filebuf<char, std::char_traits<char> >::open(char const*, std::_Ios_Openmode)@GLIBCXX_3.4
+                 U std::basic_filebuf<char, std::char_traits<char> >::close()@GLIBCXX_3.4
+                 U std::basic_filebuf<char, std::char_traits<char> >::basic_filebuf()@GLIBCXX_3.4
+                 U std::basic_filebuf<char, std::char_traits<char> >::~basic_filebuf()@GLIBCXX_3.4
+                 U std::runtime_error::runtime_error(char const*)@GLIBCXX_3.4.21
+                 U std::runtime_error::runtime_error(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)@GLIBCXX_3.4.21
+                 U std::runtime_error::runtime_error(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)@GLIBCXX_3.4.21
+                 U std::runtime_error::~runtime_error()@GLIBCXX_3.4
+                 U std::basic_ifstream<char, std::char_traits<char> >::~basic_ifstream()@GLIBCXX_3.4
+                 U std::basic_ofstream<char, std::char_traits<char> >::~basic_ofstream()@GLIBCXX_3.4
+                 U std::overflow_error::overflow_error(char const*)@GLIBCXX_3.4.21
+                 U std::overflow_error::~overflow_error()@GLIBCXX_3.4
+                 U std::invalid_argument::invalid_argument(char const*)@GLIBCXX_3.4.21
+                 U std::invalid_argument::invalid_argument(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)@GLIBCXX_3.4.21
+                 U std::invalid_argument::~invalid_argument()@GLIBCXX_3.4
+                 U std::_V2::system_category()@GLIBCXX_3.4.21
+                 U std::_V2::generic_category()@GLIBCXX_3.4.21
+                 U std::chrono::_V2::steady_clock::now()@GLIBCXX_3.4.19
+                 U std::locale::classic()@GLIBCXX_3.4
+                 U std::locale::locale()@GLIBCXX_3.4
+                 U std::locale::~locale()@GLIBCXX_3.4
+                 U std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())@GLIBCXX_3.4.22
+                 U std::thread::join()@GLIBCXX_3.4.11
+                 U std::thread::_State::~_State()@GLIBCXX_3.4.22
+                 U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()@GLIBCXX_3.4.21
+                 U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned long, unsigned long, char const*, unsigned long)@GLIBCXX_3.4.21
+                 U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace_cold(char*, unsigned long, char const*, unsigned long, unsigned long)@GLIBCXX_3.4.31
+                 U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::swap(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)@GLIBCXX_3.4.21
+                 U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*)@GLIBCXX_3.4.21
+                 U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long)@GLIBCXX_3.4.21
+                 U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(unsigned long, char const*)@GLIBCXX_3.4.21
+                 U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(unsigned long, unsigned long, char const*, unsigned long)@GLIBCXX_3.4.21
+                 U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::reserve(unsigned long)@GLIBCXX_3.4.21
+                 U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_append(char const*, unsigned long)@GLIBCXX_3.4.21
+                 U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)@GLIBCXX_3.4.21
+                 U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_mutate(unsigned long, unsigned long, char const*, unsigned long)@GLIBCXX_3.4.21
+                 U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::push_back(char)@GLIBCXX_3.4.21
+                 U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)@GLIBCXX_3.4.21
+                 U std::__cxx11::basic_ostringstream<char, std::char_traits<char>, std::allocator<char> >::~basic_ostringstream()@GLIBCXX_3.4.21
+                 U std::ios_base::ios_base()@GLIBCXX_3.4
+                 U std::ios_base::~ios_base()@GLIBCXX_3.4
+                 U std::basic_ios<char, std::char_traits<char> >::init(std::basic_streambuf<char, std::char_traits<char> >*)@GLIBCXX_3.4
+                 U std::basic_ios<char, std::char_traits<char> >::clear(std::_Ios_Iostate)@GLIBCXX_3.4
+                 U std::basic_ios<char, std::char_traits<char> >::imbue(std::locale const&)@GLIBCXX_3.4
+                 U std::from_chars(char const*, char const*, float&, std::chars_format)@GLIBCXX_3.4.29
+                 U std::_Hash_bytes(void const*, unsigned long, unsigned long)@CXXABI_1.3.5
+                 U std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@GLIBCXX_3.4.9
+                 U std::__throw_bad_cast()@GLIBCXX_3.4
+                 U std::__throw_bad_alloc()@GLIBCXX_3.4
+                 U std::__throw_logic_error(char const*)@GLIBCXX_3.4
+                 U std::__throw_length_error(char const*)@GLIBCXX_3.4
+                 U std::__throw_out_of_range(char const*)@GLIBCXX_3.4
+                 U std::ios_base_library_init()@GLIBCXX_3.4.32
+                 U std::__throw_out_of_range_fmt(char const*, ...)@GLIBCXX_3.4.20
+                 U std::__throw_bad_function_call()@GLIBCXX_3.4.14
+                 U std::__throw_bad_array_new_length()@GLIBCXX_3.4.29
+                 U std::basic_istream<char, std::char_traits<char> >& std::getline<char, std::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, char)@GLIBCXX_3.4.21
+                 U std::to_chars(char*, char*, double, std::chars_format, int)@GLIBCXX_3.4.29
+                 U std::terminate()@GLIBCXX_3.4
+                 U std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)@GLIBCXX_3.4
+                 U std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char)@GLIBCXX_3.4
+                 U typeinfo for std::thread::_State@GLIBCXX_3.4.22
+                 U typeinfo for std::exception@GLIBCXX_3.4
+                 U vtable for __cxxabiv1::__class_type_info@CXXABI_1.3
+                 U vtable for __cxxabiv1::__si_class_type_info@CXXABI_1.3
+                 U operator delete(void*, std::align_val_t)@CXXABI_1.3.11
+                 U operator delete(void*, unsigned long)@CXXABI_1.3.9
+                 U operator delete(void*, unsigned long, std::align_val_t)@CXXABI_1.3.11
+                 U operator new(unsigned long)@GLIBCXX_3.4
+                 U operator new(unsigned long, std::align_val_t)@CXXABI_1.3.11
+                 U __cxa_allocate_exception@CXXABI_1.3
+                 U __cxa_atexit@GLIBC_2.2.5
+                 U __cxa_begin_catch@CXXABI_1.3
+                 U __cxa_end_catch@CXXABI_1.3
+                 w __cxa_finalize@GLIBC_2.2.5
+                 U __cxa_free_exception@CXXABI_1.3
+                 U __cxa_guard_abort@CXXABI_1.3
+                 U __cxa_guard_acquire@CXXABI_1.3
+                 U __cxa_guard_release@CXXABI_1.3
+                 U __cxa_rethrow@CXXABI_1.3
+                 U __cxa_throw@CXXABI_1.3
+                 U __errno_location@GLIBC_2.2.5
+                 w __gmon_start__
+                 U __gxx_personality_v0@CXXABI_1.3
+                 U __libc_start_main@GLIBC_2.34
+                 U __popcountdi2@GCC_3.4
+                 U __stack_chk_fail@GLIBC_2.4
+                 U atan2f@GLIBC_2.43
+                 U clock_getres@GLIBC_2.17
+                 U clock_gettime@GLIBC_2.17
+                 U close@GLIBC_2.2.5
+                 U floor@GLIBC_2.2.5
+                 U fsync@GLIBC_2.2.5
+                 U getenv@GLIBC_2.2.5
+                 U getrusage@GLIBC_2.2.5
+                 U glGetIntegerv
+                 U glGetString
+                 U glXChooseFBConfig
+                 U glXDestroyContext
+                 U glXGetProcAddressARB
+                 U glXGetVisualFromFBConfig
+                 U glXMakeCurrent
+                 U glXQueryExtensionsString
+                 U glXSwapBuffers
+                 U hypotf@GLIBC_2.35
+                 U inotify_add_watch@GLIBC_2.4
+                 U inotify_init1@GLIBC_2.9
+                 U lroundf@GLIBC_2.2.5
+                 U memchr@GLIBC_2.2.5
+                 U memcmp@GLIBC_2.2.5
+                 U memcpy@GLIBC_2.14
+                 U memmove@GLIBC_2.2.5
+                 U memset@GLIBC_2.2.5
+                 U mkdir@GLIBC_2.2.5
+                 U mkstemp@GLIBC_2.2.5
+                 U nanosleep@GLIBC_2.2.5
+                 U open@GLIBC_2.2.5
+                 U read@GLIBC_2.2.5
+                 U rename@GLIBC_2.2.5
+                 U sincosf@GLIBC_2.2.5
+                 U sinf@GLIBC_2.2.5
+                 U snd_pcm_close@ALSA_0.9
+                 U snd_pcm_drop@ALSA_0.9
+                 U snd_pcm_open@ALSA_0.9
+                 U snd_pcm_prepare@ALSA_0.9
+                 U snd_pcm_resume@ALSA_0.9
+                 U snd_pcm_set_params@ALSA_0.9
+                 U snd_pcm_wait@ALSA_0.9
+                 U snd_pcm_writei@ALSA_0.9
+                 U snd_strerror@ALSA_0.9
+                 U stat@GLIBC_2.33
+                 U strcmp@GLIBC_2.2.5
+                 U strlen@GLIBC_2.2.5
+                 U strnlen@GLIBC_2.2.5
+                 U sysconf@GLIBC_2.2.5
+                 U uname@GLIBC_2.2.5
+                 U unlink@GLIBC_2.2.5
+                 U write@GLIBC_2.2.5
+0000000000000000 0000000000000008 u engine::StagingScope::active_
+0000000000000008 0000000000000004 b engine::(anonymous namespace)::context_error
+0000000000007000 T _init
+0000000000007c80 000000000000006c t std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::__str_concat<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::value_type const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::size_type, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::value_type const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::size_type, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::allocator_type const&) [clone .isra.0]
+0000000000007cec 0000000000000058 t feature_lab::Soundtrack::require(bool) [clone .isra.0] [clone .cold]
+0000000000007d44 0000000000000005 t std::basic_ostream<char, std::char_traits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&) [clone .isra.0] [clone .cold]
+0000000000007d4a 0000000000000018 t std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, unsigned long, std::allocator<char> const&) [clone .isra.0] [clone .cold]
+0000000000007d62 000000000000000c t void std::vector<engine::Rect, std::allocator<engine::Rect> >::_M_range_insert<__gnu_cxx::__normal_iterator<engine::Rect*, std::vector<engine::Rect, std::allocator<engine::Rect> > > >(__gnu_cxx::__normal_iterator<engine::Rect*, std::vector<engine::Rect, std::allocator<engine::Rect> > >, __gnu_cxx::__normal_iterator<engine::Rect*, std::vector<engine::Rect, std::allocator<engine::Rect> > >, __gnu_cxx::__normal_iterator<engine::Rect*, std::vector<engine::Rect, std::allocator<engine::Rect> > >, std::forward_iterator_tag) [clone .isra.0] [clone .cold]
+0000000000007d6e 000000000000013d t feature_lab::TextureAssets::validate_level(feature_lab::Game const&) const::{lambda(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int)#1}::operator()(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int) const [clone .isra.0] [clone .cold]
+0000000000007eac 0000000000000045 t feature_lab::Game::restart(engine::StagingBytes*)::{lambda()#1}::operator()() const [clone .isra.0] [clone .cold]
+0000000000007ef2 000000000000001d t std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::assign(char const*) [clone .isra.0] [clone .cold]
+0000000000007f0f 00000000000002ff t std::_Function_handler<bool (), main::{lambda()#2}>::_M_invoke(std::_Any_data const&) [clone .cold]
+000000000000820e 0000000000000178 t feature_lab::FontAssets::reload(engine::Renderer&, engine::AssetRoot const&) [clone .isra.0] [clone .cold]
+0000000000008386 0000000000000036 t std::_Function_handler<void (feature_lab::Game const&), main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#2}::operator()(std::basic_string_view<char, std::char_traits<char> >) const::{lambda(feature_lab::Game const&)#1}>::_M_invoke(std::_Any_data const&, feature_lab::Game const&) [clone .cold]
+00000000000083bc 000000000000014f t std::_Function_handler<void (feature_lab::Game const&), main::{lambda(feature_lab::Game const&)#1}>::_M_invoke(std::_Any_data const&, feature_lab::Game const&) [clone .cold]
+000000000000850c 00000000000000fa t feature_lab::Soundtrack::update(feature_lab::Game const&, engine::InputFrame const&, int) [clone .constprop.0] [clone .cold]
+0000000000008606 000000000000014f t main::{lambda()#3}::operator()() const [clone .cold]
+0000000000008755 000000000000004d t std::_Function_handler<bool (std::basic_string_view<char, std::char_traits<char> >), main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#1}>::_M_invoke(std::_Any_data const&, std::basic_string_view<char, std::char_traits<char> >&&) [clone .cold]
+00000000000087a2 0000000000000153 t main::{lambda()#6}::operator()() const [clone .cold]
+00000000000088f5 000000000000022a t std::_Function_handler<void (), main::{lambda()#1}>::_M_invoke(std::_Any_data const&) [clone .cold]
+0000000000008b1f 00000000000001f0 t std::_Function_handler<bool (std::basic_string_view<char, std::char_traits<char> >), main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#2}>::_M_invoke(std::_Any_data const&, std::basic_string_view<char, std::char_traits<char> >&&) [clone .cold]
+0000000000008d0f 0000000000000263 t (anonymous namespace)::verify(engine::AssetRoot const&, feature_lab::Level) [clone .cold]
+0000000000008f72 000000000000178d t main.cold
+000000000000a700 0000000000000110 W engine::binary::Reader::fail(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const
+000000000000a810 00000000000001ce W feature_lab::playback_step(feature_lab::Game&, feature_lab::ReplayFile const&, unsigned long)::{lambda()#1}::operator()() const
+000000000000a9de 000000000000008a t feature_lab::run_stress_mode(int, char**)::{lambda()#1}::operator()() const [clone .cold]
+000000000000aa68 00000000000008b0 t feature_lab::run_stress_mode(int, char**) [clone .cold]
+000000000000b318 0000000000000232 t engine::Window::poll(engine::Input&) [clone .cold]
+000000000000b54a 0000000000000114 t engine::Window::set_bindings(engine::KeyBindings const&, engine::Input&) [clone .cold]
+000000000000b65e 000000000000004f t engine::Window::resize(int, int) [clone .cold]
+000000000000b6ae 0000000000000069 t engine::Window::title(std::basic_string_view<char, std::char_traits<char> >) [clone .cold]
+000000000000b718 00000000000004aa t engine::Window::Window(int, int, std::basic_string_view<char, std::char_traits<char> >, bool) [clone .cold]
+000000000000bbc2 000000000000008e t std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, unsigned long, std::allocator<char> const&) [clone .isra.0]
+000000000000bc50 0000000000000349 t engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .constprop.0] [clone .cold]
+000000000000bf9a 000000000000004f t engine::Renderer::begin(engine::RenderTargetHandle, engine::Camera, engine::Color) [clone .cold]
+000000000000bfea 00000000000001c4 t engine::Renderer::create_target(int, int) [clone .cold]
+000000000000c1ae 00000000000001c4 t engine::Renderer::resize_target(engine::RenderTargetHandle, int, int) [clone .cold]
+000000000000c372 00000000000000cf t engine::Renderer::release(engine::RenderTargetHandle) [clone .cold]
+000000000000c442 0000000000000058 t engine::Renderer::target_size(engine::RenderTargetHandle) const [clone .cold]
+000000000000c49a 00000000000000fc t engine::Renderer::target_sprite(engine::RenderTargetHandle, engine::Transform, engine::Color, engine::Rect) [clone .cold]
+000000000000c596 00000000000001ab t engine::Renderer::push_clip(engine::PixelRect) [clone .cold]
+000000000000c742 000000000000011b t engine::Renderer::pop_clip() [clone .cold]
+000000000000c85e 00000000000002a7 t engine::Renderer::set_camera(engine::Camera) [clone .cold]
+000000000000cb06 0000000000000341 t engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]
+000000000000ce48 00000000000003b5 t engine::Renderer::upload(engine::TextureData const&, engine::TextureSampling) [clone .cold]
+000000000000d1fe 000000000000042e t engine::Renderer::replace_textures(std::span<engine::TextureReplacement const, 18446744073709551615ul>) [clone .cold]
+000000000000d62c 0000000000000058 t engine::Renderer::sampling(engine::TextureHandle) const [clone .cold]
+000000000000d684 000000000000033b t engine::Renderer::set_sampling(engine::TextureHandle, engine::TextureSampling) [clone .cold]
+000000000000d9c0 00000000000000de t engine::Renderer::release(engine::TextureHandle) [clone .cold]
+000000000000da9e 0000000000000019 t engine::Renderer::graphics_info() const [clone .cold]
+000000000000dab8 0000000000000058 t engine::Renderer::sprite(engine::TextureHandle, engine::Transform, engine::Color, engine::Rect) [clone .cold]
+000000000000db10 000000000000033b t engine::Renderer::set_font(engine::BitmapFont const&) [clone .cold]
+000000000000de4c 0000000000000197 t engine::Renderer::text(engine::Vec2, float, std::basic_string_view<char, std::char_traits<char> >, engine::Color) [clone .cold]
+000000000000dfe4 000000000000021e t engine::Renderer::end() [clone .cold]
+000000000000e202 00000000000000a8 t engine::Renderer::set_cpu_timing(bool, bool) [clone .cold]
+000000000000e2aa 000000000000006f t engine::Renderer::pixel(int, int) const [clone .cold]
+000000000000e31a 00000000000000ec t engine::Renderer::reload_shaders(std::basic_string_view<char, std::char_traits<char> >, std::basic_string_view<char, std::char_traits<char> >) [clone .cold]
+000000000000e406 0000000000000025 t engine::Renderer::Renderer() [clone .cold]
+000000000000e42c 00000000000001c8 t engine::Renderer::screenshot(std::basic_string_view<char, std::char_traits<char> >) const [clone .cold]
+000000000000e5f4 0000000000000477 t engine::AudioOutput::AudioOutput(std::basic_string_view<char, std::char_traits<char> >, engine::MixerGains) [clone .cold]
+000000000000ea6c 000000000000000a t engine::AudioOutput::~AudioOutput() [clone .cold]
+000000000000ea76 000000000000009e t engine::AudioOutput::register_sound(engine::SoundData) [clone .cold]
+000000000000eb14 00000000000002ef t engine::AudioOutput::replace_sounds(std::span<engine::SoundReplacement, 18446744073709551615ul>) [clone .cold]
+000000000000ee03 000000000000003a t engine::draw_ui(engine::Renderer&, engine::Ui const&) [clone .cold]
+000000000000ee3e 0000000000000057 t engine::GpuTimer::GpuTimer(engine::GpuTimingMethod) [clone .cold]
+000000000000ee96 0000000000000187 t engine::GpuTimer::begin(unsigned long) [clone .cold]
+000000000000f01e 0000000000000054 t engine::GpuTimer::end() [clone .cold]
+000000000000f072 000000000000008d t engine::GpuTimer::collect() [clone .cold]
+000000000000f100 00000000000013c0 t engine::Gl::Gl() [clone .cold]
+00000000000104c0 00000000000002f4 t feature_lab::StressOptions::validate() const [clone .cold]
+00000000000107b4 0000000000000a89 t feature_lab::parse_stress_options(int, char**) [clone .cold]
+000000000001123e 000000000000006a t feature_lab::Measurements::add(double) [clone .cold]
+00000000000112a8 0000000000000031 t feature_lab::Measurements::summary() const [clone .cold]
+00000000000112da 0000000000000027 t feature_lab::StressReport::json[abi:cxx11](feature_lab::StressOptions const&) const::{lambda(std::basic_string_view<char, std::char_traits<char> >, feature_lab::Measurements const&, bool)#1}::operator()(std::basic_string_view<char, std::char_traits<char> >, feature_lab::Measurements const&, bool) const [clone .cold]
+0000000000011302 0000000000000694 t feature_lab::StressReport::json[abi:cxx11](feature_lab::StressOptions const&) const [clone .cold]
+0000000000011996 0000000000000102 t feature_lab::StressReport::write(feature_lab::StressOptions const&) const [clone .cold]
+0000000000011a98 00000000000000a4 t feature_lab::stress_rss_bytes() [clone .cold]
+0000000000011b3c 000000000000004f t feature_lab::StressReport::finish_cycle(feature_lab::StressArena const&) [clone .cold]
+0000000000011b8c 00000000000005ba t feature_lab::StressReport::StressReport(feature_lab::StressOptions const&) [clone .cold]
+0000000000012146 000000000000091a t feature_lab::run_cpu_stress(feature_lab::StressOptions const&) [clone .cold]
+0000000000012a60 000000000000000d t std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned long&, unsigned long) [clone .isra.0] [clone .cold]
+0000000000012a6e 000000000000000c t void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag) [clone .isra.0] [clone .cold]
+0000000000012a7a 00000000000001f9 t feature_lab::validate_profile_arguments(int, char**) [clone .cold]
+0000000000012c74 00000000000000d0 t feature_lab::ReplayProfile::ReplayProfile(unsigned long, unsigned long, unsigned long) [clone .cold]
+0000000000012d44 00000000000000da t feature_lab::ReplayProfile::record(std::array<double, 6ul> const&, int, int, engine::RenderStats const&, engine::RenderStats const&, unsigned int) [clone .cold]
+0000000000012e1e 0000000000000045 t feature_lab::ReplayProfile::collect_gpu(std::span<engine::GpuTimingSample const, 18446744073709551615ul>) [clone .cold]
+0000000000012e64 0000000000000153 t feature_lab::ReplayProfile::write(std::basic_string_view<char, std::char_traits<char> >, std::basic_string_view<char, std::char_traits<char> >) const [clone .cold]
+0000000000012fb8 0000000000000607 t feature_lab::ReplayProfile::json[abi:cxx11](unsigned long, unsigned long, std::basic_string_view<char, std::char_traits<char> >, engine::GraphicsInfo const&, bool, engine::GpuTimingStats const&, std::span<engine::GpuTimingFailure const, 18446744073709551615ul>, feature_lab::SpikeProfile const*) const [clone .cold]
+00000000000135c0 0000000000000066 t feature_lab::SpikeProfile::json[abi:cxx11]() const::{lambda(feature_lab::SpikeState const&)#1}::operator()(feature_lab::SpikeState const&) const [clone .isra.0] [clone .cold]
+0000000000013626 0000000000000058 t feature_lab::spike_action_name(feature_lab::SpikeAction) [clone .cold]
+000000000001367e 00000000000001d9 t feature_lab::validate_spike_arguments(int, char**) [clone .cold]
+0000000000013858 000000000000001d t feature_lab::SpikeProfile::SpikeProfile() [clone .cold]
+0000000000013876 00000000000000be t feature_lab::SpikeProfile::event(feature_lab::SpikeEvent) [clone .cold]
+0000000000013934 000000000000013e t feature_lab::SpikeProfile::record(std::array<double, 6ul> const&, feature_lab::SpikeResources const&) [clone .cold]
+0000000000013a72 00000000000000a6 t feature_lab::SpikeProfile::collect_gpu(std::span<engine::GpuTimingSample const, 18446744073709551615ul>) [clone .cold]
+0000000000013b18 0000000000000075 t feature_lab::SpikeProfile::observe_collision(unsigned int, engine::CollisionWorld const&) [clone .cold]
+0000000000013b8e 0000000000000075 t feature_lab::SpikeProfile::observe_scene(unsigned int, engine::Scene const&) [clone .cold]
+0000000000013c04 0000000000000189 t feature_lab::SpikeProfile::json[abi:cxx11]() const [clone .cold]
+0000000000013d8d 000000000000007e t engine::international_symbol_name[abi:cxx11](unsigned int) [clone .cold]
+0000000000013e0c 000000000000037e t engine::FontData::validate() const [clone .cold]
+000000000001418a 0000000000000cde t engine::decode_font(std::span<unsigned char const, 18446744073709551615ul>, std::basic_string_view<char, std::char_traits<char> >) [clone .cold]
+0000000000014e68 00000000000001fc t engine::encode_font(engine::FontData const&) [clone .cold]
+0000000000015064 0000000000000049 t engine::builtin_font() [clone .cold]
+00000000000150ae 0000000000000010 t engine::BitmapFont::BitmapFont(engine::FontData) [clone .cold]
+00000000000150be 0000000000000058 t engine::BitmapFont::validate_text(std::basic_string_view<char, std::char_traits<char> >, float) [clone .cold]
+0000000000015116 0000000000000058 t engine::BitmapFont::measure(std::basic_string_view<char, std::char_traits<char> >, float) const [clone .cold]
+000000000001516e 000000000000010f t engine::load_font(engine::AssetRoot const&, std::basic_string_view<char, std::char_traits<char> >) [clone .cold]
+000000000001527d 00000000000000cb t engine::load_font_or_fallback(engine::AssetRoot const&, std::basic_string_view<char, std::char_traits<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) [clone .cold]
+0000000000015348 0000000000000054 t engine::TextCursor::TextCursor(engine::BitmapFont const&, std::basic_string_view<char, std::char_traits<char> >, float) [clone .cold]
+000000000001539c 000000000000008e t std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, unsigned long, std::allocator<char> const&) [clone .isra.0]
+000000000001542a 000000000000005c t engine::(anonymous namespace)::system_failure(char const*)
+0000000000015486 00000000000000f7 t engine::TextureData::validate() const [clone .cold]
+000000000001557d 0000000000000159 t engine::decode_texture(std::span<unsigned char const, 18446744073709551615ul>) [clone .cold]
+00000000000156d6 00000000000000bc t engine::encode_texture(engine::TextureData const&) [clone .cold]
+0000000000015792 000000000000009b t engine::AssetRoot::AssetRoot(std::filesystem::__cxx11::path) [clone .cold]
+000000000001582e 00000000000002ea t engine::AssetRoot::discover(std::filesystem::__cxx11::path const&) [clone .cold]
+0000000000015b18 0000000000000121 t engine::AssetRoot::validate_key(std::basic_string_view<char, std::char_traits<char> >) [clone .cold]
+0000000000015c3a 0000000000000177 t engine::AssetRoot::resolve[abi:cxx11](std::basic_string_view<char, std::char_traits<char> >) const [clone .cold]
+0000000000015db2 0000000000000227 t engine::AssetRoot::write_atomic(std::basic_string_view<char, std::char_traits<char> >, std::span<unsigned char const, 18446744073709551615ul>, void (*)(engine::AtomicWriteStage)) const [clone .cold]
+0000000000015fda 00000000000003d9 t engine::AssetRoot::read(std::basic_string_view<char, std::char_traits<char> >, unsigned long) const [clone .cold]
+00000000000163b4 0000000000000135 t engine::AssetRoot::text[abi:cxx11](std::basic_string_view<char, std::char_traits<char> >, unsigned long) const [clone .cold]
+00000000000164ea 000000000000034e t engine::TextureCache::reload(std::basic_string_view<char, std::char_traits<char> >) [clone .cold]
+0000000000016838 0000000000000078 t engine::TextureCache::load(std::basic_string_view<char, std::char_traits<char> >) [clone .cold]
+00000000000168b0 00000000000001df t engine::TextureCache::load_or_fallback(std::basic_string_view<char, std::char_traits<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) [clone .cold]
+0000000000016a90 0000000000000056 t engine::AssetWatcher::inspect(std::filesystem::__cxx11::path const&) const [clone .cold]
+0000000000016ae6 00000000000003c8 t engine::AssetWatcher::AssetWatcher(engine::AssetRoot const&, std::span<engine::WatchedAsset const, 18446744073709551615ul>) [clone .cold]
+0000000000016eae 0000000000000069 t engine::AssetWatcher::scan() [clone .cold]
+0000000000016f18 0000000000000075 t engine::AssetWatcher::poll(std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >) [clone .cold]
+0000000000016f8e 00000000000000a8 t engine::(anonymous namespace)::label_valid(std::basic_string_view<char, std::char_traits<char> >) [clone .cold]
+0000000000017036 0000000000000078 t std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [clone .isra.0]
+00000000000170ae 000000000000011c t float engine::(anonymous namespace)::number<float>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [clone .cold]
+00000000000171ca 000000000000008e t std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, unsigned long, std::allocator<char> const&) [clone .isra.0]
+0000000000017258 00000000000000b8 t unsigned long engine::(anonymous namespace)::number<unsigned long>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [clone .cold]
+0000000000017310 00000000000000cf t engine::Scene::operator=(engine::Scene&&) [clone .part.0] [clone .cold]
+00000000000173e0 0000000000000058 t engine::Scene::require_mutable() const [clone .cold]
+0000000000017438 0000000000000054 t engine::Scene::get(engine::Entity) const [clone .cold]
+000000000001748c 0000000000000054 t engine::Scene::mutable_node(engine::Entity) [clone .cold]
+00000000000174e0 00000000000000fc t engine::Scene::set_transform(engine::Entity, engine::LocalTransform) [clone .cold]
+00000000000175dc 00000000000002b4 t engine::Scene::set_parent(engine::Entity, engine::Entity) [clone .cold]
+0000000000017890 0000000000000114 t engine::Scene::set_sprite(engine::Entity, engine::Sprite) [clone .cold]
+00000000000179a4 00000000000000fc t engine::Scene::set_collider(engine::Entity, engine::Collider) [clone .cold]
+0000000000017aa0 0000000000000101 t engine::Scene::world_transform(engine::Entity) const [clone .cold]
+0000000000017ba2 0000000000000167 t engine::Scene::destroy(engine::Entity) [clone .cold]
+0000000000017d0a 0000000000000077 t engine::Scene::defer_destroy(engine::Entity) [clone .cold]
+0000000000017d82 0000000000000054 t engine::Scene::flush() [clone .cold]
+0000000000017dd6 00000000000000d7 t engine::Scene::Scene(engine::Scene::Limits) [clone .cold]
+0000000000017eae 00000000000000ab t engine::Scene::Scene() [clone .cold]
+0000000000017f5a 00000000000000ae t engine::Scene::Scene(engine::Scene&&) [clone .cold]
+0000000000018008 000000000000029b t engine::serialize_scene[abi:cxx11](engine::Scene const&) [clone .cold]
+00000000000182a4 000000000000037b t engine::Scene::create(unsigned long, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [clone .cold]
+000000000001861f 00000000000011a6 t engine::parse_scene(std::basic_string_view<char, std::char_traits<char> >, std::basic_string_view<char, std::char_traits<char> >, engine::Scene::Limits) [clone .cold]
+00000000000197c5 0000000000000028 t engine::replace_scene(engine::Scene&, std::basic_string_view<char, std::char_traits<char> >, std::basic_string_view<char, std::char_traits<char> >) [clone .cold]
+00000000000197ee 00000000000000a8 t engine::(anonymous namespace)::cell_count(unsigned int, unsigned int, unsigned long) [clone .cold]
+0000000000019896 0000000000000228 t engine::TileMapData::validate() const [clone .cold]
+0000000000019abe 0000000000000faf t engine::decode_tilemap(std::span<unsigned char const, 18446744073709551615ul>, std::basic_string_view<char, std::char_traits<char> >) [clone .cold]
+000000000001aa6d 00000000000000cc t engine::encode_tilemap(engine::TileMapData const&) [clone .cold]
+000000000001ab3a 0000000000000212 t engine::TileMap::TileMap(engine::TileMapData) [clone .cold]
+000000000001ad4c 00000000000000e2 t engine::TileMap::range(engine::Rect) const [clone .cold]
+000000000001ae2e 0000000000000058 t engine::TileMap::solid(unsigned int, unsigned int) const [clone .cold]
+000000000001ae86 0000000000000051 t engine::TileMap::append_colliders(engine::Rect, std::vector<engine::Rect, std::allocator<engine::Rect> >&) const [clone .cold]
+000000000001aed8 000000000000008e t std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, unsigned long, std::allocator<char> const&) [clone .isra.0]
+000000000001af66 00000000000000c6 t engine::AnimationPlayer::play(std::basic_string_view<char, std::char_traits<char> >, bool) [clone .cold]
+000000000001b02c 00000000000000a8 t engine::AnimationPlayer::uv() const [clone .cold]
+000000000001b0d4 000000000000000c t engine::AnimationPlayer::snapshot() const [clone .cold]
+000000000001b0e0 00000000000000a3 t engine::AnimationPlayer::restore(engine::AnimationState const&) [clone .cold]
+000000000001b184 00000000000002ee t engine::AnimationSet::validate() const [clone .cold]
+000000000001b472 0000000000000d6c t engine::decode_animations(std::span<unsigned char const, 18446744073709551615ul>, std::basic_string_view<char, std::char_traits<char> >) [clone .cold]
+000000000001c1de 00000000000000c8 t engine::encode_animations(engine::AnimationSet const&) [clone .cold]
+000000000001c2a6 000000000000006b t engine::AnimationPlayer::AnimationPlayer(std::shared_ptr<engine::AnimationSet const>) [clone .cold]
+000000000001c312 00000000000000dd t engine::AnimationPlayer::replace(std::shared_ptr<engine::AnimationSet const>) [clone .cold]
+000000000001c3f0 00000000000000a8 t engine::SoundData::validate() const [clone .cold]
+000000000001c498 0000000000000efa t engine::decode_wav(std::span<unsigned char const, 18446744073709551615ul>, std::basic_string_view<char, std::char_traits<char> >) [clone .cold]
+000000000001d392 00000000000000bb t engine::encode_wav(engine::SoundData const&) [clone .cold]
+000000000001d44e 00000000000000a8 t engine::(anonymous namespace)::validate(engine::Rect) [clone .cold]
+000000000001d4f6 0000000000000130 t engine::Ui::layout(engine::Rect, std::span<engine::UiWidget const, 18446744073709551615ul>) [clone .cold]
+000000000001d626 000000000000007a t engine::Ui::set_value(unsigned int, float) [clone .cold]
+000000000001d6a0 000000000000006f t engine::Ui::update(engine::InputFrame const&, bool) [clone .cold]
+000000000001d710 00000000000000fc t engine::UiColumn::UiColumn(engine::Rect, float) [clone .cold]
+000000000001d80c 0000000000000058 t engine::UiColumn::next(float) [clone .cold]
+000000000001d864 000000000000006f t engine::(anonymous namespace)::absolute_env(char const*) [clone .cold]
+000000000001d8d3 00000000000000d2 t engine::(anonymous namespace)::slot_key(unsigned int) [clone .cold]
+000000000001d9a5 00000000000002a9 t engine::(anonymous namespace)::directory_failure(char const*, std::filesystem::__cxx11::path const&, int)
+000000000001dc4e 00000000000001a9 t engine::(anonymous namespace)::prepare_directories(std::filesystem::__cxx11::path const&) [clone .cold]
+000000000001ddf7 00000000000000f8 t engine::(anonymous namespace)::read(std::filesystem::__cxx11::path const&, std::basic_string_view<char, std::char_traits<char> >) [clone .cold]
+000000000001deef 0000000000000051 t engine::seal_record(std::vector<unsigned char, std::allocator<unsigned char> >, unsigned long) [clone .cold]
+000000000001df40 00000000000000a8 t engine::open_record(std::span<unsigned char const, 18446744073709551615ul>, unsigned long) [clone .cold]
+000000000001dfe8 0000000000000291 t engine::UserPaths::discover(std::filesystem::__cxx11::path const&) [clone .cold]
+000000000001e27a 0000000000000067 t engine::UserStorage::UserStorage(engine::UserPaths) [clone .cold]
+000000000001e2e2 0000000000000025 t engine::UserStorage::read_slot(unsigned int) const [clone .cold]
+000000000001e308 000000000000002f t engine::UserStorage::write_config(std::span<unsigned char const, 18446744073709551615ul>) const [clone .cold]
+000000000001e338 0000000000000039 t engine::UserStorage::write_slot(unsigned int, std::span<unsigned char const, 18446744073709551615ul>) const [clone .cold]
+000000000001e372 00000000000000a8 t engine::(anonymous namespace)::validate(engine::Shape2D) [clone .cold]
+000000000001e41a 00000000000000a8 t engine::bounds(engine::Shape2D) [clone .cold]
+000000000001e4c2 0000000000000150 t engine::intersects(engine::Shape2D, engine::Shape2D) [clone .cold]
+000000000001e612 0000000000000153 t engine::CollisionWorld::CollisionWorld(engine::CollisionWorld::Limits) [clone .cold]
+000000000001e766 00000000000001ef t engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>) [clone .cold]
+000000000001e956 000000000000000c t engine::CollisionWorld::query(engine::Shape2D, std::vector<unsigned long, std::allocator<unsigned long> >&, engine::QueryFilter) const [clone .cold]
+000000000001e962 00000000000000a8 t engine::CollisionWorld::segment(engine::Vec2, engine::Vec2, engine::QueryFilter) const [clone .cold]
+000000000001ea20 0000000000007cc3 T main
+00000000000266f0 0000000000000026 T _start
+0000000000026720 t deregister_tm_clones
+0000000000026750 t register_tm_clones
+0000000000026790 t __do_global_dtors_aux
+00000000000267e0 t frame_dummy
+0000000000026800 0000000000000021 t std::_Optional_payload_base<engine::StagingBytes>::_M_reset() [clone .part.0]
+0000000000026830 000000000000002d t std::_Function_handler<void (engine::TileMap const&), main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#1}::operator()(std::basic_string_view<char, std::char_traits<char> >) const::{lambda(engine::TileMap const&)#1}>::_M_manager(std::_Any_data&, std::_Any_data const&, std::_Manager_operation)
+0000000000026860 000000000000002d t std::_Function_handler<void (feature_lab::Game const&), main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#2}::operator()(std::basic_string_view<char, std::char_traits<char> >) const::{lambda(feature_lab::Game const&)#1}>::_M_manager(std::_Any_data&, std::_Any_data const&, std::_Manager_operation)
+0000000000026890 000000000000002d t std::_Function_handler<bool (), main::{lambda()#2}>::_M_manager(std::_Any_data&, std::_Any_data const&, std::_Manager_operation)
+00000000000268c0 000000000000001c t std::_Optional_payload_base<std::vector<unsigned char, std::allocator<unsigned char> > >::_M_reset() [clone .part.0]
+00000000000268e0 000000000000008c t std::_Function_handler<void (feature_lab::Game const&), main::{lambda(feature_lab::Game const&)#1}>::_M_manager(std::_Any_data&, std::_Any_data const&, std::_Manager_operation)
+0000000000026970 0000000000000095 t std::_Function_handler<bool (std::basic_string_view<char, std::char_traits<char> >), main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#2}>::_M_manager(std::_Any_data&, std::_Any_data const&, std::_Manager_operation)
+0000000000026a10 000000000000008c t std::_Function_handler<bool (std::basic_string_view<char, std::char_traits<char> >), main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#1}>::_M_manager(std::_Any_data&, std::_Any_data const&, std::_Manager_operation)
+0000000000026aa0 000000000000008b t std::_Function_handler<void (), main::{lambda()#1}>::_M_manager(std::_Any_data&, std::_Any_data const&, std::_Manager_operation)
+0000000000026b30 0000000000000081 t void std::this_thread::sleep_for<long, std::ratio<1l, 1000l> >(std::chrono::duration<long, std::ratio<1l, 1000l> > const&) [clone .isra.0]
+0000000000026bc0 000000000000000a t feature_lab::Soundtrack::require(bool) [clone .isra.0]
+0000000000026bd0 0000000000000187 t feature_lab::Replay::next(feature_lab::Game const&) [clone .isra.0]
+0000000000026d60 0000000000000073 t std::basic_ostream<char, std::char_traits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&) [clone .isra.0]
+0000000000026de0 000000000000012c t std::__detail::_Hash_node_base* std::_Hashtable<std::type_index, std::pair<std::type_index const, std::unique_ptr<engine::detail::ComponentStorage, std::default_delete<engine::detail::ComponentStorage> > >, std::allocator<std::pair<std::type_index const, std::unique_ptr<engine::detail::ComponentStorage, std::default_delete<engine::detail::ComponentStorage> > > >, std::__detail::_Select1st, std::equal_to<std::type_index>, std::hash<std::type_index>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::_M_find_before_node_tr<std::type_index>(unsigned long, std::type_index const&, unsigned long) const [clone .isra.0]
+0000000000026f10 0000000000000108 t std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [clone .isra.0]
+0000000000027020 00000000000000ae t std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, unsigned long, std::allocator<char> const&) [clone .isra.0]
+00000000000270d0 0000000000000311 t void std::vector<engine::Rect, std::allocator<engine::Rect> >::_M_range_insert<__gnu_cxx::__normal_iterator<engine::Rect*, std::vector<engine::Rect, std::allocator<engine::Rect> > > >(__gnu_cxx::__normal_iterator<engine::Rect*, std::vector<engine::Rect, std::allocator<engine::Rect> > >, __gnu_cxx::__normal_iterator<engine::Rect*, std::vector<engine::Rect, std::allocator<engine::Rect> > >, __gnu_cxx::__normal_iterator<engine::Rect*, std::vector<engine::Rect, std::allocator<engine::Rect> > >, std::forward_iterator_tag) [clone .isra.0]
+00000000000273f0 000000000000021e t feature_lab::TextureAssets::validate_level(feature_lab::Game const&) const::{lambda(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int)#1}::operator()(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int) const [clone .isra.0]
+0000000000027610 0000000000000423 t void std::__introsort_loop<double*, long, std::less<void> >(double*, double*, long, std::less<void>) [clone .isra.0]
+0000000000027a40 00000000000002c9 t feature_lab::Game::restart(engine::StagingBytes*)::{lambda()#1}::operator()() const [clone .isra.0]
+0000000000027d10 0000000000000357 t std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::assign(char const*) [clone .isra.0]
+0000000000028070 00000000000005a1 t std::_Function_handler<bool (), main::{lambda()#2}>::_M_invoke(std::_Any_data const&)
+0000000000028620 0000000000000720 t void std::__sort<double*, std::less<void> >(double*, double*, std::less<void>) [clone .isra.0]
+0000000000028d40 00000000000002f7 t feature_lab::FontAssets::reload(engine::Renderer&, engine::AssetRoot const&) [clone .isra.0]
+0000000000029040 0000000000000029 t std::default_delete<engine::UserStorage>::operator()(engine::UserStorage*) const [clone .isra.0]
+0000000000029070 00000000000000a7 t std::_Function_handler<void (engine::TileMap const&), main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#1}::operator()(std::basic_string_view<char, std::char_traits<char> >) const::{lambda(engine::TileMap const&)#1}>::_M_invoke(std::_Any_data const&, engine::TileMap const&)
+0000000000029120 0000000000000361 t std::_Function_handler<void (feature_lab::Game const&), main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#2}::operator()(std::basic_string_view<char, std::char_traits<char> >) const::{lambda(feature_lab::Game const&)#1}>::_M_invoke(std::_Any_data const&, feature_lab::Game const&)
+0000000000029490 0000000000000460 t std::_Function_handler<void (feature_lab::Game const&), main::{lambda(feature_lab::Game const&)#1}>::_M_invoke(std::_Any_data const&, feature_lab::Game const&)
+00000000000298f0 000000000000048a t feature_lab::Soundtrack::update(feature_lab::Game const&, engine::InputFrame const&, int) [clone .constprop.0]
+0000000000029d80 0000000000000354 t main::{lambda()#3}::operator()() const
+000000000002a0e0 000000000000016d t std::_Function_handler<bool (std::basic_string_view<char, std::char_traits<char> >), main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#1}>::_M_invoke(std::_Any_data const&, std::basic_string_view<char, std::char_traits<char> >&&)
+000000000002a250 000000000000011b t main::{lambda()#6}::operator()() const
+000000000002a370 00000000000004f1 t std::_Function_handler<void (), main::{lambda()#1}>::_M_invoke(std::_Any_data const&)
+000000000002a870 000000000000007e t main::{lambda(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int)#1}::operator()(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int) const
+000000000002a8f0 000000000000049d t std::_Function_handler<bool (std::basic_string_view<char, std::char_traits<char> >), main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#2}>::_M_invoke(std::_Any_data const&, std::basic_string_view<char, std::char_traits<char> >&&)
+000000000002ad90 0000000000000f12 t (anonymous namespace)::verify(engine::AssetRoot const&, feature_lab::Level)
+000000000002bcb0 0000000000000003 W std::ctype<char>::do_widen(char) const
+000000000002bcc0 0000000000000001 W std::_Sp_counted_ptr<decltype(nullptr), (__gnu_cxx::_Lock_policy)2>::_M_dispose()
+000000000002bcd0 0000000000000001 W std::_Sp_counted_ptr_inplace<engine::AnimationSet, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::~_Sp_counted_ptr_inplace()
+000000000002bcd0 0000000000000001 W std::_Sp_counted_ptr_inplace<engine::AnimationSet, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::~_Sp_counted_ptr_inplace()
+000000000002bce0 0000000000000055 W engine::detail::ComponentPool<feature_lab::CorePickup>::memory_usage() const
+000000000002bd40 0000000000000020 W engine::detail::ComponentPool<feature_lab::CorePickup>::buffer_bytes() const
+000000000002bd60 000000000000000a W std::_Sp_counted_ptr_inplace<engine::AnimationSet, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::~_Sp_counted_ptr_inplace()
+000000000002bd70 0000000000000061 W engine::detail::ComponentPool<feature_lab::CorePickup>::~ComponentPool()
+000000000002bd70 0000000000000061 W engine::detail::ComponentPool<feature_lab::CorePickup>::~ComponentPool()
+000000000002bde0 000000000000000a W std::_Sp_counted_ptr_inplace<engine::AnimationSet, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_destroy()
+000000000002bdf0 0000000000000053 t std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::compare(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const [clone .isra.0]
+000000000002be50 00000000000000fa t engine::Camera::extent(int, int) const [clone .isra.0]
+000000000002bf50 000000000000005b W std::_Sp_counted_ptr_inplace<engine::AnimationSet, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_get_deleter(std::type_info const&)
+000000000002bfb0 0000000000000022 W std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_destroy()
+000000000002bfe0 00000000000000a3 W engine::detail::ComponentPool<feature_lab::CorePickup>::erase(engine::Entity)
+000000000002c090 000000000000003c W engine::detail::ComponentPool<feature_lab::CorePickup>::~ComponentPool()
+000000000002c0d0 000000000000009d W std::_Sp_counted_ptr_inplace<engine::AnimationSet, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose()
+000000000002c180 0000000000000477 t void std::__introsort_loop<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long> > >, long, std::less<void> >(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long> > >, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long> > >, long, std::less<void>) [clone .isra.0]
+000000000002c600 00000000000012dc t void std::__introsort_loop<__gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > >, long, std::less<void> >(__gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > >, __gnu_cxx::__normal_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > >, long, std::less<void>) [clone .isra.0]
+000000000002d900 00000000000006ab t engine::WatchedAsset& std::vector<engine::WatchedAsset, std::allocator<engine::WatchedAsset> >::emplace_back<engine::WatchedAsset>(engine::WatchedAsset&&) [clone .isra.0]
+000000000002dfb0 00000000000002ae W std::__cxx11::to_string(unsigned int)
+000000000002e260 00000000000002ea W std::__cxx11::to_string(unsigned long)
+000000000002e550 0000000000000069 W std::filesystem::__cxx11::path::~path()
+000000000002e550 0000000000000069 W std::filesystem::__cxx11::path::~path()
+000000000002e5c0 0000000000000099 W std::filesystem::__cxx11::path::path(std::filesystem::__cxx11::path const&)
+000000000002e5c0 0000000000000099 W std::filesystem::__cxx11::path::path(std::filesystem::__cxx11::path const&)
+000000000002e660 0000000000000094 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(char const*, std::allocator<char> const&)
+000000000002e660 0000000000000094 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(char const*, std::allocator<char> const&)
+000000000002e700 0000000000000101 W engine::StagingBytes::set(unsigned long)
+000000000002e810 00000000000000a5 W engine::TileMapData::~TileMapData()
+000000000002e810 00000000000000a5 W engine::TileMapData::~TileMapData()
+000000000002e8c0 0000000000000105 W engine::TileMap::~TileMap()
+000000000002e8c0 0000000000000105 W engine::TileMap::~TileMap()
+000000000002e9d0 000000000000018d W engine::Scene::~Scene()
+000000000002e9d0 000000000000018d W engine::Scene::~Scene()
+000000000002eb60 00000000000000e2 W engine::CollisionWorld::~CollisionWorld()
+000000000002eb60 00000000000000e2 W engine::CollisionWorld::~CollisionWorld()
+000000000002ec60 0000000000000478 W feature_lab::Game::append_obstacles(engine::Rect, std::vector<engine::Rect, std::allocator<engine::Rect> >&) const
+000000000002f0e0 0000000000000249 W feature_lab::Game::camera(int, int, float) const
+000000000002f330 0000000000000055 W feature_lab::Checkpoint::~Checkpoint()
+000000000002f330 0000000000000055 W feature_lab::Checkpoint::~Checkpoint()
+000000000002f390 0000000000000135 W feature_lab::Game::content_id() const
+000000000002f4d0 00000000000003be W feature_lab::Game::checkpoint() const
+000000000002f8c0 00000000000009fa W feature_lab::Game::stage_sensor_bodies(std::vector<engine::Rect, std::allocator<engine::Rect> > const&, std::vector<engine::Body2D, std::allocator<engine::Body2D> >&) const
+00000000000302c0 0000000000000f46 W feature_lab::Game::reload_tilemap(engine::TileMapData, std::function<void (engine::TileMap const&)> const&)
+0000000000031210 000000000000015a W feature_lab::Game::update_sensors(bool)
+0000000000031370 00000000000001f0 W feature_lab::text_detail::append(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, feature_lab::Fixed2)
+0000000000031560 000000000000060a W feature_lab::ShaderTools::reload(engine::Renderer&, engine::AssetRoot const&)
+0000000000031b70 00000000000002d5 W feature_lab::ShaderTools::fail_demo(engine::Renderer&)
+0000000000031e50 00000000000003cc W engine::KeyBindings::validate() const
+0000000000032220 0000000000000c31 W engine::KeyBindings::key_name[abi:cxx11](engine::Key) const
+0000000000032e60 00000000000001c5 W feature_lab::CollisionVisuals::CollisionVisuals(engine::Renderer&)
+0000000000032e60 00000000000001c5 W feature_lab::CollisionVisuals::CollisionVisuals(engine::Renderer&)
+0000000000033030 0000000000000102 W engine::debug_detail::validate(engine::Vec2, float, engine::Color)
+0000000000033140 0000000000000579 W engine::debug_rect(engine::Renderer&, engine::Rect, float, engine::Color)
+00000000000336c0 0000000000000867 W engine::GpuTimingHistory::summary() const
+0000000000033f40 00000000000001ea W feature_lab::Overlays::stage(engine::TileMap const&, std::span<engine::Rect const, 18446744073709551615ul>)
+0000000000034140 000000000000090d W feature_lab::Overlays::render_minimap(engine::Renderer&, feature_lab::Game const&, int, int, float)
+0000000000034a50 0000000000000ca6 W feature_lab::Overlays::draw(engine::Renderer&, feature_lab::Game const&, int, int) const
+0000000000035700 000000000000026c W feature_lab::Diagnostics::collect_gpu(engine::GpuTimer&, unsigned long)
+0000000000035970 000000000000006d W feature_lab::Diagnostics::draw_hud(engine::Renderer&, feature_lab::Game const&, int, int, double, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const::{lambda(std::basic_string_view<char, std::char_traits<char> >, engine::Color)#1}::operator()(std::basic_string_view<char, std::char_traits<char> >, engine::Color) const
+00000000000359e0 00000000000004ef W feature_lab::draw_font_gallery(engine::Renderer&, int, int)
+0000000000035ed0 00000000000001aa W feature_lab::SamplingGallery::SamplingGallery(engine::Renderer&)
+0000000000035ed0 00000000000001aa W feature_lab::SamplingGallery::SamplingGallery(engine::Renderer&)
+0000000000036080 0000000000000109 W feature_lab::Soundtrack::start_loops()
+0000000000036190 00000000000001df W feature_lab::Soundtrack::disable(std::basic_string_view<char, std::char_traits<char> >)
+0000000000036370 00000000000006cb W feature_lab::Soundtrack::update(feature_lab::Game const&, engine::InputFrame const&, int)
+0000000000036a40 00000000000003f1 W feature_lab::Soundtrack::restored(feature_lab::Game const&)
+0000000000036e40 00000000000007b5 W feature_lab::TilemapAssets::reload(feature_lab::Game&, engine::AssetRoot const&, std::function<void (engine::TileMap const&)> const&)
+0000000000037600 0000000000000878 W feature_lab::draw_game(engine::Renderer&, feature_lab::Game const&, feature_lab::TextureAssets const&, float, int, int, engine::Camera, feature_lab::Overlays const&, feature_lab::Soundtrack const&, feature_lab::CollisionVisuals const&, feature_lab::SamplingGallery const&, feature_lab::Diagnostics const&, feature_lab::ShaderTools const&, feature_lab::FontAssets const&, feature_lab::AnimationAssets const&, feature_lab::TilemapAssets const&, feature_lab::SceneAssets const&, bool, engine::KeyBindings const&, std::basic_string_view<char, std::char_traits<char> >, bool, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >*)::{lambda()#1}::operator()() const
+0000000000037e80 00000000000007d5 W engine::binary::Writer::u64(unsigned long)
+0000000000038660 0000000000000f27 W feature_lab::encode_config(feature_lab::Configuration)
+00000000000395a0 000000000000368c W feature_lab::encode_checkpoint(feature_lab::Checkpoint const&)
+000000000003cc30 000000000000024f W feature_lab::ReplayCommand::input() const
+000000000003ce80 00000000000006b6 W feature_lab::replay_hash(feature_lab::Game const&)
+000000000003d540 0000000000001d88 W feature_lab::encode_replay(feature_lab::ReplayFile const&)
+000000000003f2d0 0000000000000075 W feature_lab::ReplayFile::~ReplayFile()
+000000000003f2d0 0000000000000075 W feature_lab::ReplayFile::~ReplayFile()
+000000000003f350 0000000000000bc8 W feature_lab::SceneFlow::rebuild(int, int, bool)
+000000000003ff20 0000000000000343 W feature_lab::SceneFlow::draw(engine::Renderer&, int, int) const
+0000000000040270 00000000000000db W feature_lab::SceneFlow::~SceneFlow()
+0000000000040270 00000000000000db W feature_lab::SceneFlow::~SceneFlow()
+0000000000040350 000000000000005a W engine::GraphicsInfo::~GraphicsInfo()
+0000000000040350 000000000000005a W engine::GraphicsInfo::~GraphicsInfo()
+00000000000403b0 000000000000015c W void std::__detail::__to_chars_10_impl<unsigned int>(char*, unsigned int, unsigned int)
+0000000000040510 000000000000017e W std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release_last_use_cold()
+0000000000040690 000000000000018d W std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release()
+0000000000040820 0000000000000387 W feature_lab::Game::~Game()
+0000000000040820 0000000000000387 W feature_lab::Game::~Game()
+0000000000040bb0 0000000000000cac W feature_lab::Game::reload_animations(std::shared_ptr<engine::AnimationSet const>)
+0000000000041860 0000000000000c61 W feature_lab::Game::replace(feature_lab::Game&&)
+00000000000424d0 000000000000004b W bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)
+0000000000042520 0000000000000965 W feature_lab::Game::apply_checkpoint(feature_lab::Checkpoint const&)
+0000000000042ea0 0000000000000afe W feature_lab::Game::restart(engine::StagingBytes*)::{lambda(engine::SceneNode const&)#1}::operator()(engine::SceneNode const&) const
+00000000000439a0 0000000000000127 W std::_Hashtable<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::weak_ptr<engine::TextureData const> >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::weak_ptr<engine::TextureData const> > >, std::__detail::_Select1st, std::equal_to<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::hash<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::~_Hashtable()
+00000000000439a0 0000000000000127 W std::_Hashtable<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::weak_ptr<engine::TextureData const> >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::weak_ptr<engine::TextureData const> > >, std::__detail::_Select1st, std::equal_to<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::hash<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::~_Hashtable()
+0000000000043ad0 00000000000002af W feature_lab::TextureAssets::~TextureAssets()
+0000000000043ad0 00000000000002af W feature_lab::TextureAssets::~TextureAssets()
+0000000000043d80 0000000000000033 W bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+0000000000043dc0 000000000000007d W std::vector<engine::AnimationClip, std::allocator<engine::AnimationClip> >::~vector()
+0000000000043dc0 000000000000007d W std::vector<engine::AnimationClip, std::allocator<engine::AnimationClip> >::~vector()
+0000000000043e40 0000000000000339 W std::__detail::_MakeUniq<engine::TextureCache>::__single_object std::make_unique<engine::TextureCache, engine::AssetRoot&>(engine::AssetRoot&)
+0000000000044180 0000000000000065 W std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >::~vector()
+0000000000044180 0000000000000065 W std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >::~vector()
+00000000000441f0 0000000000000226 W std::vector<feature_lab::TextureAssets::reload(engine::Renderer&, bool)::Staged, std::allocator<feature_lab::TextureAssets::reload(engine::Renderer&, bool)::Staged> >::~vector()
+00000000000441f0 0000000000000226 W std::vector<feature_lab::TextureAssets::reload(engine::Renderer&, bool)::Staged, std::allocator<feature_lab::TextureAssets::reload(engine::Renderer&, bool)::Staged> >::~vector()
+0000000000044420 0000000000000065 W std::vector<engine::WatchedAsset, std::allocator<engine::WatchedAsset> >::~vector()
+0000000000044420 0000000000000065 W std::vector<engine::WatchedAsset, std::allocator<engine::WatchedAsset> >::~vector()
+0000000000044490 00000000000004fb W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)
+0000000000044990 00000000000000ee W engine::binary::Reader::u32()
+0000000000044a80 0000000000000289 W engine::binary::Reader::Reader(std::span<unsigned char const, 18446744073709551615ul>, std::basic_string_view<char, std::char_traits<char> >, unsigned int)
+0000000000044a80 0000000000000289 W engine::binary::Reader::Reader(std::span<unsigned char const, 18446744073709551615ul>, std::basic_string_view<char, std::char_traits<char> >, unsigned int)
+0000000000044d10 00000000000013c5 W feature_lab::decode_checkpoint(std::span<unsigned char const, 18446744073709551615ul>)
+00000000000460e0 0000000000000d19 W feature_lab::decode_replay(std::span<unsigned char const, 18446744073709551615ul>)
+0000000000046e00 000000000000111d W feature_lab::decode_config(std::span<unsigned char const, 18446744073709551615ul>)
+0000000000047f20 0000000000000514 W std::basic_string_view<char, std::char_traits<char> > feature_lab::format_text<char [10], feature_lab::Fixed2, char [7], feature_lab::Fixed2, char [4]>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, char const (&) [10], feature_lab::Fixed2 const&, char const (&) [7], feature_lab::Fixed2 const&, char const (&) [4])
+0000000000048440 0000000000000065 W std::vector<engine::UiWidget, std::allocator<engine::UiWidget> >::~vector()
+0000000000048440 0000000000000065 W std::vector<engine::UiWidget, std::allocator<engine::UiWidget> >::~vector()
+00000000000484b0 0000000000002a59 W feature_lab::Settings::rebuild(int, int, bool)
+000000000004af20 0000000000000aca W feature_lab::Settings::update(feature_lab::Game&, engine::InputFrame const&, int, int, bool)
+000000000004b9f0 0000000000000031 W std::unique_ptr<engine::AudioOutput, std::default_delete<engine::AudioOutput> >::~unique_ptr()
+000000000004b9f0 0000000000000031 W std::unique_ptr<engine::AudioOutput, std::default_delete<engine::AudioOutput> >::~unique_ptr()
+000000000004ba40 0000000000000143 W void engine::Scene::each<feature_lab::Soundtrack::locate_emitter(feature_lab::Game const&)::{lambda(engine::SceneNode const&)#1}>(feature_lab::Soundtrack::locate_emitter(feature_lab::Game const&)::{lambda(engine::SceneNode const&)#1}&&) const
+000000000004bbc0 00000000000004ea W std::from_chars_result std::from_chars<unsigned long, 0>(char const*, char const*, unsigned long&, int)
+000000000004c0b0 00000000000000cd W std::filesystem::__cxx11::path::path<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::filesystem::__cxx11::path>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::filesystem::__cxx11::path::format)
+000000000004c0b0 00000000000000cd W std::filesystem::__cxx11::path::path<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::filesystem::__cxx11::path>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::filesystem::__cxx11::path::format)
+000000000004c180 00000000000000a2 W std::unique_ptr<feature_lab::AssetReload, std::default_delete<feature_lab::AssetReload> >::~unique_ptr()
+000000000004c180 00000000000000a2 W std::unique_ptr<feature_lab::AssetReload, std::default_delete<feature_lab::AssetReload> >::~unique_ptr()
+000000000004c230 000000000000008d W feature_lab::SpikeProfile::~SpikeProfile()
+000000000004c230 000000000000008d W feature_lab::SpikeProfile::~SpikeProfile()
+000000000004c2c0 0000000000000068 W feature_lab::ReplayProfile::~ReplayProfile()
+000000000004c2c0 0000000000000068 W feature_lab::ReplayProfile::~ReplayProfile()
+000000000004c330 0000000000000052 W std::basic_string_view<char, std::char_traits<char> >::compare(std::basic_string_view<char, std::char_traits<char> >) const
+000000000004c390 0000000000000086 W void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<true>(char const*, unsigned long)
+000000000004c440 00000000000010a0 W feature_lab::TextureAssets::keys[abi:cxx11]() const
+000000000004d500 0000000000001154 W feature_lab::AssetReload::files(feature_lab::TextureAssets const&, bool, bool, bool, bool)
+000000000004e660 000000000000068d W std::__detail::_MakeUniq<feature_lab::AssetReload>::__single_object std::make_unique<feature_lab::AssetReload, engine::AssetRoot const&, feature_lab::TextureAssets&, std::function<void ()>&, std::function<bool (std::basic_string_view<char, std::char_traits<char> >)>&, std::function<bool (std::basic_string_view<char, std::char_traits<char> >)>&, std::function<bool ()>&>(engine::AssetRoot const&, feature_lab::TextureAssets&, std::function<void ()>&, std::function<bool (std::basic_string_view<char, std::char_traits<char> >)>&, std::function<bool (std::basic_string_view<char, std::char_traits<char> >)>&, std::function<bool ()>&)
+000000000004ed00 00000000000016a1 W feature_lab::TextureAssets::reload(engine::Renderer&, bool)
+00000000000503b0 0000000000000549 W feature_lab::write_replay(std::filesystem::__cxx11::path const&, feature_lab::ReplayFile const&)
+0000000000050900 0000000000000553 W feature_lab::read_replay(std::filesystem::__cxx11::path const&)
+0000000000050e60 00000000000005a7 W void feature_lab::text_detail::append<unsigned long>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, unsigned long)
+0000000000051410 0000000000000367 W std::basic_string_view<char, std::char_traits<char> > feature_lab::format_text<char const*, unsigned long>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, char const* const&, unsigned long const&)
+0000000000051780 000000000000041a W std::basic_string_view<char, std::char_traits<char> > feature_lab::format_text<char const*, unsigned long, char [29]>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, char const* const&, unsigned long const&, char const (&) [29])
+0000000000051ba0 00000000000003fd W std::basic_string_view<char, std::char_traits<char> > feature_lab::format_text<char [11], unsigned long, char [7], unsigned long>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, char const (&) [11], unsigned long const&, char const (&) [7], unsigned long const&)
+0000000000051fa0 0000000000001084 W feature_lab::Diagnostics::draw_hud(engine::Renderer&, feature_lab::Game const&, int, int, double, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const
+0000000000053030 0000000000000153 W engine::detail::ComponentPool<feature_lab::CorePickup> const* engine::Scene::pool<feature_lab::CorePickup>() const
+0000000000053190 000000000000044c W void feature_lab::text_detail::append<int>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, int)
+0000000000053600 0000000000000180 W bool std::__detail::__from_chars_pow2_base<false, unsigned int>(char const*&, char const*, unsigned int&, int)
+0000000000053780 0000000000000081 W feature_lab::AssetReload::~AssetReload()
+0000000000053780 0000000000000081 W feature_lab::AssetReload::~AssetReload()
+0000000000053810 0000000000000058 W void std::_Destroy<engine::TileLayer*>(engine::TileLayer*, engine::TileLayer*)
+0000000000053870 00000000000005e6 W std::basic_ostream<char, std::char_traits<char> >& std::filesystem::__cxx11::operator<< <char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, std::filesystem::__cxx11::path const&)
+0000000000053e60 0000000000000080 W auto feature_lab::Game::restart(engine::StagingBytes*)::{lambda(auto:1, auto:2)#1}::operator()<engine::Entity, engine::Entity>(engine::Entity, engine::Entity) const
+0000000000053ee0 0000000000000cd3 W void std::__introsort_loop<__gnu_cxx::__normal_iterator<engine::Entity*, std::vector<engine::Entity, std::allocator<engine::Entity> > >, long, feature_lab::Game::restart(engine::StagingBytes*)::{lambda(auto:1, auto:2)#1}>(__gnu_cxx::__normal_iterator<engine::Entity*, std::vector<engine::Entity, std::allocator<engine::Entity> > >, __gnu_cxx::__normal_iterator<engine::Entity*, std::vector<engine::Entity, std::allocator<engine::Entity> > >, long, feature_lab::Game::restart(engine::StagingBytes*)::{lambda(auto:1, auto:2)#1})
+0000000000054bc0 000000000000075a W std::vector<bool, std::allocator<bool> >::_M_fill_insert(std::_Bit_iterator, unsigned long, bool)
+0000000000055320 0000000000000203 W std::_Hashtable<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, feature_lab::ResidentTexture>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, feature_lab::ResidentTexture> >, std::__detail::_Select1st, std::equal_to<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::hash<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::__location_type std::_Hashtable<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, feature_lab::ResidentTexture>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, feature_lab::ResidentTexture> >, std::__detail::_Select1st, std::equal_to<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::hash<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::_M_locate_tr<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const
+0000000000055530 0000000000003dfd W feature_lab::draw_game(engine::Renderer&, feature_lab::Game const&, feature_lab::TextureAssets const&, float, int, int, engine::Camera, feature_lab::Overlays const&, feature_lab::Soundtrack const&, feature_lab::CollisionVisuals const&, feature_lab::SamplingGallery const&, feature_lab::Diagnostics const&, feature_lab::ShaderTools const&, feature_lab::FontAssets const&, feature_lab::AnimationAssets const&, feature_lab::TilemapAssets const&, feature_lab::SceneAssets const&, bool, engine::KeyBindings const&, std::basic_string_view<char, std::char_traits<char> >, bool, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >*)
+0000000000059340 00000000000001f4 W std::_Hashtable<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, feature_lab::ResidentTexture>, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, feature_lab::ResidentTexture> >, std::__detail::_Select1st, std::equal_to<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::hash<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::_M_insert_unique_node(unsigned long, unsigned long, std::__detail::_Hash_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, feature_lab::ResidentTexture>, true>*, unsigned long)
+0000000000059540 0000000000000910 W feature_lab::TextureAssets::load(engine::Renderer&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int, bool)
+0000000000059e50 000000000000024c W std::_Hashtable<std::type_index, std::pair<std::type_index const, std::unique_ptr<engine::detail::ComponentStorage, std::default_delete<engine::detail::ComponentStorage> > >, std::allocator<std::pair<std::type_index const, std::unique_ptr<engine::detail::ComponentStorage, std::default_delete<engine::detail::ComponentStorage> > > >, std::__detail::_Select1st, std::equal_to<std::type_index>, std::hash<std::type_index>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::_M_insert_unique_node(unsigned long, unsigned long, std::__detail::_Hash_node<std::pair<std::type_index const, std::unique_ptr<engine::detail::ComponentStorage, std::default_delete<engine::detail::ComponentStorage> > >, false>*, unsigned long)
+000000000005a0c0 000000000000204e W feature_lab::Game::restart(engine::StagingBytes*)
+000000000005c110 0000000000000bc7 W feature_lab::Game::Game(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, engine::TileMapData, std::shared_ptr<engine::AnimationSet const>, feature_lab::Level)
+000000000005c110 0000000000000bc7 W feature_lab::Game::Game(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, engine::TileMapData, std::shared_ptr<engine::AnimationSet const>, feature_lab::Level)
+000000000005cce0 0000000000001035 W feature_lab::load_game(engine::AssetRoot const&, feature_lab::Level)
+000000000005dd20 0000000000000533 W feature_lab::SceneFlow::advance_level(feature_lab::Game&, engine::InputFrame const&)
+000000000005e260 0000000000000657 W feature_lab::Game::restore(feature_lab::Checkpoint const&, std::function<void (feature_lab::Game const&)> const&)
+000000000005e8c0 0000000000000217 W feature_lab::restore_game(feature_lab::Game&, feature_lab::Checkpoint const&, engine::AssetRoot const*, std::function<void (feature_lab::Game const&)> const&)
+000000000005eae0 0000000000000182 W feature_lab::load_slot(engine::UserStorage const&, unsigned int, feature_lab::Game&, engine::AssetRoot const*, std::function<void (feature_lab::Game const&)> const&)
+000000000005ec80 00000000000010a2 W feature_lab::Game::reload_scene(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::function<void (feature_lab::Game const&)> const&)
+000000000005fd30 0000000000000614 W feature_lab::Game::validate_checkpoint(feature_lab::Checkpoint const&) const
+0000000000060350 0000000000000138 W feature_lab::save_slot(engine::UserStorage const&, unsigned int, feature_lab::Game const&, bool)
+0000000000060490 0000000000000b20 W feature_lab::Game::update(engine::InputFrame const&)
+0000000000060fb0 0000000000000361 W feature_lab::playback_step(feature_lab::Game&, feature_lab::ReplayFile const&, unsigned long)
+0000000000061320 0000000000000578 W feature_lab::ReplayRecorder::step(feature_lab::Game&, engine::InputFrame const&)
+00000000000618c0 00000000000001c9 t feature_lab::run_stress_mode(int, char**)::{lambda()#1}::operator()() const
+0000000000061a90 00000000000042e1 T feature_lab::run_stress_mode(int, char**)
+0000000000065d80 000000000000072d W std::system_error::system_error(std::error_code, char const*)
+0000000000065d80 000000000000072d W std::system_error::system_error(std::error_code, char const*)
+00000000000664b0 00000000000001e4 W feature_lab::StressArena::make_tiles(feature_lab::StressConfig const&)
+00000000000666c0 000000000000206c W feature_lab::StressArena::StressArena(feature_lab::StressConfig)
+00000000000666c0 000000000000206c W feature_lab::StressArena::StressArena(feature_lab::StressConfig)
+0000000000068730 0000000000000045 W feature_lab::stress_gpu_resources(engine::Renderer const&)
+0000000000068780 0000000000000033 W feature_lab::StressGraphics::~StressGraphics()
+0000000000068780 0000000000000033 W feature_lab::StressGraphics::~StressGraphics()
+00000000000687c0 0000000000000563 W feature_lab::StressGraphics::render(feature_lab::StressArena const&, std::array<feature_lab::StressPreparationPhase, 4ul>*, std::array<feature_lab::StressContextPhase, 4ul>*)::{lambda()#2}::operator()() const
+0000000000068d30 0000000000001e64 W feature_lab::StressGraphics::render(feature_lab::StressArena const&, std::array<feature_lab::StressPreparationPhase, 4ul>*, std::array<feature_lab::StressContextPhase, 4ul>*)
+000000000006aba0 000000000000006a W feature_lab::StressOptions::~StressOptions()
+000000000006aba0 000000000000006a W feature_lab::StressOptions::~StressOptions()
+000000000006ac10 00000000000001a2 W feature_lab::StressReport::~StressReport()
+000000000006ac10 00000000000001a2 W feature_lab::StressReport::~StressReport()
+000000000006adc0 00000000000003f5 W feature_lab::StressArena::~StressArena()
+000000000006adc0 00000000000003f5 W feature_lab::StressArena::~StressArena()
+000000000006b1c0 000000000000000f t engine::(anonymous namespace)::capture_error(_XDisplay*, XErrorEvent*)
+000000000006b1d0 00000000000000f8 t engine::(anonymous namespace)::extension(std::basic_string_view<char, std::char_traits<char> >, std::basic_string_view<char, std::char_traits<char> >)
+000000000006b2d0 000000000000007b T engine::Window::~Window()
+000000000006b2d0 000000000000007b T engine::Window::~Window()
+000000000006b350 00000000000032dd T engine::Window::poll(engine::Input&)
+000000000006e630 00000000000005cd T engine::Window::set_bindings(engine::KeyBindings const&, engine::Input&)
+000000000006ec00 0000000000000031 T engine::Window::present()
+000000000006ec40 0000000000000081 T engine::Window::set_vsync(bool)
+000000000006ecd0 00000000000000ec T engine::Window::set_fullscreen(bool)
+000000000006edc0 00000000000000ec T engine::Window::toggle_fullscreen()
+000000000006eeb0 0000000000000037 T engine::Window::minimize()
+000000000006eef0 000000000000001f T engine::Window::restore()
+000000000006ef10 0000000000000008 T engine::Window::fullscreen() const
+000000000006ef20 0000000000000008 T engine::Window::focused() const
+000000000006ef30 0000000000000054 T engine::Window::resize(int, int)
+000000000006ef90 0000000000000007 T engine::Window::width() const
+000000000006efa0 0000000000000007 T engine::Window::height() const
+000000000006efb0 0000000000000025 T engine::Window::drawable() const
+000000000006efe0 000000000000010a T engine::Window::title(std::basic_string_view<char, std::char_traits<char> >)
+000000000006f0f0 0000000000000dc9 T engine::Window::Window(int, int, std::basic_string_view<char, std::char_traits<char> >, bool)
+000000000006f0f0 0000000000000dc9 T engine::Window::Window(int, int, std::basic_string_view<char, std::char_traits<char> >, bool)
+000000000006fec0 00000000000002f2 W std::__cxx11::to_string(int)
+00000000000701c0 000000000000007b W std::unique_ptr<engine::Window::Impl, std::default_delete<engine::Window::Impl> >::~unique_ptr()
+00000000000701c0 000000000000007b W std::unique_ptr<engine::Window::Impl, std::default_delete<engine::Window::Impl> >::~unique_ptr()
+0000000000070240 0000000000000bb3 t engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .constprop.0]
+0000000000070e00 000000000000020a T engine::Renderer::~Renderer()
+0000000000070e00 000000000000020a T engine::Renderer::~Renderer()
+0000000000071010 000000000000000d T engine::Renderer::default_vertex_shader()
+0000000000071020 000000000000000d T engine::Renderer::default_fragment_shader()
+0000000000071030 000000000000000b T engine::Renderer::shader_revision() const
+0000000000071040 000000000000000d T engine::Renderer::begin(int, int, engine::Camera, engine::Color)
+0000000000071050 000000000000007d T engine::Renderer::begin(engine::RenderTargetHandle, engine::Camera, engine::Color)
+00000000000710d0 0000000000000198 T engine::Renderer::create_target(int, int)
+0000000000071270 00000000000001da T engine::Renderer::resize_target(engine::RenderTargetHandle, int, int)
+0000000000071450 0000000000000130 T engine::Renderer::release(engine::RenderTargetHandle)
+0000000000071580 0000000000000049 T engine::Renderer::target_size(engine::RenderTargetHandle) const
+00000000000715d0 000000000000005e T engine::Renderer::live_targets() const
+0000000000071630 000000000000000b T engine::Renderer::target_bytes() const
+0000000000071640 0000000000000084 T engine::Renderer::target_sprite(engine::RenderTargetHandle, engine::Transform, engine::Color, engine::Rect)
+00000000000716d0 0000000000000463 T engine::Renderer::push_clip(engine::PixelRect)
+0000000000071b40 0000000000000333 T engine::Renderer::pop_clip()
+0000000000071e80 00000000000003a7 T engine::Renderer::set_camera(engine::Camera)
+0000000000072230 0000000000000c28 T engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)
+0000000000072e60 00000000000000e8 T engine::Renderer::quad(engine::Vec2, engine::Vec2, engine::Color, float, bool)
+0000000000072f50 00000000000002ec T engine::Renderer::upload(engine::TextureData const&, engine::TextureSampling)
+0000000000073240 0000000000000701 T engine::Renderer::replace_textures(std::span<engine::TextureReplacement const, 18446744073709551615ul>)
+0000000000073950 0000000000000049 T engine::Renderer::sampling(engine::TextureHandle) const
+00000000000739a0 00000000000001f3 T engine::Renderer::set_sampling(engine::TextureHandle, engine::TextureSampling)
+0000000000073ba0 00000000000000b5 T engine::Renderer::release(engine::TextureHandle)
+0000000000073c60 0000000000000524 T engine::Renderer::live_textures() const
+0000000000074190 0000000000000030 T engine::Renderer::texture_bytes() const
+00000000000741c0 00000000000002bd T engine::Renderer::graphics_info() const
+0000000000074480 0000000000000044 T engine::Renderer::sprite(engine::TextureHandle, engine::Transform, engine::Color, engine::Rect)
+00000000000744d0 0000000000000564 T engine::Renderer::set_font(engine::BitmapFont const&)
+0000000000074a40 000000000000000f T engine::Renderer::text_size(std::basic_string_view<char, std::char_traits<char> >, float) const
+0000000000074a50 0000000000000013 T engine::Renderer::font_bytes() const
+0000000000074a70 000000000000024d T engine::Renderer::text(engine::Vec2, float, std::basic_string_view<char, std::char_traits<char> >, engine::Color)
+0000000000074cc0 00000000000003fd T engine::Renderer::end()
+00000000000750c0 0000000000000034 T engine::Renderer::set_cpu_timing(bool, bool)
+0000000000075100 000000000000002a T engine::Renderer::cpu_timing() const
+0000000000075130 000000000000001d T engine::Renderer::stats() const
+0000000000075150 00000000000000d0 T engine::Renderer::pixel(int, int) const
+0000000000075220 0000000000000023 T engine::Renderer::healthy() const
+0000000000075250 00000000000000d7 T engine::Renderer::reload_shaders(std::basic_string_view<char, std::char_traits<char> >, std::basic_string_view<char, std::char_traits<char> >)
+0000000000075330 00000000000001e1 T engine::Renderer::Renderer()
+0000000000075330 00000000000001e1 T engine::Renderer::Renderer()
+0000000000075520 0000000000000481 T engine::Renderer::screenshot(std::basic_string_view<char, std::char_traits<char> >) const
+00000000000759b0 00000000000000bf t engine::(anonymous namespace)::debug_callback(unsigned int, unsigned int, unsigned int, unsigned int, int, char const*, void const*)
+0000000000075a70 0000000000000e78 W engine::detail::append_log(engine::Gl&, unsigned int, bool, std::basic_string_view<char, std::char_traits<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
+00000000000768f0 00000000000003be W engine::detail::resource(engine::Gl&, unsigned int, unsigned int, char const*, unsigned int, int)
+0000000000076cb0 0000000000000061 W engine::FontData::~FontData()
+0000000000076cb0 0000000000000061 W engine::FontData::~FontData()
+0000000000076d20 000000000000048b W engine::Renderer::Impl::allocate_target(int, int, unsigned long)
+00000000000771b0 0000000000000629 W engine::Renderer::Impl::begin_pass(int, int, engine::Camera, engine::Color, unsigned int, unsigned int)
+00000000000777e0 00000000000002e5 t engine::detail::count(engine::Gl&, unsigned int, unsigned int, int) [clone .isra.0]
+0000000000077ad0 0000000000000910 W engine::detail::build_sprite_program(engine::Gl&, std::basic_string_view<char, std::char_traits<char> >, std::basic_string_view<char, std::char_traits<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
+00000000000783e0 00000000000008bc W engine::Renderer::Impl::initialize()
+0000000000078ca0 000000000000020a W std::unique_ptr<engine::Renderer::Impl, std::default_delete<engine::Renderer::Impl> >::~unique_ptr()
+0000000000078ca0 000000000000020a W std::unique_ptr<engine::Renderer::Impl, std::default_delete<engine::Renderer::Impl> >::~unique_ptr()
+0000000000078ec0 000000000000000f t std::thread::_State_impl<std::thread::_Invoker<std::tuple<engine::AudioOutput::AudioOutput(std::basic_string_view<char, std::char_traits<char> >, engine::MixerGains)::{lambda()#1}> > >::~_State_impl()
+0000000000078ec0 000000000000000f t std::thread::_State_impl<std::thread::_Invoker<std::tuple<engine::AudioOutput::AudioOutput(std::basic_string_view<char, std::char_traits<char> >, engine::MixerGains)::{lambda()#1}> > >::~_State_impl()
+0000000000078ed0 000000000000002b t std::thread::_State_impl<std::thread::_Invoker<std::tuple<engine::AudioOutput::AudioOutput(std::basic_string_view<char, std::char_traits<char> >, engine::MixerGains)::{lambda()#1}> > >::~_State_impl()
+0000000000078f00 000000000000000c t std::thread::_State_impl<std::thread::_Invoker<std::tuple<engine::AudioOutput::AudioOutput(std::basic_string_view<char, std::char_traits<char> >, engine::MixerGains)::{lambda()#1}> > >::_M_run()
+0000000000078f10 0000000000000a88 T engine::AudioOutput::AudioOutput(std::basic_string_view<char, std::char_traits<char> >, engine::MixerGains)
+0000000000078f10 0000000000000a88 T engine::AudioOutput::AudioOutput(std::basic_string_view<char, std::char_traits<char> >, engine::MixerGains)
+00000000000799a0 0000000000000203 T engine::AudioOutput::~AudioOutput()
+00000000000799a0 0000000000000203 T engine::AudioOutput::~AudioOutput()
+0000000000079bb0 000000000000046c T engine::AudioOutput::register_sound(engine::SoundData)
+000000000007a020 0000000000000359 T engine::AudioOutput::collect_sounds()
+000000000007a380 0000000000000012 T engine::AudioOutput::retained_sound_bytes() const
+000000000007a3a0 000000000000000b T engine::AudioOutput::sound_count() const
+000000000007a3b0 000000000000000b T engine::AudioOutput::sound_bytes() const
+000000000007a3c0 00000000000001a6 T engine::AudioOutput::play(engine::SoundHandle, engine::Playback)
+000000000007a570 00000000000000fc T engine::AudioOutput::stop(engine::VoiceHandle)
+000000000007a670 00000000000000fb T engine::AudioOutput::pause(engine::VoiceHandle, bool)
+000000000007a770 0000000000000122 T engine::AudioOutput::set_gain(engine::VoiceHandle, float)
+000000000007a8a0 000000000000010a T engine::AudioOutput::set_pan(engine::VoiceHandle, float)
+000000000007a9b0 000000000000011e T engine::AudioOutput::set_master_gain(float)
+000000000007aad0 0000000000000122 T engine::AudioOutput::set_group_gain(engine::AudioGroup, float)
+000000000007ac00 00000000000000fb T engine::AudioOutput::pause_group(engine::AudioGroup, bool)
+000000000007ad00 00000000000000f0 T engine::AudioOutput::stop_all()
+000000000007adf0 000000000000009e T engine::AudioOutput::stats() const
+000000000007ae90 0000000000000010 T engine::AudioOutput::healthy() const
+000000000007aea0 0000000000000e42 T engine::AudioOutput::replace_sounds(std::span<engine::SoundReplacement, 18446744073709551615ul>)
+000000000007bcf0 0000000000000001 W std::thread::_M_thread_deps_never_run()
+000000000007bd00 000000000000145f W engine::AudioOutput::Impl::process()
+000000000007d160 00000000000000d2 W std::unique_ptr<engine::AudioOutput::Impl::Pending, std::default_delete<engine::AudioOutput::Impl::Pending> >::~unique_ptr()
+000000000007d160 00000000000000d2 W std::unique_ptr<engine::AudioOutput::Impl::Pending, std::default_delete<engine::AudioOutput::Impl::Pending> >::~unique_ptr()
+000000000007d240 0000000000001285 T engine::draw_ui(engine::Renderer&, engine::Ui const&)
+000000000007e4d0 0000000000000229 T engine::GpuTimer::GpuTimer(engine::GpuTimingMethod)
+000000000007e4d0 0000000000000229 T engine::GpuTimer::GpuTimer(engine::GpuTimingMethod)
+000000000007e700 0000000000000075 T engine::GpuTimer::~GpuTimer()
+000000000007e700 0000000000000075 T engine::GpuTimer::~GpuTimer()
+000000000007e780 000000000000016e T engine::GpuTimer::begin(unsigned long)
+000000000007e8f0 00000000000000ba T engine::GpuTimer::end()
+000000000007e9b0 00000000000002ad T engine::GpuTimer::collect()
+000000000007ec60 0000000000000035 T engine::GpuTimer::stats() const
+000000000007eca0 0000000000000012 T engine::GpuTimer::failures() const
+000000000007ecc0 00000000000007b0 T engine::Gl::Gl()
+000000000007ecc0 00000000000007b0 T engine::Gl::Gl()
+000000000007f480 0000000000000433 t void std::__introsort_loop<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, long, std::less<void> >(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, long, std::less<void>) [clone .isra.0]
+000000000007f8c0 000000000000015e T feature_lab::StressOptions::validate() const
+000000000007fa20 000000000000118c T feature_lab::parse_stress_options(int, char**)
+0000000000080bb0 0000000000000041 T feature_lab::stress_help[abi:cxx11]()
+0000000000080c00 0000000000000172 T feature_lab::Measurements::add(double)
+0000000000080d80 0000000000000415 T feature_lab::Measurements::summary() const
+00000000000811a0 0000000000000243 t feature_lab::StressReport::json[abi:cxx11](feature_lab::StressOptions const&) const::{lambda(std::basic_string_view<char, std::char_traits<char> >, feature_lab::Measurements const&, bool)#1}::operator()(std::basic_string_view<char, std::char_traits<char> >, feature_lab::Measurements const&, bool) const
+00000000000813f0 0000000000000354 T feature_lab::StressReport::observe(feature_lab::StressArena const&, feature_lab::StressResources const&)
+0000000000081750 00000000000055d9 T feature_lab::StressReport::json[abi:cxx11](feature_lab::StressOptions const&) const
+0000000000086d30 00000000000006e0 T feature_lab::StressReport::write(feature_lab::StressOptions const&) const
+0000000000087410 0000000000000237 T feature_lab::stress_rss_bytes()
+0000000000087650 0000000000000069 T feature_lab::StressReport::finish_cycle(feature_lab::StressArena const&)
+00000000000876c0 0000000000000802 T feature_lab::StressReport::StressReport(feature_lab::StressOptions const&)
+00000000000876c0 0000000000000802 T feature_lab::StressReport::StressReport(feature_lab::StressOptions const&)
+0000000000087ed0 0000000000003414 T feature_lab::run_cpu_stress(feature_lab::StressOptions const&)
+000000000008b2f0 0000000000000bbf W feature_lab::json_string[abi:cxx11](std::basic_string_view<char, std::char_traits<char> >)
+000000000008beb0 000000000000082c W feature_lab::StressArena::checksum() const
+000000000008c6e0 0000000000000057 t std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned long&, unsigned long) [clone .isra.0]
+000000000008c740 000000000000009c t void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag) [clone .isra.0]
+000000000008c7e0 0000000000000203 T feature_lab::validate_profile_arguments(int, char**)
+000000000008c9f0 0000000000000049 T feature_lab::replay_fingerprint(std::span<unsigned char const, 18446744073709551615ul>)
+000000000008ca40 000000000000019a T feature_lab::ReplayProfile::ReplayProfile(unsigned long, unsigned long, unsigned long)
+000000000008ca40 000000000000019a T feature_lab::ReplayProfile::ReplayProfile(unsigned long, unsigned long, unsigned long)
+000000000008cbe0 0000000000000275 T feature_lab::ReplayProfile::record(std::array<double, 6ul> const&, int, int, engine::RenderStats const&, engine::RenderStats const&, unsigned int)
+000000000008ce60 00000000000000d6 T feature_lab::ReplayProfile::collect_gpu(std::span<engine::GpuTimingSample const, 18446744073709551615ul>)
+000000000008cf40 0000000000000640 T feature_lab::ReplayProfile::write(std::basic_string_view<char, std::char_traits<char> >, std::basic_string_view<char, std::char_traits<char> >) const
+000000000008d580 00000000000037bd T feature_lab::ReplayProfile::json[abi:cxx11](unsigned long, unsigned long, std::basic_string_view<char, std::char_traits<char> >, engine::GraphicsInfo const&, bool, engine::GpuTimingStats const&, std::span<engine::GpuTimingFailure const, 18446744073709551615ul>, feature_lab::SpikeProfile const*) const
+0000000000090d40 0000000000000511 t feature_lab::SpikeProfile::json[abi:cxx11]() const::{lambda(feature_lab::SpikeState const&)#1}::operator()(feature_lab::SpikeState const&) const [clone .isra.0]
+0000000000091260 00000000000000a8 T feature_lab::spike_action_name(feature_lab::SpikeAction)
+0000000000091310 00000000000001ba T feature_lab::validate_spike_arguments(int, char**)
+00000000000914d0 00000000000000a9 T feature_lab::SpikeProfile::SpikeProfile()
+00000000000914d0 00000000000000a9 T feature_lab::SpikeProfile::SpikeProfile()
+0000000000091580 000000000000011a T feature_lab::SpikeProfile::next(unsigned long, bool) const
+00000000000916a0 0000000000000c7c T feature_lab::SpikeProfile::event(feature_lab::SpikeEvent)
+0000000000092320 000000000000036f T feature_lab::SpikeProfile::record(std::array<double, 6ul> const&, feature_lab::SpikeResources const&)
+0000000000092690 00000000000000c1 T feature_lab::SpikeProfile::collect_gpu(std::span<engine::GpuTimingSample const, 18446744073709551615ul>)
+0000000000092760 00000000000001f6 T feature_lab::SpikeProfile::observe_collision(unsigned int, engine::CollisionWorld const&)
+0000000000092960 00000000000001d4 T feature_lab::SpikeProfile::observe_scene(unsigned int, engine::Scene const&)
+0000000000092b40 00000000000013b6 T feature_lab::SpikeProfile::json[abi:cxx11]() const
+0000000000093f00 00000000000000de T engine::canonical_character_symbol(unsigned int)
+0000000000093fe0 0000000000000083 T engine::is_international_binding_symbol(unsigned int)
+0000000000094070 0000000000000451 T engine::international_symbol_name[abi:cxx11](unsigned int)
+0000000000094500 0000000000000015 t std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy(char*, char const*, unsigned long) [clone .part.0]
+0000000000094520 0000000000000639 T engine::FontData::validate() const
+0000000000094b60 0000000000000850 T engine::decode_font(std::span<unsigned char const, 18446744073709551615ul>, std::basic_string_view<char, std::char_traits<char> >)
+00000000000953b0 000000000000204f T engine::encode_font(engine::FontData const&)
+0000000000097400 0000000000000da9 T engine::builtin_font()
+00000000000981b0 00000000000001a4 T engine::BitmapFont::BitmapFont(engine::FontData)
+00000000000981b0 00000000000001a4 T engine::BitmapFont::BitmapFont(engine::FontData)
+0000000000098360 0000000000000031 T engine::BitmapFont::glyph(unsigned char) const
+00000000000983a0 0000000000000043 T engine::BitmapFont::validate_text(std::basic_string_view<char, std::char_traits<char> >, float)
+00000000000983f0 00000000000000f7 T engine::BitmapFont::measure(std::basic_string_view<char, std::char_traits<char> >, float) const
+00000000000984f0 00000000000001cc T engine::load_font(engine::AssetRoot const&, std::basic_string_view<char, std::char_traits<char> >)
+00000000000986c0 0000000000000054 T engine::load_font_or_fallback(engine::AssetRoot const&, std::basic_string_view<char, std::char_traits<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
+0000000000098720 000000000000006d T engine::TextCursor::TextCursor(engine::BitmapFont const&, std::basic_string_view<char, std::char_traits<char> >, float)
+0000000000098720 000000000000006d T engine::TextCursor::TextCursor(engine::BitmapFont const&, std::basic_string_view<char, std::char_traits<char> >, float)
+0000000000098790 000000000000017a T engine::TextCursor::next(engine::PositionedGlyph&)
+0000000000098920 00000000000001a6 t std::unordered_map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::weak_ptr<engine::TextureData const>, std::hash<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::equal_to<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::weak_ptr<engine::TextureData const> > > >::size_type std::__detail::__erase_nodes_if<std::unordered_map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::weak_ptr<engine::TextureData const>, std::hash<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::equal_to<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::weak_ptr<engine::TextureData const> > > >, std::unordered_map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::weak_ptr<engine::TextureData const>, std::hash<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::equal_to<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::weak_ptr<engine::TextureData const> > > >, engine::TextureCache::collect()::{lambda(auto:1 const&)#1}>(std::unordered_map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::weak_ptr<engine::TextureData const>, std::hash<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::equal_to<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::weak_ptr<engine::TextureData const> > > >&, std::unordered_map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::weak_ptr<engine::TextureData const>, std::hash<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::equal_to<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::weak_ptr<engine::TextureData const> > > >&, engine::TextureCache::collect()::{lambda(auto:1 const&)#1}) [clone .isra.0]
+0000000000098ad0 0000000000000057 T engine::TextureData::validate() const
+0000000000098b30 00000000000000cc T engine::decode_texture(std::span<unsigned char const, 18446744073709551615ul>)
+0000000000098c00 0000000000000881 T engine::encode_texture(engine::TextureData const&)
+0000000000099490 000000000000005b T engine::AssetRoot::AssetRoot(std::filesystem::__cxx11::path)
+0000000000099490 000000000000005b T engine::AssetRoot::AssetRoot(std::filesystem::__cxx11::path)
+00000000000994f0 00000000000006f7 T engine::AssetRoot::discover(std::filesystem::__cxx11::path const&)
+0000000000099bf0 00000000000000e1 T engine::AssetRoot::validate_key(std::basic_string_view<char, std::char_traits<char> >)
+0000000000099ce0 0000000000000431 T engine::AssetRoot::resolve[abi:cxx11](std::basic_string_view<char, std::char_traits<char> >) const
+000000000009a120 00000000000004f1 T engine::AssetRoot::write_atomic(std::basic_string_view<char, std::char_traits<char> >, std::span<unsigned char const, 18446744073709551615ul>, void (*)(engine::AtomicWriteStage)) const
+000000000009a620 0000000000000017 T engine::AssetRoot::write_text(std::basic_string_view<char, std::char_traits<char> >, std::basic_string_view<char, std::char_traits<char> >) const
+000000000009a640 000000000000000c T engine::TextureCache::collect()
+000000000009a650 00000000000003ff T engine::AssetRoot::read(std::basic_string_view<char, std::char_traits<char> >, unsigned long) const
+000000000009aa50 0000000000000334 T engine::AssetRoot::text[abi:cxx11](std::basic_string_view<char, std::char_traits<char> >, unsigned long) const
+000000000009ad90 0000000000000db0 T engine::TextureCache::reload(std::basic_string_view<char, std::char_traits<char> >)
+000000000009bb40 0000000000000587 T engine::TextureCache::load(std::basic_string_view<char, std::char_traits<char> >)
+000000000009c0d0 0000000000000069 T engine::TextureCache::load_or_fallback(std::basic_string_view<char, std::char_traits<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
+000000000009c140 0000000000000001 W std::_Sp_counted_ptr_inplace<engine::TextureData, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::~_Sp_counted_ptr_inplace()
+000000000009c140 0000000000000001 W std::_Sp_counted_ptr_inplace<engine::TextureData, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::~_Sp_counted_ptr_inplace()
+000000000009c150 000000000000000a W std::_Sp_counted_ptr_inplace<engine::TextureData, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::~_Sp_counted_ptr_inplace()
+000000000009c160 000000000000000a W std::_Sp_counted_ptr_inplace<engine::TextureData, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_destroy()
+000000000009c170 0000000000000021 W std::_Sp_counted_ptr_inplace<engine::TextureData, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose()
+000000000009c1a0 000000000000005b W std::_Sp_counted_ptr_inplace<engine::TextureData, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_get_deleter(std::type_info const&)
+000000000009c200 0000000000000174 W std::shared_ptr<engine::TextureData const>::~shared_ptr()
+000000000009c200 0000000000000174 W std::shared_ptr<engine::TextureData const>::~shared_ptr()
+000000000009c380 00000000000000f6 W std::_Hashtable<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::weak_ptr<engine::TextureData const> >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::weak_ptr<engine::TextureData const> > >, std::__detail::_Select1st, std::equal_to<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::hash<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::_Scoped_node::~_Scoped_node()
+000000000009c380 00000000000000f6 W std::_Hashtable<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::weak_ptr<engine::TextureData const> >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::weak_ptr<engine::TextureData const> > >, std::__detail::_Select1st, std::equal_to<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::hash<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::_Scoped_node::~_Scoped_node()
+000000000009c480 00000000000001f4 W std::_Hashtable<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::weak_ptr<engine::TextureData const> >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::weak_ptr<engine::TextureData const> > >, std::__detail::_Select1st, std::equal_to<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::hash<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::_M_insert_unique_node(unsigned long, unsigned long, std::__detail::_Hash_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::weak_ptr<engine::TextureData const> >, true>*, unsigned long)
+000000000009c680 0000000000000185 T engine::AssetWatcher::~AssetWatcher()
+000000000009c680 0000000000000185 T engine::AssetWatcher::~AssetWatcher()
+000000000009c810 000000000000008e T engine::AssetWatcher::close()
+000000000009c8a0 00000000000002cf T engine::AssetWatcher::inspect(std::filesystem::__cxx11::path const&) const
+000000000009cb70 000000000000017e T engine::AssetWatcher::rebuild()
+000000000009ccf0 00000000000022c6 T engine::AssetWatcher::AssetWatcher(engine::AssetRoot const&, std::span<engine::WatchedAsset const, 18446744073709551615ul>)
+000000000009ccf0 00000000000022c6 T engine::AssetWatcher::AssetWatcher(engine::AssetRoot const&, std::span<engine::WatchedAsset const, 18446744073709551615ul>)
+000000000009efc0 0000000000000494 T engine::AssetWatcher::scan()
+000000000009f460 0000000000000035 T engine::AssetWatcher::mark(unsigned int, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >)
+000000000009f4a0 00000000000004e3 T engine::AssetWatcher::poll(std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >)
+000000000009f9c0 000000000000003c t engine::(anonymous namespace)::label_valid(std::basic_string_view<char, std::char_traits<char> >)
+000000000009fa00 000000000000009c t float engine::(anonymous namespace)::number<float>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+000000000009faa0 00000000000000c5 t unsigned long engine::(anonymous namespace)::number<unsigned long>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+000000000009fb70 0000000000000157 t std::_Hashtable<unsigned long, std::pair<unsigned long const, engine::Entity>, std::allocator<std::pair<unsigned long const, engine::Entity> >, std::__detail::_Select1st, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::erase(unsigned long const&) [clone .isra.0]
+000000000009fcd0 00000000000004ab t void std::__introsort_loop<__gnu_cxx::__normal_iterator<engine::SceneNode const**, std::vector<engine::SceneNode const*, std::allocator<engine::SceneNode const*> > >, long, engine::serialize_scene[abi:cxx11](engine::Scene const&)::{lambda(auto:1 const*, auto:2 const*)#1}>(__gnu_cxx::__normal_iterator<engine::SceneNode const**, std::vector<engine::SceneNode const*, std::allocator<engine::SceneNode const*> > >, __gnu_cxx::__normal_iterator<engine::SceneNode const**, std::vector<engine::SceneNode const*, std::allocator<engine::SceneNode const*> > >, long, engine::serialize_scene[abi:cxx11](engine::Scene const&)::{lambda(auto:1 const*, auto:2 const*)#1}) [clone .isra.0]
+00000000000a0180 00000000000005b4 t engine::Scene::operator=(engine::Scene&&) [clone .part.0]
+00000000000a0740 0000000000000144 T engine::Scene::memory_usage() const
+00000000000a0890 0000000000000050 T engine::Scene::buffer_bytes() const
+00000000000a08e0 0000000000000021 T engine::Scene::operator=(engine::Scene&&)
+00000000000a0910 000000000000000f T engine::Scene::require_mutable() const
+00000000000a0920 0000000000000043 T engine::Scene::valid(engine::Entity) const
+00000000000a0970 00000000000000e4 T engine::Scene::find(unsigned long) const
+00000000000a0a60 0000000000000060 T engine::Scene::get(engine::Entity) const
+00000000000a0ac0 0000000000000060 T engine::Scene::mutable_node(engine::Entity)
+00000000000a0b20 0000000000000150 T engine::Scene::set_transform(engine::Entity, engine::LocalTransform)
+00000000000a0c70 0000000000000286 T engine::Scene::set_parent(engine::Entity, engine::Entity)
+00000000000a0f00 0000000000000512 T engine::Scene::set_sprite(engine::Entity, engine::Sprite)
+00000000000a1420 00000000000000fb T engine::Scene::set_collider(engine::Entity, engine::Collider)
+00000000000a1520 00000000000003a1 T engine::Scene::world_transform(engine::Entity) const
+00000000000a18d0 00000000000008ff T engine::Scene::destroy(engine::Entity)
+00000000000a21d0 00000000000005d0 T engine::Scene::defer_destroy(engine::Entity)
+00000000000a27a0 00000000000000e3 T engine::Scene::flush()
+00000000000a2890 0000000000000116 T engine::Scene::Scene(engine::Scene::Limits)
+00000000000a2890 0000000000000116 T engine::Scene::Scene(engine::Scene::Limits)
+00000000000a29b0 00000000000000f4 T engine::Scene::Scene()
+00000000000a29b0 00000000000000f4 T engine::Scene::Scene()
+00000000000a2ab0 0000000000000120 T engine::Scene::Scene(engine::Scene&&)
+00000000000a2ab0 0000000000000120 T engine::Scene::Scene(engine::Scene&&)
+00000000000a2bd0 0000000000001599 T engine::serialize_scene[abi:cxx11](engine::Scene const&)
+00000000000a4170 00000000000024ec T engine::Scene::create(unsigned long, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
+00000000000a6660 00000000000020bf T engine::parse_scene(std::basic_string_view<char, std::char_traits<char> >, std::basic_string_view<char, std::char_traits<char> >, engine::Scene::Limits)
+00000000000a8720 00000000000001eb T engine::replace_scene(engine::Scene&, std::basic_string_view<char, std::char_traits<char> >, std::basic_string_view<char, std::char_traits<char> >)
+00000000000a8910 00000000000000b5 W std::vector<engine::SceneNode, std::allocator<engine::SceneNode> >::~vector()
+00000000000a8910 00000000000000b5 W std::vector<engine::SceneNode, std::allocator<engine::SceneNode> >::~vector()
+00000000000a89d0 000000000000005f W std::_Hashtable<unsigned long, std::pair<unsigned long const, engine::Entity>, std::allocator<std::pair<unsigned long const, engine::Entity> >, std::__detail::_Select1st, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::~_Hashtable()
+00000000000a89d0 000000000000005f W std::_Hashtable<unsigned long, std::pair<unsigned long const, engine::Entity>, std::allocator<std::pair<unsigned long const, engine::Entity> >, std::__detail::_Select1st, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::~_Hashtable()
+00000000000a8a30 0000000000000086 W std::_Hashtable<std::type_index, std::pair<std::type_index const, std::unique_ptr<engine::detail::ComponentStorage, std::default_delete<engine::detail::ComponentStorage> > >, std::allocator<std::pair<std::type_index const, std::unique_ptr<engine::detail::ComponentStorage, std::default_delete<engine::detail::ComponentStorage> > > >, std::__detail::_Select1st, std::equal_to<std::type_index>, std::hash<std::type_index>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::~_Hashtable()
+00000000000a8a30 0000000000000086 W std::_Hashtable<std::type_index, std::pair<std::type_index const, std::unique_ptr<engine::detail::ComponentStorage, std::default_delete<engine::detail::ComponentStorage> > >, std::allocator<std::pair<std::type_index const, std::unique_ptr<engine::detail::ComponentStorage, std::default_delete<engine::detail::ComponentStorage> > > >, std::__detail::_Select1st, std::equal_to<std::type_index>, std::hash<std::type_index>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::~_Hashtable()
+00000000000a8ac0 00000000000006cd W std::basic_ostream<char, std::char_traits<char> >& std::__detail::operator<< <char, std::char_traits<char>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&>(std::basic_ostream<char, std::char_traits<char> >&, std::__detail::_Quoted_string<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char> const&)
+00000000000a91c0 00000000000001f4 W std::_Hashtable<unsigned long, std::pair<unsigned long const, engine::Entity>, std::allocator<std::pair<unsigned long const, engine::Entity> >, std::__detail::_Select1st, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::_M_insert_unique_node(unsigned long, unsigned long, std::__detail::_Hash_node<std::pair<unsigned long const, engine::Entity>, false>*, unsigned long)
+00000000000a93c0 000000000000004c t engine::(anonymous namespace)::cell_count(unsigned int, unsigned int, unsigned long)
+00000000000a9410 0000000000000015 t std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy(char*, char const*, unsigned long) [clone .part.0]
+00000000000a9430 0000000000000048 T engine::TileMapData::buffer_bytes() const
+00000000000a9480 000000000000009f T engine::TileMap::buffer_bytes() const
+00000000000a9520 00000000000002b3 T engine::TileMapData::validate() const
+00000000000a97e0 000000000000145a T engine::decode_tilemap(std::span<unsigned char const, 18446744073709551615ul>, std::basic_string_view<char, std::char_traits<char> >)
+00000000000aac40 0000000000001209 T engine::encode_tilemap(engine::TileMapData const&)
+00000000000abe50 0000000000001226 T engine::TileMap::TileMap(engine::TileMapData)
+00000000000abe50 0000000000001226 T engine::TileMap::TileMap(engine::TileMapData)
+00000000000ad080 000000000000003b T engine::TileMap::bounds() const
+00000000000ad0c0 0000000000000335 T engine::TileMap::range(engine::Rect) const
+00000000000ad400 000000000000002a T engine::TileMap::solid(unsigned int, unsigned int) const
+00000000000ad430 00000000000002ac T engine::TileMap::append_colliders(engine::Rect, std::vector<engine::Rect, std::allocator<engine::Rect> >&) const
+00000000000ad6e0 0000000000000015 t std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy(char*, char const*, unsigned long) [clone .part.0]
+00000000000ad700 0000000000000038 T engine::AnimationSet::buffer_bytes() const
+00000000000ad740 0000000000000381 T engine::AnimationPlayer::play(std::basic_string_view<char, std::char_traits<char> >, bool)
+00000000000adad0 000000000000002b T engine::AnimationPlayer::finished() const
+00000000000adb00 000000000000007b T engine::AnimationPlayer::frame_index() const
+00000000000adb80 0000000000000131 T engine::AnimationPlayer::uv() const
+00000000000adcc0 000000000000001d T engine::AnimationPlayer::clip_name() const
+00000000000adce0 00000000000000ba T engine::AnimationPlayer::snapshot() const
+00000000000adda0 000000000000009e T engine::AnimationPlayer::advance(unsigned long)
+00000000000ade40 00000000000004c4 T engine::AnimationPlayer::restore(engine::AnimationState const&)
+00000000000ae310 000000000000022a T engine::AnimationSet::validate() const
+00000000000ae540 0000000000001da2 T engine::decode_animations(std::span<unsigned char const, 18446744073709551615ul>, std::basic_string_view<char, std::char_traits<char> >)
+00000000000b02f0 00000000000015e9 T engine::encode_animations(engine::AnimationSet const&)
+00000000000b18e0 0000000000000097 T engine::AnimationPlayer::AnimationPlayer(std::shared_ptr<engine::AnimationSet const>)
+00000000000b18e0 0000000000000097 T engine::AnimationPlayer::AnimationPlayer(std::shared_ptr<engine::AnimationSet const>)
+00000000000b1980 00000000000004b9 T engine::AnimationPlayer::replace(std::shared_ptr<engine::AnimationSet const>)
+00000000000b1e40 00000000000001f4 W std::_Hashtable<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::__detail::_Identity, std::equal_to<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::hash<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, true, true> >::_M_insert_unique_node(unsigned long, unsigned long, std::__detail::_Hash_node<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, true>*, unsigned long)
+00000000000b2040 000000000000029b W std::pair<std::__detail::_Node_iterator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, true, true>, bool> std::_Hashtable<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::__detail::_Identity, std::equal_to<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::hash<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, true, true> >::_M_emplace_uniq<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+00000000000b2300 00000000000000a7 T engine::SoundData::validate() const
+00000000000b23b0 0000000000000677 T engine::decode_wav(std::span<unsigned char const, 18446744073709551615ul>, std::basic_string_view<char, std::char_traits<char> >)
+00000000000b2a30 0000000000001c76 T engine::encode_wav(engine::SoundData const&)
+00000000000b46c0 00000000000000b4 t engine::(anonymous namespace)::validate(engine::Rect)
+00000000000b4780 000000000000002e T engine::Ui::find(unsigned int)
+00000000000b47b0 0000000000000074 T engine::Ui::hit(engine::Vec2) const
+00000000000b4830 00000000000000be T engine::Ui::navigate(int)
+00000000000b48f0 00000000000003de T engine::Ui::layout(engine::Rect, std::span<engine::UiWidget const, 18446744073709551615ul>)
+00000000000b4cd0 00000000000000d0 T engine::Ui::set_value(unsigned int, float)
+00000000000b4da0 0000000000000019 T engine::Ui::reset_interaction()
+00000000000b4dc0 0000000000000997 T engine::Ui::update(engine::InputFrame const&, bool)
+00000000000b5760 00000000000000eb T engine::UiColumn::UiColumn(engine::Rect, float)
+00000000000b5760 00000000000000eb T engine::UiColumn::UiColumn(engine::Rect, float)
+00000000000b5850 000000000000005f T engine::UiColumn::next(float)
+00000000000b58b0 000000000000023b t engine::(anonymous namespace)::absolute_env(char const*)
+00000000000b5af0 0000000000000141 t engine::(anonymous namespace)::slot_key(unsigned int)
+00000000000b5c40 00000000000009e4 t engine::(anonymous namespace)::prepare_directories(std::filesystem::__cxx11::path const&)
+00000000000b6630 00000000000004d7 t engine::(anonymous namespace)::read(std::filesystem::__cxx11::path const&, std::basic_string_view<char, std::char_traits<char> >)
+00000000000b6b10 00000000000000ae T engine::crc32(std::span<unsigned char const, 18446744073709551615ul>)
+00000000000b6bc0 0000000000000527 T engine::seal_record(std::vector<unsigned char, std::allocator<unsigned char> >, unsigned long)
+00000000000b70f0 000000000000011d T engine::open_record(std::span<unsigned char const, 18446744073709551615ul>, unsigned long)
+00000000000b7210 0000000000001117 T engine::UserPaths::discover(std::filesystem::__cxx11::path const&)
+00000000000b8330 00000000000003ea T engine::UserStorage::UserStorage(engine::UserPaths)
+00000000000b8330 00000000000003ea T engine::UserStorage::UserStorage(engine::UserPaths)
+00000000000b8720 0000000000000045 T engine::UserStorage::read_config() const
+00000000000b8770 0000000000000082 T engine::UserStorage::read_slot(unsigned int) const
+00000000000b8800 00000000000000f5 T engine::UserStorage::write_config(std::span<unsigned char const, 18446744073709551615ul>) const
+00000000000b8900 0000000000000132 T engine::UserStorage::write_slot(unsigned int, std::span<unsigned char const, 18446744073709551615ul>) const
+00000000000b8a40 000000000000068a W std::system_error::system_error(int, std::_V2::error_category const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+00000000000b8a40 000000000000068a W std::system_error::system_error(int, std::_V2::error_category const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+00000000000b9100 0000000000000176 t engine::(anonymous namespace)::narrow(engine::Shape2D, engine::Shape2D)
+00000000000b9280 0000000000000022 t engine::(anonymous namespace)::less(engine::Contact2D, engine::Contact2D)
+00000000000b92b0 00000000000000e1 t engine::(anonymous namespace)::validate(engine::Shape2D)
+00000000000b93a0 00000000000006f5 t void std::__introsort_loop<__gnu_cxx::__normal_iterator<engine::Body2D*, std::vector<engine::Body2D, std::allocator<engine::Body2D> > >, long, engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)::{lambda(auto:1&, auto:2&)#1}>(__gnu_cxx::__normal_iterator<engine::Body2D*, std::vector<engine::Body2D, std::allocator<engine::Body2D> > >, __gnu_cxx::__normal_iterator<engine::Body2D*, std::vector<engine::Body2D, std::allocator<engine::Body2D> > >, long, engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)::{lambda(auto:1&, auto:2&)#1}) [clone .isra.0]
+00000000000b9aa0 000000000000072c t void std::__introsort_loop<__gnu_cxx::__normal_iterator<engine::Contact2D*, std::vector<engine::Contact2D, std::allocator<engine::Contact2D> > >, long, bool (*)(engine::Contact2D, engine::Contact2D)>(__gnu_cxx::__normal_iterator<engine::Contact2D*, std::vector<engine::Contact2D, std::allocator<engine::Contact2D> > >, __gnu_cxx::__normal_iterator<engine::Contact2D*, std::vector<engine::Contact2D, std::allocator<engine::Contact2D> > >, long, bool (*)(engine::Contact2D, engine::Contact2D)) [clone .constprop.0]
+00000000000ba1d0 0000000000000678 t void std::__introsort_loop<__gnu_cxx::__normal_iterator<engine::CollisionWorld::Cell*, std::vector<engine::CollisionWorld::Cell, std::allocator<engine::CollisionWorld::Cell> > >, long, engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)::{lambda(auto:1, auto:2)#1}>(__gnu_cxx::__normal_iterator<engine::CollisionWorld::Cell*, std::vector<engine::CollisionWorld::Cell, std::allocator<engine::CollisionWorld::Cell> > >, __gnu_cxx::__normal_iterator<engine::CollisionWorld::Cell*, std::vector<engine::CollisionWorld::Cell, std::allocator<engine::CollisionWorld::Cell> > >, long, engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)::{lambda(auto:1, auto:2)#1}) [clone .isra.0]
+00000000000ba850 00000000000000a3 T engine::CollisionWorld::buffer_bytes() const
+00000000000ba900 0000000000000163 T engine::CollisionWorld::memory_usage() const
+00000000000baa70 0000000000000106 T engine::bounds(engine::Shape2D)
+00000000000bab80 00000000000002f6 T engine::intersects(engine::Shape2D, engine::Shape2D)
+00000000000bae80 0000000000000435 T engine::CollisionWorld::CollisionWorld(engine::CollisionWorld::Limits)
+00000000000bae80 0000000000000435 T engine::CollisionWorld::CollisionWorld(engine::CollisionWorld::Limits)
+00000000000bb2c0 0000000000000023 T engine::CollisionWorld::CollisionWorld()
+00000000000bb2c0 0000000000000023 T engine::CollisionWorld::CollisionWorld()
+00000000000bb2f0 0000000000001f10 T engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)
+00000000000bd200 0000000000000022 T engine::CollisionWorld::prime(std::span<engine::Body2D const, 18446744073709551615ul>)
+00000000000bd230 0000000000000304 T engine::CollisionWorld::query(engine::Shape2D, std::vector<unsigned long, std::allocator<unsigned long> >&, engine::QueryFilter) const
+00000000000bd540 000000000000058a T engine::CollisionWorld::segment(engine::Vec2, engine::Vec2, engine::QueryFilter) const
+00000000000bdacc T _fini
+00000000000be000 0000000000000004 R _IO_stdin_used
+00000000000c6900 0000000000000058 r typeinfo name for main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#1}::operator()(std::basic_string_view<char, std::char_traits<char> >) const::{lambda(engine::TileMap const&)#1}
+00000000000c6960 000000000000005c r typeinfo name for main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#2}::operator()(std::basic_string_view<char, std::char_traits<char> >) const::{lambda(feature_lab::Game const&)#1}
+00000000000c69c0 000000000000000e r typeinfo name for main::{lambda()#1}
+00000000000c69e0 0000000000000037 r typeinfo name for main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#1}
+00000000000c6a20 0000000000000038 r typeinfo name for main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#2}
+00000000000c6a58 000000000000000f r typeinfo name for main::{lambda()#2}
+00000000000c6a80 0000000000000023 r typeinfo name for main::{lambda(feature_lab::Game const&)#1}
+00000000000c6aa8 0000000000000008 r C.1191.4
+00000000000c6b40 0000000000000020 r C.151.0
+00000000000c6b60 000000000000002f V typeinfo name for std::_Mutex_base<(__gnu_cxx::_Lock_policy)2>
+00000000000c6b90 0000000000000018 V typeinfo name for std::_Sp_make_shared_tag
+00000000000c6bc0 0000000000000023 V typeinfo name for engine::detail::ComponentStorage
+00000000000c6c00 0000000000000034 V typeinfo name for std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>
+00000000000c6c40 000000000000003d V typeinfo name for engine::detail::ComponentPool<feature_lab::CorePickup>
+00000000000c6c80 000000000000001c V typeinfo name for feature_lab::CorePickup
+00000000000c6ca0 0000000000000057 V typeinfo name for std::_Sp_counted_ptr_inplace<engine::AnimationSet, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>
+00000000000c6cf8 000000000000000c u feature_lab::Soundtrack::effect_levels
+00000000000c6d08 000000000000000c u feature_lab::Soundtrack::music_levels
+00000000000c6d20 0000000000000100 u std::__detail::__from_chars_alnum_to_val_table<false>::value
+00000000000c6e20 0000000000000038 u feature_lab::Replay::annex_route
+00000000000c6e60 0000000000000050 u feature_lab::Replay::route
+00000000000c6eb0 0000000000000010 u std::_Sp_make_shared_tag::_S_ti()::__tag
+00000000000c7260 0000000000000010 r C.138.1
+00000000000c7ca0 0000000000000018 r C.107.0
+00000000000c7d00 0000000000000091 r typeinfo name for std::thread::_State_impl<std::thread::_Invoker<std::tuple<engine::AudioOutput::AudioOutput(std::basic_string_view<char, std::char_traits<char> >, engine::MixerGains)::{lambda()#1}> > >
+00000000000c7e40 00000000000018c8 r engine::(anonymous namespace)::character_ranges
+00000000000c9720 0000000000001690 r engine::(anonymous namespace)::character_aliases
+00000000000caea0 0000000000000056 V typeinfo name for std::_Sp_counted_ptr_inplace<engine::TextureData, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>
+00000000000caef8 r __GNU_EH_FRAME_HDR
+00000000000d56c8 r __FRAME_END__
+00000000000dad70 0000000000000020 r __abi_tag
+00000000000dbfb0 d __frame_dummy_init_array_entry
+00000000000dbfb8 d __do_global_dtors_aux_fini_array_entry
+00000000000dbfc0 0000000000000020 d C.928.3
+00000000000dbfe0 0000000000000028 d C.792.2
+00000000000dc058 0000000000000038 V vtable for engine::detail::ComponentPool<feature_lab::CorePickup>
+00000000000dc090 0000000000000038 V vtable for std::_Sp_counted_ptr_inplace<engine::AnimationSet, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>
+00000000000dc0e0 0000000000000040 u feature_lab::Soundtrack::keys
+00000000000dc120 00000000000001c8 u engine::extra_binding_symbols
+00000000000dc300 0000000000000180 u engine::keypad_binding_symbols
+00000000000dc480 0000000000000198 u engine::named_binding_symbols
+00000000000dc620 00000000000000a0 u engine::binding_names
+00000000000dc6c0 0000000000000028 d vtable for std::thread::_State_impl<std::thread::_Invoker<std::tuple<engine::AudioOutput::AudioOutput(std::basic_string_view<char, std::char_traits<char> >, engine::MixerGains)::{lambda()#1}> > >
+00000000000dc700 0000000000000030 u engine::SceneMemoryUsage::names
+00000000000dc740 0000000000000050 u engine::CollisionMemoryUsage::names
+00000000000dc790 0000000000000038 V vtable for std::_Sp_counted_ptr_inplace<engine::TextureData, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>
+00000000000dc7e0 0000000000000020 V vtable for std::basic_ios<char, std::char_traits<char> >@GLIBCXX_3.4
+00000000000dc800 0000000000000018 V typeinfo for std::system_error@GLIBCXX_3.4.11
+00000000000dc818 0000000000000018 V typeinfo for std::overflow_error@GLIBCXX_3.4
+00000000000dc830 0000000000000080 V vtable for std::basic_streambuf<char, std::char_traits<char> >@GLIBCXX_3.4
+00000000000dc8b0 0000000000000020 V VTT for std::basic_ofstream<char, std::char_traits<char> >@GLIBCXX_3.4
+00000000000dc8d0 0000000000000050 V vtable for std::__cxx11::basic_ostringstream<char, std::char_traits<char>, std::allocator<char> >@GLIBCXX_3.4.21
+00000000000dc920 0000000000000050 V vtable for std::basic_ifstream<char, std::char_traits<char> >@GLIBCXX_3.4
+00000000000dc970 0000000000000020 V VTT for std::__cxx11::basic_ostringstream<char, std::char_traits<char>, std::allocator<char> >@GLIBCXX_3.4.21
+00000000000dc990 0000000000000080 V vtable for std::basic_filebuf<char, std::char_traits<char> >@GLIBCXX_3.4
+00000000000dca10 0000000000000050 V vtable for std::basic_ofstream<char, std::char_traits<char> >@GLIBCXX_3.4
+00000000000dca60 0000000000000018 V typeinfo for std::length_error@GLIBCXX_3.4
+00000000000dca78 0000000000000018 V typeinfo for std::out_of_range@GLIBCXX_3.4
+00000000000dca90 0000000000000018 V typeinfo for std::logic_error@GLIBCXX_3.4
+00000000000dcaa8 0000000000000018 V typeinfo for std::invalid_argument@GLIBCXX_3.4
+00000000000dcac0 0000000000000028 V vtable for std::system_error@GLIBCXX_3.4.11
+00000000000dcae8 0000000000000020 V VTT for std::basic_ifstream<char, std::char_traits<char> >@GLIBCXX_3.4
+00000000000dcb10 0000000000000018 V typeinfo for std::runtime_error@GLIBCXX_3.4
+00000000000dcb28 0000000000000080 V vtable for std::__cxx11::basic_stringbuf<char, std::char_traits<char>, std::allocator<char> >@GLIBCXX_3.4.21
+00000000000dcba8 0000000000000010 V typeinfo for std::_Mutex_base<(__gnu_cxx::_Lock_policy)2>
+00000000000dcbb8 0000000000000010 V typeinfo for engine::detail::ComponentStorage
+00000000000dcbc8 0000000000000018 V typeinfo for std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>
+00000000000dcbe0 0000000000000018 V typeinfo for engine::detail::ComponentPool<feature_lab::CorePickup>
+00000000000dcbf8 0000000000000010 V typeinfo for feature_lab::CorePickup
+00000000000dcc08 0000000000000010 d typeinfo for main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#1}::operator()(std::basic_string_view<char, std::char_traits<char> >) const::{lambda(engine::TileMap const&)#1}
+00000000000dcc18 0000000000000010 d typeinfo for main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#2}::operator()(std::basic_string_view<char, std::char_traits<char> >) const::{lambda(feature_lab::Game const&)#1}
+00000000000dcc28 0000000000000010 d typeinfo for main::{lambda()#1}
+00000000000dcc38 0000000000000010 d typeinfo for main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#1}
+00000000000dcc48 0000000000000010 d typeinfo for main::{lambda(std::basic_string_view<char, std::char_traits<char> >)#2}
+00000000000dcc58 0000000000000010 d typeinfo for main::{lambda()#2}
+00000000000dcc68 0000000000000010 d typeinfo for main::{lambda(feature_lab::Game const&)#1}
+00000000000dcc88 0000000000000018 V typeinfo for std::_Sp_counted_ptr_inplace<engine::AnimationSet, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>
+00000000000dcca8 0000000000000018 d typeinfo for std::thread::_State_impl<std::thread::_Invoker<std::tuple<engine::AudioOutput::AudioOutput(std::basic_string_view<char, std::char_traits<char> >, engine::MixerGains)::{lambda()#1}> > >
+00000000000dccf8 0000000000000018 V typeinfo for std::_Sp_counted_ptr_inplace<engine::TextureData, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>
+00000000000dcd20 d _DYNAMIC
+00000000000dcfe8 d _GLOBAL_OFFSET_TABLE_
+00000000000dd618 D __data_start
+00000000000dd618 W data_start
+00000000000dd620 D __dso_handle
+00000000000dd628 0000000000000008 V DW.ref._ZTISt13runtime_error
+00000000000dd630 0000000000000008 V DW.ref._ZTISt9exception
+00000000000dd638 0000000000000008 V DW.ref.__gxx_personality_v0
+00000000000dd640 0000000000000008 u engine::audio_detail::ticket()::next
+00000000000dd648 0000000000000008 d engine::Renderer::upload(engine::TextureData const&, engine::TextureSampling)::next_serial
+00000000000dd650 0000000000000008 d engine::Renderer::create_target(int, int)::next_serial
+00000000000dd658 0000000000000008 d engine::AudioOutput::register_sound(engine::SoundData)::next_serial
+00000000000dd660 0000000000000008 d engine::(anonymous namespace)::new_domain()::next
+00000000000dd668 D __TMC_END__
+00000000000dd668 D _edata
+00000000000dd680 B __bss_start
+00000000000dd680 0000000000000001 B __libc_single_threaded@GLIBC_2.32
+00000000000dd6c0 0000000000000110 B std::cout@GLIBCXX_3.4
+00000000000dd7e0 0000000000000110 B std::cerr@GLIBCXX_3.4
+00000000000dd8f0 0000000000000001 b completed.0
+00000000000dd900 0000000000000008 b guard variable for engine::TextureCache::load_or_fallback(std::basic_string_view<char, std::char_traits<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::fallback
+00000000000dd910 0000000000000010 b engine::TextureCache::load_or_fallback(std::basic_string_view<char, std::char_traits<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::fallback
+00000000000dd920 B _end

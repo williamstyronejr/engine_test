@@ -268,7 +268,11 @@ assigned to individual switches. All six maxima still fail 16.7 ms.
 Increment 67 [tests quad-corner reuse](../benchmarks/2026-10-28-corners-results.md):
 correctness passes, but the predeclared CPU gate fails, so the renderer is restored.
 All six new frame maxima exceed 16.7 ms; presentation dominates all 34 slow frames.
-Next obtain function-level CPU attribution before selecting another optimization.
+Increment 68 [collects main-thread function samples](../benchmarks/2026-10-28-functions-results.md):
+quad submission leads application symbols consistently, with no lost/throttled
+samples and matching normal/profiled pixels. Whole-process sample scope and
+unresolved driver symbols limit interpretation; all six frame maxima still fail.
+Next predeclare a vertex-emission candidate using the retained emitted code.
 R6 timing/coverage and physical R4/R5 cases remain open; R8 requires their
 coverage/support record. Refresh automated evidence when the implementation or
 toolchain changes. These results do not complete milestone 6.

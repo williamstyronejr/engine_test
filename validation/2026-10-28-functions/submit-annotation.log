@@ -1,0 +1,590 @@
+ Percent |	Source code & Disassembly of feature_lab for cpu-clock:u (2484 samples, percent: local period)
+--------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     0000000000072230 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)>:
+    0.04 :   72230:  sub    $0xc8,%rsp
+    0.56 :   72237:  movdqa %xmm2,%xmm14
+    0.20 :   7223c:  movdqa %xmm3,%xmm13
+    0.00 :   72241:  shufps $0x55,%xmm2,%xmm2
+    0.28 :   72245:  mov    %fs:0x28,%rax
+    0.04 :   7224e:  mov    %rax,0x98(%rsp)
+    0.40 :   72256:  xor    %eax,%eax
+    0.04 :   72258:  shufps $0x55,%xmm3,%xmm3
+    2.25 :   7225c:  movd   %xmm0,0x8(%rsp)
+    0.12 :   72262:  movss  0xd0(%rsp),%xmm4
+    0.56 :   7226b:  movd   %xmm1,0x10(%rsp)
+    0.04 :   72271:  shufps $0x55,%xmm0,%xmm0
+    0.36 :   72275:  movss  0xd4(%rsp),%xmm5
+    0.04 :   7227e:  movss  0xd8(%rsp),%xmm8
+    0.36 :   72288:  movss  0xdc(%rsp),%xmm7
+    0.00 :   72291:  shufps $0x55,%xmm1,%xmm1
+    0.28 :   72295:  movss  0xe0(%rsp),%xmm11
+    0.00 :   7229f:  movss  0xe4(%rsp),%xmm10
+    0.20 :   722a9:  cmpb   $0x0,0xe8c(%rdi)
+    0.08 :   722b0:  je     cc23 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x11d>
+    0.16 :   722b6:  mov    %r14,0xb8(%rsp)
+    0.04 :   722be:  movd   %xmm0,%r14d
+    0.24 :   722c3:  movss  0x4bd45(%rip),%xmm0        # be010 <_IO_stdin_used+0x10>
+    0.00 :   722cb:  mov    %r15,0xc0(%rsp)
+    0.28 :   722d3:  movd   %xmm1,%r15d
+    0.04 :   722d8:  movaps %xmm4,%xmm1
+    0.32 :   722db:  andps  0x54bde(%rip),%xmm1        # c6ec0 <std::_Sp_make_shared_tag::_S_ti()::__tag+0x10>
+    0.16 :   722e2:  ucomiss %xmm1,%xmm0
+    0.44 :   722e5:  jb     cda5 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x29f>
+    0.12 :   722eb:  movaps %xmm5,%xmm1
+    0.20 :   722ee:  andps  0x54bcb(%rip),%xmm1        # c6ec0 <std::_Sp_make_shared_tag::_S_ti()::__tag+0x10>
+    0.04 :   722f5:  ucomiss %xmm1,%xmm0
+    0.40 :   722f8:  jb     cda5 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x29f>
+    0.16 :   722fe:  movaps %xmm8,%xmm1
+    0.24 :   72302:  andps  0x54bb7(%rip),%xmm1        # c6ec0 <std::_Sp_make_shared_tag::_S_ti()::__tag+0x10>
+    0.04 :   72309:  ucomiss %xmm1,%xmm0
+    0.20 :   7230c:  jb     cda5 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x29f>
+    0.12 :   72312:  movaps %xmm7,%xmm1
+    0.28 :   72315:  andps  0x54ba4(%rip),%xmm1        # c6ec0 <std::_Sp_make_shared_tag::_S_ti()::__tag+0x10>
+    0.00 :   7231c:  ucomiss %xmm1,%xmm0
+    0.28 :   7231f:  jb     cda5 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x29f>
+    0.20 :   72325:  movaps %xmm11,%xmm1
+    0.12 :   72329:  andps  0x54b90(%rip),%xmm1        # c6ec0 <std::_Sp_make_shared_tag::_S_ti()::__tag+0x10>
+    0.00 :   72330:  ucomiss %xmm1,%xmm0
+    0.08 :   72333:  jb     cda5 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x29f>
+    0.12 :   72339:  movaps %xmm10,%xmm1
+    0.16 :   7233d:  andps  0x54b7c(%rip),%xmm1        # c6ec0 <std::_Sp_make_shared_tag::_S_ti()::__tag+0x10>
+    0.08 :   72344:  ucomiss %xmm1,%xmm0
+    0.08 :   72347:  jb     cda5 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x29f>
+    0.16 :   7234d:  movss  0x8(%rsp),%xmm1
+    0.12 :   72353:  andps  0x54b66(%rip),%xmm1        # c6ec0 <std::_Sp_make_shared_tag::_S_ti()::__tag+0x10>
+    0.00 :   7235a:  ucomiss %xmm1,%xmm0
+    0.24 :   7235d:  jb     cda5 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x29f>
+    0.08 :   72363:  movd   %r14d,%xmm1
+    0.24 :   72368:  andps  0x54b51(%rip),%xmm1        # c6ec0 <std::_Sp_make_shared_tag::_S_ti()::__tag+0x10>
+    0.00 :   7236f:  ucomiss %xmm1,%xmm0
+    0.40 :   72372:  jb     cda5 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x29f>
+    0.16 :   72378:  movss  0x10(%rsp),%xmm1
+    0.12 :   7237e:  andps  0x54b3b(%rip),%xmm1        # c6ec0 <std::_Sp_make_shared_tag::_S_ti()::__tag+0x10>
+    0.00 :   72385:  ucomiss %xmm1,%xmm0
+    0.20 :   72388:  jb     cda5 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x29f>
+    0.12 :   7238e:  movd   %r15d,%xmm1
+    0.44 :   72393:  andps  0x54b26(%rip),%xmm1        # c6ec0 <std::_Sp_make_shared_tag::_S_ti()::__tag+0x10>
+    0.00 :   7239a:  ucomiss %xmm1,%xmm0
+    0.20 :   7239d:  jb     cda5 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x29f>
+    0.12 :   723a3:  movaps %xmm14,%xmm1
+    0.24 :   723a7:  andps  0x54b12(%rip),%xmm1        # c6ec0 <std::_Sp_make_shared_tag::_S_ti()::__tag+0x10>
+    0.00 :   723ae:  ucomiss %xmm1,%xmm0
+    0.32 :   723b1:  jb     cda5 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x29f>
+    0.08 :   723b7:  movaps %xmm2,%xmm1
+    0.16 :   723ba:  andps  0x54aff(%rip),%xmm1        # c6ec0 <std::_Sp_make_shared_tag::_S_ti()::__tag+0x10>
+    0.08 :   723c1:  ucomiss %xmm1,%xmm0
+    0.16 :   723c4:  jb     cda5 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x29f>
+    0.12 :   723ca:  movaps %xmm13,%xmm1
+    0.20 :   723ce:  andps  0x54aeb(%rip),%xmm1        # c6ec0 <std::_Sp_make_shared_tag::_S_ti()::__tag+0x10>
+    0.00 :   723d5:  ucomiss %xmm1,%xmm0
+    0.36 :   723d8:  jb     cda5 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x29f>
+    0.08 :   723de:  movaps %xmm3,%xmm1
+    0.20 :   723e1:  andps  0x54ad8(%rip),%xmm1        # c6ec0 <std::_Sp_make_shared_tag::_S_ti()::__tag+0x10>
+    0.00 :   723e8:  ucomiss %xmm1,%xmm0
+    0.44 :   723eb:  jb     cda5 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x29f>
+    0.16 :   723f1:  mov    %rbx,0xa0(%rsp)
+    0.52 :   723f9:  mov    %esi,%r8d
+    0.00 :   723fc:  mov    %rdi,%rbx
+    0.28 :   723ff:  mov    %edx,%r9d
+    0.20 :   72402:  test   %cl,%cl
+    0.00 :   72404:  jne    72630 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x400>
+    0.00 :   7240a:  pxor   %xmm6,%xmm6
+    0.00 :   7240e:  comiss %xmm14,%xmm6
+    0.00 :   72412:  ja     cc90 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x18a>
+    0.00 :   72418:  movss  0x4bdf4(%rip),%xmm1        # be214 <_IO_stdin_used+0x214>
+    0.00 :   72420:  comiss %xmm1,%xmm14
+    0.00 :   72424:  ja     cc90 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x18a>
+    0.00 :   7242a:  comiss %xmm2,%xmm6
+    0.00 :   7242d:  ja     cc90 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x18a>
+    0.00 :   72433:  comiss %xmm1,%xmm2
+    0.00 :   72436:  ja     cc90 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x18a>
+    0.00 :   7243c:  comiss %xmm13,%xmm6
+    0.00 :   72440:  ja     cc90 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x18a>
+    0.00 :   72446:  comiss %xmm1,%xmm13
+    0.00 :   7244a:  ja     cc90 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x18a>
+    0.00 :   72450:  comiss %xmm3,%xmm6
+    0.00 :   72453:  ja     cc90 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x18a>
+    0.00 :   72459:  comiss %xmm1,%xmm3
+    0.00 :   7245c:  ja     72e53 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0xc23>
+    0.12 :   72462:  movss  0x4bdc5(%rip),%xmm9        # be230 <_IO_stdin_used+0x230>
+    0.16 :   7246b:  movss  0x4bdc0(%rip),%xmm15        # be234 <_IO_stdin_used+0x234>
+    0.04 :   72474:  mulss  %xmm9,%xmm4
+    0.24 :   72479:  mulss  %xmm9,%xmm8
+    0.36 :   7247e:  mulss  %xmm9,%xmm7
+    0.32 :   72483:  mulss  %xmm9,%xmm5
+    0.04 :   72488:  movaps %xmm4,%xmm6
+    0.12 :   7248b:  addss  %xmm8,%xmm6
+    0.32 :   72490:  movaps %xmm7,%xmm12
+    0.04 :   72494:  addss  %xmm5,%xmm12
+    0.28 :   72499:  addss  %xmm11,%xmm6
+    0.16 :   7249e:  addss  %xmm10,%xmm12
+    0.16 :   724a3:  movaps %xmm6,%xmm9
+    0.16 :   724a7:  movaps %xmm6,%xmm1
+    0.04 :   724aa:  movss  %xmm6,0x70(%rsp)
+    0.24 :   724b0:  cmpless %xmm0,%xmm9
+    0.32 :   724b6:  movss  %xmm12,0x74(%rsp)
+    1.53 :   724bd:  andps  %xmm9,%xmm1
+    0.20 :   724c1:  andnps %xmm15,%xmm9
+    0.20 :   724c5:  movaps %xmm8,%xmm15
+    0.00 :   724c9:  orps   %xmm1,%xmm9
+    0.24 :   724cd:  movaps %xmm7,%xmm1
+    0.00 :   724d0:  subss  %xmm4,%xmm15
+    0.32 :   724d5:  subss  %xmm5,%xmm1
+    0.20 :   724d9:  addss  %xmm11,%xmm15
+    0.72 :   724de:  addss  %xmm10,%xmm1
+    0.04 :   724e3:  movss  %xmm15,0x78(%rsp)
+    0.52 :   724ea:  movd   %xmm1,%ecx
+    0.00 :   724ee:  movss  %xmm1,0x7c(%rsp)
+    0.24 :   724f4:  movaps %xmm15,%xmm1
+    0.16 :   724f8:  minss  %xmm9,%xmm1
+    0.32 :   724fd:  movaps %xmm4,%xmm9
+    0.04 :   72501:  subss  %xmm8,%xmm4
+    0.20 :   72506:  xorps  0x54ac2(%rip),%xmm9        # c6fd0 <std::_Sp_make_shared_tag::_S_ti()::__tag+0x120>
+    0.16 :   7250e:  subss  %xmm8,%xmm9
+    0.32 :   72513:  addss  %xmm11,%xmm4
+    0.00 :   72518:  movss  0xe70(%rbx),%xmm8
+    0.56 :   72521:  movss  %xmm4,0x88(%rsp)
+    0.04 :   7252a:  addss  %xmm11,%xmm9
+    0.12 :   7252f:  movss  0xe7c(%rbx),%xmm11
+    0.12 :   72538:  movd   %xmm9,%esi
+    0.16 :   7253d:  movaps %xmm7,%xmm9
+    0.04 :   72541:  xorps  0x54a87(%rip),%xmm9        # c6fd0 <std::_Sp_make_shared_tag::_S_ti()::__tag+0x120>
+    0.36 :   72549:  mov    %esi,0x80(%rsp)
+    0.16 :   72550:  subss  %xmm5,%xmm9
+    0.12 :   72555:  subss  %xmm7,%xmm5
+    0.00 :   72559:  movaps %xmm8,%xmm7
+    0.32 :   7255d:  addss  %xmm10,%xmm9
+    0.12 :   72562:  addss  %xmm5,%xmm10
+    0.52 :   72567:  movaps %xmm4,%xmm5
+    0.00 :   7256a:  movss  %xmm9,0x84(%rsp)
+    0.56 :   72574:  movd   %xmm9,%eax
+    0.00 :   72579:  movd   %esi,%xmm9
+    1.85 :   7257e:  movss  %xmm10,0x8c(%rsp)
+    0.36 :   72588:  minss  %xmm1,%xmm9
+    0.32 :   7258d:  movss  0x54a2b(%rip),%xmm1        # c6fc0 <std::_Sp_make_shared_tag::_S_ti()::__tag+0x110>
+    0.08 :   72595:  mulss  %xmm11,%xmm1
+    0.48 :   7259a:  minss  %xmm9,%xmm5
+    0.16 :   7259f:  addss  %xmm1,%xmm7
+    0.48 :   725a3:  comiss %xmm5,%xmm7
+    0.64 :   725a6:  jbe    725eb <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x3bb>
+    0.32 :   725a8:  movss  0x4bc8c(%rip),%xmm5        # be23c <_IO_stdin_used+0x23c>
+    0.00 :   725b0:  movss  0x4bc80(%rip),%xmm7        # be238 <_IO_stdin_used+0x238>
+    0.04 :   725b8:  cmpless %xmm6,%xmm5
+    0.00 :   725bd:  andps  %xmm5,%xmm6
+    0.24 :   725c0:  andnps %xmm7,%xmm5
+    0.00 :   725c3:  movaps %xmm15,%xmm7
+    0.08 :   725c7:  orps   %xmm5,%xmm6
+    0.00 :   725ca:  maxss  %xmm6,%xmm7
+    0.36 :   725ce:  movd   %esi,%xmm6
+    0.00 :   725d2:  maxss  %xmm7,%xmm6
+    0.28 :   725d6:  maxss  %xmm6,%xmm4
+    0.40 :   725da:  movaps %xmm8,%xmm6
+    0.20 :   725de:  subss  %xmm1,%xmm6
+    0.00 :   725e2:  comiss %xmm6,%xmm4
+    0.32 :   725e5:  ja     726a0 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x470>
+    0.04 :   725eb:  addq   $0x1,0xe98(%rbx)
+    0.00 :   725f3:  mov    0x98(%rsp),%rax
+    0.00 :   725fb:  sub    %fs:0x28,%rax
+    0.00 :   72604:  jne    72e3e <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0xc0e>
+    0.40 :   7260a:  mov    0xa0(%rsp),%rbx
+    0.36 :   72612:  mov    0xb8(%rsp),%r14
+    0.04 :   7261a:  mov    0xc0(%rsp),%r15
+    0.00 :   72622:  add    $0xc8,%rsp
+    0.04 :   72629:  ret
+    0.00 :   7262a:  nopw   0x0(%rax,%rax,1)
+    0.20 :   72630:  movss  0x4bc08(%rip),%xmm1        # be240 <_IO_stdin_used+0x240>
+    0.12 :   72638:  comiss %xmm14,%xmm1
+    0.32 :   7263c:  ja     cc90 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x18a>
+    0.12 :   72642:  comiss 0x4bbfa(%rip),%xmm14        # be244 <_IO_stdin_used+0x244>
+    0.16 :   7264a:  ja     cc90 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x18a>
+    0.32 :   72650:  comiss %xmm2,%xmm1
+    0.12 :   72653:  ja     cc90 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x18a>
+    0.40 :   72659:  comiss 0x4bbe4(%rip),%xmm2        # be244 <_IO_stdin_used+0x244>
+    0.28 :   72660:  ja     cc90 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x18a>
+    0.16 :   72666:  comiss %xmm13,%xmm1
+    0.16 :   7266a:  ja     cc90 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x18a>
+    0.12 :   72670:  comiss 0x4bbcc(%rip),%xmm13        # be244 <_IO_stdin_used+0x244>
+    0.32 :   72678:  ja     cc90 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x18a>
+    0.40 :   7267e:  comiss %xmm3,%xmm1
+    0.00 :   72681:  ja     cc90 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x18a>
+    0.24 :   72687:  comiss 0x4bbb6(%rip),%xmm3        # be244 <_IO_stdin_used+0x244>
+    0.36 :   7268e:  jbe    72462 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x232>
+    0.00 :   72694:  jmp    cc90 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x18a>
+    0.00 :   72699:  nopl   0x0(%rax)
+    0.12 :   726a0:  movaps %xmm12,%xmm1
+    0.12 :   726a4:  movaps %xmm12,%xmm4
+    0.00 :   726a8:  movd   %eax,%xmm6
+    0.08 :   726ac:  movss  0x5490b(%rip),%xmm15        # c6fc0 <std::_Sp_make_shared_tag::_S_ti()::__tag+0x110>
+    0.24 :   726b5:  cmpless %xmm0,%xmm1
+    0.20 :   726ba:  movss  0x4bb72(%rip),%xmm0        # be234 <_IO_stdin_used+0x234>
+    0.00 :   726c2:  movaps %xmm10,%xmm7
+    0.16 :   726c6:  andps  %xmm1,%xmm4
+    0.36 :   726c9:  andnps %xmm0,%xmm1
+    0.08 :   726cc:  movd   %ecx,%xmm0
+    0.00 :   726d0:  orps   %xmm4,%xmm1
+    0.16 :   726d3:  movss  0xe80(%rbx),%xmm4
+    0.16 :   726db:  minss  %xmm1,%xmm0
+    0.08 :   726df:  mulss  %xmm4,%xmm15
+    0.04 :   726e4:  minss  %xmm0,%xmm6
+    0.08 :   726e8:  movss  0xe74(%rbx),%xmm0
+    0.08 :   726f0:  movaps %xmm0,%xmm1
+    0.12 :   726f3:  minss  %xmm6,%xmm7
+    0.00 :   726f7:  addss  %xmm15,%xmm1
+    0.16 :   726fc:  comiss %xmm7,%xmm1
+    0.24 :   726ff:  jbe    725eb <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x3bb>
+    0.32 :   72705:  movss  0x4bb2b(%rip),%xmm7        # be238 <_IO_stdin_used+0x238>
+    0.04 :   7270d:  movd   %ecx,%xmm6
+    0.08 :   72711:  movd   %eax,%xmm1
+    0.28 :   72715:  movaps %xmm10,%xmm5
+    0.20 :   72719:  movss  0x4bb1a(%rip),%xmm9        # be23c <_IO_stdin_used+0x23c>
+    0.00 :   72722:  cmpless %xmm12,%xmm9
+    0.16 :   72728:  andps  %xmm9,%xmm12
+    0.12 :   7272c:  andnps %xmm7,%xmm9
+    0.28 :   72730:  orps   %xmm9,%xmm12
+    0.00 :   72734:  maxss  %xmm12,%xmm6
+    0.20 :   72739:  maxss  %xmm6,%xmm1
+    0.12 :   7273d:  maxss  %xmm1,%xmm5
+    0.28 :   72741:  movaps %xmm0,%xmm1
+    0.00 :   72744:  subss  %xmm15,%xmm1
+    0.12 :   72749:  comiss %xmm1,%xmm5
+    0.36 :   7274c:  jbe    725eb <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x3bb>
+    0.28 :   72752:  mov    0xe60(%rbx),%rcx
+    0.04 :   72759:  mov    0xe58(%rbx),%rdx
+    0.08 :   72760:  mov    %rcx,%rax
+    0.12 :   72763:  sub    %rdx,%rax
+    0.28 :   72766:  sar    $0x5,%rax
+    0.00 :   7276a:  add    $0x6,%rax
+    0.12 :   7276e:  cmp    $0x6000,%rax
+    0.00 :   72774:  ja     72887 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x657>
+    0.04 :   7277a:  cmp    %r8d,0xe48(%rbx)
+    0.00 :   72781:  jne    72887 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x657>
+    0.28 :   72787:  cmp    %r9b,0xe4c(%rbx)
+    0.00 :   7278e:  jne    72887 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x657>
+    0.04 :   72794:  mov    %rcx,%rdx
+    0.08 :   72797:  movss  0x10(%rsp),%xmm1
+    0.24 :   7279d:  movd   %r15d,%xmm7
+    0.28 :   727a2:  movss  0x8(%rsp),%xmm6
+    0.04 :   727a8:  lea    0x554f1(%rip),%rcx        # c7ca0 <C.107.0>
+    0.08 :   727af:  mov    %r8d,0xe48(%rbx)
+    0.08 :   727b6:  mov    0xe68(%rbx),%rsi
+    0.36 :   727bd:  lea    0x18(%rcx),%r8
+    0.00 :   727c1:  unpcklps %xmm7,%xmm1
+    0.24 :   727c4:  movd   %r14d,%xmm7
+    0.04 :   727c9:  mov    %r9b,0xe4c(%rbx)
+    0.40 :   727d0:  unpcklps %xmm7,%xmm6
+    0.00 :   727d3:  movlhps %xmm1,%xmm6
+    0.12 :   727d6:  jmp    7284d <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x61d>
+    0.00 :   727d8:  nopl   0x0(%rax,%rax,1)
+    0.04 :   727e0:  movaps %xmm13,%xmm0
+    0.00 :   727e4:  cmp    $0x3,%rax
+    0.00 :   727e8:  je     7287e <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x64e>
+    1.21 :   727ee:  movaps %xmm3,%xmm4
+    1.69 :   727f1:  cmp    $0x1,%rax
+    0.00 :   727f5:  ja     727fa <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x5ca>
+    0.00 :   727f7:  movaps %xmm2,%xmm4
+    0.52 :   727fa:  unpcklps %xmm4,%xmm0
+    0.04 :   727fd:  unpcklps %xmm5,%xmm1
+    1.41 :   72800:  movlhps %xmm0,%xmm1
+    0.36 :   72803:  cmp    %rsi,%rdx
+    0.12 :   72806:  je     72a4e <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x81e>
+    4.15 :   7280c:  movups %xmm1,(%rdx)
+    5.27 :   7280f:  add    $0x20,%rdx
+    1.77 :   72813:  movups %xmm6,-0x10(%rdx)
+    0.76 :   72817:  mov    %rdx,0xe60(%rbx)
+    0.48 :   7281e:  add    $0x4,%rcx
+    2.05 :   72822:  cmp    %rcx,%r8
+    0.00 :   72825:  je     72c1a <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x9ea>
+    0.04 :   7282b:  movss  0xe74(%rbx),%xmm0
+    0.40 :   72833:  movss  0xe80(%rbx),%xmm4
+    0.00 :   7283b:  movss  0xe70(%rbx),%xmm8
+    2.33 :   72844:  movss  0xe7c(%rbx),%xmm11
+    0.32 :   7284d:  mov    (%rcx),%eax
+    0.28 :   7284f:  movss  0x70(%rsp,%rax,8),%xmm1
+    0.20 :   72855:  movss  0x74(%rsp,%rax,8),%xmm5
+    2.62 :   7285b:  subss  %xmm8,%xmm1
+    0.36 :   72860:  subss  %xmm0,%xmm5
+    0.40 :   72864:  addss  %xmm1,%xmm1
+    0.32 :   72868:  addss  %xmm5,%xmm5
+    2.01 :   7286c:  divss  %xmm11,%xmm1
+    5.84 :   72871:  divss  %xmm4,%xmm5
+   14.65 :   72875:  test   %rax,%rax
+    0.00 :   72878:  jne    727e0 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x5b0>
+    0.44 :   7287e:  movaps %xmm14,%xmm0
+    0.00 :   72882:  jmp    727ee <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x5be>
+    0.04 :   72887:  cmp    %rdx,%rcx
+    0.00 :   7288a:  je     72797 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x567>
+    0.00 :   72890:  mov    %rbp,0xa8(%rsp)
+    0.00 :   72898:  xor    %ebp,%ebp
+    0.00 :   7289a:  mov    %r12,0xb0(%rsp)
+    0.00 :   728a2:  cmpb   $0x0,0xea8(%rbx)
+    0.04 :   728a9:  jne    72cc1 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0xa91>
+    0.00 :   728af:  xor    %r12d,%r12d
+    0.00 :   728b2:  cmpb   $0x0,0xea9(%rbx)
+    0.00 :   728b9:  jne    72d99 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0xb69>
+    0.00 :   728bf:  mov    %r9b,0x54(%rsp)
+    0.00 :   728c4:  mov    0x20c(%rbx),%edi
+    0.08 :   728ca:  mov    %r8d,0x50(%rsp)
+    0.00 :   728cf:  movss  %xmm13,0x30(%rsp)
+    0.00 :   728d6:  movss  %xmm2,0x28(%rsp)
+    0.00 :   728dc:  movss  %xmm14,0x20(%rsp)
+    0.00 :   728e3:  movss  %xmm3,0x18(%rsp)
+    0.00 :   728e9:  call   *0x150(%rbx)
+    0.00 :   728ef:  movzbl 0xe4c(%rbx),%esi
+    0.00 :   728f6:  mov    0x220(%rbx),%edi
+    0.00 :   728fc:  call   *0xb0(%rbx)
+    0.00 :   72902:  mov    $0x303,%ecx
+    0.00 :   72907:  mov    $0x1,%edx
+    0.00 :   7290c:  cmpb   $0x1,0xe4c(%rbx)
+    0.00 :   72913:  sbb    %edi,%edi
+    0.00 :   72915:  mov    $0x303,%esi
+    0.00 :   7291a:  and    $0x301,%edi
+    0.00 :   72920:  add    $0x1,%edi
+    0.00 :   72923:  call   *0x88(%rbx)
+    0.00 :   72929:  mov    0x200(%rbx),%edi
+    0.00 :   7292f:  call   *0x160(%rbx)
+    0.00 :   72935:  mov    0x204(%rbx),%esi
+    0.00 :   7293b:  mov    $0x8892,%edi
+    0.00 :   72940:  call   *0x178(%rbx)
+    0.00 :   72946:  mov    $0x84c0,%edi
+    0.00 :   7294b:  call   *0x1d8(%rbx)
+    0.00 :   72951:  mov    0xe48(%rbx),%esi
+    0.00 :   72957:  mov    $0xde1,%edi
+    0.00 :   7295c:  call   *0x1b8(%rbx)
+    0.00 :   72962:  xor    %edx,%edx
+    0.00 :   72964:  mov    $0x88e0,%ecx
+    0.00 :   72969:  mov    $0xc0000,%esi
+    0.00 :   7296e:  mov    $0x8892,%edi
+    0.00 :   72973:  call   *0x180(%rbx)
+    0.00 :   72979:  mov    0xe58(%rbx),%rcx
+    0.00 :   72980:  xor    %esi,%esi
+    0.00 :   72982:  mov    0xe60(%rbx),%rdx
+    0.00 :   72989:  mov    $0x8892,%edi
+    0.00 :   7298e:  sub    %rcx,%rdx
+    0.00 :   72991:  call   *0x188(%rbx)
+    0.00 :   72997:  mov    0xe60(%rbx),%rdx
+    0.00 :   7299e:  xor    %esi,%esi
+    0.00 :   729a0:  sub    0xe58(%rbx),%rdx
+    0.00 :   729a7:  sar    $0x5,%rdx
+    0.00 :   729ab:  mov    $0x4,%edi
+    0.00 :   729b0:  call   *0x1a8(%rbx)
+    0.00 :   729b6:  cmpb   $0x0,0xea9(%rbx)
+    0.00 :   729bd:  movss  0x18(%rsp),%xmm3
+    0.00 :   729c3:  movss  0x20(%rsp),%xmm14
+    0.00 :   729ca:  movss  0x28(%rsp),%xmm2
+    0.00 :   729d0:  movss  0x30(%rsp),%xmm13
+    0.00 :   729d7:  mov    0x50(%rsp),%r8d
+    0.00 :   729dc:  movzbl 0x54(%rsp),%r9d
+    0.00 :   729e2:  jne    72d17 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0xae7>
+    0.00 :   729e8:  cmpb   $0x0,0xea8(%rbx)
+    0.00 :   729ef:  jne    72c27 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x9f7>
+    0.00 :   729f5:  mov    0xe58(%rbx),%rdx
+    0.00 :   729fc:  mov    0xe60(%rbx),%rax
+    0.00 :   72a03:  cmp    %rax,%rdx
+    0.00 :   72a06:  je     72a0f <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x7df>
+    0.00 :   72a08:  mov    %rdx,0xe60(%rbx)
+    0.00 :   72a0f:  addq   $0x1,0xea0(%rbx)
+    0.00 :   72a17:  movss  0xe70(%rbx),%xmm8
+    0.00 :   72a20:  movss  0xe74(%rbx),%xmm0
+    0.00 :   72a28:  movss  0xe80(%rbx),%xmm4
+    0.00 :   72a30:  mov    0xa8(%rsp),%rbp
+    0.00 :   72a38:  mov    0xb0(%rsp),%r12
+    0.00 :   72a40:  movss  0xe7c(%rbx),%xmm11
+    0.00 :   72a49:  jmp    72797 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x567>
+    0.00 :   72a4e:  mov    0xe58(%rbx),%r9
+    0.00 :   72a55:  mov    %rdx,%r11
+    0.00 :   72a58:  movabs $0x3ffffffffffffff,%rax
+    0.00 :   72a62:  sub    %r9,%r11
+    0.00 :   72a65:  mov    %r11,%rdi
+    0.00 :   72a68:  sar    $0x5,%rdi
+    0.00 :   72a6c:  cmp    %rax,%rdi
+    0.00 :   72a6f:  je     cb63 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x5d>
+    0.00 :   72a75:  test   %rdi,%rdi
+    0.00 :   72a78:  mov    $0x1,%eax
+    0.00 :   72a7d:  mov    %rsi,0x28(%rsp)
+    0.00 :   72a82:  cmovne %rdi,%rax
+    0.00 :   72a86:  mov    %rdx,0x20(%rsp)
+    0.00 :   72a8b:  mov    %r11,0x18(%rsp)
+    0.00 :   72a90:  add    %rdi,%rax
+    0.00 :   72a93:  mov    %r9,0x10(%rsp)
+    0.00 :   72a98:  movabs $0x3ffffffffffffff,%rdi
+    0.00 :   72aa2:  cmp    %rdi,%rax
+    0.00 :   72aa5:  mov    %rcx,0x8(%rsp)
+    0.00 :   72aaa:  cmova  %rdi,%rax
+    0.00 :   72aae:  movss  %xmm13,0x5c(%rsp)
+    0.00 :   72ab5:  movss  %xmm2,0x58(%rsp)
+    0.00 :   72abb:  shl    $0x5,%rax
+    0.00 :   72abf:  movaps %xmm6,0x40(%rsp)
+    0.00 :   72ac4:  mov    %rax,%rdi
+    0.00 :   72ac7:  movss  %xmm14,0x54(%rsp)
+    0.00 :   72ace:  mov    %rax,%r15
+    0.00 :   72ad1:  movss  %xmm3,0x50(%rsp)
+    0.00 :   72ad7:  movaps %xmm1,0x30(%rsp)
+    0.00 :   72adc:  call   76a0 <operator new(unsigned long)@plt>
+    0.00 :   72ae1:  mov    0x10(%rsp),%r9
+    0.00 :   72ae6:  mov    0x20(%rsp),%rdx
+    0.00 :   72aeb:  lea    0x551c6(%rip),%r8        # c7cb8 <C.107.0+0x18>
+    0.00 :   72af2:  mov    0x18(%rsp),%r11
+    0.00 :   72af7:  movaps 0x30(%rsp),%xmm1
+    0.00 :   72afc:  mov    %rax,%r10
+    0.00 :   72aff:  movaps 0x40(%rsp),%xmm6
+    0.00 :   72b04:  cmp    %rdx,%r9
+    0.00 :   72b07:  mov    0x8(%rsp),%rcx
+    0.00 :   72b0c:  mov    0x28(%rsp),%rsi
+    0.00 :   72b11:  movss  0x50(%rsp),%xmm3
+    0.00 :   72b17:  movups %xmm1,(%rax,%r11,1)
+    0.00 :   72b1c:  movss  0x54(%rsp),%xmm14
+    0.00 :   72b23:  movss  0x58(%rsp),%xmm2
+    0.00 :   72b29:  movups %xmm6,0x10(%rax,%r11,1)
+    0.00 :   72b2f:  movss  0x5c(%rsp),%xmm13
+    0.00 :   72b36:  je     72e18 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0xbe8>
+    0.00 :   72b3c:  mov    %r9,%rax
+    0.00 :   72b3f:  mov    %r10,%rdi
+    0.00 :   72b42:  nopl   0x0(%rax,%rax,1)
+    0.00 :   72b4a:  data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   72b55:  data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   72b60:  movdqu (%rax),%xmm0
+    0.00 :   72b64:  add    $0x20,%rax
+    0.00 :   72b68:  add    $0x20,%rdi
+    0.00 :   72b6c:  movups %xmm0,-0x20(%rdi)
+    0.00 :   72b70:  movdqu -0x10(%rax),%xmm0
+    0.00 :   72b75:  movups %xmm0,-0x10(%rdi)
+    0.00 :   72b79:  cmp    %rdx,%rax
+    0.00 :   72b7c:  jne    72b60 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x930>
+    0.00 :   72b7e:  sub    %r9,%rax
+    0.00 :   72b81:  lea    (%r10,%rax,1),%rdx
+    0.00 :   72b85:  add    $0x20,%rdx
+    0.00 :   72b89:  test   %r9,%r9
+    0.00 :   72b8c:  je     72bfc <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x9cc>
+    0.00 :   72b8e:  sub    %r9,%rsi
+    0.00 :   72b91:  mov    %r9,%rdi
+    0.00 :   72b94:  mov    %r10,0x18(%rsp)
+    0.00 :   72b99:  mov    %rdx,0x10(%rsp)
+    0.00 :   72b9e:  mov    %rcx,0x8(%rsp)
+    0.00 :   72ba3:  movss  %xmm13,0x54(%rsp)
+    0.00 :   72baa:  movss  %xmm2,0x50(%rsp)
+    0.00 :   72bb0:  movaps %xmm6,0x30(%rsp)
+    0.00 :   72bb5:  movss  %xmm14,0x28(%rsp)
+    0.00 :   72bbc:  movss  %xmm3,0x20(%rsp)
+    0.00 :   72bc2:  call   76b0 <operator delete(void*, unsigned long)@plt>
+    0.00 :   72bc7:  movss  0x50(%rsp),%xmm2
+    0.00 :   72bcd:  movss  0x54(%rsp),%xmm13
+    0.00 :   72bd4:  lea    0x550dd(%rip),%r8        # c7cb8 <C.107.0+0x18>
+    0.00 :   72bdb:  movaps 0x30(%rsp),%xmm6
+    0.00 :   72be0:  movss  0x28(%rsp),%xmm14
+    0.00 :   72be7:  movss  0x20(%rsp),%xmm3
+    0.00 :   72bed:  mov    0x18(%rsp),%r10
+    0.00 :   72bf2:  mov    0x10(%rsp),%rdx
+    0.00 :   72bf7:  mov    0x8(%rsp),%rcx
+    0.00 :   72bfc:  lea    (%r10,%r15,1),%rsi
+    0.00 :   72c00:  mov    %r10,0xe58(%rbx)
+    0.00 :   72c07:  mov    %rdx,0xe60(%rbx)
+    0.00 :   72c0e:  mov    %rsi,0xe68(%rbx)
+    0.00 :   72c15:  jmp    7281e <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x5ee>
+    1.09 :   72c1a:  addq   $0x1,0xe90(%rbx)
+    0.28 :   72c22:  jmp    725f3 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x3c3>
+    0.00 :   72c27:  mov    %r9b,0x54(%rsp)
+    0.00 :   72c2c:  mov    %r8d,0x50(%rsp)
+    0.00 :   72c31:  movss  %xmm13,0x30(%rsp)
+    0.00 :   72c38:  movss  %xmm2,0x28(%rsp)
+    0.00 :   72c3e:  movss  %xmm14,0x20(%rsp)
+    0.00 :   72c45:  movss  %xmm3,0x18(%rsp)
+    0.00 :   72c4b:  call   7860 <std::chrono::_V2::steady_clock::now()@plt>
+    0.00 :   72c50:  pxor   %xmm0,%xmm0
+    0.00 :   72c54:  mov    0x50(%rsp),%r8d
+    0.00 :   72c59:  mov    0xe58(%rbx),%rdx
+    0.00 :   72c60:  sub    %rbp,%rax
+    0.00 :   72c63:  addq   $0x1,0xed0(%rbx)
+    0.00 :   72c6b:  movzbl 0x54(%rsp),%r9d
+    0.00 :   72c71:  cvtsi2sd %rax,%xmm0
+    0.00 :   72c76:  mov    0xe60(%rbx),%rax
+    0.00 :   72c7d:  divsd  0x53e7b(%rip),%xmm0        # c6b00 <C.1191.4+0x58>
+    0.00 :   72c85:  addsd  0xeb8(%rbx),%xmm0
+    0.00 :   72c8d:  movss  0x30(%rsp),%xmm13
+    0.00 :   72c94:  movss  0x28(%rsp),%xmm2
+    0.00 :   72c9a:  mov    %rax,%rcx
+    0.00 :   72c9d:  movss  0x20(%rsp),%xmm14
+    0.00 :   72ca4:  movss  0x18(%rsp),%xmm3
+    0.00 :   72caa:  sub    %rdx,%rcx
+    0.00 :   72cad:  movsd  %xmm0,0xeb8(%rbx)
+    0.00 :   72cb5:  add    %rcx,0xed8(%rbx)
+    0.00 :   72cbc:  jmp    72a03 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x7d3>
+    0.04 :   72cc1:  mov    %r9b,0x54(%rsp)
+    0.00 :   72cc6:  mov    %r8d,0x50(%rsp)
+    0.00 :   72ccb:  movss  %xmm13,0x30(%rsp)
+    0.00 :   72cd2:  movss  %xmm2,0x28(%rsp)
+    0.00 :   72cd8:  movss  %xmm14,0x20(%rsp)
+    0.00 :   72cdf:  movss  %xmm3,0x18(%rsp)
+    0.00 :   72ce5:  call   7860 <std::chrono::_V2::steady_clock::now()@plt>
+    0.00 :   72cea:  movzbl 0x54(%rsp),%r9d
+    0.00 :   72cf0:  mov    0x50(%rsp),%r8d
+    0.00 :   72cf5:  movss  0x30(%rsp),%xmm13
+    0.00 :   72cfc:  movss  0x28(%rsp),%xmm2
+    0.00 :   72d02:  mov    %rax,%rbp
+    0.00 :   72d05:  movss  0x20(%rsp),%xmm14
+    0.00 :   72d0c:  movss  0x18(%rsp),%xmm3
+    0.00 :   72d12:  jmp    728af <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x67f>
+    0.00 :   72d17:  pxor   %xmm0,%xmm0
+    0.00 :   72d1b:  lea    0x60(%rsp),%rsi
+    0.00 :   72d20:  mov    $0x3,%edi
+    0.00 :   72d25:  movaps %xmm0,0x60(%rsp)
+    0.00 :   72d2a:  call   7650 <clock_gettime@plt>
+    0.00 :   72d2f:  test   %eax,%eax
+    0.00 :   72d31:  jne    cb06 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]>
+    0.00 :   72d37:  imul   $0x3b9aca00,0x60(%rsp),%rax
+    0.00 :   72d40:  add    0x68(%rsp),%rax
+    0.00 :   72d45:  movss  0x18(%rsp),%xmm3
+    0.00 :   72d4b:  movss  0x20(%rsp),%xmm14
+    0.00 :   72d52:  movss  0x28(%rsp),%xmm2
+    0.00 :   72d58:  movss  0x30(%rsp),%xmm13
+    0.00 :   72d5f:  mov    0x50(%rsp),%r8d
+    0.00 :   72d64:  movzbl 0x54(%rsp),%r9d
+    0.00 :   72d6a:  sub    %r12,%rax
+    0.00 :   72d6d:  js     72e20 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0xbf0>
+    0.00 :   72d73:  pxor   %xmm0,%xmm0
+    0.00 :   72d77:  cvtsi2sd %rax,%xmm0
+    0.00 :   72d7c:  divsd  0x53d7c(%rip),%xmm0        # c6b00 <C.1191.4+0x58>
+    0.04 :   72d84:  addsd  0xec8(%rbx),%xmm0
+    0.00 :   72d8c:  movsd  %xmm0,0xec8(%rbx)
+    0.00 :   72d94:  jmp    729e8 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x7b8>
+    0.00 :   72d99:  pxor   %xmm0,%xmm0
+    0.00 :   72d9d:  lea    0x60(%rsp),%rsi
+    0.00 :   72da2:  mov    $0x3,%edi
+    0.00 :   72da7:  mov    %r9b,0x54(%rsp)
+    0.00 :   72dac:  mov    %r8d,0x50(%rsp)
+    0.00 :   72db1:  movss  %xmm13,0x30(%rsp)
+    0.00 :   72db8:  movss  %xmm2,0x28(%rsp)
+    0.04 :   72dbe:  movss  %xmm14,0x20(%rsp)
+    0.00 :   72dc5:  movss  %xmm3,0x18(%rsp)
+    0.00 :   72dcb:  movaps %xmm0,0x60(%rsp)
+    0.00 :   72dd0:  call   7650 <clock_gettime@plt>
+    0.00 :   72dd5:  test   %eax,%eax
+    0.00 :   72dd7:  jne    cb96 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x90>
+    0.00 :   72ddd:  imul   $0x3b9aca00,0x60(%rsp),%rax
+    0.00 :   72de6:  add    0x68(%rsp),%rax
+    0.00 :   72deb:  movss  0x18(%rsp),%xmm3
+    0.00 :   72df1:  movss  0x28(%rsp),%xmm2
+    0.00 :   72df7:  mov    %rax,%r12
+    0.00 :   72dfa:  movss  0x20(%rsp),%xmm14
+    0.00 :   72e01:  movss  0x30(%rsp),%xmm13
+    0.00 :   72e08:  mov    0x50(%rsp),%r8d
+    0.00 :   72e0d:  movzbl 0x54(%rsp),%r9d
+    0.00 :   72e13:  jmp    728bf <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x68f>
+    0.00 :   72e18:  mov    %rax,%rdx
+    0.00 :   72e1b:  jmp    72b85 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0x955>
+    0.00 :   72e20:  mov    %rax,%rdx
+    0.00 :   72e23:  and    $0x1,%eax
+    0.00 :   72e26:  pxor   %xmm0,%xmm0
+    0.00 :   72e2a:  shr    $1,%rdx
+    0.00 :   72e2d:  or     %rax,%rdx
+    0.00 :   72e30:  cvtsi2sd %rdx,%xmm0
+    0.00 :   72e35:  addsd  %xmm0,%xmm0
+    0.00 :   72e39:  jmp    72d7c <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)+0xb4c>
+    0.00 :   72e3e:  mov    %rbp,0xa8(%rsp)
+    0.00 :   72e46:  mov    %r12,0xb0(%rsp)
+    0.00 :   72e4e:  call   7710 <__stack_chk_fail@plt>
+    0.00 :   72e53:  jmp    cc90 <engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .cold]+0x18a>

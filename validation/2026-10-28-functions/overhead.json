@@ -1,0 +1,20 @@
+[
+  {
+    "repeat": 1,
+    "frame_median_change_percent": 4.24976480877548,
+    "frame_p99_change_percent": -0.0751247911721542,
+    "preparation_cpu_median_change_percent": 13.48240464174133
+  },
+  {
+    "repeat": 2,
+    "frame_median_change_percent": 4.375843664874934,
+    "frame_p99_change_percent": 9.916867587066292,
+    "preparation_cpu_median_change_percent": 5.265708987346951
+  },
+  {
+    "repeat": 3,
+    "frame_median_change_percent": -7.188632292472407,
+    "frame_p99_change_percent": 6.393273359646612,
+    "preparation_cpu_median_change_percent": -18.721907333480768
+  }
+]

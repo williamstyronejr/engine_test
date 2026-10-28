@@ -1,0 +1,39 @@
+[
+  {
+    "command": [
+      "cmake",
+      "--preset",
+      "release"
+    ],
+    "exit_code": 0,
+    "seconds": 0.46375385200371966,
+    "source": "9b4dd215fe5094086143547e6e9e9229229c6ec4"
+  },
+  {
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "--target",
+      "feature_lab",
+      "-j2"
+    ],
+    "exit_code": 0,
+    "seconds": 11.011212650002562,
+    "source": "9b4dd215fe5094086143547e6e9e9229229c6ec4"
+  },
+  {
+    "command": [
+      "ctest",
+      "--preset",
+      "release",
+      "-R",
+      "^stress_frame_samples$",
+      "--output-on-failure"
+    ],
+    "exit_code": 0,
+    "seconds": 9.827329640000244,
+    "source": "9b4dd215fe5094086143547e6e9e9229229c6ec4"
+  }
+]

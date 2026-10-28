@@ -1,0 +1,56 @@
+[
+  {
+    "baseline": "build/release/stress-frame-tests/ctx.ppm",
+    "sampled": "/home/zero/dev/engine_test/build/function-validation/profile-images/ctx.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017
+  },
+  {
+    "baseline": "build/release/stress-frame-tests/ctx_vsync.ppm",
+    "sampled": "/home/zero/dev/engine_test/build/function-validation/profile-images/ctx_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017
+  },
+  {
+    "baseline": "build/release/stress-frame-tests/plain.ppm",
+    "sampled": "/home/zero/dev/engine_test/build/function-validation/profile-images/plain.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017
+  },
+  {
+    "baseline": "build/release/stress-frame-tests/prep.ppm",
+    "sampled": "/home/zero/dev/engine_test/build/function-validation/profile-images/prep.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017
+  },
+  {
+    "baseline": "build/release/stress-frame-tests/prep_vsync.ppm",
+    "sampled": "/home/zero/dev/engine_test/build/function-validation/profile-images/prep_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017
+  },
+  {
+    "baseline": "build/release/stress-frame-tests/split.ppm",
+    "sampled": "/home/zero/dev/engine_test/build/function-validation/profile-images/split.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017
+  },
+  {
+    "baseline": "build/release/stress-frame-tests/split_vsync.ppm",
+    "sampled": "/home/zero/dev/engine_test/build/function-validation/profile-images/split_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017
+  },
+  {
+    "baseline": "build/release/stress-frame-tests/traced.ppm",
+    "sampled": "/home/zero/dev/engine_test/build/function-validation/profile-images/traced.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017
+  },
+  {
+    "baseline": "build/release/stress-frame-tests/vsync.ppm",
+    "sampled": "/home/zero/dev/engine_test/build/function-validation/profile-images/vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017
+  }
+]

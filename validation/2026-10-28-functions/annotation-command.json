@@ -1,0 +1,13 @@
+{
+  "command": [
+    "build/function-validation/perf/usr/bin/perf",
+    "annotate",
+    "--stdio",
+    "--symbol",
+    "engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)",
+    "-i",
+    "build/function-validation/sample-1.data"
+  ],
+  "exit_code": 0,
+  "stderr": ""
+}
