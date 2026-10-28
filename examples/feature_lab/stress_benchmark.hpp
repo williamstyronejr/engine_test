@@ -2,6 +2,7 @@
 #include "engine/gpu_timer.hpp"
 #include "json.hpp"
 #include "stress.hpp"
+#include "stress_context.hpp"
 #include "stress_frames.hpp"
 #include "stress_preparation.hpp"
 #include "stress_submission.hpp"
@@ -16,7 +17,7 @@ struct StressOptions {
     std::size_t frames{600}, warmup{60}, cycles{3};
     int width{1280}, height{720};
     bool cpu_only{}, help{}, frame_samples{}, submission_samples{}, preparation_samples{},
-        presentation_explicit{};
+        context_samples{}, presentation_explicit{};
     StressPresentation presentation{StressPresentation::immediate};
     std::string report, screenshot, label;
     void validate() const;
@@ -48,6 +49,7 @@ struct StressReport {
     StressFrames frame_samples;
     StressSubmission submission_samples;
     StressPreparation preparation_samples;
+    StressContext context_samples;
     std::uint64_t thread_clock_resolution_ns{};
     StressResources resources;
     std::uint64_t checksum{}, quads{}, culled{}, draws{}, tiles{}, pairs{}, contacts{},

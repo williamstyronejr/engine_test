@@ -283,3 +283,8 @@ outliers, workload identity, image checks and existing acceptance limits.
 measurements and nested GL accounting. The [on/off collection](2026-10-27-preparation-results.md)
 retains signed wall-minus-CPU differences and unmeasured wall time without treating
 them as exact scheduler latency or isolated GPU work.
+
+[Context-switch traces](STRESS_CONTEXT_SWITCHES.md) retain calling-thread snapshots
+around preparation phases. The [2026-10-28 correlation](2026-10-28-context-results.md)
+groups gaps by observed voluntary/involuntary switches without claiming durations
+or causes for individual switches.

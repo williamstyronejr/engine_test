@@ -651,6 +651,71 @@ TEST(preparation_options_and_partial_report_are_explicit) {
     CHECK(plain.json(options).find("preparation_sample") == std::string::npos);
     CHECK(plain.thread_clock_resolution_ns == 0);
 }
+TEST(context_records_validate_monotonic_snapshots_and_allocate_once) {
+    const auto first = engine::thread_context_switches();
+    const auto second = engine::thread_context_switches();
+    CHECK(second.voluntary >= first.voluntary && second.involuntary >= first.involuntary);
+    rejects([] { StressContext trace(0, 0, 1, true); });
+    rejects([] { StressContext trace(10000, 0, 7, true); });
+    StressContext trace(1, 2, 2, true);
+    StressContextPhases phases{};
+    for (std::size_t i = 0; i < phases.size(); ++i)
+        phases[i] = {{10 + 2 * i, 20 + 2 * i}, {11 + 2 * i, 21 + 2 * i}};
+    rejects([&] { trace.record(1, phases); });
+    auto bad = phases;
+    bad[0].after.voluntary = 9;
+    rejects([&] { trace.record(3, bad); });
+    bad = phases;
+    bad[0].after.involuntary = 19;
+    rejects([&] { trace.record(3, bad); });
+    bad = phases;
+    bad[1].before = phases[0].before;
+    rejects([&] { trace.record(3, bad); });
+    trace.record(3, phases);
+    CHECK(trace.samples()[0].phases.back().after.voluntary == 17);
+    rejects([&] { trace.record(3, phases); });
+    rejects([&] { trace.record(6, phases); }); // Cross-row counter regression.
+    for (auto& p : phases)
+        p = {{UINT64_MAX, UINT64_MAX}, {UINT64_MAX, UINT64_MAX}};
+    trace.record(6, phases);
+    rejects([&] { trace.record(9, phases); });
+    const auto calls = allocation_check::calls;
+    StressContext disabled(1, 0, 1, false);
+    disabled.record(0, bad);
+    CHECK(disabled.buffer_bytes() == 0 && disabled.samples().empty());
+    CHECK(allocation_check::calls == calls);
+    StressContext full(10000, 600, 6, true);
+    const auto recording = allocation_check::calls;
+    for (std::uint64_t cycle = 0; cycle < 6; ++cycle)
+        for (std::uint64_t step = 601; step <= 10600; ++step)
+            full.record(cycle * 10600 + step, {});
+    CHECK(full.samples().size() == 60000 && allocation_check::calls == recording);
+    CHECK(full.buffer_bytes() == 60000 * sizeof(StressContext::Sample));
+}
+TEST(context_options_preserve_uint64_snapshots_and_partial_reports) {
+    char program[] = "stress", ctx[] = "--context-samples", prep[] = "--preparation-samples",
+         split[] = "--submission-samples", frames[] = "--frame-samples", cpu[] = "--cpu-only";
+    char* args[] = {program, ctx, prep, split, frames, cpu};
+    for (int count : {2, 3, 4})
+        rejects([&] { parse_stress_options(count, args); });
+    auto options = parse_stress_options(5, args);
+    CHECK(options.context_samples);
+    rejects([&] { parse_stress_options(6, args); });
+    StressReport report(options);
+    StressContextPhases phases{};
+    for (auto& p : phases)
+        p = {{UINT64_MAX, UINT64_MAX}, {UINT64_MAX, UINT64_MAX}};
+    report.context_samples.record(61, phases);
+    const auto text = report.json(options);
+    CHECK(text.find("stress_context_samples_v1") != std::string::npos);
+    CHECK(text.find("getrusage(RUSAGE_THREAD)") != std::string::npos);
+    CHECK(text.find("\"before\":[\"18446744073709551615\",\"18446744073709551615\"]") !=
+          std::string::npos);
+    CHECK(text.find("\"complete\":false") != std::string::npos);
+    options.context_samples = false;
+    StressReport plain(options);
+    CHECK(plain.json(options).find("context_sample") == std::string::npos);
+}
 TEST(gpu_failure_report_preserves_uint64_values_and_omitted_count) {
     StressOptions options;
     StressReport report(options);

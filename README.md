@@ -739,7 +739,10 @@ CPU preparation/bookkeeping from GL pass setup and batch upload/draw. See the
 [retained results](benchmarks/2026-10-27-submission-results.md). Add
 `--preparation-samples` for coarse phase wall/thread-CPU measurements; see the
 [clock and phase contract](benchmarks/STRESS_PREPARATION.md) and
-[profile findings](benchmarks/2026-10-27-preparation-results.md).
+[profile findings](benchmarks/2026-10-27-preparation-results.md). Add `--context-samples`
+to correlate calling-thread switch counts with those phases; see the
+[counter scope](benchmarks/STRESS_CONTEXT_SWITCHES.md) and
+[retained comparison](benchmarks/2026-10-28-context-results.md).
 
 ## Window lifecycle
 

@@ -55,9 +55,13 @@ TEST(thread_cpu_phases_cover_nested_gl_and_reset_for_empty_passes) {
         StressGraphics graphics(*renderer, 256, 144);
         renderer->set_cpu_timing(true, true);
         StressPreparationPhases phases{};
-        CHECK(graphics.render(arena, &phases) == (empty ? 0 : 1024));
+        StressContextPhases contexts{};
+        rejects([&] { graphics.render(arena, nullptr, &contexts); });
+        CHECK(graphics.render(arena, &phases, &contexts) == (empty ? 0 : 1024));
         StressPreparation trace(1, 0, 1, true);
         trace.record(1, phases); // Checks finite, nonnegative and nested same-clock intervals.
+        StressContext context_trace(1, 0, 1, true);
+        context_trace.record(1, contexts); // Real per-thread snapshots remain ordered.
         const auto timing = renderer->cpu_timing();
         double gl_wall{}, gl_cpu{};
         for (const auto& p : phases) {

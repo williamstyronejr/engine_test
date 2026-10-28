@@ -73,8 +73,10 @@ int run_stress_mode(int argc, char** argv) {
                 const auto render_start =
                     options.submission_samples ? StressClock::now() : StressClock::time_point{};
                 StressPreparationPhases preparation{};
+                StressContextPhases contexts{};
                 const auto tiles =
-                    graphics.render(arena, options.preparation_samples ? &preparation : nullptr);
+                    graphics.render(arena, options.preparation_samples ? &preparation : nullptr,
+                                    options.context_samples ? &contexts : nullptr);
                 const auto render_end =
                     options.submission_samples ? StressClock::now() : StressClock::time_point{};
                 const auto render_timing =
@@ -154,6 +156,8 @@ int run_stress_mode(int argc, char** argv) {
                             render_timing.upload_bytes);
                     if (options.preparation_samples)
                         report.preparation_samples.record(frame, preparation);
+                    if (options.context_samples)
+                        report.context_samples.record(frame, contexts);
                     report.quads += stats.quads;
                     report.culled += stats.culled;
                     report.draws += stats.draws;

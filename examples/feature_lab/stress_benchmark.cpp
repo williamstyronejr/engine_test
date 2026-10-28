@@ -14,6 +14,8 @@
 namespace feature_lab {
 void StressOptions::validate() const {
     workload.validate();
+    if (context_samples && !preparation_samples)
+        throw std::invalid_argument("Context samples require --preparation-samples");
     if (preparation_samples && !submission_samples)
         throw std::invalid_argument("Preparation samples require --submission-samples");
     if (submission_samples && (cpu_only || !frame_samples))
@@ -73,6 +75,8 @@ StressOptions parse_stress_options(int argc, char** argv) {
             result.submission_samples = true;
         else if (arg == "--preparation-samples")
             result.preparation_samples = true;
+        else if (arg == "--context-samples")
+            result.context_samples = true;
         else if (arg == "--cpu-only")
             result.cpu_only = true;
         else if (arg == "--dense")
@@ -123,6 +127,7 @@ std::string stress_help() {
            "FILE.ppm [--frame-samples] [--presentation immediate|vsync]\n"
            "--submission-samples requires --frame-samples and graphics; CPU driver-call timing.\n"
            "--preparation-samples additionally profiles phases and calling-thread CPU time.\n"
+           "--context-samples requires --preparation-samples; counts calling-thread switches.\n"
            "Defaults: 8192 sprites, 4096 tiles, 1024 entities, 128 sparse bodies, 8 voices;\n"
            "600 frames after 60 warmup steps per cycle, 3 cycles, 1280x720 offscreen.\n"
            "Mixer runs offline; no audio device. Presentation requests interval 0 (default) or 1.\n"
@@ -168,7 +173,8 @@ StressReport::StressReport(const StressOptions& options)
       submission_samples(options.frames, options.warmup, options.cycles,
                          options.submission_samples),
       preparation_samples(options.frames, options.warmup, options.cycles,
-                          options.preparation_samples) {
+                          options.preparation_samples),
+      context_samples(options.frames, options.warmup, options.cycles, options.context_samples) {
     if (options.preparation_samples)
         thread_clock_resolution_ns = engine::thread_cpu_resolution_nanoseconds();
     rss_start = rss_peak = stress_rss_bytes();
@@ -258,6 +264,9 @@ std::string StressReport::json(const StressOptions& options) const {
         << (preparation_samples.enabled() ? ",\"preparation_sample_buffer_bytes\":" +
                                                 std::to_string(preparation_samples.buffer_bytes())
                                           : "")
+        << (context_samples.enabled() ? ",\"context_sample_buffer_bytes\":" +
+                                            std::to_string(context_samples.buffer_bytes())
+                                      : "")
         << ",\"rss_start\":" << rss_start << ",\"rss_end\":" << rss_end
         << ",\"rss_peak_at_cycle_boundary\":" << rss_peak
         << ",\"peak_uploaded_textures\":" << texture_peak
@@ -351,6 +360,28 @@ std::string StressReport::json(const StressOptions& options) const {
                 const auto& p = sample.phases[i];
                 out << (i ? "," : "") << '[' << p.wall << ',' << p.cpu << ',' << p.gl_wall << ','
                     << p.gl_cpu << ']';
+            }
+            out << "]}";
+        }
+        out << "]}";
+    }
+    if (context_samples.enabled()) {
+        out << ",\n  \"context_samples\":{\"schema\":\"stress_context_samples_v1\","
+               "\"source\":\"getrusage(RUSAGE_THREAD)\","
+               "\"phase_order\":[\"begin\",\"tiles\",\"sprites\",\"end\"],"
+               "\"counter_order\":[\"voluntary\",\"involuntary\"],\"rows\":[";
+        bool comma = false;
+        for (const auto& sample : context_samples.samples()) {
+            out << (comma ? "," : "") << "\n{\"frame\":" << json_string(std::to_string(sample.tag))
+                << ",\"phases\":[";
+            comma = true;
+            for (std::size_t i = 0; i < sample.phases.size(); ++i) {
+                const auto& p = sample.phases[i];
+                out << (i ? "," : "") << "{\"before\":["
+                    << json_string(std::to_string(p.before.voluntary)) << ','
+                    << json_string(std::to_string(p.before.involuntary)) << "],\"after\":["
+                    << json_string(std::to_string(p.after.voluntary)) << ','
+                    << json_string(std::to_string(p.after.involuntary)) << "]}";
             }
             out << "]}";
         }

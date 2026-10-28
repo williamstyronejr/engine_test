@@ -2,6 +2,7 @@
 #include "engine/renderer.hpp"
 #include "engine/thread_cpu_clock.hpp"
 #include "stress.hpp"
+#include "stress_context.hpp"
 #include "stress_preparation.hpp"
 #include <chrono>
 
@@ -38,7 +39,10 @@ class StressGraphics {
     }
     StressGraphics(const StressGraphics&) = delete;
     StressGraphics& operator=(const StressGraphics&) = delete;
-    std::size_t render(const StressArena& arena, StressPreparationPhases* phases = nullptr) {
+    std::size_t render(const StressArena& arena, StressPreparationPhases* phases = nullptr,
+                       StressContextPhases* contexts = nullptr) {
+        if (contexts && !phases)
+            throw std::invalid_argument("Context samples require preparation phases");
         const auto phase = [&](std::size_t index, auto&& work) {
             if (!phases) {
                 work();
@@ -46,11 +50,17 @@ class StressGraphics {
             }
             // begin() resets cumulative GL measurements; subsequent phases use deltas.
             const auto before = index ? renderer_.cpu_timing() : engine::RenderCpuTiming{};
+            // Counter snapshots enclose the timed phase, including GL work. Their calls
+            // lie outside phase timings, inside the enclosing render interval.
+            const auto switches_before =
+                contexts ? engine::thread_context_switches() : engine::ThreadContextSwitches{};
             const auto start = std::chrono::steady_clock::now();
             const auto cpu_start = engine::thread_cpu_nanoseconds();
             work();
             const auto cpu_end = engine::thread_cpu_nanoseconds();
             const auto end = std::chrono::steady_clock::now();
+            if (contexts)
+                (*contexts)[index] = {switches_before, engine::thread_context_switches()};
             const auto after = renderer_.cpu_timing();
             (*phases)[index] = {std::chrono::duration<double, std::milli>(end - start).count(),
                                 static_cast<double>(cpu_end - cpu_start) / 1e6,
