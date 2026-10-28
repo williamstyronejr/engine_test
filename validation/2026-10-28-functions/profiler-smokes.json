@@ -1,0 +1,45 @@
+[
+  {
+    "command": [
+      "gprofng",
+      "collect",
+      "app",
+      "-p",
+      "1",
+      "-j",
+      "off",
+      "-F",
+      "off",
+      "-a",
+      "off",
+      "-o",
+      "build/function-validation/true.er",
+      "/bin/true"
+    ],
+    "returncode": -9,
+    "stdout": "Creating experiment directory build/function-validation/true.er (Process ID: 362433) ...\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "gprofng",
+      "collect",
+      "app",
+      "-p",
+      "1",
+      "-j",
+      "off",
+      "-F",
+      "off",
+      "-a",
+      "off",
+      "-o",
+      "build/function-validation/sleep.er",
+      "/bin/sleep",
+      "0.2"
+    ],
+    "returncode": -9,
+    "stdout": "Creating experiment directory build/function-validation/sleep.er (Process ID: 362434) ...\n",
+    "stderr": ""
+  }
+]

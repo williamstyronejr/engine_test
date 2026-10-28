@@ -1,0 +1,218 @@
+[
+  {
+    "command": [
+      "build/function-validation/perf/usr/bin/perf",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "perf-version.log",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "nm",
+      "-n",
+      "-S",
+      "-C",
+      "/home/zero/dev/engine_test/build/release/feature_lab"
+    ],
+    "exit_code": 0,
+    "stdout": "executable-symbols.log",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/function-validation/perf/usr/bin/perf",
+      "evlist",
+      "-v",
+      "-i",
+      "build/function-validation/sample-1.data"
+    ],
+    "exit_code": 0,
+    "stdout": "sample-1-events.log",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/function-validation/perf/usr/bin/perf",
+      "script",
+      "-F",
+      "pid,tid,ip,sym,dso",
+      "-i",
+      "build/function-validation/sample-1.data"
+    ],
+    "exit_code": 0,
+    "stdout": "sample-1-samples.log",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/function-validation/perf/usr/bin/perf",
+      "report",
+      "-D",
+      "-i",
+      "build/function-validation/sample-1.data"
+    ],
+    "exit_code": 0,
+    "retained": "Aggregated stats suffix",
+    "stdout": "sample-1-records.log",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/function-validation/perf/usr/bin/perf",
+      "report",
+      "--stdio",
+      "--no-children",
+      "-n",
+      "--percent-limit",
+      "0",
+      "-i",
+      "build/function-validation/sample-1.data"
+    ],
+    "exit_code": 0,
+    "stdout": "sample-1-functions.log",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/function-validation/perf/usr/bin/perf",
+      "buildid-list",
+      "-i",
+      "build/function-validation/sample-1.data"
+    ],
+    "exit_code": 0,
+    "stdout": "sample-1-buildids.log",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/function-validation/perf/usr/bin/perf",
+      "evlist",
+      "-v",
+      "-i",
+      "build/function-validation/sample-2.data"
+    ],
+    "exit_code": 0,
+    "stdout": "sample-2-events.log",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/function-validation/perf/usr/bin/perf",
+      "script",
+      "-F",
+      "pid,tid,ip,sym,dso",
+      "-i",
+      "build/function-validation/sample-2.data"
+    ],
+    "exit_code": 0,
+    "stdout": "sample-2-samples.log",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/function-validation/perf/usr/bin/perf",
+      "report",
+      "-D",
+      "-i",
+      "build/function-validation/sample-2.data"
+    ],
+    "exit_code": 0,
+    "retained": "Aggregated stats suffix",
+    "stdout": "sample-2-records.log",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/function-validation/perf/usr/bin/perf",
+      "report",
+      "--stdio",
+      "--no-children",
+      "-n",
+      "--percent-limit",
+      "0",
+      "-i",
+      "build/function-validation/sample-2.data"
+    ],
+    "exit_code": 0,
+    "stdout": "sample-2-functions.log",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/function-validation/perf/usr/bin/perf",
+      "buildid-list",
+      "-i",
+      "build/function-validation/sample-2.data"
+    ],
+    "exit_code": 0,
+    "stdout": "sample-2-buildids.log",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/function-validation/perf/usr/bin/perf",
+      "evlist",
+      "-v",
+      "-i",
+      "build/function-validation/sample-3.data"
+    ],
+    "exit_code": 0,
+    "stdout": "sample-3-events.log",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/function-validation/perf/usr/bin/perf",
+      "script",
+      "-F",
+      "pid,tid,ip,sym,dso",
+      "-i",
+      "build/function-validation/sample-3.data"
+    ],
+    "exit_code": 0,
+    "stdout": "sample-3-samples.log",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/function-validation/perf/usr/bin/perf",
+      "report",
+      "-D",
+      "-i",
+      "build/function-validation/sample-3.data"
+    ],
+    "exit_code": 0,
+    "retained": "Aggregated stats suffix",
+    "stdout": "sample-3-records.log",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/function-validation/perf/usr/bin/perf",
+      "report",
+      "--stdio",
+      "--no-children",
+      "-n",
+      "--percent-limit",
+      "0",
+      "-i",
+      "build/function-validation/sample-3.data"
+    ],
+    "exit_code": 0,
+    "stdout": "sample-3-functions.log",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/function-validation/perf/usr/bin/perf",
+      "buildid-list",
+      "-i",
+      "build/function-validation/sample-3.data"
+    ],
+    "exit_code": 0,
+    "stdout": "sample-3-buildids.log",
+    "stderr": ""
+  }
+]

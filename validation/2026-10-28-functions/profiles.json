@@ -1,0 +1,2336 @@
+[
+  {
+    "total_samples": 6782,
+    "application_samples": 4580,
+    "unknown_application_samples": 0,
+    "unknown_all_samples": 2015,
+    "pid_tid": [
+      365664,
+      365664
+    ],
+    "records": {
+      "TOTAL": 6840,
+      "COMM": 2,
+      "EXIT": 1,
+      "FORK": 2,
+      "SAMPLE": 6782,
+      "MMAP2": 44,
+      "FINISHED_ROUND": 1,
+      "ID_INDEX": 1,
+      "THREAD_MAP": 1,
+      "CPU_MAP": 1,
+      "EVENT_UPDATE": 3,
+      "TIME_CONV": 1,
+      "FINISHED_INIT": 1
+    },
+    "objects": [
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "samples": 4580
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "samples": 1269
+      },
+      {
+        "object": "/usr/lib/libgallium-26.2.5-arch1.1.so",
+        "samples": 784
+      },
+      {
+        "object": "/usr/lib/ld-linux-x86-64.so.2",
+        "samples": 26
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "samples": 20
+      },
+      {
+        "object": "[vdso]",
+        "samples": 20
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "samples": 20
+      },
+      {
+        "object": "/usr/lib/libGLdispatch.so.0.0.0",
+        "samples": 19
+      },
+      {
+        "object": "/usr/lib/libGLX_mesa.so.0.0.0",
+        "samples": 14
+      },
+      {
+        "object": "/usr/lib/libexpat.so.1.13.0",
+        "samples": 7
+      },
+      {
+        "object": "/usr/lib/libX11.so.6.4.0",
+        "samples": 7
+      },
+      {
+        "object": "/usr/lib/libxshmfence.so.1.0.0",
+        "samples": 4
+      },
+      {
+        "object": "/usr/lib/libLLVM.so.23.1",
+        "samples": 3
+      },
+      {
+        "object": "/usr/lib/libGLX.so.0.0.0",
+        "samples": 3
+      },
+      {
+        "object": "/usr/lib/libm.so.6",
+        "samples": 2
+      },
+      {
+        "object": "/usr/lib/libgcc_s.so.1",
+        "samples": 2
+      },
+      {
+        "object": "/usr/lib/libxcb-present.so.0.0.0",
+        "samples": 1
+      },
+      {
+        "object": "/usr/lib/libedit.so.0.0.78",
+        "samples": 1
+      }
+    ],
+    "functions": [
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)",
+        "samples": 2484,
+        "percent_all": 36.626363904452965,
+        "percent_application": 54.23580786026201
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "[unknown]",
+        "samples": 1160,
+        "percent_all": 17.104099085815395,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::run_stress_mode(int, char**)",
+        "samples": 897,
+        "percent_all": 13.226186965496904,
+        "percent_application": 19.58515283842795
+      },
+      {
+        "object": "/usr/lib/libgallium-26.2.5-arch1.1.so",
+        "symbol": "[unknown]",
+        "samples": 772,
+        "percent_all": 11.383072839870245,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::StressGraphics::render(feature_lab::StressArena const&, std::array<feature_lab::StressPreparationPhase, 4ul>*, std::array<feature_lab::StressContextPhase, 4ul>*)::{lambda()#2}::operator()() const",
+        "samples": 737,
+        "percent_all": 10.86700088469478,
+        "percent_application": 16.09170305676856
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::StressGraphics::render(feature_lab::StressArena const&, std::array<feature_lab::StressPreparationPhase, 4ul>*, std::array<feature_lab::StressContextPhase, 4ul>*)",
+        "samples": 128,
+        "percent_all": 1.8873488646416987,
+        "percent_application": 2.7947598253275108
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)",
+        "samples": 76,
+        "percent_all": 1.1206133883810085,
+        "percent_application": 1.6593886462882097
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::sprite(engine::TextureHandle, engine::Transform, engine::Color, engine::Rect)",
+        "samples": 58,
+        "percent_all": 0.8552049542907697,
+        "percent_application": 1.2663755458515285
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "void std::__introsort_loop<__gnu_cxx::__normal_iterator<engine::CollisionWorld::Cell*, std::vector<engine::CollisionWorld::Cell, std::allocator<engine::CollisionWorld::Cell> > >, long, engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)::{lambda(auto:1, auto:2)#1}>(__gnu_cxx::__normal_iterator<engine::CollisionWorld::Cell*, std::vector<engine::CollisionWorld::Cell, std::allocator<engine::CollisionWorld::Cell> > >, __gnu_cxx::__normal_iterator<engine::CollisionWorld::Cell*, std::vector<engine::CollisionWorld::Cell, std::allocator<engine::CollisionWorld::Cell> > >, long, engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)::{lambda(auto:1, auto:2)#1}) [clone .isra.0]",
+        "samples": 44,
+        "percent_all": 0.6487761722205839,
+        "percent_application": 0.9606986899563319
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "ioctl",
+        "samples": 43,
+        "percent_all": 0.6340312592155706,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Scene::set_transform(engine::Entity, engine::LocalTransform)",
+        "samples": 36,
+        "percent_all": 0.5308168681804777,
+        "percent_application": 0.7860262008733624
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .constprop.0]",
+        "samples": 35,
+        "percent_all": 0.5160719551754644,
+        "percent_application": 0.7641921397379913
+      },
+      {
+        "object": "/usr/lib/ld-linux-x86-64.so.2",
+        "symbol": "[unknown]",
+        "samples": 26,
+        "percent_all": 0.383367738130345,
+        "percent_application": null
+      },
+      {
+        "object": "[vdso]",
+        "symbol": "__vdso_clock_gettime",
+        "samples": 20,
+        "percent_all": 0.29489826010026543,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::TextCursor::next(engine::PositionedGlyph&)",
+        "samples": 16,
+        "percent_all": 0.23591860808021234,
+        "percent_application": 0.34934497816593885
+      },
+      {
+        "object": "/usr/lib/libGLX_mesa.so.0.0.0",
+        "symbol": "[unknown]",
+        "samples": 14,
+        "percent_all": 0.20642878207018578,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "[unknown]",
+        "samples": 14,
+        "percent_all": 0.20642878207018578,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libGLdispatch.so.0.0.0",
+        "symbol": "[unknown]",
+        "samples": 14,
+        "percent_all": 0.20642878207018578,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "getrusage",
+        "samples": 13,
+        "percent_all": 0.1916838690651725,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "clock_gettime",
+        "samples": 11,
+        "percent_all": 0.16219404305514598,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "__libc_calloc",
+        "samples": 10,
+        "percent_all": 0.14744913005013272,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "pthread_mutex_lock",
+        "samples": 8,
+        "percent_all": 0.11795930404010617,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "malloc",
+        "samples": 7,
+        "percent_all": 0.10321439103509289,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::chrono::_V2::steady_clock::now()",
+        "samples": 7,
+        "percent_all": 0.10321439103509289,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libexpat.so.1.13.0",
+        "symbol": "[unknown]",
+        "samples": 6,
+        "percent_all": 0.08846947803007962,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libX11.so.6.4.0",
+        "symbol": "_XSend",
+        "samples": 5,
+        "percent_all": 0.07372456502506636,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::CollisionWorld::buffer_bytes() const",
+        "samples": 4,
+        "percent_all": 0.058979652020053085,
+        "percent_application": 0.08733624454148471
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "cfree",
+        "samples": 4,
+        "percent_all": 0.058979652020053085,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::GpuTimer::collect()",
+        "samples": 4,
+        "percent_all": 0.058979652020053085,
+        "percent_application": 0.08733624454148471
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "void std::__introsort_loop<__gnu_cxx::__normal_iterator<engine::Body2D*, std::vector<engine::Body2D, std::allocator<engine::Body2D> > >, long, engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)::{lambda(auto:1&, auto:2&)#1}>(__gnu_cxx::__normal_iterator<engine::Body2D*, std::vector<engine::Body2D, std::allocator<engine::Body2D> > >, __gnu_cxx::__normal_iterator<engine::Body2D*, std::vector<engine::Body2D, std::allocator<engine::Body2D> > >, long, engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)::{lambda(auto:1&, auto:2&)#1}) [clone .isra.0]",
+        "samples": 4,
+        "percent_all": 0.058979652020053085,
+        "percent_application": 0.08733624454148471
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::GpuTimer::end()",
+        "samples": 4,
+        "percent_all": 0.058979652020053085,
+        "percent_application": 0.08733624454148471
+      },
+      {
+        "object": "/usr/lib/libGLdispatch.so.0.0.0",
+        "symbol": "__glDispatchCheckMultithreaded",
+        "samples": 4,
+        "percent_all": 0.058979652020053085,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::text(engine::Vec2, float, std::basic_string_view<char, std::char_traits<char> >, engine::Color)",
+        "samples": 4,
+        "percent_all": 0.058979652020053085,
+        "percent_application": 0.08733624454148471
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "xcb_send_request_with_fds64",
+        "samples": 3,
+        "percent_all": 0.04423473901503981,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libgallium-26.2.5-arch1.1.so",
+        "symbol": "loader_dri3_swap_buffers_msc",
+        "samples": 3,
+        "percent_all": 0.04423473901503981,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::Measurements::add(double)",
+        "samples": 3,
+        "percent_all": 0.04423473901503981,
+        "percent_application": 0.06550218340611354
+      },
+      {
+        "object": "/usr/lib/libxshmfence.so.1.0.0",
+        "symbol": "xshmfence_await",
+        "samples": 3,
+        "percent_all": 0.04423473901503981,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::Impl::begin_pass(int, int, engine::Camera, engine::Color, unsigned int, unsigned int)",
+        "samples": 3,
+        "percent_all": 0.04423473901503981,
+        "percent_application": 0.06550218340611354
+      },
+      {
+        "object": "/usr/lib/libgallium-26.2.5-arch1.1.so",
+        "symbol": "loader_dri3_flush",
+        "samples": 3,
+        "percent_all": 0.04423473901503981,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::StressReport::observe(feature_lab::StressArena const&, feature_lab::StressResources const&)",
+        "samples": 3,
+        "percent_all": 0.04423473901503981,
+        "percent_application": 0.06550218340611354
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::TextCursor::TextCursor(engine::BitmapFont const&, std::basic_string_view<char, std::char_traits<char> >, float)",
+        "samples": 3,
+        "percent_all": 0.04423473901503981,
+        "percent_application": 0.06550218340611354
+      },
+      {
+        "object": "/usr/lib/libgallium-26.2.5-arch1.1.so",
+        "symbol": "loader_dri3_get_buffers",
+        "samples": 3,
+        "percent_all": 0.04423473901503981,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::TileMap::buffer_bytes() const",
+        "samples": 3,
+        "percent_all": 0.04423473901503981,
+        "percent_application": 0.06550218340611354
+      },
+      {
+        "object": "/usr/lib/libLLVM.so.23.1",
+        "symbol": "llvm::xxh3_64bits(unsigned char const*, unsigned long)",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "std::__cxx11::to_string(unsigned long)",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": 0.043668122270742356
+      },
+      {
+        "object": "/usr/lib/libX11.so.6.4.0",
+        "symbol": "[unknown]",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "pthread_self",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::(anonymous namespace)::validate(engine::Shape2D)",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": 0.043668122270742356
+      },
+      {
+        "object": "/usr/lib/libm.so.6",
+        "symbol": "[unknown]",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::GpuTimer::begin(unsigned long)",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": 0.043668122270742356
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::TileMap::range(engine::Rect) const",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": 0.043668122270742356
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "pthread_mutex_unlock",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::end()",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": 0.043668122270742356
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::StressArena::checksum() const",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": 0.043668122270742356
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Scene::create(unsigned long, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": 0.043668122270742356
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::StressArena::StressArena(feature_lab::StressConfig)",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": 0.043668122270742356
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "std::chrono::_V2::steady_clock::now()@plt",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": 0.043668122270742356
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "vsnprintf",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libgcc_s.so.1",
+        "symbol": "__popcountdi2",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libGLX.so.0.0.0",
+        "symbol": "[unknown]",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": 0.043668122270742356
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "__getpid",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "void std::__introsort_loop<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, long, std::less<void> >(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, long, std::less<void>) [clone .isra.0]",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": 0.043668122270742356
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::ostream& std::ostream::_M_insert<double>(double)",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::json_string[abi:cxx11](std::basic_string_view<char, std::char_traits<char> >)",
+        "samples": 2,
+        "percent_all": 0.029489826010026542,
+        "percent_application": 0.043668122270742356
+      },
+      {
+        "object": "/usr/lib/libLLVM.so.23.1",
+        "symbol": "[unknown]",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libexpat.so.1.13.0",
+        "symbol": "XML_ParseBuffer",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "getenv",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libgallium-26.2.5-arch1.1.so",
+        "symbol": "driIndexConfigAttrib",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libgallium-26.2.5-arch1.1.so",
+        "symbol": "dri_create_image",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "recvmsg",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::live_targets() const",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": 0.021834061135371178
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::live_textures() const",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": 0.021834061135371178
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_append(char const*, unsigned long)",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "writev",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxcb-present.so.0.0.0",
+        "symbol": "xcb_present_pixmap",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Window::present()",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": 0.021834061135371178
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "__sbrk",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "xcb_send_request",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "__errno_location",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "xcb_poll_for_event",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "xcb_send_request64",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned long, unsigned long, char const*, unsigned long)",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "operator new(unsigned long)",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned long, unsigned long, char const*, unsigned long)@plt",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": 0.021834061135371178
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::StressArena::make_tiles(feature_lab::StressConfig const&)",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": 0.021834061135371178
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Window::width() const",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": 0.021834061135371178
+      },
+      {
+        "object": "/usr/lib/libgallium-26.2.5-arch1.1.so",
+        "symbol": "dri_flush",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::set_cpu_timing(bool, bool)",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": 0.021834061135371178
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()@plt",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": 0.021834061135371178
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::target_size(engine::RenderTargetHandle) const",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": 0.021834061135371178
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "operator delete(void*, unsigned long)",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libGLX.so.0.0.0",
+        "symbol": "glXSwapBuffers",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libGLdispatch.so.0.0.0",
+        "symbol": "_glapi_get_current",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*)",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxshmfence.so.1.0.0",
+        "symbol": "xshmfence_reset",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "[unknown]",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::locale::facet::_S_get_c_locale()",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::AssetRoot::write_atomic(std::basic_string_view<char, std::char_traits<char> >, std::span<unsigned char const, 18446744073709551615ul>, void (*)(engine::AtomicWriteStage)) const",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": 0.021834061135371178
+      },
+      {
+        "object": "/usr/lib/libedit.so.0.0.78",
+        "symbol": "[unknown]",
+        "samples": 1,
+        "percent_all": 0.014744913005013271,
+        "percent_application": null
+      }
+    ],
+    "quality_passed": true,
+    "repeat": 1,
+    "raw_sha256": "851bb801068fd1001a67b221f5c5417ae80d4c125b86982aa0780a8edb112a01"
+  },
+  {
+    "total_samples": 7090,
+    "application_samples": 4834,
+    "unknown_application_samples": 0,
+    "unknown_all_samples": 2072,
+    "pid_tid": [
+      365698,
+      365698
+    ],
+    "records": {
+      "TOTAL": 7148,
+      "COMM": 2,
+      "EXIT": 1,
+      "FORK": 2,
+      "SAMPLE": 7090,
+      "MMAP2": 44,
+      "FINISHED_ROUND": 1,
+      "ID_INDEX": 1,
+      "THREAD_MAP": 1,
+      "CPU_MAP": 1,
+      "EVENT_UPDATE": 3,
+      "TIME_CONV": 1,
+      "FINISHED_INIT": 1
+    },
+    "objects": [
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "samples": 4834
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "samples": 1303
+      },
+      {
+        "object": "/usr/lib/libgallium-26.2.5-arch1.1.so",
+        "samples": 807
+      },
+      {
+        "object": "[vdso]",
+        "samples": 30
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "samples": 25
+      },
+      {
+        "object": "/usr/lib/ld-linux-x86-64.so.2",
+        "samples": 24
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "samples": 16
+      },
+      {
+        "object": "/usr/lib/libGLX_mesa.so.0.0.0",
+        "samples": 12
+      },
+      {
+        "object": "/usr/lib/libX11.so.6.4.0",
+        "samples": 10
+      },
+      {
+        "object": "/usr/lib/libGLdispatch.so.0.0.0",
+        "samples": 10
+      },
+      {
+        "object": "/usr/lib/libexpat.so.1.13.0",
+        "samples": 7
+      },
+      {
+        "object": "/usr/lib/libgcc_s.so.1",
+        "samples": 3
+      },
+      {
+        "object": "/usr/lib/libm.so.6",
+        "samples": 3
+      },
+      {
+        "object": "/usr/lib/libLLVM.so.23.1",
+        "samples": 2
+      },
+      {
+        "object": "/usr/lib/libGLX.so.0.0.0",
+        "samples": 2
+      },
+      {
+        "object": "/usr/lib/libxcb-present.so.0.0.0",
+        "samples": 1
+      },
+      {
+        "object": "/usr/lib/libxshmfence.so.1.0.0",
+        "samples": 1
+      }
+    ],
+    "functions": [
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)",
+        "samples": 2659,
+        "percent_all": 37.50352609308886,
+        "percent_application": 55.00620604054613
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "[unknown]",
+        "samples": 1192,
+        "percent_all": 16.812411847672777,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::run_stress_mode(int, char**)",
+        "samples": 916,
+        "percent_all": 12.919605077574047,
+        "percent_application": 18.94911046752172
+      },
+      {
+        "object": "/usr/lib/libgallium-26.2.5-arch1.1.so",
+        "symbol": "[unknown]",
+        "samples": 802,
+        "percent_all": 11.311706629055006,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::StressGraphics::render(feature_lab::StressArena const&, std::array<feature_lab::StressPreparationPhase, 4ul>*, std::array<feature_lab::StressContextPhase, 4ul>*)::{lambda()#2}::operator()() const",
+        "samples": 798,
+        "percent_all": 11.255289139633286,
+        "percent_application": 16.50806785270997
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::StressGraphics::render(feature_lab::StressArena const&, std::array<feature_lab::StressPreparationPhase, 4ul>*, std::array<feature_lab::StressContextPhase, 4ul>*)",
+        "samples": 126,
+        "percent_all": 1.777150916784203,
+        "percent_application": 2.6065370293752586
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)",
+        "samples": 79,
+        "percent_all": 1.1142454160789845,
+        "percent_application": 1.6342573438146462
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::sprite(engine::TextureHandle, engine::Transform, engine::Color, engine::Rect)",
+        "samples": 60,
+        "percent_all": 0.846262341325811,
+        "percent_application": 1.2412081092263136
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .constprop.0]",
+        "samples": 38,
+        "percent_all": 0.535966149506347,
+        "percent_application": 0.7860984691766653
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "ioctl",
+        "samples": 38,
+        "percent_all": 0.535966149506347,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Scene::set_transform(engine::Entity, engine::LocalTransform)",
+        "samples": 35,
+        "percent_all": 0.4936530324400564,
+        "percent_application": 0.7240380637153496
+      },
+      {
+        "object": "[vdso]",
+        "symbol": "__vdso_clock_gettime",
+        "samples": 30,
+        "percent_all": 0.4231311706629055,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "void std::__introsort_loop<__gnu_cxx::__normal_iterator<engine::CollisionWorld::Cell*, std::vector<engine::CollisionWorld::Cell, std::allocator<engine::CollisionWorld::Cell> > >, long, engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)::{lambda(auto:1, auto:2)#1}>(__gnu_cxx::__normal_iterator<engine::CollisionWorld::Cell*, std::vector<engine::CollisionWorld::Cell, std::allocator<engine::CollisionWorld::Cell> > >, __gnu_cxx::__normal_iterator<engine::CollisionWorld::Cell*, std::vector<engine::CollisionWorld::Cell, std::allocator<engine::CollisionWorld::Cell> > >, long, engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)::{lambda(auto:1, auto:2)#1}) [clone .isra.0]",
+        "samples": 29,
+        "percent_all": 0.4090267983074753,
+        "percent_application": 0.5999172527927182
+      },
+      {
+        "object": "/usr/lib/ld-linux-x86-64.so.2",
+        "symbol": "[unknown]",
+        "samples": 24,
+        "percent_all": 0.3385049365303244,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::TextCursor::next(engine::PositionedGlyph&)",
+        "samples": 20,
+        "percent_all": 0.2820874471086037,
+        "percent_application": 0.4137360364087712
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "clock_gettime",
+        "samples": 15,
+        "percent_all": 0.21156558533145275,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libGLX_mesa.so.0.0.0",
+        "symbol": "[unknown]",
+        "samples": 12,
+        "percent_all": 0.1692524682651622,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "[unknown]",
+        "samples": 10,
+        "percent_all": 0.14104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "getrusage",
+        "samples": 10,
+        "percent_all": 0.14104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libGLdispatch.so.0.0.0",
+        "symbol": "[unknown]",
+        "samples": 10,
+        "percent_all": 0.14104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "malloc",
+        "samples": 10,
+        "percent_all": 0.14104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "cfree",
+        "samples": 9,
+        "percent_all": 0.12693935119887165,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libX11.so.6.4.0",
+        "symbol": "[unknown]",
+        "samples": 8,
+        "percent_all": 0.11283497884344147,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libexpat.so.1.13.0",
+        "symbol": "[unknown]",
+        "samples": 7,
+        "percent_all": 0.09873060648801128,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "pthread_mutex_lock",
+        "samples": 6,
+        "percent_all": 0.0846262341325811,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "void std::__introsort_loop<__gnu_cxx::__normal_iterator<engine::Body2D*, std::vector<engine::Body2D, std::allocator<engine::Body2D> > >, long, engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)::{lambda(auto:1&, auto:2&)#1}>(__gnu_cxx::__normal_iterator<engine::Body2D*, std::vector<engine::Body2D, std::allocator<engine::Body2D> > >, __gnu_cxx::__normal_iterator<engine::Body2D*, std::vector<engine::Body2D, std::allocator<engine::Body2D> > >, long, engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)::{lambda(auto:1&, auto:2&)#1}) [clone .isra.0]",
+        "samples": 6,
+        "percent_all": 0.0846262341325811,
+        "percent_application": 0.12412081092263136
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "__getpid",
+        "samples": 6,
+        "percent_all": 0.0846262341325811,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::TileMap::range(engine::Rect) const",
+        "samples": 6,
+        "percent_all": 0.0846262341325811,
+        "percent_application": 0.12412081092263136
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "__libc_calloc",
+        "samples": 5,
+        "percent_all": 0.07052186177715092,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Window::width() const",
+        "samples": 5,
+        "percent_all": 0.07052186177715092,
+        "percent_application": 0.1034340091021928
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "xcb_send_request_with_fds64",
+        "samples": 5,
+        "percent_all": 0.07052186177715092,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Scene::create(unsigned long, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)",
+        "samples": 4,
+        "percent_all": 0.056417489421720736,
+        "percent_application": 0.08274720728175423
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "std::__cxx11::to_string(unsigned long)",
+        "samples": 4,
+        "percent_all": 0.056417489421720736,
+        "percent_application": 0.08274720728175423
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::text(engine::Vec2, float, std::basic_string_view<char, std::char_traits<char> >, engine::Color)",
+        "samples": 4,
+        "percent_all": 0.056417489421720736,
+        "percent_application": 0.08274720728175423
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_mutate(unsigned long, unsigned long, char const*, unsigned long)",
+        "samples": 4,
+        "percent_all": 0.056417489421720736,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::chrono::_V2::steady_clock::now()",
+        "samples": 3,
+        "percent_all": 0.04231311706629055,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libgcc_s.so.1",
+        "symbol": "__popcountdi2",
+        "samples": 3,
+        "percent_all": 0.04231311706629055,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)",
+        "samples": 3,
+        "percent_all": 0.04231311706629055,
+        "percent_application": 0.06206040546131568
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Window::drawable() const",
+        "samples": 3,
+        "percent_all": 0.04231311706629055,
+        "percent_application": 0.06206040546131568
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "__errno_location",
+        "samples": 3,
+        "percent_all": 0.04231311706629055,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "xcb_poll_for_special_event",
+        "samples": 3,
+        "percent_all": 0.04231311706629055,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libgallium-26.2.5-arch1.1.so",
+        "symbol": "loader_dri3_get_buffers",
+        "samples": 3,
+        "percent_all": 0.04231311706629055,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libm.so.6",
+        "symbol": "[unknown]",
+        "samples": 3,
+        "percent_all": 0.04231311706629055,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::StressReport::observe(feature_lab::StressArena const&, feature_lab::StressResources const&)",
+        "samples": 3,
+        "percent_all": 0.04231311706629055,
+        "percent_application": 0.06206040546131568
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::live_textures() const",
+        "samples": 3,
+        "percent_all": 0.04231311706629055,
+        "percent_application": 0.06206040546131568
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::cpu_timing() const",
+        "samples": 3,
+        "percent_all": 0.04231311706629055,
+        "percent_application": 0.06206040546131568
+      },
+      {
+        "object": "/usr/lib/libLLVM.so.23.1",
+        "symbol": "[unknown]",
+        "samples": 2,
+        "percent_all": 0.028208744710860368,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Window::poll(engine::Input&)",
+        "samples": 2,
+        "percent_all": 0.028208744710860368,
+        "percent_application": 0.04137360364087712
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::GpuTimer::end()",
+        "samples": 2,
+        "percent_all": 0.028208744710860368,
+        "percent_application": 0.04137360364087712
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "xcb_send_request64",
+        "samples": 2,
+        "percent_all": 0.028208744710860368,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "recvmsg",
+        "samples": 2,
+        "percent_all": 0.028208744710860368,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "xcb_connection_has_error",
+        "samples": 2,
+        "percent_all": 0.028208744710860368,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::TileMap::buffer_bytes() const",
+        "samples": 2,
+        "percent_all": 0.028208744710860368,
+        "percent_application": 0.04137360364087712
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::end()",
+        "samples": 2,
+        "percent_all": 0.028208744710860368,
+        "percent_application": 0.04137360364087712
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::CollisionWorld::buffer_bytes() const",
+        "samples": 2,
+        "percent_all": 0.028208744710860368,
+        "percent_application": 0.04137360364087712
+      },
+      {
+        "object": "/usr/lib/libX11.so.6.4.0",
+        "symbol": "_XEventsQueued",
+        "samples": 2,
+        "percent_all": 0.028208744710860368,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::StressArena::checksum() const",
+        "samples": 2,
+        "percent_all": 0.028208744710860368,
+        "percent_application": 0.04137360364087712
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::Impl::begin_pass(int, int, engine::Camera, engine::Color, unsigned int, unsigned int)",
+        "samples": 2,
+        "percent_all": 0.028208744710860368,
+        "percent_application": 0.04137360364087712
+      },
+      {
+        "object": "/usr/lib/libGLX.so.0.0.0",
+        "symbol": "[unknown]",
+        "samples": 2,
+        "percent_all": 0.028208744710860368,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::live_targets() const",
+        "samples": 2,
+        "percent_all": 0.028208744710860368,
+        "percent_application": 0.04137360364087712
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "writev",
+        "samples": 2,
+        "percent_all": 0.028208744710860368,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)",
+        "samples": 2,
+        "percent_all": 0.028208744710860368,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "pthread_cond_signal",
+        "samples": 2,
+        "percent_all": 0.028208744710860368,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::Measurements::add(double)",
+        "samples": 2,
+        "percent_all": 0.028208744710860368,
+        "percent_application": 0.04137360364087712
+      },
+      {
+        "object": "/usr/lib/libgallium-26.2.5-arch1.1.so",
+        "symbol": "driIndexConfigAttrib",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned long, unsigned long, char const*, unsigned long)",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::target_sprite(engine::RenderTargetHandle, engine::Transform, engine::Color, engine::Rect)",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": 0.02068680182043856
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::TextCursor::TextCursor(engine::BitmapFont const&, std::basic_string_view<char, std::char_traits<char> >, float)",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": 0.02068680182043856
+      },
+      {
+        "object": "/usr/lib/libxcb-present.so.0.0.0",
+        "symbol": "xcb_present_pixmap",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "pthread_mutex_unlock",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "xcb_poll_for_event",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "xcb_take_socket",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "operator new(unsigned long)",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_append(char const*, unsigned long)",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::TileMap::TileMap(engine::TileMapData)",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": 0.02068680182043856
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::target_size(engine::RenderTargetHandle) const",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": 0.02068680182043856
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*)",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libgallium-26.2.5-arch1.1.so",
+        "symbol": "loader_dri3_flush",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxshmfence.so.1.0.0",
+        "symbol": "xshmfence_reset",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::GpuTimer::collect()",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": 0.02068680182043856
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::set_cpu_timing(bool, bool)",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": 0.02068680182043856
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::GpuTimer::begin(unsigned long)",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": 0.02068680182043856
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "pthread_self",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "xcb_flush",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "std::chrono::_V2::steady_clock::now()@plt",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": 0.02068680182043856
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_append(char const*, unsigned long)@plt",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": 0.02068680182043856
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "pthread_cond_broadcast",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Window::present()",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": 0.02068680182043856
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "void std::__introsort_loop<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, long, std::less<void> >(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, long, std::less<void>) [clone .isra.0]",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": 0.02068680182043856
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::ostream& std::ostream::_M_insert<double>(double)",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_float<double>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, char, double) const",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@plt",
+        "samples": 1,
+        "percent_all": 0.014104372355430184,
+        "percent_application": 0.02068680182043856
+      }
+    ],
+    "quality_passed": true,
+    "repeat": 2,
+    "raw_sha256": "a9c6c2ce139218995fc395af6c45e02fbbd520f9d99fc41c44f02ad00c1a4f85"
+  },
+  {
+    "total_samples": 6056,
+    "application_samples": 3799,
+    "unknown_application_samples": 0,
+    "unknown_all_samples": 2099,
+    "pid_tid": [
+      365800,
+      365800
+    ],
+    "records": {
+      "TOTAL": 6115,
+      "COMM": 2,
+      "EXIT": 1,
+      "FORK": 2,
+      "SAMPLE": 6056,
+      "MMAP2": 44,
+      "FINISHED_ROUND": 2,
+      "ID_INDEX": 1,
+      "THREAD_MAP": 1,
+      "CPU_MAP": 1,
+      "EVENT_UPDATE": 3,
+      "TIME_CONV": 1,
+      "FINISHED_INIT": 1
+    },
+    "objects": [
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "samples": 3799
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "samples": 1378
+      },
+      {
+        "object": "/usr/lib/libgallium-26.2.5-arch1.1.so",
+        "samples": 717
+      },
+      {
+        "object": "/usr/lib/ld-linux-x86-64.so.2",
+        "samples": 31
+      },
+      {
+        "object": "[vdso]",
+        "samples": 24
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "samples": 20
+      },
+      {
+        "object": "/usr/lib/libGLdispatch.so.0.0.0",
+        "samples": 20
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "samples": 20
+      },
+      {
+        "object": "/usr/lib/libGLX_mesa.so.0.0.0",
+        "samples": 15
+      },
+      {
+        "object": "/usr/lib/libGLX.so.0.0.0",
+        "samples": 10
+      },
+      {
+        "object": "/usr/lib/libX11.so.6.4.0",
+        "samples": 9
+      },
+      {
+        "object": "/usr/lib/libexpat.so.1.13.0",
+        "samples": 5
+      },
+      {
+        "object": "/usr/lib/libLLVM.so.23.1",
+        "samples": 3
+      },
+      {
+        "object": "/usr/lib/libgcc_s.so.1",
+        "samples": 2
+      },
+      {
+        "object": "/usr/lib/libzstd.so.1.5.7",
+        "samples": 1
+      },
+      {
+        "object": "/usr/lib/libxshmfence.so.1.0.0",
+        "samples": 1
+      },
+      {
+        "object": "/usr/lib/libxml2.so.16.1.4",
+        "samples": 1
+      }
+    ],
+    "functions": [
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool)",
+        "samples": 2037,
+        "percent_all": 33.636063408190225,
+        "percent_application": 53.6193735193472
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "[unknown]",
+        "samples": 1294,
+        "percent_all": 21.367239101717306,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::run_stress_mode(int, char**)",
+        "samples": 716,
+        "percent_all": 11.822985468956407,
+        "percent_application": 18.847065017109767
+      },
+      {
+        "object": "/usr/lib/libgallium-26.2.5-arch1.1.so",
+        "symbol": "[unknown]",
+        "samples": 709,
+        "percent_all": 11.707397622192866,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::StressGraphics::render(feature_lab::StressArena const&, std::array<feature_lab::StressPreparationPhase, 4ul>*, std::array<feature_lab::StressContextPhase, 4ul>*)::{lambda()#2}::operator()() const",
+        "samples": 649,
+        "percent_all": 10.716644649933949,
+        "percent_application": 17.083443011318767
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::StressGraphics::render(feature_lab::StressArena const&, std::array<feature_lab::StressPreparationPhase, 4ul>*, std::array<feature_lab::StressContextPhase, 4ul>*)",
+        "samples": 99,
+        "percent_all": 1.6347424042272127,
+        "percent_application": 2.6059489339299815
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)",
+        "samples": 77,
+        "percent_all": 1.271466314398943,
+        "percent_application": 2.02684917083443
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::sprite(engine::TextureHandle, engine::Transform, engine::Color, engine::Rect)",
+        "samples": 40,
+        "percent_all": 0.6605019815059445,
+        "percent_application": 1.0529086601737299
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Scene::set_transform(engine::Entity, engine::LocalTransform)",
+        "samples": 38,
+        "percent_all": 0.6274768824306473,
+        "percent_application": 1.0002632271650433
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::Impl::submit(engine::Transform, engine::Color, engine::Rect, unsigned int, bool, bool) [clone .constprop.0]",
+        "samples": 32,
+        "percent_all": 0.5284015852047557,
+        "percent_application": 0.8423269281389839
+      },
+      {
+        "object": "/usr/lib/ld-linux-x86-64.so.2",
+        "symbol": "[unknown]",
+        "samples": 31,
+        "percent_all": 0.511889035667107,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "ioctl",
+        "samples": 30,
+        "percent_all": 0.4953764861294584,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "void std::__introsort_loop<__gnu_cxx::__normal_iterator<engine::CollisionWorld::Cell*, std::vector<engine::CollisionWorld::Cell, std::allocator<engine::CollisionWorld::Cell> > >, long, engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)::{lambda(auto:1, auto:2)#1}>(__gnu_cxx::__normal_iterator<engine::CollisionWorld::Cell*, std::vector<engine::CollisionWorld::Cell, std::allocator<engine::CollisionWorld::Cell> > >, __gnu_cxx::__normal_iterator<engine::CollisionWorld::Cell*, std::vector<engine::CollisionWorld::Cell, std::allocator<engine::CollisionWorld::Cell> > >, long, engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)::{lambda(auto:1, auto:2)#1}) [clone .isra.0]",
+        "samples": 29,
+        "percent_all": 0.47886393659180976,
+        "percent_application": 0.7633587786259542
+      },
+      {
+        "object": "[vdso]",
+        "symbol": "__vdso_clock_gettime",
+        "samples": 24,
+        "percent_all": 0.3963011889035667,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libGLdispatch.so.0.0.0",
+        "symbol": "[unknown]",
+        "samples": 18,
+        "percent_all": 0.29722589167767505,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::TextCursor::next(engine::PositionedGlyph&)",
+        "samples": 17,
+        "percent_all": 0.2807133421400264,
+        "percent_application": 0.4474861805738352
+      },
+      {
+        "object": "/usr/lib/libGLX_mesa.so.0.0.0",
+        "symbol": "[unknown]",
+        "samples": 15,
+        "percent_all": 0.2476882430647292,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "cfree",
+        "samples": 10,
+        "percent_all": 0.16512549537648613,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libX11.so.6.4.0",
+        "symbol": "[unknown]",
+        "samples": 9,
+        "percent_all": 0.14861294583883752,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "[unknown]",
+        "samples": 8,
+        "percent_all": 0.13210039630118892,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "getrusage",
+        "samples": 8,
+        "percent_all": 0.13210039630118892,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "__libc_calloc",
+        "samples": 8,
+        "percent_all": 0.13210039630118892,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "clock_gettime",
+        "samples": 8,
+        "percent_all": 0.13210039630118892,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::TileMap::range(engine::Rect) const",
+        "samples": 7,
+        "percent_all": 0.1155878467635403,
+        "percent_application": 0.18425901553040275
+      },
+      {
+        "object": "/usr/lib/libGLX.so.0.0.0",
+        "symbol": "[unknown]",
+        "samples": 7,
+        "percent_all": 0.1155878467635403,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libexpat.so.1.13.0",
+        "symbol": "[unknown]",
+        "samples": 5,
+        "percent_all": 0.08256274768824307,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::text(engine::Vec2, float, std::basic_string_view<char, std::char_traits<char> >, engine::Color)",
+        "samples": 5,
+        "percent_all": 0.08256274768824307,
+        "percent_application": 0.13161358252171623
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::healthy() const",
+        "samples": 5,
+        "percent_all": 0.08256274768824307,
+        "percent_application": 0.13161358252171623
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::chrono::_V2::steady_clock::now()",
+        "samples": 5,
+        "percent_all": 0.08256274768824307,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libgallium-26.2.5-arch1.1.so",
+        "symbol": "loader_dri3_swap_buffers_msc",
+        "samples": 4,
+        "percent_all": 0.06605019815059446,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "pthread_mutex_lock",
+        "samples": 4,
+        "percent_all": 0.06605019815059446,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "__getpid",
+        "samples": 4,
+        "percent_all": 0.06605019815059446,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::(anonymous namespace)::validate(engine::Shape2D)",
+        "samples": 4,
+        "percent_all": 0.06605019815059446,
+        "percent_application": 0.10529086601737299
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "void std::__introsort_loop<__gnu_cxx::__normal_iterator<engine::Body2D*, std::vector<engine::Body2D, std::allocator<engine::Body2D> > >, long, engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)::{lambda(auto:1&, auto:2&)#1}>(__gnu_cxx::__normal_iterator<engine::Body2D*, std::vector<engine::Body2D, std::allocator<engine::Body2D> > >, __gnu_cxx::__normal_iterator<engine::Body2D*, std::vector<engine::Body2D, std::allocator<engine::Body2D> > >, long, engine::CollisionWorld::update(std::span<engine::Body2D const, 18446744073709551615ul>)::{lambda(auto:1&, auto:2&)#1}) [clone .isra.0]",
+        "samples": 4,
+        "percent_all": 0.06605019815059446,
+        "percent_application": 0.10529086601737299
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Scene::create(unsigned long, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)",
+        "samples": 3,
+        "percent_all": 0.04953764861294584,
+        "percent_application": 0.07896814951302975
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "xcb_send_request_with_fds64",
+        "samples": 3,
+        "percent_all": 0.04953764861294584,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::StressReport::observe(feature_lab::StressArena const&, feature_lab::StressResources const&)",
+        "samples": 3,
+        "percent_all": 0.04953764861294584,
+        "percent_application": 0.07896814951302975
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Window::poll(engine::Input&)",
+        "samples": 3,
+        "percent_all": 0.04953764861294584,
+        "percent_application": 0.07896814951302975
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "malloc",
+        "samples": 3,
+        "percent_all": 0.04953764861294584,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::end()",
+        "samples": 3,
+        "percent_all": 0.04953764861294584,
+        "percent_application": 0.07896814951302975
+      },
+      {
+        "object": "/usr/lib/libgallium-26.2.5-arch1.1.so",
+        "symbol": "dri_flush",
+        "samples": 3,
+        "percent_all": 0.04953764861294584,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libGLX.so.0.0.0",
+        "symbol": "glXSwapBuffers",
+        "samples": 3,
+        "percent_all": 0.04953764861294584,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)",
+        "samples": 3,
+        "percent_all": 0.04953764861294584,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libLLVM.so.23.1",
+        "symbol": "[unknown]",
+        "samples": 2,
+        "percent_all": 0.03302509907529723,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "xcb_take_socket",
+        "samples": 2,
+        "percent_all": 0.03302509907529723,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "writev",
+        "samples": 2,
+        "percent_all": 0.03302509907529723,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libGLdispatch.so.0.0.0",
+        "symbol": "__glDispatchCheckMultithreaded",
+        "samples": 2,
+        "percent_all": 0.03302509907529723,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::Impl::begin_pass(int, int, engine::Camera, engine::Color, unsigned int, unsigned int)",
+        "samples": 2,
+        "percent_all": 0.03302509907529723,
+        "percent_application": 0.052645433008686494
+      },
+      {
+        "object": "/usr/lib/libgcc_s.so.1",
+        "symbol": "__popcountdi2",
+        "samples": 2,
+        "percent_all": 0.03302509907529723,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "xcb_flush",
+        "samples": 2,
+        "percent_all": 0.03302509907529723,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)",
+        "samples": 2,
+        "percent_all": 0.03302509907529723,
+        "percent_application": 0.052645433008686494
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::texture_bytes() const",
+        "samples": 2,
+        "percent_all": 0.03302509907529723,
+        "percent_application": 0.052645433008686494
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::cpu_timing() const",
+        "samples": 2,
+        "percent_all": 0.03302509907529723,
+        "percent_application": 0.052645433008686494
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::Measurements::add(double)",
+        "samples": 2,
+        "percent_all": 0.03302509907529723,
+        "percent_application": 0.052645433008686494
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned long, unsigned long, char const*, unsigned long)",
+        "samples": 2,
+        "percent_all": 0.03302509907529723,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "__errno_location",
+        "samples": 2,
+        "percent_all": 0.03302509907529723,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "xcb_send_request",
+        "samples": 2,
+        "percent_all": 0.03302509907529723,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::GpuTimer::collect()",
+        "samples": 2,
+        "percent_all": 0.03302509907529723,
+        "percent_application": 0.052645433008686494
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "xcb_poll_for_special_event",
+        "samples": 2,
+        "percent_all": 0.03302509907529723,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::live_textures() const",
+        "samples": 2,
+        "percent_all": 0.03302509907529723,
+        "percent_application": 0.052645433008686494
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::StressReport::json[abi:cxx11](feature_lab::StressOptions const&) const",
+        "samples": 2,
+        "percent_all": 0.03302509907529723,
+        "percent_application": 0.052645433008686494
+      },
+      {
+        "object": "/usr/lib/libLLVM.so.23.1",
+        "symbol": "llvm::cl::Option::Option(llvm::cl::NumOccurrencesFlag, llvm::cl::OptionHidden)",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libzstd.so.1.5.7",
+        "symbol": "[unknown]",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::TileMapData::validate() const",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": 0.026322716504343247
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::CollisionWorld::buffer_bytes() const",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": 0.026322716504343247
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "operator new(unsigned long)",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "operator delete(void*, unsigned long)",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "pthread_cond_broadcast",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxcb.so.1.1.0",
+        "symbol": "xcb_connection_has_error",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "pthread_mutex_unlock",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxshmfence.so.1.0.0",
+        "symbol": "xshmfence_await",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "sincosf@plt",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": 0.026322716504343247
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::StressArena::checksum() const",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": 0.026322716504343247
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::StressArena::make_tiles(feature_lab::StressConfig const&)",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": 0.026322716504343247
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned long&, unsigned long)",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "std::chrono::_V2::steady_clock::now()@plt",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": 0.026322716504343247
+      },
+      {
+        "object": "/usr/lib/libgallium-26.2.5-arch1.1.so",
+        "symbol": "loader_dri3_flush",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::begin(engine::RenderTargetHandle, engine::Camera, engine::Color)",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": 0.026322716504343247
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*)",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::TextCursor::TextCursor(engine::BitmapFont const&, std::basic_string_view<char, std::char_traits<char> >, float)",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": 0.026322716504343247
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "recvmsg",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "feature_lab::StressArena::~StressArena()",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": 0.026322716504343247
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "memmove@plt",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": 0.026322716504343247
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "engine::Renderer::target_size(engine::RenderTargetHandle) const",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": 0.026322716504343247
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "__sysconf",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/home/zero/dev/engine_test/build/release/feature_lab",
+        "symbol": "void std::__introsort_loop<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, long, std::less<void> >(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, long, std::less<void>) [clone .isra.0]",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": 0.026322716504343247
+      },
+      {
+        "object": "/usr/lib/libc.so.6",
+        "symbol": "__uselocale",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::__num_base::_S_format_float(std::ios_base const&, char*, char)",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::ostream::sentry::sentry(std::ostream&)",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::ostream& std::ostream::_M_insert<double>(double)",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libstdc++.so.6.0.36",
+        "symbol": "std::ostream::put(char)",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      },
+      {
+        "object": "/usr/lib/libxml2.so.16.1.4",
+        "symbol": "xmlCleanupParser",
+        "samples": 1,
+        "percent_all": 0.016512549537648614,
+        "percent_application": null
+      }
+    ],
+    "quality_passed": true,
+    "repeat": 3,
+    "raw_sha256": "358d1e081574179145db95b572e3f0b6193aadf7b0e24c048c42ba99cd8f0107"
+  }
+]

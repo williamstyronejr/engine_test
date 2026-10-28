@@ -2255,12 +2255,34 @@ At documentation/restoration commit `dd434ea`, seven restored Release correctnes
 groups and three package groups pass (10/10, no skips, 47.51 s). All 61 evidence
 files and both benchmark documents match archived copies; profilers stay excluded.
 
+## Increment 68: main-thread function attribution
+
+- Declared and collected three normal/profiled pairs using the unchanged GNU
+  Release binary and all existing stress traces. Per-thread user-space perf sampling
+  runs from launch through teardown; it does not isolate measured-frame preparation.
+- Retained failed gprofng capability attempts, then used a repository-verified,
+  project-local perf and two libraries without system changes or runtime dependencies.
+- All profiles satisfy count/thread/loss/coverage checks. `Renderer::Impl::submit`
+  accounts for 53.62–55.01% of application samples and 33.64–37.50% of all samples;
+  unresolved library symbols remain in the denominator. Retained annotated emitted code.
+- Nine normal/profiled image pairs match; all six workload/checksum/trace/resource
+  identities validate. Overhead observations vary in direction. Every frame maximum
+  still exceeds 16.7 ms. No renderer optimization or new runtime API is adopted.
+
+See [protocol](../benchmarks/STRESS_FUNCTION_SAMPLING.md),
+[findings](../benchmarks/2026-10-28-functions-results.md) and
+[evidence](../validation/2026-10-28-functions/RESULTS.md).
+
+At documentation commit `6b47848`, all three Release package groups pass without
+skips (36.99 s). All 65 evidence files and both benchmark documents match archived
+copies; development profiling tools remain excluded.
+
 ## Next increment
 
-Obtain function-level CPU attribution before choosing another preparation
-optimization. First investigate sampling-tool availability and access, then declare
-measurement/overhead checks and retain full workload identities and failed attempts.
-The corner-reuse trial did not establish a repeatable gain; coarse phase totals do
-not identify a hot function. Keep presentation timing and context-switch-associated
-gaps separate from steady CPU cost. Physical display/audio, broader memory-path
-coverage and the final support record remain open; background loading stays deferred.
+Select and predeclare one vertex-emission experiment inside `Renderer::Impl::submit`
+using the retained disassembly. Preserve validation, culling, batching and floating-
+point operation order; require matching images/transforms and a repeatable CPU
+benefit before adoption. Samples locate an emitted function/loop, not an isolated
+instruction cost or the cause of frame spikes. Keep presentation/switch-associated
+wall-time gaps separate from steady CPU cost. Physical display/audio, broader memory coverage
+and the final support record remain open; background loading stays deferred.

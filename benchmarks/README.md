@@ -292,3 +292,8 @@ or causes for individual switches.
 The [quad-corner experiment](QUAD_CORNER_REUSE.md) compares separate reference and
 candidate binaries with a predeclared CPU adoption rule. [Results](2026-10-28-corners-results.md)
 reject adoption despite matching pixels; the renderer is restored and all attempts remain.
+
+[Main-thread function sampling](STRESS_FUNCTION_SAMPLING.md) uses an external,
+project-local development profiler against the unchanged Release binary.
+[Results](2026-10-28-functions-results.md) retain full sample coverage, unknown
+symbols, observer effects and frame-limit failures before selecting further work.

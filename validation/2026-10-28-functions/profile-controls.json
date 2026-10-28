@@ -1,0 +1,46 @@
+[
+  {
+    "control": "valid_with_unknown_external",
+    "accepted": true
+  },
+  {
+    "control": "mixed_tid",
+    "accepted": false
+  },
+  {
+    "control": "mixed_pid",
+    "accepted": false
+  },
+  {
+    "control": "malformed",
+    "accepted": false
+  },
+  {
+    "control": "missing_object",
+    "accepted": false
+  },
+  {
+    "control": "count_mismatch",
+    "accepted": false
+  },
+  {
+    "control": "lost",
+    "accepted": false
+  },
+  {
+    "control": "throttled",
+    "accepted": false
+  },
+  {
+    "control": "insufficient",
+    "accepted": false
+  },
+  {
+    "control": "unknown_application",
+    "accepted": false
+  },
+  {
+    "control": "inconsistent_counts",
+    "accepted": false
+  }
+]

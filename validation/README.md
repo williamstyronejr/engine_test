@@ -36,6 +36,9 @@ with its measurement interpretation linked from benchmarks.
   unchanged pixels and six retained plain/traced runs. The directory uses the
   October 26 local session date.
 
+- [2026-10-28 function sampling](2026-10-28-functions/RESULTS.md):
+  profiler capability failures, six normal/profiled runs, raw main-thread samples,
+  symbol attribution, observer effects and nine matching image pairs.
 - [2026-10-28 quad-corner experiment](2026-10-28-corners/RESULTS.md):
   reference/prototype correctness, 36 identical captures, six paired CPU attempts,
   retained launch failures and a failed adoption gate with restored renderer.

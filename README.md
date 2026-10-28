@@ -16,6 +16,8 @@ retains full compiler/sanitizer results, audio ThreadSanitizer checks and a clea
 offline build with relocated package checks. Release acceptance remains open. A [quad-corner reuse experiment](benchmarks/2026-10-28-corners-results.md)
 passed rendering checks but failed its CPU adoption gate; the existing renderer
 is retained, with the prototype and all measurements preserved.
+[Function sampling](benchmarks/2026-10-28-functions-results.md) now identifies quad
+submission as the leading application CPU symbol for the next measured experiment.
 
 Atomic saves also have [isolated filesystem-failure tests](docs/ATOMIC_SAVE_VALIDATION.md)
 covering short/interrupted writes, cleanup and failures before/after replacement.

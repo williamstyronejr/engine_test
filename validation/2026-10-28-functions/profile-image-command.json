@@ -1,0 +1,12 @@
+{
+  "command": [
+    "/home/zero/dev/engine_test/.tools/bin/cmake",
+    "-DGAME_EXE=/home/zero/dev/engine_test/build/function-validation/profile-images.sh",
+    "-DOUTPUT_DIR=/home/zero/dev/engine_test/build/function-validation/profile-images",
+    "-P",
+    "tests/check_stress_frames.cmake"
+  ],
+  "wrapper": "#!/bin/sh\nexec env LD_LIBRARY_PATH=/home/zero/dev/engine_test/build/function-validation/perf/usr/lib PERF_EXEC_PATH=/home/zero/dev/engine_test/build/function-validation/perf/usr/lib/perf /home/zero/dev/engine_test/build/function-validation/perf/usr/bin/perf record --no-inherit -e cpu-clock:u -c 1000000 -m 128 --no-buildid-cache -o /home/zero/dev/engine_test/build/function-validation/image-$$.data -- /home/zero/dev/engine_test/build/release/feature_lab \"$@\"\n",
+  "exit_code": 0,
+  "seconds": 10.243647932002204
+}
