@@ -1,0 +1,218 @@
+[
+  {
+    "path": "build/debug/stress-frame-tests/plain.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/debug/stress-frame-tests/traced.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/debug/stress-frame-tests/vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/debug/stress-frame-tests/split.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/debug/stress-frame-tests/split_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/debug/stress-frame-tests/prep.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/debug/stress-frame-tests/prep_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/debug/stress-frame-tests/ctx.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/debug/stress-frame-tests/ctx_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/release/stress-frame-tests/plain.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/release/stress-frame-tests/traced.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/release/stress-frame-tests/vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/release/stress-frame-tests/split.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/release/stress-frame-tests/split_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/release/stress-frame-tests/prep.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/release/stress-frame-tests/prep_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/release/stress-frame-tests/ctx.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/release/stress-frame-tests/ctx_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/clang/stress-frame-tests/plain.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/clang/stress-frame-tests/traced.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/clang/stress-frame-tests/vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/clang/stress-frame-tests/split.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/clang/stress-frame-tests/split_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/clang/stress-frame-tests/prep.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/clang/stress-frame-tests/prep_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/clang/stress-frame-tests/ctx.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/clang/stress-frame-tests/ctx_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/sanitize-platform/stress-frame-tests/plain.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/sanitize-platform/stress-frame-tests/traced.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/sanitize-platform/stress-frame-tests/vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/sanitize-platform/stress-frame-tests/split.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/sanitize-platform/stress-frame-tests/split_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/sanitize-platform/stress-frame-tests/prep.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/sanitize-platform/stress-frame-tests/prep_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/sanitize-platform/stress-frame-tests/ctx.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  },
+  {
+    "path": "build/sanitize-platform/stress-frame-tests/ctx_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6",
+    "bytes": 4284017,
+    "matches_reference": true
+  }
+]

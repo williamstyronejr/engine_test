@@ -1,0 +1,72 @@
+{
+  "tests": [
+    {
+      "configuration": "reference",
+      "name": "(empty)",
+      "tests": "7",
+      "failures": "0",
+      "disabled": "0",
+      "skipped": "0",
+      "hostname": "",
+      "time": "11",
+      "timestamp": "2026-10-28T05:31:59"
+    },
+    {
+      "configuration": "gcc-debug",
+      "name": "(empty)",
+      "tests": "7",
+      "failures": "0",
+      "disabled": "0",
+      "skipped": "0",
+      "hostname": "",
+      "time": "12",
+      "timestamp": "2026-10-28T05:34:34"
+    },
+    {
+      "configuration": "gcc-release",
+      "name": "(empty)",
+      "tests": "7",
+      "failures": "0",
+      "disabled": "0",
+      "skipped": "0",
+      "hostname": "",
+      "time": "11",
+      "timestamp": "2026-10-28T05:34:58"
+    },
+    {
+      "configuration": "clang-debug",
+      "name": "(empty)",
+      "tests": "7",
+      "failures": "0",
+      "disabled": "0",
+      "skipped": "0",
+      "hostname": "",
+      "time": "11",
+      "timestamp": "2026-10-28T05:35:39"
+    },
+    {
+      "configuration": "cpu-sanitize",
+      "name": "(empty)",
+      "tests": "1",
+      "failures": "0",
+      "disabled": "0",
+      "skipped": "0",
+      "hostname": "",
+      "time": "1",
+      "timestamp": "2026-10-28T05:36:02"
+    },
+    {
+      "configuration": "native-sanitize",
+      "name": "Linux-c++",
+      "tests": "6",
+      "failures": "0",
+      "disabled": "0",
+      "skipped": "0",
+      "hostname": "omarchy",
+      "time": "15",
+      "timestamp": "2026-10-28T05:36:42"
+    }
+  ],
+  "image_comparisons": 36,
+  "all_passed": true
+}

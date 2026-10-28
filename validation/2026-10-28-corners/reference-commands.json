@@ -1,0 +1,44 @@
+[
+  {
+    "command": [
+      "cmake",
+      "--preset",
+      "release"
+    ],
+    "exit_code": 0,
+    "seconds": 0.8050265049969312
+  },
+  {
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "--target",
+      "feature_lab",
+      "render_target_tests",
+      "sampling_tests",
+      "graphics_tests",
+      "stress_graphics_tests",
+      "transform_tests",
+      "font_graphics_tests",
+      "-j2"
+    ],
+    "exit_code": 0,
+    "seconds": 10.068767889999435
+  },
+  {
+    "command": [
+      "ctest",
+      "--preset",
+      "release",
+      "-R",
+      "^(render_targets|texture_sampling|graphics|stress_graphics|transforms|font_graphics|stress_frame_samples)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-28-corners/reference-tests.xml"
+    ],
+    "exit_code": 0,
+    "seconds": 12.016693279001629
+  }
+]

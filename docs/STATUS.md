@@ -2233,15 +2233,34 @@ At documentation commit `e67ad6e`, all three Release package checks pass (32.78 
 All 42 evidence files and both new benchmark documents match their archived copies;
 the allocation profilers remain excluded from installation.
 
+## Increment 67: quad-corner reuse experiment
+
+- Prototyped four clip-space calculations followed by the existing six-vertex
+  emission, preserving arithmetic order, culling, UVs, colors and batching.
+- Declared a ≥5% median preparation CPU reduction in each of three pairs before
+  collection. Changes were +0.51%, −21.74% and +6.63% (positive means reduction):
+  the gate failed. Restored the renderer byte for byte; retained prototype history.
+- All 35 focused reference/prototype compiler/sanitizer test executions passed
+  without skips; 36 stress captures match the reference. Six timed runs preserve
+  matching workload/state/render identity. Initial unsupported-argument launch
+  failures are retained separately; no timing-based attempts were discarded.
+- Every frame p99 passes 16.7 ms, while every maximum fails. Presentation dominates
+  all 34 slow frames. This is not evidence of a fix for presentation or scheduling tails.
+
+See [declaration](../benchmarks/QUAD_CORNER_REUSE.md),
+[findings](../benchmarks/2026-10-28-corners-results.md) and
+[evidence](../validation/2026-10-28-corners/RESULTS.md).
+
+At documentation/restoration commit `dd434ea`, seven restored Release correctness
+groups and three package groups pass (10/10, no skips, 47.51 s). All 61 evidence
+files and both benchmark documents match archived copies; profilers stay excluded.
+
 ## Next increment
 
-Prototype reuse of each quad's clip-space corners before emitting six vertices,
-then compare against the current path with declared CPU and pixel/transform/culling
-checks. The phase profile does not establish this calculation as a hot function;
-adopt only after evaluating the candidate. Keep context-switch-associated tails
-separate: all 78 preparation gaps above 1 ms accompany involuntary switches, while
-937 other frames with involuntary switches stay at or below that grouping threshold.
-All six frame maxima still exceed 16.7 ms.
-Keep presentation timing, workload identities, declared limits and failed attempts.
-Physical display/audio, broader memory-path coverage and the final support record
-remain open; background loading remains deferred.
+Obtain function-level CPU attribution before choosing another preparation
+optimization. First investigate sampling-tool availability and access, then declare
+measurement/overhead checks and retain full workload identities and failed attempts.
+The corner-reuse trial did not establish a repeatable gain; coarse phase totals do
+not identify a hot function. Keep presentation timing and context-switch-associated
+gaps separate from steady CPU cost. Physical display/audio, broader memory-path
+coverage and the final support record remain open; background loading stays deferred.

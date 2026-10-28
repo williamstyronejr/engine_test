@@ -36,6 +36,9 @@ with its measurement interpretation linked from benchmarks.
   unchanged pixels and six retained plain/traced runs. The directory uses the
   October 26 local session date.
 
+- [2026-10-28 quad-corner experiment](2026-10-28-corners/RESULTS.md):
+  reference/prototype correctness, 36 identical captures, six paired CPU attempts,
+  retained launch failures and a failed adoption gate with restored renderer.
 - [2026-10-28 UTC context-switch correlation](2026-10-28-context/RESULTS.md):
   six retained attempts, exact per-thread snapshots, phase/frame gap groups,
   focused checks and thirty-two identical image pairs.

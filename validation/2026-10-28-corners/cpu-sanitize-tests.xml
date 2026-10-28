@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="1"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="1"
+	timestamp="2026-10-28T05:36:02"
+	>
+	<testcase name="transforms" classname="transforms" time="1.00998" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS hierarchy_numeric_reference_and_read_only_sampling
+PASS camera_corners_resize_aspects_and_invalid_domains
+PASS follow_interpolation_edges_and_oversized_viewports
+PASS decorations_orbit_scale_mirror_shear_and_wrap
+PASS decorations_pause_step_restore_restart_and_large_ticks
+PASS decorations_replay_same_interpolated_pose_every_command
+PASS animated_subtrees_reject_gameplay_and_collision_nodes
+7 tests, 0 failed
+</system-out>
+	</testcase>
+</testsuite>

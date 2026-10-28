@@ -1,0 +1,30 @@
+Test project /home/zero/dev/engine_test/build/release
+      Start 13: transforms
+ 1/10 Test #13: transforms .......................   Passed    0.03 sec
+      Start 44: font_graphics
+ 2/10 Test #44: font_graphics ....................   Passed    0.25 sec
+      Start 45: texture_sampling
+ 3/10 Test #45: texture_sampling .................   Passed    0.30 sec
+      Start 46: stress_frame_samples
+ 4/10 Test #46: stress_frame_samples .............   Passed    9.99 sec
+      Start 47: stress_graphics
+ 5/10 Test #47: stress_graphics ..................   Passed    0.08 sec
+      Start 55: render_targets
+ 6/10 Test #55: render_targets ...................   Passed    0.67 sec
+      Start 60: graphics
+ 7/10 Test #60: graphics .........................   Passed    0.07 sec
+      Start 66: package_build
+ 8/10 Test #66: package_build ....................   Passed    8.12 sec
+      Start 67: package_relocation
+ 9/10 Test #67: package_relocation ...............   Passed    3.53 sec
+      Start 68: package_graphics
+10/10 Test #68: package_graphics .................   Passed   24.39 sec
+
+100% tests passed out of 10
+
+Label Time Summary:
+cpu          =   0.03 sec*proc (1 test)
+hardware     =  35.76 sec*proc (7 tests)
+packaging    =  36.04 sec*proc (3 tests)
+
+Total Test time (real) =  47.51 sec

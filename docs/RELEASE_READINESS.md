@@ -264,9 +264,11 @@ with six retained attempts and phase/frame category distributions. Spans include
 GL work and wider boundaries, so counts cannot isolate non-GL waits or their cause.
 All 78 preparation gaps above 1 ms accompany involuntary switches, while 937 other
 frames with involuntary switches have smaller gaps; no duration or root cause is
-assigned to individual switches. All six maxima still fail 16.7 ms. Next: test
-per-quad clip-space corner reuse against the current path as a steady CPU-cost
-experiment, retaining associated timing tails and image/transform/culling checks.
+assigned to individual switches. All six maxima still fail 16.7 ms.
+Increment 67 [tests quad-corner reuse](../benchmarks/2026-10-28-corners-results.md):
+correctness passes, but the predeclared CPU gate fails, so the renderer is restored.
+All six new frame maxima exceed 16.7 ms; presentation dominates all 34 slow frames.
+Next obtain function-level CPU attribution before selecting another optimization.
 R6 timing/coverage and physical R4/R5 cases remain open; R8 requires their
 coverage/support record. Refresh automated evidence when the implementation or
 toolchain changes. These results do not complete milestone 6.

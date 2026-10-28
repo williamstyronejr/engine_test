@@ -1,0 +1,26 @@
+[
+  {
+    "command": [
+      "cmake",
+      "--preset",
+      "release"
+    ],
+    "exit_code": 0,
+    "seconds": 0.6995692310010782,
+    "source": "2fcb6dc0b5ecdd473c7c0c7fce4d0b613ce30cea"
+  },
+  {
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "--target",
+      "feature_lab",
+      "-j2"
+    ],
+    "exit_code": 0,
+    "seconds": 8.909091913003067,
+    "source": "2fcb6dc0b5ecdd473c7c0c7fce4d0b613ce30cea"
+  }
+]

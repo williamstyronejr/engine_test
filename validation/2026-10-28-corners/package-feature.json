@@ -1,0 +1,55 @@
+{
+  "source": "dd434ea95078008bb6585d25f7e678c03b6e1386",
+  "recorded_utc": "2026-10-28T09:45:00.591855+00:00",
+  "commands": [
+    {
+      "command": [
+        "cmake",
+        "--preset",
+        "release"
+      ],
+      "exit_code": 0,
+      "seconds": 0.3410265790007543
+    },
+    {
+      "command": [
+        "cmake",
+        "--build",
+        "--preset",
+        "release",
+        "--target",
+        "feature_lab",
+        "stress_bench",
+        "validate_assets",
+        "render_target_tests",
+        "sampling_tests",
+        "graphics_tests",
+        "stress_graphics_tests",
+        "transform_tests",
+        "font_graphics_tests",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "seconds": 11.676516109997465
+    },
+    {
+      "command": [
+        "ctest",
+        "--preset",
+        "release",
+        "-R",
+        "^(render_targets|texture_sampling|graphics|stress_graphics|transforms|font_graphics|stress_frame_samples|package_build|package_relocation|package_graphics)$",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "seconds": 47.69139703599649
+    }
+  ],
+  "tests_passed": 10,
+  "tests_skipped": 0,
+  "restored_renderer_groups": 7,
+  "packaging_groups": 3,
+  "ctest_seconds": 47.51,
+  "matching_archive_files": 63,
+  "allocation_profilers_installed": false
+}
