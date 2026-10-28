@@ -259,9 +259,14 @@ with calling-thread CPU time and signed wall-minus-CPU gaps. All six attempts an
 nested phase/GL partitions are retained; these do not establish a hot instruction
 or attribute a gap specifically to scheduler delay. In 23 of 30 largest profiled
 submissions the preparation wall-minus-CPU gap exceeds its CPU duration. Three p99
-values and all six maxima fail 16.7 ms. Next: correlate voluntary/involuntary
-context-switch counters with these gaps before choosing a tail-latency fix;
-steady CPU optimization remains a separate experiment.
+values and all six maxima fail 16.7 ms. Increment 66 [adds thread switch counters](../benchmarks/2026-10-28-context-results.md)
+with six retained attempts and phase/frame category distributions. Spans include
+GL work and wider boundaries, so counts cannot isolate non-GL waits or their cause.
+All 78 preparation gaps above 1 ms accompany involuntary switches, while 937 other
+frames with involuntary switches have smaller gaps; no duration or root cause is
+assigned to individual switches. All six maxima still fail 16.7 ms. Next: test
+per-quad clip-space corner reuse against the current path as a steady CPU-cost
+experiment, retaining associated timing tails and image/transform/culling checks.
 R6 timing/coverage and physical R4/R5 cases remain open; R8 requires their
 coverage/support record. Refresh automated evidence when the implementation or
 toolchain changes. These results do not complete milestone 6.

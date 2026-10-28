@@ -36,6 +36,9 @@ with its measurement interpretation linked from benchmarks.
   unchanged pixels and six retained plain/traced runs. The directory uses the
   October 26 local session date.
 
+- [2026-10-28 UTC context-switch correlation](2026-10-28-context/RESULTS.md):
+  six retained attempts, exact per-thread snapshots, phase/frame gap groups,
+  focused checks and thirty-two identical image pairs.
 - [2026-10-27 preparation profiling](2026-10-27-preparation/RESULTS.md):
   six retained on/off runs, coarse phase wall/thread-CPU measurements, nested GL
   reconstruction, signed gaps, focused checks and twenty-four identical image pairs.

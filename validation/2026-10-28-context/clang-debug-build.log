@@ -1,0 +1,25 @@
+[1/25] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/replay_profile.cpp.o
+[2/25] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/stress_benchmark.cpp.o
+[3/25] Building CXX object CMakeFiles/engine_platform.dir/engine/src/renderer.cpp.o
+[4/25] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/spike_profile.cpp.o
+[5/25] Stage Feature Lab assets
+[6/25] Linking CXX static library libfeature_lab_stress.a
+[7/25] Building CXX object CMakeFiles/engine_platform.dir/engine/src/ui_renderer.cpp.o
+[8/25] Building CXX object CMakeFiles/stress_bench.dir/tools/stress_bench.cpp.o
+[9/25] Building CXX object CMakeFiles/stress_tests.dir/tests/stress_tests.cpp.o
+[10/25] Building CXX object CMakeFiles/replay_profile_tests.dir/tests/replay_profile_tests.cpp.o
+[11/25] Linking CXX static library libengine_platform.a
+[12/25] Building CXX object CMakeFiles/spike_profile_tests.dir/tests/spike_profile_tests.cpp.o
+[13/25] Building CXX object CMakeFiles/feature_lab.dir/examples/feature_lab/main.cpp.o
+[14/25] Building CXX object CMakeFiles/feature_lab.dir/examples/feature_lab/stress_mode.cpp.o
+[15/25] Building CXX object CMakeFiles/stress_graphics_tests.dir/tests/stress_graphics_tests.cpp.o
+[16/25] Building CXX object CMakeFiles/render_target_tests.dir/tests/render_target_tests.cpp.o
+[17/25] Linking CXX executable stress_bench
+[18/25] Linking CXX executable stress_tests
+[19/25] Linking CXX executable replay_profile_tests
+[20/25] Linking CXX executable spike_profile_tests
+[21/25] Linking CXX executable feature_lab
+[22/25] Building CXX object CMakeFiles/gpu_timer_tests.dir/tests/gpu_timer_tests.cpp.o
+[23/25] Linking CXX executable stress_graphics_tests
+[24/25] Linking CXX executable render_target_tests
+[25/25] Linking CXX executable gpu_timer_tests

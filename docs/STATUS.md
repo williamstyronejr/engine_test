@@ -2210,13 +2210,34 @@ At documentation commit `82b6b2f`, all three Release package checks pass (33.45 
 All 42 evidence files and both new benchmark documents match their archived copies;
 the allocation profilers remain excluded from installation.
 
+## Increment 66: per-thread context-switch correlation
+
+- Added `--context-samples`, requiring frame/submission/preparation traces.
+  Voluntary/involuntary snapshots enclose each whole phase, including GL and clock
+  reads. Counter calls lie outside phase timings; their overhead remains in the
+  enclosing render interval. No priorities, affinities or scheduler settings change.
+- Separate bounded storage reserves once; records preserve exact uint64 strings
+  and reject counter regressions across spans/phases/cycles. Defaults retain no
+  context-row payload and make no new counter calls.
+- All six declared on/off attempts complete with matching workload/state/render
+  identity. Analysis groups paired gaps by observed switch categories without
+  assigning durations or causes to individual switches.
+- Nine focused groups pass in GNU Debug/Release and Clang; five CPU and four native
+  sanitizer groups pass without skips. Thirty-two image comparisons match.
+
+See [contract](../benchmarks/STRESS_CONTEXT_SWITCHES.md),
+[findings](../benchmarks/2026-10-28-context-results.md) and
+[evidence](../validation/2026-10-28-context/RESULTS.md).
+
 ## Next increment
 
-Correlate the paired gaps with render-thread voluntary/involuntary context-switch
-counters before choosing a tail-latency fix. The wall-minus-CPU gap exceeds CPU
-time in 23 of 30 largest profiled submissions; three p99 values and all six maxima
-still fail 16.7 ms. Counter deltas do not identify wait durations or blocking causes.
-Keep steady CPU optimization separate, with the scalar path as a reference.
+Prototype reuse of each quad's clip-space corners before emitting six vertices,
+then compare against the current path with declared CPU and pixel/transform/culling
+checks. The phase profile does not establish this calculation as a hot function;
+adopt only after evaluating the candidate. Keep context-switch-associated tails
+separate: all 78 preparation gaps above 1 ms accompany involuntary switches, while
+937 other frames with involuntary switches stay at or below that grouping threshold.
+All six frame maxima still exceed 16.7 ms.
 Keep presentation timing, workload identities, declared limits and failed attempts.
 Physical display/audio, broader memory-path coverage and the final support record
 remain open; background loading remains deferred.
