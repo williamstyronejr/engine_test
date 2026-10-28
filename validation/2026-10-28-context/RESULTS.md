@@ -47,3 +47,14 @@ python3 validation/2026-10-28-context/analyze.py \
 ```
 
 Counter spans contain GL work and slightly wider boundaries than the timed phases. Deltas neither provide switch durations nor identify blocking causes. Original timing/memory limits and earlier failed attempts remain unchanged; physical and broader memory-path gates remain open.
+
+## Feature package verification
+
+At documentation commit `e67ad6e`, all three Release package checks pass without
+skips (32.78 s), including relocated OpenGL gameplay. All 42 evidence files and
+both new benchmark documents match their archived copies byte-for-byte. The four
+allocation profilers remain excluded. Build identity is GNU 16.2.1, Release,
+sanitizers off. These follow-up package records are included in the later archive.
+
+[Identity and commands](package-feature.json), [configure](package-feature-configure.log),
+[build](package-feature-build.log), [tests](package-feature-tests.log).

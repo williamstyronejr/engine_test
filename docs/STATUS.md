@@ -2229,6 +2229,10 @@ See [contract](../benchmarks/STRESS_CONTEXT_SWITCHES.md),
 [findings](../benchmarks/2026-10-28-context-results.md) and
 [evidence](../validation/2026-10-28-context/RESULTS.md).
 
+At documentation commit `e67ad6e`, all three Release package checks pass (32.78 s).
+All 42 evidence files and both new benchmark documents match their archived copies;
+the allocation profilers remain excluded from installation.
+
 ## Next increment
 
 Prototype reuse of each quad's clip-space corners before emitting six vertices,

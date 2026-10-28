@@ -1,0 +1,45 @@
+{
+  "archive": "/home/zero/dev/engine_test/build/release/dist/feature-lab-0.1.0-Linux-x86_64-e67ad6e.tar.gz",
+  "revision": "e67ad6e",
+  "matching_files": 44,
+  "profilers_installed": false,
+  "source": "e67ad6eb8dbf52a029c4583beafe26ad099b296c",
+  "commands": [
+    {
+      "command": [
+        "cmake",
+        "--preset",
+        "release"
+      ],
+      "exit_code": 0,
+      "seconds": 0.3731763850009884
+    },
+    {
+      "command": [
+        "cmake",
+        "--build",
+        "--preset",
+        "release",
+        "--target",
+        "feature_lab",
+        "stress_bench",
+        "validate_assets",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "seconds": 9.028538933998789
+    },
+    {
+      "command": [
+        "ctest",
+        "--preset",
+        "release",
+        "-L",
+        "packaging",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "seconds": 32.97850571299932
+    }
+  ]
+}
