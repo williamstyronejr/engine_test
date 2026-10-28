@@ -80,8 +80,7 @@ struct Renderer::Impl {
     GLuint batch_texture{};
     bool batch_premultiplied{};
     unsigned int high_errors{};
-    std::unique_ptr<Vertex[]> vertices;
-    std::size_t vertex_count{};
+    std::vector<Vertex> vertices;
     Camera camera;
     Vec2 extent;
     int width{}, height{};
@@ -113,7 +112,7 @@ struct Renderer::Impl {
             gl.DeleteVertexArrays(1, &vao);
     }
     void initialize() {
-        vertices = std::make_unique<Vertex[]>(batch_capacity * 6);
+        vertices.reserve(batch_capacity * 6);
         gl.Enable(GL_DEBUG_OUTPUT);
         gl.Enable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
         gl.DebugMessageCallback(debug_callback, &high_errors);
@@ -280,7 +279,7 @@ struct Renderer::Impl {
         stats = {};
         cpu_timing = {};
         clip_depth = 0;
-        vertex_count = 0;
+        vertices.clear();
         const auto started = cpu_timing_enabled ? Clock::now() : Clock::time_point{};
         const auto cpu_started = thread_cpu_timing_enabled ? thread_cpu_nanoseconds() : 0;
         gl.BindFramebuffer(GL_FRAMEBUFFER, framebuffer);
@@ -312,7 +311,7 @@ struct Renderer::Impl {
     void submit(Transform transform, Color color, Rect uv, GLuint object,
                 bool premultiplied = false, bool extended_uv = false);
     void flush() {
-        if (vertex_count == 0)
+        if (vertices.empty())
             return;
         const auto started = cpu_timing_enabled ? Clock::now() : Clock::time_point{};
         const auto cpu_started = thread_cpu_timing_enabled ? thread_cpu_nanoseconds() : 0;
@@ -328,18 +327,18 @@ struct Renderer::Impl {
         gl.BufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(batch_capacity * 6 * sizeof(Vertex)),
                       nullptr, GL_STREAM_DRAW);
         gl.BufferSubData(GL_ARRAY_BUFFER, 0,
-                         static_cast<GLsizeiptr>(vertex_count * sizeof(Vertex)),
-                         vertices.get());
-        gl.DrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertex_count));
+                         static_cast<GLsizeiptr>(vertices.size() * sizeof(Vertex)),
+                         vertices.data());
+        gl.DrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
         if (thread_cpu_timing_enabled)
             cpu_timing.upload_draw_cpu_ms +=
                 static_cast<double>(thread_cpu_nanoseconds() - cpu_started) / 1e6;
         if (cpu_timing_enabled) {
             cpu_timing.upload_draw_ms += elapsed(started);
             ++cpu_timing.batches;
-            cpu_timing.upload_bytes += vertex_count * sizeof(Vertex);
+            cpu_timing.upload_bytes += vertices.size() * sizeof(Vertex);
         }
-        vertex_count = 0;
+        vertices.clear();
         ++stats.draws;
     }
 };
@@ -523,19 +522,17 @@ void Renderer::Impl::submit(Transform transform, Color color, Rect uv, GLuint ob
         ++p.stats.culled;
         return;
     }
-    if (p.vertex_count + 6 > batch_capacity * 6 || p.batch_texture != object ||
+    if (p.vertices.size() + 6 > batch_capacity * 6 || p.batch_texture != object ||
         p.batch_premultiplied != premultiplied)
         p.flush();
     p.batch_texture = object;
     p.batch_premultiplied = premultiplied;
-    auto cursor = p.vertex_count;
     for (const std::size_t i : {0U, 1U, 2U, 0U, 2U, 3U}) {
         const Vec2 point = positions[i] - p.camera.center;
-        p.vertices[cursor++] = {point.x * 2 / p.extent.x, point.y * 2 / p.extent.y,
+        p.vertices.push_back({point.x * 2 / p.extent.x, point.y * 2 / p.extent.y,
                               i == 0 || i == 3 ? uv.min.x : uv.max.x, i < 2 ? uv.min.y : uv.max.y,
-                               color};
+                              color});
     }
-    p.vertex_count = cursor;
     ++p.stats.quads;
 }
 void Renderer::quad(Vec2 center, Vec2 size, Color color, float angle, bool checker) {

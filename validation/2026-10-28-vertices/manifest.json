@@ -1,0 +1,274 @@
+{
+  "schema": "quad_fixed_buffer_collection_v1",
+  "source": "d0f1f521ae853266be6cf76e7c401de7acb4183e",
+  "started_utc": "2026-10-28T20:12:07.836676+00:00",
+  "reference_source": "9003db72f02034c6c42028272e65171c783931a0",
+  "executable_sha256": {
+    "reference": "2945b619465da535d237ee3e17c983f4172b45beb32f9cad82a8931a1143f5ba",
+    "candidate": "2ded48121b7e984ee9ec74266b72d35529296356e013e0a50c6141d3e309332e"
+  },
+  "declaration_sha256": "d0dfab84c9c8971a64f5e72ccf608f07ea9e1d388df094249b4e1c816b3d2585",
+  "collector_sha256": "bb603819dac4aaae7a69742be40bea38e826951ced749e8fb86ac7d3e4e8dda3",
+  "display": ":0",
+  "runs": [
+    {
+      "mode": "reference",
+      "repeat": 1,
+      "command": [
+        "build/vertex-validation/reference-feature-lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--submission-samples",
+        "--preparation-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-28-vertices/reference-1.json",
+        "--context-samples"
+      ],
+      "report": "reference-1.json",
+      "log": "reference-1.log",
+      "started_utc": "2026-10-28T20:12:07.856628+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -267100,
+        "/sys/class/thermal/thermal_zone1/temp": 67000
+      },
+      "exit_code": 0,
+      "seconds": 8.929220195001108,
+      "rss_peak_bytes": 57774080,
+      "finished_utc": "2026-10-28T20:12:16.789438+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264900,
+        "/sys/class/thermal/thermal_zone1/temp": 77000
+      },
+      "report_sha256": "0a84928eb320652929a6ef9156a51e5e7c9b20a054c8c2eaa02eeaa9fc979574",
+      "log_sha256": "c2b66741a05fb2a868d717ed39399e34b3407347fcaf6a069d0c9effaae5f3d9"
+    },
+    {
+      "mode": "candidate",
+      "repeat": 1,
+      "command": [
+        "build/vertex-validation/candidate-feature-lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--submission-samples",
+        "--preparation-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-28-vertices/candidate-1.json",
+        "--context-samples"
+      ],
+      "report": "candidate-1.json",
+      "log": "candidate-1.log",
+      "started_utc": "2026-10-28T20:12:16.832817+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264900,
+        "/sys/class/thermal/thermal_zone1/temp": 80000
+      },
+      "exit_code": 0,
+      "seconds": 9.057750775988097,
+      "rss_peak_bytes": 57712640,
+      "finished_utc": "2026-10-28T20:12:25.893672+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264400,
+        "/sys/class/thermal/thermal_zone1/temp": 83000
+      },
+      "report_sha256": "ce51e56d40ee9884e9169d3d57cb06c17f4f0e2d4b5329388327bdbdd2e0cc8a",
+      "log_sha256": "fa96eda9238b02572d84383ad97218c0f6d6f5b7e3a04a7891d310b80b96ab87"
+    },
+    {
+      "mode": "candidate",
+      "repeat": 2,
+      "command": [
+        "build/vertex-validation/candidate-feature-lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--submission-samples",
+        "--preparation-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-28-vertices/candidate-2.json",
+        "--context-samples"
+      ],
+      "report": "candidate-2.json",
+      "log": "candidate-2.log",
+      "started_utc": "2026-10-28T20:12:25.908323+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264400,
+        "/sys/class/thermal/thermal_zone1/temp": 84000
+      },
+      "exit_code": 0,
+      "seconds": 9.16295495101076,
+      "rss_peak_bytes": 57745408,
+      "finished_utc": "2026-10-28T20:12:35.073804+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264200,
+        "/sys/class/thermal/thermal_zone1/temp": 85000
+      },
+      "report_sha256": "a0ba6903e3847ac3c67d39b2ebce8b7a7b0a7125e5dc9a454734eebd251e95b3",
+      "log_sha256": "c871f8ec528c7850ff9ffe61e3c9b59bab54c9caf4af604cf574cf02d74d7d4e"
+    },
+    {
+      "mode": "reference",
+      "repeat": 2,
+      "command": [
+        "build/vertex-validation/reference-feature-lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--submission-samples",
+        "--preparation-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-28-vertices/reference-2.json",
+        "--context-samples"
+      ],
+      "report": "reference-2.json",
+      "log": "reference-2.log",
+      "started_utc": "2026-10-28T20:12:35.087440+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264200,
+        "/sys/class/thermal/thermal_zone1/temp": 86000
+      },
+      "exit_code": 0,
+      "seconds": 9.388753292005276,
+      "rss_peak_bytes": 57810944,
+      "finished_utc": "2026-10-28T20:12:44.477925+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264300,
+        "/sys/class/thermal/thermal_zone1/temp": 87000
+      },
+      "report_sha256": "70979d72f1ed245e0a9a6c3135b200a097ad17151326b6a2342d05fb97fc899f",
+      "log_sha256": "6ef3681df8995192571d72752a1ecf9fe18dfe3971974b0322f2397c0115ea0b"
+    },
+    {
+      "mode": "reference",
+      "repeat": 3,
+      "command": [
+        "build/vertex-validation/reference-feature-lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--submission-samples",
+        "--preparation-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-28-vertices/reference-3.json",
+        "--context-samples"
+      ],
+      "report": "reference-3.json",
+      "log": "reference-3.log",
+      "started_utc": "2026-10-28T20:12:44.512585+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264300,
+        "/sys/class/thermal/thermal_zone1/temp": 88000
+      },
+      "exit_code": 0,
+      "seconds": 9.631809687998611,
+      "rss_peak_bytes": 57421824,
+      "finished_utc": "2026-10-28T20:12:54.146012+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264200,
+        "/sys/class/thermal/thermal_zone1/temp": 88000
+      },
+      "report_sha256": "f2b5ad0766a601a0587fa3f9caefc235d9c76270a4f6238977453bbbbea54262",
+      "log_sha256": "6bdc01718db6f3bbb2fb782787c27196f1fb82bca2ca86f47f483fe80b989fe2"
+    },
+    {
+      "mode": "candidate",
+      "repeat": 3,
+      "command": [
+        "build/vertex-validation/candidate-feature-lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--frame-samples",
+        "--submission-samples",
+        "--preparation-samples",
+        "--presentation",
+        "immediate",
+        "--report",
+        "validation/2026-10-28-vertices/candidate-3.json",
+        "--context-samples"
+      ],
+      "report": "candidate-3.json",
+      "log": "candidate-3.log",
+      "started_utc": "2026-10-28T20:12:54.158979+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264200,
+        "/sys/class/thermal/thermal_zone1/temp": 89000
+      },
+      "exit_code": 0,
+      "seconds": 9.810734402009984,
+      "rss_peak_bytes": 57483264,
+      "finished_utc": "2026-10-28T20:13:03.972219+00:00",
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264200,
+        "/sys/class/thermal/thermal_zone1/temp": 89000
+      },
+      "report_sha256": "d47088cd1b53ce241c659a51532b971306cea85d15d94f5898daeafae9d89547",
+      "log_sha256": "fc7ab0a42b9fafde8ef125aa4f8409b8aeb9f289eba20a4275371d457d346667"
+    }
+  ],
+  "finished_utc": "2026-10-28T20:13:03.991649+00:00"
+}

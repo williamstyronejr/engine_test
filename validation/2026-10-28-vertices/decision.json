@@ -1,0 +1,12 @@
+{
+  "adopted": false,
+  "reason": "Not all three paired median preparation CPU reductions meet the predeclared 5% gate",
+  "reference_source": "9003db72f02034c6c42028272e65171c783931a0",
+  "candidate_source": "d0f1f521ae853266be6cf76e7c401de7acb4183e",
+  "renderer_restored": true,
+  "reference_renderer_blob": "54de0a2263e480508ca615942b46275d1a51fba1",
+  "restored_renderer_blob": "54de0a2263e480508ca615942b46275d1a51fba1",
+  "boundary_regression_test_retained": true,
+  "correctness_passed": true,
+  "cpu_gate_passed": false
+}

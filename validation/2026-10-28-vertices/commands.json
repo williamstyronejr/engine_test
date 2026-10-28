@@ -1,0 +1,276 @@
+[
+  {
+    "name": "gcc-debug-configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "debug"
+    ],
+    "environment_overrides": {},
+    "source": "d0f1f521ae853266be6cf76e7c401de7acb4183e",
+    "utc": "2026-10-28T20:09:17.923716+00:00",
+    "seconds": 0.41804247901018243,
+    "exit_code": 0
+  },
+  {
+    "name": "gcc-debug-build",
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "debug",
+      "--target",
+      "feature_lab",
+      "render_target_tests",
+      "sampling_tests",
+      "graphics_tests",
+      "stress_graphics_tests",
+      "transform_tests",
+      "font_graphics_tests",
+      "-j2"
+    ],
+    "environment_overrides": {},
+    "source": "d0f1f521ae853266be6cf76e7c401de7acb4183e",
+    "utc": "2026-10-28T20:10:05.368591+00:00",
+    "seconds": 47.44447636399127,
+    "exit_code": 0
+  },
+  {
+    "name": "gcc-debug-tests",
+    "command": [
+      "ctest",
+      "--preset",
+      "debug",
+      "-R",
+      "^(render_targets|texture_sampling|graphics|stress_graphics|transforms|font_graphics|stress_frame_samples)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-28-vertices/gcc-debug-tests.xml"
+    ],
+    "environment_overrides": {},
+    "source": "d0f1f521ae853266be6cf76e7c401de7acb4183e",
+    "utc": "2026-10-28T20:10:18.022895+00:00",
+    "seconds": 12.653987429002882,
+    "exit_code": 0
+  },
+  {
+    "name": "gcc-release-configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "release"
+    ],
+    "environment_overrides": {},
+    "source": "d0f1f521ae853266be6cf76e7c401de7acb4183e",
+    "utc": "2026-10-28T20:10:18.540562+00:00",
+    "seconds": 0.3869920419965638,
+    "exit_code": 0
+  },
+  {
+    "name": "gcc-release-build",
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "--target",
+      "feature_lab",
+      "render_target_tests",
+      "sampling_tests",
+      "graphics_tests",
+      "stress_graphics_tests",
+      "transform_tests",
+      "font_graphics_tests",
+      "-j2"
+    ],
+    "environment_overrides": {},
+    "source": "d0f1f521ae853266be6cf76e7c401de7acb4183e",
+    "utc": "2026-10-28T20:10:29.041414+00:00",
+    "seconds": 10.500520378001966,
+    "exit_code": 0
+  },
+  {
+    "name": "gcc-release-tests",
+    "command": [
+      "ctest",
+      "--preset",
+      "release",
+      "-R",
+      "^(render_targets|texture_sampling|graphics|stress_graphics|transforms|font_graphics|stress_frame_samples)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-28-vertices/gcc-release-tests.xml"
+    ],
+    "environment_overrides": {},
+    "source": "d0f1f521ae853266be6cf76e7c401de7acb4183e",
+    "utc": "2026-10-28T20:10:40.573900+00:00",
+    "seconds": 11.532063359991298,
+    "exit_code": 0
+  },
+  {
+    "name": "clang-debug-configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "clang"
+    ],
+    "environment_overrides": {},
+    "source": "d0f1f521ae853266be6cf76e7c401de7acb4183e",
+    "utc": "2026-10-28T20:10:41.076299+00:00",
+    "seconds": 0.3799887689965544,
+    "exit_code": 0
+  },
+  {
+    "name": "clang-debug-build",
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "clang",
+      "--target",
+      "feature_lab",
+      "render_target_tests",
+      "sampling_tests",
+      "graphics_tests",
+      "stress_graphics_tests",
+      "transform_tests",
+      "font_graphics_tests",
+      "-j2"
+    ],
+    "environment_overrides": {},
+    "source": "d0f1f521ae853266be6cf76e7c401de7acb4183e",
+    "utc": "2026-10-28T20:10:51.605658+00:00",
+    "seconds": 10.529077640996547,
+    "exit_code": 0
+  },
+  {
+    "name": "clang-debug-tests",
+    "command": [
+      "ctest",
+      "--preset",
+      "clang",
+      "-R",
+      "^(render_targets|texture_sampling|graphics|stress_graphics|transforms|font_graphics|stress_frame_samples)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-28-vertices/clang-debug-tests.xml"
+    ],
+    "environment_overrides": {},
+    "source": "d0f1f521ae853266be6cf76e7c401de7acb4183e",
+    "utc": "2026-10-28T20:11:04.126977+00:00",
+    "seconds": 12.52068332399358,
+    "exit_code": 0
+  },
+  {
+    "name": "cpu-sanitize-configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "sanitize"
+    ],
+    "environment_overrides": {},
+    "source": "d0f1f521ae853266be6cf76e7c401de7acb4183e",
+    "utc": "2026-10-28T20:11:04.509284+00:00",
+    "seconds": 0.25596820999635383,
+    "exit_code": 0
+  },
+  {
+    "name": "cpu-sanitize-build",
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "sanitize",
+      "--target",
+      "transform_tests",
+      "-j2"
+    ],
+    "environment_overrides": {},
+    "source": "d0f1f521ae853266be6cf76e7c401de7acb4183e",
+    "utc": "2026-10-28T20:11:04.687538+00:00",
+    "seconds": 0.17770080499758478,
+    "exit_code": 0
+  },
+  {
+    "name": "cpu-sanitize-tests",
+    "command": [
+      "ctest",
+      "--preset",
+      "sanitize",
+      "-R",
+      "^transforms$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-28-vertices/cpu-sanitize-tests.xml"
+    ],
+    "environment_overrides": {
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1"
+    },
+    "source": "d0f1f521ae853266be6cf76e7c401de7acb4183e",
+    "utc": "2026-10-28T20:11:05.875479+00:00",
+    "seconds": 1.1875437830021838,
+    "exit_code": 0
+  },
+  {
+    "name": "native-sanitize-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/sanitize-platform",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_SANITIZERS=ON"
+    ],
+    "environment_overrides": {},
+    "source": "d0f1f521ae853266be6cf76e7c401de7acb4183e",
+    "utc": "2026-10-28T20:11:06.253526+00:00",
+    "seconds": 0.3775587039999664,
+    "exit_code": 0
+  },
+  {
+    "name": "native-sanitize-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/sanitize-platform",
+      "--target",
+      "feature_lab",
+      "render_target_tests",
+      "sampling_tests",
+      "graphics_tests",
+      "stress_graphics_tests",
+      "font_graphics_tests",
+      "-j2"
+    ],
+    "environment_overrides": {},
+    "source": "d0f1f521ae853266be6cf76e7c401de7acb4183e",
+    "utc": "2026-10-28T20:11:22.522998+00:00",
+    "seconds": 16.268934498002636,
+    "exit_code": 0
+  },
+  {
+    "name": "native-sanitize-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/sanitize-platform",
+      "-R",
+      "^(render_targets|texture_sampling|graphics|stress_graphics|font_graphics|stress_frame_samples)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-28-vertices/native-sanitize-tests.xml"
+    ],
+    "environment_overrides": {
+      "ASAN_OPTIONS": "detect_leaks=0:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1"
+    },
+    "source": "d0f1f521ae853266be6cf76e7c401de7acb4183e",
+    "utc": "2026-10-28T20:11:40.188707+00:00",
+    "seconds": 17.66516238100303,
+    "exit_code": 0
+  }
+]

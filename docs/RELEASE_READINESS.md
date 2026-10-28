@@ -272,7 +272,11 @@ Increment 68 [collects main-thread function samples](../benchmarks/2026-10-28-fu
 quad submission leads application symbols consistently, with no lost/throttled
 samples and matching normal/profiled pixels. Whole-process sample scope and
 unresolved driver symbols limit interpretation; all six frame maxima still fail.
-Next predeclare a vertex-emission candidate using the retained emitted code.
+Increment 69 [tests fixed-capacity vertex emission](../benchmarks/2026-10-28-vertices-results.md):
+all correctness checks pass, but inconsistent paired CPU changes fail the declared
+adoption gate. The renderer is restored; new capacity-boundary regression tests
+remain. Every frame maximum still fails. Investigate run-to-run stability before
+another optimization trial.
 R6 timing/coverage and physical R4/R5 cases remain open; R8 requires their
 coverage/support record. Refresh automated evidence when the implementation or
 toolchain changes. These results do not complete milestone 6.
