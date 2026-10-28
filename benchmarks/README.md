@@ -288,3 +288,7 @@ them as exact scheduler latency or isolated GPU work.
 around preparation phases. The [2026-10-28 correlation](2026-10-28-context-results.md)
 groups gaps by observed voluntary/involuntary switches without claiming durations
 or causes for individual switches.
+
+The [quad-corner experiment](QUAD_CORNER_REUSE.md) compares separate reference and
+candidate binaries with a predeclared CPU adoption rule. [Results](2026-10-28-corners-results.md)
+reject adoption despite matching pixels; the renderer is restored and all attempts remain.

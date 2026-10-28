@@ -1,0 +1,12 @@
+{
+  "adopted": false,
+  "reason": "Not all three pairs meet the predeclared 5% median CPU reduction gate",
+  "prototype_source": "2f0e9de93119629079f4bf98ff4059065edcba3b",
+  "collection_candidate_source": "2fcb6dc0b5ecdd473c7c0c7fce4d0b613ce30cea",
+  "reference_source": "547695cd43ba707b88013e641357d7fc639e40f9",
+  "renderer_restored": true,
+  "reference_renderer_blob": "54de0a2263e480508ca615942b46275d1a51fba1",
+  "restored_renderer_blob": "54de0a2263e480508ca615942b46275d1a51fba1",
+  "correctness_passed": true,
+  "cpu_gate_passed": false
+}

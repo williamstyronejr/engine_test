@@ -1,0 +1,5 @@
+[1/5] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/replay_profile.cpp.o
+[2/5] Stage Feature Lab assets
+[3/5] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/stress_benchmark.cpp.o
+[4/5] Linking CXX static library libfeature_lab_stress.a
+[5/5] Linking CXX executable feature_lab
