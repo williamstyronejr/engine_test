@@ -39,3 +39,13 @@ python validation/2026-10-28-vertices/analyzer_controls.py
 
 Analyzer success establishes internal consistency, not a passed optimization gate
 or release acceptance. Missing GPU observations and earlier timing failures remain.
+
+## Final restored Release and packaging
+
+At `abdffa5`, the stress-graphics group (including the retained boundary test)
+and all three Release package groups pass: **4/4, no skips, 41.46 s**. All 54
+evidence files then present and both benchmark documents match archived copies
+(56 files). Development allocation profilers remain excluded.
+[package-feature.json](package-feature.json) and the corresponding configure/build/
+test logs retain commands and results. The merge revision receives a fresh Release
+configure/build and all three package groups before publication.

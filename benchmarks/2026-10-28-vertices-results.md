@@ -108,6 +108,11 @@ These workload counters do not include the separately described renderer batch.
 GPU atlas remains 16 bytes and render target 8,294,400, with stable resource counts.
 This does not broaden the existing memory-path coverage.
 
+At restoration/documentation commit `abdffa5`, stress graphics (including the new
+boundary case) and all three Release package groups pass (4/4, no skips, 41.46 s).
+All 54 evidence files then present and both benchmark documents match archived
+copies; development allocation profilers remain excluded.
+
 ## Follow-up
 
 Investigate run-to-run variation before a third optimization trial. Declare

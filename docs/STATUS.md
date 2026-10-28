@@ -2293,6 +2293,10 @@ See [protocol](../benchmarks/QUAD_FIXED_BUFFER.md),
 [findings](../benchmarks/2026-10-28-vertices-results.md) and
 [evidence](../validation/2026-10-28-vertices/RESULTS.md).
 
+At restoration/documentation commit `abdffa5`, stress graphics and all three
+Release package groups pass (4/4, no skips, 41.46 s). All 54 evidence files and both
+benchmark documents match archived copies; allocation profilers remain excluded.
+
 ## Next increment
 
 Investigate run-to-run variation before another optimization trial. Predeclare
