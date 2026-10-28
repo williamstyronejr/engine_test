@@ -1,0 +1,9 @@
+[1/9] Stage Feature Lab assets
+[2/9] Building CXX object CMakeFiles/font_graphics_tests.dir/tests/font_graphics_tests.cpp.o
+[3/9] Building CXX object CMakeFiles/sampling_tests.dir/tests/sampling_tests.cpp.o
+[4/9] Building CXX object CMakeFiles/graphics_tests.dir/tests/graphics_tests.cpp.o
+[5/9] Linking CXX executable font_graphics_tests
+[6/9] Linking CXX executable sampling_tests
+[7/9] Linking CXX executable graphics_tests
+[8/9] Building CXX object CMakeFiles/stress_graphics_tests.dir/tests/stress_graphics_tests.cpp.o
+[9/9] Linking CXX executable stress_graphics_tests

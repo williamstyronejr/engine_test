@@ -527,9 +527,12 @@ void Renderer::Impl::submit(Transform transform, Color color, Rect uv, GLuint ob
         p.flush();
     p.batch_texture = object;
     p.batch_premultiplied = premultiplied;
+    for (auto& position : positions) {
+        const Vec2 point = position - p.camera.center;
+        position = {point.x * 2 / p.extent.x, point.y * 2 / p.extent.y};
+    }
     for (const std::size_t i : {0U, 1U, 2U, 0U, 2U, 3U}) {
-        const Vec2 point = positions[i] - p.camera.center;
-        p.vertices.push_back({point.x * 2 / p.extent.x, point.y * 2 / p.extent.y,
+        p.vertices.push_back({positions[i].x, positions[i].y,
                               i == 0 || i == 3 ? uv.min.x : uv.max.x, i < 2 ? uv.min.y : uv.max.y,
                               color});
     }
