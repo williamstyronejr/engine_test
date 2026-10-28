@@ -1,0 +1,15 @@
+{
+  "source": "2f0e9de93119629079f4bf98ff4059065edcba3b",
+  "cwd": "/home/zero/dev/engine_test",
+  "platform": [
+    "Linux",
+    "omarchy",
+    "7.2.8-9-omarchy",
+    "#1 SMP PREEMPT_DYNAMIC Sat, 17 Oct 2026 22:09:33 +0000",
+    "x86_64",
+    ""
+  ],
+  "python": "3.14.8",
+  "display": ":0",
+  "session": "wayland"
+}

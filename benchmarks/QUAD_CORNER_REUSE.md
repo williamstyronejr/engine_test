@@ -73,3 +73,13 @@ python validation/2026-10-28-corners/analyze.py validation/2026-10-28-corners
 Collection refuses existing output files. Use a fresh evidence directory (the optional
 third argument) for a new experiment, retaining the declaration, collector and
 reference-build identity there. Do not overwrite this experiment's evidence.
+
+## Collector correction before timing
+
+The initial six launch attempts at `2f0e9de` incorrectly included `--assets`, which
+stress mode rejects. Every process exited 1 before rendering, without a timing
+report. Their original collector, manifest and logs remain in the evidence's
+`launch-failure/` directory. Remove only this unsupported argument and commit the
+correction before the six timed attempts; rebuild the candidate to stamp that
+source identity. Stress renders procedural assets. No timing-based retry or
+adoption-rule change is involved. The renderer remains identical to `2f0e9de`.

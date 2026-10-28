@@ -20,7 +20,7 @@ for repeat,modes in [(1,['reference','candidate']),(2,['candidate','reference'])
   stem=f'{mode}-{repeat}';report=root/(stem+'.json');log=root/(stem+'.log')
   assert not report.exists() and not log.exists()
   args=[binaries[mode],'--stress','--width','1920','--height','1080','--frames','600','--warmup','60','--cycles','3','--frame-samples','--submission-samples','--preparation-samples','--presentation','immediate','--report',str(report)]
-  args += ['--context-samples','--assets',str(Path('assets').resolve())]
+  args.append('--context-samples')
   entry={'mode':mode,'repeat':repeat,'command':args,'report':report.name,'log':log.name,'started_utc':utc(),'temperatures_before':temperatures()}
   print('START',stem,flush=True);start=time.monotonic()
   with log.open('x') as f:
