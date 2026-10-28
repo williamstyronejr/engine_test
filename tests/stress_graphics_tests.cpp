@@ -2,6 +2,7 @@
 #include "engine/window.hpp"
 #include "test.hpp"
 #include <cstdlib>
+#include <limits>
 namespace {
 using namespace testing;
 using namespace engine;
@@ -31,6 +32,44 @@ TEST(repeated_gpu_load_draw_unload_and_rollover) {
         }
         CHECK(stress_gpu_resources(*renderer) == baseline);
     }
+    CHECK(renderer->healthy());
+}
+TEST(quad_batch_capacity_edges_and_empty_reset) {
+    const auto target = renderer->create_target(64, 32);
+    const auto white = renderer->upload({1, 1, {255, 255, 255, 255}});
+    constexpr auto capacity = Renderer::batch_capacity;
+    renderer->set_cpu_timing(true);
+    for (const auto count : std::array<std::size_t, 6>{0, 1, capacity - 1, capacity,
+                                                     capacity + 1, 2 * capacity + 1}) {
+        renderer->begin(target, {{}, 32}, {0, 0, 1, 1});
+        for (std::size_t i = 0; i < count; ++i)
+            renderer->sprite(white, Transform::from({}, 0, {4, 4}),
+                             i + 1 == count ? Color{0, 1, 0, 1} : Color{1, 0, 0, 1});
+        renderer->sprite(white, Transform::from({1000, 0}, 0, {1, 1}));
+        rejects([&] {
+            renderer->sprite(white, Transform::from(
+                                        {std::numeric_limits<float>::infinity(), 0}, 0, {1, 1}));
+        });
+        CHECK(renderer->stats().quads == count && renderer->stats().culled == 1);
+        CHECK(renderer->stats().draws == (count ? (count - 1) / capacity : 0));
+        renderer->end();
+        const auto draws = (count + capacity - 1) / capacity;
+        CHECK(renderer->stats().draws == draws);
+        CHECK(renderer->cpu_timing().batches == draws);
+        CHECK(renderer->cpu_timing().upload_bytes == count * 6 * 32);
+        const auto pixel = renderer->pixel(32, 16);
+        CHECK(pixel[0] == 0 && pixel[1] == (count ? 255 : 0));
+        CHECK(pixel[2] == (count ? 0 : 255) && pixel[3] == 255);
+
+        renderer->begin(target, {{}, 32}, {0, 0, 0, 1});
+        renderer->end();
+        CHECK(renderer->stats().quads == 0 && renderer->stats().draws == 0);
+        CHECK(renderer->cpu_timing().batches == 0 && renderer->cpu_timing().upload_bytes == 0);
+        CHECK(renderer->pixel(32, 16)[1] == 0);
+    }
+    renderer->set_cpu_timing(false);
+    renderer->release(white);
+    renderer->release(target);
     CHECK(renderer->healthy());
 }
 TEST(cpu_timing_empty_pass_and_active_pass_contract) {

@@ -1,0 +1,44 @@
+[
+  {
+    "command": [
+      "cmake",
+      "--preset",
+      "release"
+    ],
+    "exit_code": 0,
+    "seconds": 0.5046327760064742
+  },
+  {
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "--target",
+      "feature_lab",
+      "render_target_tests",
+      "sampling_tests",
+      "graphics_tests",
+      "stress_graphics_tests",
+      "transform_tests",
+      "font_graphics_tests",
+      "-j2"
+    ],
+    "exit_code": 0,
+    "seconds": 0.19820422399789095
+  },
+  {
+    "command": [
+      "ctest",
+      "--preset",
+      "release",
+      "-R",
+      "^(render_targets|texture_sampling|graphics|stress_graphics|transforms|font_graphics|stress_frame_samples)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-28-vertices/reference-tests.xml"
+    ],
+    "exit_code": 0,
+    "seconds": 11.891253678011708
+  }
+]
