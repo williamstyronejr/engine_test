@@ -297,3 +297,8 @@ reject adoption despite matching pixels; the renderer is restored and all attemp
 project-local development profiler against the unchanged Release binary.
 [Results](2026-10-28-functions-results.md) retain full sample coverage, unknown
 symbols, observer effects and frame-limit failures before selecting further work.
+
+The [fixed vertex-buffer experiment](QUAD_FIXED_BUFFER.md) tests direct writes into
+bounded storage. [Results](2026-10-28-vertices-results.md) fail the CPU adoption rule;
+new boundary tests remain, and the renderer is restored. Further work first examines
+run-to-run measurement stability.

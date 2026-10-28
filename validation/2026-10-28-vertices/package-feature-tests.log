@@ -1,0 +1,17 @@
+Test project /home/zero/dev/engine_test/build/release
+    Start 47: stress_graphics
+1/4 Test #47: stress_graphics ..................   Passed    0.11 sec
+    Start 66: package_build
+2/4 Test #66: package_build ....................   Passed   11.57 sec
+    Start 67: package_relocation
+3/4 Test #67: package_relocation ...............   Passed    4.87 sec
+    Start 68: package_graphics
+4/4 Test #68: package_graphics .................   Passed   24.90 sec
+
+100% tests passed out of 4
+
+Label Time Summary:
+hardware     =  25.00 sec*proc (2 tests)
+packaging    =  41.34 sec*proc (3 tests)
+
+Total Test time (real) =  41.46 sec

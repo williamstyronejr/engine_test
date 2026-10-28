@@ -2277,12 +2277,32 @@ At documentation commit `6b47848`, all three Release package groups pass without
 skips (36.99 s). All 65 evidence files and both benchmark documents match archived
 copies; development profiling tools remain excluded.
 
+## Increment 69: fixed-capacity vertex emission trial
+
+- Prototyped one owned fixed-capacity vertex array and direct prefix writes,
+  publishing the live count once per quad while preserving arithmetic and batching.
+- Added capacity-edge, tail-pixel, culling/rejection and empty-reset regression
+  coverage; it passes against the original renderer and remains in the final suite.
+- All 36 reference/candidate compiler/sanitizer group executions pass without skips;
+  36 stress images match. Six timed attempts preserve workload/state/render identity.
+- Paired median preparation CPU reductions are +0.12%, −10.89% and +19.91%.
+  The predeclared ≥5% in every pair rule fails. Restored the renderer byte for byte;
+  the prototype and all results remain in history. All six frame maxima still fail.
+
+See [protocol](../benchmarks/QUAD_FIXED_BUFFER.md),
+[findings](../benchmarks/2026-10-28-vertices-results.md) and
+[evidence](../validation/2026-10-28-vertices/RESULTS.md).
+
+At restoration/documentation commit `abdffa5`, stress graphics and all three
+Release package groups pass (4/4, no skips, 41.46 s). All 54 evidence files and both
+benchmark documents match archived copies; allocation profilers remain excluded.
+
 ## Next increment
 
-Select and predeclare one vertex-emission experiment inside `Renderer::Impl::submit`
-using the retained disassembly. Preserve validation, culling, batching and floating-
-point operation order; require matching images/transforms and a repeatable CPU
-benefit before adoption. Samples locate an emitted function/loop, not an isolated
-instruction cost or the cause of frame spikes. Keep presentation/switch-associated
-wall-time gaps separate from steady CPU cost. Physical display/audio, broader memory coverage
-and the final support record remain open; background loading stays deferred.
+Investigate run-to-run variation before another optimization trial. Predeclare
+observational CPU-frequency/thermal metadata and a warmup/order stability comparison,
+without changing governor, affinity, priority or desktop settings. Do not revise
+the rules or discard results from either rejected candidate. Keep presentation and
+switch-associated gaps distinct from steady CPU cost. Physical display/audio,
+broader memory coverage and final support records stay open; background loading
+remains deferred.

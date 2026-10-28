@@ -1,0 +1,32 @@
+{
+  "runtime_source": "9003db72f02034c6c42028272e65171c783931a0",
+  "test_definition_source": "d0f1f521ae853266be6cf76e7c401de7acb4183e",
+  "test_file_sha256": "b360e2e6ff61e2dfa9ac79054ee2d9365188b6b3c6bdd091db7d4b1033a910f6",
+  "commands": [
+    [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "--target",
+      "stress_graphics_tests",
+      "-j2"
+    ],
+    [
+      "ctest",
+      "--preset",
+      "release",
+      "-R",
+      "^stress_graphics$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-28-vertices/boundary-reference-tests.xml"
+    ]
+  ],
+  "exit_codes": [
+    0,
+    0
+  ],
+  "tests_passed": 1,
+  "tests_skipped": 0
+}

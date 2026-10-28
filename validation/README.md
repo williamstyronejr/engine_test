@@ -36,6 +36,9 @@ with its measurement interpretation linked from benchmarks.
   unchanged pixels and six retained plain/traced runs. The directory uses the
   October 26 local session date.
 
+- [2026-10-28 fixed vertex-buffer trial](2026-10-28-vertices/RESULTS.md):
+  capacity-boundary regressions, 36 matching captures, six paired CPU attempts and
+  a failed adoption gate with exact renderer restoration.
 - [2026-10-28 function sampling](2026-10-28-functions/RESULTS.md):
   profiler capability failures, six normal/profiled runs, raw main-thread samples,
   symbol attribution, observer effects and nine matching image pairs.
