@@ -2251,6 +2251,10 @@ See [declaration](../benchmarks/QUAD_CORNER_REUSE.md),
 [findings](../benchmarks/2026-10-28-corners-results.md) and
 [evidence](../validation/2026-10-28-corners/RESULTS.md).
 
+At documentation/restoration commit `dd434ea`, seven restored Release correctness
+groups and three package groups pass (10/10, no skips, 47.51 s). All 61 evidence
+files and both benchmark documents match archived copies; profilers stay excluded.
+
 ## Next increment
 
 Obtain function-level CPU attribution before choosing another preparation

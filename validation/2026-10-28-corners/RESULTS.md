@@ -37,3 +37,14 @@ python validation/2026-10-28-corners/analyzer_controls.py
 
 Analyzer success establishes internal consistency, not release acceptance or a
 passed optimization gate. GPU missing observations and all timing failures remain.
+
+## Restored Release and package check
+
+At `dd434ea`, the seven focused correctness groups pass again on the restored
+renderer, together with all three packaging groups: **10/10, no skips, 47.51 s**.
+The archive contains byte-identical copies of all 61 evidence files then present
+and both benchmark documents (63 files). Four development allocation profilers
+remain excluded. [package-feature.json](package-feature.json) records commands,
+identity and counts; the corresponding configure/build/test logs retain output.
+The merge revision receives a fresh Release configure/build and all three package
+checks before publication.

@@ -100,6 +100,11 @@ records after hashes are updated in isolated copies. See the
 [evidence index](../validation/2026-10-28-corners/RESULTS.md) for commands, compiler
 logs, test XML and final packaging checks.
 
+At restoration/documentation commit `dd434ea`, the seven Release correctness groups
+pass again together with all three package groups (10/10, no skips, 47.51 s).
+All 61 evidence files then present and both benchmark documents match their archive
+copies; development allocation profilers remain excluded.
+
 ## Follow-up
 
 Obtain function-level CPU attribution before proposing another arithmetic
