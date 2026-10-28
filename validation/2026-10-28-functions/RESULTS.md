@@ -56,3 +56,18 @@ the measured executable hash, not a later packaging build.
 No engine compiler/sanitizer matrix is claimed for this unchanged implementation.
 The final feature and merge revisions receive fresh GNU Release package checks.
 Physical synchronization/audibility and broader release support remain unverified.
+
+The capability probe's `errno` is a raw snapshot, meaningful only when `opened`
+is false. The successful 128-byte request retains stale errno 7 from the earlier
+failed request; `opened: true` records its valid returned descriptor. Successful
+perf sampling independently confirms access.
+
+## Release package checks
+
+At documentation commit `6b47848`, all three GNU Release package groups pass
+without skips (36.99 s). All 65 evidence files then present and both benchmark
+documents match their archive copies (67 files). The four development allocation
+profilers and the project-local perf/gprofng tools remain excluded.
+[package-feature.json](package-feature.json) and the corresponding configure/build/
+test logs retain commands and results. The merge revision receives a fresh
+configure/build and all three package checks before publication.

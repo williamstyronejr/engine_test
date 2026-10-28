@@ -2273,6 +2273,10 @@ See [protocol](../benchmarks/STRESS_FUNCTION_SAMPLING.md),
 [findings](../benchmarks/2026-10-28-functions-results.md) and
 [evidence](../validation/2026-10-28-functions/RESULTS.md).
 
+At documentation commit `6b47848`, all three Release package groups pass without
+skips (36.99 s). All 65 evidence files and both benchmark documents match archived
+copies; development profiling tools remain excluded.
+
 ## Next increment
 
 Select and predeclare one vertex-emission experiment inside `Renderer::Impl::submit`

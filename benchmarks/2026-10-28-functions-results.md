@@ -117,6 +117,10 @@ including perf and its child; it is not an engine-only heap or RSS delta. These
 observations do not extend the older memory-path coverage. Raw engine cycle-boundary
 RSS remains separately available in reports.
 
+At documentation commit `6b47848`, all three Release package groups pass without
+skips (36.99 s). All 65 evidence files then present and both benchmark documents
+match archived copies; development profilers remain excluded.
+
 ## Next investigation
 
 Select and predeclare one vertex-emission experiment inside `Renderer::Impl::submit`

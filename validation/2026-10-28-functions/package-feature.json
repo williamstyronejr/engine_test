@@ -1,0 +1,47 @@
+{
+  "source": "6b47848f4392453810c74fe78385ac1f3d6de21c",
+  "recorded_utc": "2026-10-28T15:04:39.463416+00:00",
+  "commands": [
+    {
+      "command": [
+        "cmake",
+        "--preset",
+        "release"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4502805630036164
+    },
+    {
+      "command": [
+        "cmake",
+        "--build",
+        "--preset",
+        "release",
+        "--target",
+        "feature_lab",
+        "stress_bench",
+        "validate_assets",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "seconds": 8.523618979001185
+    },
+    {
+      "command": [
+        "ctest",
+        "--preset",
+        "release",
+        "-L",
+        "packaging",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "seconds": 37.162143074005144
+    }
+  ],
+  "tests_passed": 3,
+  "tests_skipped": 0,
+  "ctest_seconds": 36.99,
+  "matching_archive_files": 67,
+  "development_profilers_installed": false
+}
