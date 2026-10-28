@@ -1,0 +1,57 @@
+{
+  "utc": "2026-10-28T14:49:13.766423+00:00",
+  "source": "c65fb23f2a2b8fd4ed47b7ea42c6a1fa3d965e58",
+  "platform": [
+    "Linux",
+    "omarchy",
+    "7.2.8-9-omarchy",
+    "#1 SMP PREEMPT_DYNAMIC Sat, 17 Oct 2026 22:09:33 +0000",
+    "x86_64",
+    ""
+  ],
+  "display": ":0",
+  "session": "wayland",
+  "kernel_perf_event_paranoid": "2",
+  "initial_perf_path": null,
+  "gprofng_version": "GNU gprofng binutils version 2.47\nCopyright (C) 2026 Free Software Foundation, Inc.\nLicense GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.\nThis is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.\n",
+  "capability_probes": [
+    {
+      "attr_size": 56,
+      "opened": false,
+      "errno": 7,
+      "error": "Argument list too long"
+    },
+    {
+      "attr_size": 128,
+      "opened": true,
+      "errno": 7,
+      "error": "Argument list too long"
+    }
+  ],
+  "initial_gprofng_engine_smoke_exit": 137,
+  "initial_gprofng_engine_command": [
+    "gprofng",
+    "collect",
+    "app",
+    "-p",
+    "1",
+    "-j",
+    "off",
+    "-F",
+    "off",
+    "-a",
+    "off",
+    "-o",
+    "build/function-validation/smoke.er",
+    "build/release/feature_lab",
+    "--stress",
+    "--frames",
+    "30",
+    "--warmup",
+    "3",
+    "--cycles",
+    "1",
+    "--report",
+    "build/function-validation/smoke.json"
+  ]
+}

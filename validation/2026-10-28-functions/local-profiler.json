@@ -1,0 +1,20 @@
+[
+  {
+    "url": "https://stable-mirror.omarchy.org/extra/os/x86_64/libtraceevent-1:1.9.0-1-x86_64.pkg.tar.zst",
+    "sha256": "40bd5d4fd4c3d4a0c8be3cd2af9cbc570ec3dfe8b5047cf4854d742c22cfcd2e",
+    "repository_sha256_matches": true,
+    "bytes": 174587
+  },
+  {
+    "url": "https://stable-mirror.omarchy.org/extra/os/x86_64/libpfm-4.14.1-1-x86_64.pkg.tar.zst",
+    "sha256": "430a596f6d2c5cd2af725922f3c21dd0d74b053e4e6d319b6be9b25494223372",
+    "repository_sha256_matches": true,
+    "bytes": 407116
+  },
+  {
+    "url": "https://stable-mirror.omarchy.org/extra/os/x86_64/perf-7.2.11-1-x86_64.pkg.tar.zst",
+    "sha256": "f8666b2653b5ceba7c73eb6d761345a62831c46e28b3e5a26408e68fdd41b0e8",
+    "repository_sha256_matches": true,
+    "bytes": 3392627
+  }
+]
