@@ -2384,6 +2384,12 @@ copies; allocation profilers remain excluded.
 See [contract](RENDERER_MEMORY.md#f2-memory-panel-increment-73) and
 [validation](../validation/2026-10-29-diagnostics-memory/RESULTS.md).
 
+The initial package-content audit caught omitted PNG captures after the three
+runtime/package tests passed. The install filter and archive gate now include and
+verify validation images. At corrected commit `f54d0d0`, all three package groups
+pass without skips (44.27 s); all 72 evidence files and eight changed documentation
+files match the archive. The original failed audit is retained.
+
 ## Next increment
 
 Refresh release-readiness evidence at the integrated revision: run the full GNU

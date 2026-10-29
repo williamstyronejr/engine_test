@@ -97,3 +97,11 @@ and original package commands/logs are retained. The install filter now includes
 validation PNGs, and the archive target checks each source capture's staged bytes
 before creating the manifest. The corrected package is verified separately before
 publication. These packaging-only changes leave the matrix's runtime sources intact.
+
+At corrected package commit `f54d0d0`, all three Release package groups pass without
+skips (44.27 s). The [archive audit](package-corrected-inventory.json) verifies all
+72 then-current evidence files and eight changed documentation files byte-for-byte,
+including all seven PNGs. The four allocation profilers remain excluded. The
+initial failed audit stays visible above; it is not reclassified as a pass.
+A fresh configure/build and the same three package groups are required at the
+local merge revision before pushing `main`.
