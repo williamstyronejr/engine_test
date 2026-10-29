@@ -68,12 +68,12 @@ for config in ['debug', 'release', 'clang', 'sanitize', 'sanitize-platform']:
         overrides = {'ASAN_OPTIONS': 'detect_leaks='+('1' if config == 'sanitize' else '0')+':halt_on_error=1',
                      'UBSAN_OPTIONS': 'halt_on_error=1'}
     if config == 'sanitize-platform':
-        groups = ['renderer_memory', 'render_targets', 'font_graphics', 'font_reload',
+        groups = ['gpu_timers', 'renderer_memory', 'render_targets', 'font_graphics', 'font_reload',
                   'texture_reload', 'shaders', 'watched_reload', 'scene_watch', 'tilemap_watch',
                   'animation_watch', 'stress_graphics', 'stress_frame_samples', 'ui_allocations',
                   'diagnostics_allocations', 'audio_transport', 'audio_reload']
         selection = ['-R', '^('+'|'.join(groups)+')$']
-        build_args += ['--target', 'renderer_memory_tests', 'render_target_tests', 'font_graphics_tests',
+        build_args += ['--target', 'gpu_timer_tests', 'renderer_memory_tests', 'render_target_tests', 'font_graphics_tests',
                        'font_reload_tests', 'texture_reload_tests', 'shader_tests', 'watched_reload_tests',
                        'scene_watch_tests', 'tilemap_watch_tests', 'animation_watch_tests',
                        'stress_graphics_tests', 'feature_lab', 'ui_allocations',

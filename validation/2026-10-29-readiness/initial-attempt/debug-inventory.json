@@ -1,0 +1,2412 @@
+{
+  "backtraceGraph": {
+    "commands": [
+      "add_test"
+    ],
+    "files": [
+      "/home/zero/dev/engine_test/CMakeLists.txt"
+    ],
+    "nodes": [
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 58,
+        "parent": 0
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 63,
+        "parent": 2
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 68,
+        "parent": 4
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 70,
+        "parent": 6
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 77,
+        "parent": 8
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 82,
+        "parent": 10
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 87,
+        "parent": 12
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 92,
+        "parent": 14
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 96,
+        "parent": 16
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 101,
+        "parent": 18
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 105,
+        "parent": 20
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 109,
+        "parent": 22
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 114,
+        "parent": 24
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 116,
+        "parent": 26
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 121,
+        "parent": 28
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 123,
+        "parent": 30
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 129,
+        "parent": 32
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 134,
+        "parent": 34
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 142,
+        "parent": 36
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 147,
+        "parent": 38
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 152,
+        "parent": 40
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 156,
+        "parent": 42
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 161,
+        "parent": 44
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 165,
+        "parent": 46
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 170,
+        "parent": 48
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 175,
+        "parent": 50
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 180,
+        "parent": 52
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 187,
+        "parent": 54
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 193,
+        "parent": 56
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 198,
+        "parent": 58
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 203,
+        "parent": 60
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 207,
+        "parent": 62
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 211,
+        "parent": 64
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 216,
+        "parent": 66
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 246,
+        "parent": 68
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 255,
+        "parent": 70
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 264,
+        "parent": 72
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 266,
+        "parent": 74
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 274,
+        "parent": 76
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 279,
+        "parent": 78
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 284,
+        "parent": 80
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 289,
+        "parent": 82
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 293,
+        "parent": 84
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 297,
+        "parent": 86
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 301,
+        "parent": 88
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 303,
+        "parent": 90
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 311,
+        "parent": 92
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 315,
+        "parent": 94
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 321,
+        "parent": 96
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 326,
+        "parent": 98
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 331,
+        "parent": 100
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 335,
+        "parent": 102
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 339,
+        "parent": 104
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 345,
+        "parent": 106
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 350,
+        "parent": 108
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 355,
+        "parent": 110
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 363,
+        "parent": 112
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 368,
+        "parent": 114
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 373,
+        "parent": 116
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 377,
+        "parent": 118
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 381,
+        "parent": 120
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 383,
+        "parent": 122
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 387,
+        "parent": 124
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 393,
+        "parent": 126
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 400,
+        "parent": 128
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 402,
+        "parent": 130
+      }
+    ]
+  },
+  "kind": "ctestInfo",
+  "tests": [
+    {
+      "backtrace": 1,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/allocation_profile_tests"
+      ],
+      "name": "allocation_counters",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 3,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/hud_text_tests"
+      ],
+      "name": "hud_text",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 5,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/asset_validation_tests"
+      ],
+      "name": "asset_validation",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 7,
+      "command": [
+        "/home/zero/dev/engine_test/.tools/lib/python3.14/site-packages/cmake/data/bin/cmake",
+        "-DVALIDATOR=/home/zero/dev/engine_test/build/debug/validate_assets",
+        "-DASSET_ROOT=/home/zero/dev/engine_test/assets",
+        "-DWORK_ROOT=/home/zero/dev/engine_test/build/debug/asset-validation-cli",
+        "-P",
+        "/home/zero/dev/engine_test/tests/check_asset_validation.cmake"
+      ],
+      "name": "asset_validation_cli",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 9,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/mixer_reload_tests"
+      ],
+      "name": "mixer_reload",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 11,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/scene_reload_tests"
+      ],
+      "name": "scene_reload",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 13,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/tilemap_reload_tests"
+      ],
+      "name": "tilemap_reload",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 15,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/animation_reload_tests"
+      ],
+      "name": "animation_reload",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 17,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/audio_recovery_tests"
+      ],
+      "name": "audio_recovery",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 19,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/font_tests"
+      ],
+      "name": "fonts",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 21,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/asset_watch_tests"
+      ],
+      "name": "asset_watch",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 23,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/component_tests"
+      ],
+      "name": "components",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 60.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 25,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/transform_tests"
+      ],
+      "name": "transforms",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 27,
+      "command": [
+        "/home/zero/dev/engine_test/.tools/lib/python3.14/site-packages/cmake/data/bin/cmake",
+        "-DWORK_ROOT=/home/zero/dev/engine_test/build/debug/package-tests",
+        "-P",
+        "/home/zero/dev/engine_test/tests/package_manifest_tests.cmake"
+      ],
+      "name": "package_manifest",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 29,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/stress_tests"
+      ],
+      "name": "stress_cpu",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 31,
+      "command": [
+        "/home/zero/dev/engine_test/.tools/lib/python3.14/site-packages/cmake/data/bin/cmake",
+        "-DSTRESS_EXE=/home/zero/dev/engine_test/build/debug/stress_bench",
+        "-DREPORT_PATH=/home/zero/dev/engine_test/build/debug/stress-test-report.json",
+        "-P",
+        "/home/zero/dev/engine_test/tests/check_stress_report.cmake"
+      ],
+      "name": "stress_report",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 33,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/replay_profile_tests"
+      ],
+      "name": "replay_profile",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 35,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/spike_profile_tests"
+      ],
+      "name": "spike_profile",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 37,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/replay_tests"
+      ],
+      "name": "replay_files",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 39,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/level_tests"
+      ],
+      "name": "levels",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 60.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 41,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/scene_flow_tests"
+      ],
+      "name": "scene_flow",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 43,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/international_bindings_tests"
+      ],
+      "name": "international_bindings",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 45,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/bindings_tests"
+      ],
+      "name": "bindings",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 47,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/gpu_timer_queue_tests"
+      ],
+      "name": "gpu_timer_queue",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 49,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/diagnostics_tests"
+      ],
+      "name": "diagnostics",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 51,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/collision_tests"
+      ],
+      "name": "collision",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 53,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/persistence_tests"
+      ],
+      "name": "persistence",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 55,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/atomic_write_tests"
+      ],
+      "name": "atomic_write",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 57,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/storage_directory_tests"
+      ],
+      "name": "storage_directories",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 59,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/ui_tests"
+      ],
+      "name": "ui",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 61,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/sound_tests"
+      ],
+      "name": "sound",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 63,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/world_tests"
+      ],
+      "name": "tile_animation",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 65,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/content_tests"
+      ],
+      "name": "content",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 67,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/core_tests"
+      ],
+      "name": "core",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 69,
+      "command": [
+        "/home/zero/dev/engine_test/.tools/lib/python3.14/site-packages/cmake/data/bin/cmake",
+        "-DPROBE=/home/zero/dev/engine_test/build/debug/diagnostics_allocations",
+        "-DREPORT=/home/zero/dev/engine_test/build/debug/diagnostics-allocations.json",
+        "-DDIAGNOSTICS_MATRIX=ON",
+        "-P",
+        "/home/zero/dev/engine_test/tests/check_ui_allocations.cmake"
+      ],
+      "name": "diagnostics_allocations",
+      "properties": [
+        {
+          "name": "SKIP_REGULAR_EXPRESSION",
+          "value": [
+            "SKIP: UI allocation workload"
+          ]
+        },
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 150.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 71,
+      "command": [
+        "/home/zero/dev/engine_test/.tools/lib/python3.14/site-packages/cmake/data/bin/cmake",
+        "-DPROBE=/home/zero/dev/engine_test/build/debug/ui_allocations",
+        "-DREPORT=/home/zero/dev/engine_test/build/debug/ui-allocations.json",
+        "-P",
+        "/home/zero/dev/engine_test/tests/check_ui_allocations.cmake"
+      ],
+      "name": "ui_allocations",
+      "properties": [
+        {
+          "name": "SKIP_REGULAR_EXPRESSION",
+          "value": [
+            "SKIP: UI allocation workload"
+          ]
+        },
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 150.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 73,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/audio_allocations",
+        "/home/zero/dev/engine_test/build/debug/audio-allocations.json"
+      ],
+      "name": "audio_allocations",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "platform"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 75,
+      "command": [
+        "/home/zero/dev/engine_test/.tools/lib/python3.14/site-packages/cmake/data/bin/cmake",
+        "-DGAME_EXE=/home/zero/dev/engine_test/build/debug/feature_lab_allocations",
+        "-DFIXTURE_EXE=/home/zero/dev/engine_test/build/debug/make_profile_replay",
+        "-DOUTPUT_DIR=/home/zero/dev/engine_test/build/debug/allocation-reports",
+        "-DCHECK_ALLOCATIONS=ON",
+        "-P",
+        "/home/zero/dev/engine_test/tests/check_replay_profile.cmake"
+      ],
+      "name": "gameplay_allocations",
+      "properties": [
+        {
+          "name": "SKIP_REGULAR_EXPRESSION",
+          "value": [
+            "SKIP: replay profile"
+          ]
+        },
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 150.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 77,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/lifecycle_tests"
+      ],
+      "name": "platform_lifecycle",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 79,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/scene_watch_tests"
+      ],
+      "name": "scene_watch",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 81,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/tilemap_watch_tests"
+      ],
+      "name": "tilemap_watch",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 83,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/animation_watch_tests"
+      ],
+      "name": "animation_watch",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 85,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/font_reload_tests"
+      ],
+      "name": "font_reload",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 87,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/font_graphics_tests"
+      ],
+      "name": "font_graphics",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 89,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/sampling_tests"
+      ],
+      "name": "texture_sampling",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 91,
+      "command": [
+        "/home/zero/dev/engine_test/.tools/lib/python3.14/site-packages/cmake/data/bin/cmake",
+        "-DGAME_EXE=/home/zero/dev/engine_test/build/debug/feature_lab",
+        "-DOUTPUT_DIR=/home/zero/dev/engine_test/build/debug/stress-frame-tests",
+        "-P",
+        "/home/zero/dev/engine_test/tests/check_stress_frames.cmake"
+      ],
+      "name": "stress_frame_samples",
+      "properties": [
+        {
+          "name": "SKIP_REGULAR_EXPRESSION",
+          "value": [
+            "SKIP: stress frame samples"
+          ]
+        },
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 93,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/renderer_memory_tests"
+      ],
+      "name": "renderer_memory",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 95,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/stress_graphics_tests"
+      ],
+      "name": "stress_graphics",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 97,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/audio_reload_tests"
+      ],
+      "name": "audio_reload",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "platform"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 99,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/audio_watch_tests"
+      ],
+      "name": "audio_watch",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 101,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/audio_tests"
+      ],
+      "name": "audio_transport",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "platform"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 10.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 103,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/platform_tests"
+      ],
+      "name": "platform_events",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 105,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/keyboard_map_tests"
+      ],
+      "name": "keyboard_maps",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 107,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/international_platform_tests"
+      ],
+      "name": "platform_international",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 109,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/chord_platform_tests"
+      ],
+      "name": "platform_chords",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 111,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/render_target_tests"
+      ],
+      "name": "render_targets",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 113,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/gpu_timer_tests"
+      ],
+      "name": "gpu_timers",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 115,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/texture_reload_tests"
+      ],
+      "name": "texture_reload",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 117,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/shader_tests"
+      ],
+      "name": "shaders",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 119,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/watched_reload_tests"
+      ],
+      "name": "watched_reload",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 121,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/graphics_tests"
+      ],
+      "name": "graphics",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 123,
+      "command": [
+        "/home/zero/dev/engine_test/.tools/lib/python3.14/site-packages/cmake/data/bin/cmake",
+        "-DGAME_EXE=/home/zero/dev/engine_test/build/debug/feature_lab",
+        "-DUSER_DATA=/home/zero/dev/engine_test/build/debug/level-tour-user",
+        "-P",
+        "/home/zero/dev/engine_test/tests/check_level_tour.cmake"
+      ],
+      "name": "level_tour",
+      "properties": [
+        {
+          "name": "SKIP_REGULAR_EXPRESSION",
+          "value": [
+            "SKIP: level tour"
+          ]
+        },
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 90.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 125,
+      "command": [
+        "/home/zero/dev/engine_test/.tools/lib/python3.14/site-packages/cmake/data/bin/cmake",
+        "-DGAME_EXE=/home/zero/dev/engine_test/build/debug/feature_lab",
+        "-DFIXTURE_EXE=/home/zero/dev/engine_test/build/debug/make_profile_replay",
+        "-DOUTPUT_DIR=/home/zero/dev/engine_test/build/debug/replay-profile-tests",
+        "-P",
+        "/home/zero/dev/engine_test/tests/check_replay_profile.cmake"
+      ],
+      "name": "replay_profile_native",
+      "properties": [
+        {
+          "name": "SKIP_REGULAR_EXPRESSION",
+          "value": [
+            "SKIP: replay profile"
+          ]
+        },
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 120.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 127,
+      "command": [
+        "/home/zero/dev/engine_test/.tools/lib/python3.14/site-packages/cmake/data/bin/cmake",
+        "-DGAME_EXE=/home/zero/dev/engine_test/build/debug/feature_lab",
+        "-DREFERENCE_EXE=/home/zero/dev/engine_test/build/debug/spike_profile_tests",
+        "-DASSET_ROOT=/home/zero/dev/engine_test/assets",
+        "-DOUTPUT_DIR=/home/zero/dev/engine_test/build/debug/spike-profile-tests",
+        "-P",
+        "/home/zero/dev/engine_test/tests/check_spike_profile.cmake"
+      ],
+      "name": "spike_profile_native",
+      "properties": [
+        {
+          "name": "SKIP_REGULAR_EXPRESSION",
+          "value": [
+            "SKIP: spike profile"
+          ]
+        },
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 150.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 129,
+      "command": [
+        "/home/zero/dev/engine_test/build/debug/feature_lab",
+        "--verify"
+      ],
+      "name": "game_replay",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 131,
+      "command": [
+        "/home/zero/dev/engine_test/.tools/lib/python3.14/site-packages/cmake/data/bin/cmake",
+        "-E",
+        "env",
+        "--unset=DISPLAY",
+        "/home/zero/dev/engine_test/build/debug/feature_lab",
+        "--frames",
+        "1",
+        "--no-audio"
+      ],
+      "name": "platform_no_display",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "platform"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 10.0
+        },
+        {
+          "name": "WILL_FAIL",
+          "value": true
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/debug"
+        }
+      ]
+    }
+  ],
+  "version": {
+    "major": 1,
+    "minor": 0
+  }
+}
