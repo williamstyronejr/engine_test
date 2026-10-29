@@ -89,4 +89,11 @@ record remain open; background loading is deferred.
 
 ## Packaging
 
-Package verification is recorded below after the committed documentation build.
+At documentation commit `7e5bd80`, all three Release package tests passed without
+skips (45.99 s). The additional archive-content audit then failed: the validation
+install filter omitted all seven linked PNG captures. This was a documentation
+payload omission, not a runtime test failure. The [failed audit](package-initial-audit.json)
+and original package commands/logs are retained. The install filter now includes
+validation PNGs, and the archive target checks each source capture's staged bytes
+before creating the manifest. The corrected package is verified separately before
+publication. These packaging-only changes leave the matrix's runtime sources intact.

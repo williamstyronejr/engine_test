@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/zero/dev/engine_test/build/diagnostics-memory-validation/check-package.py", line 9, in <module>
+    assert len(matches)==1,(p,matches)
+           ^^^^^^^^^^^^^^^
+AssertionError: (PosixPath('validation/2026-10-29-diagnostics-memory/captures/FACILITY-gpu_completed.png'), [])

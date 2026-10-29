@@ -1,0 +1,11 @@
+{
+  "source": "7e5bd8002bd42a8b9a446ce3455193a30de22cc9",
+  "command": [
+    "python3",
+    "build/diagnostics-memory-validation/check-package.py"
+  ],
+  "exit_code": 1,
+  "reason": "PNG captures excluded from validation documentation install filter",
+  "archive": "/home/zero/dev/engine_test/build/release/dist/feature-lab-0.1.0-Linux-x86_64-7e5bd80.tar.gz",
+  "package_tests_passed": 3
+}
