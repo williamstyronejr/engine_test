@@ -1,0 +1,442 @@
+{
+  "schema": "stress_host_observations_v1",
+  "static_before": {
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_driver": {
+      "value": "intel_cpufreq",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor": {
+      "value": "schedutil",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/related_cpus": {
+      "value": "0",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/affected_cpus": {
+      "value": "0",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/scaling_driver": {
+      "value": "intel_cpufreq",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/scaling_governor": {
+      "value": "schedutil",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/scaling_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/scaling_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/related_cpus": {
+      "value": "1",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/affected_cpus": {
+      "value": "1",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/scaling_driver": {
+      "value": "intel_cpufreq",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/scaling_governor": {
+      "value": "schedutil",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/scaling_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/scaling_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/related_cpus": {
+      "value": "2",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/affected_cpus": {
+      "value": "2",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/scaling_driver": {
+      "value": "intel_cpufreq",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/scaling_governor": {
+      "value": "schedutil",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/scaling_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/scaling_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/related_cpus": {
+      "value": "3",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/affected_cpus": {
+      "value": "3",
+      "error": null
+    },
+    "/sys/class/thermal/thermal_zone0/type": {
+      "value": "acpitz",
+      "error": null
+    },
+    "/sys/class/thermal/thermal_zone1/type": {
+      "value": "x86_pkg_temp",
+      "error": null
+    }
+  },
+  "static_after": {
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_driver": {
+      "value": "intel_cpufreq",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor": {
+      "value": "schedutil",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/related_cpus": {
+      "value": "0",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/affected_cpus": {
+      "value": "0",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/scaling_driver": {
+      "value": "intel_cpufreq",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/scaling_governor": {
+      "value": "schedutil",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/scaling_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/scaling_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/related_cpus": {
+      "value": "1",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/affected_cpus": {
+      "value": "1",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/scaling_driver": {
+      "value": "intel_cpufreq",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/scaling_governor": {
+      "value": "schedutil",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/scaling_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/scaling_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/related_cpus": {
+      "value": "2",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/affected_cpus": {
+      "value": "2",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/scaling_driver": {
+      "value": "intel_cpufreq",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/scaling_governor": {
+      "value": "schedutil",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/scaling_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/scaling_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/related_cpus": {
+      "value": "3",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/affected_cpus": {
+      "value": "3",
+      "error": null
+    },
+    "/sys/class/thermal/thermal_zone0/type": {
+      "value": "acpitz",
+      "error": null
+    },
+    "/sys/class/thermal/thermal_zone1/type": {
+      "value": "x86_pkg_temp",
+      "error": null
+    }
+  },
+  "launch_offset_seconds": 0.004319732004660182,
+  "exit_observed_offset_seconds": 17.40241864399286,
+  "samples": [
+    {
+      "label": "before",
+      "offset_seconds": 0.002132748006260954,
+      "read_seconds": 0.002179666989832185,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "1596196",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "1596196",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "1596133",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "1596133",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "1596151",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "1596151",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "1596175",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "1596175",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265900",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "73000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "4808",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "20346",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "2715",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "20346",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "4808",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "20346",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "2715",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "20346",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "after",
+      "offset_seconds": 17.402421716993558,
+      "read_seconds": 0.008786718011833727,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "1695924",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "1695924",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "1695943",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "1695927",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "1695935",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "1695935",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "1695950",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "1695950",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-266000",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "71000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "4808",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "20346",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "2715",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "20346",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "4808",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "20346",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "2715",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "20346",
+          "error": null
+        }
+      }
+    }
+  ],
+  "collector_cpu_seconds": 0.011034104000000156
+}

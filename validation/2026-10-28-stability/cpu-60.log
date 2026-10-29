@@ -1,0 +1,21 @@
+{
+  "schema":"feature_lab_stress_v1","workload_version":1,"mode":"cpu","label":"","complete":true,"resources_stable":true,
+  "build":{"revision":"455e03b","compiler":"GNU 16.2.1","configuration":"Release","flags":" -O3 -DNDEBUG; C++20; sanitizers=OFF"},
+  "machine":{"cpu":" Intel(R) Core(TM) i5-4300U CPU @ 1.90GHz","system":"Linux 7.2.8-9-omarchy x86_64","gl_vendor":"","gl_device":"","gl_version":""},
+  "workload":{"sprites":8192,"tiles":4096,"entities":1024,"bodies":128,"voices":8,"dense":false,"seed":"1","width":1920,"height":1080,"warmup_per_cycle":60,"frames_per_cycle":600,"cycles":3},
+  "run":{"completed_cycles":3,"measured_frames":1800,"checksum":"3573445382734126645","window_width":0,"window_height":0,"vsync_requested":false,"vsync_disable_accepted":false,"audio_device":false,"capture_requested":false},
+  "presentation":{"mode":"none","swap_interval_requested":null,"request_issued":false,"present_calls":0},
+  "totals":{"quads":0,"culled":0,"draws":0,"visible_tiles":0,"collision_candidates":1396800,"contacts":0},
+  "memory":{"tracked_cpu_buffer_bytes":8072232,"report_buffer_bytes":100824,"rss_start":5603328,"rss_end":6754304,"rss_peak_at_cycle_boundary":6782976,"peak_uploaded_textures":0,"peak_uploaded_texture_bytes":0,"peak_targets":0,"peak_target_bytes":0},
+  "gpu_queries":{"supported":false,"method":"time_elapsed","counter_bits":0,"submitted":0,"completed":0,"pending":0,"skipped":0,"invalid":0,"failure_capacity":8,"failures_omitted":0,"failures":[]},
+  "milliseconds":{
+    "load":{"samples":3,"mean":1.18028133,"median":1.156407,"p95":1.156407,"p99":1.156407,"max":1.315685},
+    "simulation":{"samples":1800,"mean":0.0574372694,"median":0.052007,"p95":0.082078,"p99":0.092643,"max":0.241384},
+    "mixer":{"samples":1800,"mean":0.0966185117,"median":0.088408,"p95":0.128559,"p99":0.145338,"max":0.220132},
+    "render_submit":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0},
+    "preview_submit":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0},
+    "present":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0},
+    "frame":{"samples":1800,"mean":0.154055781,"median":0.141292,"p95":0.207321,"p99":0.231826,"max":0.358356},
+    "gpu_render":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0}
+  }
+}

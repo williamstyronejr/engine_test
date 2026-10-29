@@ -277,6 +277,12 @@ all correctness checks pass, but inconsistent paired CPU changes fail the declar
 adoption gate. The renderer is restored; new capacity-boundary regression tests
 remain. Every frame maximum still fails. Investigate run-to-run stability before
 another optimization trial.
+Increment 70 [tests warmup/order stability](../benchmarks/2026-10-28-stability-results.md):
+neither warmup protocol meets its predeclared stability screen. Read-only telemetry
+retains a late low-frequency/CPU-time transition, throttle counters and implausible
+ACPI readings without causal attribution. Four of sixteen p99 values and thirteen
+maxima fail. Runtime remains unchanged; renderer memory accounting is the next
+concrete coverage task while host-dependent timing stays unresolved.
 R6 timing/coverage and physical R4/R5 cases remain open; R8 requires their
 coverage/support record. Refresh automated evidence when the implementation or
 toolchain changes. These results do not complete milestone 6.

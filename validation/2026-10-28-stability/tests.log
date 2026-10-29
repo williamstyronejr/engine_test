@@ -1,0 +1,12 @@
+Test project /home/zero/dev/engine_test/build/release
+    Start 46: stress_frame_samples
+1/2 Test #46: stress_frame_samples .............   Passed    9.94 sec
+    Start 47: stress_graphics
+2/2 Test #47: stress_graphics ..................   Passed    0.15 sec
+
+100% tests passed out of 2
+
+Label Time Summary:
+hardware    =  10.10 sec*proc (2 tests)
+
+Total Test time (real) =  10.10 sec

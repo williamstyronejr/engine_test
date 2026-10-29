@@ -302,3 +302,8 @@ The [fixed vertex-buffer experiment](QUAD_FIXED_BUFFER.md) tests direct writes i
 bounded storage. [Results](2026-10-28-vertices-results.md) fail the CPU adoption rule;
 new boundary tests remain, and the renderer is restored. Further work first examines
 run-to-run measurement stability.
+
+The [warmup/order protocol](STRESS_RUN_STABILITY.md) balances short/long runs and
+records external read-only host observations. [Results](2026-10-28-stability-results.md)
+retain the late frequency/CPU-time transition, observer controls and failed
+stability screens. The engine remains unchanged; no system settings are altered.

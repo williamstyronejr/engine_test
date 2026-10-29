@@ -79,3 +79,7 @@ full suite, and race instrumentation covers exercised schedules only.
 The [release-readiness audit](../docs/RELEASE_READINESS.md) defines the gates and
 their limits. Results do not prove physical audibility, every display configuration,
 power-loss durability or broad Linux compatibility.
+
+[Warmup/order stability evidence](2026-10-28-stability/RESULTS.md) retains sixteen
+graphics attempts, two deterministic CPU references, host sensor observations,
+strict analyzer controls and unchanged-runtime Release/package verification.

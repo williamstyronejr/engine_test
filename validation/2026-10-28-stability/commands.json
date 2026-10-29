@@ -1,0 +1,52 @@
+[
+  {
+    "command": [
+      "cmake",
+      "--preset",
+      "release"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-29T02:00:00.673519+00:00",
+    "seconds": 0.5973352500004694
+  },
+  {
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "--target",
+      "feature_lab",
+      "stress_graphics_tests",
+      "-j2"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-29T02:00:01.271100+00:00",
+    "seconds": 9.9516427799972
+  },
+  {
+    "command": [
+      "ctest",
+      "--preset",
+      "release",
+      "-R",
+      "^(stress_graphics|stress_frame_samples)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-28-stability/checks.xml"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-29T02:00:11.223045+00:00",
+    "seconds": 10.326389671987272
+  },
+  {
+    "command": [
+      "python3",
+      "validation/2026-10-28-stability/collect.py",
+      "build/release/feature_lab"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-29T02:00:21.549713+00:00",
+    "seconds": 255.57615650100342
+  }
+]

@@ -20,6 +20,8 @@ is retained, with the prototype and all measurements preserved.
 submission as the leading application CPU symbol. The subsequent
 [fixed-buffer trial](benchmarks/2026-10-28-vertices-results.md) also failed its adoption
 gate; it retains new batch-capacity regression coverage and the original renderer.
+The [warmup/order study](benchmarks/2026-10-28-stability-results.md) retains changing
+host frequency/thermal observations; neither warmup protocol establishes stability.
 
 Atomic saves also have [isolated filesystem-failure tests](docs/ATOMIC_SAVE_VALIDATION.md)
 covering short/interrupted writes, cleanup and failures before/after replacement.
