@@ -1,0 +1,66 @@
+{
+  "source": "279bb88ed7426016ef0cc57c8c1ab8ef8084e10b",
+  "commands": [
+    {
+      "command": [
+        "cmake",
+        "--preset",
+        "release",
+        "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-font-memory-vv9ua9so/packages"
+      ],
+      "source": "279bb88ed7426016ef0cc57c8c1ab8ef8084e10b",
+      "environment": {
+        "TMPDIR": "/home/zero/.cache/engine-font-memory-vv9ua9so/compiler-tmp",
+        "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0IjaAtt:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+        "DISPLAY": ":0"
+      },
+      "exit_code": 0,
+      "seconds": 0.6260626799776219
+    },
+    {
+      "command": [
+        "cmake",
+        "--build",
+        "--preset",
+        "release",
+        "--target",
+        "feature_lab",
+        "stress_bench",
+        "validate_assets",
+        "-j2"
+      ],
+      "source": "279bb88ed7426016ef0cc57c8c1ab8ef8084e10b",
+      "environment": {
+        "TMPDIR": "/home/zero/.cache/engine-font-memory-vv9ua9so/compiler-tmp",
+        "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0IjaAtt:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+        "DISPLAY": ":0"
+      },
+      "exit_code": 0,
+      "seconds": 12.475591811002232
+    },
+    {
+      "command": [
+        "ctest",
+        "--preset",
+        "release",
+        "-R",
+        "^package_(build|relocation|graphics)$",
+        "--output-on-failure"
+      ],
+      "source": "279bb88ed7426016ef0cc57c8c1ab8ef8084e10b",
+      "environment": {
+        "TMPDIR": "/home/zero/.cache/engine-font-memory-vv9ua9so/compiler-tmp",
+        "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0IjaAtt:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+        "DISPLAY": ":0"
+      },
+      "exit_code": 0,
+      "seconds": 46.916675364016555
+    }
+  ],
+  "archive": "/home/zero/dev/engine_test/build/release/dist/feature-lab-0.1.0-Linux-x86_64-279bb88.tar.gz",
+  "archive_sha256": "844ecb4d84c941a8c4e88ba941e7e89ee0674c473491c431f3d199e1eb6f5cb1",
+  "matching_files": 79,
+  "evidence_files": 78,
+  "contract_documents": 1,
+  "allocation_profilers_installed": false
+}

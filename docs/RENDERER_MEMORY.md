@@ -101,7 +101,7 @@ Older retained `owned_buffers_and_texels_v1` records lack CPU font fields; do no
 interpret their absence as zero. Existing fields retain their meanings; v2 expands
 the coverage marker while the outer report schema remains `feature_lab_stress_v1`.
 
-## Validation scope
+## Vertex/texel validation (increment 71)
 
 The new native `renderer_memory` group compares the reported VBO size with
 `GL_BUFFER_SIZE`, checks getter non-interference, replacement/resize rollback,
@@ -118,7 +118,7 @@ with the pre-change Release binary. Keep failures/skips and exact source/build
 identities. This is correctness/coverage validation, not a performance adoption
 trial; earlier timing failures and rejected optimizations remain unchanged.
 
-The [2026-10-29 validation record](../validation/2026-10-29-renderer-memory/RESULTS.md)
+The [2026-10-29 vertex/texel validation record](../validation/2026-10-29-renderer-memory/RESULTS.md)
 retains results, exact commands, source identities and package checks.
 
 ## Font CPU coverage validation (increment 72)

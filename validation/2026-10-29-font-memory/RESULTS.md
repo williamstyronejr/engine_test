@@ -89,3 +89,8 @@ There is no new CTest group: 66 native runtime plus three package groups remain.
 No system settings are changed and no timing gain or complete live-memory budget
 is claimed. Existing timing failures, physical display/audio cases and support
 coverage remain open. Package checks are recorded after this evidence is committed.
+
+At documentation commit `279bb88`, all three Release package groups pass
+without skips (46.74 s). All 78 evidence files and the renderer memory contract
+match their archived copies; allocation profilers remain excluded. See
+[package-feature.json](package-feature.json) and matching configure/build/test logs.

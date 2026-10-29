@@ -2362,6 +2362,10 @@ copies; allocation profilers remain excluded.
 See [contract](RENDERER_MEMORY.md) and
 [validation](../validation/2026-10-29-font-memory/RESULTS.md).
 
+At documentation commit `279bb88`, all three Release package groups pass
+without skips (46.74 s). All 78 evidence files and the memory contract match archived
+copies; allocation profilers remain excluded.
+
 ## Next increment
 
 Expose the scoped renderer inventory in the opt-in diagnostics overlay, with
