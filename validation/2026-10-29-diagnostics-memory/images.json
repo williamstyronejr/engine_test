@@ -1,0 +1,1862 @@
+[
+  {
+    "configuration": "release",
+    "kind": "unchanged_stress",
+    "name": "ctx.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_stress",
+    "name": "ctx_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_stress",
+    "name": "plain.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_stress",
+    "name": "prep.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_stress",
+    "name": "prep_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_stress",
+    "name": "split.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_stress",
+    "name": "split_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_stress",
+    "name": "traced.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_stress",
+    "name": "vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_controls-0.ppm",
+    "sha256": "859d689d423a00c93902287b441927aa89f8a7b5b31775a8b70a52bfd0352fd4"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_controls-10.ppm",
+    "sha256": "11086f98b0edc8261e089a78beed80ff4a97c25cc0763a97a0a8f379e6689d19"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_controls-20.ppm",
+    "sha256": "b79966ddaeb929f4247577e3be8798e5bd998e1e07149d360843687264867fcb"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_controls.ppm",
+    "sha256": "b13a85c20bd9f629c1eac40ea7fbf375ac076afafe00273b80ec6832557ea326"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_settings-0.ppm",
+    "sha256": "f45fe937fb6498a87716c03a36545d1bfbb957c6ebe41a6fe2f130565ea6db84"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_settings-10.ppm",
+    "sha256": "f7ff8a7bf5740b388b39caa7d85783fe7a65f2c075603d249f39e361385d96d8"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_settings-20.ppm",
+    "sha256": "af07bb84e19949883da67a77ebc4b697324a9f610f320e33b3f2366b6eb09712"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_settings.ppm",
+    "sha256": "627dd97e9f06910a57301d484716c2f877f357c54b0066d0007d6b3ebe05441d"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_changing-0.ppm",
+    "sha256": "7223134666f3931da083f6f1248110fbe944c808ec36a3c709abff0e9696f572"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_changing-10.ppm",
+    "sha256": "d43dc461560fd5d963346d65eac1aaf9f04d02f0a277c0b57a2f93acae38eaee"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_changing-20.ppm",
+    "sha256": "579de9473daaa5c1bc4a53f337394f362850866210d87d940cd088d3de5ac101"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_changing.ppm",
+    "sha256": "0d01c0e22386d10790d0461a96051b91aa705a1d1362b474c3a47d6119f804dd"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_completed.ppm",
+    "sha256": "758a9b1f6f7b2ab17735e50c913b36f3c650175c8870516e57cd4245d4e90fdf"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_unsupported.ppm",
+    "sha256": "c8440c88a57c553b212a9fc87573e208d3b6e71369fc43e26a5150d13537ad8e"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_waiting.ppm",
+    "sha256": "55b4a2853d84c26118c12501f349cc382de80c87fe6750bbbc531bc581f9fcf2"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_controls-0.ppm",
+    "sha256": "9acb50cf05cd4994ed625ba3b8f49ca9109a1718eb7eecd58d56aae220c25b8b"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_controls-10.ppm",
+    "sha256": "ac13167f8e95001b322c0d84f65d554bc1cb953917dcc4a4818c528a0dac92e7"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_controls-20.ppm",
+    "sha256": "19742b84fa30e25e6b9d496fb0ede7becd61fcf8e404e1687789955a993bbd25"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_controls.ppm",
+    "sha256": "741b5db1f6f27ea24c5459a9e27fbac9a87132c593d6c835da9f0e24bf6360b7"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_settings-0.ppm",
+    "sha256": "5c68ac1b8025515bb744cad18566f7c4bfbfb6d7779b4cbb950fed0cf0987a23"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_settings-10.ppm",
+    "sha256": "ebeaecff44f2f1cf2c8b3061412be71c076a7bf53a4f4e467216ad97cef72ba2"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_settings-20.ppm",
+    "sha256": "613eb2106edc7068136f3be207c1ba35aebf8bfd590f675473b5bbb2a28c677b"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_settings.ppm",
+    "sha256": "5aad683beae16047b9688de51d705f9e9999a807662b0942aa2b4cddbd47353c"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_changing-0.ppm",
+    "sha256": "5a123d0e7c3367c4decd84bc710c4f1428ff1486166770835a07e542f2216138"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_changing-10.ppm",
+    "sha256": "cd0c688215f3c2eb11332535bf2dbbe78f8903fa0e167161ec77431f42a8a9e0"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_changing-20.ppm",
+    "sha256": "bbf6e48a0fe7778325f7edcd9883acf05e1a1363a13adcaaad53cc9dbf4fb2ac"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_changing.ppm",
+    "sha256": "feee2a2fe643b6a902f4533c05b72c69b017acbdab3ff6afa44bae1cb771e4c4"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_completed.ppm",
+    "sha256": "008df34ed16a04ae0d5fc6593167e5b21b83cb5c507c9fd37dedf4f50f31a96f"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_unsupported.ppm",
+    "sha256": "22df0817053ef45ab992400fa9b5a8f9867ff5483f446c0de37df888219a86a9"
+  },
+  {
+    "configuration": "release",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_waiting.ppm",
+    "sha256": "86963f52015ab5e7e6bb748d88984c093a0a3587b7e73640c23ddfe4b53700a5"
+  },
+  {
+    "configuration": "debug",
+    "kind": "unchanged_stress",
+    "name": "ctx.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "debug",
+    "kind": "unchanged_stress",
+    "name": "ctx_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "debug",
+    "kind": "unchanged_stress",
+    "name": "plain.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "debug",
+    "kind": "unchanged_stress",
+    "name": "prep.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "debug",
+    "kind": "unchanged_stress",
+    "name": "prep_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "debug",
+    "kind": "unchanged_stress",
+    "name": "split.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "debug",
+    "kind": "unchanged_stress",
+    "name": "split_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "debug",
+    "kind": "unchanged_stress",
+    "name": "traced.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "debug",
+    "kind": "unchanged_stress",
+    "name": "vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_controls-0.ppm",
+    "sha256": "859d689d423a00c93902287b441927aa89f8a7b5b31775a8b70a52bfd0352fd4"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_controls-10.ppm",
+    "sha256": "11086f98b0edc8261e089a78beed80ff4a97c25cc0763a97a0a8f379e6689d19"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_controls-20.ppm",
+    "sha256": "b79966ddaeb929f4247577e3be8798e5bd998e1e07149d360843687264867fcb"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_controls.ppm",
+    "sha256": "b13a85c20bd9f629c1eac40ea7fbf375ac076afafe00273b80ec6832557ea326"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_settings-0.ppm",
+    "sha256": "f45fe937fb6498a87716c03a36545d1bfbb957c6ebe41a6fe2f130565ea6db84"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_settings-10.ppm",
+    "sha256": "f7ff8a7bf5740b388b39caa7d85783fe7a65f2c075603d249f39e361385d96d8"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_settings-20.ppm",
+    "sha256": "af07bb84e19949883da67a77ebc4b697324a9f610f320e33b3f2366b6eb09712"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_settings.ppm",
+    "sha256": "627dd97e9f06910a57301d484716c2f877f357c54b0066d0007d6b3ebe05441d"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_changing-0.ppm",
+    "sha256": "7223134666f3931da083f6f1248110fbe944c808ec36a3c709abff0e9696f572"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_changing-10.ppm",
+    "sha256": "d43dc461560fd5d963346d65eac1aaf9f04d02f0a277c0b57a2f93acae38eaee"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_changing-20.ppm",
+    "sha256": "579de9473daaa5c1bc4a53f337394f362850866210d87d940cd088d3de5ac101"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_changing.ppm",
+    "sha256": "0d01c0e22386d10790d0461a96051b91aa705a1d1362b474c3a47d6119f804dd"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_completed.ppm",
+    "sha256": "758a9b1f6f7b2ab17735e50c913b36f3c650175c8870516e57cd4245d4e90fdf"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_unsupported.ppm",
+    "sha256": "c8440c88a57c553b212a9fc87573e208d3b6e71369fc43e26a5150d13537ad8e"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_waiting.ppm",
+    "sha256": "55b4a2853d84c26118c12501f349cc382de80c87fe6750bbbc531bc581f9fcf2"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_controls-0.ppm",
+    "sha256": "9acb50cf05cd4994ed625ba3b8f49ca9109a1718eb7eecd58d56aae220c25b8b"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_controls-10.ppm",
+    "sha256": "ac13167f8e95001b322c0d84f65d554bc1cb953917dcc4a4818c528a0dac92e7"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_controls-20.ppm",
+    "sha256": "19742b84fa30e25e6b9d496fb0ede7becd61fcf8e404e1687789955a993bbd25"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_controls.ppm",
+    "sha256": "741b5db1f6f27ea24c5459a9e27fbac9a87132c593d6c835da9f0e24bf6360b7"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_settings-0.ppm",
+    "sha256": "5c68ac1b8025515bb744cad18566f7c4bfbfb6d7779b4cbb950fed0cf0987a23"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_settings-10.ppm",
+    "sha256": "ebeaecff44f2f1cf2c8b3061412be71c076a7bf53a4f4e467216ad97cef72ba2"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_settings-20.ppm",
+    "sha256": "613eb2106edc7068136f3be207c1ba35aebf8bfd590f675473b5bbb2a28c677b"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_settings.ppm",
+    "sha256": "5aad683beae16047b9688de51d705f9e9999a807662b0942aa2b4cddbd47353c"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_changing-0.ppm",
+    "sha256": "5a123d0e7c3367c4decd84bc710c4f1428ff1486166770835a07e542f2216138"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_changing-10.ppm",
+    "sha256": "cd0c688215f3c2eb11332535bf2dbbe78f8903fa0e167161ec77431f42a8a9e0"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_changing-20.ppm",
+    "sha256": "bbf6e48a0fe7778325f7edcd9883acf05e1a1363a13adcaaad53cc9dbf4fb2ac"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_changing.ppm",
+    "sha256": "feee2a2fe643b6a902f4533c05b72c69b017acbdab3ff6afa44bae1cb771e4c4"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_completed.ppm",
+    "sha256": "008df34ed16a04ae0d5fc6593167e5b21b83cb5c507c9fd37dedf4f50f31a96f"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_unsupported.ppm",
+    "sha256": "22df0817053ef45ab992400fa9b5a8f9867ff5483f446c0de37df888219a86a9"
+  },
+  {
+    "configuration": "debug",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_waiting.ppm",
+    "sha256": "86963f52015ab5e7e6bb748d88984c093a0a3587b7e73640c23ddfe4b53700a5"
+  },
+  {
+    "configuration": "clang",
+    "kind": "unchanged_stress",
+    "name": "ctx.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "clang",
+    "kind": "unchanged_stress",
+    "name": "ctx_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "clang",
+    "kind": "unchanged_stress",
+    "name": "plain.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "clang",
+    "kind": "unchanged_stress",
+    "name": "prep.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "clang",
+    "kind": "unchanged_stress",
+    "name": "prep_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "clang",
+    "kind": "unchanged_stress",
+    "name": "split.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "clang",
+    "kind": "unchanged_stress",
+    "name": "split_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "clang",
+    "kind": "unchanged_stress",
+    "name": "traced.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "clang",
+    "kind": "unchanged_stress",
+    "name": "vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_controls-0.ppm",
+    "sha256": "859d689d423a00c93902287b441927aa89f8a7b5b31775a8b70a52bfd0352fd4"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_controls-10.ppm",
+    "sha256": "11086f98b0edc8261e089a78beed80ff4a97c25cc0763a97a0a8f379e6689d19"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_controls-20.ppm",
+    "sha256": "b79966ddaeb929f4247577e3be8798e5bd998e1e07149d360843687264867fcb"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_controls.ppm",
+    "sha256": "b13a85c20bd9f629c1eac40ea7fbf375ac076afafe00273b80ec6832557ea326"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_settings-0.ppm",
+    "sha256": "f45fe937fb6498a87716c03a36545d1bfbb957c6ebe41a6fe2f130565ea6db84"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_settings-10.ppm",
+    "sha256": "f7ff8a7bf5740b388b39caa7d85783fe7a65f2c075603d249f39e361385d96d8"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_settings-20.ppm",
+    "sha256": "af07bb84e19949883da67a77ebc4b697324a9f610f320e33b3f2366b6eb09712"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_settings.ppm",
+    "sha256": "627dd97e9f06910a57301d484716c2f877f357c54b0066d0007d6b3ebe05441d"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_changing-0.ppm",
+    "sha256": "7223134666f3931da083f6f1248110fbe944c808ec36a3c709abff0e9696f572"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_changing-10.ppm",
+    "sha256": "d43dc461560fd5d963346d65eac1aaf9f04d02f0a277c0b57a2f93acae38eaee"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_changing-20.ppm",
+    "sha256": "579de9473daaa5c1bc4a53f337394f362850866210d87d940cd088d3de5ac101"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_changing.ppm",
+    "sha256": "0d01c0e22386d10790d0461a96051b91aa705a1d1362b474c3a47d6119f804dd"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_completed.ppm",
+    "sha256": "758a9b1f6f7b2ab17735e50c913b36f3c650175c8870516e57cd4245d4e90fdf"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_unsupported.ppm",
+    "sha256": "c8440c88a57c553b212a9fc87573e208d3b6e71369fc43e26a5150d13537ad8e"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_waiting.ppm",
+    "sha256": "55b4a2853d84c26118c12501f349cc382de80c87fe6750bbbc531bc581f9fcf2"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_controls-0.ppm",
+    "sha256": "9acb50cf05cd4994ed625ba3b8f49ca9109a1718eb7eecd58d56aae220c25b8b"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_controls-10.ppm",
+    "sha256": "ac13167f8e95001b322c0d84f65d554bc1cb953917dcc4a4818c528a0dac92e7"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_controls-20.ppm",
+    "sha256": "19742b84fa30e25e6b9d496fb0ede7becd61fcf8e404e1687789955a993bbd25"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_controls.ppm",
+    "sha256": "741b5db1f6f27ea24c5459a9e27fbac9a87132c593d6c835da9f0e24bf6360b7"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_settings-0.ppm",
+    "sha256": "5c68ac1b8025515bb744cad18566f7c4bfbfb6d7779b4cbb950fed0cf0987a23"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_settings-10.ppm",
+    "sha256": "ebeaecff44f2f1cf2c8b3061412be71c076a7bf53a4f4e467216ad97cef72ba2"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_settings-20.ppm",
+    "sha256": "613eb2106edc7068136f3be207c1ba35aebf8bfd590f675473b5bbb2a28c677b"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_settings.ppm",
+    "sha256": "5aad683beae16047b9688de51d705f9e9999a807662b0942aa2b4cddbd47353c"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_changing-0.ppm",
+    "sha256": "5a123d0e7c3367c4decd84bc710c4f1428ff1486166770835a07e542f2216138"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_changing-10.ppm",
+    "sha256": "cd0c688215f3c2eb11332535bf2dbbe78f8903fa0e167161ec77431f42a8a9e0"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_changing-20.ppm",
+    "sha256": "bbf6e48a0fe7778325f7edcd9883acf05e1a1363a13adcaaad53cc9dbf4fb2ac"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_changing.ppm",
+    "sha256": "feee2a2fe643b6a902f4533c05b72c69b017acbdab3ff6afa44bae1cb771e4c4"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_completed.ppm",
+    "sha256": "008df34ed16a04ae0d5fc6593167e5b21b83cb5c507c9fd37dedf4f50f31a96f"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_unsupported.ppm",
+    "sha256": "22df0817053ef45ab992400fa9b5a8f9867ff5483f446c0de37df888219a86a9"
+  },
+  {
+    "configuration": "clang",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_waiting.ppm",
+    "sha256": "86963f52015ab5e7e6bb748d88984c093a0a3587b7e73640c23ddfe4b53700a5"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "unchanged_stress",
+    "name": "ctx.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "unchanged_stress",
+    "name": "ctx_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "unchanged_stress",
+    "name": "plain.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "unchanged_stress",
+    "name": "prep.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "unchanged_stress",
+    "name": "prep_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "unchanged_stress",
+    "name": "split.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "unchanged_stress",
+    "name": "split_vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "unchanged_stress",
+    "name": "traced.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "unchanged_stress",
+    "name": "vsync.ppm",
+    "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_controls-0.ppm",
+    "sha256": "859d689d423a00c93902287b441927aa89f8a7b5b31775a8b70a52bfd0352fd4"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_controls-10.ppm",
+    "sha256": "11086f98b0edc8261e089a78beed80ff4a97c25cc0763a97a0a8f379e6689d19"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_controls-20.ppm",
+    "sha256": "b79966ddaeb929f4247577e3be8798e5bd998e1e07149d360843687264867fcb"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_controls.ppm",
+    "sha256": "b13a85c20bd9f629c1eac40ea7fbf375ac076afafe00273b80ec6832557ea326"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_settings-0.ppm",
+    "sha256": "f45fe937fb6498a87716c03a36545d1bfbb957c6ebe41a6fe2f130565ea6db84"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_settings-10.ppm",
+    "sha256": "f7ff8a7bf5740b388b39caa7d85783fe7a65f2c075603d249f39e361385d96d8"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_settings-20.ppm",
+    "sha256": "af07bb84e19949883da67a77ebc4b697324a9f610f320e33b3f2366b6eb09712"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "ANNEX-combined_settings.ppm",
+    "sha256": "627dd97e9f06910a57301d484716c2f877f357c54b0066d0007d6b3ebe05441d"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_changing-0.ppm",
+    "sha256": "7223134666f3931da083f6f1248110fbe944c808ec36a3c709abff0e9696f572"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_changing-10.ppm",
+    "sha256": "d43dc461560fd5d963346d65eac1aaf9f04d02f0a277c0b57a2f93acae38eaee"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_changing-20.ppm",
+    "sha256": "579de9473daaa5c1bc4a53f337394f362850866210d87d940cd088d3de5ac101"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_changing.ppm",
+    "sha256": "0d01c0e22386d10790d0461a96051b91aa705a1d1362b474c3a47d6119f804dd"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_completed.ppm",
+    "sha256": "758a9b1f6f7b2ab17735e50c913b36f3c650175c8870516e57cd4245d4e90fdf"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_unsupported.ppm",
+    "sha256": "c8440c88a57c553b212a9fc87573e208d3b6e71369fc43e26a5150d13537ad8e"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "ANNEX-gpu_waiting.ppm",
+    "sha256": "55b4a2853d84c26118c12501f349cc382de80c87fe6750bbbc531bc581f9fcf2"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_controls-0.ppm",
+    "sha256": "9acb50cf05cd4994ed625ba3b8f49ca9109a1718eb7eecd58d56aae220c25b8b"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_controls-10.ppm",
+    "sha256": "ac13167f8e95001b322c0d84f65d554bc1cb953917dcc4a4818c528a0dac92e7"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_controls-20.ppm",
+    "sha256": "19742b84fa30e25e6b9d496fb0ede7becd61fcf8e404e1687789955a993bbd25"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_controls.ppm",
+    "sha256": "741b5db1f6f27ea24c5459a9e27fbac9a87132c593d6c835da9f0e24bf6360b7"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_settings-0.ppm",
+    "sha256": "5c68ac1b8025515bb744cad18566f7c4bfbfb6d7779b4cbb950fed0cf0987a23"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_settings-10.ppm",
+    "sha256": "ebeaecff44f2f1cf2c8b3061412be71c076a7bf53a4f4e467216ad97cef72ba2"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_settings-20.ppm",
+    "sha256": "613eb2106edc7068136f3be207c1ba35aebf8bfd590f675473b5bbb2a28c677b"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "FACILITY-combined_settings.ppm",
+    "sha256": "5aad683beae16047b9688de51d705f9e9999a807662b0942aa2b4cddbd47353c"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_changing-0.ppm",
+    "sha256": "5a123d0e7c3367c4decd84bc710c4f1428ff1486166770835a07e542f2216138"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_changing-10.ppm",
+    "sha256": "cd0c688215f3c2eb11332535bf2dbbe78f8903fa0e167161ec77431f42a8a9e0"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_changing-20.ppm",
+    "sha256": "bbf6e48a0fe7778325f7edcd9883acf05e1a1363a13adcaaad53cc9dbf4fb2ac"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_changing.ppm",
+    "sha256": "feee2a2fe643b6a902f4533c05b72c69b017acbdab3ff6afa44bae1cb771e4c4"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_completed.ppm",
+    "sha256": "008df34ed16a04ae0d5fc6593167e5b21b83cb5c507c9fd37dedf4f50f31a96f"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_unsupported.ppm",
+    "sha256": "22df0817053ef45ab992400fa9b5a8f9867ff5483f446c0de37df888219a86a9"
+  },
+  {
+    "configuration": "sanitize-platform",
+    "kind": "new_overlay",
+    "name": "FACILITY-gpu_waiting.ppm",
+    "sha256": "86963f52015ab5e7e6bb748d88984c093a0a3587b7e73640c23ddfe4b53700a5"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_ui",
+    "name": "FACILITY-audio_off.ppm",
+    "sha256": "ce750f04cd524048483f8023e7bc2538b58af749d5eade0125b693ab5e64544a"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_ui",
+    "name": "FACILITY-audio_default.ppm",
+    "sha256": "6e5372a59f714b626e9beede0d99d8aa08c775fa609c7a27fa1a2db8b28c782d"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_ui",
+    "name": "FACILITY-audio_remapped.ppm",
+    "sha256": "7c2acf4cc2eb489a6f69bebecb0ed95f513b519e6a8fcc51f317404d42d26488"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_ui",
+    "name": "FACILITY-settings_default.ppm",
+    "sha256": "f4f3d31cf9e5daca4b6c1a4e1c59ba16da049b266d4bd3b2a509c69e3411c587"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_ui",
+    "name": "FACILITY-controls_remapped.ppm",
+    "sha256": "30198a1f667b74d5ee43b72571d7e0dcf57ad1ac1c34f751377d860025610681"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_ui",
+    "name": "FACILITY-binding_capture.ppm",
+    "sha256": "898c3c27bbb1fa10466959b65e573c73911a74e315acd8efd31985280998549b"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_ui",
+    "name": "FACILITY-binding_updated.ppm",
+    "sha256": "ab011d3628479caba9f7e6d8bbdaf0679a0912953cb0929ffd09a59a5864374f"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_ui",
+    "name": "ANNEX-audio_off.ppm",
+    "sha256": "2d1eab0daef4c043bcd3c14936a0ee04ebdb4e7e4b1d70baab479ce1fb68f071"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_ui",
+    "name": "ANNEX-audio_default.ppm",
+    "sha256": "578149fcc7d8d3cc43bb084eca67f528f4b9706378d334108b5cb36f0866abf8"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_ui",
+    "name": "ANNEX-audio_remapped.ppm",
+    "sha256": "b77452d0dd6d442167073cee8921a43a775374abbf35ea0f91e995ea60b4499c"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_ui",
+    "name": "ANNEX-settings_default.ppm",
+    "sha256": "6c339a0411f128850843ecae27ced544ec99c5efc09d320d613ad2a6f64f252d"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_ui",
+    "name": "ANNEX-controls_remapped.ppm",
+    "sha256": "fa01b1a73d05475b09c942dc045a708aa21a7bf8871e50b1b8c0c9bb925787eb"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_ui",
+    "name": "ANNEX-binding_capture.ppm",
+    "sha256": "c3c8f07b1a6cfd70c778c59e1cc189b4d375c3f29067cc4e05fb3bcce849ac7d"
+  },
+  {
+    "configuration": "release",
+    "kind": "unchanged_ui",
+    "name": "ANNEX-binding_updated.ppm",
+    "sha256": "b35c692bb39d3a9c21fab3beb77f8a816f86e28fabe2482b94f96e188c0e9bef"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "ANNEX-combined_controls-0.ppm",
+    "sha256": "6faaa0657e5efa3624a008037ae5449a90a94a7ca9fa005d0924fd872f7041af"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "ANNEX-combined_controls-10.ppm",
+    "sha256": "d96ed4f8cccbe05d70837209af6d67cc7f6da004013d29cf0ce3772269ee6f1f"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "ANNEX-combined_controls-20.ppm",
+    "sha256": "ecd35c594c43d0acd2c3087f01665b5e6f42c2124b2aa64adf5783c654ff5cff"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "ANNEX-combined_controls.ppm",
+    "sha256": "f0993dde50983e653e6918c6f406772b27e203be00b71596001048a4b4d11e01"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "ANNEX-combined_settings-0.ppm",
+    "sha256": "46e1cfdfe236dc7757e289ec3ee1227d61f45267da61797298f90a80264ca55e"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "ANNEX-combined_settings-10.ppm",
+    "sha256": "dad7b59a3f0a177790586d469ea085105e14c98555ccede4aec69c368cde2481"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "ANNEX-combined_settings-20.ppm",
+    "sha256": "dd15b9691a8746bcd9e9101b3359cb9ee8debc7cf61c6b01a666a978602b6c7d"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "ANNEX-combined_settings.ppm",
+    "sha256": "40c2b64857abe7635f8e055d4f8cd7e7f92dd44bf775e2a018f6560f0c64ed90"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "ANNEX-gpu_changing-0.ppm",
+    "sha256": "6aabc2d12a34fb9c28b9679cce22241bacfac415ce4a4e8721c08aa5c2e6a353"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "ANNEX-gpu_changing-10.ppm",
+    "sha256": "02b4afb11b484528b147a4076c3e847d09d1bcd9e71251ad3b1655c591881f62"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "ANNEX-gpu_changing-20.ppm",
+    "sha256": "ffb6346cf89fec03141c725600c8b08f1af09c1ef2717b128c62be4db6575d5d"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "ANNEX-gpu_changing.ppm",
+    "sha256": "71d59e0d1d3d74691d7b14ee8f76b9e230fa747b98daccac273139fc9f8a414b"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "ANNEX-gpu_completed.ppm",
+    "sha256": "24a1b1361eea659e301511c36da7df0b50c907b50d09c4c5c4c0d6e701d4bd3a"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "ANNEX-gpu_unsupported.ppm",
+    "sha256": "db0970c3748f500ec259cff0d17c765506b6ecbf832d5eecf417281d12c43594"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "ANNEX-gpu_waiting.ppm",
+    "sha256": "4c7b1f513c864063b62f78488c360a91816829a6077e1d68519c7b61a437f733"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "FACILITY-combined_controls-0.ppm",
+    "sha256": "a7df7fc6b137079429d85134e17068c703184fd0a599e8ff391701fe73111bb5"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "FACILITY-combined_controls-10.ppm",
+    "sha256": "42a5fa6fac85ed282eae840e904ab33fcd57c5611f81665c1892ff7c52ed7f02"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "FACILITY-combined_controls-20.ppm",
+    "sha256": "c3d49cac9ad5dd09458abfe8a8df5673cf84a135b45b125b9a6fa5b0cb9395c8"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "FACILITY-combined_controls.ppm",
+    "sha256": "dfe85ef6466ac398fcc417028c38e04b62ba6335a433d8f4dc42c2326dca2588"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "FACILITY-combined_settings-0.ppm",
+    "sha256": "f8aec6d05476f4a86f1514e2347cf353bad0438a5d67e0b140db5d181349d708"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "FACILITY-combined_settings-10.ppm",
+    "sha256": "8f421505178e26412bd84ee16395d56561bd3a1d2279691a2da2d423c0fb2d47"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "FACILITY-combined_settings-20.ppm",
+    "sha256": "8693c9787aae0b513fccc6f945d78fcc434f0b2dc8f8fe28db9b8e52d1ca6fd2"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "FACILITY-combined_settings.ppm",
+    "sha256": "0127e92c65beb0024f85eb5037a5de820f6dd37d2a266b31106e92d1deefab0b"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "FACILITY-gpu_changing-0.ppm",
+    "sha256": "fea24636f8f11e4140e603c069a71378c50ac121e40e17de69f9c36ada60ffcb"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "FACILITY-gpu_changing-10.ppm",
+    "sha256": "af53f43e73cac3812ea4abe7b66be98d5e11ca38a5a40e41e6e8f16f1b5a81fe"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "FACILITY-gpu_changing-20.ppm",
+    "sha256": "2a2e3d81f45c7104387bb1a265232d698a97dfc1ef11d47f9b2c3a9519e0acb1"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "FACILITY-gpu_changing.ppm",
+    "sha256": "4e9ea7f9cb5c3b3ac7a6af2e8af1f2f268611de869efc7f53d51f5308baf5687"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "FACILITY-gpu_completed.ppm",
+    "sha256": "55fdeebb564bebc3e407a4c5d59c185224cb0fb26aaa4ff19ce34da7d68788c6"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "FACILITY-gpu_unsupported.ppm",
+    "sha256": "2423c3a64f5b519ed971ea47f160540abe1cffecb8b5eb189cac4b7910456289"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "960x540",
+    "name": "FACILITY-gpu_waiting.ppm",
+    "sha256": "abe0151ac7b6eb67e1cc8e57e6dec7e5fc363590bb7fbe0193423578dc73d3ca"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "ANNEX-combined_controls-0.ppm",
+    "sha256": "d6e27830239954a26aa339c78711f67b317bef9d76531cf97d3dfcebc0ae1cf8"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "ANNEX-combined_controls-10.ppm",
+    "sha256": "d5360d2437bd309061d1c51417426e29c3a3d10db57760fefb98ef19f7bc9448"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "ANNEX-combined_controls-20.ppm",
+    "sha256": "942c1b6ff009325aa574e4370a1f686303b9604da1ba5f6767bd37ca86494112"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "ANNEX-combined_controls.ppm",
+    "sha256": "c8a056987bbd0793bfa3daa0f49b03c44049de7cf9499df400d863eb26f7bd2d"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "ANNEX-combined_settings-0.ppm",
+    "sha256": "921375eb718d7b7b8c2c0599a778fe6eab5efe446c71573a12f0df294f3ae51f"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "ANNEX-combined_settings-10.ppm",
+    "sha256": "ca2579d6a713fdf9d488d82c71d1d20130094333124130b9a66c66bec367d27a"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "ANNEX-combined_settings-20.ppm",
+    "sha256": "b4cc4bbf9a196b8e7f756908b8d983d1fb043ce557f4266f4be0aef029dd3c41"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "ANNEX-combined_settings.ppm",
+    "sha256": "f7bc805d07ae65f3668f6746971f4eda85d49a2ff9fd8b7a7f0b68e04a494cbf"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "ANNEX-gpu_changing-0.ppm",
+    "sha256": "bf2de7a7fa1f45ac29fe74fe69bdd966b56ca5315e8b39513f90dd808664f794"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "ANNEX-gpu_changing-10.ppm",
+    "sha256": "313e695414c7e4a87dae6433eaa743e26db0339770fd57b6a971389a50306e53"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "ANNEX-gpu_changing-20.ppm",
+    "sha256": "aa24e146545ad6df7cbc97951aa44303a98ca31734db7789c5d0faebb117db3a"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "ANNEX-gpu_changing.ppm",
+    "sha256": "4785cd1e065017e228678def50a54c4c9876bec9b75ad5b7bf3b16a7d2442b44"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "ANNEX-gpu_completed.ppm",
+    "sha256": "7630b26c3409028e75766579c5c804d40cde0852bf567232fd5ae2f529dddba4"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "ANNEX-gpu_unsupported.ppm",
+    "sha256": "4e8893671977bab0332f71abe92c2b3f5ce7f1b6feebb7c9eb9b509793c47bb9"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "ANNEX-gpu_waiting.ppm",
+    "sha256": "76828a80057f82e6e6a2e5943f4db8ad3ac5ed6a10041526154a452c0fc64c42"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "FACILITY-combined_controls-0.ppm",
+    "sha256": "bf38427b2a1e52bb73c90c2befd07db765c272b0724cf07d2a73745ddd9057a8"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "FACILITY-combined_controls-10.ppm",
+    "sha256": "72840b6003389995027b0b6396bce04d5ea5f8713d2b78ef62f6027f4f00071c"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "FACILITY-combined_controls-20.ppm",
+    "sha256": "2d0295eebf1f74551774eef86c2a67b4b2f7160bdb8df0087332742c8546723a"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "FACILITY-combined_controls.ppm",
+    "sha256": "93824d3a509d4389460fead97058c07f8150f370ae8da7447705ab2d7a261ba2"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "FACILITY-combined_settings-0.ppm",
+    "sha256": "594ad0af8b851f926069f88e3d016dc7f49b9b216f73db5d99e07197b54a78d2"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "FACILITY-combined_settings-10.ppm",
+    "sha256": "98fc3419a29c0bbe84288da9c2570ddc51d1f9bdbebdb5582816395087f7293a"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "FACILITY-combined_settings-20.ppm",
+    "sha256": "67cdcd4f87a8c8ad673a86d8d0855e11e0c6e77e07047416beaa69b5ea82f649"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "FACILITY-combined_settings.ppm",
+    "sha256": "c739e25b24a6bfc9f3d6723593fd18f314f5af82a41ddf98738e188c26cb81cf"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "FACILITY-gpu_changing-0.ppm",
+    "sha256": "8e305be5656a8be1ea8a84461b33de8c194f425371bfd2ba662e89933b26445e"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "FACILITY-gpu_changing-10.ppm",
+    "sha256": "75ee3ff7aa4e2d6aaa788e4b35b5cb25c345b9095fe04f8cd540940319cfaa85"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "FACILITY-gpu_changing-20.ppm",
+    "sha256": "103412db4d3fc21503c39eee4297172f531d5fd6a8fcd742107cecf551597095"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "FACILITY-gpu_changing.ppm",
+    "sha256": "9277fe6ac142a4dc2f0769e3d42a0063a3f686c380a155e943b4efc1e6ed23d9"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "FACILITY-gpu_completed.ppm",
+    "sha256": "ab5e56491706595b8d5d42cdf4a9843800ff208173e15b8161cf066e746078e9"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "FACILITY-gpu_unsupported.ppm",
+    "sha256": "23aeb9f2929aa8d04646285f4fc95d5a03ea54abb09896168ac1f1d9ffcaddd5"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "640x360",
+    "name": "FACILITY-gpu_waiting.ppm",
+    "sha256": "a23a2edec781ae1daa26ae44d0be353a7f9405102fba0a19462c1fa8f71f364a"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "ANNEX-combined_controls-0.ppm",
+    "sha256": "19ad3bde9f350c77be09d8265187a6f0d20aa676ff75195be7be5892b7164351"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "ANNEX-combined_controls-10.ppm",
+    "sha256": "c7775f73277da5ca276fac5847344d767b640aecf03aeb5b2718862d3e5bb12d"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "ANNEX-combined_controls-20.ppm",
+    "sha256": "3779600b1a674dcf23d1b8844f613dab0b96a4b244280856309262c30d0e2ce8"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "ANNEX-combined_controls.ppm",
+    "sha256": "89a955b606095fa83a78d3501d4008b452668af8d6974973f5aa82a0d2bde818"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "ANNEX-combined_settings-0.ppm",
+    "sha256": "5dc4de26732bd18398fb74149fdc8a5787a67de1876ee012e4f554d69c26d1f9"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "ANNEX-combined_settings-10.ppm",
+    "sha256": "276c381306ead9eb8adb0611a1bc9cd84540430b802eb78703805872d63d8bb4"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "ANNEX-combined_settings-20.ppm",
+    "sha256": "f77ee0d224823a0ffd63a3832d5566effe97e6666bf739f8dedfbd77d17c7c10"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "ANNEX-combined_settings.ppm",
+    "sha256": "62ef2667dc6c08ce994ce5b2acb339b82e8682eb6e61bbd604e1e92b720a2333"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "ANNEX-gpu_changing-0.ppm",
+    "sha256": "f8de63d7fb6eb4e8442e30d83512d5590b3e248a5a05c0586ac59802638bef1d"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "ANNEX-gpu_changing-10.ppm",
+    "sha256": "78af0408c4336e7816c1d6492ab55e94d15f81ee5d879c89bedb0197b8ab1eef"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "ANNEX-gpu_changing-20.ppm",
+    "sha256": "c3bc4d35c1ef4f7f5f4d5a83120c76b0c7a6b2c4c08d57585ebecb0b26d7fd95"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "ANNEX-gpu_changing.ppm",
+    "sha256": "6a9a14cce65cbc7dd9e018eebd4a1dd134ed25e434feb211513fcfcc28527be0"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "ANNEX-gpu_completed.ppm",
+    "sha256": "a0dbbfcaed800b3e2094ece59975c776387d4f709ba88de85044438fef22a033"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "ANNEX-gpu_unsupported.ppm",
+    "sha256": "0614cad78694d59507b80a431597eca871ae1055e24af58bbb2561d2f26fe9fe"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "ANNEX-gpu_waiting.ppm",
+    "sha256": "93ba93f8cae943e3e7b06024ffed444e15c40f56b0a7863f58bd4178689842d4"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "FACILITY-combined_controls-0.ppm",
+    "sha256": "e0014ac81b7223170f021830b88ffe806ff261cc5bf9d84de11c5d7c7c2b5560"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "FACILITY-combined_controls-10.ppm",
+    "sha256": "b286d592d634993ff4ed2155164a234a1046ed5e924fb8b4fa3e4af44073e43c"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "FACILITY-combined_controls-20.ppm",
+    "sha256": "df24ecc0c2df6c8ec5254abc927540e51a2f620774ddd7a49dae911366dc8491"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "FACILITY-combined_controls.ppm",
+    "sha256": "d2b19d38cef621a1c59dbcc2749f6f1bdbc8e0ce629fdae58039e72661d68f71"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "FACILITY-combined_settings-0.ppm",
+    "sha256": "9caf2b9d5d069b945ecd2d6183e7bf1d769c70efe3fe6b50c474986186002007"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "FACILITY-combined_settings-10.ppm",
+    "sha256": "5cc238d8c002c4aee3c5b0e8e9f413b1b0186fee7fdd001235f768e414f39134"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "FACILITY-combined_settings-20.ppm",
+    "sha256": "d4fa9040e4761ed2390a997257785bb4c4675cddd9a334bd8db26167f95a1381"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "FACILITY-combined_settings.ppm",
+    "sha256": "063d7eee4d8eec3a8a883b576b1150b10932e95241e93781e2080e4bbce9dbfa"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "FACILITY-gpu_changing-0.ppm",
+    "sha256": "138adbb8a4cbd6ff796c5cc111bd58439c39e040ee5960baf6303b4a9ed16663"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "FACILITY-gpu_changing-10.ppm",
+    "sha256": "d0ce91e35810642a17dbaabe173c0f049af990e900e1ef363bac1942e2788bb1"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "FACILITY-gpu_changing-20.ppm",
+    "sha256": "297713dd4000fea8865ad9e467f2263129f1f463350104aa428fab85f8e4c046"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "FACILITY-gpu_changing.ppm",
+    "sha256": "fc5ce891bdedb897ab143686aee18fdc2da5b375c45753becab44f07179c663c"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "FACILITY-gpu_completed.ppm",
+    "sha256": "7b2b513bcb0cbc1599457c33b51fe1f3697caf60ee4349b0db68d9acd300517e"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "FACILITY-gpu_unsupported.ppm",
+    "sha256": "3f8f4c7672137f7b788f0212e5bfac105719ee0f6896334a51a5345a2ae6ae8e"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "320x240",
+    "name": "FACILITY-gpu_waiting.ppm",
+    "sha256": "74eab8035da4fa8897f5c93bdabb1d1f3d066685bfeafd55152f3adbf109b1c0"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "ANNEX-combined_controls-0.ppm",
+    "sha256": "6e0c6a64d5828656a7f465d5fb718ee45275487d75b1a0f4a76984618982648c"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "ANNEX-combined_controls-10.ppm",
+    "sha256": "f39610096dd5396aa20e88e1ff612696dee7addd517ec141a2442be79a2b247a"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "ANNEX-combined_controls-20.ppm",
+    "sha256": "32b4d1646d31e15eb22b1a2faa29f20846b829874b540cb9dd2d9298d665e6e9"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "ANNEX-combined_controls.ppm",
+    "sha256": "a75f116c610529ac2a6f77dd2fdce47ee2b158a1ee06642cfbe92610d6c68e92"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "ANNEX-combined_settings-0.ppm",
+    "sha256": "4c34c97df9e87b6751403536e012f580a55790e233536f7980937ce9eea791f3"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "ANNEX-combined_settings-10.ppm",
+    "sha256": "4a96089787cdf07f3eb22c4e03985b27b1fed15740855c64efabd91cdfe096d9"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "ANNEX-combined_settings-20.ppm",
+    "sha256": "4b8a5805cf2e1fb8d40751a0ab65c326edf12bbb77d0ba6f3c8730c840245e97"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "ANNEX-combined_settings.ppm",
+    "sha256": "25e909bc6309aa716eaebc42ffc0c0cfd80b2cca04f2675477d55059fa115186"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "ANNEX-gpu_changing-0.ppm",
+    "sha256": "e3686d7d29691eb595cc7f22f65426da8e1368490952398d5e47f888f93125de"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "ANNEX-gpu_changing-10.ppm",
+    "sha256": "becb351389df185a2bec5cecd87ecf9654c68426a041ccfff4d76c114b38439e"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "ANNEX-gpu_changing-20.ppm",
+    "sha256": "ba43c946f6293179fd79d0e506e26c2b7e9ca55ab8b3b68cc608037b6e5b90f6"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "ANNEX-gpu_changing.ppm",
+    "sha256": "046773acd080ec0ff02c55a74f488b5ad450869f96c62214bfe9cf04ec934d7e"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "ANNEX-gpu_completed.ppm",
+    "sha256": "373f519e7c5e6986db0876be88e3b2646ff3487ccd48e469be1406fdf7ffc1c7"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "ANNEX-gpu_unsupported.ppm",
+    "sha256": "fe64493cfcde70a08fc0dd6ce29c131d663a30bb8585cc055d6f6cb27bc85909"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "ANNEX-gpu_waiting.ppm",
+    "sha256": "b67f3dc6498c49242cedb9b997ef07ea044e81ae6fec8f7997b88dd95afa8638"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "FACILITY-combined_controls-0.ppm",
+    "sha256": "a76d0a2814a9c643818c20614e9ce515e70ab07fef4388e4adb7d9eed455de5c"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "FACILITY-combined_controls-10.ppm",
+    "sha256": "7f5afff5aaa659071ade865729a88a214a0fe75b87dc686c6b115215300bbc9f"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "FACILITY-combined_controls-20.ppm",
+    "sha256": "5a16b7b241b8a5cc9a35d3ae354c38193d9a89c15b0eac67474c68e26d07bf02"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "FACILITY-combined_controls.ppm",
+    "sha256": "5c43401940801973bdcf8e8fe89fd0145dc689d939ed6f9822d623b411913d07"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "FACILITY-combined_settings-0.ppm",
+    "sha256": "a62ac7a696f593917f5d275c890af9cd0295753b2bc412c496779518044b7d0f"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "FACILITY-combined_settings-10.ppm",
+    "sha256": "8ddd5fc5adc844c05695c5f116b3a9cbbab33c675e18ce9cb9c56f0a3868c5eb"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "FACILITY-combined_settings-20.ppm",
+    "sha256": "33b56c1f9b261d6ef66d9ae3998effe586754f041460ab023ce523b9bc7dcc09"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "FACILITY-combined_settings.ppm",
+    "sha256": "7e10a7a07fe6e2cfcb9f81e229e865338834214315916aac7ae3ab0307091e2b"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "FACILITY-gpu_changing-0.ppm",
+    "sha256": "bb23132e3976c8ee1d18780d8e9c921186a30a3c3c967ff5c11ab14609b54af3"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "FACILITY-gpu_changing-10.ppm",
+    "sha256": "9386c7f38c230029b136db0cbda8f4d39a962d9cd0dacc16c96ce4afaf143356"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "FACILITY-gpu_changing-20.ppm",
+    "sha256": "808081ddab768f59122f5225b335452d543c2d482c0c0a8c10c00f7638eef0aa"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "FACILITY-gpu_changing.ppm",
+    "sha256": "4f6a2aa9893e313ec1e9a258ae36d72739a7ede564d7a238337ecb746286c559"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "FACILITY-gpu_completed.ppm",
+    "sha256": "1a7d13f72bdb2867016a3637787c8805cb40a72fb3c5aab654b89bdbb2353471"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "FACILITY-gpu_unsupported.ppm",
+    "sha256": "b4847e991295c356ab05b84f7690537de877929ed2cc0de9df0d16e46e1e3cfe"
+  },
+  {
+    "configuration": "release",
+    "kind": "viewport",
+    "viewport": "1050x1360",
+    "name": "FACILITY-gpu_waiting.ppm",
+    "sha256": "8561e90b2eec566c264fab75b29acdb2a497f732ea8932f637d5587ef73882e5"
+  }
+]

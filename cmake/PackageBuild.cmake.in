@@ -14,6 +14,21 @@ execute_process(COMMAND "@CMAKE_COMMAND@" --install "${build}" --config Release 
 if(NOT result EQUAL 0)
   message(FATAL_ERROR "Package install failed: ${output}${error}")
 endif()
+# Validation records link these captures. Verify the install filter retained them,
+# rather than only hashing the subset of documentation that reached staging.
+file(GLOB_RECURSE validation_images RELATIVE "@CMAKE_CURRENT_SOURCE_DIR@/validation"
+  "@CMAKE_CURRENT_SOURCE_DIR@/validation/*.png")
+foreach(image IN LISTS validation_images)
+  set(installed "${prefix}/share/doc/feature_lab/validation/${image}")
+  if(NOT EXISTS "${installed}")
+    message(FATAL_ERROR "Missing validation capture in package: ${image}")
+  endif()
+  file(SHA256 "@CMAKE_CURRENT_SOURCE_DIR@/validation/${image}" expected)
+  file(SHA256 "${installed}" actual)
+  if(NOT actual STREQUAL expected)
+    message(FATAL_ERROR "Validation capture differs in package: ${image}")
+  endif()
+endforeach()
 configure_file("@CMAKE_CURRENT_SOURCE_DIR@/docs/PACKAGE_README.md" "${prefix}/README.md" COPYONLY)
 configure_file("@CMAKE_CURRENT_BINARY_DIR@/generated/package-build-info.txt" "${prefix}/BUILD_INFO.txt" COPYONLY)
 if(EXISTS "/etc/os-release")

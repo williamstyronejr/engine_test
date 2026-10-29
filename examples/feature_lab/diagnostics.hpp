@@ -1,4 +1,5 @@
 #pragma once
+#include "diagnostics_memory.hpp"
 #include "engine/debug_draw.hpp"
 #include "engine/diagnostics.hpp"
 #include "game.hpp"
@@ -64,7 +65,10 @@ class Diagnostics {
         using namespace engine;
         if (!controls.visible)
             return;
-        const float scale = hud_scale(width, height);
+        // Capture pending vertices before either panel changes batching or clipping.
+        const auto memory = renderer.memory();
+        const float scale = std::min({hud_scale(width, height), static_cast<float>(width) / 1280.0F,
+                                      static_cast<float>(height) / 720.0F});
         renderer.quad({254 * scale, -314 * scale}, {460 * scale, 424 * scale},
                       {0.008F, 0.018F, 0.03F, 0.98F});
         renderer.push_clip({static_cast<int>(24 * scale), static_cast<int>(102 * scale),
@@ -100,9 +104,7 @@ class Diagnostics {
         row(format_text(text, "CULLED ", window_.culled + minimap_.culled,
                         " / GPU = RENDER INTERVAL"));
         row(format_text(text, "TEXTURES ", renderer.live_textures(), "  TARGETS ",
-                        renderer.live_targets(), "  KB ",
-                        Fixed2{static_cast<double>(renderer.target_bytes()) / 1024}, " FONT KB ",
-                        Fixed2{static_cast<double>(renderer.font_bytes()) / 1024}));
+                        renderer.live_targets()));
         row(format_text(text, "BODIES ", game.collisions.bodies().size(), "  CONTACTS ",
                         game.collisions.contacts().size()));
         row(format_text(text, "GRID PAIRS ", collision.candidate_pairs, "  TESTS ",
@@ -112,6 +114,24 @@ class Diagnostics {
         row("BLUE STATIC / CYAN MOVING AND CAMERA");
         row(format_text(text, "ENTITIES ", game.world.size(), "  PICKUPS ",
                         game.world.component_count<CorePickup>()));
+        renderer.pop_clip();
+        renderer.quad({726 * scale, -282 * scale}, {460 * scale, 360 * scale},
+                      {0.008F, 0.018F, 0.03F, 0.98F});
+        renderer.push_clip({static_cast<int>(496 * scale), static_cast<int>(102 * scale),
+                            static_cast<int>(460 * scale), static_cast<int>(360 * scale)});
+        y = 114;
+        unsigned index = 0;
+        memory_rows(memory, text, [&](std::string_view value) {
+            const Color color = index == 0 || index == 2 || index == 7
+                                    ? Color{0.04F, 0.85F, 0.7F, 1}
+                                    : Color{0.8F, 0.9F, 0.94F, 1};
+            // Keep unusually large byte counts inside the panel without truncation.
+            const float measured = renderer.text_size(value).x;
+            const float size = measured > 0 ? std::min(1.35F, 436.0F / measured) : 1.35F;
+            renderer.text({508 * scale, -y * scale}, size * scale, value, color);
+            y += 21;
+            ++index;
+        });
         renderer.pop_clip();
     }
 

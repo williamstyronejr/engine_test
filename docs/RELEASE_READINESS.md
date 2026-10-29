@@ -294,6 +294,12 @@ in coverage-v2 renderer snapshots. Atlas/glyph reservations and used bytes remai
 separate from candidate staging. Ownership/rollback tests and 32 focused groups
 pass, with 36 matching images; object/lookup storage, allocator/driver overhead and
 retired stores remain excluded. No whole-engine live-memory or timing gate closes.
+Increment 73 [exposes the scoped renderer inventory in F2](../validation/2026-10-29-diagnostics-memory/RESULTS.md).
+CPU reserved/used values and logical GPU payloads remain separate from RSS and
+staging peaks. The overlay samples before its own drawing and reuses HUD storage;
+this observability change does not extend inventory coverage or establish a
+performance improvement. Tiny offscreen captures do not replace physical display
+checks. The next evidence refresh must retain these limits.
 R6 timing/coverage and physical R4/R5 cases remain open; R8 requires their
 coverage/support record. Refresh automated evidence when the implementation or
 toolchain changes. These results do not complete milestone 6.

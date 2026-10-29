@@ -1,0 +1,23 @@
+Test project /home/zero/dev/engine_test/build/debug
+    Start  2: hud_text
+1/7 Test  #2: hud_text .........................   Passed    0.03 sec
+    Start 25: diagnostics
+2/7 Test #25: diagnostics ......................   Passed    0.28 sec
+    Start 35: diagnostics_allocations
+3/7 Test #35: diagnostics_allocations ..........   Passed   13.29 sec
+    Start 36: ui_allocations
+4/7 Test #36: ui_allocations ...................   Passed   16.02 sec
+    Start 46: stress_frame_samples
+5/7 Test #46: stress_frame_samples .............   Passed   10.24 sec
+    Start 47: renderer_memory
+6/7 Test #47: renderer_memory ..................   Passed    0.06 sec
+    Start 56: render_targets
+7/7 Test #56: render_targets ...................   Passed    0.83 sec
+
+100% tests passed out of 7
+
+Label Time Summary:
+cpu         =   0.31 sec*proc (2 tests)
+hardware    =  40.44 sec*proc (5 tests)
+
+Total Test time (real) =  40.76 sec

@@ -1,0 +1,57 @@
+[
+  {
+    "command": [
+      "cmake",
+      "--preset",
+      "release",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/packages"
+    ],
+    "source": "f54d0d077d750314f83fb84488cc01080cd39a20",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0IjaAtt:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "DISPLAY": ":0"
+    },
+    "exit_code": 0,
+    "seconds": 0.37283014398417436
+  },
+  {
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "--target",
+      "feature_lab",
+      "stress_bench",
+      "validate_assets",
+      "-j2"
+    ],
+    "source": "f54d0d077d750314f83fb84488cc01080cd39a20",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0IjaAtt:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "DISPLAY": ":0"
+    },
+    "exit_code": 0,
+    "seconds": 8.360693401977187
+  },
+  {
+    "command": [
+      "ctest",
+      "--preset",
+      "release",
+      "-R",
+      "^package_(build|relocation|graphics)$",
+      "--output-on-failure"
+    ],
+    "source": "f54d0d077d750314f83fb84488cc01080cd39a20",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0IjaAtt:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "DISPLAY": ":0"
+    },
+    "exit_code": 0,
+    "seconds": 44.444180999998935
+  }
+]

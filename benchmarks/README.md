@@ -317,3 +317,8 @@ lifecycle and image/report identity; it does not revise earlier timing decisions
 renderer baselines to coverage v2 with owned atlas/glyph reservations and used
 bytes. Committed snapshots and replacement staging remain separate; old v1 reports
 and earlier timing/adoption decisions are preserved.
+
+[The F2 memory panel](../validation/2026-10-29-diagnostics-memory/RESULTS.md) displays
+this scoped inventory with explicit reserved/used CPU values and logical GPU
+payloads. Warmed allocation and presentation checks are correctness evidence;
+they do not close timing acceptance or total-memory coverage gaps.

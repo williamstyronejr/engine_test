@@ -446,6 +446,8 @@ TEST(diagnostics_overlay_sizes_toggles_and_resources) {
     Renderer renderer;
     auto game = feature_lab::load_game(AssetRoot(TEST_ASSET_ROOT));
     feature_lab::Diagnostics diagnostics;
+    std::string text;
+    text.reserve(256);
     const auto textures = renderer.live_textures();
     for (const auto [width, height] :
          {std::pair{320, 240}, {640, 480}, {1280, 720}, {1050, 1360}}) {
@@ -454,22 +456,37 @@ TEST(diagnostics_overlay_sizes_toggles_and_resources) {
         const Camera camera{{w / 2, -h / 2}, h};
         diagnostics.controls = {};
         renderer.begin(target, camera, {1, 0, 0, 1});
-        diagnostics.draw_hud(renderer, game, width, height, 0);
+        const auto memory = renderer.memory();
+        diagnostics.draw_hud(renderer, game, width, height, 0, text);
         diagnostics.draw_world(renderer, game, game.camera(width, height, 1), width, height);
         CHECK(renderer.stats().quads == 0);
+        CHECK(renderer.memory() == memory);
         renderer.end();
         diagnostics.controls = {true, true};
         diagnostics.record({16, 2}, {100, 20, 3}, {10, 0, 1}, 1);
         renderer.begin(target, camera, {1, 0, 0, 1});
-        diagnostics.draw_hud(renderer, game, width, height, 0.5);
+        diagnostics.draw_hud(renderer, game, width, height, 0.5, text);
+        // Both panels must restore the caller's clip, including tiny viewports.
+        renderer.quad({5, -h + 5}, {4, 4}, {0, 1, 0, 1});
         renderer.end();
         CHECK(renderer.stats().quads > 100);
-        const float scale = feature_lab::hud_scale(width, height);
+        CHECK(renderer.memory() == memory);
+        CHECK(renderer.pixel(5, 5)[1] > 240);
+        const float scale = std::min({1.25F, w / 1280, h / 720});
         const auto panel = renderer.pixel(static_cast<int>(26 * scale),
                                           height - 1 - static_cast<int>(105 * scale));
         const auto outside = renderer.pixel(static_cast<int>(20 * scale),
                                             height - 1 - static_cast<int>(105 * scale));
         CHECK(panel[0] < 100 && outside[0] > 240);
+        const auto memory_panel = renderer.pixel(static_cast<int>(500 * scale),
+                                                 height - 1 - static_cast<int>(105 * scale));
+        const auto gap = renderer.pixel(static_cast<int>(490 * scale),
+                                        height - 1 - static_cast<int>(105 * scale));
+        const auto right = renderer.pixel(static_cast<int>(962 * scale),
+                                          height - 1 - static_cast<int>(105 * scale));
+        const auto below = renderer.pixel(static_cast<int>(500 * scale),
+                                          height - 1 - static_cast<int>(470 * scale));
+        CHECK(memory_panel[0] < 100 && gap[0] > 240 && right[0] > 240 && below[0] > 240);
         renderer.begin(target, game.camera(width, height, 1));
         diagnostics.draw_world(renderer, game, game.camera(width, height, 1), width, height);
         renderer.end();

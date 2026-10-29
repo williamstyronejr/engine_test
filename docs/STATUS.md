@@ -2366,11 +2366,34 @@ At documentation commit `279bb88`, all three Release package groups pass
 without skips (46.74 s). All 78 evidence files and the memory contract match archived
 copies; allocation profilers remain excluded.
 
+## Increment 73: scoped renderer memory in F2 diagnostics
+
+- Added a second F2 panel with CPU vertex/font reserved and used bytes, plus all
+  five logical GPU payload fields in KiB. One snapshot precedes both panels;
+  used bytes remain part of reserved bytes. RSS/staging and excluded coverage
+  are labeled separately, with no synthesized total-memory estimate.
+- Reused the caller's HUD text storage. Numeric rows fit their panel without
+  truncation; diagnostics scales below the general HUD minimum for tiny viewports.
+- Added exact field/label checks and extended native panel bounds, clip restoration
+  and resource-stability checks. UI probes identify the new layout and accept
+  optional capture dimensions; historical captures remain unchanged.
+- All 28 focused compiler/sanitizer groups pass without skips. Warmed render-thread
+  C++ allocation scopes remain zero. New diagnostic images match across builds;
+  36 stress and 14 non-diagnostic UI images match their retained references.
+
+See [contract](RENDERER_MEMORY.md#f2-memory-panel-increment-73) and
+[validation](../validation/2026-10-29-diagnostics-memory/RESULTS.md).
+
+The initial package-content audit caught omitted PNG captures after the three
+runtime/package tests passed. The install filter and archive gate now include and
+verify validation images. At corrected commit `f54d0d0`, all three package groups
+pass without skips (44.27 s); all 72 evidence files and eight changed documentation
+files match the archive. The original failed audit is retained.
+
 ## Next increment
 
-Expose the scoped renderer inventory in the opt-in diagnostics overlay, with
-reserved/used CPU fields and logical GPU payloads clearly labeled. Keep it separate
-from process RSS and staging peaks, reuse text buffers, and validate overlay output
-and warmed render allocations. Do not claim total driver/live-heap coverage or a
-performance fix. Timing acceptance, physical display/audio and final support
-records stay open; background loading remains deferred.
+Refresh release-readiness evidence at the integrated revision: run the full GNU
+Debug/Release runtime suites and relevant Clang/sanitizer checks, audit packaged
+documentation/sample entry points, and record remaining physical display/audio,
+timing/memory-coverage and final support gaps. Observational diagnostics do not
+close those acceptance gates; background loading remains deferred.

@@ -14,7 +14,7 @@
 namespace {
 using namespace engine;
 using namespace feature_lab;
-constexpr int width = 1280, height = 800;
+int width = 1280, height = 800;
 constexpr unsigned frames = 300, warmup = 30;
 enum Scope : std::size_t { update, minimap, world, hud, diagnostics, settings, end, frame, count };
 constexpr std::array scope_names{
@@ -33,7 +33,8 @@ constexpr std::array scenarios{
     Scenario{"gpu_changing", true, false, false, false, false, false, true, true, 3},
     Scenario{"combined_settings", true, false, true, false, false, false, true, true, 3},
     Scenario{"combined_controls", true, true, true, true, false, false, true, true, 3}};
-constexpr const char* usage = "Usage: diagnostics_allocations REPORT.json [SCREENSHOT_DIRECTORY]";
+constexpr const char* usage =
+    "Usage: diagnostics_allocations REPORT.json [SCREENSHOT_DIRECTORY [WIDTH HEIGHT]]";
 constexpr const char* workload = "diagnostics_ui_states_v1";
 constexpr const char* gpu_history = "synthetic";
 #else
@@ -47,7 +48,8 @@ constexpr std::array scenarios{
     Scenario{"binding_updated", true, true, true, true, true, true},
     Scenario{"diagnostics", true, false, false, false, false, false, true},
     Scenario{"diagnostics_shapes", true, false, false, false, false, false, true, true}};
-constexpr const char* usage = "Usage: ui_allocations REPORT.json [SCREENSHOT_DIRECTORY]";
+constexpr const char* usage =
+    "Usage: ui_allocations REPORT.json [SCREENSHOT_DIRECTORY [WIDTH HEIGHT]]";
 constexpr const char* workload = "frozen_ui_states_v1";
 constexpr const char* gpu_history = "none";
 #endif
@@ -295,13 +297,27 @@ void summary(std::ostream& out, const Summary& value) {
 } // namespace
 int main(int argc, char** argv) {
     try {
-        if (argc != 2 && argc != 3)
+        if (argc != 2 && argc != 3 && argc != 5)
             throw std::invalid_argument(usage);
+        if (argc == 5) {
+            const auto dimension = [](std::string_view value) {
+                int result{};
+                const auto parsed =
+                    std::from_chars(value.data(), value.data() + value.size(), result);
+                if (parsed.ec != std::errc{} || parsed.ptr != value.data() + value.size() ||
+                    result < 240 || result > 2560)
+                    throw std::invalid_argument(
+                        "UI probe dimensions must be integers in [240, 2560]");
+                return result;
+            };
+            width = dimension(argv[3]);
+            height = dimension(argv[4]);
+        }
         if (!std::getenv("DISPLAY") || !*std::getenv("DISPLAY")) {
             std::cout << "SKIP: UI allocation workload DISPLAY unavailable\n";
             return 77;
         }
-        const std::filesystem::path screenshots = argc == 3 ? argv[2] : "";
+        const std::filesystem::path screenshots = argc >= 3 ? argv[2] : "";
         if (!screenshots.empty())
             std::filesystem::create_directories(screenshots);
         const AssetRoot assets(TEST_ASSET_ROOT);
@@ -319,7 +335,7 @@ int main(int argc, char** argv) {
             << ",\"compiler\":" << json_string(stress_build_compiler)
             << ",\"configuration\":" << json_string(stress_build_configuration)
             << ",\"flags\":" << json_string(stress_build_flags)
-            << ",\"workload\":" << json_string(workload)
+            << ",\"workload\":" << json_string(workload) << ",\"diagnostics_layout\":\"memory_v1\""
             << ",\"complete\":true,\"frames\":" << frames << ",\"warmup\":" << warmup
             << ",\"measured_frames\":" << frames - warmup << ",\"width\":" << width
             << ",\"height\":" << height

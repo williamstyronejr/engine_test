@@ -62,6 +62,65 @@ TEST(diagnostic_gpu_ingestion_preserves_delayed_samples_without_allocations) {
     CHECK(debug.gpu_summary().samples == 2 && debug.gpu_summary().last_frame == 2);
     CHECK(allocation_profile::snapshot().calls == before.calls);
 }
+TEST(memory_labels_preserve_scope_units_and_independent_fields_without_allocations) {
+    engine::RenderMemory memory;
+    memory.cpu_vertex_reserved_bytes = 786432;
+    memory.cpu_vertex_used_bytes = 192;
+    memory.cpu_font_atlas_reserved_bytes = 32768;
+    memory.cpu_font_atlas_used_bytes = 16384;
+    memory.cpu_font_glyph_reserved_bytes = 2048;
+    memory.cpu_font_glyph_used_bytes = 1408;
+    memory.gpu_vertex_store_bytes = 65536;
+    memory.gpu_builtin_texture_bytes = 32;
+    memory.gpu_uploaded_texture_bytes = 4096;
+    memory.gpu_font_texture_bytes = 8192;
+    memory.gpu_target_texture_bytes = 131072;
+    constexpr std::array<std::string_view, 16> expected{"RENDERER MEMORY / KIB",
+                                                        "KIB: 1024 BYTES / PRE F2 DRAW",
+                                                        "CPU BUFFER / RESERVED / USED",
+                                                        "VERTICES / 768.00 / 0.19",
+                                                        "FONT ATLAS / 32.00 / 16.00",
+                                                        "FONT GLYPHS / 2.00 / 1.38",
+                                                        "USED IS PART OF RESERVED",
+                                                        "GPU / LOGICAL PAYLOADS",
+                                                        "VERTEX STORE / 64.00",
+                                                        "BUILTIN TEXELS / 0.03",
+                                                        "UPLOADED TEXELS / 4.00",
+                                                        "FONT TEXELS / 8.00",
+                                                        "TARGET TEXELS / 128.00",
+                                                        "EXCLUDES DRIVER AND RESIDENCY",
+                                                        "RSS AND STAGING PEAKS ARE SEPARATE",
+                                                        "EXCLUDES OTHER HEAP AND GL OBJECTS"};
+    std::string text;
+    text.reserve(256);
+    const auto before = allocation_profile::snapshot();
+    for (int repeat = 0; repeat < 1000; ++repeat) {
+        std::size_t index = 0;
+        memory_rows(memory, text, [&](std::string_view value) {
+            CHECK(index < expected.size() && value == expected[index++]);
+        });
+        CHECK(index == expected.size());
+        auto changed = memory;
+        changed.cpu_vertex_reserved_bytes = std::numeric_limits<std::size_t>::max();
+        changed.cpu_vertex_used_bytes = 0;
+        changed.gpu_uploaded_texture_bytes = 0;
+        changed.gpu_target_texture_bytes = 4;
+        index = 0;
+        memory_rows(changed, text, [&](std::string_view value) {
+            if (index == 3) {
+                CHECK(value.starts_with("VERTICES / ") && value.ends_with(" / 0.00"));
+                CHECK(value.find("OVERFLOW") == std::string_view::npos);
+            } else if (index == 10)
+                CHECK(value == "UPLOADED TEXELS / 0.00");
+            else if (index == 12)
+                CHECK(value == "TARGET TEXELS / 0.00");
+            else
+                CHECK(value == expected[index]);
+            ++index;
+        });
+    }
+    CHECK(allocation_profile::snapshot().calls == before.calls);
+}
 TEST(long_labels_grow_losslessly_and_then_reuse_capacity) {
     const std::string long_label(4096, 'X');
     std::string text;

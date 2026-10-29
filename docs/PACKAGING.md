@@ -54,7 +54,11 @@ cmake --install build/release --prefix "$PWD/build/package"
 
 Normal native installs include all three executables, assets and linked documentation.
 The [release-validation records](../validation/README.md), including command logs
-and CTest XML, install under `share/doc/feature_lab/validation`. Each record names
+and CTest XML, install under `share/doc/feature_lab/validation`. Selected PNG
+captures install alongside their records so relative image links remain usable.
+The archive target checks every source validation PNG against its staged bytes
+before creating the manifest, so an install-filter omission fails packaging.
+Each record names
 its tested source revision; it does not automatically certify later package revisions.
 Top-level README/build/dependency/hash records are added by the archive target.
 CPU-only builds install `stress_bench`, `validate_assets` and documentation; they do not

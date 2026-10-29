@@ -26,6 +26,10 @@ list(LENGTH names per_level)
 math(EXPR total "${per_level} * 2")
 math(EXPR last "${total} - 1")
 string(JSON workload GET "${json}" workload)
+string(JSON layout GET "${json}" diagnostics_layout)
+if(NOT layout STREQUAL "memory_v1")
+  message(FATAL_ERROR "Missing renderer memory presentation")
+endif()
 if(NOT workload STREQUAL expected_workload OR
    NOT schema STREQUAL "feature_lab_ui_allocations_v1" OR NOT complete OR NOT count EQUAL total OR
    NOT measured EQUAL 270 OR NOT frames EQUAL 300 OR NOT warmup EQUAL 30)
