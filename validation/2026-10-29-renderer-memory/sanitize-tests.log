@@ -1,0 +1,12 @@
+Test project /home/zero/dev/engine_test/build/sanitize
+    Start 15: stress_cpu
+1/2 Test #15: stress_cpu .......................   Passed    6.09 sec
+    Start 16: stress_report
+2/2 Test #16: stress_report ....................   Passed    0.34 sec
+
+100% tests passed out of 2
+
+Label Time Summary:
+cpu    =   6.42 sec*proc (2 tests)
+
+Total Test time (real) =   6.43 sec

@@ -1,0 +1,290 @@
+[
+  {
+    "configuration": "debug",
+    "mode": "plain",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "1f522eabd70d82c4cb2793b790807055e7450442a32603ea8a8deec9358cd861",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "release",
+    "mode": "plain",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "67ddd1098fe5830c67b7e1e876f21885b335d1c1cb595ce2c6e850b40b3f0dfe",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "clang",
+    "mode": "plain",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "88f5471e3f81c8e721f26611358d2ed897faeb33ec73d5297116992c84daeef6",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "sanitize-platform",
+    "mode": "plain",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "feb9a607475fc2877e0ef3f0d7b37151a480fc3ee35054ed4204a6aeca807f00",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "debug",
+    "mode": "traced",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "afcee8c443be4029a2a9a68319f27d831aecc0bb62d17cd978a97c4ed2417dbf",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "release",
+    "mode": "traced",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "cee0facb00381e0746138e7bbc2b3bef153213c8b04c6b7c7af86548ca3ebc71",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "clang",
+    "mode": "traced",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "2a60f871b37776d356319a349895f549ba44a45a02d68d8c313906e19f167548",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "sanitize-platform",
+    "mode": "traced",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "f2ee739cc8d07b9aeb6baa8b75d0afdc7e580926532b44e5eba8504b60c6d7d0",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "debug",
+    "mode": "vsync",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "454f54747bb171cda0cb2cae373a26ce78a303a9e6b32ea9dbedfa0104d12840",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "release",
+    "mode": "vsync",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "4cee775b8d5f1d95346fa57c164246ee4833a4f4baf934fbf15533639bff705c",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "clang",
+    "mode": "vsync",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "b9567e3406b37ca9e1231e55a1fe9a505d5715ada7937d9db340f2fa53837de1",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "sanitize-platform",
+    "mode": "vsync",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "6a6739bdb99d7f034612ae504fdbfbebd3d2a71a5197380c034207a7f76113f6",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "debug",
+    "mode": "split",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "2502e28aad3a7a0ad4bf0f87de8ea091c71e51299dc4436ca0bc6ddd3680e40d",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "release",
+    "mode": "split",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "168b668c4b3e1d08cb20c933fe18c962f81ce961f9e167f10395480b8ca62824",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "clang",
+    "mode": "split",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "168ed7b67e6b341cccd914fa00efce4f00c1d9b506c3ab177d1eaf2e24b06036",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "sanitize-platform",
+    "mode": "split",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "9c67b09fe33c632d1c0112e6bcf71b5ed1b4e99acdd8d1cef039cbe2c219c56b",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "debug",
+    "mode": "split_vsync",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "be3bba6fb17c630d68f99a2d03acaa8437082f1543342634257c339ca5d7cee9",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "release",
+    "mode": "split_vsync",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "1eb5d4c19a15327296085b49170eae91e881ebaeec509215519430ef15faeeb8",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "clang",
+    "mode": "split_vsync",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "704bba46d08f5e0126ddfb1ca487c9e7d7a3546c9f6c2fe957b2bd9d1659fe00",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "sanitize-platform",
+    "mode": "split_vsync",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "44b18543639347ab288d24379bf5fe92f4b33ae4a08483ec2a3108baa92c70d2",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "debug",
+    "mode": "prep",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "065936afa7ba4cc1bdbbeb484acea4e8d02fff1ac566c91531ef6b5fc0c56cc4",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "release",
+    "mode": "prep",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "9a481121c7f117b2e93cd8ef1e9b4a0e582a57b0d3078f21500e276a542c8bf9",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "clang",
+    "mode": "prep",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "d68a503b60ceee69a47d9d558f9e4495ffa81d8f603bd849a17d59d25cf5d7bb",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "sanitize-platform",
+    "mode": "prep",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "e2e6283e780ff4e1696cfc7de00886288572183738fb7321fbd90704b33d4c79",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "debug",
+    "mode": "prep_vsync",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "6640e5287586f58bbbee81a452b332f31d95c9469fef6f2b0d987ceb5cc127c8",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "release",
+    "mode": "prep_vsync",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "3e99d4871650b67fb517a7adaf7e96879f62dbae092bf529d630af7d1e86b0f5",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "clang",
+    "mode": "prep_vsync",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "ad0d69568b7bec872d3398036585bf98844984e3b16059c05ab4b026081e78da",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "sanitize-platform",
+    "mode": "prep_vsync",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "a7723710435bf96268e3dd04ec171c96f731c1f1a6a5b0b663323f8a230cf6d2",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "debug",
+    "mode": "ctx",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "80319c2f52b3d4f29560764daa065c9ffa242c575bfb710479ed64a0c65d5a52",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "release",
+    "mode": "ctx",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "913867428994b4670a4b7fae8b570f71798cbcc8f357b188975a666b08e33243",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "clang",
+    "mode": "ctx",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "a776ba246229f7bf87d6152c9290f737d8b415cd26a8c37e3b186e0e3a9727b5",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "sanitize-platform",
+    "mode": "ctx",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "fb869f7f94cdcf05b1846c1775770e2e9614705f5f4dcbc8ffb354fd9cad8ab0",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "debug",
+    "mode": "ctx_vsync",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "501dd937af797efb349c6f1d5e563699ccfb4780c7570d115742e81df38a7b0a",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "release",
+    "mode": "ctx_vsync",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "4d2611c8e72ddbb4755b5544cdf2353db6a8e09e4a099fde5bace3badb68544d",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "clang",
+    "mode": "ctx_vsync",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "4d9bcf5c0f93ee1bede52425386fef16a7427e8f16f54df4deb3205e6f4b1e7c",
+    "workload_state_render_existing_memory_match": true
+  },
+  {
+    "configuration": "sanitize-platform",
+    "mode": "ctx_vsync",
+    "source": "3f60321d431289cfe8b5d5be9048872498038f33",
+    "reference_source": "07f6727",
+    "report_sha256": "06fdef586c5323be6fd98aae0a4f19d9068e66847cd66501ec428679431f092f",
+    "workload_state_render_existing_memory_match": true
+  }
+]

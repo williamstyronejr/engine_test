@@ -2325,11 +2325,27 @@ three package tests pass at the same source revision using the existing test-roo
 option; the initial cause remains unconfirmed. Failed/successful commands and
 file/hash evidence are preserved in the increment's evidence directory.
 
+## Increment 71: renderer owned-memory accounting
+
+- Added `Renderer::memory()` for CPU vertex reservation/pending bytes, logical VBO
+  store and built-in/uploaded/font/target texels. The getter makes no GL calls,
+  allocates nothing and does not flush. Driver overhead/retired stores remain excluded.
+- Stress reports add an explicitly labeled unloaded renderer baseline; CPU-only
+  runs mark it unobserved. Frame/load/unload stability checks include the inventory.
+- Native tests compare VBO size with GL, verify deletion across four lifetimes,
+  and cover capacity boundaries, reset, texture/target rollback and font replacement.
+- All 40 focused compiler/sanitizer groups pass without skips; 36 images and their
+  workload/state/render/existing-memory reports match the pre-change renderer.
+  The initial test compile diagnostic remains in evidence. No timing gain is claimed.
+
+See [contract](RENDERER_MEMORY.md) and
+[validation](../validation/2026-10-29-renderer-memory/RESULTS.md).
+
 ## Next increment
 
-Extend renderer memory accounting for explicitly owned CPU vertex storage and
-known GPU buffer allocations, keeping driver overhead separate. Validate capacity,
-reset/release and reported payload semantics without claiming a total GPU-memory
-budget. Timing acceptance and both rejected optimization gates remain open; neither
-warmup protocol establishes a stable baseline. Physical display/audio and final
-support records stay open; background loading remains deferred.
+Extend owned CPU accounting to renderer font snapshots (atlas and glyph capacities)
+and distinguish committed storage from temporary replacement staging. Cover
+successful/rejected font replacements and expose the same scope in stress baseline
+reports. Keep allocator/driver overhead and total live-heap claims separate. Timing
+acceptance, physical display/audio and final support records remain open; background
+loading remains deferred.

@@ -307,3 +307,8 @@ The [warmup/order protocol](STRESS_RUN_STABILITY.md) balances short/long runs an
 records external read-only host observations. [Results](2026-10-28-stability-results.md)
 retain the late frequency/CPU-time transition, observer controls and failed
 stability screens. The engine remains unchanged; no system settings are altered.
+
+[Renderer memory accounting](../docs/RENDERER_MEMORY.md) adds an unloaded baseline
+snapshot to stress JSON while preserving existing workload/peak fields. Its
+[validation](../validation/2026-10-29-renderer-memory/RESULTS.md) covers buffer
+lifecycle and image/report identity; it does not revise earlier timing decisions.

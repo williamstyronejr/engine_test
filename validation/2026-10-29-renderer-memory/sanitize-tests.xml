@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-c++"
+	tests="2"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="omarchy"
+	time="6"
+	timestamp="2026-10-29T06:40:36"
+	>
+	<testcase name="stress_cpu" classname="stress_cpu" time="6.08752" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS small_collision_budgets_reuse_storage_with_full_query_capacity
+PASS scene_usage_and_component_peaks_allocate_nothing_after_setup
+PASS stale_deletion_requests_do_not_grow_small_scene_buffers
+PASS default_grid_saturation_allocates_nothing_after_setup
+PASS collision_usage_and_worst_case_event_batches_allocate_nothing_after_setup
+PASS empty_scenes_and_scene_moves_do_not_allocate
+PASS font_measurement_and_layout_allocate_nothing_after_setup
+PASS component_queries_and_pool_reuse_allocate_nothing_after_setup
+PASS deterministic_workloads_and_exact_tile_occupancy
+PASS dense_collision_pairs_match_all_pairs_reference
+PASS steady_state_allocations_and_repeated_unload_baseline
+PASS capacities_empty_arena_and_rejected_overflow
+PASS percentiles_warmup_capacity_and_nonfinite_samples
+PASS options_bounds_json_escaping_and_resource_growth_detection
+PASS presentation_options_defaults_conflicts_and_cpu_rejection
+PASS presentation_report_distinguishes_request_from_confirmation
+PASS frame_samples_pair_delayed_gpu_across_warmup...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="stress_report" classname="stress_report" time="0.335985" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+</testsuite>
