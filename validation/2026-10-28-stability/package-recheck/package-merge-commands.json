@@ -1,0 +1,39 @@
+[
+  {
+    "command": [
+      "cmake",
+      "--preset",
+      "release"
+    ],
+    "exit_code": 0,
+    "seconds": 0.6086114819918294
+  },
+  {
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "--target",
+      "feature_lab",
+      "stress_bench",
+      "validate_assets",
+      "stress_graphics_tests",
+      "-j2"
+    ],
+    "exit_code": 0,
+    "seconds": 8.66485505500168
+  },
+  {
+    "command": [
+      "ctest",
+      "--preset",
+      "release",
+      "-R",
+      "^package_(build|relocation|graphics)$",
+      "--output-on-failure"
+    ],
+    "exit_code": 8,
+    "seconds": 9.6233036229969
+  }
+]

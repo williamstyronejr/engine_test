@@ -170,3 +170,19 @@ At documentation commit `4cdeb26`, all three Release package checks pass
 without skips (45.73 s). All 71 evidence files and both benchmark documents
 match their archived copies; allocation profilers remain excluded. See
 [package record](../validation/2026-10-28-stability/package-feature.json).
+
+The first merge package attempt at `775622e` fails before publication: CMake
+extraction returns zero, but the extracted manifest is entirely zero-filled and
+425 listed payloads differ from the valid archive. Independent archive decoding
+matches all 1,072 staged payload hashes and the manifest. Including the manifest,
+426 extracted files differ; 425 are entirely zero-filled. The exact cause is
+unconfirmed; no disk-full or thermal cause is asserted. The invalid package is
+rejected by the existing verifier and dependent smoke tests do not run.
+
+A fresh extraction of that same archive to a disk-backed directory outside the
+repository passes the unchanged verifier. Using the existing
+`ENGINE_PACKAGE_TEST_ROOT` CMake option for that location, all three package tests
+then pass at the same merge revision without skips (45.23 s). No source/build
+rule, system setting, stress benchmark measurement or acceptance threshold changes.
+The failed attempt, manifest reconstruction, archive/file hashes, changed test-root
+configuration and successful recheck remain in [package-recheck evidence](../validation/2026-10-28-stability/package-recheck/inspection.json).
