@@ -26,3 +26,8 @@ frequency normalization, exact scheduler delay or causal thermal conclusion is
 made. The ACPI temperature values are implausible and remain uninterpreted.
 Package checks follow in the committed record; no fresh full compiler/sanitizer
 matrix is claimed for unchanged runtime code.
+
+At documentation commit `4cdeb26`, all three Release package checks pass
+without skips (45.73 s). All 71 evidence files and both benchmark documents
+match their archived copies; allocation profilers remain excluded. See
+[package-feature.json](package-feature.json) and matching configure/build/test logs.

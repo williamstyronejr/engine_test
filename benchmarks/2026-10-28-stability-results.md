@@ -165,3 +165,8 @@ buffer allocation sizes, keeping driver overhead separate. That addresses a
 concrete remaining coverage gap while host-dependent timing remains unresolved.
 Physical display/audio and final support records stay open; background loading
 remains deferred.
+
+At documentation commit `4cdeb26`, all three Release package checks pass
+without skips (45.73 s). All 71 evidence files and both benchmark documents
+match their archived copies; allocation profilers remain excluded. See
+[package record](../validation/2026-10-28-stability/package-feature.json).

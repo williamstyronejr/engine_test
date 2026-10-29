@@ -1,0 +1,48 @@
+{
+  "source": "4cdeb2665089322215eaad7b65c79b970302fc97",
+  "commands": [
+    {
+      "command": [
+        "cmake",
+        "--preset",
+        "release"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5574559679953381
+    },
+    {
+      "command": [
+        "cmake",
+        "--build",
+        "--preset",
+        "release",
+        "--target",
+        "feature_lab",
+        "stress_bench",
+        "validate_assets",
+        "stress_graphics_tests",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "seconds": 8.581028132000938
+    },
+    {
+      "command": [
+        "ctest",
+        "--preset",
+        "release",
+        "-R",
+        "^package_(build|relocation|graphics)$",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "seconds": 45.99945415799448
+    }
+  ],
+  "archive": "/home/zero/dev/engine_test/build/release/dist/feature-lab-0.1.0-Linux-x86_64-4cdeb26.tar.gz",
+  "archive_sha256": "c30aa1a141e5d56bd848183c5c757702707864b8c3b80dcac13f01c37a738dc8",
+  "matching_archived_files": 73,
+  "evidence_files": 71,
+  "benchmark_documents": 2,
+  "allocation_profilers_installed": false
+}

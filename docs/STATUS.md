@@ -2315,6 +2315,10 @@ See [protocol](../benchmarks/STRESS_RUN_STABILITY.md),
 [findings](../benchmarks/2026-10-28-stability-results.md) and
 [evidence](../validation/2026-10-28-stability/RESULTS.md).
 
+At documentation commit `4cdeb26`, all three Release package groups pass
+without skips (45.73 s). All 71 evidence files and both benchmark documents match
+archived copies; development allocation profilers remain excluded.
+
 ## Next increment
 
 Extend renderer memory accounting for explicitly owned CPU vertex storage and
