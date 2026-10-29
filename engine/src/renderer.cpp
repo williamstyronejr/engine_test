@@ -20,6 +20,8 @@ struct Vertex {
     float x, y, u, v;
     Color color;
 };
+constexpr std::size_t vertex_store_bytes = Renderer::batch_capacity * 6 * sizeof(Vertex);
+constexpr int builtin_atlas_width = 4, builtin_atlas_height = 2;
 constexpr const char* vertex_source = R"(#version 460 core
 layout(location=0) in vec2 position;
 layout(location=1) in vec2 texcoord;
@@ -131,8 +133,8 @@ struct Renderer::Impl {
         gl.BindVertexArray(vao);
         gl.GenBuffers(1, &vbo);
         gl.BindBuffer(GL_ARRAY_BUFFER, vbo);
-        gl.BufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(batch_capacity * 6 * sizeof(Vertex)),
-                      nullptr, GL_STREAM_DRAW);
+        gl.BufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertex_store_bytes), nullptr,
+                      GL_STREAM_DRAW);
         gl.EnableVertexAttribArray(0);
         gl.VertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), nullptr);
         gl.EnableVertexAttribArray(1);
@@ -147,8 +149,9 @@ struct Renderer::Impl {
                                             255, 255, 160, 160, 160, 255, 255, 255, 255, 255};
         gl.GenTextures(1, &texture);
         gl.BindTexture(GL_TEXTURE_2D, texture);
-        gl.TexImage2D(GL_TEXTURE_2D, 0, GL_SRGB8_ALPHA8, 4, 2, 0, GL_RGBA, GL_UNSIGNED_BYTE,
-                      pixels);
+        static_assert(sizeof(pixels) == builtin_atlas_width * builtin_atlas_height * 4);
+        gl.TexImage2D(GL_TEXTURE_2D, 0, GL_SRGB8_ALPHA8, builtin_atlas_width, builtin_atlas_height,
+                      0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
         gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -324,8 +327,8 @@ struct Renderer::Impl {
         gl.ActiveTexture(GL_TEXTURE0);
         gl.BindTexture(GL_TEXTURE_2D, batch_texture);
         // Orphan storage before upload so the driver can retain earlier in-flight batches.
-        gl.BufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(batch_capacity * 6 * sizeof(Vertex)),
-                      nullptr, GL_STREAM_DRAW);
+        gl.BufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertex_store_bytes), nullptr,
+                      GL_STREAM_DRAW);
         gl.BufferSubData(GL_ARRAY_BUFFER, 0,
                          static_cast<GLsizeiptr>(vertices.size() * sizeof(Vertex)),
                          vertices.data());
@@ -344,6 +347,16 @@ struct Renderer::Impl {
 };
 Renderer::Renderer() : impl_(std::make_unique<Impl>()) {
     impl_->initialize();
+}
+RenderMemory Renderer::memory() const {
+    const auto& p = *impl_;
+    return {p.vertices.capacity() * sizeof(Vertex),
+            p.vertices.size() * sizeof(Vertex),
+            vertex_store_bytes,
+            builtin_atlas_width * builtin_atlas_height * 4,
+            texture_bytes(),
+            font_bytes(),
+            target_bytes()};
 }
 Renderer::~Renderer() = default;
 std::string_view Renderer::default_vertex_shader() {

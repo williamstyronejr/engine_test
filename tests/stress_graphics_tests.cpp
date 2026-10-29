@@ -38,21 +38,27 @@ TEST(quad_batch_capacity_edges_and_empty_reset) {
     const auto target = renderer->create_target(64, 32);
     const auto white = renderer->upload({1, 1, {255, 255, 255, 255}});
     constexpr auto capacity = Renderer::batch_capacity;
+    const auto reserved = renderer->memory();
     renderer->set_cpu_timing(true);
-    for (const auto count : std::array<std::size_t, 6>{0, 1, capacity - 1, capacity,
-                                                     capacity + 1, 2 * capacity + 1}) {
+    for (const auto count :
+         std::array<std::size_t, 6>{0, 1, capacity - 1, capacity, capacity + 1, 2 * capacity + 1}) {
         renderer->begin(target, {{}, 32}, {0, 0, 1, 1});
         for (std::size_t i = 0; i < count; ++i)
             renderer->sprite(white, Transform::from({}, 0, {4, 4}),
                              i + 1 == count ? Color{0, 1, 0, 1} : Color{1, 0, 0, 1});
         renderer->sprite(white, Transform::from({1000, 0}, 0, {1, 1}));
         rejects([&] {
-            renderer->sprite(white, Transform::from(
-                                        {std::numeric_limits<float>::infinity(), 0}, 0, {1, 1}));
+            renderer->sprite(
+                white, Transform::from({std::numeric_limits<float>::infinity(), 0}, 0, {1, 1}));
         });
         CHECK(renderer->stats().quads == count && renderer->stats().culled == 1);
         CHECK(renderer->stats().draws == (count ? (count - 1) / capacity : 0));
+        CHECK(renderer->memory().cpu_vertex_used_bytes ==
+              (count ? (count - 1) % capacity + 1 : 0) * 6 * 32);
+        CHECK(renderer->memory().cpu_vertex_reserved_bytes == reserved.cpu_vertex_reserved_bytes);
+        CHECK(renderer->memory().gpu_vertex_store_bytes == reserved.gpu_vertex_store_bytes);
         renderer->end();
+        CHECK(renderer->memory().cpu_vertex_used_bytes == 0);
         const auto draws = (count + capacity - 1) / capacity;
         CHECK(renderer->stats().draws == draws);
         CHECK(renderer->cpu_timing().batches == draws);
@@ -63,6 +69,7 @@ TEST(quad_batch_capacity_edges_and_empty_reset) {
 
         renderer->begin(target, {{}, 32}, {0, 0, 0, 1});
         renderer->end();
+        CHECK(renderer->memory() == reserved);
         CHECK(renderer->stats().quads == 0 && renderer->stats().draws == 0);
         CHECK(renderer->cpu_timing().batches == 0 && renderer->cpu_timing().upload_bytes == 0);
         CHECK(renderer->pixel(32, 16)[1] == 0);

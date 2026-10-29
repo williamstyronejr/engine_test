@@ -25,6 +25,7 @@ int run_stress_mode(int argc, char** argv) {
     report.device = device.device;
     report.gl_version = device.version;
     const auto unloaded = stress_gpu_resources(renderer);
+    report.renderer_baseline = unloaded.renderer_memory;
     engine::Input input;
     std::uint64_t frame = 0;
     bool running = true;

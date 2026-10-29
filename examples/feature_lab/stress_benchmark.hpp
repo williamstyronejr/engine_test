@@ -1,5 +1,6 @@
 #pragma once
 #include "engine/gpu_timer.hpp"
+#include "engine/renderer.hpp"
 #include "json.hpp"
 #include "stress.hpp"
 #include "stress_context.hpp"
@@ -56,6 +57,7 @@ struct StressReport {
         present_calls{};
     std::size_t completed_cycles{}, measured_frames{}, rss_start{}, rss_end{}, rss_peak{};
     std::size_t texture_peak{}, texture_bytes_peak{}, target_peak{}, target_bytes_peak{};
+    engine::RenderMemory renderer_baseline;
     std::uint64_t gpu_submitted{}, gpu_completed{}, gpu_skipped{}, gpu_invalid{};
     std::size_t gpu_pending{};
     engine::GpuTimingMethod gpu_method{engine::GpuTimingMethod::elapsed};
