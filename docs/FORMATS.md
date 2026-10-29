@@ -1420,6 +1420,13 @@ Built-in rendering storage and target bytes are separate. `graphics_info()` read
 GL vendor/device/version from the owning current context. These methods add no
 external dependency and do not change content, save or replay schemas.
 
+[Renderer owned-memory snapshots](RENDERER_MEMORY.md) additionally expose reserved
+and pending CPU vertices, the logical VBO store, and separate built-in, uploaded,
+font and target texels. `memory.renderer_baseline` labels the stress report's
+unloaded snapshot and distinguishes CPU-only absence from observed zero payloads.
+This inventory does not include allocator/driver overhead or retired orphan stores.
+
+
 ## Authored level replacement
 
 The Feature Lab catalog contains `Level::facility` (`facility.scene` and

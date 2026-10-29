@@ -283,6 +283,12 @@ retains a late low-frequency/CPU-time transition, throttle counters and implausi
 ACPI readings without causal attribution. Four of sixteen p99 values and thirteen
 maxima fail. Runtime remains unchanged; renderer memory accounting is the next
 concrete coverage task while host-dependent timing stays unresolved.
+Increment 71 [adds renderer memory snapshots](RENDERER_MEMORY.md), with
+[validated](../validation/2026-10-29-renderer-memory/RESULTS.md) CPU vertex capacity,
+logical VBO size and built-in/font/user/target texel accounting. This narrows the
+renderer inventory gap for new reports; old reports retain their original scope.
+CPU font snapshots, allocator/driver overhead and retired GPU stores remain outside
+coverage. No timing budget or whole-engine memory gate is closed.
 R6 timing/coverage and physical R4/R5 cases remain open; R8 requires their
 coverage/support record. Refresh automated evidence when the implementation or
 toolchain changes. These results do not complete milestone 6.

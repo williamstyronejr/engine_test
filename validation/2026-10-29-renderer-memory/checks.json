@@ -1,0 +1,77 @@
+[
+  {
+    "configuration": "debug",
+    "groups": [
+      "renderer_memory",
+      "stress_graphics",
+      "stress_frame_samples",
+      "font_graphics",
+      "texture_reload",
+      "render_targets",
+      "texture_sampling",
+      "graphics",
+      "stress_cpu",
+      "stress_report"
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  {
+    "configuration": "release",
+    "groups": [
+      "renderer_memory",
+      "stress_graphics",
+      "stress_frame_samples",
+      "font_graphics",
+      "texture_reload",
+      "render_targets",
+      "texture_sampling",
+      "graphics",
+      "stress_cpu",
+      "stress_report"
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  {
+    "configuration": "clang",
+    "groups": [
+      "renderer_memory",
+      "stress_graphics",
+      "stress_frame_samples",
+      "font_graphics",
+      "texture_reload",
+      "render_targets",
+      "texture_sampling",
+      "graphics",
+      "stress_cpu",
+      "stress_report"
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  {
+    "configuration": "sanitize",
+    "groups": [
+      "stress_cpu",
+      "stress_report"
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  {
+    "configuration": "sanitize-platform",
+    "groups": [
+      "renderer_memory",
+      "stress_graphics",
+      "stress_frame_samples",
+      "font_graphics",
+      "texture_reload",
+      "render_targets",
+      "texture_sampling",
+      "graphics"
+    ],
+    "failures": 0,
+    "skips": 0
+  }
+]

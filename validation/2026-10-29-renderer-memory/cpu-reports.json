@@ -1,0 +1,26 @@
+[
+  {
+    "configuration": "debug",
+    "report": "debug-cpu-report.json",
+    "sha256": "ee663cd518dfa9bbf22cba73b40cb81eb92afe9a60e5d3be3f23de86dfc733b8",
+    "renderer_observed": false
+  },
+  {
+    "configuration": "release",
+    "report": "release-cpu-report.json",
+    "sha256": "aad39f613fbf5f63fddabc16471c15333d0842de801e38addf75dd80bd8e7c28",
+    "renderer_observed": false
+  },
+  {
+    "configuration": "clang",
+    "report": "clang-cpu-report.json",
+    "sha256": "77328551c76fa308908655c1f11fe1efe2e02fc6226f8eed6d5edd44431b125b",
+    "renderer_observed": false
+  },
+  {
+    "configuration": "sanitize",
+    "report": "sanitize-cpu-report.json",
+    "sha256": "71bb17db0ebf5e65552d90bf5571d29a1440315c0131a61ea0bffb0a8b06a121",
+    "renderer_observed": false
+  }
+]

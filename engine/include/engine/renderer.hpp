@@ -44,6 +44,15 @@ struct GraphicsInfo {
 struct RenderStats {
     std::size_t quads{}, culled{}, draws{};
 };
+// Owned payload snapshot, not total CPU/GPU memory or cumulative uploads.
+// GPU store/texel sizes exclude driver overhead and retired orphaned stores.
+struct RenderMemory {
+    std::size_t cpu_vertex_reserved_bytes{}, cpu_vertex_used_bytes{};
+    std::size_t gpu_vertex_store_bytes{};
+    std::size_t gpu_builtin_texture_bytes{}, gpu_uploaded_texture_bytes{};
+    std::size_t gpu_font_texture_bytes{}, gpu_target_texture_bytes{};
+    bool operator==(const RenderMemory&) const = default;
+};
 // Optional CPU wall time inside begin-pass GL setup and nonempty batch flushes.
 // These are driver-call intervals, not GPU execution times. Reset by each begin().
 struct RenderCpuTiming {
@@ -109,6 +118,9 @@ class Renderer {
     void text(Vec2 top_left, float pixel_size, std::string_view value, Color color);
     void end();
     RenderStats stats() const;
+    // Owning thread only; allowed during a pass. No flush, allocation or GL query.
+    // Vertex used bytes reset on flush/end; reservations survive until destruction.
+    RenderMemory memory() const;
     // Between passes only. Disabled by default; disabled passes perform no timing reads.
     // thread_cpu additionally samples CLOCK_THREAD_CPUTIME_ID; requires enabled.
     void set_cpu_timing(bool enabled, bool thread_cpu = false);

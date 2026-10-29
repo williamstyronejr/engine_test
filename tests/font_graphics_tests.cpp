@@ -68,8 +68,10 @@ TEST(font_replacement_boundaries_lifetime_and_invalid_text) {
             CHECK(memory.combined_peak == memory.cpu_peak + memory.gpu_peak);
         } // Renderer must own the copied snapshot and atlas.
         CHECK(renderer.font_bytes() == (i % 2 ? 16384U : 64U));
+        CHECK(renderer.memory().gpu_font_texture_bytes == renderer.font_bytes());
         renderer.begin(target, {{32, -32}, 64}, {0, 0, 0, 1});
         rejects([&] { renderer.set_font(BitmapFont(metric_font())); });
+        CHECK(renderer.memory().gpu_font_texture_bytes == renderer.font_bytes());
         rejects([&] { renderer.text({}, 0, "A", {}); });
         rejects([&] { renderer.text({std::numeric_limits<float>::quiet_NaN(), 0}, 1, "", {}); });
         rejects([&] { renderer.text({}, 1, "", {1, 1, 1, 2}); });

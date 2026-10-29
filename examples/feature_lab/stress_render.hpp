@@ -9,11 +9,12 @@
 namespace feature_lab {
 struct StressGpuResources {
     std::size_t textures{}, texture_bytes{}, targets{}, target_bytes{};
+    engine::RenderMemory renderer_memory;
     bool operator==(const StressGpuResources&) const = default;
 };
 inline StressGpuResources stress_gpu_resources(const engine::Renderer& renderer) {
     return {renderer.live_textures(), renderer.texture_bytes(), renderer.live_targets(),
-            renderer.target_bytes()};
+            renderer.target_bytes(), renderer.memory()};
 }
 // Renderer/context must outlive this session. Handles are released between passes.
 class StressGraphics {

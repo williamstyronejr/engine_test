@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-c++"
+	tests="10"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="omarchy"
+	time="11"
+	timestamp="2026-10-29T06:39:14"
+	>
+	<testcase name="stress_cpu" classname="stress_cpu" time="0.105888" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS small_collision_budgets_reuse_storage_with_full_query_capacity
+PASS scene_usage_and_component_peaks_allocate_nothing_after_setup
+PASS stale_deletion_requests_do_not_grow_small_scene_buffers
+PASS default_grid_saturation_allocates_nothing_after_setup
+PASS collision_usage_and_worst_case_event_batches_allocate_nothing_after_setup
+PASS empty_scenes_and_scene_moves_do_not_allocate
+PASS font_measurement_and_layout_allocate_nothing_after_setup
+PASS component_queries_and_pool_reuse_allocate_nothing_after_setup
+PASS deterministic_workloads_and_exact_tile_occupancy
+PASS dense_collision_pairs_match_all_pairs_reference
+PASS steady_state_allocations_and_repeated_unload_baseline
+PASS capacities_empty_arena_and_rejected_overflow
+PASS percentiles_warmup_capacity_and_nonfinite_samples
+PASS options_bounds_json_escaping_and_resource_growth_detection
+PASS presentation_options_defaults_conflicts_and_cpu_rejection
+PASS presentation_report_distinguishes_request_from_confirmation
+PASS frame_samples_pair_delayed_gpu_across_warmup...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="stress_report" classname="stress_report" time="0.0724809" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="font_graphics" classname="font_graphics" time="0.201101" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_atlas_pixels_offsets_spacing_fallback_and_batching
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_clipping_tint_ordering_and_offscreen_alpha
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_replacement_boundaries_lifetime_and_invalid_text
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_gallery_draws_at_small_and_large_viewports
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_builtin_retains_original_pixel_shapes
+5 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="texture_sampling" classname="texture_sampling" time="0.270938" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS nearest_linear_magnification_and_independent_minification
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS wrap_axes_negative_uv_flip_and_linear_seams
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS atlas_inset_removes_adjacent_cell_bleed_including_single_texels
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS state_changes_preserve_bindings_and_failed_changes_preserve_batches
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS mixed_sampling_keeps_painter_order_and_l...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="stress_frame_samples" classname="stress_frame_samples" time="9.6421" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="renderer_memory" classname="renderer_memory" time="0.0613686" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS renderer_memory_lifecycle_and_logical_store
+1 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="stress_graphics" classname="stress_graphics" time="0.0867745" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS repeated_gpu_load_draw_unload_and_rollover
+PASS quad_batch_capacity_edges_and_empty_reset
+PASS cpu_timing_empty_pass_and_active_pass_contract
+PASS thread_cpu_phases_cover_nested_gl_and_reset_for_empty_passes
+PASS texture_byte_accounting_replacement_failure_and_cleanup
+5 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="render_targets" classname="render_targets" time="0.745657" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS offscreen_orientation_and_composition
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS transparent_targets_preserve_linear_alpha
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS nested_clips_flush_and_restore
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS clip_limits_empty_and_error_recovery
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS target_lifetime_resize_and_failure_preservation
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graph...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="texture_reload" classname="texture_reload" time="0.544213" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS replacement_preserves_shared_handles_and_completed_pixels
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS invalid_batches_preserve_all_textures_and_pending_geometry
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS full_handle_capacity_and_repeated_reload_retire_gpu_objects
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS staging_budget_rejection_is_atomic
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS accounting_failure_after_partial_gpu_staging_is_atomic
+[platfo...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="graphics" classname="graphics" time="0.0628798" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS GPU pixels, alpha/sRGB, atlas, ordering, culling, batch rollover, resize and clean GL state
+</system-out>
+	</testcase>
+</testsuite>
