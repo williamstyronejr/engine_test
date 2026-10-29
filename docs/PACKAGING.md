@@ -142,3 +142,12 @@ Broader hardware/manual gates and remaining engine features stay tracked in
 [STATUS.md](STATUS.md). The [release-readiness audit](RELEASE_READINESS.md) records
 candidate validation, clean offline-build and physical acceptance requirements;
 successful packaging alone does not complete release acceptance.
+
+## Integrated documentation and entry-point audit
+
+The [2026-10-29 readiness refresh](../validation/2026-10-29-readiness/RESULTS.md)
+audits relative file links and shell recipe syntax in packaged Markdown. It also
+runs the documented help, simulation verification, asset validation and CPU stress
+commands from a private extraction in an unrelated working directory with DISPLAY
+unset, checking the payload manifest before and after. External URLs, Markdown
+anchors and interactive/physical play remain outside this automated audit.

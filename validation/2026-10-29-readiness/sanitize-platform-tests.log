@@ -1,0 +1,43 @@
+Test project /home/zero/dev/engine_test/build/sanitize-platform
+      Start 35: diagnostics_allocations
+ 1/17 Test #35: diagnostics_allocations ..........   Passed   77.78 sec
+      Start 36: ui_allocations
+ 2/17 Test #36: ui_allocations ...................   Passed   82.37 sec
+      Start 40: scene_watch
+ 3/17 Test #40: scene_watch ......................   Passed    1.17 sec
+      Start 41: tilemap_watch
+ 4/17 Test #41: tilemap_watch ....................   Passed    1.07 sec
+      Start 42: animation_watch
+ 5/17 Test #42: animation_watch ..................   Passed    0.69 sec
+      Start 43: font_reload
+ 6/17 Test #43: font_reload ......................   Passed    1.16 sec
+      Start 44: font_graphics
+ 7/17 Test #44: font_graphics ....................   Passed    0.51 sec
+      Start 46: stress_frame_samples
+ 8/17 Test #46: stress_frame_samples .............   Passed   16.80 sec
+      Start 47: renderer_memory
+ 9/17 Test #47: renderer_memory ..................   Passed    0.11 sec
+      Start 48: stress_graphics
+10/17 Test #48: stress_graphics ..................   Passed    0.91 sec
+      Start 49: audio_reload
+11/17 Test #49: audio_reload .....................   Passed    1.93 sec
+      Start 51: audio_transport
+12/17 Test #51: audio_transport ..................   Passed    3.62 sec
+      Start 56: render_targets
+13/17 Test #56: render_targets ...................   Passed    1.82 sec
+      Start 57: gpu_timers
+14/17 Test #57: gpu_timers .......................   Passed    0.54 sec
+      Start 58: texture_reload
+15/17 Test #58: texture_reload ...................   Passed    0.92 sec
+      Start 59: shaders
+16/17 Test #59: shaders ..........................   Passed    0.76 sec
+      Start 60: watched_reload
+17/17 Test #60: watched_reload ...................   Passed    0.59 sec
+
+100% tests passed out of 17
+
+Label Time Summary:
+hardware    = 187.20 sec*proc (15 tests)
+platform    =   5.55 sec*proc (2 tests)
+
+Total Test time (real) = 192.76 sec

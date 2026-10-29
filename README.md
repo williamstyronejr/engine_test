@@ -13,7 +13,9 @@ records remaining performance, persistence and physical display/audio gates with
 commands and expected evidence. The [declared workload acceptance](benchmarks/2026-10-26-workload-acceptance-results.md)
 records passing memory budgets and remaining frame-time failures across 18 runs. [Candidate validation](validation/2026-10-23/RESULTS.md)
 retains full compiler/sanitizer results, audio ThreadSanitizer checks and a clean
-offline build with relocated package checks. Release acceptance remains open. A [quad-corner reuse experiment](benchmarks/2026-10-28-corners-results.md)
+offline build with relocated package checks. The [integrated readiness refresh](validation/2026-10-29-readiness/RESULTS.md)
+adds current full GNU/Clang suites, CPU and focused native sanitizers, audio race
+checks and a packaged documentation/entry-point audit. Release acceptance remains open. A [quad-corner reuse experiment](benchmarks/2026-10-28-corners-results.md)
 passed rendering checks but failed its CPU adoption gate; the existing renderer
 is retained, with the prototype and all measurements preserved.
 [Function sampling](benchmarks/2026-10-28-functions-results.md) now identifies quad

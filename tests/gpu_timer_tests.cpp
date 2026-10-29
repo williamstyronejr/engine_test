@@ -222,12 +222,15 @@ TEST(overlay_displays_collected_samples_and_keeps_resources_stable) {
         diagnostics.draw_hud(renderer, game, width, height, 0);
         renderer.end();
         CHECK(renderer.stats().quads > 100);
-        const auto scale = feature_lab::hud_scale(width, height);
-        // The enlarged panel contains the extra GPU rows; clipping still isolates its edge.
+        // Diagnostics fits below the general HUD's minimum scale at tiny sizes.
+        // Sample the panel's own lower edge, not the old 0.35-scale position.
+        const auto scale = std::min({1.25F, w / 1280, h / 720});
         CHECK(renderer.pixel(static_cast<int>(26 * scale),
                              height - 1 - static_cast<int>(520 * scale))[0] < 100);
         CHECK(renderer.pixel(static_cast<int>(20 * scale),
                              height - 1 - static_cast<int>(520 * scale))[0] > 240);
+        CHECK(renderer.pixel(static_cast<int>(26 * scale),
+                             height - 1 - static_cast<int>(532 * scale))[0] > 240);
         CHECK(renderer.live_textures() == textures && renderer.live_targets() == 1);
     }
     CHECK(renderer.healthy());

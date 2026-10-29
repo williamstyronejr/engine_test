@@ -1,0 +1,702 @@
+{
+  "backtraceGraph": {
+    "commands": [
+      "add_test"
+    ],
+    "files": [
+      "/home/zero/dev/engine_test/CMakeLists.txt"
+    ],
+    "nodes": [
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 246,
+        "parent": 0
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 255,
+        "parent": 2
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 279,
+        "parent": 4
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 284,
+        "parent": 6
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 289,
+        "parent": 8
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 293,
+        "parent": 10
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 297,
+        "parent": 12
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 303,
+        "parent": 14
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 311,
+        "parent": 16
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 315,
+        "parent": 18
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 321,
+        "parent": 20
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 331,
+        "parent": 22
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 355,
+        "parent": 24
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 363,
+        "parent": 26
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 368,
+        "parent": 28
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 373,
+        "parent": 30
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 377,
+        "parent": 32
+      }
+    ]
+  },
+  "kind": "ctestInfo",
+  "tests": [
+    {
+      "backtrace": 1,
+      "command": [
+        "/home/zero/dev/engine_test/.tools/lib/python3.14/site-packages/cmake/data/bin/cmake",
+        "-DPROBE=/home/zero/dev/engine_test/build/sanitize-platform/diagnostics_allocations",
+        "-DREPORT=/home/zero/dev/engine_test/build/sanitize-platform/diagnostics-allocations.json",
+        "-DDIAGNOSTICS_MATRIX=ON",
+        "-P",
+        "/home/zero/dev/engine_test/tests/check_ui_allocations.cmake"
+      ],
+      "name": "diagnostics_allocations",
+      "properties": [
+        {
+          "name": "SKIP_REGULAR_EXPRESSION",
+          "value": [
+            "SKIP: UI allocation workload"
+          ]
+        },
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 150.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    },
+    {
+      "backtrace": 3,
+      "command": [
+        "/home/zero/dev/engine_test/.tools/lib/python3.14/site-packages/cmake/data/bin/cmake",
+        "-DPROBE=/home/zero/dev/engine_test/build/sanitize-platform/ui_allocations",
+        "-DREPORT=/home/zero/dev/engine_test/build/sanitize-platform/ui-allocations.json",
+        "-P",
+        "/home/zero/dev/engine_test/tests/check_ui_allocations.cmake"
+      ],
+      "name": "ui_allocations",
+      "properties": [
+        {
+          "name": "SKIP_REGULAR_EXPRESSION",
+          "value": [
+            "SKIP: UI allocation workload"
+          ]
+        },
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 150.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    },
+    {
+      "backtrace": 5,
+      "command": [
+        "/home/zero/dev/engine_test/build/sanitize-platform/scene_watch_tests"
+      ],
+      "name": "scene_watch",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    },
+    {
+      "backtrace": 7,
+      "command": [
+        "/home/zero/dev/engine_test/build/sanitize-platform/tilemap_watch_tests"
+      ],
+      "name": "tilemap_watch",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    },
+    {
+      "backtrace": 9,
+      "command": [
+        "/home/zero/dev/engine_test/build/sanitize-platform/animation_watch_tests"
+      ],
+      "name": "animation_watch",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    },
+    {
+      "backtrace": 11,
+      "command": [
+        "/home/zero/dev/engine_test/build/sanitize-platform/font_reload_tests"
+      ],
+      "name": "font_reload",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    },
+    {
+      "backtrace": 13,
+      "command": [
+        "/home/zero/dev/engine_test/build/sanitize-platform/font_graphics_tests"
+      ],
+      "name": "font_graphics",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    },
+    {
+      "backtrace": 15,
+      "command": [
+        "/home/zero/dev/engine_test/.tools/lib/python3.14/site-packages/cmake/data/bin/cmake",
+        "-DGAME_EXE=/home/zero/dev/engine_test/build/sanitize-platform/feature_lab",
+        "-DOUTPUT_DIR=/home/zero/dev/engine_test/build/sanitize-platform/stress-frame-tests",
+        "-P",
+        "/home/zero/dev/engine_test/tests/check_stress_frames.cmake"
+      ],
+      "name": "stress_frame_samples",
+      "properties": [
+        {
+          "name": "SKIP_REGULAR_EXPRESSION",
+          "value": [
+            "SKIP: stress frame samples"
+          ]
+        },
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    },
+    {
+      "backtrace": 17,
+      "command": [
+        "/home/zero/dev/engine_test/build/sanitize-platform/renderer_memory_tests"
+      ],
+      "name": "renderer_memory",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    },
+    {
+      "backtrace": 19,
+      "command": [
+        "/home/zero/dev/engine_test/build/sanitize-platform/stress_graphics_tests"
+      ],
+      "name": "stress_graphics",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    },
+    {
+      "backtrace": 21,
+      "command": [
+        "/home/zero/dev/engine_test/build/sanitize-platform/audio_reload_tests"
+      ],
+      "name": "audio_reload",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "platform"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    },
+    {
+      "backtrace": 23,
+      "command": [
+        "/home/zero/dev/engine_test/build/sanitize-platform/audio_tests"
+      ],
+      "name": "audio_transport",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "platform"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 10.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    },
+    {
+      "backtrace": 25,
+      "command": [
+        "/home/zero/dev/engine_test/build/sanitize-platform/render_target_tests"
+      ],
+      "name": "render_targets",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    },
+    {
+      "backtrace": 27,
+      "command": [
+        "/home/zero/dev/engine_test/build/sanitize-platform/gpu_timer_tests"
+      ],
+      "name": "gpu_timers",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    },
+    {
+      "backtrace": 29,
+      "command": [
+        "/home/zero/dev/engine_test/build/sanitize-platform/texture_reload_tests"
+      ],
+      "name": "texture_reload",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    },
+    {
+      "backtrace": 31,
+      "command": [
+        "/home/zero/dev/engine_test/build/sanitize-platform/shader_tests"
+      ],
+      "name": "shaders",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    },
+    {
+      "backtrace": 33,
+      "command": [
+        "/home/zero/dev/engine_test/build/sanitize-platform/watched_reload_tests"
+      ],
+      "name": "watched_reload",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    }
+  ],
+  "version": {
+    "major": 1,
+    "minor": 0
+  }
+}

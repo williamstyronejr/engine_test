@@ -1,0 +1,61 @@
+[
+  {
+    "command": [
+      "uname",
+      "-srmo"
+    ],
+    "exit_code": 0,
+    "output": "Linux 7.2.8-9-omarchy x86_64 GNU/Linux\n"
+  },
+  {
+    "command": [
+      "g++",
+      "--version"
+    ],
+    "exit_code": 0,
+    "output": "g++ (GCC) 16.2.1 20260810\nCopyright (C) 2026 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n"
+  },
+  {
+    "command": [
+      "clang++",
+      "--version"
+    ],
+    "exit_code": 0,
+    "output": "clang version 23.1.3\nTarget: x86_64-pc-linux-gnu\nThread model: posix\nInstalledDir: /usr/bin\n"
+  },
+  {
+    "command": [
+      ".tools/bin/cmake",
+      "--version"
+    ],
+    "exit_code": 0,
+    "output": "cmake version 4.4.4\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\n"
+  },
+  {
+    "command": [
+      ".tools/bin/ninja",
+      "--version"
+    ],
+    "exit_code": 0,
+    "output": "1.13.2.git.kitware.jobserver-pipe-1\n"
+  },
+  {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "exit_code": 0,
+    "output": "1fc09030e4a4d0ed5929302c76db4599a60aa4fd\n"
+  },
+  {
+    "file": "/etc/os-release",
+    "output": "NAME=\"Omarchy\"\nPRETTY_NAME=\"Omarchy\"\nID=omarchy\nID_LIKE=arch\nBUILD_ID=\"4.0.6\"\nVERSION_ID=\"4.0.6\"\nANSI_COLOR=\"38;2;158;206;106\"\nHOME_URL=\"https://omarchy.org/\"\nDOCUMENTATION_URL=\"https://learn.omacom.io/2/the-omarchy-manual\"\nSUPPORT_URL=\"https://discord.gg/tXFUdasqhY\"\nBUG_REPORT_URL=\"https://github.com/basecamp/omarchy/issues\"\nLOGO=omarchy\n"
+  },
+  {
+    "environment": {
+      "DISPLAY": ":0",
+      "XDG_SESSION_TYPE": "wayland"
+    }
+  }
+]

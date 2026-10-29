@@ -1,0 +1,12 @@
+Test project /home/zero/dev/engine_test/build/readiness-tsan
+    Start 49: audio_reload
+1/2 Test #49: audio_reload .....................   Passed    2.95 sec
+    Start 51: audio_transport
+2/2 Test #51: audio_transport ..................   Passed    4.72 sec
+
+100% tests passed out of 2
+
+Label Time Summary:
+platform    =   7.67 sec*proc (2 tests)
+
+Total Test time (real) =   7.67 sec
