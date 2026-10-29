@@ -36,7 +36,7 @@ string(JSON baseline GET "${plain}" memory renderer_baseline)
 string(JSON coverage GET "${baseline}" coverage)
 string(JSON observed GET "${baseline}" observed)
 string(JSON reserved GET "${baseline}" cpu_vertex_reserved_bytes)
-if(NOT coverage STREQUAL "owned_buffers_and_texels_v1" OR NOT observed OR reserved LESS 786432)
+if(NOT coverage STREQUAL "owned_buffers_and_texels_v2" OR NOT observed OR reserved LESS 786432)
   message(FATAL_ERROR "Missing renderer baseline memory coverage")
 endif()
 foreach(pair "cpu_vertex_used_bytes;0" "gpu_vertex_store_bytes;786432"
@@ -49,6 +49,14 @@ foreach(pair "cpu_vertex_used_bytes;0" "gpu_vertex_store_bytes;786432"
     message(FATAL_ERROR "Incorrect renderer baseline ${key}: ${value}")
   endif()
 endforeach()
+string(JSON atlas_reserved GET "${baseline}" cpu_font_atlas_reserved_bytes)
+string(JSON atlas_used GET "${baseline}" cpu_font_atlas_used_bytes)
+string(JSON glyph_reserved GET "${baseline}" cpu_font_glyph_reserved_bytes)
+string(JSON glyph_used GET "${baseline}" cpu_font_glyph_used_bytes)
+if(NOT atlas_used EQUAL 16384 OR atlas_reserved LESS atlas_used OR
+   NOT glyph_used GREATER 0 OR glyph_reserved LESS glyph_used)
+  message(FATAL_ERROR "Incorrect owned font snapshot payload")
+endif()
 foreach(mode traced vsync split split_vsync prep prep_vsync ctx ctx_vsync)
     set(traced "${${mode}}")
   foreach(path "run;checksum" "totals" "workload" "memory;report_buffer_bytes"

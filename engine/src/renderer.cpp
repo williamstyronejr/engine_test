@@ -350,13 +350,18 @@ Renderer::Renderer() : impl_(std::make_unique<Impl>()) {
 }
 RenderMemory Renderer::memory() const {
     const auto& p = *impl_;
+    const auto font_memory = p.font->memory();
     return {p.vertices.capacity() * sizeof(Vertex),
             p.vertices.size() * sizeof(Vertex),
             vertex_store_bytes,
             builtin_atlas_width * builtin_atlas_height * 4,
             texture_bytes(),
             font_bytes(),
-            target_bytes()};
+            target_bytes(),
+            font_memory.atlas_reserved_bytes,
+            font_memory.atlas_used_bytes,
+            font_memory.glyph_reserved_bytes,
+            font_memory.glyph_used_bytes};
 }
 Renderer::~Renderer() = default;
 std::string_view Renderer::default_vertex_shader() {
@@ -677,8 +682,9 @@ void Renderer::set_font(const BitmapFont& font) {
     if (p.recording)
         throw std::logic_error("Font replacement during active render pass");
     auto candidate = std::make_unique<BitmapFont>(font);
-    const StagingBytes cpu_memory(candidate->data().atlas.rgba.capacity() +
-                                 candidate->data().glyphs.capacity() * sizeof(FontGlyph));
+    const auto candidate_memory = candidate->memory();
+    StagingBytes cpu_memory(candidate_memory.atlas_reserved_bytes +
+                            candidate_memory.glyph_reserved_bytes);
     struct CandidateTexture {
         Gl& gl;
         GLuint object;
@@ -687,10 +693,13 @@ void Renderer::set_font(const BitmapFont& font) {
                 gl.DeleteTextures(1, &object);
         }
     } texture{p.gl, p.allocate_texture(candidate->data().atlas, {})};
-    const StagingBytes gpu_memory(candidate->data().atlas.rgba.size(), StagingKind::gpu);
+    StagingBytes gpu_memory(candidate->data().atlas.rgba.size(), StagingKind::gpu);
     const auto previous = p.font_texture;
     p.font.swap(candidate);
     p.font_texture = std::exchange(texture.object, 0);
+    // The new snapshot/atlas are committed now, not temporary candidate payloads.
+    cpu_memory.set(0);
+    gpu_memory.set(0);
     p.gl.DeleteTextures(1, &previous);
 }
 Vec2 Renderer::text_size(std::string_view value, float size) const {

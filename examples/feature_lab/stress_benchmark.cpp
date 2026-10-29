@@ -272,7 +272,7 @@ std::string StressReport::json(const StressOptions& options) const {
         << ",\"peak_uploaded_textures\":" << texture_peak
         << ",\"peak_uploaded_texture_bytes\":" << texture_bytes_peak
         << ",\"peak_targets\":" << target_peak << ",\"peak_target_bytes\":" << target_bytes_peak
-        << ",\"renderer_baseline\":{\"coverage\":\"owned_buffers_and_texels_v1\",\"observed\":"
+        << ",\"renderer_baseline\":{\"coverage\":\"owned_buffers_and_texels_v2\",\"observed\":"
         << !options.cpu_only
         << ",\"cpu_vertex_reserved_bytes\":" << renderer_baseline.cpu_vertex_reserved_bytes
         << ",\"cpu_vertex_used_bytes\":" << renderer_baseline.cpu_vertex_used_bytes
@@ -280,7 +280,11 @@ std::string StressReport::json(const StressOptions& options) const {
         << ",\"gpu_builtin_texture_bytes\":" << renderer_baseline.gpu_builtin_texture_bytes
         << ",\"gpu_uploaded_texture_bytes\":" << renderer_baseline.gpu_uploaded_texture_bytes
         << ",\"gpu_font_texture_bytes\":" << renderer_baseline.gpu_font_texture_bytes
-        << ",\"gpu_target_texture_bytes\":" << renderer_baseline.gpu_target_texture_bytes << '}'
+        << ",\"gpu_target_texture_bytes\":" << renderer_baseline.gpu_target_texture_bytes
+        << ",\"cpu_font_atlas_reserved_bytes\":" << renderer_baseline.cpu_font_atlas_reserved_bytes
+        << ",\"cpu_font_atlas_used_bytes\":" << renderer_baseline.cpu_font_atlas_used_bytes
+        << ",\"cpu_font_glyph_reserved_bytes\":" << renderer_baseline.cpu_font_glyph_reserved_bytes
+        << ",\"cpu_font_glyph_used_bytes\":" << renderer_baseline.cpu_font_glyph_used_bytes << '}'
         << "},\n  \"gpu_queries\":{\"supported\":" << gpu_supported
         << ",\"method\":" << json_string(engine::gpu_timing_method_name(gpu_method))
         << ",\"counter_bits\":" << gpu_counter_bits << ",\"submitted\":" << gpu_submitted

@@ -21,6 +21,14 @@ FontData decode_font(std::span<const std::uint8_t> bytes, std::string_view sourc
 std::vector<std::uint8_t> encode_font(const FontData& font);
 FontData builtin_font(); // In-house uppercase/digit/punctuation subset, no filesystem dependency.
 
+// Owned vector payloads only. Used bytes are included in reserved bytes.
+// Excludes BitmapFont/lookup storage, allocator overhead and other font copies.
+struct FontMemory {
+    std::size_t atlas_reserved_bytes{}, atlas_used_bytes{};
+    std::size_t glyph_reserved_bytes{}, glyph_used_bytes{};
+    bool operator==(const FontMemory&) const = default;
+};
+
 // Validated immutable snapshot, O(1) byte lookup, no allocations during layout.
 class BitmapFont {
   public:
@@ -28,6 +36,11 @@ class BitmapFont {
     static constexpr std::size_t max_text_bytes = 4096;
     explicit BitmapFont(FontData data);
     const FontData& data() const { return data_; }
+    FontMemory memory() const noexcept {
+        return {data_.atlas.rgba.capacity(), data_.atlas.rgba.size(),
+                data_.glyphs.capacity() * sizeof(FontGlyph),
+                data_.glyphs.size() * sizeof(FontGlyph)};
+    }
     const FontGlyph& glyph(unsigned char byte) const;
     // Logical advance width (including spaces) and line-box height; empty text is zero.
     Vec2 measure(std::string_view text, float scale = 1) const;

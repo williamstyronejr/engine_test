@@ -62,15 +62,24 @@ TEST(font_replacement_boundaries_lifetime_and_invalid_text) {
             StagingScope staging;
             renderer.set_font(candidate);
             const auto memory = staging.snapshot();
+            const auto committed = renderer.memory();
             CHECK(memory.clean() && memory.gpu_peak == candidate.data().atlas.rgba.size());
-            CHECK(memory.cpu_peak >= candidate.data().atlas.rgba.size() +
-                  candidate.data().glyphs.size() * sizeof(FontGlyph));
+            CHECK(memory.cpu_peak == committed.cpu_font_atlas_reserved_bytes +
+                                         committed.cpu_font_glyph_reserved_bytes);
+            CHECK(committed.cpu_font_atlas_used_bytes == candidate.memory().atlas_used_bytes);
+            CHECK(committed.cpu_font_glyph_used_bytes == candidate.memory().glyph_used_bytes);
             CHECK(memory.combined_peak == memory.cpu_peak + memory.gpu_peak);
         } // Renderer must own the copied snapshot and atlas.
         CHECK(renderer.font_bytes() == (i % 2 ? 16384U : 64U));
         CHECK(renderer.memory().gpu_font_texture_bytes == renderer.font_bytes());
         renderer.begin(target, {{32, -32}, 64}, {0, 0, 0, 1});
-        rejects([&] { renderer.set_font(BitmapFont(metric_font())); });
+        const auto committed = renderer.memory();
+        {
+            StagingScope rejected;
+            rejects([&] { renderer.set_font(BitmapFont(metric_font())); });
+            CHECK(renderer.memory() == committed);
+            CHECK(rejected.snapshot().clean() && rejected.snapshot().combined_peak == 0);
+        }
         CHECK(renderer.memory().gpu_font_texture_bytes == renderer.font_bytes());
         rejects([&] { renderer.text({}, 0, "A", {}); });
         rejects([&] { renderer.text({std::numeric_limits<float>::quiet_NaN(), 0}, 1, "", {}); });
@@ -84,6 +93,36 @@ TEST(font_replacement_boundaries_lifetime_and_invalid_text) {
         CHECK(renderer.healthy());
     }
     rejects([&] { renderer.text({}, 1, "", {}); });
+}
+TEST(font_memory_uses_renderer_copy_and_reads_do_not_stage) {
+    Window window(64, 64, "Font memory ownership", false);
+    Renderer renderer;
+    RenderMemory committed;
+    {
+        auto data = metric_font();
+        data.atlas.rgba.reserve(4096);
+        data.glyphs.reserve(96);
+        BitmapFont caller(std::move(data));
+        const auto caller_memory = caller.memory();
+        StagingScope staging;
+        CHECK(renderer.memory().cpu_font_atlas_used_bytes == renderer.font_bytes());
+        CHECK(staging.snapshot().combined_peak == 0); // Reading does not claim staging.
+        renderer.set_font(caller);
+        committed = renderer.memory();
+        CHECK(committed.cpu_font_atlas_used_bytes == 64);
+        CHECK(committed.cpu_font_glyph_used_bytes == 4 * sizeof(FontGlyph));
+        CHECK(committed.cpu_font_atlas_reserved_bytes >= committed.cpu_font_atlas_used_bytes);
+        CHECK(committed.cpu_font_glyph_reserved_bytes >= committed.cpu_font_glyph_used_bytes);
+        CHECK(staging.snapshot().cpu_peak ==
+              committed.cpu_font_atlas_reserved_bytes + committed.cpu_font_glyph_reserved_bytes);
+        CHECK(staging.snapshot().gpu_peak == 64 && staging.snapshot().clean());
+        CHECK(caller.memory() == caller_memory);
+        caller = BitmapFont(builtin_font());
+        CHECK(renderer.memory() == committed);
+    } // Caller changes/destruction must not affect the renderer-owned copy.
+    CHECK(renderer.memory() == committed);
+    NEAR(renderer.text_size("AA").x, 8);
+    CHECK(renderer.healthy());
 }
 TEST(font_gallery_draws_at_small_and_large_viewports) {
     Window window(64, 64, "Font gallery", false);
