@@ -81,3 +81,6 @@ checks disabled. Compare nine stress-mode images in all four native configuratio
 with the pre-change Release binary. Keep failures/skips and exact source/build
 identities. This is correctness/coverage validation, not a performance adoption
 trial; earlier timing failures and rejected optimizations remain unchanged.
+
+The [2026-10-29 validation record](../validation/2026-10-29-renderer-memory/RESULTS.md)
+retains results, exact commands, source identities and package checks.

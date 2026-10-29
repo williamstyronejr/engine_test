@@ -83,3 +83,8 @@ No system settings are changed. Package checks are recorded after committing thi
 validation. Earlier timing failures, rejected candidates and the failed warmup
 stability screens remain intact. Physical display/audio and broader live-memory
 coverage remain open.
+
+At documentation commit `c7db7d8`, all three Release package groups pass
+without skips (46.38 s). All 83 evidence files and the renderer memory contract
+match their archived copies; allocation profilers remain excluded. See
+[package-feature.json](package-feature.json) and matching configure/build/test logs.

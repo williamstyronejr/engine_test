@@ -2341,6 +2341,10 @@ file/hash evidence are preserved in the increment's evidence directory.
 See [contract](RENDERER_MEMORY.md) and
 [validation](../validation/2026-10-29-renderer-memory/RESULTS.md).
 
+At documentation commit `c7db7d8`, all three Release package groups pass
+without skips (46.38 s). All 83 evidence files and the memory contract match archived
+copies; allocation profilers remain excluded.
+
 ## Next increment
 
 Extend owned CPU accounting to renderer font snapshots (atlas and glyph capacities)
