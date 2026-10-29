@@ -47,3 +47,11 @@ then pass at the same merge revision without skips (45.23 s). No source/build
 rule, system setting, stress benchmark measurement or acceptance threshold changes.
 The failed attempt, manifest reconstruction, archive/file hashes, changed test-root
 configuration and successful recheck remain in [package-recheck/inspection.json](package-recheck/inspection.json) and adjacent command/log files.
+
+A subsequent rebuild at `40b8358` explicitly reports **Disk quota exceeded**
+while the compiler writes temporary assembly under `/tmp`; compilation stops before
+package tests. The failed configure/build commands and logs are retained beside
+[compiler-temp.json](package-recheck/compiler-temp.json). Follow-up validation also sets the compiler's
+`TMPDIR` to the disk-backed scratch area. This is a per-command environment
+override, not a source or system-configuration change. The later quota diagnostic
+is confirmed; the earlier zero-filled extraction's exact cause remains unconfirmed.

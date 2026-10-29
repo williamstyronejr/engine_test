@@ -1,0 +1,9 @@
+{
+  "failed_source": "40b83589308b7354490464a4aea154f4510ac41a",
+  "diagnostic": "error writing to /tmp/ccqzlt5R.s: Disk quota exceeded",
+  "followup_environment": {
+    "TMPDIR": "/home/zero/.cache/engine-package-stability-jz9jpfwo/tests/compiler-tmp"
+  },
+  "runtime_or_build_rule_changes": false,
+  "initial_extraction_cause_confirmed": false
+}
