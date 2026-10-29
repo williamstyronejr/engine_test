@@ -1,0 +1,28 @@
+[
+  {
+    "command": [
+      "cmake",
+      "--preset",
+      "release",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-package-stability-jz9jpfwo/tests"
+    ],
+    "exit_code": 0,
+    "seconds": 0.40040013400721364
+  },
+  {
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "--target",
+      "feature_lab",
+      "stress_bench",
+      "validate_assets",
+      "stress_graphics_tests",
+      "-j2"
+    ],
+    "exit_code": 1,
+    "seconds": 8.747469817011734
+  }
+]

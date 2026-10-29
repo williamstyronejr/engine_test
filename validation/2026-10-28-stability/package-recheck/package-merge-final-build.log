@@ -1,0 +1,15 @@
+[1/6] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/replay_profile.cpp.o
+FAILED: [code=1] CMakeFiles/feature_lab_stress.dir/examples/feature_lab/replay_profile.cpp.o 
+/usr/bin/c++  -I/home/zero/dev/engine_test/build/release/generated -I/home/zero/dev/engine_test/engine/include -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Werror -MD -MT CMakeFiles/feature_lab_stress.dir/examples/feature_lab/replay_profile.cpp.o -MF CMakeFiles/feature_lab_stress.dir/examples/feature_lab/replay_profile.cpp.o.d -o CMakeFiles/feature_lab_stress.dir/examples/feature_lab/replay_profile.cpp.o -c /home/zero/dev/engine_test/examples/feature_lab/replay_profile.cpp
+/home/zero/dev/engine_test/examples/feature_lab/replay_profile.cpp:157:1: fatal error: error writing to /tmp/ccqzlt5R.s: Disk quota exceeded
+  157 | } // namespace feature_lab
+      | ^
+compilation terminated.
+[2/6] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/stress_benchmark.cpp.o
+FAILED: [code=1] CMakeFiles/feature_lab_stress.dir/examples/feature_lab/stress_benchmark.cpp.o 
+/usr/bin/c++  -I/home/zero/dev/engine_test/build/release/generated -I/home/zero/dev/engine_test/engine/include -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Werror -MD -MT CMakeFiles/feature_lab_stress.dir/examples/feature_lab/stress_benchmark.cpp.o -MF CMakeFiles/feature_lab_stress.dir/examples/feature_lab/stress_benchmark.cpp.o.d -o CMakeFiles/feature_lab_stress.dir/examples/feature_lab/stress_benchmark.cpp.o -c /home/zero/dev/engine_test/examples/feature_lab/stress_benchmark.cpp
+/home/zero/dev/engine_test/examples/feature_lab/stress_benchmark.cpp:439:1: fatal error: error writing to /tmp/ccjaG9av.s: Disk quota exceeded
+  439 | } // namespace feature_lab
+      | ^
+compilation terminated.
+ninja: build stopped: subcommand failed.
