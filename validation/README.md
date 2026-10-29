@@ -96,3 +96,8 @@ with 32 focused compiler/sanitizer groups and 36 image/report comparisons.
 F2 field labels, panel bounds/clip restoration, warmed allocation scopes and
 captures across compiler builds and viewport sizes. It preserves the earlier
 memory-coverage and performance limits.
+
+[Integrated readiness refresh](2026-10-29-readiness/RESULTS.md) records full
+GNU/Clang suites, complete CPU and focused native sanitizers, leak-enabled audio,
+a fresh TSan audio build and packaged documentation/CPU entry-point checks. Its
+incremental build scope and remaining offline/physical/timing limits are explicit.

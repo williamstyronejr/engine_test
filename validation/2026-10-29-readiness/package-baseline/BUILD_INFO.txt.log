@@ -1,0 +1,21 @@
+Feature Lab 0.1.0
+Revision (at configure): 855805d
+Configuration: Release
+Compiler: GNU 16.2.1
+Flags:  -O3 -DNDEBUG; C++20; sanitizers=OFF
+Target: Linux x86_64
+System libraries and drivers are not bundled. See RUNTIME_DEPENDENCIES.txt.
+
+Build host /etc/os-release:
+NAME="Omarchy"
+PRETTY_NAME="Omarchy"
+ID=omarchy
+ID_LIKE=arch
+BUILD_ID="4.0.6"
+VERSION_ID="4.0.6"
+ANSI_COLOR="38;2;158;206;106"
+HOME_URL="https://omarchy.org/"
+DOCUMENTATION_URL="https://learn.omacom.io/2/the-omarchy-manual"
+SUPPORT_URL="https://discord.gg/tXFUdasqhY"
+BUG_REPORT_URL="https://github.com/basecamp/omarchy/issues"
+LOGO=omarchy

@@ -1,0 +1,434 @@
+[
+  {
+    "name": "debug-configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "debug",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-readiness-umvajdlo/packages"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:28:05.519477+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 0.6127663910156116,
+    "exit_code": 0
+  },
+  {
+    "name": "debug-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/debug",
+      "-j2"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:28:06.132836+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 202.02931122900918,
+    "exit_code": 0
+  },
+  {
+    "name": "debug-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/debug",
+      "-LE",
+      "packaging",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-29-readiness/debug-tests.xml"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:31:28.512491+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 234.0844030890148,
+    "exit_code": 0
+  },
+  {
+    "name": "release-configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "release",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-readiness-umvajdlo/packages"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:35:22.613652+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 0.8392959850025363,
+    "exit_code": 0
+  },
+  {
+    "name": "release-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/release",
+      "-j2"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:35:23.453698+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 172.41996092299814,
+    "exit_code": 0
+  },
+  {
+    "name": "release-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/release",
+      "-LE",
+      "packaging",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-29-readiness/release-tests.xml"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:38:16.089825+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 132.85047763300827,
+    "exit_code": 0
+  },
+  {
+    "name": "clang-configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "clang",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-readiness-umvajdlo/packages"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:40:28.961070+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 0.7351966409769375,
+    "exit_code": 0
+  },
+  {
+    "name": "clang-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/clang",
+      "-j2"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:40:29.697191+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 180.9106642290135,
+    "exit_code": 0
+  },
+  {
+    "name": "clang-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/clang",
+      "-LE",
+      "packaging",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-29-readiness/clang-tests.xml"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:43:30.821179+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 248.37819537700852,
+    "exit_code": 0
+  },
+  {
+    "name": "sanitize-configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "sanitize",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-readiness-umvajdlo/packages"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:47:39.219245+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 0.3581416750093922,
+    "exit_code": 0
+  },
+  {
+    "name": "sanitize-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/sanitize",
+      "-j2"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:47:39.578483+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 180.03310761699686,
+    "exit_code": 0
+  },
+  {
+    "name": "sanitize-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/sanitize",
+      "-LE",
+      "packaging",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-29-readiness/sanitize-tests.xml"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:50:39.892010+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1"
+    },
+    "seconds": 48.66851730601047,
+    "exit_code": 0
+  },
+  {
+    "name": "sanitize-platform-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/sanitize-platform",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_SANITIZERS=ON",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-readiness-umvajdlo/packages"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:51:28.571484+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 0.4172952889930457,
+    "exit_code": 0
+  },
+  {
+    "name": "sanitize-platform-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/sanitize-platform",
+      "-j2",
+      "--target",
+      "gpu_timer_tests",
+      "renderer_memory_tests",
+      "render_target_tests",
+      "font_graphics_tests",
+      "font_reload_tests",
+      "texture_reload_tests",
+      "shader_tests",
+      "watched_reload_tests",
+      "scene_watch_tests",
+      "tilemap_watch_tests",
+      "animation_watch_tests",
+      "stress_graphics_tests",
+      "feature_lab",
+      "ui_allocations",
+      "diagnostics_allocations",
+      "audio_tests",
+      "audio_reload_tests"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:51:28.989797+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 110.67676055000629,
+    "exit_code": 0
+  },
+  {
+    "name": "sanitize-platform-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/sanitize-platform",
+      "-R",
+      "^(gpu_timers|renderer_memory|render_targets|font_graphics|font_reload|texture_reload|shaders|watched_reload|scene_watch|tilemap_watch|animation_watch|stress_graphics|stress_frame_samples|ui_allocations|diagnostics_allocations|audio_transport|audio_reload)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-29-readiness/sanitize-platform-tests.xml"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:53:19.955773+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": "detect_leaks=0:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1"
+    },
+    "seconds": 193.0327462569985,
+    "exit_code": 0
+  },
+  {
+    "name": "audio-leaks-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/sanitize-platform",
+      "-R",
+      "^(audio_transport|audio_reload)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-29-readiness/audio-leaks-tests.xml"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:56:33.228593+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1"
+    },
+    "seconds": 6.990308563981671,
+    "exit_code": 0
+  },
+  {
+    "name": "tsan-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/readiness-tsan",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DCMAKE_CXX_COMPILER=clang++",
+      "-DENGINE_SANITIZERS=OFF",
+      "-DCMAKE_CXX_FLAGS=-fsanitize=thread -fno-omit-frame-pointer",
+      "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=thread",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-readiness-umvajdlo/packages"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:56:40.223827+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 4.642952284979401,
+    "exit_code": 0
+  },
+  {
+    "name": "tsan-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/readiness-tsan",
+      "--target",
+      "audio_tests",
+      "audio_reload_tests",
+      "-j2"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:56:44.867817+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 29.7404274159926,
+    "exit_code": 0
+  },
+  {
+    "name": "tsan-audio-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/readiness-tsan",
+      "-R",
+      "^(audio_transport|audio_reload)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-29-readiness/tsan-audio-tests.xml"
+    ],
+    "source": "6d0da8fc96218963d3fa794fccee2cd6e9b5e356",
+    "started_utc": "2026-10-29T18:57:14.781762+00:00",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg09yFCKd:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp",
+      "DISPLAY": ":0",
+      "TSAN_OPTIONS": "halt_on_error=1"
+    },
+    "seconds": 7.822557447012514,
+    "exit_code": 0
+  }
+]

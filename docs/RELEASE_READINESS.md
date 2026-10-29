@@ -18,6 +18,18 @@ at `aa53ca4` covers ancestor creation/synchronization, errors, process-interrupt
 retry and consistent read/write normalization. It documents stricter ancestor-access
 requirements and synchronous I/O.
 
+Latest refresh: [2026-10-29 integrated evidence](../validation/2026-10-29-readiness/RESULTS.md)
+at `6d0da8f`, with runtime sources unchanged from merge `855805d`, passes 253 test
+group executions: full GNU Debug/Release and Clang suites, complete CPU ASan/UBSan,
+17 focused native sanitizer groups, two leak-enabled audio groups and two TSan
+audio groups. Preset build trees were reused; only the TSan build directory was
+new. This is not a fresh offline build or a full current native sanitizer suite.
+The first Debug attempt at `1fc0903` retained one failed GPU-overlay pixel test;
+`6d0da8f` corrects its stale tiny-viewport scale expectation and checks the lower
+panel boundary. Engine/example runtime sources remain unchanged.
+The original audit evidence table remains historical; the gate table records the
+new scopes without replacing earlier failures or physical acceptance requirements.
+
 “Evidence available” below applies to the stated revision and environment only.
 “Open” means missing evidence or unfinished acceptance work, not a reproduced code
 failure. Unconfirmed WM minimization and rejected historical timing runs are called
@@ -47,9 +59,9 @@ advertised; a second GPU is not a substitute for finishing checks on the testing
 
 | Gate | State | Required closure / evidence | Execution |
 | --- | --- | --- | --- |
-| R1: candidate compiler and sanitizer matrix | Evidence available at `1dfba31` | Fresh GCC Debug/Release and Clang each passed 56 groups; CPU ASan/UBSan passed 30, native ASan/UBSan passed 56 and leak-enabled native audio passed two. No skips. Preserve the explicit leak policy and refresh evidence when implementation/toolchain changes. | Completed on the recorded host; [raw results](../validation/2026-10-23/RESULTS.md). |
-| R2: concurrent audio validation | Evidence available at `1dfba31` | Clang TSan passed both concurrent audio groups without reports, using null/failing sinks. This covers exercised queue, buffer-retirement and shutdown schedules, not all interleavings or uninstrumented ALSA internals. | Completed without physical sound output; [raw results](../validation/2026-10-23/tsan-tests.xml). |
-| R3: clean offline build and candidate package | Evidence available at `1dfba31` | A fresh archived source built every target with networking disabled; 32 CPU groups and mandatory package smoke checks passed inside isolation. All three package checks passed afterward in the display session. Source/archive hashes, build identity and dependency/payload inventories are retained; the archive's embedded revision is `unknown` because Git metadata was absent. | Completed on the recorded host; [offline results and provenance](../validation/2026-10-23/RESULTS.md#clean-offline-build). |
+| R1: candidate compiler and sanitizer matrix | Refreshed evidence at `6d0da8f`; scope limits remain | Full GNU Debug/Release and Clang each pass 66 runtime groups; CPU ASan/UBSan passes all 34. Native ASan/UBSan covers 17 focused groups, plus two leak-enabled audio groups. All pass without skips. Existing build trees were reused; the full current native sanitizer suite and a fresh-build qualification are not claimed. | [Integrated matrix](../validation/2026-10-29-readiness/RESULTS.md); prior fresh full-native evidence remains at `1dfba31`. |
+| R2: concurrent audio validation | Refreshed evidence at `6d0da8f` | A new Clang TSan build passes both audio groups without reports, using null/failing sinks. This covers exercised queue, buffer-retirement and shutdown schedules, not all interleavings or uninstrumented ALSA internals. | No physical sound claim; [race results](../validation/2026-10-29-readiness/tsan-audio-tests.xml). |
+| R3: clean offline build and candidate package | Current package audit; offline evidence remains at `1dfba31` | Current archives receive manifest/relocation/graphics checks and an audit of packaged documentation and bounded CPU entry points. The prior isolated fresh build remains historical evidence; incremental current builds do not refresh that offline qualification. | [Current audit](../validation/2026-10-29-readiness/RESULTS.md), [prior offline provenance](../validation/2026-10-23/RESULTS.md#clean-offline-build). |
 | R4: display, input and interactive game acceptance | Open; WM minimize was unconfirmed (probe exit 2) | Finish physical scale/monitor, supported WM minimize/restore, focus, layout switching and title/settings/gameplay checks. Verify camera, clipping, rebinding, save/relaunch, level transitions and visible shader failure/recovery. Record each case, configuration and result. | Human observation and a suitable WM/monitor configuration. |
 | R5: physical sound and device lifecycle | Open | Listen to channel/gain/mute/pause/stop and gameplay cues. Exercise physical disconnect and system suspend/resume in an arranged session. Confirm continued play and useful disabled-audio diagnostics on terminal failure. Record device/backend and outcome; automatic reconnection is not implemented or required by the current contract. | Human observation and physical device access. |
 | R6: declared performance and memory acceptance | Open; declared memory checks pass, timing fails at `d4dbe22` | [Six workloads / 18 attempts](../benchmarks/2026-10-26-workload-acceptance-results.md) retain predeclared ceilings, kernel peak RSS and a storage coverage audit. All memory checks pass; one p99 and fourteen worst-frame checks exceed 16.7 ms. Investigate paired-frame causes, then repeat without discarding failures; extend interactive/audio/error/long-session coverage and physical 1080p acceptance. | Measurements are automated; physical presentation/refresh checks require observation. |
@@ -83,25 +95,38 @@ in a new evidence directory. The original audit did not run these recipes. The
 [follow-up](../validation/2026-10-23/RESULTS.md) records actual commands and results
 in fresh build paths; use these recipes to refresh evidence for later candidates.
 
+Use a fresh disk-backed scratch directory outside the checkout for compiler and
+package temporary files. Earlier runs retained an explicit `/tmp` quota failure
+and a separate unconfirmed extraction corruption; do not reuse that storage
+choice. This setup changes only the current shell's compiler scratch environment:
+
+```sh
+mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}"
+audit_scratch=$(mktemp -d "${XDG_CACHE_HOME:-$HOME/.cache}/engine-validation.XXXXXX")
+mkdir "$audit_scratch/compiler-tmp"
+export TMPDIR="$audit_scratch/compiler-tmp"
+```
+
 ### R1: build every target before testing
 
 ```sh
-cmake --preset debug
+cmake --preset debug -DENGINE_PACKAGE_TEST_ROOT="$audit_scratch/packages"
 cmake --build --preset debug -j2
 ctest --preset debug -LE packaging --output-on-failure
-cmake --preset release
+cmake --preset release -DENGINE_PACKAGE_TEST_ROOT="$audit_scratch/packages"
 cmake --build --preset release -j2
 ctest --preset release -LE packaging --output-on-failure
-cmake --preset clang
+cmake --preset clang -DENGINE_PACKAGE_TEST_ROOT="$audit_scratch/packages"
 cmake --build --preset clang -j2
 ctest --preset clang --output-on-failure
-cmake --preset sanitize
+cmake --preset sanitize -DENGINE_PACKAGE_TEST_ROOT="$audit_scratch/packages"
 cmake --build --preset sanitize -j2
 ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 \
   ctest --preset sanitize --output-on-failure
 
 cmake -S . -B build/sanitize-platform -G Ninja \
-  -DCMAKE_BUILD_TYPE=Debug -DENGINE_SANITIZERS=ON
+  -DCMAKE_BUILD_TYPE=Debug -DENGINE_SANITIZERS=ON \
+  -DENGINE_PACKAGE_TEST_ROOT="$audit_scratch/packages"
 cmake --build build/sanitize-platform -j2
 ASAN_OPTIONS=detect_leaks=0:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 \
   ctest --test-dir build/sanitize-platform --output-on-failure
@@ -113,10 +138,12 @@ ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 \
 Native graphics previously disabled leak detection because of driver allocations;
 that run checks address/undefined behavior only. Retain CPU and audio leak-enabled
 results separately. Do not suppress an engine report to make the aggregate pass.
-After storage, allocation profiling, UI coverage and paired stress-frame additions, the current inventory is 65
-native runtime groups (36 CPU, 25 hardware, four platform), plus three packaging
+After storage, allocation profiling, UI coverage and paired stress-frame additions, the current inventory is 66
+native runtime groups (36 CPU, 26 hardware, four platform), plus three packaging
 fixtures; platform-disabled builds discover 34 CPU groups. Discovery is not execution.
-The full-matrix record at `1dfba31` predates these additions; later storage and
+The [current refresh](../validation/2026-10-29-readiness/RESULTS.md) runs every GNU/Clang
+runtime group and CPU sanitizer group, with a focused native sanitizer subset.
+The full fresh-matrix record at `1dfba31` predates these additions; later storage and
 [allocation validation](../validation/2026-10-24-allocations/RESULTS.md) record their
 own full/focused scopes. Update counts from
 the candidate's inventory if tests are added.
@@ -146,15 +173,17 @@ One Linux option, **where unprivileged network namespaces are available**, is:
 
 ```sh
 audit_tools=$(dirname "$(command -v cmake)")
-audit_root=$(mktemp -d /tmp/feature-lab-offline.XXXXXX)
+audit_root=$(mktemp -d "$audit_scratch/offline.XXXXXX")
 audit_revision=$(git rev-parse HEAD)
 mkdir "$audit_root/source"
 git archive "$audit_revision" > "$audit_root/source.tar"
 tar -xf "$audit_root/source.tar" -C "$audit_root/source"
 printf '%s\n' "$audit_revision" > "$audit_root/SOURCE_REVISION.txt"
 unshare --user --map-root-user --net env PATH="$audit_tools:$PATH" \
-  AUDIT_SOURCE="$audit_root/source" AUDIT_BUILD="$audit_root/build" sh -eu -c '
-    cmake -S "$AUDIT_SOURCE" -B "$AUDIT_BUILD" -G Ninja -DCMAKE_BUILD_TYPE=Release
+  AUDIT_SOURCE="$audit_root/source" AUDIT_BUILD="$audit_root/build" \
+  AUDIT_PACKAGE_ROOT="$audit_root/packages" sh -eu -c '
+    cmake -S "$AUDIT_SOURCE" -B "$AUDIT_BUILD" -G Ninja -DCMAKE_BUILD_TYPE=Release \
+      -DENGINE_PACKAGE_TEST_ROOT="$AUDIT_PACKAGE_ROOT"
     cmake --build "$AUDIT_BUILD" -j2
     ctest --test-dir "$AUDIT_BUILD" -L cpu --output-on-failure
     cmake --build "$AUDIT_BUILD" --target release_package
@@ -303,3 +332,11 @@ checks. The next evidence refresh must retain these limits.
 R6 timing/coverage and physical R4/R5 cases remain open; R8 requires their
 coverage/support record. Refresh automated evidence when the implementation or
 toolchain changes. These results do not complete milestone 6.
+
+Increment 74 [refreshes the integrated automated evidence](../validation/2026-10-29-readiness/RESULTS.md).
+All 253 scoped compiler/sanitizer/race group executions pass without skips. The
+package audit checks relative file links and shell syntax, then runs bounded CPU
+entry points outside the package directory with the display unset. It does not
+test external URLs, heading anchors, interactive recipes or physical devices.
+R1's complete native sanitizer refresh and R3's fresh offline qualification remain
+separate follow-up work. R4/R5, R6 timing/coverage and R8 support/signoff stay open.

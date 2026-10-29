@@ -1,0 +1,83 @@
+{
+  "backtraceGraph": {
+    "commands": [
+      "add_test"
+    ],
+    "files": [
+      "/home/zero/dev/engine_test/CMakeLists.txt"
+    ],
+    "nodes": [
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 321,
+        "parent": 0
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 331,
+        "parent": 2
+      }
+    ]
+  },
+  "kind": "ctestInfo",
+  "tests": [
+    {
+      "backtrace": 1,
+      "command": [
+        "/home/zero/dev/engine_test/build/sanitize-platform/audio_reload_tests"
+      ],
+      "name": "audio_reload",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "platform"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    },
+    {
+      "backtrace": 3,
+      "command": [
+        "/home/zero/dev/engine_test/build/sanitize-platform/audio_tests"
+      ],
+      "name": "audio_transport",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "platform"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 10.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/dev/engine_test/build/sanitize-platform"
+        }
+      ]
+    }
+  ],
+  "version": {
+    "major": 1,
+    "minor": 0
+  }
+}

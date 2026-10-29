@@ -2390,10 +2390,31 @@ verify validation images. At corrected commit `f54d0d0`, all three package group
 pass without skips (44.27 s); all 72 evidence files and eight changed documentation
 files match the archive. The original failed audit is retained.
 
+## Increment 74: integrated release-readiness evidence
+
+- Refreshed the full 66-group GNU Debug, GNU Release and Clang runtime suites,
+  all 34 CPU sanitizer groups, 17 focused native sanitizer groups, two audio leak
+  groups and two concurrent-audio TSan groups. All 253 executions pass without skips.
+- The initial 66-group Debug attempt passed 65 groups and caught a stale GPU-overlay
+  pixel expectation. The test now uses the diagnostics scale and checks its lower
+  boundary; the failed attempt remains recorded separately.
+- Preset build directories were reused; the TSan build was new. Runtime sources
+  are unchanged from `855805d`. No new clean/offline or full native sanitizer
+  certification is inferred from this scoped refresh.
+- Audited the preceding merge archive's 1,031 relative documentation links and 74
+  shell recipes. Eight documented CPU entry-point commands pass from an unrelated
+  working directory, bracketed by two successful payload-manifest checks.
+- Updated the current inventory and validation recipes to use disk-backed compiler
+  and package scratch space. Physical display/audio, timing/memory coverage and
+  final support records remain open; historical failures are retained.
+
+See [results](../validation/2026-10-29-readiness/RESULTS.md) and
+[release gates](RELEASE_READINESS.md).
+
 ## Next increment
 
-Refresh release-readiness evidence at the integrated revision: run the full GNU
-Debug/Release runtime suites and relevant Clang/sanitizer checks, audit packaged
-documentation/sample entry points, and record remaining physical display/audio,
-timing/memory-coverage and final support gaps. Observational diagnostics do not
-close those acceptance gates; background loading remains deferred.
+Complete the current native sanitizer runtime suite and run a fresh archived-source
+offline build with relocated package checks. Retain exact source/artifact identities,
+failures and skips; neither this nor prior automated checks close physical
+display/audio acceptance, the unresolved timing/memory-coverage gate or final
+support signoff. Background loading remains deferred.
