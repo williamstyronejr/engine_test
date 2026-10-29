@@ -2411,6 +2411,11 @@ files match the archive. The original failed audit is retained.
 See [results](../validation/2026-10-29-readiness/RESULTS.md) and
 [release gates](RELEASE_READINESS.md).
 
+At documentation commit `f2773cc`, all three Release package groups pass without
+skips (49.27 s). All 64 evidence files and five changed documentation files match
+the archive; 1,052 relative links, 75 shell recipes and eight CPU entry-point
+commands pass the current package audit. Allocation profilers remain excluded.
+
 ## Next increment
 
 Complete the current native sanitizer runtime suite and run a fresh archived-source

@@ -114,4 +114,17 @@ and rejected optimizations remain unchanged. Background loading remains deferred
 
 ## Current package verification
 
-Feature and merge package verification follow the committed documentation build.
+At documentation commit `f2773cc`, all three Release package groups pass without
+skips (49.27 s). The [content audit](package-feature-inventory.json) verifies all
+64 then-current evidence files and five changed documentation files byte-for-byte;
+the four allocation profilers remain excluded. Exact configure/build/test commands
+are in [the package record](package-feature-commands.json).
+
+The [current archive audit](package-candidate/summary.json) verifies 1,052 relative
+file links, 75 shell recipes and the same eight CPU entry points bracketed by two
+manifest checks. Its compressed archive hash and build/dependency records identify
+the tested artifact. Original failure and baseline records remain unchanged.
+
+A fresh Release configure/build and all three package fixtures run again at the
+local merge revision before pushing `main`; the merge archive also receives the
+documentation/entry-point audit.

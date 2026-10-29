@@ -1,0 +1,170 @@
+[
+  {
+    "name": "manifest",
+    "command": [
+      "/home/zero/dev/engine_test/.tools/bin/cmake",
+      "-DMODE=verify",
+      "-DROOT=/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/relocated package with spaces",
+      "-P",
+      "/home/zero/dev/engine_test/cmake/PackageSmoke.cmake"
+    ],
+    "cwd": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 1.4371059210097883
+  },
+  {
+    "name": "game-help",
+    "command": [
+      "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/relocated package with spaces/bin/feature_lab",
+      "--help"
+    ],
+    "cwd": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.004020519991172478
+  },
+  {
+    "name": "stress-help",
+    "command": [
+      "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/relocated package with spaces/bin/feature_lab",
+      "--stress",
+      "--help"
+    ],
+    "cwd": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.004001649998826906
+  },
+  {
+    "name": "validator-help",
+    "command": [
+      "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/relocated package with spaces/bin/validate_assets",
+      "--help"
+    ],
+    "cwd": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.0026071270112879574
+  },
+  {
+    "name": "game-verify",
+    "command": [
+      "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/relocated package with spaces/bin/feature_lab",
+      "--verify"
+    ],
+    "cwd": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.04213658699882217
+  },
+  {
+    "name": "validate-all",
+    "command": [
+      "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/relocated package with spaces/bin/validate_assets"
+    ],
+    "cwd": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.006519827991724014
+  },
+  {
+    "name": "validate-scene",
+    "command": [
+      "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/relocated package with spaces/bin/validate_assets",
+      "--type",
+      "scene",
+      "--file",
+      "facility.scene",
+      "--scene-budget",
+      "256"
+    ],
+    "cwd": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.002959791978355497
+  },
+  {
+    "name": "validate-json",
+    "command": [
+      "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/relocated package with spaces/bin/validate_assets",
+      "--json"
+    ],
+    "cwd": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.00939171900972724
+  },
+  {
+    "name": "stress-bench",
+    "command": [
+      "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/relocated package with spaces/bin/stress_bench",
+      "--frames",
+      "60",
+      "--warmup",
+      "10",
+      "--cycles",
+      "2",
+      "--report",
+      "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/stress.json"
+    ],
+    "cwd": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.7721650930179749
+  },
+  {
+    "name": "manifest-after",
+    "command": [
+      "/home/zero/dev/engine_test/.tools/bin/cmake",
+      "-DMODE=verify",
+      "-DROOT=/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/relocated package with spaces",
+      "-P",
+      "/home/zero/dev/engine_test/cmake/PackageSmoke.cmake"
+    ],
+    "cwd": "/home/zero/.cache/engine-readiness-umvajdlo/compiler-tmp/package-doc-audit-_v3hopow/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 1.3823806529981084
+  }
+]
