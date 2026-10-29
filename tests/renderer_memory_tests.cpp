@@ -9,7 +9,7 @@ namespace {
 using namespace engine;
 using namespace testing;
 TEST(renderer_memory_lifecycle_and_logical_store) {
-    Window window(64, 32, "Renderer memory", false);
+    engine::Window window(64, 32, "Renderer memory", false);
     const auto get_buffer = reinterpret_cast<PFNGLGETBUFFERPARAMETERIVPROC>(
         glXGetProcAddressARB(reinterpret_cast<const GLubyte*>("glGetBufferParameteriv")));
     const auto is_buffer = reinterpret_cast<PFNGLISBUFFERPROC>(

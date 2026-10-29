@@ -1,0 +1,71 @@
+[
+  {
+    "name": "reference",
+    "command": [
+      "cmake",
+      "-DGAME_EXE=/home/zero/dev/engine_test/build/renderer-memory-validation/reference-feature-lab",
+      "-DOUTPUT_DIR=/home/zero/dev/engine_test/build/renderer-memory-validation/reference-run",
+      "-P",
+      "build/renderer-memory-validation/reference-frames.cmake"
+    ],
+    "source": "9c5198d338549df555150f62b67b005dec6bd3b3",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0zGrT3u:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-renderer-memory-rp0_tn0k/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "started_utc": "2026-10-29T10:34:29.785019+00:00",
+    "seconds": 10.171895837993361,
+    "exit_code": 0
+  },
+  {
+    "name": "debug-configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "debug",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-renderer-memory-rp0_tn0k/packages"
+    ],
+    "source": "9c5198d338549df555150f62b67b005dec6bd3b3",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0zGrT3u:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-renderer-memory-rp0_tn0k/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "started_utc": "2026-10-29T10:34:39.961501+00:00",
+    "seconds": 0.4288222670147661,
+    "exit_code": 0
+  },
+  {
+    "name": "debug-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/debug",
+      "--target",
+      "renderer_memory_tests",
+      "stress_graphics_tests",
+      "font_graphics_tests",
+      "texture_reload_tests",
+      "render_target_tests",
+      "sampling_tests",
+      "graphics_tests",
+      "feature_lab",
+      "stress_tests",
+      "stress_bench",
+      "-j2"
+    ],
+    "source": "9c5198d338549df555150f62b67b005dec6bd3b3",
+    "working_directory": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0zGrT3u:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-renderer-memory-rp0_tn0k/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "started_utc": "2026-10-29T10:34:40.391043+00:00",
+    "seconds": 40.47325116200955,
+    "exit_code": 1
+  }
+]
