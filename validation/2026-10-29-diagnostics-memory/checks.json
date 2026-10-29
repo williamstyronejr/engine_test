@@ -1,0 +1,65 @@
+[
+  {
+    "configuration": "release",
+    "groups": [
+      "hud_text",
+      "diagnostics",
+      "render_targets",
+      "renderer_memory",
+      "ui_allocations",
+      "diagnostics_allocations",
+      "stress_frame_samples"
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  {
+    "configuration": "debug",
+    "groups": [
+      "hud_text",
+      "diagnostics",
+      "render_targets",
+      "renderer_memory",
+      "ui_allocations",
+      "diagnostics_allocations",
+      "stress_frame_samples"
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  {
+    "configuration": "clang",
+    "groups": [
+      "hud_text",
+      "diagnostics",
+      "render_targets",
+      "renderer_memory",
+      "ui_allocations",
+      "diagnostics_allocations",
+      "stress_frame_samples"
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  {
+    "configuration": "sanitize",
+    "groups": [
+      "hud_text",
+      "diagnostics"
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  {
+    "configuration": "sanitize-platform",
+    "groups": [
+      "render_targets",
+      "renderer_memory",
+      "ui_allocations",
+      "diagnostics_allocations",
+      "stress_frame_samples"
+    ],
+    "failures": 0,
+    "skips": 0
+  }
+]

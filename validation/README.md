@@ -91,3 +91,8 @@ and workload/report comparisons, with initial compiler diagnostics retained.
 [CPU font memory validation](2026-10-29-font-memory/RESULTS.md) covers spare
 capacity, copy independence, committed/staged ownership and failure retention,
 with 32 focused compiler/sanitizer groups and 36 image/report comparisons.
+
+[Diagnostics memory validation](2026-10-29-diagnostics-memory/RESULTS.md) covers
+F2 field labels, panel bounds/clip restoration, warmed allocation scopes and
+captures across compiler builds and viewport sizes. It preserves the earlier
+memory-coverage and performance limits.

@@ -1,0 +1,12 @@
+Test project /home/zero/dev/engine_test/build/sanitize
+    Start  2: hud_text
+1/2 Test  #2: hud_text .........................   Passed    0.17 sec
+    Start 25: diagnostics
+2/2 Test #25: diagnostics ......................   Passed    1.69 sec
+
+100% tests passed out of 2
+
+Label Time Summary:
+cpu    =   1.86 sec*proc (2 tests)
+
+Total Test time (real) =   1.86 sec

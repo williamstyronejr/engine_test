@@ -1,0 +1,510 @@
+[
+  {
+    "name": "reference-ui",
+    "command": [
+      "build/diagnostics-memory-validation/reference-ui",
+      "validation/2026-10-29-diagnostics-memory/reference-ui.json",
+      "build/diagnostics-memory-validation/reference-ui-images"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:09:51.665090+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 8.54873803598457,
+    "exit_code": 0
+  },
+  {
+    "name": "reference-frames",
+    "command": [
+      "cmake",
+      "-DGAME_EXE=/home/zero/dev/engine_test/build/diagnostics-memory-validation/reference-feature-lab",
+      "-DOUTPUT_DIR=/home/zero/dev/engine_test/build/diagnostics-memory-validation/reference-frames",
+      "-P",
+      "build/diagnostics-memory-validation/reference-frames.cmake"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:10:00.221170+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 10.031337323976913,
+    "exit_code": 0
+  },
+  {
+    "name": "release-configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "release",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/packages"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:10:10.261811+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 0.41905666899401695,
+    "exit_code": 0
+  },
+  {
+    "name": "release-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/release",
+      "--target",
+      "hud_text_tests",
+      "diagnostics_tests",
+      "render_target_tests",
+      "renderer_memory_tests",
+      "ui_allocations",
+      "diagnostics_allocations",
+      "feature_lab",
+      "-j2"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:10:10.681482+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 32.45503483599168,
+    "exit_code": 0
+  },
+  {
+    "name": "release-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/release",
+      "-R",
+      "^(hud_text|diagnostics|render_targets|renderer_memory|ui_allocations|diagnostics_allocations|stress_frame_samples)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-29-diagnostics-memory/release-tests.xml"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:10:43.137454+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 26.456942466000328,
+    "exit_code": 0
+  },
+  {
+    "name": "release-capture",
+    "command": [
+      "build/release/diagnostics_allocations",
+      "validation/2026-10-29-diagnostics-memory/release-diagnostics-capture.json",
+      "build/diagnostics-memory-validation/release-diagnostics-images"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:11:09.984686+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 6.357885607983917,
+    "exit_code": 0
+  },
+  {
+    "name": "debug-configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "debug",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/packages"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:11:17.239623+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 0.43516558298142627,
+    "exit_code": 0
+  },
+  {
+    "name": "debug-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/debug",
+      "--target",
+      "hud_text_tests",
+      "diagnostics_tests",
+      "render_target_tests",
+      "renderer_memory_tests",
+      "ui_allocations",
+      "diagnostics_allocations",
+      "feature_lab",
+      "-j2"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:11:17.675585+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 54.62992936099181,
+    "exit_code": 0
+  },
+  {
+    "name": "debug-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/debug",
+      "-R",
+      "^(hud_text|diagnostics|render_targets|renderer_memory|ui_allocations|diagnostics_allocations|stress_frame_samples)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-29-diagnostics-memory/debug-tests.xml"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:12:12.306628+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 40.926171699975384,
+    "exit_code": 0
+  },
+  {
+    "name": "debug-capture",
+    "command": [
+      "build/debug/diagnostics_allocations",
+      "validation/2026-10-29-diagnostics-memory/debug-diagnostics-capture.json",
+      "build/diagnostics-memory-validation/debug-diagnostics-images"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:12:53.614887+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 13.420670932013309,
+    "exit_code": 0
+  },
+  {
+    "name": "clang-configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "clang",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/packages"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:13:08.042091+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 0.3689439029840287,
+    "exit_code": 0
+  },
+  {
+    "name": "clang-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/clang",
+      "--target",
+      "hud_text_tests",
+      "diagnostics_tests",
+      "render_target_tests",
+      "renderer_memory_tests",
+      "ui_allocations",
+      "diagnostics_allocations",
+      "feature_lab",
+      "-j2"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:13:08.411880+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 37.116212610999355,
+    "exit_code": 0
+  },
+  {
+    "name": "clang-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/clang",
+      "-R",
+      "^(hud_text|diagnostics|render_targets|renderer_memory|ui_allocations|diagnostics_allocations|stress_frame_samples)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-29-diagnostics-memory/clang-tests.xml"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:13:45.529256+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 53.60318508697674,
+    "exit_code": 0
+  },
+  {
+    "name": "clang-capture",
+    "command": [
+      "build/clang/diagnostics_allocations",
+      "validation/2026-10-29-diagnostics-memory/clang-diagnostics-capture.json",
+      "build/diagnostics-memory-validation/clang-diagnostics-images"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:14:39.507981+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 21.02711799601093,
+    "exit_code": 0
+  },
+  {
+    "name": "sanitize-configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "sanitize",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/packages"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:15:01.500655+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 0.26106523600174114,
+    "exit_code": 0
+  },
+  {
+    "name": "sanitize-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/sanitize",
+      "--target",
+      "hud_text_tests",
+      "diagnostics_tests",
+      "-j2"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:15:01.762624+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 17.214055468008155,
+    "exit_code": 0
+  },
+  {
+    "name": "sanitize-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/sanitize",
+      "-R",
+      "^(hud_text|diagnostics)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-29-diagnostics-memory/sanitize-tests.xml"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:15:18.977720+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1"
+    },
+    "seconds": 2.1064791879907716,
+    "exit_code": 0
+  },
+  {
+    "name": "sanitize-platform-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/sanitize-platform",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_SANITIZERS=ON",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/packages"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:15:21.086001+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 0.41331008297856897,
+    "exit_code": 0
+  },
+  {
+    "name": "sanitize-platform-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/sanitize-platform",
+      "--target",
+      "hud_text_tests",
+      "diagnostics_tests",
+      "render_target_tests",
+      "renderer_memory_tests",
+      "ui_allocations",
+      "diagnostics_allocations",
+      "feature_lab",
+      "-j2"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:15:21.500198+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 84.28277680900646,
+    "exit_code": 0
+  },
+  {
+    "name": "sanitize-platform-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/sanitize-platform",
+      "-R",
+      "^(render_targets|renderer_memory|ui_allocations|diagnostics_allocations|stress_frame_samples)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-29-diagnostics-memory/sanitize-platform-tests.xml"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:16:45.787325+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": "detect_leaks=0:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1"
+    },
+    "seconds": 195.98183805399458,
+    "exit_code": 0
+  },
+  {
+    "name": "sanitize-platform-capture",
+    "command": [
+      "build/sanitize-platform/diagnostics_allocations",
+      "validation/2026-10-29-diagnostics-memory/sanitize-platform-diagnostics-capture.json",
+      "build/diagnostics-memory-validation/sanitize-platform-diagnostics-images"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:20:02.178630+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": "detect_leaks=0:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1"
+    },
+    "seconds": 67.96749051200459,
+    "exit_code": 0
+  },
+  {
+    "name": "release-ui-capture",
+    "command": [
+      "build/release/ui_allocations",
+      "validation/2026-10-29-diagnostics-memory/release-ui-capture.json",
+      "build/diagnostics-memory-validation/release-ui-images"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:21:11.182881+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 10.978761815000325,
+    "exit_code": 0
+  },
+  {
+    "name": "viewport-960x540",
+    "command": [
+      "build/release/diagnostics_allocations",
+      "validation/2026-10-29-diagnostics-memory/viewport-960x540.json",
+      "build/diagnostics-memory-validation/viewport-960x540",
+      "960",
+      "540"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:21:22.662228+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 5.831056658993475,
+    "exit_code": 0
+  },
+  {
+    "name": "viewport-640x360",
+    "command": [
+      "build/release/diagnostics_allocations",
+      "validation/2026-10-29-diagnostics-memory/viewport-640x360.json",
+      "build/diagnostics-memory-validation/viewport-640x360",
+      "640",
+      "360"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:21:28.647808+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 3.8715764640073758,
+    "exit_code": 0
+  },
+  {
+    "name": "viewport-320x240",
+    "command": [
+      "build/release/diagnostics_allocations",
+      "validation/2026-10-29-diagnostics-memory/viewport-320x240.json",
+      "build/diagnostics-memory-validation/viewport-320x240",
+      "320",
+      "240"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:21:32.602127+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 2.751380761998007,
+    "exit_code": 0
+  },
+  {
+    "name": "viewport-1050x1360",
+    "command": [
+      "build/release/diagnostics_allocations",
+      "validation/2026-10-29-diagnostics-memory/viewport-1050x1360.json",
+      "build/diagnostics-memory-validation/viewport-1050x1360",
+      "1050",
+      "1360"
+    ],
+    "source": "1d6ef4565d06f1f00fa994747ab22ffd2b94559f",
+    "started_utc": "2026-10-29T16:21:35.392764+00:00",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-diagnostics-memory-sr1_bey4/compiler-tmp",
+      "DISPLAY": ":0"
+    },
+    "seconds": 9.865026649000356,
+    "exit_code": 0
+  }
+]

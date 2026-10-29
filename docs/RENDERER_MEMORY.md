@@ -135,3 +135,41 @@ runs. Preserve the earlier validation record and all timing/adoption decisions.
 
 The [font CPU validation record](../validation/2026-10-29-font-memory/RESULTS.md)
 retains the v1 reference, v2 reports, ownership checks and package verification.
+
+## F2 memory panel (increment 73)
+
+Feature Lab's opt-in F2 overlay shows all eleven fields beside the timing/collision
+panel. CPU rows are explicitly ordered **buffer / reserved / used**; used bytes
+are part of the reservation and must not be added to it. GPU rows are explicitly
+logical payloads. All values use two decimal places in KiB (1,024 bytes); tiny
+nonzero values can round to `0.00`. The raw API and stress reports retain bytes.
+No CPU/GPU total or process-memory estimate is synthesized.
+
+One live snapshot is taken before either diagnostics panel submits geometry or
+changes clipping. `PRE F2 DRAW` describes this boundary, not a completed-frame
+peak: pending vertex bytes depend on the caller's previous batches and flushes.
+Frame counters in the neighboring panel still describe completed frames. Renderer
+inventory includes the caller's current offscreen targets; a capture fixture may
+therefore show a larger target payload than a window-only session.
+
+The panel labels exclude driver allocation/residency and other heap/GL objects,
+and keep RSS and staging peaks separate. The more detailed exclusions above still
+apply. Enabling diagnostics does not expand accounting coverage or resolve the
+remaining timing, physical display/audio or support gates.
+
+`memory_rows` formats each label into the caller's reusable string and immediately
+passes its view to the row sink. Production and allocation probes continue to use
+the existing 256-character reservation. There is no persistent label cache or new
+snapshot allocation. The convenience `draw_hud` overload still uses a local string
+and can allocate. Long numeric rows shrink to fit without truncating values.
+
+The memory panel occupies design coordinates x=496..956, y=102..462, alongside
+the existing x=24..484 panel and before the minimap at ordinary aspect ratios.
+Diagnostics scales down with both viewport dimensions, including below the general
+HUD's minimum scale. Tiny viewports keep panel geometry in bounds, but subpixel
+bitmap text loses readability; this is not a legibility claim at 320×240.
+Settings/controls draw above diagnostics and can obscure it while open.
+
+The [overlay validation record](../validation/2026-10-29-diagnostics-memory/RESULTS.md)
+covers exact field/label mapping, zero and extreme values, panel clipping/resource
+checks, warmed C++ allocation scopes and native captures across viewport sizes.

@@ -1,0 +1,79 @@
+[
+  {
+    "source": "build/diagnostics-memory-validation/viewport-1050x1360/FACILITY-gpu_completed.ppm",
+    "source_sha256": "1a7d13f72bdb2867016a3637787c8805cb40a72fb3c5aab654b89bdbb2353471",
+    "png": "validation/2026-10-29-diagnostics-memory/captures/1050x1360.png",
+    "png_sha256": "bdb086ab0ad38148ed8030a8613bb754f8952ddd1d57954751be52a55cfbe7f4",
+    "command": [
+      "magick",
+      "build/diagnostics-memory-validation/viewport-1050x1360/FACILITY-gpu_completed.ppm",
+      "validation/2026-10-29-diagnostics-memory/captures/1050x1360.png"
+    ]
+  },
+  {
+    "source": "build/diagnostics-memory-validation/viewport-320x240/FACILITY-gpu_completed.ppm",
+    "source_sha256": "7b2b513bcb0cbc1599457c33b51fe1f3697caf60ee4349b0db68d9acd300517e",
+    "png": "validation/2026-10-29-diagnostics-memory/captures/320x240.png",
+    "png_sha256": "377fc32daae25594ac88f94b4df39fb1c77cb819469680eacc9f0258b77a1135",
+    "command": [
+      "magick",
+      "build/diagnostics-memory-validation/viewport-320x240/FACILITY-gpu_completed.ppm",
+      "validation/2026-10-29-diagnostics-memory/captures/320x240.png"
+    ]
+  },
+  {
+    "source": "build/diagnostics-memory-validation/viewport-640x360/FACILITY-gpu_completed.ppm",
+    "source_sha256": "ab5e56491706595b8d5d42cdf4a9843800ff208173e15b8161cf066e746078e9",
+    "png": "validation/2026-10-29-diagnostics-memory/captures/640x360.png",
+    "png_sha256": "1a39f81937ee60f6f215170bfefd9692429d91a433587f7f10479fc9012d9999",
+    "command": [
+      "magick",
+      "build/diagnostics-memory-validation/viewport-640x360/FACILITY-gpu_completed.ppm",
+      "validation/2026-10-29-diagnostics-memory/captures/640x360.png"
+    ]
+  },
+  {
+    "source": "build/diagnostics-memory-validation/viewport-960x540/FACILITY-gpu_completed.ppm",
+    "source_sha256": "55fdeebb564bebc3e407a4c5d59c185224cb0fb26aaa4ff19ce34da7d68788c6",
+    "png": "validation/2026-10-29-diagnostics-memory/captures/960x540.png",
+    "png_sha256": "dedccb0b44649385c05f0372d41ddf0c6467c453b419e70c80f9eb4a2e87fa58",
+    "command": [
+      "magick",
+      "build/diagnostics-memory-validation/viewport-960x540/FACILITY-gpu_completed.ppm",
+      "validation/2026-10-29-diagnostics-memory/captures/960x540.png"
+    ]
+  },
+  {
+    "source": "build/diagnostics-memory-validation/release-diagnostics-images/ANNEX-combined_controls.ppm",
+    "source_sha256": "b13a85c20bd9f629c1eac40ea7fbf375ac076afafe00273b80ec6832557ea326",
+    "png": "validation/2026-10-29-diagnostics-memory/captures/ANNEX-combined_controls.png",
+    "png_sha256": "a57dacf59283b0d1e1e56e62f1e510354497737849d38d0bf1d04df37e7a35fa",
+    "command": [
+      "magick",
+      "build/diagnostics-memory-validation/release-diagnostics-images/ANNEX-combined_controls.ppm",
+      "validation/2026-10-29-diagnostics-memory/captures/ANNEX-combined_controls.png"
+    ]
+  },
+  {
+    "source": "build/diagnostics-memory-validation/release-diagnostics-images/FACILITY-gpu_changing.ppm",
+    "source_sha256": "feee2a2fe643b6a902f4533c05b72c69b017acbdab3ff6afa44bae1cb771e4c4",
+    "png": "validation/2026-10-29-diagnostics-memory/captures/FACILITY-gpu_changing.png",
+    "png_sha256": "009665d9bf41791cc88cca4bbade3128402aedee931cc6f3eb8654c9968fec4d",
+    "command": [
+      "magick",
+      "build/diagnostics-memory-validation/release-diagnostics-images/FACILITY-gpu_changing.ppm",
+      "validation/2026-10-29-diagnostics-memory/captures/FACILITY-gpu_changing.png"
+    ]
+  },
+  {
+    "source": "build/diagnostics-memory-validation/release-diagnostics-images/FACILITY-gpu_completed.ppm",
+    "source_sha256": "008df34ed16a04ae0d5fc6593167e5b21b83cb5c507c9fd37dedf4f50f31a96f",
+    "png": "validation/2026-10-29-diagnostics-memory/captures/FACILITY-gpu_completed.png",
+    "png_sha256": "9677b576c7dd87a59a0c25ed99bd084375c9c828444afef88df4d9fbcd4416e7",
+    "command": [
+      "magick",
+      "build/diagnostics-memory-validation/release-diagnostics-images/FACILITY-gpu_completed.ppm",
+      "validation/2026-10-29-diagnostics-memory/captures/FACILITY-gpu_completed.png"
+    ]
+  }
+]

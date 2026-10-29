@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-c++"
+	tests="5"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="omarchy"
+	time="195"
+	timestamp="2026-10-29T12:16:46"
+	>
+	<testcase name="diagnostics_allocations" classname="diagnostics_allocations" time="106.393" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>-- 0 UI scenarios: states, labels, samples and inclusive counters verified
+</system-out>
+	</testcase>
+	<testcase name="ui_allocations" classname="ui_allocations" time="75.1145" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>-- 0 UI scenarios: states, labels, samples and inclusive counters verified
+</system-out>
+	</testcase>
+	<testcase name="stress_frame_samples" classname="stress_frame_samples" time="12.1342" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="renderer_memory" classname="renderer_memory" time="0.168119" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS renderer_memory_lifecycle_and_logical_store
+1 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="render_targets" classname="render_targets" time="1.749" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS offscreen_orientation_and_composition
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS transparent_targets_preserve_linear_alpha
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS nested_clips_flush_and_restore
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS clip_limits_empty_and_error_recovery
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS target_lifetime_resize_and_failure_preservation
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graph...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+</testsuite>

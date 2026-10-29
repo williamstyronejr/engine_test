@@ -194,10 +194,18 @@ The exit report includes separate window/minimap draw counts and live target byt
 
 F2 displays the last 240 rendered frames: wall mean, CPU mean/p95, simulation ticks,
 steps per frame, discarded clock time, per-pass quads/draws, culling, GPU texture and
-render-target counts/bytes, collision bodies/contacts and broad/narrow-phase counts.
+render-target counts, collision bodies/contacts and broad/narrow-phase counts.
 Frame statistics describe completed frames, so they appear one frame later. CPU
 samples include diagnostic drawing overhead. Wall intervals include pacing; scripted
 mode does not count ignored wall-clock time as dropped simulation time.
+
+The adjacent memory panel shows CPU vertex/font reservations and used bytes, plus
+logical GPU vertex-store and texture payloads in KiB (1,024 bytes). It samples the
+renderer once before either F2 panel draws; pending vertex bytes can therefore
+describe a partial batch. Used CPU bytes are part of the reservation. RSS, staging
+peaks, other heap storage and driver/residency overhead are separate. See the
+[snapshot and overlay contract](docs/RENDERER_MEMORY.md#f2-memory-panel-increment-73)
+and [validation record](validation/2026-10-29-diagnostics-memory/RESULTS.md).
 
 The GPU rows show mean/p95 over the last 240 completed measurements, sample age in
 rendered frames, pending slots, skipped measurements, and invalid timestamp pairs
@@ -733,8 +741,8 @@ settings, diagnostics and enabled-audio HUD labels, including remapped controls.
 [Recorded results](benchmarks/2026-10-25-ui-allocation-results.md) separate steady
 redraws from menu/rebinding transitions.
 
-Diagnostics now shares the reusable HUD buffer, preserving decimal labels and
-rendered output. The [diagnostics storage contract](benchmarks/DIAGNOSTIC_TEXT.md)
+Diagnostics shares the reusable HUD buffer. Increment 60 preserved decimal labels
+and rendered output; increment 73 adds the memory panel. The [diagnostics storage contract](benchmarks/DIAGNOSTIC_TEXT.md)
 and [measurements](benchmarks/2026-10-26-diagnostic-text-results.md) cover changing
 GPU labels and combined settings/controls overlays as well as the original UI states.
 

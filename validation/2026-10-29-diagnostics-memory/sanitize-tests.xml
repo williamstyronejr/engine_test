@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-c++"
+	tests="2"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="omarchy"
+	time="1"
+	timestamp="2026-10-29T12:15:19"
+	>
+	<testcase name="hud_text" classname="hud_text" time="0.167139" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS integer_extremes_and_shorter_replacements_preserve_exact_text
+PASS fixed_decimals_preserve_rounding_zero_and_overflow_without_allocations
+PASS diagnostic_gpu_ingestion_preserves_delayed_samples_without_allocations
+PASS memory_labels_preserve_scope_units_and_independent_fields_without_allocations
+PASS long_labels_grow_losslessly_and_then_reuse_capacity
+[scene applied] revision=2 source=facility.scene
+[scene retained] revision=2 source=facility.scene
+facility.scene: facility.scene: Not a regular asset file
+[tilemap applied] revision=2 source=facility.etmp
+[tilemap retained] revision=2 source=facility.etmp
+facility.etmp: facility.etmp: Not a regular asset file
+[animation applied] revision=2 source=facility.eani
+[animation retained] revision=2 source=facility.eani
+facility.eani: facility.eani: Not a regular asset file
+PASS reload_labels_follow_success_failure_lock_and_replacement
+PASS repeated_status_formatting_reuses_the_callers_storage
+7 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="diagnostics" classname="diagnostics" time="1.69166" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS timing_history_statistics_and_rejection
+PASS timing_history_rollover_clear_and_large_samples
+PASS debug_toggle_edges_and_focus_cancel
+PASS single_step_consumes_one_edge_across_catchup
+PASS single_step_matches_complete_unpaused_replay
+PASS single_step_pause_and_restart_priority
+PASS settings_capture_step_and_debug_controls_until_release
+7 tests, 0 failed
+</system-out>
+	</testcase>
+</testsuite>

@@ -97,3 +97,30 @@ is claimed. Direct C allocation, driver/GPU memory, input/event processing, swap
 live updates, initial reservations/growth, loading, exceptional errors and reporting
 retain their exclusions. Declared workload/memory budgets and physical release
 acceptance remain separate work.
+
+## Memory overlay follow-up (increment 73)
+
+The F2 renderer memory panel reuses the same string and formatting path. The
+[memory contract](../docs/RENDERER_MEMORY.md#f2-memory-panel-increment-73) defines
+sampling, units and exclusions. Its additional labels intentionally change
+diagnostic images and render counts; the increment-60 comparisons above remain
+historical evidence for their original revisions.
+
+Both UI probes now emit `diagnostics_layout:"memory_v1"`. Their workload names and
+scenario/timing/allocation boundaries remain unchanged. Treat layout identity as
+part of any render-count/fingerprint comparison; older reports lack the marker.
+The checker requires the current marker and still enforces zero warmed diagnostic
+allocation calls. The validation runner additionally verifies zero allocations
+in every measured render-thread scope of the exercised fixtures.
+
+An optional width/height pair follows the screenshot directory; each dimension
+must be an integer from 240 through 2560. Defaults remain 1280×800. For example:
+
+```sh
+./build/release/diagnostics_allocations build/diagnostics-640.json \
+  build/diagnostics-640-images 640 360
+```
+
+These are offscreen UI fixtures, including their own render target in the memory
+inventory. They do not establish physical display legibility, input behavior or
+frame-time acceptance. See the [new results](../validation/2026-10-29-diagnostics-memory/RESULTS.md).
