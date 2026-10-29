@@ -1421,10 +1421,14 @@ GL vendor/device/version from the owning current context. These methods add no
 external dependency and do not change content, save or replay schemas.
 
 [Renderer owned-memory snapshots](RENDERER_MEMORY.md) additionally expose reserved
-and pending CPU vertices, the logical VBO store, and separate built-in, uploaded,
-font and target texels. `memory.renderer_baseline` labels the stress report's
+and pending CPU vertices, owned font atlas/glyph capacities and used bytes, the
+logical VBO store, and separate built-in, uploaded, font and target texels. `memory.renderer_baseline` labels the stress report's
 unloaded snapshot and distinguishes CPU-only absence from observed zero payloads.
-This inventory does not include allocator/driver overhead or retired orphan stores.
+Coverage `owned_buffers_and_texels_v2` adds the four CPU font fields; retained v1
+records keep their original scope. `BitmapFont::memory()` describes each owned
+snapshot; candidate staging uses the same capacity definition but remains separate
+from committed renderer storage. This inventory excludes allocator/driver overhead,
+object/lookup storage and retired orphan stores.
 
 
 ## Authored level replacement

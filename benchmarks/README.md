@@ -312,3 +312,8 @@ stability screens. The engine remains unchanged; no system settings are altered.
 snapshot to stress JSON while preserving existing workload/peak fields. Its
 [validation](../validation/2026-10-29-renderer-memory/RESULTS.md) covers buffer
 lifecycle and image/report identity; it does not revise earlier timing decisions.
+
+[CPU font memory coverage](../validation/2026-10-29-font-memory/RESULTS.md) extends
+renderer baselines to coverage v2 with owned atlas/glyph reservations and used
+bytes. Committed snapshots and replacement staging remain separate; old v1 reports
+and earlier timing/adoption decisions are preserved.

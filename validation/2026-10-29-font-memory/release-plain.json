@@ -1,0 +1,21 @@
+{
+  "schema":"feature_lab_stress_v1","workload_version":1,"mode":"opengl","label":"","complete":true,"resources_stable":true,
+  "build":{"revision":"91886ba","compiler":"GNU 16.2.1","configuration":"Release","flags":" -O3 -DNDEBUG; C++20; sanitizers=OFF"},
+  "machine":{"cpu":" Intel(R) Core(TM) i5-4300U CPU @ 1.90GHz","system":"Linux 7.2.8-9-omarchy x86_64","gl_vendor":"Intel","gl_device":"Mesa Intel(R) HD Graphics 4400 (HSW GT2)","gl_version":"4.6 (Core Profile) Mesa 26.2.5-arch1.1"},
+  "workload":{"sprites":64,"tiles":64,"entities":16,"bodies":16,"voices":2,"dense":false,"seed":"1","width":256,"height":144,"warmup_per_cycle":3,"frames_per_cycle":12,"cycles":2},
+  "run":{"completed_cycles":2,"measured_frames":24,"checksum":"17408532417893646107","window_width":1050,"window_height":1360,"vsync_requested":false,"vsync_disable_accepted":true,"audio_device":false,"capture_requested":true},
+  "presentation":{"mode":"immediate","swap_interval_requested":0,"request_issued":true,"present_calls":30},
+  "totals":{"quads":2688,"culled":384,"draws":24,"visible_tiles":1536,"collision_candidates":528,"contacts":0},
+  "memory":{"tracked_cpu_buffer_bytes":7881000,"report_buffer_bytes":1360,"rss_start":48164864,"rss_end":50561024,"rss_peak_at_cycle_boundary":50561024,"peak_uploaded_textures":1,"peak_uploaded_texture_bytes":16,"peak_targets":1,"peak_target_bytes":147456,"renderer_baseline":{"coverage":"owned_buffers_and_texels_v2","observed":true,"cpu_vertex_reserved_bytes":786432,"cpu_vertex_used_bytes":0,"gpu_vertex_store_bytes":786432,"gpu_builtin_texture_bytes":32,"gpu_uploaded_texture_bytes":0,"gpu_font_texture_bytes":16384,"gpu_target_texture_bytes":0,"cpu_font_atlas_reserved_bytes":16384,"cpu_font_atlas_used_bytes":16384,"cpu_font_glyph_reserved_bytes":2048,"cpu_font_glyph_used_bytes":1408}},
+  "gpu_queries":{"supported":true,"method":"time_elapsed","counter_bits":64,"submitted":30,"completed":30,"pending":0,"skipped":0,"invalid":0,"failure_capacity":8,"failures_omitted":0,"failures":[]},
+  "milliseconds":{
+    "load":{"samples":2,"mean":0.6903115,"median":0.565189,"p95":0.565189,"p99":0.565189,"max":0.815434},
+    "simulation":{"samples":24,"mean":0.0236225417,"median":0.022773,"p95":0.030043,"p99":0.032243,"max":0.033083},
+    "mixer":{"samples":24,"mean":0.0671182917,"median":0.065314,"p95":0.077757,"p99":0.080084,"max":0.085875},
+    "render_submit":{"samples":24,"mean":0.234017958,"median":0.224661,"p95":0.310074,"p99":0.313901,"max":0.319924},
+    "preview_submit":{"samples":24,"mean":0.802536375,"median":0.126878,"p95":4.4743,"p99":5.157957,"max":6.289525},
+    "present":{"samples":24,"mean":1.14266383,"median":0.396527,"p95":3.50773,"p99":3.529195,"max":11.948288},
+    "frame":{"samples":24,"mean":2.33873592,"median":0.884821,"p95":6.097018,"p99":7.268784,"max":17.955557},
+    "gpu_render":{"samples":24,"mean":0.02296,"median":0.01768,"p95":0.02608,"p99":0.02616,"max":0.0892}
+  }
+}

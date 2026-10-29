@@ -87,3 +87,7 @@ strict analyzer controls and unchanged-runtime Release/package verification.
 [Renderer memory validation](2026-10-29-renderer-memory/RESULTS.md) covers logical
 buffer/texel accounting, 40 focused compiler/sanitizer groups and 36 reference image
 and workload/report comparisons, with initial compiler diagnostics retained.
+
+[CPU font memory validation](2026-10-29-font-memory/RESULTS.md) covers spare
+capacity, copy independence, committed/staged ownership and failure retention,
+with 32 focused compiler/sanitizer groups and 36 image/report comparisons.

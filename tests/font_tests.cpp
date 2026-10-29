@@ -8,6 +8,29 @@
 namespace {
 using namespace engine;
 using namespace testing;
+TEST(font_memory_tracks_owned_capacity_and_used_payload) {
+    auto data = metric_font();
+    data.atlas.rgba.reserve(512);
+    data.glyphs.reserve(64);
+    const auto atlas_capacity = data.atlas.rgba.capacity();
+    const auto glyph_capacity = data.glyphs.capacity();
+    const BitmapFont font(std::move(data));
+    const auto memory = font.memory();
+    CHECK(memory.atlas_reserved_bytes == atlas_capacity);
+    CHECK(memory.glyph_reserved_bytes == glyph_capacity * sizeof(FontGlyph));
+    CHECK(memory.atlas_used_bytes == 64 && memory.glyph_used_bytes == 4 * sizeof(FontGlyph));
+    CHECK(memory.atlas_reserved_bytes > memory.atlas_used_bytes);
+    CHECK(memory.glyph_reserved_bytes > memory.glyph_used_bytes);
+    const auto encoded = encode_font(font.data());
+    const BitmapFont copy(font);
+    CHECK(copy.memory().atlas_used_bytes == memory.atlas_used_bytes);
+    CHECK(copy.memory().glyph_used_bytes == memory.glyph_used_bytes);
+    CHECK(copy.memory().atlas_reserved_bytes == copy.data().atlas.rgba.capacity());
+    CHECK(copy.memory().glyph_reserved_bytes == copy.data().glyphs.capacity() * sizeof(FontGlyph));
+    CHECK(encode_font(copy.data()) == encoded);
+    NEAR(font.measure("AA").x, 8);
+    CHECK(font.memory() == memory);
+}
 TEST(font_round_trip_and_shipped_asset) {
     const auto source = metric_font();
     const auto encoded = encode_font(source);

@@ -1,4 +1,5 @@
 #include "../examples/feature_lab/asset_reload.hpp"
+#include "engine/staging_memory.hpp"
 #include "engine/window.hpp"
 #include "font_fixture.hpp"
 #include "test.hpp"
@@ -88,11 +89,25 @@ TEST(font_reload_startup_fallback_strict_failure_retention_and_pass_boundary) {
     CHECK(f.fonts.diagnostic().find("fonts/ui.efnt") != std::string::npos);
     NEAR(f.renderer.text_size("AA").x, 12);
     f.files.write(metric_font());
-    CHECK(f.fonts.reload(f.renderer, f.root));
+    {
+        StagingScope staging;
+        CHECK(f.fonts.reload(f.renderer, f.root));
+        const auto memory = f.renderer.memory();
+        // Loader candidate and renderer copy coexist; committed old storage is excluded.
+        CHECK(staging.snapshot().cpu_peak >=
+              2 * (memory.cpu_font_atlas_used_bytes + memory.cpu_font_glyph_used_bytes));
+        CHECK(staging.snapshot().gpu_peak == 64 && staging.snapshot().clean());
+    }
     CHECK(!f.fonts.embedded() && f.fonts.revision() == 2 && f.fonts.diagnostic().empty());
     f.check_metric();
+    const auto committed = f.renderer.memory();
     f.root.write_text(FontAssets::key, "damaged EFNT");
-    CHECK(!f.fonts.reload(f.renderer, f.root));
+    {
+        StagingScope staging;
+        CHECK(!f.fonts.reload(f.renderer, f.root));
+        CHECK(f.renderer.memory() == committed);
+        CHECK(staging.snapshot().clean());
+    }
     CHECK(!f.fonts.embedded() && f.fonts.revision() == 2);
     CHECK(f.fonts.status().find("FAILED - KEPT R2") != std::string::npos);
     f.check_metric();
@@ -101,6 +116,7 @@ TEST(font_reload_startup_fallback_strict_failure_retention_and_pass_boundary) {
     f.renderer.begin(f.target, {{32, -32}, 64});
     rejects([&] { f.fonts.reload(f.renderer, f.root); });
     f.renderer.end();
+    CHECK(f.renderer.memory() == committed);
     CHECK(f.fonts.revision() == 2 && !f.fonts.applied());
     f.check_metric();
     CHECK(f.fonts.reload(f.renderer, f.root));

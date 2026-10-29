@@ -51,6 +51,8 @@ struct RenderMemory {
     std::size_t gpu_vertex_store_bytes{};
     std::size_t gpu_builtin_texture_bytes{}, gpu_uploaded_texture_bytes{};
     std::size_t gpu_font_texture_bytes{}, gpu_target_texture_bytes{};
+    std::size_t cpu_font_atlas_reserved_bytes{}, cpu_font_atlas_used_bytes{};
+    std::size_t cpu_font_glyph_reserved_bytes{}, cpu_font_glyph_used_bytes{};
     bool operator==(const RenderMemory&) const = default;
 };
 // Optional CPU wall time inside begin-pass GL setup and nonempty batch flushes.

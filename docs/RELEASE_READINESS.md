@@ -289,6 +289,11 @@ logical VBO size and built-in/font/user/target texel accounting. This narrows th
 renderer inventory gap for new reports; old reports retain their original scope.
 CPU font snapshots, allocator/driver overhead and retired GPU stores remain outside
 coverage. No timing budget or whole-engine memory gate is closed.
+Increment 72 [covers committed CPU font buffers](../validation/2026-10-29-font-memory/RESULTS.md)
+in coverage-v2 renderer snapshots. Atlas/glyph reservations and used bytes remain
+separate from candidate staging. Ownership/rollback tests and 32 focused groups
+pass, with 36 matching images; object/lookup storage, allocator/driver overhead and
+retired stores remain excluded. No whole-engine live-memory or timing gate closes.
 R6 timing/coverage and physical R4/R5 cases remain open; R8 requires their
 coverage/support record. Refresh automated evidence when the implementation or
 toolchain changes. These results do not complete milestone 6.

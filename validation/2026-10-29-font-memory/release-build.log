@@ -1,0 +1,27 @@
+[1/27] Building CXX object CMakeFiles/engine_core.dir/engine/src/font.cpp.o
+[2/27] Linking CXX static library libengine_core.a
+[3/27] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/replay_profile.cpp.o
+[4/27] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/stress_benchmark.cpp.o
+[5/27] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/spike_profile.cpp.o
+[6/27] Building CXX object CMakeFiles/engine_platform.dir/engine/src/renderer.cpp.o
+[7/27] Stage Feature Lab assets
+[8/27] Linking CXX static library libfeature_lab_stress.a
+[9/27] Building CXX object CMakeFiles/engine_platform.dir/engine/src/ui_renderer.cpp.o
+[10/27] Building CXX object CMakeFiles/stress_bench.dir/tools/stress_bench.cpp.o
+[11/27] Building CXX object CMakeFiles/font_tests.dir/tests/font_tests.cpp.o
+[12/27] Linking CXX static library libengine_platform.a
+[13/27] Building CXX object CMakeFiles/stress_tests.dir/tests/stress_tests.cpp.o
+[14/27] Building CXX object CMakeFiles/feature_lab.dir/examples/feature_lab/stress_mode.cpp.o
+[15/27] Building CXX object CMakeFiles/feature_lab.dir/examples/feature_lab/main.cpp.o
+[16/27] Building CXX object CMakeFiles/font_reload_tests.dir/tests/font_reload_tests.cpp.o
+[17/27] Building CXX object CMakeFiles/font_graphics_tests.dir/tests/font_graphics_tests.cpp.o
+[18/27] Building CXX object CMakeFiles/renderer_memory_tests.dir/tests/renderer_memory_tests.cpp.o
+[19/27] Linking CXX executable stress_bench
+[20/27] Linking CXX executable font_tests
+[21/27] Linking CXX executable stress_tests
+[22/27] Linking CXX executable feature_lab
+[23/27] Linking CXX executable font_reload_tests
+[24/27] Linking CXX executable font_graphics_tests
+[25/27] Linking CXX executable renderer_memory_tests
+[26/27] Building CXX object CMakeFiles/stress_graphics_tests.dir/tests/stress_graphics_tests.cpp.o
+[27/27] Linking CXX executable stress_graphics_tests

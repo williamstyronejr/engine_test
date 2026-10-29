@@ -39,10 +39,11 @@ if(NOT failure_count EQUAL 0)
 endif()
 expect(0 memory peak_targets)
 expect(0 memory peak_uploaded_texture_bytes)
-expect(owned_buffers_and_texels_v1 memory renderer_baseline coverage)
+expect(owned_buffers_and_texels_v2 memory renderer_baseline coverage)
 expect(OFF memory renderer_baseline observed)
 foreach(field cpu_vertex_reserved_bytes cpu_vertex_used_bytes gpu_vertex_store_bytes
-              gpu_builtin_texture_bytes gpu_uploaded_texture_bytes gpu_font_texture_bytes gpu_target_texture_bytes)
+              gpu_builtin_texture_bytes gpu_uploaded_texture_bytes gpu_font_texture_bytes gpu_target_texture_bytes
+              cpu_font_atlas_reserved_bytes cpu_font_atlas_used_bytes cpu_font_glyph_reserved_bytes cpu_font_glyph_used_bytes)
   expect(0 memory renderer_baseline ${field})
 endforeach()
 execute_process(COMMAND "${STRESS_EXE}" --frames 0 --report "${REPORT_PATH}"
