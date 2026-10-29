@@ -23,7 +23,8 @@ gate; it retains new batch-capacity regression coverage and the original rendere
 The [warmup/order study](benchmarks/2026-10-28-stability-results.md) retains changing
 host frequency/thermal observations; neither warmup protocol establishes stability.
 [Renderer memory snapshots](docs/RENDERER_MEMORY.md) now report CPU vertex storage,
-logical VBO size and texture payloads with explicit coverage limits.
+logical VBO size, texture payloads and owned CPU font buffers with explicit
+coverage limits. Committed font storage is separate from replacement staging.
 
 Atomic saves also have [isolated filesystem-failure tests](docs/ATOMIC_SAVE_VALIDATION.md)
 covering short/interrupted writes, cleanup and failures before/after replacement.

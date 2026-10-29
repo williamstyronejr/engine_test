@@ -1,0 +1,18 @@
+Test project /home/zero/dev/engine_test/build/sanitize-platform
+    Start 43: font_reload
+1/5 Test #43: font_reload ......................   Passed    1.05 sec
+    Start 44: font_graphics
+2/5 Test #44: font_graphics ....................   Passed    0.44 sec
+    Start 46: stress_frame_samples
+3/5 Test #46: stress_frame_samples .............   Passed   11.78 sec
+    Start 47: renderer_memory
+4/5 Test #47: renderer_memory ..................   Passed    0.12 sec
+    Start 48: stress_graphics
+5/5 Test #48: stress_graphics ..................   Passed    0.81 sec
+
+100% tests passed out of 5
+
+Label Time Summary:
+hardware    =  14.20 sec*proc (5 tests)
+
+Total Test time (real) =  14.20 sec

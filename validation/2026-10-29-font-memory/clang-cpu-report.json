@@ -1,0 +1,28 @@
+{
+  "schema":"feature_lab_stress_v1","workload_version":1,"mode":"cpu","label":"","complete":true,"resources_stable":true,
+  "build":{"revision":"91886ba","compiler":"Clang 22.1.8","configuration":"Debug","flags":" -g; C++20; sanitizers=OFF"},
+  "machine":{"cpu":" Intel(R) Core(TM) i5-4300U CPU @ 1.90GHz","system":"Linux 7.2.8-9-omarchy x86_64","gl_vendor":"","gl_device":"","gl_version":""},
+  "workload":{"sprites":32,"tiles":64,"entities":16,"bodies":16,"voices":2,"dense":false,"seed":"1","width":1280,"height":720,"warmup_per_cycle":2,"frames_per_cycle":3,"cycles":2},
+  "run":{"completed_cycles":2,"measured_frames":6,"checksum":"12603588605120929010","window_width":0,"window_height":0,"vsync_requested":false,"vsync_disable_accepted":false,"audio_device":false,"capture_requested":false},
+  "presentation":{"mode":"none","swap_interval_requested":null,"request_issued":false,"present_calls":0},
+  "totals":{"quads":0,"culled":0,"draws":0,"visible_tiles":0,"collision_candidates":132,"contacts":0},
+  "memory":{"tracked_cpu_buffer_bytes":7880360,"report_buffer_bytes":352,"frame_sample_buffer_bytes":528,"rss_start":4112384,"rss_end":4915200,"rss_peak_at_cycle_boundary":4956160,"peak_uploaded_textures":0,"peak_uploaded_texture_bytes":0,"peak_targets":0,"peak_target_bytes":0,"renderer_baseline":{"coverage":"owned_buffers_and_texels_v2","observed":false,"cpu_vertex_reserved_bytes":0,"cpu_vertex_used_bytes":0,"gpu_vertex_store_bytes":0,"gpu_builtin_texture_bytes":0,"gpu_uploaded_texture_bytes":0,"gpu_font_texture_bytes":0,"gpu_target_texture_bytes":0,"cpu_font_atlas_reserved_bytes":0,"cpu_font_atlas_used_bytes":0,"cpu_font_glyph_reserved_bytes":0,"cpu_font_glyph_used_bytes":0}},
+  "gpu_queries":{"supported":false,"method":"time_elapsed","counter_bits":0,"submitted":0,"completed":0,"pending":0,"skipped":0,"invalid":0,"failure_capacity":8,"failures_omitted":0,"failures":[]},
+  "milliseconds":{
+    "load":{"samples":2,"mean":2.6034605,"median":2.600623,"p95":2.600623,"p99":2.600623,"max":2.606298},
+    "simulation":{"samples":6,"mean":0.0480586667,"median":0.045146,"p95":0.051257,"p99":0.051257,"max":0.057115},
+    "mixer":{"samples":6,"mean":0.181363167,"median":0.177952,"p95":0.193397,"p99":0.193397,"max":0.209036},
+    "render_submit":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0},
+    "preview_submit":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0},
+    "present":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0},
+    "frame":{"samples":6,"mean":0.229421833,"median":0.233325,"p95":0.238543,"p99":0.238543,"max":0.254608},
+    "gpu_render":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0}
+  },
+  "frame_samples":{"schema":"stress_frame_samples_v1","cpu_scope_order":["poll_collect","simulation","mixer","render_submit","preview_submit","present","frame"],"rows":[
+{"frame":"3","cpu_ms":[0,0.044706,0.162947,0,0,0,0.207653],"gpu_status":"not_submitted","gpu_ms":null,"gpu_collected_after":null},
+{"frame":"4","cpu_ms":[0,0.044556,0.162779,0,0,0,0.207335],"gpu_status":"not_submitted","gpu_ms":null,"gpu_collected_after":null},
+{"frame":"5","cpu_ms":[0,0.057115,0.177952,0,0,0,0.235067],"gpu_status":"not_submitted","gpu_ms":null,"gpu_collected_after":null},
+{"frame":"8","cpu_ms":[0,0.045146,0.193397,0,0,0,0.238543],"gpu_status":"not_submitted","gpu_ms":null,"gpu_collected_after":null},
+{"frame":"9","cpu_ms":[0,0.045572,0.209036,0,0,0,0.254608],"gpu_status":"not_submitted","gpu_ms":null,"gpu_collected_after":null},
+{"frame":"10","cpu_ms":[0,0.051257,0.182068,0,0,0,0.233325],"gpu_status":"not_submitted","gpu_ms":null,"gpu_collected_after":null}]}
+}

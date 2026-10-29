@@ -132,3 +132,6 @@ checks disabled (32 group executions). Compare nine stress images in all four
 native configurations with the previous Release binary. Report baseline tests
 require v2 graphics fields and explicit unobserved zero placeholders for CPU-only
 runs. Preserve the earlier validation record and all timing/adoption decisions.
+
+The [font CPU validation record](../validation/2026-10-29-font-memory/RESULTS.md)
+retains the v1 reference, v2 reports, ownership checks and package verification.

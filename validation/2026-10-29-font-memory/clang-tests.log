@@ -1,0 +1,25 @@
+Test project /home/zero/dev/engine_test/build/clang
+    Start 10: fonts
+1/8 Test #10: fonts ............................   Passed    0.09 sec
+    Start 15: stress_cpu
+2/8 Test #15: stress_cpu .......................   Passed    1.75 sec
+    Start 16: stress_report
+3/8 Test #16: stress_report ....................   Passed    0.17 sec
+    Start 43: font_reload
+4/8 Test #43: font_reload ......................   Passed    0.99 sec
+    Start 44: font_graphics
+5/8 Test #44: font_graphics ....................   Passed    0.24 sec
+    Start 46: stress_frame_samples
+6/8 Test #46: stress_frame_samples .............   Passed   10.03 sec
+    Start 47: renderer_memory
+7/8 Test #47: renderer_memory ..................   Passed    0.06 sec
+    Start 48: stress_graphics
+8/8 Test #48: stress_graphics ..................   Passed    0.22 sec
+
+100% tests passed out of 8
+
+Label Time Summary:
+cpu         =   2.01 sec*proc (3 tests)
+hardware    =  11.54 sec*proc (5 tests)
+
+Total Test time (real) =  13.55 sec

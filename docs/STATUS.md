@@ -2345,11 +2345,28 @@ At documentation commit `c7db7d8`, all three Release package groups pass
 without skips (46.38 s). All 83 evidence files and the memory contract match archived
 copies; allocation profilers remain excluded.
 
+## Increment 72: committed CPU font snapshot accounting
+
+- Added per-font atlas/glyph capacity and used-byte snapshots and exposed the
+  renderer-owned copy in `RenderMemory`. Reads allocate nothing and do not mutate
+  layout, rendering or staging state. Caller copies are accounted separately.
+- Renderer and loader candidate staging use the same capacity definition; renderer
+  leases end when the new snapshot/atlas becomes committed. Retired storage and
+  whole-operation heap peaks remain outside the inventory.
+- Stress baseline coverage advances to `owned_buffers_and_texels_v2`; old v1
+  evidence remains unchanged and CPU-only runs remain explicitly unobserved.
+- All 32 focused compiler/sanitizer groups pass without skips. All 36 reference
+  images and existing workload/state/render/memory fields match. Tests cover spare
+  capacity, copy independence, repeated swaps, rejected reloads and clean staging.
+
+See [contract](RENDERER_MEMORY.md) and
+[validation](../validation/2026-10-29-font-memory/RESULTS.md).
+
 ## Next increment
 
-Extend owned CPU accounting to renderer font snapshots (atlas and glyph capacities)
-and distinguish committed storage from temporary replacement staging. Cover
-successful/rejected font replacements and expose the same scope in stress baseline
-reports. Keep allocator/driver overhead and total live-heap claims separate. Timing
-acceptance, physical display/audio and final support records remain open; background
-loading remains deferred.
+Expose the scoped renderer inventory in the opt-in diagnostics overlay, with
+reserved/used CPU fields and logical GPU payloads clearly labeled. Keep it separate
+from process RSS and staging peaks, reuse text buffers, and validate overlay output
+and warmed render allocations. Do not claim total driver/live-heap coverage or a
+performance fix. Timing acceptance, physical display/audio and final support
+records stay open; background loading remains deferred.

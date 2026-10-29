@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-c++"
+	tests="8"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="omarchy"
+	time="11"
+	timestamp="2026-10-29T11:30:43"
+	>
+	<testcase name="fonts" classname="fonts" time="0.068966" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS font_memory_tracks_owned_capacity_and_used_payload
+PASS font_round_trip_and_shipped_asset
+PASS font_parser_rejects_truncation_headers_counts_and_trailing_data
+PASS font_validation_rejects_invalid_metrics_and_invisible_fallback
+PASS font_layout_offsets_advances_newlines_and_unsigned_fallback
+PASS font_layout_limits_and_snapshot_ownership
+PASS font_missing_and_corrupt_assets_have_readable_fallback
+7 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="stress_cpu" classname="stress_cpu" time="0.105403" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS small_collision_budgets_reuse_storage_with_full_query_capacity
+PASS scene_usage_and_component_peaks_allocate_nothing_after_setup
+PASS stale_deletion_requests_do_not_grow_small_scene_buffers
+PASS default_grid_saturation_allocates_nothing_after_setup
+PASS collision_usage_and_worst_case_event_batches_allocate_nothing_after_setup
+PASS empty_scenes_and_scene_moves_do_not_allocate
+PASS font_measurement_and_layout_allocate_nothing_after_setup
+PASS component_queries_and_pool_reuse_allocate_nothing_after_setup
+PASS deterministic_workloads_and_exact_tile_occupancy
+PASS dense_collision_pairs_match_all_pairs_reference
+PASS steady_state_allocations_and_repeated_unload_baseline
+PASS capacities_empty_arena_and_rejected_overflow
+PASS percentiles_warmup_capacity_and_nonfinite_samples
+PASS options_bounds_json_escaping_and_resource_growth_detection
+PASS presentation_options_defaults_conflicts_and_cpu_rejection
+PASS presentation_report_distinguishes_request_from_confirmation
+PASS frame_samples_pair_delayed_gpu_across_warmup...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="stress_report" classname="stress_report" time="0.0708886" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="font_reload" classname="font_reload" time="0.879748" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[font retained] revision=1 embedded=1 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Not a regular asset file
+[font applied] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+[font retained] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[font applied] revision=3 embedded=0 atlas_bytes=128 source=fonts/ui.efnt
+PASS font_reload_startup_fallback_strict_failure_retention_and_pass_boundary
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[font applied] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+[watch] enabled files=4
+[watch] notifications active
+[shader applied] revision=2 source=/home/zero/.cache/engine-font-memory-vv9ua9so/compiler-tmp/font-reload-j8jyUM
+[textures applied] revision=2 count...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="font_graphics" classname="font_graphics" time="0.250958" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_atlas_pixels_offsets_spacing_fallback_and_batching
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_clipping_tint_ordering_and_offscreen_alpha
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_replacement_boundaries_lifetime_and_invalid_text
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_memory_uses_renderer_copy_and_reads_do_not_stage
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_gallery_draws_at_small_and_large_viewports
+[platform] X11...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="stress_frame_samples" classname="stress_frame_samples" time="9.48271" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="renderer_memory" classname="renderer_memory" time="0.0605403" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS renderer_memory_lifecycle_and_logical_store
+1 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="stress_graphics" classname="stress_graphics" time="0.0968033" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS repeated_gpu_load_draw_unload_and_rollover
+PASS quad_batch_capacity_edges_and_empty_reset
+PASS cpu_timing_empty_pass_and_active_pass_contract
+PASS thread_cpu_phases_cover_nested_gl_and_reset_for_empty_passes
+PASS texture_byte_accounting_replacement_failure_and_cleanup
+5 tests, 0 failed
+</system-out>
+	</testcase>
+</testsuite>
