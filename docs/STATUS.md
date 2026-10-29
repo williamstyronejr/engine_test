@@ -2297,12 +2297,29 @@ At restoration/documentation commit `abdffa5`, stress graphics and all three
 Release package groups pass (4/4, no skips, 41.46 s). All 54 evidence files and both
 benchmark documents match archived copies; allocation profilers remain excluded.
 
+## Increment 70: warmup and run-order stability
+
+- Predeclared six balanced short/long warmup pairs plus two telemetry on/off pairs,
+  with one unchanged GNU Release binary and independent CPU-only state references.
+- All sixteen attempts validate; neither warmup length meets the ≤5% stability
+  screen. The late CPU-time shift accompanies roughly 0.8 GHz policy observations;
+  earlier throttle-counter increments are retained without causal attribution.
+- Read-only frequency, thermal and throttle observations retain actual timing and
+  errors. Implausible ACPI temperature values remain uninterpreted. No system
+  settings change; sensor readings are not assigned to individual frames.
+- Two Release groups and eight image comparisons pass without skips. Three valid
+  analyzer controls pass and 32 corrupt records are rejected. Runtime code stays
+  unchanged. Four p99 values and thirteen maxima still exceed 16.7 ms.
+
+See [protocol](../benchmarks/STRESS_RUN_STABILITY.md),
+[findings](../benchmarks/2026-10-28-stability-results.md) and
+[evidence](../validation/2026-10-28-stability/RESULTS.md).
+
 ## Next increment
 
-Investigate run-to-run variation before another optimization trial. Predeclare
-observational CPU-frequency/thermal metadata and a warmup/order stability comparison,
-without changing governor, affinity, priority or desktop settings. Do not revise
-the rules or discard results from either rejected candidate. Keep presentation and
-switch-associated gaps distinct from steady CPU cost. Physical display/audio,
-broader memory coverage and final support records stay open; background loading
-remains deferred.
+Extend renderer memory accounting for explicitly owned CPU vertex storage and
+known GPU buffer allocations, keeping driver overhead separate. Validate capacity,
+reset/release and reported payload semantics without claiming a total GPU-memory
+budget. Timing acceptance and both rejected optimization gates remain open; neither
+warmup protocol establishes a stable baseline. Physical display/audio and final
+support records stay open; background loading remains deferred.

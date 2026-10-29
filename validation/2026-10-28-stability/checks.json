@@ -1,0 +1,45 @@
+{
+  "source": "455e03b993d5c48d53f0e97d2b29ffa1bb529b7a",
+  "runtime_base": "4613515f8245c71baa54824d5081c27edf040944",
+  "runtime_test_and_build_sources_unchanged": true,
+  "release_test_groups": [
+    "stress_graphics",
+    "stress_frame_samples"
+  ],
+  "failures": 0,
+  "skips": 0,
+  "images": [
+    {
+      "mode": "traced",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+    },
+    {
+      "mode": "vsync",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+    },
+    {
+      "mode": "split",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+    },
+    {
+      "mode": "split_vsync",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+    },
+    {
+      "mode": "prep",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+    },
+    {
+      "mode": "prep_vsync",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+    },
+    {
+      "mode": "ctx",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+    },
+    {
+      "mode": "ctx_vsync",
+      "sha256": "24e22ad5285f1492e8a0b043f83a5053bda225457e700c2ed88f9145c0ffc9a6"
+    }
+  ]
+}

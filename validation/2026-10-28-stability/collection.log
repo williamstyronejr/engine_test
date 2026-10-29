@@ -1,0 +1,36 @@
+START cpu-60
+DONE cpu-60 0
+START cpu-600
+DONE cpu-600 0
+START w60-1
+DONE w60-1 0
+START w600-1
+DONE w600-1 0
+START w600-2
+DONE w600-2 0
+START w60-2
+DONE w60-2 0
+START w60-3
+DONE w60-3 0
+START w600-3
+DONE w600-3 0
+START w600-4
+DONE w600-4 0
+START w60-4
+DONE w60-4 0
+START w60-5
+DONE w60-5 0
+START w600-5
+DONE w600-5 0
+START w600-6
+DONE w600-6 0
+START w60-6
+DONE w60-6 0
+START observer-off-1
+DONE observer-off-1 0
+START observer-on-1
+DONE observer-on-1 0
+START observer-on-2
+DONE observer-on-2 0
+START observer-off-2
+DONE observer-off-2 0
