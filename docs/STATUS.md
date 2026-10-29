@@ -2319,6 +2319,12 @@ At documentation commit `4cdeb26`, all three Release package groups pass
 without skips (45.73 s). All 71 evidence files and both benchmark documents match
 archived copies; development allocation profilers remain excluded.
 
+The first merge package extraction is rejected because its manifest and payloads
+are zero-filled despite a valid archive. A fresh disk-backed extraction and all
+three package tests pass at the same source revision using the existing test-root
+option; the initial cause remains unconfirmed. Failed/successful commands and
+file/hash evidence are preserved in the increment's evidence directory.
+
 ## Next increment
 
 Extend renderer memory accounting for explicitly owned CPU vertex storage and

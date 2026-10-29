@@ -1,0 +1,26 @@
+[
+  {
+    "command": [
+      "/home/zero/dev/engine_test/.tools/bin/cmake",
+      "-E",
+      "tar",
+      "xfz",
+      "/home/zero/dev/engine_test/build/release/packaging/work-e272817f5772/feature-lab-0.1.0-Linux-x86_64-775622e.tar.gz"
+    ],
+    "working_directory": "/home/zero/.cache/engine-package-stability-jz9jpfwo/extraction",
+    "exit_code": 0,
+    "seconds": 0.8015913249982987
+  },
+  {
+    "command": [
+      "/home/zero/dev/engine_test/.tools/bin/cmake",
+      "-DMODE=verify",
+      "-DROOT=/home/zero/.cache/engine-package-stability-jz9jpfwo/extraction/feature-lab-0.1.0-Linux-x86_64-775622e",
+      "-P",
+      "/home/zero/dev/engine_test/cmake/PackageSmoke.cmake"
+    ],
+    "working_directory": "/home/zero/.cache/engine-package-stability-jz9jpfwo/extraction",
+    "exit_code": 0,
+    "seconds": 1.5652483589947224
+  }
+]

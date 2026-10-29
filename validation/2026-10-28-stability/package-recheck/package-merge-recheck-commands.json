@@ -1,0 +1,40 @@
+[
+  {
+    "command": [
+      "cmake",
+      "--preset",
+      "release",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-package-stability-jz9jpfwo/tests"
+    ],
+    "exit_code": 0,
+    "seconds": 0.6116326280025532
+  },
+  {
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "--target",
+      "feature_lab",
+      "stress_bench",
+      "validate_assets",
+      "stress_graphics_tests",
+      "-j2"
+    ],
+    "exit_code": 0,
+    "seconds": 0.18936851600301452
+  },
+  {
+    "command": [
+      "ctest",
+      "--preset",
+      "release",
+      "-R",
+      "^package_(build|relocation|graphics)$",
+      "--output-on-failure"
+    ],
+    "exit_code": 0,
+    "seconds": 45.429563171986956
+  }
+]
