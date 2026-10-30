@@ -1,8 +1,8 @@
 # Implementation status
 
-The fifty-sixth increment prepares and synchronizes the resolved save-directory
-chain before record creation, with deterministic errors and process-interruption retry tests.
-See [retained results](../validation/2026-10-24-storage-directories/RESULTS.md) and
+The latest increment (78) validates terminal audio failures and unavailable audio
+controls across repeated full gameplay/UI sessions, preserving manual recovery.
+See [retained results](../validation/2026-10-30-audio-ui-session/RESULTS.md) and
 [release readiness](RELEASE_READINESS.md) for the remaining gates.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
@@ -2494,10 +2494,33 @@ skips (54.53 s). All 37 evidence files and five changed documentation files matc
 the archive. The package audit passes 1,167 relative links, 77 shell recipes and
 eight CPU entry-point commands; profilers and both session tests stay excluded.
 
+## Increment 78: terminal audio errors and unavailable UI
+
+- Added native `audio_ui_session`: 16 complete routes, with four cases repeated
+  twice on each level. Eight terminal write errors occur during checkbox presses
+  or binding capture; other cases start explicitly disabled or with a corrupt WAV.
+- Availability changes clear held widget capture, preserve binding cancellation,
+  disable audio controls and retain preferences/checkpoints. Gameplay still completes.
+  Repair/reload does not reconnect; explicitly creating a new soundtrack restores audio UI.
+- The fixture renders 156 full passes and captures 84 complete frames. All owned
+  renderer inventory fields remain bounded and restore the presentation baseline.
+  Failed/disabled soundtracks report zero live/retained sound-bank bytes.
+- All 24 selected GNU Debug/Release, Clang and native ASan/UBSan group executions
+  pass without skips; all 84 fingerprints match. Engine/example behavior and the
+  two earlier session fixtures are unchanged. These are fresh selected-target
+  builds, not full-suite or offline acceptance.
+
+See [contract](SESSION_VALIDATION.md#audio-failureui-companion-increment-78) and
+[validation evidence](../validation/2026-10-30-audio-ui-session/RESULTS.md).
+
+At documentation commit `76c2b7d`, all three Release package groups pass without
+skips. All 42 then-current evidence/documentation files match archive bytes;
+the packaged link/recipe and bounded CPU entry-point audit also passes.
+
 ## Next increment
 
-Add bounded terminal-audio-failure and disabled-audio presentation transitions to
-repeated full-UI coverage, using controlled sinks and private fixtures. Preserve
-the current manual-restart contract; do not imply automatic reconnection or
-physical device acceptance. Real-time endurance, timing stability, broader memory
+Return to the declared workload's open frame-time failures: reproduce a bounded
+current baseline and assess host stability before choosing another optimization.
+Keep timing failures visible and require measured evidence before adopting a change.
+Physical display/input/audio acceptance, real-time endurance, broader memory
 acceptance and support/signoff remain open. Background loading stays deferred.

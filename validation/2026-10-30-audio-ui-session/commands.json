@@ -1,0 +1,340 @@
+[
+  {
+    "name": "environment",
+    "command": [
+      "bash",
+      "-c",
+      "uname -a; c++ --version; clang++ --version; cmake --version; ninja --version; glxinfo -B"
+    ],
+    "source": "30a87f3da9424398817758283e69d04d12913968",
+    "started_utc": "2026-10-30T22:47:39.309535+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 0.3550269149709493,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0rhxKjf:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "debug-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/debug",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-audio-ui-78-0svx11as/packages"
+    ],
+    "source": "30a87f3da9424398817758283e69d04d12913968",
+    "started_utc": "2026-10-30T22:47:39.670063+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 2.0844532339833677,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0rhxKjf:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "debug-build",
+    "command": [
+      "cmake",
+      "--build",
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/debug",
+      "--target",
+      "audio_ui_session_tests",
+      "ui_session_tests",
+      "ui_tests",
+      "audio_reload_tests",
+      "audio_tests",
+      "renderer_memory_tests",
+      "-j2"
+    ],
+    "source": "30a87f3da9424398817758283e69d04d12913968",
+    "started_utc": "2026-10-30T22:47:41.755125+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 42.40598922496429,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0rhxKjf:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "debug-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/debug",
+      "-R",
+      "^(audio_ui_session|ui_session|ui|audio_reload|audio_transport|renderer_memory)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-30-audio-ui-session/debug-tests.xml"
+    ],
+    "source": "30a87f3da9424398817758283e69d04d12913968",
+    "started_utc": "2026-10-30T22:48:24.336413+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 15.232784210005775,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0rhxKjf:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "release-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/release",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-audio-ui-78-0svx11as/packages"
+    ],
+    "source": "30a87f3da9424398817758283e69d04d12913968",
+    "started_utc": "2026-10-30T22:48:39.577485+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 1.9198787020286545,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0rhxKjf:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "release-build",
+    "command": [
+      "cmake",
+      "--build",
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/release",
+      "--target",
+      "audio_ui_session_tests",
+      "ui_session_tests",
+      "ui_tests",
+      "audio_reload_tests",
+      "audio_tests",
+      "renderer_memory_tests",
+      "-j2"
+    ],
+    "source": "30a87f3da9424398817758283e69d04d12913968",
+    "started_utc": "2026-10-30T22:48:41.498449+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 67.88412926299497,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0rhxKjf:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "release-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/release",
+      "-R",
+      "^(audio_ui_session|ui_session|ui|audio_reload|audio_transport|renderer_memory)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-30-audio-ui-session/release-tests.xml"
+    ],
+    "source": "30a87f3da9424398817758283e69d04d12913968",
+    "started_utc": "2026-10-30T22:49:49.583594+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 8.742078284965828,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0rhxKjf:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "clang-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/clang",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-audio-ui-78-0svx11as/packages",
+      "-DCMAKE_CXX_COMPILER=clang++"
+    ],
+    "source": "30a87f3da9424398817758283e69d04d12913968",
+    "started_utc": "2026-10-30T22:49:58.333489+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 2.2791652849991806,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0rhxKjf:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "clang-build",
+    "command": [
+      "cmake",
+      "--build",
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/clang",
+      "--target",
+      "audio_ui_session_tests",
+      "ui_session_tests",
+      "ui_tests",
+      "audio_reload_tests",
+      "audio_tests",
+      "renderer_memory_tests",
+      "-j2"
+    ],
+    "source": "30a87f3da9424398817758283e69d04d12913968",
+    "started_utc": "2026-10-30T22:50:00.613500+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 43.714200142014306,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0rhxKjf:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "clang-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/clang",
+      "-R",
+      "^(audio_ui_session|ui_session|ui|audio_reload|audio_transport|renderer_memory)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-30-audio-ui-session/clang-tests.xml"
+    ],
+    "source": "30a87f3da9424398817758283e69d04d12913968",
+    "started_utc": "2026-10-30T22:50:44.596949+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 18.70434102002764,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0rhxKjf:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "native-sanitize-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/native-sanitize",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-audio-ui-78-0svx11as/packages",
+      "-DENGINE_SANITIZERS=ON"
+    ],
+    "source": "30a87f3da9424398817758283e69d04d12913968",
+    "started_utc": "2026-10-30T22:51:03.309821+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 2.0118890370358713,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0rhxKjf:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "native-sanitize-build",
+    "command": [
+      "cmake",
+      "--build",
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/native-sanitize",
+      "--target",
+      "audio_ui_session_tests",
+      "ui_session_tests",
+      "ui_tests",
+      "audio_reload_tests",
+      "audio_tests",
+      "renderer_memory_tests",
+      "-j2"
+    ],
+    "source": "30a87f3da9424398817758283e69d04d12913968",
+    "started_utc": "2026-10-30T22:51:05.322592+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 74.38518918899354,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0rhxKjf:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "native-sanitize-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/native-sanitize",
+      "-R",
+      "^(audio_ui_session|ui_session|ui|audio_reload|audio_transport|renderer_memory)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-30-audio-ui-session/native-sanitize-tests.xml"
+    ],
+    "source": "30a87f3da9424398817758283e69d04d12913968",
+    "started_utc": "2026-10-30T22:52:19.889966+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 52.9900517219794,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0rhxKjf:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": "detect_leaks=0:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1"
+    }
+  }
+]

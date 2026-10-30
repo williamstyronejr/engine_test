@@ -1,0 +1,235 @@
+{
+  "backtraceGraph": {
+    "commands": [
+      "add_test"
+    ],
+    "files": [
+      "/home/zero/dev/engine_test/CMakeLists.txt"
+    ],
+    "nodes": [
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 198,
+        "parent": 0
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 275,
+        "parent": 2
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 282,
+        "parent": 4
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 328,
+        "parent": 6
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 338,
+        "parent": 8
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 348,
+        "parent": 10
+      }
+    ]
+  },
+  "kind": "ctestInfo",
+  "tests": [
+    {
+      "backtrace": 1,
+      "command": [
+        "/home/zero/.cache/engine-audio-ui-78-0svx11as/native-sanitize/ui_tests"
+      ],
+      "name": "ui",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-audio-ui-78-0svx11as/native-sanitize"
+        }
+      ]
+    },
+    {
+      "backtrace": 3,
+      "command": [
+        "/home/zero/.cache/engine-audio-ui-78-0svx11as/native-sanitize/ui_session_tests"
+      ],
+      "name": "ui_session",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 180.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-audio-ui-78-0svx11as/native-sanitize"
+        }
+      ]
+    },
+    {
+      "backtrace": 5,
+      "command": [
+        "/home/zero/.cache/engine-audio-ui-78-0svx11as/native-sanitize/audio_ui_session_tests"
+      ],
+      "name": "audio_ui_session",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 180.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-audio-ui-78-0svx11as/native-sanitize"
+        }
+      ]
+    },
+    {
+      "backtrace": 7,
+      "command": [
+        "/home/zero/.cache/engine-audio-ui-78-0svx11as/native-sanitize/renderer_memory_tests"
+      ],
+      "name": "renderer_memory",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-audio-ui-78-0svx11as/native-sanitize"
+        }
+      ]
+    },
+    {
+      "backtrace": 9,
+      "command": [
+        "/home/zero/.cache/engine-audio-ui-78-0svx11as/native-sanitize/audio_reload_tests"
+      ],
+      "name": "audio_reload",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "platform"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-audio-ui-78-0svx11as/native-sanitize"
+        }
+      ]
+    },
+    {
+      "backtrace": 11,
+      "command": [
+        "/home/zero/.cache/engine-audio-ui-78-0svx11as/native-sanitize/audio_tests"
+      ],
+      "name": "audio_transport",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "platform"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 10.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-audio-ui-78-0svx11as/native-sanitize"
+        }
+      ]
+    }
+  ],
+  "version": {
+    "major": 1,
+    "minor": 0
+  }
+}

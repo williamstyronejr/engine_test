@@ -1,0 +1,22 @@
+Test project /home/zero/.cache/engine-audio-ui-78-0svx11as/native-sanitize
+    Start 30: ui
+1/6 Test #30: ui ...............................   Passed    0.06 sec
+    Start 39: ui_session
+2/6 Test #39: ui_session .......................   Passed   25.25 sec
+    Start 40: audio_ui_session
+3/6 Test #40: audio_ui_session .................   Passed   20.77 sec
+    Start 50: renderer_memory
+4/6 Test #50: renderer_memory ..................   Passed    0.15 sec
+    Start 52: audio_reload
+5/6 Test #52: audio_reload .....................   Passed    2.46 sec
+    Start 54: audio_transport
+6/6 Test #54: audio_transport ..................   Passed    4.11 sec
+
+100% tests passed out of 6
+
+Label Time Summary:
+cpu         =   0.06 sec*proc (1 test)
+hardware    =  46.17 sec*proc (3 tests)
+platform    =   6.57 sec*proc (2 tests)
+
+Total Test time (real) =  52.80 sec

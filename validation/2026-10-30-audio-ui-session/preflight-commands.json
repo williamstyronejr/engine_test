@@ -1,0 +1,43 @@
+[
+  {
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/preflight",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-audio-ui-78-0svx11as/packages"
+    ],
+    "exit_code": 0,
+    "seconds": 2.3948246969957836
+  },
+  {
+    "command": [
+      "cmake",
+      "--build",
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/preflight",
+      "--target",
+      "audio_ui_session_tests",
+      "-j2"
+    ],
+    "exit_code": 0,
+    "seconds": 30.5572543850285
+  },
+  {
+    "command": [
+      "ctest",
+      "--test-dir",
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/preflight",
+      "-R",
+      "^audio_ui_session$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-30-audio-ui-session/preflight-tests.xml"
+    ],
+    "exit_code": 0,
+    "seconds": 6.402547456033062
+  }
+]

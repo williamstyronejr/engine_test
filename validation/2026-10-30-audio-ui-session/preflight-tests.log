@@ -1,0 +1,10 @@
+Test project /home/zero/.cache/engine-audio-ui-78-0svx11as/preflight
+    Start 40: audio_ui_session
+1/1 Test #40: audio_ui_session .................   Passed    6.13 sec
+
+100% tests passed out of 1
+
+Label Time Summary:
+hardware    =   6.13 sec*proc (1 test)
+
+Total Test time (real) =   6.14 sec

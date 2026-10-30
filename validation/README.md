@@ -113,3 +113,8 @@ incremental build scope and remaining offline/physical/timing limits are explici
 - [2026-10-30 full gameplay/UI sessions](2026-10-30-ui-session/RESULTS.md):
   16 complete routes through full rendering and modal UI transitions, with 240
   matching frame fingerprints across four selected compiler/sanitizer builds.
+
+[Audio failure/UI session validation](2026-10-30-audio-ui-session/RESULTS.md) adds
+16 repeated routes with terminal transport errors, disabled controls, startup
+asset failure and manual session recreation. Twenty-four selected group executions
+pass, with 84 matching complete-frame fingerprints across four builds.

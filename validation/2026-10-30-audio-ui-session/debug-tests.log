@@ -1,0 +1,22 @@
+Test project /home/zero/.cache/engine-audio-ui-78-0svx11as/debug
+    Start 30: ui
+1/6 Test #30: ui ...............................   Passed    0.01 sec
+    Start 39: ui_session
+2/6 Test #39: ui_session .......................   Passed    7.74 sec
+    Start 40: audio_ui_session
+3/6 Test #40: audio_ui_session .................   Passed    5.69 sec
+    Start 50: renderer_memory
+4/6 Test #50: renderer_memory ..................   Passed    0.08 sec
+    Start 52: audio_reload
+5/6 Test #52: audio_reload .....................   Passed    0.78 sec
+    Start 54: audio_transport
+6/6 Test #54: audio_transport ..................   Passed    0.76 sec
+
+100% tests passed out of 6
+
+Label Time Summary:
+cpu         =   0.01 sec*proc (1 test)
+hardware    =  13.51 sec*proc (3 tests)
+platform    =   1.54 sec*proc (2 tests)
+
+Total Test time (real) =  15.06 sec

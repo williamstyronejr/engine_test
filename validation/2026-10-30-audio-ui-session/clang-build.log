@@ -1,0 +1,31 @@
+[1/31] Building CXX object CMakeFiles/engine_core.dir/engine/src/keyboard_symbols.cpp.o
+[2/31] Building CXX object CMakeFiles/engine_core.dir/engine/src/font.cpp.o
+[3/31] Building CXX object CMakeFiles/engine_core.dir/engine/src/assets.cpp.o
+[4/31] Building CXX object CMakeFiles/engine_core.dir/engine/src/asset_watch.cpp.o
+[5/31] Building CXX object CMakeFiles/engine_core.dir/engine/src/scene.cpp.o
+[6/31] Building CXX object CMakeFiles/engine_core.dir/engine/src/tilemap.cpp.o
+[7/31] Building CXX object CMakeFiles/engine_core.dir/engine/src/animation.cpp.o
+[8/31] Building CXX object CMakeFiles/engine_core.dir/engine/src/sound.cpp.o
+[9/31] Building CXX object CMakeFiles/engine_core.dir/engine/src/ui.cpp.o
+[10/31] Building CXX object CMakeFiles/engine_core.dir/engine/src/persistence.cpp.o
+[11/31] Building CXX object CMakeFiles/engine_core.dir/engine/src/collision_world.cpp.o
+[12/31] Linking CXX static library libengine_core.a
+[13/31] Building CXX object CMakeFiles/engine_platform.dir/engine/src/gl.cpp.o
+[14/31] Building CXX object CMakeFiles/engine_platform.dir/engine/src/window.cpp.o
+[15/31] Building CXX object CMakeFiles/engine_platform.dir/engine/src/audio.cpp.o
+[16/31] Building CXX object CMakeFiles/engine_platform.dir/engine/src/renderer.cpp.o
+[17/31] Building CXX object CMakeFiles/engine_platform.dir/engine/src/gpu_timer.cpp.o
+[18/31] Building CXX object CMakeFiles/engine_platform.dir/engine/src/ui_renderer.cpp.o
+[19/31] Linking CXX static library libengine_platform.a
+[20/31] Building CXX object CMakeFiles/ui_tests.dir/tests/ui_tests.cpp.o
+[21/31] Building CXX object CMakeFiles/ui_session_tests.dir/tests/ui_session_tests.cpp.o
+[22/31] Building CXX object CMakeFiles/renderer_memory_tests.dir/tests/renderer_memory_tests.cpp.o
+[23/31] Building CXX object CMakeFiles/audio_ui_session_tests.dir/tests/audio_ui_session_tests.cpp.o
+[24/31] Building CXX object CMakeFiles/audio_reload_tests.dir/tests/audio_reload_tests.cpp.o
+[25/31] Linking CXX executable ui_tests
+[26/31] Linking CXX executable ui_session_tests
+[27/31] Linking CXX executable audio_ui_session_tests
+[28/31] Linking CXX executable renderer_memory_tests
+[29/31] Linking CXX executable audio_reload_tests
+[30/31] Building CXX object CMakeFiles/audio_tests.dir/tests/audio_tests.cpp.o
+[31/31] Linking CXX executable audio_tests

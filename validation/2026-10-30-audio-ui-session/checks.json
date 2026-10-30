@@ -1,0 +1,54 @@
+[
+  {
+    "config": "debug",
+    "groups": [
+      "audio_ui_session",
+      "ui_session",
+      "ui",
+      "audio_reload",
+      "audio_transport",
+      "renderer_memory"
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  {
+    "config": "release",
+    "groups": [
+      "audio_ui_session",
+      "ui_session",
+      "ui",
+      "audio_reload",
+      "audio_transport",
+      "renderer_memory"
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  {
+    "config": "clang",
+    "groups": [
+      "audio_ui_session",
+      "ui_session",
+      "ui",
+      "audio_reload",
+      "audio_transport",
+      "renderer_memory"
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  {
+    "config": "native-sanitize",
+    "groups": [
+      "audio_ui_session",
+      "ui_session",
+      "ui",
+      "audio_reload",
+      "audio_transport",
+      "renderer_memory"
+    ],
+    "failures": 0,
+    "skips": 0
+  }
+]

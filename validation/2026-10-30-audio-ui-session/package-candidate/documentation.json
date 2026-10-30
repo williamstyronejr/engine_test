@@ -1,0 +1,13 @@
+{
+  "archive": "/home/zero/dev/engine_test/build/release/dist/feature-lab-0.1.0-Linux-x86_64-76c2b7d.tar.gz",
+  "sha256": "55e11d8a9d6a9a77b1874b3ec2f3c91af25353fd095c2cef0bf588cd7bf2d9ec",
+  "relative_links": 1196,
+  "missing": [],
+  "shell_recipes": 78,
+  "recipe_failures": [],
+  "excluded_checks": [
+    "external URLs",
+    "Markdown anchors",
+    "interactive recipe execution"
+  ]
+}

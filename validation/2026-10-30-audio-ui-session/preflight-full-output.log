@@ -1,0 +1,140 @@
+Start testing: Oct 30 18:47 EDT
+----------------------------------------------------------
+40/69 Testing: audio_ui_session
+40/69 Test: audio_ui_session
+Command: "/home/zero/.cache/engine-audio-ui-78-0svx11as/preflight/audio_ui_session_tests"
+Directory: /home/zero/.cache/engine-audio-ui-78-0svx11as/preflight
+"audio_ui_session" start time: Oct 30 18:47 EDT
+Output:
+----------------------------------------------------------
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[audio-ui-frame] cycle=1 mode=0 state=before hash=16722469393360854100
+[audio] Muted: Audio device failed (device_error=-19)
+[audio-ui-frame] cycle=1 mode=0 state=unavailable hash=15218032465425470100
+[audio-ui-frame] cycle=1 mode=0 state=resumed_disabled hash=11629214816056269205
+[audio-ui-frame] cycle=1 mode=0 state=completed_disabled hash=6569759245120790385
+[audio-ui-frame] cycle=1 mode=0 state=manual_restart hash=5030319420621121939
+[audio-ui-cycle] completed=1 mode=0 ticks=1381
+[audio-ui-frame] cycle=2 mode=0 state=before hash=14424482125906437148
+[audio] Muted: Audio device failed (device_error=-19)
+[audio-ui-frame] cycle=2 mode=0 state=unavailable hash=5145218403885081217
+[audio-ui-frame] cycle=2 mode=0 state=resumed_disabled hash=11615497546396643860
+[audio-ui-frame] cycle=2 mode=0 state=completed_disabled hash=2068437966720204972
+[audio-ui-frame] cycle=2 mode=0 state=manual_restart hash=1015009545955725493
+[audio-ui-cycle] completed=2 mode=0 ticks=702
+[audio-ui-frame] cycle=3 mode=1 state=before hash=16722469393360854100
+[audio] Muted: Audio device failed (device_error=-19)
+[audio-ui-frame] cycle=3 mode=1 state=capture_disabled hash=11677247065501000979
+[audio-ui-frame] cycle=3 mode=1 state=unavailable hash=6572972759690399573
+[audio-ui-frame] cycle=3 mode=1 state=resumed_disabled hash=11629214816056269205
+[audio-ui-frame] cycle=3 mode=1 state=completed_disabled hash=6569759245120790385
+[audio-ui-frame] cycle=3 mode=1 state=manual_restart hash=5030319420621121939
+[audio-ui-cycle] completed=3 mode=1 ticks=1381
+[audio-ui-frame] cycle=4 mode=1 state=before hash=14424482125906437148
+[audio] Muted: Audio device failed (device_error=-19)
+[audio-ui-frame] cycle=4 mode=1 state=capture_disabled hash=13753433195809223426
+[audio-ui-frame] cycle=4 mode=1 state=unavailable hash=6360901848194571680
+[audio-ui-frame] cycle=4 mode=1 state=resumed_disabled hash=11615497546396643860
+[audio-ui-frame] cycle=4 mode=1 state=completed_disabled hash=2068437966720204972
+[audio-ui-frame] cycle=4 mode=1 state=manual_restart hash=1015009545955725493
+[audio-ui-cycle] completed=4 mode=1 ticks=702
+[audio-ui-frame] cycle=5 mode=2 state=before hash=6572972759690399573
+[audio-ui-frame] cycle=5 mode=2 state=unavailable hash=6572972759690399573
+[audio-ui-frame] cycle=5 mode=2 state=resumed_disabled hash=11629214816056269205
+[audio-ui-frame] cycle=5 mode=2 state=completed_disabled hash=6569759245120790385
+[audio-ui-frame] cycle=5 mode=2 state=manual_restart hash=5030319420621121939
+[audio-ui-cycle] completed=5 mode=2 ticks=1381
+[audio-ui-frame] cycle=6 mode=2 state=before hash=6360901848194571680
+[audio-ui-frame] cycle=6 mode=2 state=unavailable hash=6360901848194571680
+[audio-ui-frame] cycle=6 mode=2 state=resumed_disabled hash=11615497546396643860
+[audio-ui-frame] cycle=6 mode=2 state=completed_disabled hash=2068437966720204972
+[audio-ui-frame] cycle=6 mode=2 state=manual_restart hash=1015009545955725493
+[audio-ui-cycle] completed=6 mode=2 ticks=702
+[audio] Muted: sounds/door.wav: Truncated WAV at byte 0
+[audio-ui-frame] cycle=7 mode=3 state=before hash=6572972759690399573
+[audio-ui-frame] cycle=7 mode=3 state=unavailable hash=6572972759690399573
+[audio-ui-frame] cycle=7 mode=3 state=resumed_disabled hash=11629214816056269205
+[audio-ui-frame] cycle=7 mode=3 state=completed_disabled hash=6569759245120790385
+[audio-ui-frame] cycle=7 mode=3 state=manual_restart hash=5030319420621121939
+[audio-ui-cycle] completed=7 mode=3 ticks=1381
+[audio] Muted: sounds/door.wav: Truncated WAV at byte 0
+[audio-ui-frame] cycle=8 mode=3 state=before hash=6360901848194571680
+[audio-ui-frame] cycle=8 mode=3 state=unavailable hash=6360901848194571680
+[audio-ui-frame] cycle=8 mode=3 state=resumed_disabled hash=11615497546396643860
+[audio-ui-frame] cycle=8 mode=3 state=completed_disabled hash=2068437966720204972
+[audio-ui-frame] cycle=8 mode=3 state=manual_restart hash=1015009545955725493
+[audio-ui-cycle] completed=8 mode=3 ticks=702
+[audio-ui-frame] cycle=9 mode=0 state=before hash=16722469393360854100
+[audio] Muted: Audio device failed (device_error=-19)
+[audio-ui-frame] cycle=9 mode=0 state=unavailable hash=15218032465425470100
+[audio-ui-frame] cycle=9 mode=0 state=resumed_disabled hash=11629214816056269205
+[audio-ui-frame] cycle=9 mode=0 state=completed_disabled hash=6569759245120790385
+[audio-ui-frame] cycle=9 mode=0 state=manual_restart hash=5030319420621121939
+[audio-ui-cycle] completed=9 mode=0 ticks=1381
+[audio-ui-frame] cycle=10 mode=0 state=before hash=14424482125906437148
+[audio] Muted: Audio device failed (device_error=-19)
+[audio-ui-frame] cycle=10 mode=0 state=unavailable hash=5145218403885081217
+[audio-ui-frame] cycle=10 mode=0 state=resumed_disabled hash=11615497546396643860
+[audio-ui-frame] cycle=10 mode=0 state=completed_disabled hash=2068437966720204972
+[audio-ui-frame] cycle=10 mode=0 state=manual_restart hash=1015009545955725493
+[audio-ui-cycle] completed=10 mode=0 ticks=702
+[audio-ui-frame] cycle=11 mode=1 state=before hash=16722469393360854100
+[audio] Muted: Audio device failed (device_error=-19)
+[audio-ui-frame] cycle=11 mode=1 state=capture_disabled hash=11677247065501000979
+[audio-ui-frame] cycle=11 mode=1 state=unavailable hash=6572972759690399573
+[audio-ui-frame] cycle=11 mode=1 state=resumed_disabled hash=11629214816056269205
+[audio-ui-frame] cycle=11 mode=1 state=completed_disabled hash=6569759245120790385
+[audio-ui-frame] cycle=11 mode=1 state=manual_restart hash=5030319420621121939
+[audio-ui-cycle] completed=11 mode=1 ticks=1381
+[audio-ui-frame] cycle=12 mode=1 state=before hash=14424482125906437148
+[audio] Muted: Audio device failed (device_error=-19)
+[audio-ui-frame] cycle=12 mode=1 state=capture_disabled hash=13753433195809223426
+[audio-ui-frame] cycle=12 mode=1 state=unavailable hash=6360901848194571680
+[audio-ui-frame] cycle=12 mode=1 state=resumed_disabled hash=11615497546396643860
+[audio-ui-frame] cycle=12 mode=1 state=completed_disabled hash=2068437966720204972
+[audio-ui-frame] cycle=12 mode=1 state=manual_restart hash=1015009545955725493
+[audio-ui-cycle] completed=12 mode=1 ticks=702
+[audio-ui-frame] cycle=13 mode=2 state=before hash=6572972759690399573
+[audio-ui-frame] cycle=13 mode=2 state=unavailable hash=6572972759690399573
+[audio-ui-frame] cycle=13 mode=2 state=resumed_disabled hash=11629214816056269205
+[audio-ui-frame] cycle=13 mode=2 state=completed_disabled hash=6569759245120790385
+[audio-ui-frame] cycle=13 mode=2 state=manual_restart hash=5030319420621121939
+[audio-ui-cycle] completed=13 mode=2 ticks=1381
+[audio-ui-frame] cycle=14 mode=2 state=before hash=6360901848194571680
+[audio-ui-frame] cycle=14 mode=2 state=unavailable hash=6360901848194571680
+[audio-ui-frame] cycle=14 mode=2 state=resumed_disabled hash=11615497546396643860
+[audio-ui-frame] cycle=14 mode=2 state=completed_disabled hash=2068437966720204972
+[audio-ui-frame] cycle=14 mode=2 state=manual_restart hash=1015009545955725493
+[audio-ui-cycle] completed=14 mode=2 ticks=702
+[audio] Muted: sounds/door.wav: Truncated WAV at byte 0
+[audio-ui-frame] cycle=15 mode=3 state=before hash=6572972759690399573
+[audio-ui-frame] cycle=15 mode=3 state=unavailable hash=6572972759690399573
+[audio-ui-frame] cycle=15 mode=3 state=resumed_disabled hash=11629214816056269205
+[audio-ui-frame] cycle=15 mode=3 state=completed_disabled hash=6569759245120790385
+[audio-ui-frame] cycle=15 mode=3 state=manual_restart hash=5030319420621121939
+[audio-ui-cycle] completed=15 mode=3 ticks=1381
+[audio] Muted: sounds/door.wav: Truncated WAV at byte 0
+[audio-ui-frame] cycle=16 mode=3 state=before hash=6360901848194571680
+[audio-ui-frame] cycle=16 mode=3 state=unavailable hash=6360901848194571680
+[audio-ui-frame] cycle=16 mode=3 state=resumed_disabled hash=11615497546396643860
+[audio-ui-frame] cycle=16 mode=3 state=completed_disabled hash=2068437966720204972
+[audio-ui-frame] cycle=16 mode=3 state=manual_restart hash=1015009545955725493
+[audio-ui-cycle] completed=16 mode=3 ticks=702
+[audio-ui-session] cycles=16 ticks=16664 renders=156 captures=84 injected_errors=8 elapsed_seconds=5.90147 presentation_baseline_restored=true
+PASS audio_unavailability_preserves_full_ui_gameplay_and_manual_restart
+1 tests, 0 failed
+<end of output>
+Test time =   6.13 sec
+----------------------------------------------------------
+Test Passed.
+"audio_ui_session" end time: Oct 30 18:47 EDT
+"audio_ui_session" time elapsed: 00:00:06
+----------------------------------------------------------
+
+End testing: Oct 30 18:47 EDT
+
+hardware =   6.13 sec*proc
+
