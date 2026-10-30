@@ -1,0 +1,7 @@
+{
+  "completed_test_run": "debug-tests.xml",
+  "ctest_result": "7 passed, no skips",
+  "initial_evidence_check": "Failed because successful JUnit output was truncated at the default 1024-byte limit",
+  "correction": "Retain and parse full LastTest.log; keep original XML and command records; no test rerun",
+  "fixture_unchanged": true
+}
