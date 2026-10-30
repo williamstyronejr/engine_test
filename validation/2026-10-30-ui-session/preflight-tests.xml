@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-c++"
+	tests="1"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="omarchy"
+	time="7"
+	timestamp="2026-10-30T11:17:15"
+	>
+	<testcase name="ui_session" classname="ui_session" time="7.83726" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=1 state=gameplay width=640 height=480 hash=9951465953928205060
+[ui-frame] cycle=1 state=diagnostics width=640 height=480 hash=6444833199444432233
+[ui-frame] cycle=1 state=shapes width=640 height=480 hash=13162496544934281923
+[ui-frame] cycle=1 state=settings width=640 height=480 hash=2893751576189037492
+[ui-frame] cycle=1 state=muted width=640 height=480 hash=14911613460464926224
+[ui-frame] cycle=1 state=controls width=640 height=480 hash=4590355988804566258
+[ui-frame] cycle=1 state=capture width=640 height=480 hash=1882989708947030658
+[ui-frame] cycle=1 state=canceled width=640 height=480 hash=4890718040651851706
+[ui-frame] cycle=1 state=rebound width=640 height=480 hash=2708027372318167019
+[ui-frame] cycle=1 state=settings_return width=640 height=480 hash=106112166464967091...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+</testsuite>
