@@ -1,0 +1,24 @@
+Test project /home/zero/.cache/engine-session-76-5wqqvzes/native-sanitize
+    Start  6: scene_reload
+1/7 Test  #6: scene_reload .....................   Passed    2.85 sec
+    Start 20: levels
+2/7 Test #20: levels ...........................   Passed    5.38 sec
+    Start 27: persistence
+3/7 Test #27: persistence ......................   Passed    3.68 sec
+    Start 39: long_session
+4/7 Test #39: long_session .....................   Passed  105.54 sec
+    Start 48: renderer_memory
+5/7 Test #48: renderer_memory ..................   Passed    0.16 sec
+    Start 50: audio_reload
+6/7 Test #50: audio_reload .....................   Passed    2.62 sec
+    Start 59: texture_reload
+7/7 Test #59: texture_reload ...................   Passed    1.07 sec
+
+100% tests passed out of 7
+
+Label Time Summary:
+cpu         =  11.91 sec*proc (3 tests)
+hardware    = 106.77 sec*proc (3 tests)
+platform    =   2.62 sec*proc (1 test)
+
+Total Test time (real) = 121.31 sec

@@ -1,0 +1,267 @@
+{
+  "backtraceGraph": {
+    "commands": [
+      "add_test"
+    ],
+    "files": [
+      "/home/zero/dev/engine_test/CMakeLists.txt"
+    ],
+    "nodes": [
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 82,
+        "parent": 0
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 147,
+        "parent": 2
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 180,
+        "parent": 4
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 275,
+        "parent": 6
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 316,
+        "parent": 8
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 326,
+        "parent": 10
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 373,
+        "parent": 12
+      }
+    ]
+  },
+  "kind": "ctestInfo",
+  "tests": [
+    {
+      "backtrace": 1,
+      "command": [
+        "/home/zero/.cache/engine-session-76-5wqqvzes/debug/scene_reload_tests"
+      ],
+      "name": "scene_reload",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-session-76-5wqqvzes/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 3,
+      "command": [
+        "/home/zero/.cache/engine-session-76-5wqqvzes/debug/level_tests"
+      ],
+      "name": "levels",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 60.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-session-76-5wqqvzes/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 5,
+      "command": [
+        "/home/zero/.cache/engine-session-76-5wqqvzes/debug/persistence_tests"
+      ],
+      "name": "persistence",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-session-76-5wqqvzes/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 7,
+      "command": [
+        "/home/zero/.cache/engine-session-76-5wqqvzes/debug/long_session_tests"
+      ],
+      "name": "long_session",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 180.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-session-76-5wqqvzes/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 9,
+      "command": [
+        "/home/zero/.cache/engine-session-76-5wqqvzes/debug/renderer_memory_tests"
+      ],
+      "name": "renderer_memory",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-session-76-5wqqvzes/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 11,
+      "command": [
+        "/home/zero/.cache/engine-session-76-5wqqvzes/debug/audio_reload_tests"
+      ],
+      "name": "audio_reload",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "platform"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-session-76-5wqqvzes/debug"
+        }
+      ]
+    },
+    {
+      "backtrace": 13,
+      "command": [
+        "/home/zero/.cache/engine-session-76-5wqqvzes/debug/texture_reload_tests"
+      ],
+      "name": "texture_reload",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-session-76-5wqqvzes/debug"
+        }
+      ]
+    }
+  ],
+  "version": {
+    "major": 1,
+    "minor": 0
+  }
+}

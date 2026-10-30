@@ -105,3 +105,7 @@ incremental build scope and remaining offline/physical/timing limits are explici
 - [2026-10-29 full native sanitizer and fresh offline validation](2026-10-29-offline/RESULTS.md):
   66 native sanitizer groups, two audio leak groups, a new isolated Release build,
   36 CPU groups and three relocated package checks from archived source `4f60312`.
+
+- [2026-10-30 bounded repeated-session regression](2026-10-30-long-session/RESULTS.md):
+  64 complete routes with reload rollback, private saves, audio retirement and
+  renderer restoration, across four targeted compiler/sanitizer configurations.

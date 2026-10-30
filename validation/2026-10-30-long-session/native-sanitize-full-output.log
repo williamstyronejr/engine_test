@@ -1,0 +1,890 @@
+Start testing: Oct 30 06:30 EDT
+----------------------------------------------------------
+6/67 Testing: scene_reload
+6/67 Test: scene_reload
+Command: "/home/zero/.cache/engine-session-76-5wqqvzes/native-sanitize/scene_reload_tests"
+Directory: /home/zero/.cache/engine-session-76-5wqqvzes/native-sanitize
+"scene_reload" start time: Oct 30 06:30 EDT
+Output:
+----------------------------------------------------------
+PASS scene_budget_overflow_rejects_reload_then_valid_content_retries
+PASS commit_rebinds_handles_preserves_progress_and_changes_save_identity
+PASS scene_walls_affect_movement_queries_and_restart_uses_new_spawn
+PASS rejected_edits_and_preflight_leave_world_and_runtime_untouched
+PASS reordered_core_records_keep_persistent_collection_and_runtime_slots
+PASS alarm_contacts_are_primed_without_extra_enter_and_animation_snapshots_retained
+PASS opening_and_completed_door_never_replays_completion_after_reload
+[scene retained] revision=1 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene retained] revision=1 source=facility.scene
+facility.scene: facility.scene: Not a regular asset file
+[scene retained] revision=1 source=facility.scene
+facility.scene: facility.scene: Asset path escapes its root
+[scene applied] revision=2 source=facility.scene
+[scene applied] revision=3 source=facility.scene
+[scene applied] revision=4 source=facility.scene
+[scene applied] revision=5 source=facility.scene
+[scene applied] revision=6 source=facility.scene
+[scene applied] revision=7 source=facility.scene
+[scene applied] revision=8 source=facility.scene
+[scene applied] revision=9 source=facility.scene
+[scene applied] revision=10 source=facility.scene
+[scene applied] revision=11 source=facility.scene
+[scene applied] revision=12 source=facility.scene
+[scene applied] revision=13 source=facility.scene
+[scene applied] revision=14 source=facility.scene
+[scene applied] revision=15 source=facility.scene
+[scene applied] revision=16 source=facility.scene
+[scene applied] revision=17 source=facility.scene
+[scene applied] revision=18 source=facility.scene
+[scene applied] revision=19 source=facility.scene
+[scene applied] revision=20 source=facility.scene
+[scene applied] revision=21 source=facility.scene
+PASS malformed_missing_escape_repair_repeated_replacement_and_lock
+8 tests, 0 failed
+<end of output>
+Test time =   2.85 sec
+----------------------------------------------------------
+Test Passed.
+"scene_reload" end time: Oct 30 06:30 EDT
+"scene_reload" time elapsed: 00:00:02
+----------------------------------------------------------
+
+20/67 Testing: levels
+20/67 Test: levels
+Command: "/home/zero/.cache/engine-session-76-5wqqvzes/native-sanitize/level_tests"
+Directory: /home/zero/.cache/engine-session-76-5wqqvzes/native-sanitize
+"levels" start time: Oct 30 06:30 EDT
+Output:
+----------------------------------------------------------
+PASS sample_budgets_survive_restart_reload_restore_and_transition
+PASS authored_levels_have_distinct_content_spawns_and_complete_routes
+PASS core_components_follow_pickup_save_restart_and_level_replacement
+PASS level_commit_resets_world_and_blocks_held_input
+PASS missing_corrupt_and_invalid_spawn_levels_retain_the_live_world
+PASS resource_preparation_and_iteration_failures_are_transactional
+PASS cross_level_save_continue_and_new_game_preserve_content_identity
+PASS replay_recording_in_annex_resolves_from_a_facility_start
+8 tests, 0 failed
+<end of output>
+Test time =   5.38 sec
+----------------------------------------------------------
+Test Passed.
+"levels" end time: Oct 30 06:31 EDT
+"levels" time elapsed: 00:00:05
+----------------------------------------------------------
+
+27/67 Testing: persistence
+27/67 Test: persistence
+Command: "/home/zero/.cache/engine-session-76-5wqqvzes/native-sanitize/persistence_tests"
+Directory: /home/zero/.cache/engine-session-76-5wqqvzes/native-sanitize
+"persistence" start time: Oct 30 06:31 EDT
+Output:
+----------------------------------------------------------
+PASS record_crc_reference_bounds_and_corruption
+PASS config_versions_ranges_and_exact_roundtrip
+PASS storage_slots_missing_limits_and_relaunch
+PASS user_paths_use_absolute_xdg_values_and_home_fallback
+PASS storage_failed_save_preserves_previous_slot
+PASS animation_restore_exact_boundary_and_failure_preservation
+PASS checkpoint_every_replay_phase_resumes_identically
+PASS checkpoint_invalid_state_never_replaces_live_game
+PASS checkpoint_decoder_bounds_versions_and_trailing_bytes
+PASS load_missing_or_corrupt_preserves_world
+PASS interrupted_atomic_writes_keep_old_or_new_complete_record
+PASS write_failure_retains_committed_file_and_cleans_temporary
+PASS menu_checkpoint_preserves_underlying_pause_state
+13 tests, 0 failed
+<end of output>
+Test time =   3.68 sec
+----------------------------------------------------------
+Test Passed.
+"persistence" end time: Oct 30 06:31 EDT
+"persistence" time elapsed: 00:00:03
+----------------------------------------------------------
+
+39/67 Testing: long_session
+39/67 Test: long_session
+Command: "/home/zero/.cache/engine-session-76-5wqqvzes/native-sanitize/long_session_tests"
+Directory: /home/zero/.cache/engine-session-76-5wqqvzes/native-sanitize
+"long_session" start time: Oct 30 06:31 EDT
+Output:
+----------------------------------------------------------
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[scene retained] revision=1 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=2 source=facility.scene
+[textures retained] revision=1 count=4
+Texture payload size mismatch
+[textures applied] revision=2 count=4
+[audio bank retained] revision=1
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=2
+[cycle] completed=1 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=2 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=3 source=annex.scene
+[textures retained] revision=2 count=4
+Texture payload size mismatch
+[textures applied] revision=3 count=4
+[audio bank retained] revision=2
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=3
+[cycle] completed=2 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=3 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=4 source=facility.scene
+[textures retained] revision=3 count=4
+Texture payload size mismatch
+[textures applied] revision=4 count=4
+[audio bank retained] revision=3
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=4
+[cycle] completed=3 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=4 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=5 source=annex.scene
+[textures retained] revision=4 count=4
+Texture payload size mismatch
+[textures applied] revision=5 count=4
+[audio bank retained] revision=4
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=5
+[cycle] completed=4 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=5 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=6 source=facility.scene
+[textures retained] revision=5 count=4
+Texture payload size mismatch
+[textures applied] revision=6 count=4
+[audio bank retained] revision=5
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=6
+[cycle] completed=5 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=6 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=7 source=annex.scene
+[textures retained] revision=6 count=4
+Texture payload size mismatch
+[textures applied] revision=7 count=4
+[audio bank retained] revision=6
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=7
+[cycle] completed=6 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=7 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=8 source=facility.scene
+[textures retained] revision=7 count=4
+Texture payload size mismatch
+[textures applied] revision=8 count=4
+[audio bank retained] revision=7
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=8
+[cycle] completed=7 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=8 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=9 source=annex.scene
+[textures retained] revision=8 count=4
+Texture payload size mismatch
+[textures applied] revision=9 count=4
+[audio bank retained] revision=8
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=9
+[cycle] completed=8 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=9 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=10 source=facility.scene
+[textures retained] revision=9 count=4
+Texture payload size mismatch
+[textures applied] revision=10 count=4
+[audio bank retained] revision=1
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=2
+[cycle] completed=9 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=10 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=11 source=annex.scene
+[textures retained] revision=10 count=4
+Texture payload size mismatch
+[textures applied] revision=11 count=4
+[audio bank retained] revision=2
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=3
+[cycle] completed=10 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=11 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=12 source=facility.scene
+[textures retained] revision=11 count=4
+Texture payload size mismatch
+[textures applied] revision=12 count=4
+[audio bank retained] revision=3
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=4
+[cycle] completed=11 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=12 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=13 source=annex.scene
+[textures retained] revision=12 count=4
+Texture payload size mismatch
+[textures applied] revision=13 count=4
+[audio bank retained] revision=4
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=5
+[cycle] completed=12 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=13 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=14 source=facility.scene
+[textures retained] revision=13 count=4
+Texture payload size mismatch
+[textures applied] revision=14 count=4
+[audio bank retained] revision=5
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=6
+[cycle] completed=13 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=14 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=15 source=annex.scene
+[textures retained] revision=14 count=4
+Texture payload size mismatch
+[textures applied] revision=15 count=4
+[audio bank retained] revision=6
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=7
+[cycle] completed=14 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=15 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=16 source=facility.scene
+[textures retained] revision=15 count=4
+Texture payload size mismatch
+[textures applied] revision=16 count=4
+[audio bank retained] revision=7
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=8
+[cycle] completed=15 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=16 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=17 source=annex.scene
+[textures retained] revision=16 count=4
+Texture payload size mismatch
+[textures applied] revision=17 count=4
+[audio bank retained] revision=8
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=9
+[cycle] completed=16 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=17 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=18 source=facility.scene
+[textures retained] revision=17 count=4
+Texture payload size mismatch
+[textures applied] revision=18 count=4
+[audio bank retained] revision=1
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=2
+[cycle] completed=17 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=18 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=19 source=annex.scene
+[textures retained] revision=18 count=4
+Texture payload size mismatch
+[textures applied] revision=19 count=4
+[audio bank retained] revision=2
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=3
+[cycle] completed=18 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=19 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=20 source=facility.scene
+[textures retained] revision=19 count=4
+Texture payload size mismatch
+[textures applied] revision=20 count=4
+[audio bank retained] revision=3
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=4
+[cycle] completed=19 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=20 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=21 source=annex.scene
+[textures retained] revision=20 count=4
+Texture payload size mismatch
+[textures applied] revision=21 count=4
+[audio bank retained] revision=4
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=5
+[cycle] completed=20 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=21 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=22 source=facility.scene
+[textures retained] revision=21 count=4
+Texture payload size mismatch
+[textures applied] revision=22 count=4
+[audio bank retained] revision=5
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=6
+[cycle] completed=21 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=22 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=23 source=annex.scene
+[textures retained] revision=22 count=4
+Texture payload size mismatch
+[textures applied] revision=23 count=4
+[audio bank retained] revision=6
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=7
+[cycle] completed=22 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=23 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=24 source=facility.scene
+[textures retained] revision=23 count=4
+Texture payload size mismatch
+[textures applied] revision=24 count=4
+[audio bank retained] revision=7
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=8
+[cycle] completed=23 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=24 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=25 source=annex.scene
+[textures retained] revision=24 count=4
+Texture payload size mismatch
+[textures applied] revision=25 count=4
+[audio bank retained] revision=8
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=9
+[cycle] completed=24 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=25 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=26 source=facility.scene
+[textures retained] revision=25 count=4
+Texture payload size mismatch
+[textures applied] revision=26 count=4
+[audio bank retained] revision=1
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=2
+[cycle] completed=25 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=26 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=27 source=annex.scene
+[textures retained] revision=26 count=4
+Texture payload size mismatch
+[textures applied] revision=27 count=4
+[audio bank retained] revision=2
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=3
+[cycle] completed=26 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=27 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=28 source=facility.scene
+[textures retained] revision=27 count=4
+Texture payload size mismatch
+[textures applied] revision=28 count=4
+[audio bank retained] revision=3
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=4
+[cycle] completed=27 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=28 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=29 source=annex.scene
+[textures retained] revision=28 count=4
+Texture payload size mismatch
+[textures applied] revision=29 count=4
+[audio bank retained] revision=4
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=5
+[cycle] completed=28 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=29 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=30 source=facility.scene
+[textures retained] revision=29 count=4
+Texture payload size mismatch
+[textures applied] revision=30 count=4
+[audio bank retained] revision=5
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=6
+[cycle] completed=29 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=30 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=31 source=annex.scene
+[textures retained] revision=30 count=4
+Texture payload size mismatch
+[textures applied] revision=31 count=4
+[audio bank retained] revision=6
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=7
+[cycle] completed=30 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=31 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=32 source=facility.scene
+[textures retained] revision=31 count=4
+Texture payload size mismatch
+[textures applied] revision=32 count=4
+[audio bank retained] revision=7
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=8
+[cycle] completed=31 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=32 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=33 source=annex.scene
+[textures retained] revision=32 count=4
+Texture payload size mismatch
+[textures applied] revision=33 count=4
+[audio bank retained] revision=8
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=9
+[cycle] completed=32 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=33 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=34 source=facility.scene
+[textures retained] revision=33 count=4
+Texture payload size mismatch
+[textures applied] revision=34 count=4
+[audio bank retained] revision=1
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=2
+[cycle] completed=33 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=34 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=35 source=annex.scene
+[textures retained] revision=34 count=4
+Texture payload size mismatch
+[textures applied] revision=35 count=4
+[audio bank retained] revision=2
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=3
+[cycle] completed=34 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=35 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=36 source=facility.scene
+[textures retained] revision=35 count=4
+Texture payload size mismatch
+[textures applied] revision=36 count=4
+[audio bank retained] revision=3
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=4
+[cycle] completed=35 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=36 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=37 source=annex.scene
+[textures retained] revision=36 count=4
+Texture payload size mismatch
+[textures applied] revision=37 count=4
+[audio bank retained] revision=4
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=5
+[cycle] completed=36 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=37 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=38 source=facility.scene
+[textures retained] revision=37 count=4
+Texture payload size mismatch
+[textures applied] revision=38 count=4
+[audio bank retained] revision=5
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=6
+[cycle] completed=37 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=38 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=39 source=annex.scene
+[textures retained] revision=38 count=4
+Texture payload size mismatch
+[textures applied] revision=39 count=4
+[audio bank retained] revision=6
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=7
+[cycle] completed=38 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=39 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=40 source=facility.scene
+[textures retained] revision=39 count=4
+Texture payload size mismatch
+[textures applied] revision=40 count=4
+[audio bank retained] revision=7
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=8
+[cycle] completed=39 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=40 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=41 source=annex.scene
+[textures retained] revision=40 count=4
+Texture payload size mismatch
+[textures applied] revision=41 count=4
+[audio bank retained] revision=8
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=9
+[cycle] completed=40 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=41 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=42 source=facility.scene
+[textures retained] revision=41 count=4
+Texture payload size mismatch
+[textures applied] revision=42 count=4
+[audio bank retained] revision=1
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=2
+[cycle] completed=41 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=42 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=43 source=annex.scene
+[textures retained] revision=42 count=4
+Texture payload size mismatch
+[textures applied] revision=43 count=4
+[audio bank retained] revision=2
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=3
+[cycle] completed=42 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=43 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=44 source=facility.scene
+[textures retained] revision=43 count=4
+Texture payload size mismatch
+[textures applied] revision=44 count=4
+[audio bank retained] revision=3
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=4
+[cycle] completed=43 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=44 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=45 source=annex.scene
+[textures retained] revision=44 count=4
+Texture payload size mismatch
+[textures applied] revision=45 count=4
+[audio bank retained] revision=4
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=5
+[cycle] completed=44 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=45 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=46 source=facility.scene
+[textures retained] revision=45 count=4
+Texture payload size mismatch
+[textures applied] revision=46 count=4
+[audio bank retained] revision=5
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=6
+[cycle] completed=45 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=46 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=47 source=annex.scene
+[textures retained] revision=46 count=4
+Texture payload size mismatch
+[textures applied] revision=47 count=4
+[audio bank retained] revision=6
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=7
+[cycle] completed=46 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=47 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=48 source=facility.scene
+[textures retained] revision=47 count=4
+Texture payload size mismatch
+[textures applied] revision=48 count=4
+[audio bank retained] revision=7
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=8
+[cycle] completed=47 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=48 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=49 source=annex.scene
+[textures retained] revision=48 count=4
+Texture payload size mismatch
+[textures applied] revision=49 count=4
+[audio bank retained] revision=8
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=9
+[cycle] completed=48 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=49 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=50 source=facility.scene
+[textures retained] revision=49 count=4
+Texture payload size mismatch
+[textures applied] revision=50 count=4
+[audio bank retained] revision=1
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=2
+[cycle] completed=49 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=50 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=51 source=annex.scene
+[textures retained] revision=50 count=4
+Texture payload size mismatch
+[textures applied] revision=51 count=4
+[audio bank retained] revision=2
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=3
+[cycle] completed=50 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=51 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=52 source=facility.scene
+[textures retained] revision=51 count=4
+Texture payload size mismatch
+[textures applied] revision=52 count=4
+[audio bank retained] revision=3
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=4
+[cycle] completed=51 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=52 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=53 source=annex.scene
+[textures retained] revision=52 count=4
+Texture payload size mismatch
+[textures applied] revision=53 count=4
+[audio bank retained] revision=4
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=5
+[cycle] completed=52 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=53 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=54 source=facility.scene
+[textures retained] revision=53 count=4
+Texture payload size mismatch
+[textures applied] revision=54 count=4
+[audio bank retained] revision=5
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=6
+[cycle] completed=53 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=54 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=55 source=annex.scene
+[textures retained] revision=54 count=4
+Texture payload size mismatch
+[textures applied] revision=55 count=4
+[audio bank retained] revision=6
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=7
+[cycle] completed=54 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=55 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=56 source=facility.scene
+[textures retained] revision=55 count=4
+Texture payload size mismatch
+[textures applied] revision=56 count=4
+[audio bank retained] revision=7
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=8
+[cycle] completed=55 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=56 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=57 source=annex.scene
+[textures retained] revision=56 count=4
+Texture payload size mismatch
+[textures applied] revision=57 count=4
+[audio bank retained] revision=8
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=9
+[cycle] completed=56 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=57 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=58 source=facility.scene
+[textures retained] revision=57 count=4
+Texture payload size mismatch
+[textures applied] revision=58 count=4
+[audio bank retained] revision=1
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=2
+[cycle] completed=57 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=58 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=59 source=annex.scene
+[textures retained] revision=58 count=4
+Texture payload size mismatch
+[textures applied] revision=59 count=4
+[audio bank retained] revision=2
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=3
+[cycle] completed=58 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=59 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=60 source=facility.scene
+[textures retained] revision=59 count=4
+Texture payload size mismatch
+[textures applied] revision=60 count=4
+[audio bank retained] revision=3
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=4
+[cycle] completed=59 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=60 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=61 source=annex.scene
+[textures retained] revision=60 count=4
+Texture payload size mismatch
+[textures applied] revision=61 count=4
+[audio bank retained] revision=4
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=5
+[cycle] completed=60 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=61 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=62 source=facility.scene
+[textures retained] revision=61 count=4
+Texture payload size mismatch
+[textures applied] revision=62 count=4
+[audio bank retained] revision=5
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=6
+[cycle] completed=61 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=62 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=63 source=annex.scene
+[textures retained] revision=62 count=4
+Texture payload size mismatch
+[textures applied] revision=63 count=4
+[audio bank retained] revision=6
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=7
+[cycle] completed=62 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=63 source=facility.scene
+facility.scene: facility.scene:1: Expected scene version 1
+[scene applied] revision=64 source=facility.scene
+[textures retained] revision=63 count=4
+Texture payload size mismatch
+[textures applied] revision=64 count=4
+[audio bank retained] revision=7
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=8
+[cycle] completed=63 ticks=1382 scene_bytes=81920 sound_bytes=1065600
+[scene retained] revision=64 source=annex.scene
+annex.scene: annex.scene:1: Expected scene version 1
+[scene applied] revision=65 source=annex.scene
+[textures retained] revision=64 count=4
+Texture payload size mismatch
+[textures applied] revision=65 count=4
+[audio bank retained] revision=8
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank queued] revision=9
+[cycle] completed=64 ticks=703 scene_bytes=81920 sound_bytes=1065600
+[session] cycles=64 max_steps_per_cycle=3000 ticks=66720 renders=640 audio_outputs=8 elapsed_seconds=105.343 resources_restored=true
+PASS repeated_complete_routes_reload_rollback_saves_and_audio_retirement
+1 tests, 0 failed
+<end of output>
+Test time = 105.54 sec
+----------------------------------------------------------
+Test Passed.
+"long_session" end time: Oct 30 06:32 EDT
+"long_session" time elapsed: 00:01:45
+----------------------------------------------------------
+
+48/67 Testing: renderer_memory
+48/67 Test: renderer_memory
+Command: "/home/zero/.cache/engine-session-76-5wqqvzes/native-sanitize/renderer_memory_tests"
+Directory: /home/zero/.cache/engine-session-76-5wqqvzes/native-sanitize
+"renderer_memory" start time: Oct 30 06:32 EDT
+Output:
+----------------------------------------------------------
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS renderer_memory_lifecycle_and_logical_store
+1 tests, 0 failed
+<end of output>
+Test time =   0.16 sec
+----------------------------------------------------------
+Test Passed.
+"renderer_memory" end time: Oct 30 06:32 EDT
+"renderer_memory" time elapsed: 00:00:00
+----------------------------------------------------------
+
+50/67 Testing: audio_reload
+50/67 Test: audio_reload
+Command: "/home/zero/.cache/engine-session-76-5wqqvzes/native-sanitize/audio_reload_tests"
+Directory: /home/zero/.cache/engine-session-76-5wqqvzes/native-sanitize
+"audio_reload" start time: Oct 30 06:32 EDT
+Output:
+----------------------------------------------------------
+PASS queued_chained_banks_retain_storage_until_ack_and_keep_voice_tickets
+PASS queue_rejection_and_invalid_batches_leave_bank_and_existing_voice_intact
+PASS retained_memory_budget_is_checked_before_publication
+[audio bank retained] revision=1
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank retained] revision=1
+sounds/door.wav: Not a regular asset file
+[audio bank retained] revision=1
+sounds/door.wav: Asset path escapes its root
+[audio bank queued] revision=2
+[audio bank queued] revision=3
+ALSA lib pcm_file.c:445:(snd_pcm_file_write_bytes) [error.pcm] /dev/full write failed, file data may be corrupt: No space left on device
+PASS soundtrack_failures_repair_pause_settings_and_completion_are_preserved
+PASS device_failure_rejects_reload_and_shutdown_safely_releases_pending_banks
+5 tests, 0 failed
+<end of output>
+Test time =   2.62 sec
+----------------------------------------------------------
+Test Passed.
+"audio_reload" end time: Oct 30 06:32 EDT
+"audio_reload" time elapsed: 00:00:02
+----------------------------------------------------------
+
+59/67 Testing: texture_reload
+59/67 Test: texture_reload
+Command: "/home/zero/.cache/engine-session-76-5wqqvzes/native-sanitize/texture_reload_tests"
+Directory: /home/zero/.cache/engine-session-76-5wqqvzes/native-sanitize
+"texture_reload" start time: Oct 30 06:32 EDT
+Output:
+----------------------------------------------------------
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS replacement_preserves_shared_handles_and_completed_pixels
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS invalid_batches_preserve_all_textures_and_pending_geometry
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS full_handle_capacity_and_repeated_reload_retire_gpu_objects
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS staging_budget_rejection_is_atomic
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS accounting_failure_after_partial_gpu_staging_is_atomic
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS reloaded_texture_keeps_atlas_filter_wrap_and_alpha_semantics
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[textures retained] revision=1 count=2
+b.etex: Expected ETEX texture header
+[textures retained] revision=1 count=2
+Texture payload size mismatch
+[textures applied] revision=2 count=2
+PASS file_reload_publishes_cpu_and_gpu_together_and_keeps_old_readers
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[asset fallback] a.etex: Not a regular asset file
+[textures applied] revision=2 count=1
+[textures retained] revision=2 count=1
+a.etex: Texture dimensions must fit every registered atlas grid
+[textures applied] revision=3 count=1
+PASS fallback_recovers_and_shared_atlas_constraints_survive_failed_reload
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[textures applied] revision=2 count=1
+[textures retained] revision=2 count=1
+Texture payload size mismatch
+[textures applied] revision=3 count=1
+PASS texture_controls_use_press_edges_and_settings_capture
+9 tests, 0 failed
+<end of output>
+Test time =   1.07 sec
+----------------------------------------------------------
+Test Passed.
+"texture_reload" end time: Oct 30 06:32 EDT
+"texture_reload" time elapsed: 00:00:01
+----------------------------------------------------------
+
+End testing: Oct 30 06:32 EDT
+
+cpu =  11.91 sec*proc
+
+hardware = 106.77 sec*proc
+
+platform =   2.62 sec*proc
+

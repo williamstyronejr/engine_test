@@ -1,0 +1,55 @@
+Build-host dependency inventory; these libraries are NOT bundled.
+Direct entries come from ELF NEEDED; resolved entries include transitive dependencies.
+Dynamically selected GL/ALSA drivers and plugins are outside this static inventory.
+
+feature_lab: direct NEEDED
+  NEEDED               libX11.so.6
+  NEEDED               libGLX.so.0
+  NEEDED               libOpenGL.so.0
+  NEEDED               libasound.so.2
+  NEEDED               libstdc++.so.6
+  NEEDED               libm.so.6
+  NEEDED               libgcc_s.so.1
+  NEEDED               libc.so.6
+  Required symbol versions: CXXABI_1.3, CXXABI_1.3.11, CXXABI_1.3.5, CXXABI_1.3.9, GLIBCXX_3.4, GLIBCXX_3.4.11, GLIBCXX_3.4.14, GLIBCXX_3.4.18, GLIBCXX_3.4.19, GLIBCXX_3.4.20, GLIBCXX_3.4.21, GLIBCXX_3.4.22, GLIBCXX_3.4.26, GLIBCXX_3.4.29, GLIBCXX_3.4.31, GLIBCXX_3.4.32, GLIBCXX_3.4.9, GLIBC_2.14, GLIBC_2.17, GLIBC_2.2.5, GLIBC_2.32, GLIBC_2.33, GLIBC_2.34, GLIBC_2.35, GLIBC_2.4, GLIBC_2.43, GLIBC_2.9
+feature_lab: resolved on build host
+  /usr/lib/ld-linux-x86-64.so.2
+  /usr/lib/libGLX.so.0
+  /usr/lib/libGLdispatch.so.0
+  /usr/lib/libOpenGL.so.0
+  /usr/lib/libX11.so.6
+  /usr/lib/libXau.so.6
+  /usr/lib/libXdmcp.so.6
+  /usr/lib/libasound.so.2
+  /usr/lib/libc.so.6
+  /usr/lib/libgcc_s.so.1
+  /usr/lib/libm.so.6
+  /usr/lib/libstdc++.so.6
+  /usr/lib/libxcb.so.1
+
+stress_bench: direct NEEDED
+  NEEDED               libstdc++.so.6
+  NEEDED               libm.so.6
+  NEEDED               libgcc_s.so.1
+  NEEDED               libc.so.6
+  Required symbol versions: CXXABI_1.3, CXXABI_1.3.5, CXXABI_1.3.9, GLIBCXX_3.4, GLIBCXX_3.4.11, GLIBCXX_3.4.18, GLIBCXX_3.4.19, GLIBCXX_3.4.20, GLIBCXX_3.4.21, GLIBCXX_3.4.26, GLIBCXX_3.4.29, GLIBCXX_3.4.31, GLIBCXX_3.4.32, GLIBCXX_3.4.9, GLIBC_2.14, GLIBC_2.17, GLIBC_2.2.5, GLIBC_2.32, GLIBC_2.34, GLIBC_2.35, GLIBC_2.4
+stress_bench: resolved on build host
+  /usr/lib/ld-linux-x86-64.so.2
+  /usr/lib/libc.so.6
+  /usr/lib/libgcc_s.so.1
+  /usr/lib/libm.so.6
+  /usr/lib/libstdc++.so.6
+
+validate_assets: direct NEEDED
+  NEEDED               libstdc++.so.6
+  NEEDED               libm.so.6
+  NEEDED               libgcc_s.so.1
+  NEEDED               libc.so.6
+  Required symbol versions: CXXABI_1.3, CXXABI_1.3.5, CXXABI_1.3.9, GLIBCXX_3.4, GLIBCXX_3.4.11, GLIBCXX_3.4.18, GLIBCXX_3.4.20, GLIBCXX_3.4.21, GLIBCXX_3.4.26, GLIBCXX_3.4.29, GLIBCXX_3.4.31, GLIBCXX_3.4.32, GLIBCXX_3.4.9, GLIBC_2.14, GLIBC_2.2.5, GLIBC_2.32, GLIBC_2.34, GLIBC_2.35, GLIBC_2.4
+validate_assets: resolved on build host
+  /usr/lib/ld-linux-x86-64.so.2
+  /usr/lib/libc.so.6
+  /usr/lib/libgcc_s.so.1
+  /usr/lib/libm.so.6
+  /usr/lib/libstdc++.so.6
+

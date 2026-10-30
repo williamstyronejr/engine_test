@@ -2444,10 +2444,36 @@ skips (70.73 s). All 53 evidence files and five changed documentation files matc
 the archive; 1,090 relative links, 75 recipes and eight CPU entry-point commands
 pass the package audit. Allocation profilers remain excluded.
 
+## Increment 76: bounded repeated-session regression
+
+- Added one native hardware group, `long_session`, composing 64 complete routes
+  across both levels in one renderer session. It commits 66,720 gameplay ticks,
+  renders 640 sprite passes and opens/joins eight null-PCM audio workers.
+- Each cycle checks private save/load and corrupt-save rejection, scene rollback
+  and repair, rejected/repaired texture and sound-bank reloads, pause/resume,
+  transient target retirement and production level transitions.
+- Renderer inventory returns to its pre-load baseline after release. Completed
+  scene/collision buffers stay bounded and retired audio banks drain; no whole-heap,
+  driver-memory, audible-device or wall-time endurance claim follows.
+- All 28 selected GNU Debug/Release, Clang and native ASan/UBSan group executions
+  pass with identical workload counts and no skips. Builds are fresh for the
+  selected targets; this is not a full 67-group or fresh offline qualification.
+- Retained the initial fixture error (corrupt records rejected on write), its fix,
+  and the successful Debug run whose XML output was truncated. Corrected evidence
+  capture repeats Debug once and retains complete per-cycle output.
+
+See [fixture contract](SESSION_VALIDATION.md) and
+[validation evidence](../validation/2026-10-30-long-session/RESULTS.md).
+
+At documentation commit `381e350`, all three Release package groups pass without
+skips (53.83 s). All 42 evidence files and five changed documentation files match
+the archive. The package audit passes 1,133 relative links, 76 shell recipes and
+eight CPU entry-point commands; profilers and the new test binary stay excluded.
+
 ## Next increment
 
-Define and implement a bounded long-session regression fixture for repeated
-play/reload/audio lifecycle coverage, using private assets/user data and explicit
-resource-restoration checks. Retain exact workload limits and failures; automated
-coverage does not replace physical display/audio acceptance, resolve host timing
-instability or complete final support signoff. Background loading remains deferred.
+Extend repeated-session coverage to full gameplay/HUD rendering and settings and
+diagnostics transitions, with explicit texture/font/target restoration checks.
+Keep private user data and bounded workloads. Physical display/audio, real-time
+endurance, timing stability and broader memory acceptance remain open; background
+loading stays deferred.

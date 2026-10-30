@@ -1,0 +1,20 @@
+Test project /home/zero/dev/engine_test/build/debug
+    Start 39: long_session
+1/1 Test #39: long_session .....................***Failed    0.31 sec
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+FAIL repeated_complete_routes_reload_rollback_saves_and_audio_retirement: Persistence checksum mismatch
+1 tests, 1 failed
+
+
+0% tests passed, 1 tests failed out of 1
+
+Label Time Summary:
+hardware    =   0.31 sec*proc (1 test)
+
+Total Test time (real) =   0.31 sec
+
+The following tests FAILED:
+	 39 - long_session (Failed)                             hardware
+Errors while running CTest

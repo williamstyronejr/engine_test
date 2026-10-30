@@ -1,0 +1,15 @@
+{
+  "baseline": "6facd4e390259df5889d3c6bb2de5e69d5576d3b",
+  "state": "uncommitted fixture; exact source retained in fixture.cpp.log",
+  "test_command": [
+    "ctest",
+    "--preset",
+    "debug",
+    "-R",
+    "^long_session$",
+    "--output-on-failure"
+  ],
+  "failure": "UserStorage rejects corrupt records on write, before the intended load rollback test",
+  "correction": "Write the corrupt record through AssetRoot in the private user-data directory",
+  "ninja_warning": "Reused Debug build reports premature end of file; recovery rebuild passed; cause unestablished"
+}

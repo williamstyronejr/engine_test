@@ -39,6 +39,13 @@ real display session. Both build directories are fresh. Source/package hashes
 retain provenance for archived binaries whose embedded revision is `unknown`.
 This refresh changes no engine, example, test, profiling or build rules.
 
+Increment 76 adds a [bounded repeated-session fixture](SESSION_VALIDATION.md) at
+`74ddf5a`, with 64 complete routes, reload rollback, private saves and eight audio
+worker lifetimes. [Twenty-eight selected groups](../validation/2026-10-30-long-session/RESULTS.md)
+pass across GNU Debug/Release, Clang and native ASan/UBSan. It adds automated R6
+composition coverage; accelerated ticks, null audio and hidden sprite rendering
+do not establish wall-time endurance, audible output or physical acceptance.
+
 “Evidence available” below applies to the stated revision and environment only.
 “Open” means missing evidence or unfinished acceptance work, not a reproduced code
 failure. Unconfirmed WM minimization and rejected historical timing runs are called
@@ -68,7 +75,7 @@ advertised; a second GPU is not a substitute for finishing checks on the testing
 
 | Gate | State | Required closure / evidence | Execution |
 | --- | --- | --- | --- |
-| R1: candidate compiler and sanitizer matrix | Full current native sanitizer evidence added at `4f60312` | Fresh GNU native ASan/UBSan passes all 66 runtime groups, plus two leak-enabled audio groups. The prior integrated refresh supplies full GNU Debug/Release and Clang (66 each), all 34 CPU sanitizer groups and two audio TSan groups. All pass without skips. Those prior compiler trees were reused; no fresh full cross-compiler matrix is claimed. | [Fresh native suite](../validation/2026-10-29-offline/RESULTS.md), [integrated matrix](../validation/2026-10-29-readiness/RESULTS.md). |
+| R1: candidate compiler and sanitizer matrix | Full baseline suite at `4f60312`; new session fixture validated separately | Fresh GNU native ASan/UBSan passes all 66 runtime groups, plus two leak-enabled audio groups. The prior integrated refresh supplies full GNU Debug/Release and Clang (66 each), all 34 CPU sanitizer groups and two audio TSan groups. All pass without skips. Those prior compiler trees were reused; no fresh full cross-compiler matrix is claimed. | [Fresh native suite](../validation/2026-10-29-offline/RESULTS.md), [integrated matrix](../validation/2026-10-29-readiness/RESULTS.md), [session subset](../validation/2026-10-30-long-session/RESULTS.md). |
 | R2: concurrent audio validation | Refreshed evidence at `6d0da8f` | A new Clang TSan build passes both audio groups without reports, using null/failing sinks. This covers exercised queue, buffer-retirement and shutdown schedules, not all interleavings or uninstrumented ALSA internals. | No physical sound claim; [race results](../validation/2026-10-29-readiness/tsan-audio-tests.xml). |
 | R3: clean offline build and candidate package | Fresh archived-source evidence at `4f60312` | New full GNU Release build, 36 CPU groups and mandatory headless package validation pass inside network isolation. Three package groups, including relocated OpenGL scenarios, pass afterward in the real display session. Source/archive hashes identify the build; embedded revision is `unknown` without Git metadata. Final Git-stamped candidate packages are checked separately. | [Offline provenance and package audit](../validation/2026-10-29-offline/RESULTS.md); older `1dfba31` evidence remains historical. |
 | R4: display, input and interactive game acceptance | Open; WM minimize was unconfirmed (probe exit 2) | Finish physical scale/monitor, supported WM minimize/restore, focus, layout switching and title/settings/gameplay checks. Verify camera, clipping, rebinding, save/relaunch, level transitions and visible shader failure/recovery. Record each case, configuration and result. | Human observation and a suitable WM/monitor configuration. |
@@ -147,13 +154,15 @@ ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 \
 Native graphics previously disabled leak detection because of driver allocations;
 that run checks address/undefined behavior only. Retain CPU and audio leak-enabled
 results separately. Do not suppress an engine report to make the aggregate pass.
-After storage, allocation profiling, UI coverage and paired stress-frame additions, the current inventory is 66
-native runtime groups (36 CPU, 26 hardware, four platform), plus three packaging
+After the repeated-session addition, the current inventory is 67
+native runtime groups (36 CPU, 27 hardware, four platform), plus three packaging
 fixtures; platform-disabled builds discover 34 CPU groups. Discovery is not execution.
 The [current refresh](../validation/2026-10-29-readiness/RESULTS.md) runs every GNU/Clang
 runtime group and CPU sanitizer group, with a focused native sanitizer subset.
 The [fresh follow-up](../validation/2026-10-29-offline/RESULTS.md) completes the
-current 66-group native sanitizer suite from archived source `4f60312`.
+then-current 66-group native sanitizer suite from archived source `4f60312`.
+The added `long_session` group receives targeted validation separately; the full
+67-group suite has not been refreshed by that addition.
 The full fresh-matrix record at `1dfba31` predates these additions; later storage and
 [allocation validation](../validation/2026-10-24-allocations/RESULTS.md) record their
 own full/focused scopes. Update counts from
@@ -352,5 +361,11 @@ test external URLs, heading anchors, interactive recipes or physical devices.
 Increment 75 [completes that full native and fresh offline follow-up](../validation/2026-10-29-offline/RESULTS.md)
 for archived source `4f60312`, with 107 passing CTest group executions and explicit
 network/source/package provenance. R4/R5, R6 timing/coverage and R8 support/signoff
-stay open. The next bounded automated fixture should extend repeated
-play/reload/audio lifecycle coverage with explicit resource-restoration checks.
+stay open. The repeated-session follow-up is recorded below.
+
+Increment 76 [composes repeated gameplay/reload/audio coverage](SESSION_VALIDATION.md).
+Each of four targeted builds completes 64 routes with matching deterministic
+counts and restored tracked resources. The successful Debug evidence is retained
+across a capture correction; the initial save-corruption fixture failure stays
+separate. This narrows repeated-lifecycle coverage gaps but leaves full HUD/settings,
+physical devices, wall-time endurance, timing and unmeasured memory acceptance open.
