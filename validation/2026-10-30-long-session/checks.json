@@ -1,0 +1,58 @@
+[
+  {
+    "config": "debug",
+    "groups": [
+      "long_session",
+      "levels",
+      "persistence",
+      "scene_reload",
+      "texture_reload",
+      "audio_reload",
+      "renderer_memory"
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  {
+    "config": "release",
+    "groups": [
+      "long_session",
+      "levels",
+      "persistence",
+      "scene_reload",
+      "texture_reload",
+      "audio_reload",
+      "renderer_memory"
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  {
+    "config": "clang",
+    "groups": [
+      "long_session",
+      "levels",
+      "persistence",
+      "scene_reload",
+      "texture_reload",
+      "audio_reload",
+      "renderer_memory"
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  {
+    "config": "native-sanitize",
+    "groups": [
+      "long_session",
+      "levels",
+      "persistence",
+      "scene_reload",
+      "texture_reload",
+      "audio_reload",
+      "renderer_memory"
+    ],
+    "failures": 0,
+    "skips": 0
+  }
+]

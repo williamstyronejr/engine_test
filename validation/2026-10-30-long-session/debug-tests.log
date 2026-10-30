@@ -1,0 +1,24 @@
+Test project /home/zero/.cache/engine-session-76-5wqqvzes/debug
+    Start  6: scene_reload
+1/7 Test  #6: scene_reload .....................   Passed    0.53 sec
+    Start 20: levels
+2/7 Test #20: levels ...........................   Passed    0.99 sec
+    Start 27: persistence
+3/7 Test #27: persistence ......................   Passed    1.09 sec
+    Start 39: long_session
+4/7 Test #39: long_session .....................   Passed   27.77 sec
+    Start 48: renderer_memory
+5/7 Test #48: renderer_memory ..................   Passed    0.07 sec
+    Start 50: audio_reload
+6/7 Test #50: audio_reload .....................   Passed    0.71 sec
+    Start 59: texture_reload
+7/7 Test #59: texture_reload ...................   Passed    0.57 sec
+
+100% tests passed out of 7
+
+Label Time Summary:
+cpu         =   2.61 sec*proc (3 tests)
+hardware    =  28.41 sec*proc (3 tests)
+platform    =   0.71 sec*proc (1 test)
+
+Total Test time (real) =  31.74 sec

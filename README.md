@@ -24,6 +24,9 @@ is retained, with the prototype and all measurements preserved.
 submission as the leading application CPU symbol. The subsequent
 [fixed-buffer trial](benchmarks/2026-10-28-vertices-results.md) also failed its adoption
 gate; it retains new batch-capacity regression coverage and the original renderer.
+The [bounded session regression](docs/SESSION_VALIDATION.md) repeatedly completes
+both levels with reload rollback, private saves, audio-bank retirement and resource
+restoration checks. Its accelerated simulation does not establish real-time endurance.
 The [warmup/order study](benchmarks/2026-10-28-stability-results.md) retains changing
 host frequency/thermal observations; neither warmup protocol establishes stability.
 [Renderer memory snapshots](docs/RENDERER_MEMORY.md) now report CPU vertex storage,
