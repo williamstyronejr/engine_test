@@ -83,3 +83,20 @@ main-loop glue. Controlled errors do not certify audible playback, physical devi
 disconnect/suspend/resume, or power management. Those acceptance gates, timing
 stability, real-time endurance, broader memory coverage and support/signoff remain
 open. The next increment returns to the declared workload's frame-time failures.
+
+## Candidate package
+
+At documentation commit **`76c2b7d`**, all three Release package groups pass
+without skips: [status](package-feature-tests.xml), [log](package-feature-tests.log),
+[commands](package-feature-commands.json). All 42 then-current evidence/documentation
+files match archived bytes. Allocation profilers and all three session test
+executables remain excluded from installation.
+
+The [candidate audit](package-candidate/summary.json) retains the archive SHA-256,
+relative-file-link and shell-recipe checks, and eight bounded CPU entry-point
+commands between two successful manifest checks. The package payload is unchanged.
+This is command correctness, not a performance acceptance run. Packaging reuses
+the Release preset tree and is separate from the four fresh targeted builds.
+The final merge receives all three package checks and the content/documentation
+audit again after this evidence is included; final records remain locally under
+`build/audio-ui-session-refresh/`.

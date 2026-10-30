@@ -2513,6 +2513,10 @@ eight CPU entry-point commands; profilers and both session tests stay excluded.
 See [contract](SESSION_VALIDATION.md#audio-failureui-companion-increment-78) and
 [validation evidence](../validation/2026-10-30-audio-ui-session/RESULTS.md).
 
+At documentation commit `76c2b7d`, all three Release package groups pass without
+skips. All 42 then-current evidence/documentation files match archive bytes;
+the packaged link/recipe and bounded CPU entry-point audit also passes.
+
 ## Next increment
 
 Return to the declared workload's open frame-time failures: reproduce a bounded

@@ -1,0 +1,13 @@
+Feature Lab stress arena v1: one 60 Hz tick per frame, unpaced by default.
+--stress [--cpu-only] --sprites 0..65536 --tiles 0..65536 --entities 0..4096
+--bodies 0..256 [--dense] --voices 0..16 --seed UINT64
+--frames 1..10000 --warmup 0..600 --cycles 1..50 (at most 60000 measured frames)
+--width 64..4096 --height 64..4096 --report FILE.json --label TEXT --screenshot FILE.ppm [--frame-samples] [--presentation immediate|vsync]
+--submission-samples requires --frame-samples and graphics; CPU driver-call timing.
+--preparation-samples additionally profiles phases and calling-thread CPU time.
+--context-samples requires --preparation-samples; counts calling-thread switches.
+Defaults: 8192 sprites, 4096 tiles, 1024 entities, 128 sparse bodies, 8 voices;
+600 frames after 60 warmup steps per cycle, 3 cycles, 1280x720 offscreen.
+Mixer runs offline; no audio device. Presentation requests interval 0 (default) or 1.
+Swap request issuance does not prove physical synchronization. Escape aborts.
+CPU mode omits rendering/tile traversal. --no-audio/--no-vsync are accepted aliases.

@@ -1,0 +1,59 @@
+[
+  {
+    "command": [
+      "cmake",
+      "--preset",
+      "release",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-audio-ui-78-0svx11as/candidate-packages"
+    ],
+    "source": "76c2b7d663c114c8318631bb6de67c2d3bba8289",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp",
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0rhxKjf:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "DISPLAY": ":0"
+    },
+    "exit_code": 0,
+    "seconds": 0.4457709710113704
+  },
+  {
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "--target",
+      "feature_lab",
+      "stress_bench",
+      "validate_assets",
+      "-j2"
+    ],
+    "source": "76c2b7d663c114c8318631bb6de67c2d3bba8289",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp",
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0rhxKjf:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "DISPLAY": ":0"
+    },
+    "exit_code": 0,
+    "seconds": 9.539824403007515
+  },
+  {
+    "command": [
+      "ctest",
+      "--preset",
+      "release",
+      "-R",
+      "^package_(build|relocation|graphics)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/build/audio-ui-session-refresh/package-feature-tests.xml"
+    ],
+    "source": "76c2b7d663c114c8318631bb6de67c2d3bba8289",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp",
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0rhxKjf:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "DISPLAY": ":0"
+    },
+    "exit_code": 0,
+    "seconds": 74.06813029304612
+  }
+]

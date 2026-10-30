@@ -1,0 +1,170 @@
+[
+  {
+    "name": "manifest",
+    "command": [
+      "/home/zero/dev/engine_test/.tools/bin/cmake",
+      "-DMODE=verify",
+      "-DROOT=/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/relocated package with spaces",
+      "-P",
+      "/home/zero/dev/engine_test/cmake/PackageSmoke.cmake"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 2.025268031982705
+  },
+  {
+    "name": "game-help",
+    "command": [
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/relocated package with spaces/bin/feature_lab",
+      "--help"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.004206292040180415
+  },
+  {
+    "name": "stress-help",
+    "command": [
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/relocated package with spaces/bin/feature_lab",
+      "--stress",
+      "--help"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.00415597198298201
+  },
+  {
+    "name": "validator-help",
+    "command": [
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/relocated package with spaces/bin/validate_assets",
+      "--help"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.003545488987583667
+  },
+  {
+    "name": "game-verify",
+    "command": [
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/relocated package with spaces/bin/feature_lab",
+      "--verify"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.052040008013136685
+  },
+  {
+    "name": "validate-all",
+    "command": [
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/relocated package with spaces/bin/validate_assets"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.007872959016822278
+  },
+  {
+    "name": "validate-scene",
+    "command": [
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/relocated package with spaces/bin/validate_assets",
+      "--type",
+      "scene",
+      "--file",
+      "facility.scene",
+      "--scene-budget",
+      "256"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.003254570998251438
+  },
+  {
+    "name": "validate-json",
+    "command": [
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/relocated package with spaces/bin/validate_assets",
+      "--json"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.007059899973683059
+  },
+  {
+    "name": "stress-bench",
+    "command": [
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/relocated package with spaces/bin/stress_bench",
+      "--frames",
+      "60",
+      "--warmup",
+      "10",
+      "--cycles",
+      "2",
+      "--report",
+      "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/stress.json"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.14735723700141534
+  },
+  {
+    "name": "manifest-after",
+    "command": [
+      "/home/zero/dev/engine_test/.tools/bin/cmake",
+      "-DMODE=verify",
+      "-DROOT=/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/relocated package with spaces",
+      "-P",
+      "/home/zero/dev/engine_test/cmake/PackageSmoke.cmake"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-ui-78-0svx11as/compiler-tmp/package-doc-audit-a_3l7eom/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 1.7762455670163035
+  }
+]
