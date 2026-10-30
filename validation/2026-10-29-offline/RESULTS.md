@@ -109,3 +109,20 @@ frame-time and broader memory/long-session coverage (R6), and final support/sign
 (R8) remain open. No physical power-loss guarantee is added. Historical timing
 failures and rejected optimization trials remain unchanged. Background loading
 remains deferred; these checks do not complete milestone 6.
+
+## Git-stamped candidate package
+
+At documentation commit **`60c4e8e`**, all three Release package groups pass without
+skips (70.73 s): [test log](package-feature-tests.log),
+[XML](package-feature-tests.xml) and [commands](package-feature-commands.json).
+The archive embeds the commit identity. All 53 then-current evidence files and
+five changed documentation files match their archived copies byte for byte;
+the four allocation profilers remain excluded from installation.
+
+The [candidate archive audit](package-candidate/summary.json) verifies 1,090 relative
+file links, 75 shell recipes and eight bounded CPU entry-point commands, with two
+successful manifest checks. Its compressed SHA-256 is recorded in that summary.
+The later merge receives the same three package checks and a complete content/audit
+check after adding this record; those final merge artifacts remain under
+`build/offline-refresh/` on the validation machine. These package checks reuse the
+Release preset build directory and are distinct from the two fresh builds above.

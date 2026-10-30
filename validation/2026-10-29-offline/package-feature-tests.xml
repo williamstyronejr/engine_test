@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="3"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="70"
+	timestamp="2026-10-29T22:19:17"
+	>
+	<testcase name="package_build" classname="package_build" time="13.5217" status="run">
+		<properties>
+			<property name="cmake_labels" value="packaging"/>
+		</properties>
+		<system-out>-- Validated package: /home/zero/dev/engine_test/build/release/dist/feature-lab-0.1.0-Linux-x86_64-60c4e8e.tar.gz
+</system-out>
+	</testcase>
+	<testcase name="package_relocation" classname="package_relocation" time="9.75799" status="run">
+		<properties>
+			<property name="cmake_labels" value="packaging"/>
+		</properties>
+		<system-out>-- Package headless smoke passed; evidence: /home/zero/.cache/engine-offline-75-3q1bxwdx/candidate-packages/smoke-8e65813e1e47
+</system-out>
+	</testcase>
+	<testcase name="package_graphics" classname="package_graphics" time="47.3904" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware;packaging"/>
+		</properties>
+		<system-out>-- Package graphics smoke passed; evidence: /home/zero/.cache/engine-offline-75-3q1bxwdx/candidate-packages/smoke-d0fa904280ea
+</system-out>
+	</testcase>
+</testsuite>

@@ -2439,6 +2439,11 @@ commands pass the current package audit. Allocation profilers remain excluded.
 See [results](../validation/2026-10-29-offline/RESULTS.md) and
 [release gates](RELEASE_READINESS.md).
 
+At documentation commit `60c4e8e`, all three Release package groups pass without
+skips (70.73 s). All 53 evidence files and five changed documentation files match
+the archive; 1,090 relative links, 75 recipes and eight CPU entry-point commands
+pass the package audit. Allocation profilers remain excluded.
+
 ## Next increment
 
 Define and implement a bounded long-session regression fixture for repeated
