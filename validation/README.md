@@ -109,3 +109,7 @@ incremental build scope and remaining offline/physical/timing limits are explici
 - [2026-10-30 bounded repeated-session regression](2026-10-30-long-session/RESULTS.md):
   64 complete routes with reload rollback, private saves, audio retirement and
   renderer restoration, across four targeted compiler/sanitizer configurations.
+
+- [2026-10-30 full gameplay/UI sessions](2026-10-30-ui-session/RESULTS.md):
+  16 complete routes through full rendering and modal UI transitions, with 240
+  matching frame fingerprints across four selected compiler/sanitizer builds.

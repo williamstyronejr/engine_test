@@ -1,0 +1,21 @@
+Test project /home/zero/.cache/engine-ui-session-77-qpwwoug1/debug
+    Start 25: diagnostics
+1/6 Test #25: diagnostics ......................   Passed    0.30 sec
+    Start 30: ui
+2/6 Test #30: ui ...............................   Passed    0.01 sec
+    Start 39: ui_session
+3/6 Test #39: ui_session .......................   Passed    8.01 sec
+    Start 45: font_reload
+4/6 Test #45: font_reload ......................   Passed    0.99 sec
+    Start 46: font_graphics
+5/6 Test #46: font_graphics ....................   Passed    0.24 sec
+    Start 49: renderer_memory
+6/6 Test #49: renderer_memory ..................   Passed    0.07 sec
+
+100% tests passed out of 6
+
+Label Time Summary:
+cpu         =   0.31 sec*proc (2 tests)
+hardware    =   9.31 sec*proc (4 tests)
+
+Total Test time (real) =   9.62 sec

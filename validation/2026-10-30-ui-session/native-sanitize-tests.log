@@ -1,0 +1,21 @@
+Test project /home/zero/.cache/engine-ui-session-77-qpwwoug1/native-sanitize
+    Start 25: diagnostics
+1/6 Test #25: diagnostics ......................   Passed    1.85 sec
+    Start 30: ui
+2/6 Test #30: ui ...............................   Passed    0.06 sec
+    Start 39: ui_session
+3/6 Test #39: ui_session .......................   Passed   25.18 sec
+    Start 45: font_reload
+4/6 Test #45: font_reload ......................   Passed    1.12 sec
+    Start 46: font_graphics
+5/6 Test #46: font_graphics ....................   Passed    0.45 sec
+    Start 49: renderer_memory
+6/6 Test #49: renderer_memory ..................   Passed    0.14 sec
+
+100% tests passed out of 6
+
+Label Time Summary:
+cpu         =   1.90 sec*proc (2 tests)
+hardware    =  26.90 sec*proc (4 tests)
+
+Total Test time (real) =  28.81 sec

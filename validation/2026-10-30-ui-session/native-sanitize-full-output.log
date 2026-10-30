@@ -1,0 +1,526 @@
+Start testing: Oct 30 11:23 EDT
+----------------------------------------------------------
+25/68 Testing: diagnostics
+25/68 Test: diagnostics
+Command: "/home/zero/.cache/engine-ui-session-77-qpwwoug1/native-sanitize/diagnostics_tests"
+Directory: /home/zero/.cache/engine-ui-session-77-qpwwoug1/native-sanitize
+"diagnostics" start time: Oct 30 11:23 EDT
+Output:
+----------------------------------------------------------
+PASS timing_history_statistics_and_rejection
+PASS timing_history_rollover_clear_and_large_samples
+PASS debug_toggle_edges_and_focus_cancel
+PASS single_step_consumes_one_edge_across_catchup
+PASS single_step_matches_complete_unpaused_replay
+PASS single_step_pause_and_restart_priority
+PASS settings_capture_step_and_debug_controls_until_release
+7 tests, 0 failed
+<end of output>
+Test time =   1.85 sec
+----------------------------------------------------------
+Test Passed.
+"diagnostics" end time: Oct 30 11:23 EDT
+"diagnostics" time elapsed: 00:00:01
+----------------------------------------------------------
+
+30/68 Testing: ui
+30/68 Test: ui
+Command: "/home/zero/.cache/engine-ui-session-77-qpwwoug1/native-sanitize/ui_tests"
+Directory: /home/zero/.cache/engine-ui-session-77-qpwwoug1/native-sanitize
+"ui" start time: Oct 30 11:23 EDT
+Output:
+----------------------------------------------------------
+PASS pointer_edges_and_focus_cancel
+PASS layout_validation_preserves_live_state
+PASS keyboard_focus_skips_disabled_and_wraps
+PASS pointer_activation_requires_matching_press_and_release
+PASS slider_capture_clamp_wheel_and_keyboard
+PASS clipping_overlap_and_resize_cancel_capture
+PASS input_gate_holds_capture_until_release
+PASS column_rejects_overflow_without_advancing
+PASS settings_pause_restore_and_gameplay_isolation
+PASS settings_actions_and_responsive_bounds
+PASS settings_buttons_checkboxes_and_disabled_audio
+PASS settings_save_load_and_slot_selection
+12 tests, 0 failed
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"ui" end time: Oct 30 11:23 EDT
+"ui" time elapsed: 00:00:00
+----------------------------------------------------------
+
+39/68 Testing: ui_session
+39/68 Test: ui_session
+Command: "/home/zero/.cache/engine-ui-session-77-qpwwoug1/native-sanitize/ui_session_tests"
+Directory: /home/zero/.cache/engine-ui-session-77-qpwwoug1/native-sanitize
+"ui_session" start time: Oct 30 11:23 EDT
+Output:
+----------------------------------------------------------
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=1 state=gameplay width=640 height=480 hash=9951465953928205060
+[ui-frame] cycle=1 state=diagnostics width=640 height=480 hash=6444833199444432233
+[ui-frame] cycle=1 state=shapes width=640 height=480 hash=13162496544934281923
+[ui-frame] cycle=1 state=settings width=640 height=480 hash=2893751576189037492
+[ui-frame] cycle=1 state=muted width=640 height=480 hash=14911613460464926224
+[ui-frame] cycle=1 state=controls width=640 height=480 hash=4590355988804566258
+[ui-frame] cycle=1 state=capture width=640 height=480 hash=1882989708947030658
+[ui-frame] cycle=1 state=canceled width=640 height=480 hash=4890718040651851706
+[ui-frame] cycle=1 state=rebound width=640 height=480 hash=2708027372318167019
+[ui-frame] cycle=1 state=settings_return width=640 height=480 hash=10611216646496709138
+[ui-frame] cycle=1 state=resumed width=640 height=480 hash=12596646061979486227
+[ui-frame] cycle=1 state=small_viewport width=320 height=240 hash=293804338979721115
+[ui-frame] cycle=1 state=restored_viewport width=640 height=480 hash=12596646061979486227
+[font retained] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[ui-frame] cycle=1 state=font_retained width=640 height=480 hash=3209061864026151073
+[font applied] revision=3 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=1 state=font_repaired width=640 height=480 hash=9880211152060174260
+[ui-cycle] completed=1 ticks=1381
+[ui-frame] cycle=2 state=gameplay width=640 height=480 hash=70134099428014406
+[ui-frame] cycle=2 state=diagnostics width=640 height=480 hash=17862897712847192819
+[ui-frame] cycle=2 state=shapes width=640 height=480 hash=17240987379857654919
+[ui-frame] cycle=2 state=settings width=640 height=480 hash=2122632574232643465
+[ui-frame] cycle=2 state=muted width=640 height=480 hash=10670318834871536059
+[ui-frame] cycle=2 state=controls width=640 height=480 hash=17451718009606166191
+[ui-frame] cycle=2 state=capture width=640 height=480 hash=857913707628187387
+[ui-frame] cycle=2 state=canceled width=640 height=480 hash=13039756472155575187
+[ui-frame] cycle=2 state=rebound width=640 height=480 hash=10177970231276255241
+[ui-frame] cycle=2 state=settings_return width=640 height=480 hash=14377888079489107304
+[ui-frame] cycle=2 state=resumed width=640 height=480 hash=8746911696922356996
+[ui-frame] cycle=2 state=small_viewport width=320 height=240 hash=7799197241336724380
+[ui-frame] cycle=2 state=restored_viewport width=640 height=480 hash=8746911696922356996
+[font retained] revision=3 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[ui-frame] cycle=2 state=font_retained width=640 height=480 hash=17096933659619680708
+[font applied] revision=4 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=2 state=font_repaired width=640 height=480 hash=6207336295328148308
+[ui-cycle] completed=2 ticks=702
+[ui-frame] cycle=3 state=gameplay width=640 height=480 hash=11864680382571376490
+[ui-frame] cycle=3 state=diagnostics width=640 height=480 hash=5978120378798028423
+[ui-frame] cycle=3 state=shapes width=640 height=480 hash=7396891405110914185
+[ui-frame] cycle=3 state=settings width=640 height=480 hash=4457182555303648671
+[ui-frame] cycle=3 state=muted width=640 height=480 hash=11376947811358878819
+[ui-frame] cycle=3 state=controls width=640 height=480 hash=5137433872526150687
+[ui-frame] cycle=3 state=capture width=640 height=480 hash=9040101492443574991
+[ui-frame] cycle=3 state=canceled width=640 height=480 hash=1751249214108682823
+[ui-frame] cycle=3 state=rebound width=640 height=480 hash=16265067991896303045
+[ui-frame] cycle=3 state=settings_return width=640 height=480 hash=16959401873690424048
+[ui-frame] cycle=3 state=resumed width=640 height=480 hash=1987426345711313820
+[ui-frame] cycle=3 state=small_viewport width=320 height=240 hash=16229162776447293750
+[ui-frame] cycle=3 state=restored_viewport width=640 height=480 hash=1987426345711313820
+[font retained] revision=4 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[ui-frame] cycle=3 state=font_retained width=640 height=480 hash=4393615773481799714
+[font applied] revision=5 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=3 state=font_repaired width=640 height=480 hash=2291932979958669947
+[ui-cycle] completed=3 ticks=1381
+[ui-frame] cycle=4 state=gameplay width=640 height=480 hash=13444043315677692197
+[ui-frame] cycle=4 state=diagnostics width=640 height=480 hash=100499987288064436
+[ui-frame] cycle=4 state=shapes width=640 height=480 hash=4540802418894553856
+[ui-frame] cycle=4 state=settings width=640 height=480 hash=9787596440355793122
+[ui-frame] cycle=4 state=muted width=640 height=480 hash=2001664557598990124
+[ui-frame] cycle=4 state=controls width=640 height=480 hash=10111095395364036064
+[ui-frame] cycle=4 state=capture width=640 height=480 hash=1659907854376123588
+[ui-frame] cycle=4 state=canceled width=640 height=480 hash=9372464993925185596
+[ui-frame] cycle=4 state=rebound width=640 height=480 hash=4223815255802457466
+[ui-frame] cycle=4 state=settings_return width=640 height=480 hash=5378569158346791639
+[ui-frame] cycle=4 state=resumed width=640 height=480 hash=18125431615097463551
+[ui-frame] cycle=4 state=small_viewport width=320 height=240 hash=8635280425703329856
+[ui-frame] cycle=4 state=restored_viewport width=640 height=480 hash=18125431615097463551
+[font retained] revision=5 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[ui-frame] cycle=4 state=font_retained width=640 height=480 hash=82080230073121801
+[font applied] revision=6 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=4 state=font_repaired width=640 height=480 hash=18125431615097463551
+[ui-cycle] completed=4 ticks=702
+[ui-frame] cycle=5 state=gameplay width=640 height=480 hash=11369965185996371105
+[ui-frame] cycle=5 state=diagnostics width=640 height=480 hash=1384961631653190512
+[ui-frame] cycle=5 state=shapes width=640 height=480 hash=6405138257906695406
+[ui-frame] cycle=5 state=settings width=640 height=480 hash=4427998374464107249
+[ui-frame] cycle=5 state=muted width=640 height=480 hash=12167306043222486997
+[ui-frame] cycle=5 state=controls width=640 height=480 hash=11497543122036578201
+[ui-frame] cycle=5 state=capture width=640 height=480 hash=10263511881003252873
+[ui-frame] cycle=5 state=canceled width=640 height=480 hash=13244434410052378225
+[ui-frame] cycle=5 state=rebound width=640 height=480 hash=13304285692245598703
+[ui-frame] cycle=5 state=settings_return width=640 height=480 hash=8576805320312530366
+[ui-frame] cycle=5 state=resumed width=640 height=480 hash=2291932979958669947
+[ui-frame] cycle=5 state=small_viewport width=320 height=240 hash=3638789979151992028
+[ui-frame] cycle=5 state=restored_viewport width=640 height=480 hash=2291932979958669947
+[font retained] revision=6 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[ui-frame] cycle=5 state=font_retained width=640 height=480 hash=16317757929014205477
+[font applied] revision=7 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=5 state=font_repaired width=640 height=480 hash=14195680309005152166
+[ui-cycle] completed=5 ticks=1381
+[ui-frame] cycle=6 state=gameplay width=640 height=480 hash=11362950965669395620
+[ui-frame] cycle=6 state=diagnostics width=640 height=480 hash=2714335267106836541
+[ui-frame] cycle=6 state=shapes width=640 height=480 hash=2786132683359419305
+[ui-frame] cycle=6 state=settings width=640 height=480 hash=3009864076028748843
+[ui-frame] cycle=6 state=muted width=640 height=480 hash=3780622317675564577
+[ui-frame] cycle=6 state=controls width=640 height=480 hash=14407583051871891005
+[ui-frame] cycle=6 state=capture width=640 height=480 hash=12201236426303878249
+[ui-frame] cycle=6 state=canceled width=640 height=480 hash=378576355322382401
+[ui-frame] cycle=6 state=rebound width=640 height=480 hash=965728300575800271
+[ui-frame] cycle=6 state=settings_return width=640 height=480 hash=14023099138555497954
+[ui-frame] cycle=6 state=resumed width=640 height=480 hash=5011050853239993514
+[ui-frame] cycle=6 state=small_viewport width=320 height=240 hash=13416162909690382914
+[ui-frame] cycle=6 state=restored_viewport width=640 height=480 hash=5011050853239993514
+[font retained] revision=7 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[ui-frame] cycle=6 state=font_retained width=640 height=480 hash=1580221419291985990
+[font applied] revision=8 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=6 state=font_repaired width=640 height=480 hash=8746911696922356996
+[ui-cycle] completed=6 ticks=702
+[ui-frame] cycle=7 state=gameplay width=640 height=480 hash=12723777377339738098
+[ui-frame] cycle=7 state=diagnostics width=640 height=480 hash=595712727804852423
+[ui-frame] cycle=7 state=shapes width=640 height=480 hash=14614606141726886489
+[ui-frame] cycle=7 state=settings width=640 height=480 hash=11636408123971805527
+[ui-frame] cycle=7 state=muted width=640 height=480 hash=6365297473702183315
+[ui-frame] cycle=7 state=controls width=640 height=480 hash=2899628561967262367
+[ui-frame] cycle=7 state=capture width=640 height=480 hash=10068871699732089551
+[ui-frame] cycle=7 state=canceled width=640 height=480 hash=16699846861561589671
+[ui-frame] cycle=7 state=rebound width=640 height=480 hash=3985242357565874661
+[ui-frame] cycle=7 state=settings_return width=640 height=480 hash=15941500494018751992
+[ui-frame] cycle=7 state=resumed width=640 height=480 hash=9880211152060174260
+[ui-frame] cycle=7 state=small_viewport width=320 height=240 hash=3480218984856369985
+[ui-frame] cycle=7 state=restored_viewport width=640 height=480 hash=9880211152060174260
+[font retained] revision=8 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[ui-frame] cycle=7 state=font_retained width=640 height=480 hash=3298855254236847386
+[font applied] revision=9 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=7 state=font_repaired width=640 height=480 hash=14270122180933116191
+[ui-cycle] completed=7 ticks=1381
+[ui-frame] cycle=8 state=gameplay width=640 height=480 hash=2101160112603692749
+[ui-frame] cycle=8 state=diagnostics width=640 height=480 hash=1891461819507530708
+[ui-frame] cycle=8 state=shapes width=640 height=480 hash=16018560209577719944
+[ui-frame] cycle=8 state=settings width=640 height=480 hash=14298479638715318202
+[ui-frame] cycle=8 state=muted width=640 height=480 hash=8608677250796986356
+[ui-frame] cycle=8 state=controls width=640 height=480 hash=13242788170647625576
+[ui-frame] cycle=8 state=capture width=640 height=480 hash=14519461121422442140
+[ui-frame] cycle=8 state=canceled width=640 height=480 hash=10231100798742007860
+[ui-frame] cycle=8 state=rebound width=640 height=480 hash=16041685458654778834
+[ui-frame] cycle=8 state=settings_return width=640 height=480 hash=3865018099935407791
+[ui-frame] cycle=8 state=resumed width=640 height=480 hash=11651328112687085703
+[ui-frame] cycle=8 state=small_viewport width=320 height=240 hash=7153143578055011872
+[ui-frame] cycle=8 state=restored_viewport width=640 height=480 hash=11651328112687085703
+[font retained] revision=9 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[ui-frame] cycle=8 state=font_retained width=640 height=480 hash=2854852091538454037
+[font applied] revision=10 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=8 state=font_repaired width=640 height=480 hash=1568903580287549343
+[ui-cycle] completed=8 ticks=702
+[ui-frame] cycle=9 state=gameplay width=640 height=480 hash=1925317633933185875
+[ui-frame] cycle=9 state=diagnostics width=640 height=480 hash=15555870584217589786
+[ui-frame] cycle=9 state=shapes width=640 height=480 hash=10898786543628394316
+[ui-frame] cycle=9 state=settings width=640 height=480 hash=8482471268175719576
+[ui-frame] cycle=9 state=muted width=640 height=480 hash=5022726861238699000
+[ui-frame] cycle=9 state=controls width=640 height=480 hash=2845142148673129644
+[ui-frame] cycle=9 state=capture width=640 height=480 hash=13527017444020134556
+[ui-frame] cycle=9 state=canceled width=640 height=480 hash=5913616836755026868
+[ui-frame] cycle=9 state=rebound width=640 height=480 hash=10746905928668880178
+[ui-frame] cycle=9 state=settings_return width=640 height=480 hash=4522022612579779767
+[ui-frame] cycle=9 state=resumed width=640 height=480 hash=12382734412785143725
+[ui-frame] cycle=9 state=small_viewport width=320 height=240 hash=15935862906923227413
+[ui-frame] cycle=9 state=restored_viewport width=640 height=480 hash=12382734412785143725
+[font retained] revision=10 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[ui-frame] cycle=9 state=font_retained width=640 height=480 hash=16644068912595649675
+[font applied] revision=11 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=9 state=font_repaired width=640 height=480 hash=17576930521869766356
+[ui-cycle] completed=9 ticks=1381
+[ui-frame] cycle=10 state=gameplay width=640 height=480 hash=17041520659884854812
+[ui-frame] cycle=10 state=diagnostics width=640 height=480 hash=17521840844446342421
+[ui-frame] cycle=10 state=shapes width=640 height=480 hash=3399295052368758493
+[ui-frame] cycle=10 state=settings width=640 height=480 hash=73570845210719803
+[ui-frame] cycle=10 state=muted width=640 height=480 hash=6739045498764255873
+[ui-frame] cycle=10 state=controls width=640 height=480 hash=17995967239442389909
+[ui-frame] cycle=10 state=capture width=640 height=480 hash=7814214131305127585
+[ui-frame] cycle=10 state=canceled width=640 height=480 hash=9336119687143095289
+[ui-frame] cycle=10 state=rebound width=640 height=480 hash=4860369850387891847
+[ui-frame] cycle=10 state=settings_return width=640 height=480 hash=6451600344500991730
+[ui-frame] cycle=10 state=resumed width=640 height=480 hash=6967432611052471458
+[ui-frame] cycle=10 state=small_viewport width=320 height=240 hash=8075012350629156604
+[ui-frame] cycle=10 state=restored_viewport width=640 height=480 hash=6967432611052471458
+[font retained] revision=11 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[ui-frame] cycle=10 state=font_retained width=640 height=480 hash=1342761706691685566
+[font applied] revision=12 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=10 state=font_repaired width=640 height=480 hash=11702476184946549915
+[ui-cycle] completed=10 ticks=702
+[ui-frame] cycle=11 state=gameplay width=640 height=480 hash=8976054604831029495
+[ui-frame] cycle=11 state=diagnostics width=640 height=480 hash=17593212006742051382
+[ui-frame] cycle=11 state=shapes width=640 height=480 hash=14526052803889832476
+[ui-frame] cycle=11 state=settings width=640 height=480 hash=5139303640972053060
+[ui-frame] cycle=11 state=muted width=640 height=480 hash=18038094528476656244
+[ui-frame] cycle=11 state=controls width=640 height=480 hash=6669870349365971096
+[ui-frame] cycle=11 state=capture width=640 height=480 hash=14495195518681644488
+[ui-frame] cycle=11 state=canceled width=640 height=480 hash=14589140840889221536
+[ui-frame] cycle=11 state=rebound width=640 height=480 hash=6811260598171005582
+[ui-frame] cycle=11 state=settings_return width=640 height=480 hash=9869269423079984371
+[ui-frame] cycle=11 state=resumed width=640 height=480 hash=7074130512550214633
+[ui-frame] cycle=11 state=small_viewport width=320 height=240 hash=10678731974701185196
+[ui-frame] cycle=11 state=restored_viewport width=640 height=480 hash=7074130512550214633
+[font retained] revision=12 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[ui-frame] cycle=11 state=font_retained width=640 height=480 hash=12388173628106555687
+[font applied] revision=13 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=11 state=font_repaired width=640 height=480 hash=954528622743910395
+[ui-cycle] completed=11 ticks=1381
+[ui-frame] cycle=12 state=gameplay width=640 height=480 hash=15414317300223201571
+[ui-frame] cycle=12 state=diagnostics width=640 height=480 hash=17247095399929356070
+[ui-frame] cycle=12 state=shapes width=640 height=480 hash=10437841981553403398
+[ui-frame] cycle=12 state=settings width=640 height=480 hash=13040224941425106008
+[ui-frame] cycle=12 state=muted width=640 height=480 hash=6331656303817463590
+[ui-frame] cycle=12 state=controls width=640 height=480 hash=14179166940026504282
+[ui-frame] cycle=12 state=capture width=640 height=480 hash=15888188399005690606
+[ui-frame] cycle=12 state=canceled width=640 height=480 hash=15278008954789882566
+[ui-frame] cycle=12 state=rebound width=640 height=480 hash=12324665535243052244
+[ui-frame] cycle=12 state=settings_return width=640 height=480 hash=8586087046677282261
+[ui-frame] cycle=12 state=resumed width=640 height=480 hash=10207917423393778981
+[ui-frame] cycle=12 state=small_viewport width=320 height=240 hash=1960835221715560158
+[ui-frame] cycle=12 state=restored_viewport width=640 height=480 hash=10207917423393778981
+[font retained] revision=13 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[ui-frame] cycle=12 state=font_retained width=640 height=480 hash=8187024180341594365
+[font applied] revision=14 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=12 state=font_repaired width=640 height=480 hash=17589163458242031562
+[ui-cycle] completed=12 ticks=702
+[ui-frame] cycle=13 state=gameplay width=640 height=480 hash=7191453899623552646
+[ui-frame] cycle=13 state=diagnostics width=640 height=480 hash=7048744753253770579
+[ui-frame] cycle=13 state=shapes width=640 height=480 hash=16195602653928445269
+[ui-frame] cycle=13 state=settings width=640 height=480 hash=8870754111316146906
+[ui-frame] cycle=13 state=muted width=640 height=480 hash=16135752937223012590
+[ui-frame] cycle=13 state=controls width=640 height=480 hash=1134218031020144458
+[ui-frame] cycle=13 state=capture width=640 height=480 hash=7325958812354408826
+[ui-frame] cycle=13 state=canceled width=640 height=480 hash=17357151043063446498
+[ui-frame] cycle=13 state=rebound width=640 height=480 hash=12711755247156550216
+[ui-frame] cycle=13 state=settings_return width=640 height=480 hash=15860231583465156781
+[ui-frame] cycle=13 state=resumed width=640 height=480 hash=11816525489927807712
+[ui-frame] cycle=13 state=small_viewport width=320 height=240 hash=12673393837146182698
+[ui-frame] cycle=13 state=restored_viewport width=640 height=480 hash=11816525489927807712
+[font retained] revision=14 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[ui-frame] cycle=13 state=font_retained width=640 height=480 hash=6228662144343192418
+[font applied] revision=15 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=13 state=font_repaired width=640 height=480 hash=1674578465323321934
+[ui-cycle] completed=13 ticks=1381
+[ui-frame] cycle=14 state=gameplay width=640 height=480 hash=10301366476129248934
+[ui-frame] cycle=14 state=diagnostics width=640 height=480 hash=11340012130874403051
+[ui-frame] cycle=14 state=shapes width=640 height=480 hash=14269757070756552151
+[ui-frame] cycle=14 state=settings width=640 height=480 hash=15975420276908134189
+[ui-frame] cycle=14 state=muted width=640 height=480 hash=4708791230516336111
+[ui-frame] cycle=14 state=controls width=640 height=480 hash=7010665922152693267
+[ui-frame] cycle=14 state=capture width=640 height=480 hash=7707425165051959983
+[ui-frame] cycle=14 state=canceled width=640 height=480 hash=8396294750501513703
+[ui-frame] cycle=14 state=rebound width=640 height=480 hash=1096023087402027837
+[ui-frame] cycle=14 state=settings_return width=640 height=480 hash=11303281461264044012
+[ui-frame] cycle=14 state=resumed width=640 height=480 hash=4197732404890512804
+[ui-frame] cycle=14 state=small_viewport width=320 height=240 hash=1960835221715560158
+[ui-frame] cycle=14 state=restored_viewport width=640 height=480 hash=4197732404890512804
+[font retained] revision=15 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[ui-frame] cycle=14 state=font_retained width=640 height=480 hash=8985910909329072448
+[font applied] revision=16 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=14 state=font_repaired width=640 height=480 hash=17703009055011822124
+[ui-cycle] completed=14 ticks=702
+[ui-frame] cycle=15 state=gameplay width=640 height=480 hash=6828590381814580788
+[ui-frame] cycle=15 state=diagnostics width=640 height=480 hash=16113733527562564769
+[ui-frame] cycle=15 state=shapes width=640 height=480 hash=14184724833794049563
+[ui-frame] cycle=15 state=settings width=640 height=480 hash=7452186022119803158
+[ui-frame] cycle=15 state=muted width=640 height=480 hash=1453972870264176814
+[ui-frame] cycle=15 state=controls width=640 height=480 hash=10629892264454819258
+[ui-frame] cycle=15 state=capture width=640 height=480 hash=4775019112599696746
+[ui-frame] cycle=15 state=canceled width=640 height=480 hash=8720558341772850226
+[ui-frame] cycle=15 state=rebound width=640 height=480 hash=2711103232305850648
+[ui-frame] cycle=15 state=settings_return width=640 height=480 hash=9797830042892621641
+[ui-frame] cycle=15 state=resumed width=640 height=480 hash=18001803071442060342
+[ui-frame] cycle=15 state=small_viewport width=320 height=240 hash=10805460245505447975
+[ui-frame] cycle=15 state=restored_viewport width=640 height=480 hash=18001803071442060342
+[font retained] revision=16 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[ui-frame] cycle=15 state=font_retained width=640 height=480 hash=13335302226920867516
+[font applied] revision=17 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=15 state=font_repaired width=640 height=480 hash=7532916094730117361
+[ui-cycle] completed=15 ticks=1381
+[ui-frame] cycle=16 state=gameplay width=640 height=480 hash=1878726876847672265
+[ui-frame] cycle=16 state=diagnostics width=640 height=480 hash=13641785584335845240
+[ui-frame] cycle=16 state=shapes width=640 height=480 hash=12309946175618819840
+[ui-frame] cycle=16 state=settings width=640 height=480 hash=3180879099399130018
+[ui-frame] cycle=16 state=muted width=640 height=480 hash=10917615005551692596
+[ui-frame] cycle=16 state=controls width=640 height=480 hash=6818654598928398888
+[ui-frame] cycle=16 state=capture width=640 height=480 hash=16159318071576693932
+[ui-frame] cycle=16 state=canceled width=640 height=480 hash=4864030858297835908
+[ui-frame] cycle=16 state=rebound width=640 height=480 hash=8860458561479035042
+[ui-frame] cycle=16 state=settings_return width=640 height=480 hash=9356374228276197431
+[ui-frame] cycle=16 state=resumed width=640 height=480 hash=7105198270494682611
+[ui-frame] cycle=16 state=small_viewport width=320 height=240 hash=1527517778762863385
+[ui-frame] cycle=16 state=restored_viewport width=640 height=480 hash=7105198270494682611
+[font retained] revision=17 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[ui-frame] cycle=16 state=font_retained width=640 height=480 hash=17166496274748469
+[font applied] revision=18 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=16 state=font_repaired width=640 height=480 hash=15469359587328189086
+[ui-cycle] completed=16 ticks=702
+[ui-session] cycles=16 ticks=16664 renders=328 captures=240 elapsed_seconds=24.7351 presentation_baseline_restored=true
+PASS repeated_full_game_ui_transitions_preserve_state_and_owned_payloads
+1 tests, 0 failed
+<end of output>
+Test time =  25.18 sec
+----------------------------------------------------------
+Test Passed.
+"ui_session" end time: Oct 30 11:23 EDT
+"ui_session" time elapsed: 00:00:25
+----------------------------------------------------------
+
+45/68 Testing: font_reload
+45/68 Test: font_reload
+Command: "/home/zero/.cache/engine-ui-session-77-qpwwoug1/native-sanitize/font_reload_tests"
+Directory: /home/zero/.cache/engine-ui-session-77-qpwwoug1/native-sanitize
+"font_reload" start time: Oct 30 11:23 EDT
+Output:
+----------------------------------------------------------
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[font retained] revision=1 embedded=1 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Not a regular asset file
+[font applied] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+[font retained] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[font applied] revision=3 embedded=0 atlas_bytes=128 source=fonts/ui.efnt
+PASS font_reload_startup_fallback_strict_failure_retention_and_pass_boundary
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[font applied] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+[watch] enabled files=4
+[watch] notifications active
+[shader applied] revision=2 source=/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp/font-reload-Z1xH2O
+[textures applied] revision=2 count=1
+[font applied] revision=3 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+[font applied] revision=4 embedded=0 atlas_bytes=128 source=fonts/ui.efnt
+[font retained] revision=4 embedded=0 atlas_bytes=128 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid font glyph rectangle, offset or advance
+[font retained] revision=4 embedded=0 atlas_bytes=128 source=fonts/ui.efnt
+fonts/ui.efnt: Not a regular asset file
+[font applied] revision=5 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+[font applied] revision=6 embedded=0 atlas_bytes=128 source=fonts/ui.efnt
+[font applied] revision=7 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+[font applied] revision=8 embedded=0 atlas_bytes=128 source=fonts/ui.efnt
+[font applied] revision=9 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+[font applied] revision=10 embedded=0 atlas_bytes=128 source=fonts/ui.efnt
+[font applied] revision=11 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+[font applied] revision=12 embedded=0 atlas_bytes=128 source=fonts/ui.efnt
+PASS watched_font_edits_publish_metrics_and_pixels_together_and_keep_good_failures
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[font retained] revision=1 embedded=1 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Not a regular asset file
+[watch] enabled files=4
+[watch] metadata fallback
+[shader applied] revision=2 source=/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp/font-reload-7r2fdM
+[textures applied] revision=2 count=1
+[font retained] revision=1 embedded=1 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Not a regular asset file
+[watch] notifications active
+[font applied] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+[font retained] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+fonts/ui.efnt: Asset path escapes its root
+[watch] metadata fallback
+[shader applied] revision=3 source=/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp/font-reload-7r2fdM
+[textures applied] revision=3 count=1
+[font retained] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+fonts/ui.efnt: Not a regular asset file
+[watch] notifications active
+[font applied] revision=3 embedded=0 atlas_bytes=128 source=fonts/ui.efnt
+PASS watched_font_missing_directory_recovers_and_rejects_symlink_escape
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[watch] enabled files=4
+[watch] notifications active
+[font applied] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+[shader applied] revision=2 source=/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp/font-reload-NdAbq4
+[textures applied] revision=2 count=1
+PASS explicit_font_reload_suppresses_only_its_ready_group
+4 tests, 0 failed
+<end of output>
+Test time =   1.12 sec
+----------------------------------------------------------
+Test Passed.
+"font_reload" end time: Oct 30 11:23 EDT
+"font_reload" time elapsed: 00:00:01
+----------------------------------------------------------
+
+46/68 Testing: font_graphics
+46/68 Test: font_graphics
+Command: "/home/zero/.cache/engine-ui-session-77-qpwwoug1/native-sanitize/font_graphics_tests"
+Directory: /home/zero/.cache/engine-ui-session-77-qpwwoug1/native-sanitize
+"font_graphics" start time: Oct 30 11:23 EDT
+Output:
+----------------------------------------------------------
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_atlas_pixels_offsets_spacing_fallback_and_batching
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_clipping_tint_ordering_and_offscreen_alpha
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_replacement_boundaries_lifetime_and_invalid_text
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_memory_uses_renderer_copy_and_reads_do_not_stage
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_gallery_draws_at_small_and_large_viewports
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_builtin_retains_original_pixel_shapes
+6 tests, 0 failed
+<end of output>
+Test time =   0.45 sec
+----------------------------------------------------------
+Test Passed.
+"font_graphics" end time: Oct 30 11:23 EDT
+"font_graphics" time elapsed: 00:00:00
+----------------------------------------------------------
+
+49/68 Testing: renderer_memory
+49/68 Test: renderer_memory
+Command: "/home/zero/.cache/engine-ui-session-77-qpwwoug1/native-sanitize/renderer_memory_tests"
+Directory: /home/zero/.cache/engine-ui-session-77-qpwwoug1/native-sanitize
+"renderer_memory" start time: Oct 30 11:23 EDT
+Output:
+----------------------------------------------------------
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS renderer_memory_lifecycle_and_logical_store
+1 tests, 0 failed
+<end of output>
+Test time =   0.14 sec
+----------------------------------------------------------
+Test Passed.
+"renderer_memory" end time: Oct 30 11:23 EDT
+"renderer_memory" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 30 11:23 EDT
+
+cpu =   1.90 sec*proc
+
+hardware =  26.90 sec*proc
+

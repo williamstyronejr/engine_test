@@ -1,0 +1,340 @@
+[
+  {
+    "name": "environment",
+    "command": [
+      "bash",
+      "-c",
+      "uname -a; c++ --version; clang++ --version; cmake --version; ninja --version; glxinfo -B"
+    ],
+    "source": "eaeca04e7d8668b7a8810a4049d4327e09ab0ce4",
+    "started_utc": "2026-10-30T15:19:27.748688+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 0.41474911000113934,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0RPPmWC:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "debug-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "/home/zero/.cache/engine-ui-session-77-qpwwoug1/debug",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-ui-session-77-qpwwoug1/packages"
+    ],
+    "source": "eaeca04e7d8668b7a8810a4049d4327e09ab0ce4",
+    "started_utc": "2026-10-30T15:19:28.168338+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 1.949384199018823,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0RPPmWC:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "debug-build",
+    "command": [
+      "cmake",
+      "--build",
+      "/home/zero/.cache/engine-ui-session-77-qpwwoug1/debug",
+      "--target",
+      "ui_session_tests",
+      "ui_tests",
+      "diagnostics_tests",
+      "font_reload_tests",
+      "font_graphics_tests",
+      "renderer_memory_tests",
+      "-j2"
+    ],
+    "source": "eaeca04e7d8668b7a8810a4049d4327e09ab0ce4",
+    "started_utc": "2026-10-30T15:19:30.118438+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 36.884638684015954,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0RPPmWC:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "debug-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "/home/zero/.cache/engine-ui-session-77-qpwwoug1/debug",
+      "-R",
+      "^(ui_session|ui|diagnostics|font_reload|font_graphics|renderer_memory)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-30-ui-session/debug-tests.xml"
+    ],
+    "source": "eaeca04e7d8668b7a8810a4049d4327e09ab0ce4",
+    "started_utc": "2026-10-30T15:20:07.199447+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 9.79580611397978,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0RPPmWC:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "release-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "/home/zero/.cache/engine-ui-session-77-qpwwoug1/release",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-ui-session-77-qpwwoug1/packages"
+    ],
+    "source": "eaeca04e7d8668b7a8810a4049d4327e09ab0ce4",
+    "started_utc": "2026-10-30T15:20:17.013675+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 2.099061487999279,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0RPPmWC:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "release-build",
+    "command": [
+      "cmake",
+      "--build",
+      "/home/zero/.cache/engine-ui-session-77-qpwwoug1/release",
+      "--target",
+      "ui_session_tests",
+      "ui_tests",
+      "diagnostics_tests",
+      "font_reload_tests",
+      "font_graphics_tests",
+      "renderer_memory_tests",
+      "-j2"
+    ],
+    "source": "eaeca04e7d8668b7a8810a4049d4327e09ab0ce4",
+    "started_utc": "2026-10-30T15:20:19.113502+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 55.37962704800884,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0RPPmWC:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "release-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "/home/zero/.cache/engine-ui-session-77-qpwwoug1/release",
+      "-R",
+      "^(ui_session|ui|diagnostics|font_reload|font_graphics|renderer_memory)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-30-ui-session/release-tests.xml"
+    ],
+    "source": "eaeca04e7d8668b7a8810a4049d4327e09ab0ce4",
+    "started_utc": "2026-10-30T15:21:14.779233+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 6.332490530010546,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0RPPmWC:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "clang-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "/home/zero/.cache/engine-ui-session-77-qpwwoug1/clang",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-ui-session-77-qpwwoug1/packages",
+      "-DCMAKE_CXX_COMPILER=clang++"
+    ],
+    "source": "eaeca04e7d8668b7a8810a4049d4327e09ab0ce4",
+    "started_utc": "2026-10-30T15:21:21.120103+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 2.3709611750091426,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0RPPmWC:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "clang-build",
+    "command": [
+      "cmake",
+      "--build",
+      "/home/zero/.cache/engine-ui-session-77-qpwwoug1/clang",
+      "--target",
+      "ui_session_tests",
+      "ui_tests",
+      "diagnostics_tests",
+      "font_reload_tests",
+      "font_graphics_tests",
+      "renderer_memory_tests",
+      "-j2"
+    ],
+    "source": "eaeca04e7d8668b7a8810a4049d4327e09ab0ce4",
+    "started_utc": "2026-10-30T15:21:23.492134+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 35.74253504999797,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0RPPmWC:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "clang-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "/home/zero/.cache/engine-ui-session-77-qpwwoug1/clang",
+      "-R",
+      "^(ui_session|ui|diagnostics|font_reload|font_graphics|renderer_memory)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-30-ui-session/clang-tests.xml"
+    ],
+    "source": "eaeca04e7d8668b7a8810a4049d4327e09ab0ce4",
+    "started_utc": "2026-10-30T15:21:59.404283+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 10.916599888994824,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0RPPmWC:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "native-sanitize-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "/home/zero/.cache/engine-ui-session-77-qpwwoug1/native-sanitize",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-ui-session-77-qpwwoug1/packages",
+      "-DENGINE_SANITIZERS=ON"
+    ],
+    "source": "eaeca04e7d8668b7a8810a4049d4327e09ab0ce4",
+    "started_utc": "2026-10-30T15:22:10.329511+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 1.948030136001762,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0RPPmWC:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "native-sanitize-build",
+    "command": [
+      "cmake",
+      "--build",
+      "/home/zero/.cache/engine-ui-session-77-qpwwoug1/native-sanitize",
+      "--target",
+      "ui_session_tests",
+      "ui_tests",
+      "diagnostics_tests",
+      "font_reload_tests",
+      "font_graphics_tests",
+      "renderer_memory_tests",
+      "-j2"
+    ],
+    "source": "eaeca04e7d8668b7a8810a4049d4327e09ab0ce4",
+    "started_utc": "2026-10-30T15:22:12.278429+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 58.791495829995256,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0RPPmWC:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "native-sanitize-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "/home/zero/.cache/engine-ui-session-77-qpwwoug1/native-sanitize",
+      "-R",
+      "^(ui_session|ui|diagnostics|font_reload|font_graphics|renderer_memory)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-30-ui-session/native-sanitize-tests.xml"
+    ],
+    "source": "eaeca04e7d8668b7a8810a4049d4327e09ab0ce4",
+    "started_utc": "2026-10-30T15:23:11.279377+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 28.98937001102604,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0RPPmWC:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": "detect_leaks=0:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1"
+    }
+  }
+]
