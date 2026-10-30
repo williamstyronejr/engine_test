@@ -77,10 +77,10 @@ for config in ['debug', 'release', 'clang', 'native-sanitize']:
     assert sorted(t['name'] for t in inventory['tests']) == sorted(groups)
     (root/(config+'-inventory.json')).write_text(json.dumps(inventory, indent=2)+'\n')
     env = {'ASAN_OPTIONS': 'detect_leaks=0:halt_on_error=1', 'UBSAN_OPTIONS': 'halt_on_error=1'} if config == 'native-sanitize' else {}
-    xml = root/(config+'-tests.xml')
-    if not reuse_completed:
-        run(config+'-tests', ['ctest', '--test-dir', str(build), *selection, '--output-on-failure',
-                             '--output-junit', str(xml.resolve())], env)
+    test_name = config+('-evidence-tests' if reuse_completed else '-tests')
+    xml = root/(test_name+'.xml')
+    run(test_name, ['ctest', '--test-dir', str(build), *selection, '--output-on-failure',
+                   '--output-junit', str(xml.resolve())], env)
     suite = ET.parse(xml).getroot()
     assert int(suite.attrib['tests']) == 7
     assert int(suite.attrib['failures']) == int(suite.attrib['skipped']) == 0

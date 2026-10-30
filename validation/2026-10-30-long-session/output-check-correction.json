@@ -2,6 +2,7 @@
   "completed_test_run": "debug-tests.xml",
   "ctest_result": "7 passed, no skips",
   "initial_evidence_check": "Failed because successful JUnit output was truncated at the default 1024-byte limit",
-  "correction": "Retain and parse full LastTest.log; keep original XML and command records; no test rerun",
-  "fixture_unchanged": true
+  "correction": "Keep original passing XML and logs; repeat Debug tests once under debug-evidence-tests, then preserve and parse full LastTest.log immediately after execution, before further CTest calls.",
+  "fixture_unchanged": true,
+  "followup_observation": "The resume inventory query replaced temporary LastTest.log before it was preserved; its second output check also failed."
 }
