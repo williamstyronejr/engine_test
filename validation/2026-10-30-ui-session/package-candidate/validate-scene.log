@@ -1,0 +1,6 @@
+Asset root: "/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp/package-doc-audit-5t8ljnlp/relocated package with spaces/share/feature_lab"
+Validation mode: scene format (scene budget=256)
+References and gameplay are not checked.
+PASS "facility.scene"
+Asset validation: 1 check, 0 failed
+Shader compilation, rendering, audio output and route completion require runtime tests.

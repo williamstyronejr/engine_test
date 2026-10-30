@@ -1,0 +1,243 @@
+{
+  "backtraceGraph": {
+    "commands": [
+      "add_test"
+    ],
+    "files": [
+      "/home/zero/dev/engine_test/CMakeLists.txt"
+    ],
+    "nodes": [
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 170,
+        "parent": 0
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 198,
+        "parent": 2
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 275,
+        "parent": 4
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 303,
+        "parent": 6
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 307,
+        "parent": 8
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 321,
+        "parent": 10
+      }
+    ]
+  },
+  "kind": "ctestInfo",
+  "tests": [
+    {
+      "backtrace": 1,
+      "command": [
+        "/home/zero/.cache/engine-ui-session-77-qpwwoug1/clang/diagnostics_tests"
+      ],
+      "name": "diagnostics",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/clang"
+        }
+      ]
+    },
+    {
+      "backtrace": 3,
+      "command": [
+        "/home/zero/.cache/engine-ui-session-77-qpwwoug1/clang/ui_tests"
+      ],
+      "name": "ui",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "cpu"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 20.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/clang"
+        }
+      ]
+    },
+    {
+      "backtrace": 5,
+      "command": [
+        "/home/zero/.cache/engine-ui-session-77-qpwwoug1/clang/ui_session_tests"
+      ],
+      "name": "ui_session",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 180.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/clang"
+        }
+      ]
+    },
+    {
+      "backtrace": 7,
+      "command": [
+        "/home/zero/.cache/engine-ui-session-77-qpwwoug1/clang/font_reload_tests"
+      ],
+      "name": "font_reload",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/clang"
+        }
+      ]
+    },
+    {
+      "backtrace": 9,
+      "command": [
+        "/home/zero/.cache/engine-ui-session-77-qpwwoug1/clang/font_graphics_tests"
+      ],
+      "name": "font_graphics",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/clang"
+        }
+      ]
+    },
+    {
+      "backtrace": 11,
+      "command": [
+        "/home/zero/.cache/engine-ui-session-77-qpwwoug1/clang/renderer_memory_tests"
+      ],
+      "name": "renderer_memory",
+      "properties": [
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "SKIP_RETURN_CODE",
+          "value": 77
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 30.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/clang"
+        }
+      ]
+    }
+  ],
+  "version": {
+    "major": 1,
+    "minor": 0
+  }
+}

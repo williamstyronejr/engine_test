@@ -1,0 +1,54 @@
+[
+  {
+    "config": "debug",
+    "groups": [
+      "ui_session",
+      "ui",
+      "diagnostics",
+      "font_reload",
+      "font_graphics",
+      "renderer_memory"
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  {
+    "config": "release",
+    "groups": [
+      "ui_session",
+      "ui",
+      "diagnostics",
+      "font_reload",
+      "font_graphics",
+      "renderer_memory"
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  {
+    "config": "clang",
+    "groups": [
+      "ui_session",
+      "ui",
+      "diagnostics",
+      "font_reload",
+      "font_graphics",
+      "renderer_memory"
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  {
+    "config": "native-sanitize",
+    "groups": [
+      "ui_session",
+      "ui",
+      "diagnostics",
+      "font_reload",
+      "font_graphics",
+      "renderer_memory"
+    ],
+    "failures": 0,
+    "skips": 0
+  }
+]

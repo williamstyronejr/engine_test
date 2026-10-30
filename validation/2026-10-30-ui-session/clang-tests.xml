@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-clang++"
+	tests="6"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="omarchy"
+	time="10"
+	timestamp="2026-10-30T11:21:59"
+	>
+	<testcase name="diagnostics" classname="diagnostics" time="0.401503" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS timing_history_statistics_and_rejection
+PASS timing_history_rollover_clear_and_large_samples
+PASS debug_toggle_edges_and_focus_cancel
+PASS single_step_consumes_one_edge_across_catchup
+PASS single_step_matches_complete_unpaused_replay
+PASS single_step_pause_and_restart_priority
+PASS settings_capture_step_and_debug_controls_until_release
+7 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="ui" classname="ui" time="0.00881989" status="run">
+		<properties>
+			<property name="cmake_labels" value="cpu"/>
+		</properties>
+		<system-out>PASS pointer_edges_and_focus_cancel
+PASS layout_validation_preserves_live_state
+PASS keyboard_focus_skips_disabled_and_wraps
+PASS pointer_activation_requires_matching_press_and_release
+PASS slider_capture_clamp_wheel_and_keyboard
+PASS clipping_overlap_and_resize_cancel_capture
+PASS input_gate_holds_capture_until_release
+PASS column_rejects_overflow_without_advancing
+PASS settings_pause_restore_and_gameplay_isolation
+PASS settings_actions_and_responsive_bounds
+PASS settings_buttons_checkboxes_and_disabled_audio
+PASS settings_save_load_and_slot_selection
+12 tests, 0 failed
+</system-out>
+	</testcase>
+	<testcase name="ui_session" classname="ui_session" time="9.06828" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[font applied] revision=2 embedded=0 atlas_bytes=16384 source=fonts/ui.efnt
+[ui-frame] cycle=1 state=gameplay width=640 height=480 hash=9951465953928205060
+[ui-frame] cycle=1 state=diagnostics width=640 height=480 hash=6444833199444432233
+[ui-frame] cycle=1 state=shapes width=640 height=480 hash=13162496544934281923
+[ui-frame] cycle=1 state=settings width=640 height=480 hash=2893751576189037492
+[ui-frame] cycle=1 state=muted width=640 height=480 hash=14911613460464926224
+[ui-frame] cycle=1 state=controls width=640 height=480 hash=4590355988804566258
+[ui-frame] cycle=1 state=capture width=640 height=480 hash=1882989708947030658
+[ui-frame] cycle=1 state=canceled width=640 height=480 hash=4890718040651851706
+[ui-frame] cycle=1 state=rebound width=640 height=480 hash=2708027372318167019
+[ui-frame] cycle=1 state=settings_return width=640 height=480 hash=106112166464967091...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="font_reload" classname="font_reload" time="0.954622" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[font retained] revision=1 embedded=1 atlas_bytes=16384 source=fonts/ui.efnt
+fonts/ui.efnt: Not a regular asset file
+[font applied] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+[font retained] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+fonts/ui.efnt: Invalid EFNT header at byte 0
+[font applied] revision=3 embedded=0 atlas_bytes=128 source=fonts/ui.efnt
+PASS font_reload_startup_fallback_strict_failure_retention_and_pass_boundary
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+[font applied] revision=2 embedded=0 atlas_bytes=64 source=fonts/ui.efnt
+[watch] enabled files=4
+[watch] notifications active
+[shader applied] revision=2 source=/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp/font-reload-SVCyzq
+[textures applied] revision=2 cou...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="font_graphics" classname="font_graphics" time="0.236939" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_atlas_pixels_offsets_spacing_fallback_and_batching
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_clipping_tint_ordering_and_offscreen_alpha
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_replacement_boundaries_lifetime_and_invalid_text
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_memory_uses_renderer_copy_and_reads_do_not_stage
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS font_gallery_draws_at_small_and_large_viewports
+[platform] X11...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="renderer_memory" classname="renderer_memory" time="0.069607" status="run">
+		<properties>
+			<property name="cmake_labels" value="hardware"/>
+		</properties>
+		<system-out>[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+PASS renderer_memory_lifecycle_and_logical_store
+1 tests, 0 failed
+</system-out>
+	</testcase>
+</testsuite>

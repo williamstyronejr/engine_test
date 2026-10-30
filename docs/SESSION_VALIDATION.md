@@ -91,8 +91,88 @@ source commit, exact commands, fresh targeted builds, per-cycle output and the
 initial save-corruption fixture error. Related unit groups continue to cover
 individual behaviors; this fixture adds their repeated composition.
 
-Physical input/display (R4), audible sound/device disconnect/suspend (R5),
-wall-time endurance, settings/HUD/interactive coverage, host timing instability,
+For this original fixture, settings/HUD coverage is outside its scope; the
+companion below adds that coverage separately. Physical input/display (R4), audible
+sound/device disconnect/suspend (R5), wall-time endurance, host timing instability,
 broader memory coverage (R6), and support/signoff (R8) remain open. It does not
 exercise physical audio, driver leak detection, artificial device failure or
 background loading. Passing this test does not complete milestone 6.
+
+## Full gameplay/UI companion (increment 77)
+
+`ui_session` adds **16 completed routes** (eight per level) through the production
+`draw_game`, `Overlays::render_minimap`, `Diagnostics::draw_hud` and `Settings::draw`
+paths. It keeps one renderer, texture bank, minimap, collision/sampling galleries,
+settings model and null-PCM soundtrack alive across all cycles. The original
+64-cycle `long_session` fixture remains unchanged and separately scoped.
+
+At route update 120, each cycle renders and reads back these 15 states in order:
+
+1. Gameplay with its HUD, tiles, world sprites, sampling gallery and minimap.
+2. F2 diagnostics, then F2 with F3 collision shapes.
+3. Settings over diagnostics, then the changed mute setting.
+4. Controls, binding capture, canceled capture and accepted modified-key binding.
+5. Return to settings and resume gameplay with diagnostics/shapes closed.
+6. A 320×240 render target, then restoration to 640×480.
+7. Rejected font reload retaining the live font, then repaired font reload.
+
+The grouped list above describes 15 distinct captures, not 15 separate CTest tests.
+Each capture hashes the complete PPM readback with a deterministic 64-bit FNV-style
+fingerprint, including image dimensions. The temporary image is reused inside the
+private copied-asset directory and removed with the fixture. Fingerprints and
+state labels remain in the validation record; screenshots are not retained or
+presented as a human visual review. All 240 fingerprints must match across the
+four tested compiler/sanitizer configurations on this host. Matching fingerprints
+are a regression check, not evidence of readability or compatibility on another GPU.
+
+Menu opening must pause gameplay and block a held movement input. A diagnostics
+key routed through an open menu must leave the underlying overlay unchanged.
+Escape cancels capture without closing controls; accepting a binding checks its
+symbol and modifiers. Mute changes must reach the live soundtrack. Closing the
+menu restores the exact pre-menu checkpoint, and a private config write/read
+round trip must retain audio settings, vsync preference and bindings. These checks
+call production UI and storage APIs with logical `InputFrame` values; they do not
+exercise physical keys, native keymap routing or all application-controller glue.
+
+Each level must collect its three cores, finish its door exactly once and win
+within 3,000 route updates. The production transition stages new minimap walls and
+publishes them with the new game. Every cycle settles to one active music voice
+without rejected commands, dropped plays, stale controls or device errors.
+The fixture performs **328 full passes and 240 readbacks**, committing **16,664
+gameplay ticks** (277.733 simulated seconds). This accelerated workload is not a
+wall-time soak. Diagnostic CPU history is fixed synthetic display data; no GPU
+timing queries or performance-acceptance measurements are made.
+
+All eleven renderer memory fields and live texture/target counts are checked
+after every pass. At 320×240, only the output/minimap RGBA8 target payload may
+change, and its exact expected byte count is calculated from both dimensions.
+Returning to 640×480 must restore the resident baseline. Invalid font input must
+retain its revision and inventory; a repaired reload advances the revision with
+unchanged owned font storage. The minimap must submit geometry, and the full
+pass must submit more than 100 quads with a healthy renderer.
+
+At final teardown, the test releases its output target and resident game textures
+and restores an explicitly installed embedded font. The inventory must match the
+baseline captured after creating/warming the presentation helpers. Those helpers
+retain five textures and one minimap target until the renderer is destroyed;
+**the final assertion does not claim zero GPU resources or zero process memory**.
+The embedded font is installed before the baseline so copied vector capacity is
+compared consistently. Driver memory, whole heap/RSS, uninstrumented staging and
+post-destruction process memory remain outside these checks.
+
+```sh
+cmake --preset debug
+cmake --build --preset debug --target ui_session_tests -j2
+ctest --preset debug -R '^ui_session$' --output-on-failure
+```
+
+This native-only group is serial, labeled `hardware`, has a 180-second timeout,
+and skips with code 77 without DISPLAY. The GLX window stays hidden at 64×64;
+640×480 and 320×240 are offscreen targets, not physical window/display acceptance.
+The [full UI validation record](../validation/2026-10-30-ui-session/RESULTS.md)
+retains commands, complete output and frame fingerprints. No real user settings,
+installed assets, physical sound devices or display configuration are changed.
+
+This extends full rendering and modal UI composition coverage. Physical R4/R5
+checks, terminal audio-device failure presentation, real-time endurance, timing
+stability, broader memory acceptance and final support/signoff remain open.

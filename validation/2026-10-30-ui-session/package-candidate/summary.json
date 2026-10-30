@@ -1,0 +1,10 @@
+{
+  "archive": "/home/zero/dev/engine_test/build/release/dist/feature-lab-0.1.0-Linux-x86_64-c96ddde.tar.gz",
+  "sha256": "f3e72aa4d33ef0373e415491b8e065576499399039bb8b5e7a8d34bceea61743",
+  "extracted_to": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp/package-doc-audit-5t8ljnlp/relocated package with spaces",
+  "relative_links": 1167,
+  "shell_recipes": 77,
+  "successful_commands": 10,
+  "package_payload_unchanged": true,
+  "physical_or_interactive_acceptance": false
+}

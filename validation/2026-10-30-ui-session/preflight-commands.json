@@ -1,0 +1,43 @@
+[
+  {
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "/home/zero/.cache/engine-ui-session-77-qpwwoug1/preflight",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-ui-session-77-qpwwoug1/packages"
+    ],
+    "exit_code": 0,
+    "seconds": 2.5744348839798477
+  },
+  {
+    "command": [
+      "cmake",
+      "--build",
+      "/home/zero/.cache/engine-ui-session-77-qpwwoug1/preflight",
+      "--target",
+      "ui_session_tests",
+      "-j2"
+    ],
+    "exit_code": 0,
+    "seconds": 28.06344676698791
+  },
+  {
+    "command": [
+      "ctest",
+      "--test-dir",
+      "/home/zero/.cache/engine-ui-session-77-qpwwoug1/preflight",
+      "-R",
+      "^ui_session$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/build/ui-session-refresh/preflight-tests.xml"
+    ],
+    "exit_code": 0,
+    "seconds": 8.07501070399303
+  }
+]

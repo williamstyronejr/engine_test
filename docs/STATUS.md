@@ -2470,10 +2470,34 @@ skips (53.83 s). All 42 evidence files and five changed documentation files matc
 the archive. The package audit passes 1,133 relative links, 76 shell recipes and
 eight CPU entry-point commands; profilers and the new test binary stay excluded.
 
+## Increment 77: full gameplay/HUD and modal UI sessions
+
+- Added native `ui_session`: 16 complete routes with the production gameplay,
+  minimap, HUD, diagnostics and settings draw paths. It records 328 full passes,
+  240 frame readbacks and 16,664 committed simulation ticks.
+- Repeated modal movement/diagnostics blocking, mute propagation, binding
+  capture/cancel/rebind, private config persistence, viewport restoration and
+  rejected/repaired font reloads. Level transitions also publish staged minimap walls.
+- Every pass checks owned renderer memory and live counts. Final release restores
+  the presentation-helper baseline (five textures and one target remain until
+  renderer destruction); this does not claim zero GPU resources or whole-process memory.
+- All 24 selected GNU Debug/Release, Clang and native ASan/UBSan group executions
+  pass without skips. All 240 full-frame fingerprints match across the four builds.
+  New build directories compile only the selected targets; no full-suite/offline
+  qualification or real-time endurance claim is made. The 64-cycle fixture is unchanged.
+
+See [contract](SESSION_VALIDATION.md#full-gameplayui-companion-increment-77) and
+[validation](../validation/2026-10-30-ui-session/RESULTS.md).
+
+At documentation commit `c96ddde`, all three Release package groups pass without
+skips (54.53 s). All 37 evidence files and five changed documentation files match
+the archive. The package audit passes 1,167 relative links, 77 shell recipes and
+eight CPU entry-point commands; profilers and both session tests stay excluded.
+
 ## Next increment
 
-Extend repeated-session coverage to full gameplay/HUD rendering and settings and
-diagnostics transitions, with explicit texture/font/target restoration checks.
-Keep private user data and bounded workloads. Physical display/audio, real-time
-endurance, timing stability and broader memory acceptance remain open; background
-loading stays deferred.
+Add bounded terminal-audio-failure and disabled-audio presentation transitions to
+repeated full-UI coverage, using controlled sinks and private fixtures. Preserve
+the current manual-restart contract; do not imply automatic reconnection or
+physical device acceptance. Real-time endurance, timing stability, broader memory
+acceptance and support/signoff remain open. Background loading stays deferred.

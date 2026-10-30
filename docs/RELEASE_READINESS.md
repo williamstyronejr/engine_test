@@ -46,6 +46,14 @@ pass across GNU Debug/Release, Clang and native ASan/UBSan. It adds automated R6
 composition coverage; accelerated ticks, null audio and hidden sprite rendering
 do not establish wall-time endurance, audible output or physical acceptance.
 
+Increment 77 adds the [full gameplay/UI companion](SESSION_VALIDATION.md#full-gameplayui-companion-increment-77)
+at `eaeca04`. All 24 selected compiler/sanitizer group executions pass; all 240
+frame fingerprints match across four builds. It adds rendering, modal settings,
+config persistence, font failure/recovery and viewport-restoration coverage. The
+final renderer check restores a live presentation-helper baseline, not zero GPU
+resources or total process memory. [Evidence](../validation/2026-10-30-ui-session/RESULTS.md)
+retains the exact workload and exclusions.
+
 “Evidence available” below applies to the stated revision and environment only.
 “Open” means missing evidence or unfinished acceptance work, not a reproduced code
 failure. Unconfirmed WM minimization and rejected historical timing runs are called
@@ -154,15 +162,15 @@ ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 \
 Native graphics previously disabled leak detection because of driver allocations;
 that run checks address/undefined behavior only. Retain CPU and audio leak-enabled
 results separately. Do not suppress an engine report to make the aggregate pass.
-After the repeated-session addition, the current inventory is 67
-native runtime groups (36 CPU, 27 hardware, four platform), plus three packaging
+After the full-UI session addition, the current inventory is 68
+native runtime groups (36 CPU, 28 hardware, four platform), plus three packaging
 fixtures; platform-disabled builds discover 34 CPU groups. Discovery is not execution.
 The [current refresh](../validation/2026-10-29-readiness/RESULTS.md) runs every GNU/Clang
 runtime group and CPU sanitizer group, with a focused native sanitizer subset.
 The [fresh follow-up](../validation/2026-10-29-offline/RESULTS.md) completes the
 then-current 66-group native sanitizer suite from archived source `4f60312`.
-The added `long_session` group receives targeted validation separately; the full
-67-group suite has not been refreshed by that addition.
+The added `long_session` and `ui_session` groups receive targeted validation
+separately; the full 68-group suite has not been refreshed by those additions.
 The full fresh-matrix record at `1dfba31` predates these additions; later storage and
 [allocation validation](../validation/2026-10-24-allocations/RESULTS.md) record their
 own full/focused scopes. Update counts from
@@ -369,3 +377,10 @@ counts and restored tracked resources. The successful Debug evidence is retained
 across a capture correction; the initial save-corruption fixture failure stays
 separate. This narrows repeated-lifecycle coverage gaps but leaves full HUD/settings,
 physical devices, wall-time endurance, timing and unmeasured memory acceptance open.
+
+Increment 77 [extends the repeated fixture to full gameplay and UI rendering](SESSION_VALIDATION.md#full-gameplayui-companion-increment-77).
+It covers settings, controls, diagnostic overlays, viewport changes and font
+failure/recovery through production APIs, retaining identical whole-frame
+fingerprints across selected builds. Physical/native input routing, terminal audio
+failure presentation, real-time endurance, timing and broader memory acceptance
+remain open; passing automated rendering does not certify human readability.
