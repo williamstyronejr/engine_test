@@ -2465,6 +2465,11 @@ pass the package audit. Allocation profilers remain excluded.
 See [fixture contract](SESSION_VALIDATION.md) and
 [validation evidence](../validation/2026-10-30-long-session/RESULTS.md).
 
+At documentation commit `381e350`, all three Release package groups pass without
+skips (53.83 s). All 42 evidence files and five changed documentation files match
+the archive. The package audit passes 1,133 relative links, 76 shell recipes and
+eight CPU entry-point commands; profilers and the new test binary stay excluded.
+
 ## Next increment
 
 Extend repeated-session coverage to full gameplay/HUD rendering and settings and

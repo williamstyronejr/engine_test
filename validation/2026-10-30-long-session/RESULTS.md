@@ -82,3 +82,20 @@ has bounded route/worker waits. Full HUD/settings/tile-layer rendering, physical
 input/display, audible sound/device lifecycle, wall-time endurance, timing
 stability, broader memory accounting and support/signoff remain open. Background
 loading stays deferred; milestone 6 is not complete.
+
+## Candidate package
+
+At documentation commit **`381e350`**, all three Release package groups pass
+without skips in 53.83 seconds: [log](package-feature-tests.log),
+[XML](package-feature-tests.xml), [commands](package-feature-commands.json).
+All 42 then-current evidence files and five changed documentation files match
+archived bytes. The four allocation profilers and `long_session_tests` are excluded
+from installation.
+
+The [candidate audit](package-candidate/summary.json) checks 1,133 relative file
+links, 76 shell recipes and eight bounded CPU commands, bracketed by two passing
+manifest checks. It retains the archive SHA-256. The later merge receives all
+three package checks and a complete content/documentation audit after this record
+is included; final merge records remain in `build/long-session-refresh/` locally.
+Package checks reuse the Release preset tree and remain separate from the fresh
+selected-target matrix above.
