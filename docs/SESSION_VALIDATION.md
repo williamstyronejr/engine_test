@@ -176,3 +176,68 @@ installed assets, physical sound devices or display configuration are changed.
 This extends full rendering and modal UI composition coverage. Physical R4/R5
 checks, terminal audio-device failure presentation, real-time endurance, timing
 stability, broader memory acceptance and final support/signoff remain open.
+
+## Audio failure/UI companion (increment 78)
+
+`audio_ui_session` adds 16 complete routes with the full gameplay, minimap,
+settings and diagnostic draw paths. Each of four cases runs twice on each level:
+terminal device failure during a held mute-checkbox press; terminal failure during
+binding capture; audio explicitly disabled at construction; and a private invalid
+WAV causing startup disablement. The last case repairs the WAV immediately after
+construction. Each route collects all three cores, completes its door once and wins.
+
+An executable-local linker wrapper returns `-ENODEV` on one armed ALSA write.
+Eight injected failures pass through the real worker's transport/error path and
+`Soundtrack::update`, which destroys/joins the failed output. All other writes use
+the actual ALSA null PCM. This exercises a controlled terminal error, not physical
+unplugging, audible playback or suspend/resume. Constructor-disabled audio must
+make no PCM writes. Invalid-WAV startup may briefly run a null worker before it is
+joined; the test does not interpret that as a device failure.
+
+At route update 120, the fixture verifies that availability changes rebuild the
+open settings panel: a still-held checkbox capture is cleared, its stale release
+cannot change settings, and all four audio widgets are disabled and ignore clicks.
+Binding capture survives loss of audio, remains cancelable and preserves bindings.
+Audio preferences survive unavailability and a private configuration round trip.
+Closing settings restores exact checkpoint bytes and gameplay completes normally.
+
+The disabled object reports `AUDIO OFF` and `AUDIO BANK OFF`, with zero live/retained
+sound-bank bytes. Reload after repairing the asset, settings configuration,
+checkpoint restoration and an audio restart input must not create more PCM writes
+or reconnect that object. At the end of each route the fixture explicitly constructs
+a new `Soundtrack`, checks the completed game's single music voice, and verifies
+that audio widgets work again and mute reaches the new output. This models the
+existing manual session-recreation contract; it adds no automatic reconnection or
+new recovery button to Feature Lab.
+
+Each cycle captures `before`, `unavailable`, `resumed_disabled`,
+`completed_disabled` and `manual_restart`; four binding cases also capture
+`capture_disabled`. Complete PPM fingerprints cover all **84 readbacks** across
+four compiler/sanitizer configurations on this host. They compare equivalent runs,
+not enabled/disabled pictures against each other or against a human-approved image.
+Temporary images are removed with the private fixture. Diagnostic CPU history is
+synthetic; no GPU timer or performance measurement is enabled.
+
+The workload commits **16,664 ticks** (277.733 simulated seconds), with **156 full
+passes**, each preceded by the production minimap pass, plus one minimap warmup.
+All eleven renderer inventory fields and live texture/target counts remain at the
+resident baseline after every pass. Releasing the output/game textures and restoring
+the embedded font returns to the presentation-helper baseline: five helper textures
+and one minimap target remain until renderer destruction. Audio-bank accounting is
+scoped to the soundtrack API. Neither check covers whole heap/RSS, driver residency
+or post-destruction process memory. The original two session fixtures are unchanged.
+
+```sh
+cmake --preset debug
+cmake --build --preset debug --target audio_ui_session_tests -j2
+ctest --preset debug -R '^audio_ui_session$' --output-on-failure
+```
+
+The group is native-only, serial, labeled `hardware`, times out at 180 seconds and
+skips with code 77 without DISPLAY. Worker conditions have three-second deadlines;
+route loops have 3,000-update limits and cooperative one-millisecond yields every
+16 updates. A hidden 64×64 GLX window supplies a 640×480 offscreen target. Logical
+input and direct production calls do not cover physical input or all main-loop glue.
+See [validation evidence](../validation/2026-10-30-audio-ui-session/RESULTS.md).
+Physical R4/R5 acceptance, real-time endurance, timing stability, broader memory
+acceptance and support/signoff remain open.

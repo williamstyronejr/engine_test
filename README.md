@@ -28,7 +28,9 @@ The [bounded session regression](docs/SESSION_VALIDATION.md) repeatedly complete
 both levels with reload rollback, private saves, audio-bank retirement and resource
 restoration checks. Its [full UI companion](docs/SESSION_VALIDATION.md#full-gameplayui-companion-increment-77)
 adds gameplay/HUD, minimap, settings and diagnostics transitions, with full-frame
-fingerprint checks. These accelerated simulations do not establish real-time endurance.
+fingerprint checks. The [audio failure/UI companion](docs/SESSION_VALIDATION.md#audio-failureui-companion-increment-78)
+checks terminal errors, unavailable controls and explicit audio-session recreation.
+These accelerated simulations do not establish real-time endurance.
 The [warmup/order study](benchmarks/2026-10-28-stability-results.md) retains changing
 host frequency/thermal observations; neither warmup protocol establishes stability.
 [Renderer memory snapshots](docs/RENDERER_MEMORY.md) now report CPU vertex storage,

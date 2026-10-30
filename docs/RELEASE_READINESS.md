@@ -54,6 +54,13 @@ final renderer check restores a live presentation-helper baseline, not zero GPU
 resources or total process memory. [Evidence](../validation/2026-10-30-ui-session/RESULTS.md)
 retains the exact workload and exclusions.
 
+Increment 78 adds [controlled audio failure/UI coverage](SESSION_VALIDATION.md#audio-failureui-companion-increment-78)
+at `30a87f3`: 16 full routes, eight injected terminal errors, disabled/startup-failed
+soundtracks and explicit session recreation. All 24 selected group executions pass,
+with 84 matching frame fingerprints. [Evidence](../validation/2026-10-30-audio-ui-session/RESULTS.md)
+checks unavailable controls, preserved state and bounded owned payloads. It leaves
+physical device lifecycle and real-time/performance acceptance open.
+
 “Evidence available” below applies to the stated revision and environment only.
 “Open” means missing evidence or unfinished acceptance work, not a reproduced code
 failure. Unconfirmed WM minimization and rejected historical timing runs are called
@@ -162,15 +169,15 @@ ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 \
 Native graphics previously disabled leak detection because of driver allocations;
 that run checks address/undefined behavior only. Retain CPU and audio leak-enabled
 results separately. Do not suppress an engine report to make the aggregate pass.
-After the full-UI session addition, the current inventory is 68
-native runtime groups (36 CPU, 28 hardware, four platform), plus three packaging
+After the audio-UI session addition, the current inventory is 69
+native runtime groups (36 CPU, 29 hardware, four platform), plus three packaging
 fixtures; platform-disabled builds discover 34 CPU groups. Discovery is not execution.
 The [current refresh](../validation/2026-10-29-readiness/RESULTS.md) runs every GNU/Clang
 runtime group and CPU sanitizer group, with a focused native sanitizer subset.
 The [fresh follow-up](../validation/2026-10-29-offline/RESULTS.md) completes the
 then-current 66-group native sanitizer suite from archived source `4f60312`.
-The added `long_session` and `ui_session` groups receive targeted validation
-separately; the full 68-group suite has not been refreshed by those additions.
+The added `long_session`, `ui_session` and `audio_ui_session` groups receive targeted
+validation separately; the full 69-group suite has not been refreshed by those additions.
 The full fresh-matrix record at `1dfba31` predates these additions; later storage and
 [allocation validation](../validation/2026-10-24-allocations/RESULTS.md) record their
 own full/focused scopes. Update counts from
@@ -384,3 +391,8 @@ failure/recovery through production APIs, retaining identical whole-frame
 fingerprints across selected builds. Physical/native input routing, terminal audio
 failure presentation, real-time endurance, timing and broader memory acceptance
 remain open; passing automated rendering does not certify human readability.
+
+Increment 78 adds [terminal-error and disabled-audio presentation checks](SESSION_VALIDATION.md#audio-failureui-companion-increment-78)
+through the real worker and full draw paths. The deterministic null-device wrapper
+is automated composition evidence; it does not close physical R5 acceptance or
+add automatic device reconnection. Remaining R6 timing and memory gates are unchanged.
