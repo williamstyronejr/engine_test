@@ -2489,6 +2489,11 @@ eight CPU entry-point commands; profilers and the new test binary stay excluded.
 See [contract](SESSION_VALIDATION.md#full-gameplayui-companion-increment-77) and
 [validation](../validation/2026-10-30-ui-session/RESULTS.md).
 
+At documentation commit `c96ddde`, all three Release package groups pass without
+skips (54.53 s). All 37 evidence files and five changed documentation files match
+the archive. The package audit passes 1,167 relative links, 77 shell recipes and
+eight CPU entry-point commands; profilers and both session tests stay excluded.
+
 ## Next increment
 
 Add bounded terminal-audio-failure and disabled-audio presentation transitions to

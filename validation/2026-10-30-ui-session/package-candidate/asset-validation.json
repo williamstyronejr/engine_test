@@ -1,0 +1,117 @@
+{
+  "schema": "engine_asset_validation_v1",
+  "string_encoding": "byte_values",
+  "mode": "bundle",
+  "format": null,
+  "file": null,
+  "scene_budget": 256,
+  "requested_root": null,
+  "asset_root": "/home/zero/.cache/engine-ui-session-77-qpwwoug1/compiler-tmp/package-doc-audit-5t8ljnlp/relocated package with spaces/share/feature_lab",
+  "complete": true,
+  "passed": true,
+  "check_count": 20,
+  "failed_checks": 0,
+  "checks": [
+    {
+      "name": "facility.scene",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "facility.etmp",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "annex.scene",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "annex.etmp",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "facility.eani",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "fonts/ui.efnt",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "sounds/pickup.wav",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "sounds/music.wav",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "sounds/machine.wav",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "sounds/door.wav",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "shaders/sprite.vert (source only)",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "shaders/sprite.frag (source only)",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "FACILITY gameplay",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "ANNEX gameplay",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "textures/actors.etex",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "textures/checker.etex",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "textures/tiles.etex",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "textures/white.etex",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "FACILITY -> ANNEX texture residency",
+      "passed": true,
+      "diagnostic": null
+    },
+    {
+      "name": "ANNEX -> FACILITY texture residency",
+      "passed": true,
+      "diagnostic": null
+    }
+  ],
+  "fatal_error": null
+}

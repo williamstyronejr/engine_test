@@ -82,3 +82,20 @@ targets and an ALSA null sink keep this workload bounded. Physical display/input
 audible device lifecycle, terminal audio-error presentation, real-time endurance,
 host timing stability, broader memory acceptance and final support/signoff remain
 open. Background loading is deferred and milestone 6 remains incomplete.
+
+## Candidate package
+
+At documentation commit **`c96ddde`**, all three Release package groups pass
+without skips in 54.53 seconds: [log](package-feature-tests.log),
+[XML](package-feature-tests.xml), [commands](package-feature-commands.json).
+All 37 then-current evidence files and five changed documentation files match
+archived bytes. The allocation profilers and both session test executables remain
+excluded from installation.
+
+The [candidate audit](package-candidate/summary.json) verifies 1,167 relative
+file links, 77 shell recipes and eight bounded CPU commands between two successful
+manifest checks, with the archive SHA-256 retained. The merge receives all three
+package checks and the same complete content/documentation audit after this record
+is included; final merge artifacts remain under `build/ui-session-refresh/` locally.
+Packaging reuses the Release preset tree and is separate from the fresh targeted
+compiler/sanitizer builds above.
