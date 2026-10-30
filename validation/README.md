@@ -101,3 +101,7 @@ memory-coverage and performance limits.
 GNU/Clang suites, complete CPU and focused native sanitizers, leak-enabled audio,
 a fresh TSan audio build and packaged documentation/CPU entry-point checks. Its
 incremental build scope and remaining offline/physical/timing limits are explicit.
+
+- [2026-10-29 full native sanitizer and fresh offline validation](2026-10-29-offline/RESULTS.md):
+  66 native sanitizer groups, two audio leak groups, a new isolated Release build,
+  36 CPU groups and three relocated package checks from archived source `4f60312`.

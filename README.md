@@ -15,7 +15,9 @@ records passing memory budgets and remaining frame-time failures across 18 runs.
 retains full compiler/sanitizer results, audio ThreadSanitizer checks and a clean
 offline build with relocated package checks. The [integrated readiness refresh](validation/2026-10-29-readiness/RESULTS.md)
 adds current full GNU/Clang suites, CPU and focused native sanitizers, audio race
-checks and a packaged documentation/entry-point audit. Release acceptance remains open. A [quad-corner reuse experiment](benchmarks/2026-10-28-corners-results.md)
+checks and a packaged documentation/entry-point audit. The [fresh native/offline follow-up](validation/2026-10-29-offline/RESULTS.md)
+adds all 66 native sanitizer groups and a full Release build with networking
+disabled, followed by relocated package checks. Release acceptance remains open. A [quad-corner reuse experiment](benchmarks/2026-10-28-corners-results.md)
 passed rendering checks but failed its CPU adoption gate; the existing renderer
 is retained, with the prototype and all measurements preserved.
 [Function sampling](benchmarks/2026-10-28-functions-results.md) now identifies quad

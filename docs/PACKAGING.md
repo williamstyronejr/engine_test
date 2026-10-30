@@ -151,3 +151,9 @@ runs the documented help, simulation verification, asset validation and CPU stre
 commands from a private extraction in an unrelated working directory with DISPLAY
 unset, checking the payload manifest before and after. External URLs, Markdown
 anchors and interactive/physical play remain outside this automated audit.
+
+The [fresh offline follow-up](../validation/2026-10-29-offline/RESULTS.md) builds all
+Release targets from archived source `4f60312` in a new network namespace with
+installed dependencies. It retains source and package hashes, then verifies the
+relocated archive in the real display session. The archived build embeds revision
+`unknown`; its retained source provenance supplies the commit identity.

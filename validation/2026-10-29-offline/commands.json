@@ -1,0 +1,227 @@
+[
+  {
+    "name": "environment",
+    "command": [
+      "bash",
+      "-c",
+      "uname -a; cat /etc/os-release; c++ --version; clang++ --version; cmake --version; ninja --version; pkg-config --modversion x11 alsa; glxinfo -B"
+    ],
+    "source": "4f603120812a8b3eca2d2ad7e014329e2e536b19",
+    "started_utc": "2026-10-30T01:52:46.771985+00:00",
+    "seconds": 1.3327699069923256,
+    "cwd": "/home/zero/dev/engine_test",
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0sCk4VQ:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-offline-75-3q1bxwdx/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "native-configure",
+    "command": [
+      "cmake",
+      "-S",
+      "/home/zero/.cache/engine-offline-75-3q1bxwdx/source",
+      "-B",
+      "/home/zero/.cache/engine-offline-75-3q1bxwdx/native-sanitize",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_SANITIZERS=ON",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-offline-75-3q1bxwdx/native-packages"
+    ],
+    "source": "4f603120812a8b3eca2d2ad7e014329e2e536b19",
+    "started_utc": "2026-10-30T01:52:48.104997+00:00",
+    "seconds": 2.263711781008169,
+    "cwd": "/home/zero/dev/engine_test",
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0sCk4VQ:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-offline-75-3q1bxwdx/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "native-build",
+    "command": [
+      "cmake",
+      "--build",
+      "/home/zero/.cache/engine-offline-75-3q1bxwdx/native-sanitize",
+      "-j2"
+    ],
+    "source": "4f603120812a8b3eca2d2ad7e014329e2e536b19",
+    "started_utc": "2026-10-30T01:52:50.369045+00:00",
+    "seconds": 400.58718287802185,
+    "cwd": "/home/zero/dev/engine_test",
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0sCk4VQ:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-offline-75-3q1bxwdx/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "native-sanitize-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "/home/zero/.cache/engine-offline-75-3q1bxwdx/native-sanitize",
+      "-LE",
+      "packaging",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-29-offline/native-sanitize-tests.xml"
+    ],
+    "source": "4f603120812a8b3eca2d2ad7e014329e2e536b19",
+    "started_utc": "2026-10-30T01:59:31.269583+00:00",
+    "seconds": 565.3668549639988,
+    "cwd": "/home/zero/dev/engine_test",
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0sCk4VQ:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-offline-75-3q1bxwdx/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": "detect_leaks=0:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1"
+    }
+  },
+  {
+    "name": "native-audio-leaks-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "/home/zero/.cache/engine-offline-75-3q1bxwdx/native-sanitize",
+      "-R",
+      "^(audio_transport|audio_reload)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-29-offline/native-audio-leaks-tests.xml"
+    ],
+    "source": "4f603120812a8b3eca2d2ad7e014329e2e536b19",
+    "started_utc": "2026-10-30T02:08:56.880800+00:00",
+    "seconds": 5.477775164996274,
+    "cwd": "/home/zero/dev/engine_test",
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0sCk4VQ:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-offline-75-3q1bxwdx/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1"
+    }
+  },
+  {
+    "name": "offline-build",
+    "command": [
+      "unshare",
+      "--user",
+      "--map-root-user",
+      "--net",
+      "env",
+      "-u",
+      "DISPLAY",
+      "/usr/bin/python3",
+      "/home/zero/.cache/engine-offline-75-3q1bxwdx/isolated.py",
+      "/home/zero/.cache/engine-offline-75-3q1bxwdx/source",
+      "/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release",
+      "/home/zero/dev/engine_test/validation/2026-10-29-offline",
+      "/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-packages"
+    ],
+    "source": "4f603120812a8b3eca2d2ad7e014329e2e536b19",
+    "started_utc": "2026-10-30T02:09:02.360020+00:00",
+    "seconds": 0.13943587700487114,
+    "cwd": "/home/zero/dev/engine_test",
+    "exit_code": 1,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0sCk4VQ:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-offline-75-3q1bxwdx/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "offline-corrected-build",
+    "command": [
+      "unshare",
+      "--user",
+      "--map-root-user",
+      "--net",
+      "env",
+      "-u",
+      "DISPLAY",
+      "AUDIT_PARENT_NETWORK=net:[4026531833]",
+      "/usr/bin/python3",
+      "/home/zero/.cache/engine-offline-75-3q1bxwdx/isolated.py",
+      "/home/zero/.cache/engine-offline-75-3q1bxwdx/source",
+      "/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release",
+      "/home/zero/dev/engine_test/validation/2026-10-29-offline",
+      "/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-packages"
+    ],
+    "source": "4f603120812a8b3eca2d2ad7e014329e2e536b19",
+    "started_utc": "2026-10-30T02:10:12.994436+00:00",
+    "seconds": 423.61629790099687,
+    "cwd": "/home/zero/dev/engine_test",
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0sCk4VQ:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-offline-75-3q1bxwdx/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "offline-package-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release",
+      "-L",
+      "packaging",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-29-offline/offline-package-tests.xml"
+    ],
+    "source": "4f603120812a8b3eca2d2ad7e014329e2e536b19",
+    "started_utc": "2026-10-30T02:17:17.998805+00:00",
+    "seconds": 66.87158295497647,
+    "cwd": "/home/zero/dev/engine_test",
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0sCk4VQ:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-offline-75-3q1bxwdx/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "offline-audit",
+    "command": [
+      "/usr/bin/python3",
+      "/home/zero/dev/engine_test/validation/2026-10-29-readiness/audit_package.py",
+      "/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release/dist/feature-lab-0.1.0-Linux-x86_64-unknown.tar.gz",
+      "/home/zero/dev/engine_test/validation/2026-10-29-offline/offline-audit"
+    ],
+    "source": "4f603120812a8b3eca2d2ad7e014329e2e536b19",
+    "started_utc": "2026-10-30T02:18:26.898852+00:00",
+    "seconds": 6.233758952992503,
+    "cwd": "/home/zero/dev/engine_test",
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0sCk4VQ:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-offline-75-3q1bxwdx/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null
+    }
+  }
+]

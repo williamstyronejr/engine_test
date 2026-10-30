@@ -1,10 +1,12 @@
 """Compare the extracted source to the retained fixed-commit archive byte for byte."""
+import hashlib
 import json
 from pathlib import Path
 import tarfile
 
 root = Path('validation/2026-10-29-offline')
 source = json.loads((root/'source.json').read_text())
+assert hashlib.sha256(Path(source['archive']).read_bytes()).hexdigest() == source['sha256']
 count = 0
 with tarfile.open(source['archive']) as archive:
     for member in archive.getmembers():

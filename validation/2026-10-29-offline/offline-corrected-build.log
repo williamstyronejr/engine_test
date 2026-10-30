@@ -1,0 +1,274 @@
+COMMAND ["cmake", "-S", "/home/zero/.cache/engine-offline-75-3q1bxwdx/source", "-B", "/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release", "-G", "Ninja", "-DCMAKE_BUILD_TYPE=Release", "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-packages"]
+-- The CXX compiler identification is GNU 16.2.1
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Found X11: /usr/include
+-- Looking for XOpenDisplay in /usr/lib/libX11.so;/usr/lib/libXext.so
+-- Looking for XOpenDisplay in /usr/lib/libX11.so;/usr/lib/libXext.so - found
+-- Looking for gethostbyname
+-- Looking for gethostbyname - found
+-- Looking for connect
+-- Looking for connect - found
+-- Looking for remove
+-- Looking for remove - found
+-- Looking for shmat
+-- Looking for shmat - found
+-- Looking for IceConnectionNumber in ICE
+-- Looking for IceConnectionNumber in ICE - found
+-- Found OpenGL: /usr/lib/libOpenGL.so
+-- Found ALSA: /usr/lib/libasound.so (found version "1.2.16.1")
+-- Configuring done (1.8s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release
+COMMAND ["cmake", "--build", "/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release", "-j2"]
+[1/160] Building CXX object CMakeFiles/engine_core.dir/engine/src/keyboard_symbols.cpp.o
+[2/160] Building CXX object CMakeFiles/engine_core.dir/engine/src/font.cpp.o
+[3/160] Building CXX object CMakeFiles/engine_core.dir/engine/src/assets.cpp.o
+[4/160] Building CXX object CMakeFiles/engine_core.dir/engine/src/asset_watch.cpp.o
+[5/160] Building CXX object CMakeFiles/engine_core.dir/engine/src/scene.cpp.o
+[6/160] Building CXX object CMakeFiles/engine_core.dir/engine/src/tilemap.cpp.o
+[7/160] Building CXX object CMakeFiles/engine_core.dir/engine/src/sound.cpp.o
+[8/160] Building CXX object CMakeFiles/engine_core.dir/engine/src/ui.cpp.o
+[9/160] Building CXX object CMakeFiles/engine_core.dir/engine/src/animation.cpp.o
+[10/160] Building CXX object CMakeFiles/engine_core.dir/engine/src/persistence.cpp.o
+[11/160] Building CXX object CMakeFiles/engine_core.dir/engine/src/collision_world.cpp.o
+[12/160] Linking CXX static library libengine_core.a
+[13/160] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/replay_profile.cpp.o
+[14/160] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/stress_benchmark.cpp.o
+[15/160] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/spike_profile.cpp.o
+[16/160] Building CXX object CMakeFiles/engine_platform.dir/engine/src/window.cpp.o
+[17/160] Building CXX object CMakeFiles/engine_platform.dir/engine/src/gl.cpp.o
+[18/160] Building CXX object CMakeFiles/feature_lab_validation.dir/examples/feature_lab/asset_validation.cpp.o
+[19/160] Building CXX object CMakeFiles/engine_platform.dir/engine/src/renderer.cpp.o
+[20/160] Building CXX object CMakeFiles/engine_platform.dir/engine/src/ui_renderer.cpp.o
+[21/160] Building CXX object CMakeFiles/engine_platform.dir/engine/src/gpu_timer.cpp.o
+[22/160] Stage Feature Lab assets
+[23/160] Building CXX object CMakeFiles/engine_platform.dir/engine/src/audio.cpp.o
+[24/160] Linking CXX static library libfeature_lab_stress.a
+[25/160] Building CXX object CMakeFiles/stress_bench.dir/tools/stress_bench.cpp.o
+[26/160] Linking CXX static library libfeature_lab_validation.a
+[27/160] Building CXX object CMakeFiles/make_assets.dir/tools/make_assets.cpp.o
+[28/160] Building CXX object CMakeFiles/allocation_profile.dir/profiling/allocation_profile.cpp.o
+[29/160] Building CXX object CMakeFiles/validate_assets.dir/tools/validate_assets.cpp.o
+[30/160] Building CXX object CMakeFiles/allocation_profile_tests.dir/tests/allocation_profile_tests.cpp.o
+[31/160] Building CXX object CMakeFiles/asset_validation_tests.dir/tests/asset_validation_tests.cpp.o
+[32/160] Building CXX object CMakeFiles/hud_text_tests.dir/tests/hud_text_tests.cpp.o
+[33/160] Building CXX object CMakeFiles/mixer_reload_tests.dir/tests/mixer_reload_tests.cpp.o
+[34/160] Building CXX object CMakeFiles/tilemap_reload_tests.dir/tests/tilemap_reload_tests.cpp.o
+[35/160] Building CXX object CMakeFiles/scene_reload_tests.dir/tests/scene_reload_tests.cpp.o
+[36/160] Building CXX object CMakeFiles/animation_reload_tests.dir/tests/animation_reload_tests.cpp.o
+[37/160] Building CXX object CMakeFiles/audio_recovery_tests.dir/tests/audio_recovery_tests.cpp.o
+[38/160] Building CXX object CMakeFiles/asset_watch_tests.dir/tests/asset_watch_tests.cpp.o
+[39/160] Building CXX object CMakeFiles/font_tests.dir/tests/font_tests.cpp.o
+[40/160] Building CXX object CMakeFiles/transform_tests.dir/tests/transform_tests.cpp.o
+[41/160] Building CXX object CMakeFiles/component_tests.dir/tests/component_tests.cpp.o
+[42/160] Building CXX object CMakeFiles/stress_tests.dir/tests/stress_tests.cpp.o
+[43/160] Building CXX object CMakeFiles/replay_profile_tests.dir/tests/replay_profile_tests.cpp.o
+[44/160] Building CXX object CMakeFiles/spike_profile_tests.dir/tests/spike_profile_tests.cpp.o
+[45/160] Building CXX object CMakeFiles/make_profile_replay.dir/tools/make_profile_replay.cpp.o
+[46/160] Building CXX object CMakeFiles/replay_tests.dir/tests/replay_tests.cpp.o
+[47/160] Building CXX object CMakeFiles/level_tests.dir/tests/level_tests.cpp.o
+[48/160] Building CXX object CMakeFiles/international_bindings_tests.dir/tests/international_bindings_tests.cpp.o
+[49/160] Building CXX object CMakeFiles/scene_flow_tests.dir/tests/scene_flow_tests.cpp.o
+[50/160] Building CXX object CMakeFiles/gpu_timer_queue_tests.dir/tests/gpu_timer_queue_tests.cpp.o
+[51/160] Building CXX object CMakeFiles/bindings_tests.dir/tests/bindings_tests.cpp.o
+[52/160] Building CXX object CMakeFiles/diagnostics_tests.dir/tests/diagnostics_tests.cpp.o
+[53/160] Building CXX object CMakeFiles/collision_tests.dir/tests/collision_tests.cpp.o
+[54/160] Building CXX object CMakeFiles/atomic_write_tests.dir/tests/atomic_write_tests.cpp.o
+[55/160] Building CXX object CMakeFiles/persistence_tests.dir/tests/persistence_tests.cpp.o
+[56/160] Building CXX object CMakeFiles/storage_directory_tests.dir/tests/storage_directory_tests.cpp.o
+[57/160] Building CXX object CMakeFiles/ui_tests.dir/tests/ui_tests.cpp.o
+[58/160] Building CXX object CMakeFiles/sound_tests.dir/tests/sound_tests.cpp.o
+[59/160] Building CXX object CMakeFiles/world_tests.dir/tests/world_tests.cpp.o
+[60/160] Building CXX object CMakeFiles/content_tests.dir/tests/content_tests.cpp.o
+[61/160] Linking CXX static library libengine_platform.a
+[62/160] Building CXX object CMakeFiles/core_tests.dir/tests/core_tests.cpp.o
+[63/160] Building CXX object CMakeFiles/feature_lab.dir/examples/feature_lab/stress_mode.cpp.o
+[64/160] Building CXX object CMakeFiles/platform_probe.dir/tools/platform_probe.cpp.o
+[65/160] Building CXX object CMakeFiles/audio_probe.dir/tools/audio_probe.cpp.o
+[66/160] Building CXX object CMakeFiles/feature_lab.dir/examples/feature_lab/main.cpp.o
+[67/160] Building CXX object CMakeFiles/feature_lab_allocations.dir/examples/feature_lab/stress_mode.cpp.o
+[68/160] Building CXX object CMakeFiles/diagnostics_allocations.dir/profiling/ui_allocations.cpp.o
+[69/160] Building CXX object CMakeFiles/feature_lab_allocations.dir/examples/feature_lab/main.cpp.o
+[70/160] Building CXX object CMakeFiles/audio_allocations.dir/profiling/audio_allocations.cpp.o
+[71/160] Building CXX object CMakeFiles/audio_allocations.dir/engine/src/audio.cpp.o
+[72/160] Building CXX object CMakeFiles/ui_allocations.dir/profiling/ui_allocations.cpp.o
+[73/160] Building CXX object CMakeFiles/lifecycle_tests.dir/tests/lifecycle_tests.cpp.o
+[74/160] Building CXX object CMakeFiles/scene_watch_tests.dir/tests/scene_watch_tests.cpp.o
+[75/160] Building CXX object CMakeFiles/tilemap_watch_tests.dir/tests/tilemap_watch_tests.cpp.o
+[76/160] Building CXX object CMakeFiles/animation_watch_tests.dir/tests/animation_watch_tests.cpp.o
+[77/160] Building CXX object CMakeFiles/font_reload_tests.dir/tests/font_reload_tests.cpp.o
+[78/160] Building CXX object CMakeFiles/font_graphics_tests.dir/tests/font_graphics_tests.cpp.o
+[79/160] Building CXX object CMakeFiles/sampling_tests.dir/tests/sampling_tests.cpp.o
+[80/160] Building CXX object CMakeFiles/renderer_memory_tests.dir/tests/renderer_memory_tests.cpp.o
+[81/160] Building CXX object CMakeFiles/stress_graphics_tests.dir/tests/stress_graphics_tests.cpp.o
+[82/160] Building CXX object CMakeFiles/audio_reload_tests.dir/tests/audio_reload_tests.cpp.o
+[83/160] Building CXX object CMakeFiles/audio_watch_tests.dir/tests/audio_watch_tests.cpp.o
+[84/160] Building CXX object CMakeFiles/audio_tests.dir/tests/audio_tests.cpp.o
+[85/160] Building CXX object CMakeFiles/platform_tests.dir/tests/platform_tests.cpp.o
+[86/160] Building CXX object CMakeFiles/keyboard_map_tests.dir/tests/keyboard_map_tests.cpp.o
+[87/160] Building CXX object CMakeFiles/international_platform_tests.dir/tests/international_platform_tests.cpp.o
+[88/160] Building CXX object CMakeFiles/chord_platform_tests.dir/tests/chord_platform_tests.cpp.o
+[89/160] Building CXX object CMakeFiles/gpu_timer_probe.dir/tools/gpu_timer_probe.cpp.o
+[90/160] Building CXX object CMakeFiles/render_target_tests.dir/tests/render_target_tests.cpp.o
+[91/160] Building CXX object CMakeFiles/gpu_timer_tests.dir/tests/gpu_timer_tests.cpp.o
+[92/160] Building CXX object CMakeFiles/shader_tests.dir/tests/shader_tests.cpp.o
+[93/160] Building CXX object CMakeFiles/texture_reload_tests.dir/tests/texture_reload_tests.cpp.o
+[94/160] Building CXX object CMakeFiles/graphics_tests.dir/tests/graphics_tests.cpp.o
+[95/160] Linking CXX executable make_assets
+[96/160] Linking CXX executable stress_bench
+[97/160] Linking CXX executable validate_assets
+[98/160] Linking CXX executable allocation_profile_tests
+[99/160] Linking CXX executable hud_text_tests
+[100/160] Linking CXX executable asset_validation_tests
+[101/160] Linking CXX executable mixer_reload_tests
+[102/160] Linking CXX executable scene_reload_tests
+[103/160] Linking CXX executable tilemap_reload_tests
+[104/160] Linking CXX executable animation_reload_tests
+[105/160] Linking CXX executable audio_recovery_tests
+[106/160] Linking CXX executable font_tests
+[107/160] Linking CXX executable asset_watch_tests
+[108/160] Linking CXX executable component_tests
+[109/160] Linking CXX executable transform_tests
+[110/160] Linking CXX executable stress_tests
+[111/160] Linking CXX executable replay_profile_tests
+[112/160] Linking CXX executable spike_profile_tests
+[113/160] Linking CXX executable make_profile_replay
+[114/160] Linking CXX executable replay_tests
+[115/160] Linking CXX executable level_tests
+[116/160] Linking CXX executable scene_flow_tests
+[117/160] Linking CXX executable international_bindings_tests
+[118/160] Linking CXX executable bindings_tests
+[119/160] Linking CXX executable gpu_timer_queue_tests
+[120/160] Linking CXX executable diagnostics_tests
+[121/160] Linking CXX executable collision_tests
+[122/160] Linking CXX executable persistence_tests
+[123/160] Linking CXX executable atomic_write_tests
+[124/160] Linking CXX executable storage_directory_tests
+[125/160] Linking CXX executable ui_tests
+[126/160] Linking CXX executable sound_tests
+[127/160] Linking CXX executable world_tests
+[128/160] Linking CXX executable content_tests
+[129/160] Linking CXX executable core_tests
+[130/160] Linking CXX executable feature_lab
+[131/160] Linking CXX executable platform_probe
+[132/160] Linking CXX executable audio_probe
+[133/160] Linking CXX executable feature_lab_allocations
+[134/160] Linking CXX executable diagnostics_allocations
+[135/160] Linking CXX executable ui_allocations
+[136/160] Linking CXX executable audio_allocations
+[137/160] Linking CXX executable lifecycle_tests
+[138/160] Linking CXX executable scene_watch_tests
+[139/160] Linking CXX executable tilemap_watch_tests
+[140/160] Linking CXX executable animation_watch_tests
+[141/160] Linking CXX executable font_reload_tests
+[142/160] Linking CXX executable font_graphics_tests
+[143/160] Linking CXX executable sampling_tests
+[144/160] Linking CXX executable renderer_memory_tests
+[145/160] Building CXX object CMakeFiles/watched_reload_tests.dir/tests/watched_reload_tests.cpp.o
+[146/160] Linking CXX executable stress_graphics_tests
+[147/160] Linking CXX executable audio_reload_tests
+[148/160] Linking CXX executable audio_watch_tests
+[149/160] Linking CXX executable audio_tests
+[150/160] Linking CXX executable platform_tests
+[151/160] Linking CXX executable keyboard_map_tests
+[152/160] Linking CXX executable international_platform_tests
+[153/160] Linking CXX executable chord_platform_tests
+[154/160] Linking CXX executable render_target_tests
+[155/160] Linking CXX executable gpu_timer_probe
+[156/160] Linking CXX executable gpu_timer_tests
+[157/160] Linking CXX executable texture_reload_tests
+[158/160] Linking CXX executable shader_tests
+[159/160] Linking CXX executable watched_reload_tests
+[160/160] Linking CXX executable graphics_tests
+COMMAND ["ctest", "--test-dir", "/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release", "-L", "cpu", "--output-on-failure", "--output-junit", "/home/zero/dev/engine_test/validation/2026-10-29-offline/offline-cpu-tests.xml"]
+Test project /home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release
+      Start  1: allocation_counters
+ 1/36 Test  #1: allocation_counters ..............   Passed    0.00 sec
+      Start  2: hud_text
+ 2/36 Test  #2: hud_text .........................   Passed    0.01 sec
+      Start  3: asset_validation
+ 3/36 Test  #3: asset_validation .................   Passed    1.01 sec
+      Start  4: asset_validation_cli
+ 4/36 Test  #4: asset_validation_cli .............   Passed    0.56 sec
+      Start  5: mixer_reload
+ 5/36 Test  #5: mixer_reload .....................   Passed    0.00 sec
+      Start  6: scene_reload
+ 6/36 Test  #6: scene_reload .....................   Passed    0.17 sec
+      Start  7: tilemap_reload
+ 7/36 Test  #7: tilemap_reload ...................   Passed    0.18 sec
+      Start  8: animation_reload
+ 8/36 Test  #8: animation_reload .................   Passed    0.25 sec
+      Start  9: audio_recovery
+ 9/36 Test  #9: audio_recovery ...................   Passed    0.00 sec
+      Start 10: fonts
+10/36 Test #10: fonts ............................   Passed    0.05 sec
+      Start 11: asset_watch
+11/36 Test #11: asset_watch ......................   Passed    0.33 sec
+      Start 12: components
+12/36 Test #12: components .......................   Passed    0.02 sec
+      Start 13: transforms
+13/36 Test #13: transforms .......................   Passed    0.04 sec
+      Start 14: package_manifest
+14/36 Test #14: package_manifest .................   Passed    0.10 sec
+      Start 15: stress_cpu
+15/36 Test #15: stress_cpu .......................   Passed    0.13 sec
+      Start 16: stress_report
+16/36 Test #16: stress_report ....................   Passed    0.27 sec
+      Start 17: replay_profile
+17/36 Test #17: replay_profile ...................   Passed    0.00 sec
+      Start 18: spike_profile
+18/36 Test #18: spike_profile ....................   Passed    0.27 sec
+      Start 19: replay_files
+19/36 Test #19: replay_files .....................   Passed    0.11 sec
+      Start 20: levels
+20/36 Test #20: levels ...........................   Passed    0.30 sec
+      Start 21: scene_flow
+21/36 Test #21: scene_flow .......................   Passed    0.29 sec
+      Start 22: international_bindings
+22/36 Test #22: international_bindings ...........   Passed    0.00 sec
+      Start 23: bindings
+23/36 Test #23: bindings .........................   Passed    0.00 sec
+      Start 24: gpu_timer_queue
+24/36 Test #24: gpu_timer_queue ..................   Passed    0.00 sec
+      Start 25: diagnostics
+25/36 Test #25: diagnostics ......................   Passed    0.05 sec
+      Start 26: collision
+26/36 Test #26: collision ........................   Passed    0.03 sec
+      Start 27: persistence
+27/36 Test #27: persistence ......................   Passed    0.76 sec
+      Start 28: atomic_write
+28/36 Test #28: atomic_write .....................   Passed    1.58 sec
+      Start 29: storage_directories
+29/36 Test #29: storage_directories ..............   Passed    6.11 sec
+      Start 30: ui
+30/36 Test #30: ui ...............................   Passed    0.00 sec
+      Start 31: sound
+31/36 Test #31: sound ............................   Passed    0.03 sec
+      Start 32: tile_animation
+32/36 Test #32: tile_animation ...................   Passed    0.03 sec
+      Start 33: content
+33/36 Test #33: content ..........................   Passed    0.22 sec
+      Start 34: core
+34/36 Test #34: core .............................   Passed    0.04 sec
+      Start 53: keyboard_maps
+35/36 Test #53: keyboard_maps ....................   Passed    0.01 sec
+      Start 65: game_replay
+36/36 Test #65: game_replay ......................   Passed    0.05 sec
+
+100% tests passed out of 36
+
+Label Time Summary:
+cpu    =  13.04 sec*proc (36 tests)
+
+Total Test time (real) =  13.06 sec
+COMMAND ["cmake", "--build", "/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release", "--target", "release_package"]
+[1/2] Stage Feature Lab assets
+[1/2] Build and verify the relocatable release archive
+-- Validated package: /home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release/dist/feature-lab-0.1.0-Linux-x86_64-unknown.tar.gz
