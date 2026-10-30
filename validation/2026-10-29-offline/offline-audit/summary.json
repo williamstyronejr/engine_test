@@ -1,0 +1,10 @@
+{
+  "archive": "/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release/dist/feature-lab-0.1.0-Linux-x86_64-unknown.tar.gz",
+  "sha256": "b18de1859c646cbfcf1201be68343e96edfd46e2106f3069d7044e64453cd572",
+  "extracted_to": "/home/zero/.cache/engine-offline-75-3q1bxwdx/compiler-tmp/package-doc-audit-lcmo46h8/relocated package with spaces",
+  "relative_links": 1055,
+  "shell_recipes": 75,
+  "successful_commands": 10,
+  "package_payload_unchanged": true,
+  "physical_or_interactive_acceptance": false
+}

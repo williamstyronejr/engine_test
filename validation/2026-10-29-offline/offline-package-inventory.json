@@ -1,0 +1,172 @@
+{
+  "backtraceGraph": {
+    "commands": [
+      "add_test"
+    ],
+    "files": [
+      "/home/zero/.cache/engine-offline-75-3q1bxwdx/source/CMakeLists.txt"
+    ],
+    "nodes": [
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 426,
+        "parent": 0
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 428,
+        "parent": 2
+      },
+      {
+        "file": 0
+      },
+      {
+        "command": 0,
+        "file": 0,
+        "line": 432,
+        "parent": 4
+      }
+    ]
+  },
+  "kind": "ctestInfo",
+  "tests": [
+    {
+      "backtrace": 1,
+      "command": [
+        "/home/zero/dev/engine_test/.tools/lib/python3.14/site-packages/cmake/data/bin/cmake",
+        "-P",
+        "/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release/generated/PackageBuild.cmake"
+      ],
+      "name": "package_build",
+      "properties": [
+        {
+          "name": "FIXTURES_SETUP",
+          "value": [
+            "release_archive"
+          ]
+        },
+        {
+          "name": "LABELS",
+          "value": [
+            "packaging"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 90.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release"
+        }
+      ]
+    },
+    {
+      "backtrace": 3,
+      "command": [
+        "/home/zero/dev/engine_test/.tools/lib/python3.14/site-packages/cmake/data/bin/cmake",
+        "-DARCHIVE=/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release/dist/feature-lab-0.1.0-Linux-x86_64-unknown.tar.gz",
+        "-DWORK_ROOT=/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-packages",
+        "-DMODE=headless",
+        "-P",
+        "/home/zero/.cache/engine-offline-75-3q1bxwdx/source/cmake/PackageSmoke.cmake"
+      ],
+      "name": "package_relocation",
+      "properties": [
+        {
+          "name": "DEPENDS",
+          "value": [
+            "package_build"
+          ]
+        },
+        {
+          "name": "FIXTURES_REQUIRED",
+          "value": [
+            "release_archive"
+          ]
+        },
+        {
+          "name": "LABELS",
+          "value": [
+            "packaging"
+          ]
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 60.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release"
+        }
+      ]
+    },
+    {
+      "backtrace": 5,
+      "command": [
+        "/home/zero/dev/engine_test/.tools/lib/python3.14/site-packages/cmake/data/bin/cmake",
+        "-DARCHIVE=/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release/dist/feature-lab-0.1.0-Linux-x86_64-unknown.tar.gz",
+        "-DWORK_ROOT=/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-packages",
+        "-DMODE=graphics",
+        "-P",
+        "/home/zero/.cache/engine-offline-75-3q1bxwdx/source/cmake/PackageSmoke.cmake"
+      ],
+      "name": "package_graphics",
+      "properties": [
+        {
+          "name": "DEPENDS",
+          "value": [
+            "package_build"
+          ]
+        },
+        {
+          "name": "SKIP_REGULAR_EXPRESSION",
+          "value": [
+            "SKIP: package graphics"
+          ]
+        },
+        {
+          "name": "FIXTURES_REQUIRED",
+          "value": [
+            "release_archive"
+          ]
+        },
+        {
+          "name": "LABELS",
+          "value": [
+            "hardware",
+            "packaging"
+          ]
+        },
+        {
+          "name": "RUN_SERIAL",
+          "value": true
+        },
+        {
+          "name": "TIMEOUT",
+          "value": 120.0
+        },
+        {
+          "name": "WORKING_DIRECTORY",
+          "value": "/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release"
+        }
+      ]
+    }
+  ],
+  "version": {
+    "major": 1,
+    "minor": 0
+  }
+}

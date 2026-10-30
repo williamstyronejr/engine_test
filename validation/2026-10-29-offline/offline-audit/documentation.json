@@ -1,0 +1,13 @@
+{
+  "archive": "/home/zero/.cache/engine-offline-75-3q1bxwdx/offline-release/dist/feature-lab-0.1.0-Linux-x86_64-unknown.tar.gz",
+  "sha256": "b18de1859c646cbfcf1201be68343e96edfd46e2106f3069d7044e64453cd572",
+  "relative_links": 1055,
+  "missing": [],
+  "shell_recipes": 75,
+  "recipe_failures": [],
+  "excluded_checks": [
+    "external URLs",
+    "Markdown anchors",
+    "interactive recipe execution"
+  ]
+}

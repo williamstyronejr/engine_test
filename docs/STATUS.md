@@ -2416,10 +2416,38 @@ skips (49.27 s). All 64 evidence files and five changed documentation files matc
 the archive; 1,052 relative links, 75 shell recipes and eight CPU entry-point
 commands pass the current package audit. Allocation profilers remain excluded.
 
+## Increment 75: full native sanitizer and fresh offline validation
+
+- Built every native target in a new GNU Debug ASan/UBSan directory from archived
+  source `4f60312`; all 66 runtime groups pass without skips. Two separate native
+  audio groups also pass with leak detection enabled.
+- Built every Release target from the same archive in a new user/network namespace
+  with only loopback. All 36 CPU groups and mandatory package creation/headless
+  checks pass inside isolation; all three relocated package groups pass afterward
+  in the real display session.
+- The first offline topology check stopped before configure because it read the
+  host sysfs interface list. Corrected it to query the network namespace directly;
+  the failed attempt remains retained beside the successful offline run.
+- Verified all 1,600 extracted source files against archived bytes. Retained full
+  source revision, source/package hashes, commands, logs and inventories; archived
+  binaries embed `unknown` because the source archive has no Git metadata.
+- Audited packaged relative links, shell syntax and bounded CPU entry points.
+  Native and offline build directories were fresh; no engine, example, test,
+  profiling or build-rule changes were needed. Physical acceptance, unresolved
+  timing and broader memory/long-session coverage remain open.
+
+See [results](../validation/2026-10-29-offline/RESULTS.md) and
+[release gates](RELEASE_READINESS.md).
+
+At documentation commit `60c4e8e`, all three Release package groups pass without
+skips (70.73 s). All 53 evidence files and five changed documentation files match
+the archive; 1,090 relative links, 75 recipes and eight CPU entry-point commands
+pass the package audit. Allocation profilers remain excluded.
+
 ## Next increment
 
-Complete the current native sanitizer runtime suite and run a fresh archived-source
-offline build with relocated package checks. Retain exact source/artifact identities,
-failures and skips; neither this nor prior automated checks close physical
-display/audio acceptance, the unresolved timing/memory-coverage gate or final
-support signoff. Background loading remains deferred.
+Define and implement a bounded long-session regression fixture for repeated
+play/reload/audio lifecycle coverage, using private assets/user data and explicit
+resource-restoration checks. Retain exact workload limits and failures; automated
+coverage does not replace physical display/audio acceptance, resolve host timing
+instability or complete final support signoff. Background loading remains deferred.

@@ -18,7 +18,7 @@ at `aa53ca4` covers ancestor creation/synchronization, errors, process-interrupt
 retry and consistent read/write normalization. It documents stricter ancestor-access
 requirements and synchronous I/O.
 
-Latest refresh: [2026-10-29 integrated evidence](../validation/2026-10-29-readiness/RESULTS.md)
+Integrated refresh: [2026-10-29 integrated evidence](../validation/2026-10-29-readiness/RESULTS.md)
 at `6d0da8f`, with runtime sources unchanged from merge `855805d`, passes 253 test
 group executions: full GNU Debug/Release and Clang suites, complete CPU ASan/UBSan,
 17 focused native sanitizer groups, two leak-enabled audio groups and two TSan
@@ -29,6 +29,15 @@ The first Debug attempt at `1fc0903` retained one failed GPU-overlay pixel test;
 panel boundary. Engine/example runtime sources remain unchanged.
 The original audit evidence table remains historical; the gate table records the
 new scopes without replacing earlier failures or physical acceptance requirements.
+
+Latest follow-up: [fresh native sanitizer and offline validation](../validation/2026-10-29-offline/RESULTS.md)
+at archived source `4f60312` passes the complete 66-group native ASan/UBSan suite
+and two leak-enabled audio groups. A separate new Release build completes with
+networking disabled, passing all 36 CPU groups and mandatory headless package
+checks inside isolation; three relocated package groups pass afterward in the
+real display session. Both build directories are fresh. Source/package hashes
+retain provenance for archived binaries whose embedded revision is `unknown`.
+This refresh changes no engine, example, test, profiling or build rules.
 
 “Evidence available” below applies to the stated revision and environment only.
 “Open” means missing evidence or unfinished acceptance work, not a reproduced code
@@ -59,9 +68,9 @@ advertised; a second GPU is not a substitute for finishing checks on the testing
 
 | Gate | State | Required closure / evidence | Execution |
 | --- | --- | --- | --- |
-| R1: candidate compiler and sanitizer matrix | Refreshed evidence at `6d0da8f`; scope limits remain | Full GNU Debug/Release and Clang each pass 66 runtime groups; CPU ASan/UBSan passes all 34. Native ASan/UBSan covers 17 focused groups, plus two leak-enabled audio groups. All pass without skips. Existing build trees were reused; the full current native sanitizer suite and a fresh-build qualification are not claimed. | [Integrated matrix](../validation/2026-10-29-readiness/RESULTS.md); prior fresh full-native evidence remains at `1dfba31`. |
+| R1: candidate compiler and sanitizer matrix | Full current native sanitizer evidence added at `4f60312` | Fresh GNU native ASan/UBSan passes all 66 runtime groups, plus two leak-enabled audio groups. The prior integrated refresh supplies full GNU Debug/Release and Clang (66 each), all 34 CPU sanitizer groups and two audio TSan groups. All pass without skips. Those prior compiler trees were reused; no fresh full cross-compiler matrix is claimed. | [Fresh native suite](../validation/2026-10-29-offline/RESULTS.md), [integrated matrix](../validation/2026-10-29-readiness/RESULTS.md). |
 | R2: concurrent audio validation | Refreshed evidence at `6d0da8f` | A new Clang TSan build passes both audio groups without reports, using null/failing sinks. This covers exercised queue, buffer-retirement and shutdown schedules, not all interleavings or uninstrumented ALSA internals. | No physical sound claim; [race results](../validation/2026-10-29-readiness/tsan-audio-tests.xml). |
-| R3: clean offline build and candidate package | Current package audit; offline evidence remains at `1dfba31` | Current archives receive manifest/relocation/graphics checks and an audit of packaged documentation and bounded CPU entry points. The prior isolated fresh build remains historical evidence; incremental current builds do not refresh that offline qualification. | [Current audit](../validation/2026-10-29-readiness/RESULTS.md), [prior offline provenance](../validation/2026-10-23/RESULTS.md#clean-offline-build). |
+| R3: clean offline build and candidate package | Fresh archived-source evidence at `4f60312` | New full GNU Release build, 36 CPU groups and mandatory headless package validation pass inside network isolation. Three package groups, including relocated OpenGL scenarios, pass afterward in the real display session. Source/archive hashes identify the build; embedded revision is `unknown` without Git metadata. Final Git-stamped candidate packages are checked separately. | [Offline provenance and package audit](../validation/2026-10-29-offline/RESULTS.md); older `1dfba31` evidence remains historical. |
 | R4: display, input and interactive game acceptance | Open; WM minimize was unconfirmed (probe exit 2) | Finish physical scale/monitor, supported WM minimize/restore, focus, layout switching and title/settings/gameplay checks. Verify camera, clipping, rebinding, save/relaunch, level transitions and visible shader failure/recovery. Record each case, configuration and result. | Human observation and a suitable WM/monitor configuration. |
 | R5: physical sound and device lifecycle | Open | Listen to channel/gain/mute/pause/stop and gameplay cues. Exercise physical disconnect and system suspend/resume in an arranged session. Confirm continued play and useful disabled-audio diagnostics on terminal failure. Record device/backend and outcome; automatic reconnection is not implemented or required by the current contract. | Human observation and physical device access. |
 | R6: declared performance and memory acceptance | Open; declared memory checks pass, timing fails at `d4dbe22` | [Six workloads / 18 attempts](../benchmarks/2026-10-26-workload-acceptance-results.md) retain predeclared ceilings, kernel peak RSS and a storage coverage audit. All memory checks pass; one p99 and fourteen worst-frame checks exceed 16.7 ms. Investigate paired-frame causes, then repeat without discarding failures; extend interactive/audio/error/long-session coverage and physical 1080p acceptance. | Measurements are automated; physical presentation/refresh checks require observation. |
@@ -143,6 +152,8 @@ native runtime groups (36 CPU, 26 hardware, four platform), plus three packaging
 fixtures; platform-disabled builds discover 34 CPU groups. Discovery is not execution.
 The [current refresh](../validation/2026-10-29-readiness/RESULTS.md) runs every GNU/Clang
 runtime group and CPU sanitizer group, with a focused native sanitizer subset.
+The [fresh follow-up](../validation/2026-10-29-offline/RESULTS.md) completes the
+current 66-group native sanitizer suite from archived source `4f60312`.
 The full fresh-matrix record at `1dfba31` predates these additions; later storage and
 [allocation validation](../validation/2026-10-24-allocations/RESULTS.md) record their
 own full/focused scopes. Update counts from
@@ -338,5 +349,8 @@ All 253 scoped compiler/sanitizer/race group executions pass without skips. The
 package audit checks relative file links and shell syntax, then runs bounded CPU
 entry points outside the package directory with the display unset. It does not
 test external URLs, heading anchors, interactive recipes or physical devices.
-R1's complete native sanitizer refresh and R3's fresh offline qualification remain
-separate follow-up work. R4/R5, R6 timing/coverage and R8 support/signoff stay open.
+Increment 75 [completes that full native and fresh offline follow-up](../validation/2026-10-29-offline/RESULTS.md)
+for archived source `4f60312`, with 107 passing CTest group executions and explicit
+network/source/package provenance. R4/R5, R6 timing/coverage and R8 support/signoff
+stay open. The next bounded automated fixture should extend repeated
+play/reload/audio lifecycle coverage with explicit resource-restoration checks.

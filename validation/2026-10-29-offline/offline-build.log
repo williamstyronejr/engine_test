@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/zero/.cache/engine-offline-75-3q1bxwdx/isolated.py", line 12, in <module>
+    assert interfaces == ['lo'], record
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'namespace': 'net:[4026532615]', 'interfaces': ['lo', 'wlp1s0'], 'routes': '', 'ipv6_routes': '00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000000 00200200       lo\n00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000000 00200200       lo\n', 'display': None}
