@@ -131,3 +131,18 @@ read-only power/thermal evidence that can distinguish candidate causes before
 another renderer trial. Do not change governor, power limits, fan settings or
 acceptance thresholds without a separate decision. Physical display/input/audio,
 broader memory, real-time endurance and final support/signoff remain open.
+
+## Candidate package
+
+At documentation commit **`e5d9e62`**, all three Release package groups pass
+without skips. All 124 then-current evidence/documentation files match archived
+bytes. The audit verifies 1,238 relative file links, 78 shell recipes and
+eight bounded CPU entry-point commands between two successful manifest checks.
+Allocation profilers and session tests remain excluded. These checks validate
+packaging/command correctness and do not change the failed timing decisions.
+
+The final merge receives the same three package tests and complete archive audit
+after this evidence is included. Final local records live under
+`build/timing-baseline-refresh/`; package builds reuse the Release preset tree.
+
+See the [package evidence](../validation/2026-10-31-timing/package-candidate/summary.json).

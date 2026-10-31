@@ -2536,6 +2536,10 @@ See [protocol](../benchmarks/TIMING_BASELINE_REFRESH.md),
 [findings](../benchmarks/2026-10-31-timing-results.md) and
 [evidence](../validation/2026-10-31-timing/RESULTS.md).
 
+At documentation commit `e5d9e62`, all three Release package groups pass without
+skips. All 124 then-current evidence/documentation files match archive bytes, and
+the packaged documentation/entry-point audit passes. Timing acceptance remains failed.
+
 ## Next increment
 
 Investigate the recurring low-frequency state using read-only power/thermal evidence
