@@ -1,0 +1,5103 @@
+{
+  "schema": "stress_host_observations_v1",
+  "static_before": {
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_driver": {
+      "value": "intel_cpufreq",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor": {
+      "value": "schedutil",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/related_cpus": {
+      "value": "0",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/affected_cpus": {
+      "value": "0",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/scaling_driver": {
+      "value": "intel_cpufreq",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/scaling_governor": {
+      "value": "schedutil",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/scaling_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/scaling_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/related_cpus": {
+      "value": "1",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/affected_cpus": {
+      "value": "1",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/scaling_driver": {
+      "value": "intel_cpufreq",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/scaling_governor": {
+      "value": "schedutil",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/scaling_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/scaling_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/related_cpus": {
+      "value": "2",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/affected_cpus": {
+      "value": "2",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/scaling_driver": {
+      "value": "intel_cpufreq",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/scaling_governor": {
+      "value": "schedutil",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/scaling_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/scaling_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/related_cpus": {
+      "value": "3",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/affected_cpus": {
+      "value": "3",
+      "error": null
+    },
+    "/sys/class/thermal/thermal_zone0/type": {
+      "value": "acpitz",
+      "error": null
+    },
+    "/sys/class/thermal/thermal_zone1/type": {
+      "value": "x86_pkg_temp",
+      "error": null
+    }
+  },
+  "static_after": {
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_driver": {
+      "value": "intel_cpufreq",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor": {
+      "value": "schedutil",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/related_cpus": {
+      "value": "0",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy0/affected_cpus": {
+      "value": "0",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/scaling_driver": {
+      "value": "intel_cpufreq",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/scaling_governor": {
+      "value": "schedutil",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/scaling_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/scaling_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/related_cpus": {
+      "value": "1",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy1/affected_cpus": {
+      "value": "1",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/scaling_driver": {
+      "value": "intel_cpufreq",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/scaling_governor": {
+      "value": "schedutil",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/scaling_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/scaling_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/related_cpus": {
+      "value": "2",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy2/affected_cpus": {
+      "value": "2",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/scaling_driver": {
+      "value": "intel_cpufreq",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/scaling_governor": {
+      "value": "schedutil",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/scaling_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/scaling_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_min_freq": {
+      "value": "800000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_max_freq": {
+      "value": "2900000",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/related_cpus": {
+      "value": "3",
+      "error": null
+    },
+    "/sys/devices/system/cpu/cpufreq/policy3/affected_cpus": {
+      "value": "3",
+      "error": null
+    },
+    "/sys/class/thermal/thermal_zone0/type": {
+      "value": "acpitz",
+      "error": null
+    },
+    "/sys/class/thermal/thermal_zone1/type": {
+      "value": "x86_pkg_temp",
+      "error": null
+    }
+  },
+  "launch_offset_seconds": 0.00473196100210771,
+  "exit_observed_offset_seconds": 15.14373676496325,
+  "samples": [
+    {
+      "label": "before",
+      "offset_seconds": 0.002242000016849488,
+      "read_seconds": 0.0024826209992170334,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "2194766",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "2194766",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "2194756",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "2194756",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "2194748",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "2194748",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "2194766",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "2194766",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265800",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "77000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 0.005623814009595662,
+      "read_seconds": 0.007683796982746571,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "2194736",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "2194736",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "2195092",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "2195092",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "2194751",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "2194751",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "2194644",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "2194644",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "76000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 0.26350936997914687,
+      "read_seconds": 0.004922214022371918,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "897846",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "897846",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "897845",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "897862",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "897855",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "897855",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "897901",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "897901",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265600",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "76000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 0.51870052999584,
+      "read_seconds": 0.005446510971523821,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798080",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798081",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798072",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798072",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798078",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798078",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798037",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798037",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265600",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 0.7743605459691025,
+      "read_seconds": 0.0048797340132296085,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798091",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798091",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798086",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798086",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798082",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798082",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798045",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798045",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 1.029519125004299,
+      "read_seconds": 0.01912442100001499,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798078",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798078",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798085",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798112",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798067",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798085",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798091",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798091",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 1.298911641992163,
+      "read_seconds": 0.010396194993518293,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798102",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798088",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798055",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798097",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798108",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798070",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798103",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798103",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "75000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 1.5595003889757209,
+      "read_seconds": 0.005693451035767794,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798077",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798077",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798096",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798090",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798078",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798078",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798086",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798086",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "73000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 1.8154029899742454,
+      "read_seconds": 0.0049955960130319,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "1197162",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "1197162",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "1197127",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "1197144",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "1197148",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "1197148",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "1197137",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "1197137",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265800",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "73000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 2.0705902780173346,
+      "read_seconds": 0.005719439999666065,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798077",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798077",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798083",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798079",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798091",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798091",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798052",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798052",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "75000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 2.3264784989878535,
+      "read_seconds": 0.00547187402844429,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798069",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798069",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798047",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798092",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798109",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798109",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798071",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798071",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "75000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 2.5828086239635013,
+      "read_seconds": 0.0046437300043180585,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798093",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798084",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798073",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798073",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798084",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798084",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798063",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798063",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 2.837675846996717,
+      "read_seconds": 0.02259788301307708,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798095",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798044",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798086",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798086",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798084",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798084",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798077",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798077",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 3.1104157799854875,
+      "read_seconds": 0.004560729023069143,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798061",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798061",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798087",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798087",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798067",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798067",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798070",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798103",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 3.365163733018562,
+      "read_seconds": 0.005541834980249405,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798112",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798112",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798075",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798075",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798136",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798093",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798112",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798112",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265800",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "73000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 3.621525812020991,
+      "read_seconds": 0.011244610999710858,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798109",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798060",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798077",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798093",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798085",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798113",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798090",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798090",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265800",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "75000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 3.883381202991586,
+      "read_seconds": 0.006200649018865079,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798119",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798119",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798105",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798062",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798077",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798077",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798090",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798090",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 4.139830908970907,
+      "read_seconds": 0.008905944996513426,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798076",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798076",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798104",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798073",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798088",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798088",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798077",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798077",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 4.399421704991255,
+      "read_seconds": 0.006679954007267952,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798113",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798068",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798095",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798095",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798058",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798058",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798074",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798088",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 4.656377547013108,
+      "read_seconds": 0.005632971005979925,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798099",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798099",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "797363",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798103",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798092",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798092",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798112",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798112",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 4.912282477016561,
+      "read_seconds": 0.005807381996419281,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798117",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798117",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798097",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798097",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798205",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798205",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798109",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798109",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 5.168476402992383,
+      "read_seconds": 0.003918953996617347,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798103",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798103",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798100",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798100",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798122",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798120",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798094",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798094",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 5.422660665994044,
+      "read_seconds": 0.003935292013920844,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798064",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798064",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798086",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798086",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798126",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798126",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798089",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798089",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "75000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 5.676853057986591,
+      "read_seconds": 0.005541319027543068,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798073",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798073",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798057",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798057",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798068",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798088",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798622",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798622",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 5.9325914239743724,
+      "read_seconds": 0.005851644033100456,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798464",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798464",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798106",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798066",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798110",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798110",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798117",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798117",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 6.188712521980051,
+      "read_seconds": 0.005832230031955987,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798114",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798069",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "797890",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "797890",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798091",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798091",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798095",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798088",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "75000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 6.444789798988495,
+      "read_seconds": 0.0035106330178678036,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798114",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798050",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798096",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798096",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798223",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798223",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798117",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798117",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "75000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 6.698485429980792,
+      "read_seconds": 0.004780445015057921,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798127",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798127",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798098",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798098",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798103",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798103",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798030",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798030",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "73000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 6.953528362966608,
+      "read_seconds": 0.0052527140360325575,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798095",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798079",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798095",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798095",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798093",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798122",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798092",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798092",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 7.209044410963543,
+      "read_seconds": 0.0043738430249504745,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798114",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798114",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798101",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798101",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798112",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798112",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798168",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798079",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 7.463657682994381,
+      "read_seconds": 0.0046334160142578185,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "797938",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798084",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798086",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798086",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798069",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798069",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798134",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798539",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "75000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 7.719311588967685,
+      "read_seconds": 0.006186612008605152,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798077",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798077",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798048",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798122",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798113",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798113",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798073",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798073",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "75000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 7.975705381017178,
+      "read_seconds": 0.004199289949610829,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798072",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798091",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798995",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798995",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798132",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798132",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798153",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798153",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "75000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 8.230103435984347,
+      "read_seconds": 0.005760896019637585,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798147",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798147",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798145",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798145",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798151",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798151",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798201",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798201",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265800",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 8.486134973005392,
+      "read_seconds": 0.005758940998930484,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798107",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798107",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798106",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798069",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798106",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798106",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798072",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798072",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 8.742065116006415,
+      "read_seconds": 0.004845444986131042,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798103",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798103",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "797973",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "797973",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798071",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798071",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798103",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798069",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "75000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 8.997087070019916,
+      "read_seconds": 0.003953533945605159,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798099",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798099",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798054",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798054",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798062",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798062",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "797965",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "797965",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 9.251241023011971,
+      "read_seconds": 0.004657095996662974,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798098",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798098",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798090",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798090",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798271",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798271",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798072",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798072",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 9.506178362003993,
+      "read_seconds": 0.012540964991785586,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798082",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798082",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798089",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798089",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798080",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798091",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798080",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798093",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "75000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 9.768894573964644,
+      "read_seconds": 0.005587686027865857,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "797969",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798096",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798104",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798104",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798091",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798091",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798078",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798078",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 10.024728164018597,
+      "read_seconds": 0.005730148986913264,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798081",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798081",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798079",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798079",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "799221",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798141",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798080",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798080",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "75000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 10.280718280002475,
+      "read_seconds": 0.005392505961935967,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798095",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798116",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798122",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798122",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798055",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798055",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "799010",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "799010",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265800",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 10.537001791992225,
+      "read_seconds": 0.004847379983402789,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798072",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798072",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798064",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798064",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798101",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798101",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798062",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798062",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 10.792060325969942,
+      "read_seconds": 0.004173235036432743,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798076",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798076",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798469",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798469",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798099",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798099",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798174",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798174",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "75000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 11.04644331696909,
+      "read_seconds": 0.009271268034353852,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798354",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798077",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798086",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798086",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798071",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798062",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798067",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798067",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 11.306083627976477,
+      "read_seconds": 0.003961682028602809,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798091",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798091",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798104",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798104",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798115",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798115",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798108",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798108",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "75000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 11.560407436976675,
+      "read_seconds": 0.00611936702625826,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798098",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798098",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798065",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798065",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798069",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798069",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798098",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798094",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 11.816810981021263,
+      "read_seconds": 0.005268600943963975,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798093",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798092",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798098",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798098",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "797851",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "797851",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798231",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798231",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 12.076537981978618,
+      "read_seconds": 0.010786075028590858,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798080",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798080",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798099",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798083",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798061",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798061",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798077",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798077",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265800",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "73000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 12.337502676004078,
+      "read_seconds": 0.005269763001706451,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798084",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798084",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798066",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798066",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798080",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798080",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798100",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798100",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265800",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "73000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 12.592981793975923,
+      "read_seconds": 0.003414881997741759,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798102",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798102",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798076",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798076",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798240",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798240",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798095",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798095",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265800",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "73000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 12.846577739983331,
+      "read_seconds": 0.003494221018627286,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798102",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798102",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798098",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798098",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798110",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798110",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798092",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798092",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265800",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "75000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 13.10042309697019,
+      "read_seconds": 0.004482098040170968,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798089",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798089",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798172",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798065",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798053",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798053",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798121",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798121",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265800",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 13.355162043997552,
+      "read_seconds": 0.007092209008987993,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798073",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798073",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798090",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798106",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798076",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798076",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798072",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798072",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265700",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 13.61253324401332,
+      "read_seconds": 0.006142594967968762,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798037",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798087",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798088",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798088",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798062",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798062",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798084",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798084",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265800",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "74000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 13.868858922971413,
+      "read_seconds": 0.006413701048586518,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798122",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798071",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798071",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798338",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798338",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798058",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798058",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265800",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "73000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 14.125471659994218,
+      "read_seconds": 0.004358783015049994,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798088",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798088",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798098",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798084",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798107",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798107",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798095",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798095",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265800",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "72000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 14.380014413967729,
+      "read_seconds": 0.0035331850522197783,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798093",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798093",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798070",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798070",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798139",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798139",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798031",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798031",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265900",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "72000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 14.633764852012973,
+      "read_seconds": 0.005751398974098265,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798063",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798093",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798086",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798086",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798030",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798083",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798091",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798091",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265900",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "72000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "running",
+      "offset_seconds": 14.889712931006216,
+      "read_seconds": 0.0036940709687769413,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "798133",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "798133",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "798054",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "798054",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "798193",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "798193",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "798045",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "798045",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-265900",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "72000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "after",
+      "offset_seconds": 15.143743724969681,
+      "read_seconds": 0.0026035490445792675,
+      "values": {
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": {
+          "value": "1795701",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq": {
+          "value": "1795701",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/scaling_cur_freq": {
+          "value": "1795757",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy1/cpuinfo_avg_freq": {
+          "value": "1795757",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/scaling_cur_freq": {
+          "value": "1795665",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy2/cpuinfo_avg_freq": {
+          "value": "1795665",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/scaling_cur_freq": {
+          "value": "1795740",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpufreq/policy3/cpuinfo_avg_freq": {
+          "value": "1795740",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone0/temp": {
+          "value": "-266000",
+          "error": null
+        },
+        "/sys/class/thermal/thermal_zone1/temp": {
+          "value": "73000",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu1/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/core_throttle_count": {
+          "value": "20574",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu2/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/core_throttle_count": {
+          "value": "4817",
+          "error": null
+        },
+        "/sys/devices/system/cpu/cpu3/thermal_throttle/package_throttle_count": {
+          "value": "51774",
+          "error": null
+        }
+      }
+    }
+  ],
+  "collector_cpu_seconds": 0.23756636099999984
+}

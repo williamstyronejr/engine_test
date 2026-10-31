@@ -1,0 +1,36 @@
+START combined-1
+DONE combined-1 exit 0 peak RSS 55693312
+START dense-1
+DONE dense-1 exit 0 peak RSS 18616320
+START mixer-1
+DONE mixer-1 exit 0 peak RSS 18616320
+START facility-1
+DONE facility-1 exit 0 peak RSS 55820288
+START annex-1
+DONE annex-1 exit 0 peak RSS 55971840
+START spikes-1
+DONE spikes-1 exit 0 peak RSS 56356864
+START combined-2
+DONE combined-2 exit 0 peak RSS 55599104
+START dense-2
+DONE dense-2 exit 0 peak RSS 18616320
+START mixer-2
+DONE mixer-2 exit 0 peak RSS 18616320
+START facility-2
+DONE facility-2 exit 0 peak RSS 56119296
+START annex-2
+DONE annex-2 exit 0 peak RSS 56324096
+START spikes-2
+DONE spikes-2 exit 0 peak RSS 56397824
+START combined-3
+DONE combined-3 exit 0 peak RSS 55590912
+START dense-3
+DONE dense-3 exit 0 peak RSS 18616320
+START mixer-3
+DONE mixer-3 exit 0 peak RSS 18616320
+START facility-3
+DONE facility-3 exit 0 peak RSS 56205312
+START annex-3
+DONE annex-3 exit 0 peak RSS 55988224
+START spikes-3
+DONE spikes-3 exit 0 peak RSS 56410112

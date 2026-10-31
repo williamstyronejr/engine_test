@@ -322,3 +322,8 @@ and earlier timing/adoption decisions are preserved.
 this scoped inventory with explicit reserved/used CPU values and logical GPU
 payloads. Warmed allocation and presentation checks are correctness evidence;
 they do not close timing acceptance or total-memory coverage gaps.
+
+The [current timing refresh](TIMING_BASELINE_REFRESH.md) reruns the unchanged
+acceptance and warmup protocols. [Results](2026-10-31-timing-results.md) retain 13
+maximum-frame failures and both failed stability screens; the next investigation
+is read-only evidence about the recurring low-frequency state.

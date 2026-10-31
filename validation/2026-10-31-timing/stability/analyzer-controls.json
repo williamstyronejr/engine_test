@@ -1,0 +1,177 @@
+[
+  {
+    "control": "valid",
+    "exit_code": 0,
+    "expected_accept": true
+  },
+  {
+    "control": "uint64_max",
+    "exit_code": 0,
+    "expected_accept": true
+  },
+  {
+    "control": "source_revision",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "build_flags",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "workload",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "render_totals",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "phase_cpu_nesting",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "frame_partition",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "tag",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "source",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "phase_count",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "counter_count",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "numeric_not_string",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "negative",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "leading_zero",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "overflow",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "within_span_regression",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "between_phase_regression",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "between_row_regression",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "memory",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "row_count",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "counter_order",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "warmup",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "checksum",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "presentation_count",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "unavailable_sensors",
+    "exit_code": 0,
+    "expected_accept": true
+  },
+  {
+    "control": "missing_sensor",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "missing_error",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "non_numeric",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "reversed_time",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "overlapping_reads",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "wrong_label",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "invalid_cpu_time",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "missing_static",
+    "exit_code": 1,
+    "expected_accept": false
+  },
+  {
+    "control": "run_order",
+    "exit_code": 1,
+    "expected_accept": false
+  }
+]

@@ -118,3 +118,7 @@ incremental build scope and remaining offline/physical/timing limits are explici
 16 repeated routes with terminal transport errors, disabled controls, startup
 asset failure and manual session recreation. Twenty-four selected group executions
 pass, with 84 matching complete-frame fingerprints across four builds.
+
+[Current timing baseline](2026-10-31-timing/RESULTS.md) retains all 18 acceptance
+attempts and the repeated balanced stability study. Thirteen maximum-frame checks
+and both stability screens fail; no optimization or system change is adopted.

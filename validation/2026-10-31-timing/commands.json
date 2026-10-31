@@ -1,0 +1,226 @@
+[
+  {
+    "name": "environment",
+    "command": [
+      "bash",
+      "-c",
+      "uname -a; c++ --version; cmake --version; ninja --version; glxinfo -B"
+    ],
+    "source": "49280e00238ac70b1fa4702ff79c8ba430daf0a4",
+    "started_utc": "2026-10-31T12:57:52.676491+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 0.9046788330306299,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0nRSELN:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-timing-79-3tjc4bag/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "release",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-timing-79-3tjc4bag/packages"
+    ],
+    "source": "49280e00238ac70b1fa4702ff79c8ba430daf0a4",
+    "started_utc": "2026-10-31T12:57:53.581950+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 0.43254949495894834,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0nRSELN:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-timing-79-3tjc4bag/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "build",
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "--target",
+      "feature_lab",
+      "stress_bench",
+      "stress_tests",
+      "replay_profile_tests",
+      "spike_profile_tests",
+      "stress_graphics_tests",
+      "-j2"
+    ],
+    "source": "49280e00238ac70b1fa4702ff79c8ba430daf0a4",
+    "started_utc": "2026-10-31T12:57:54.014997+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 9.878061898984015,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0nRSELN:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-timing-79-3tjc4bag/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "tests",
+    "command": [
+      "ctest",
+      "--preset",
+      "release",
+      "-R",
+      "^(stress_cpu|stress_report|replay_profile|spike_profile|stress_graphics|stress_frame_samples)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-10-31-timing/checks.xml"
+    ],
+    "source": "49280e00238ac70b1fa4702ff79c8ba430daf0a4",
+    "started_utc": "2026-10-31T12:58:03.893708+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 11.069034905987792,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0nRSELN:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-timing-79-3tjc4bag/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "host-before",
+    "command": [
+      "bash",
+      "-c",
+      "uptime; cat /proc/loadavg; ps -eo pid,comm,pcpu,pmem --sort=-pcpu | head -16"
+    ],
+    "source": "49280e00238ac70b1fa4702ff79c8ba430daf0a4",
+    "started_utc": "2026-10-31T12:58:14.971311+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 0.02313489798689261,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0nRSELN:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-timing-79-3tjc4bag/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "acceptance-collection",
+    "command": [
+      "python3",
+      "validation/2026-10-26-workload-acceptance/collect.py",
+      "validation/2026-10-31-timing/acceptance"
+    ],
+    "source": "49280e00238ac70b1fa4702ff79c8ba430daf0a4",
+    "started_utc": "2026-10-31T12:58:14.994940+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 124.47983066999586,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0nRSELN:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-timing-79-3tjc4bag/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "acceptance-evaluation",
+    "command": [
+      "python3",
+      "validation/2026-10-26-workload-acceptance/evaluate.py",
+      "validation/2026-10-31-timing/acceptance"
+    ],
+    "source": "49280e00238ac70b1fa4702ff79c8ba430daf0a4",
+    "started_utc": "2026-10-31T13:00:19.482476+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 0.202950210950803,
+    "exit_code": 1,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0nRSELN:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-timing-79-3tjc4bag/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "stability-collection",
+    "command": [
+      "python3",
+      "validation/2026-10-31-timing/stability/collect.py",
+      "build/release/feature_lab",
+      "validation/2026-10-31-timing/stability"
+    ],
+    "source": "49280e00238ac70b1fa4702ff79c8ba430daf0a4",
+    "started_utc": "2026-10-31T13:00:19.686319+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 320.02577489602845,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0nRSELN:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-timing-79-3tjc4bag/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "host-after",
+    "command": [
+      "bash",
+      "-c",
+      "uptime; cat /proc/loadavg; ps -eo pid,comm,pcpu,pmem --sort=-pcpu | head -16"
+    ],
+    "source": "49280e00238ac70b1fa4702ff79c8ba430daf0a4",
+    "started_utc": "2026-10-31T13:05:39.713079+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 0.050438249949365854,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0nRSELN:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-timing-79-3tjc4bag/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "stability-analysis",
+    "command": [
+      "python3",
+      "validation/2026-10-31-timing/stability/analyze.py",
+      "validation/2026-10-31-timing/stability"
+    ],
+    "source": "49280e00238ac70b1fa4702ff79c8ba430daf0a4",
+    "started_utc": "2026-10-31T13:05:39.766188+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 5.337776792002842,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0nRSELN:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-timing-79-3tjc4bag/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "analyzer-controls",
+    "command": [
+      "python3",
+      "validation/2026-10-31-timing/stability/analyzer_controls.py"
+    ],
+    "source": "49280e00238ac70b1fa4702ff79c8ba430daf0a4",
+    "started_utc": "2026-10-31T13:05:45.104848+00:00",
+    "cwd": "/home/zero/dev/engine_test",
+    "seconds": 25.976904165989254,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0nRSELN:/home/zero/.local/share/mise/installs/codex/0.165.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-timing-79-3tjc4bag/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  }
+]
