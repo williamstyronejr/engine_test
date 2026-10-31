@@ -1,0 +1,21 @@
+{
+  "schema":"feature_lab_stress_v1","workload_version":1,"mode":"cpu","label":"","complete":true,"resources_stable":true,
+  "build":{"revision":"49280e0","compiler":"GNU 16.2.1","configuration":"Release","flags":" -O3 -DNDEBUG; C++20; sanitizers=OFF"},
+  "machine":{"cpu":" Intel(R) Core(TM) i5-4300U CPU @ 1.90GHz","system":"Linux 7.2.8-9-omarchy x86_64","gl_vendor":"","gl_device":"","gl_version":""},
+  "workload":{"sprites":0,"tiles":0,"entities":0,"bodies":256,"voices":0,"dense":true,"seed":"1","width":1280,"height":720,"warmup_per_cycle":60,"frames_per_cycle":600,"cycles":3},
+  "run":{"completed_cycles":3,"measured_frames":1800,"checksum":"3476943666651152694","window_width":0,"window_height":0,"vsync_requested":false,"vsync_disable_accepted":false,"audio_device":false,"capture_requested":false},
+  "presentation":{"mode":"none","swap_interval_requested":null,"request_issued":false,"present_calls":0},
+  "totals":{"quads":0,"culled":0,"draws":0,"visible_tiles":0,"collision_candidates":58752000,"contacts":58752000},
+  "memory":{"tracked_cpu_buffer_bytes":6774824,"report_buffer_bytes":100824,"rss_start":4034560,"rss_end":4694016,"rss_peak_at_cycle_boundary":9269248,"peak_uploaded_textures":0,"peak_uploaded_texture_bytes":0,"peak_targets":0,"peak_target_bytes":0,"renderer_baseline":{"coverage":"owned_buffers_and_texels_v2","observed":false,"cpu_vertex_reserved_bytes":0,"cpu_vertex_used_bytes":0,"gpu_vertex_store_bytes":0,"gpu_builtin_texture_bytes":0,"gpu_uploaded_texture_bytes":0,"gpu_font_texture_bytes":0,"gpu_target_texture_bytes":0,"cpu_font_atlas_reserved_bytes":0,"cpu_font_atlas_used_bytes":0,"cpu_font_glyph_reserved_bytes":0,"cpu_font_glyph_used_bytes":0}},
+  "gpu_queries":{"supported":false,"method":"time_elapsed","counter_bits":0,"submitted":0,"completed":0,"pending":0,"skipped":0,"invalid":0,"failure_capacity":8,"failures_omitted":0,"failures":[]},
+  "milliseconds":{
+    "load":{"samples":3,"mean":3.68095067,"median":2.945083,"p95":2.945083,"p99":2.945083,"max":5.41543},
+    "simulation":{"samples":1800,"mean":3.05014312,"median":2.457666,"p95":6.292262,"p99":9.103707,"max":16.300381},
+    "mixer":{"samples":1800,"mean":7.45611111e-05,"median":5.7e-05,"p95":0.00016,"p99":0.000294,"max":0.000651},
+    "render_submit":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0},
+    "preview_submit":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0},
+    "present":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0},
+    "frame":{"samples":1800,"mean":3.05021768,"median":2.457719,"p95":6.29234,"p99":9.103762,"max":16.300577},
+    "gpu_render":{"samples":0,"mean":0,"median":0,"p95":0,"p99":0,"max":0}
+  }
+}

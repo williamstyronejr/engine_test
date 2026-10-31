@@ -1,0 +1,114 @@
+w60-1 cpu 1.3098230000000002 cycle change -17.760541386804114 p99 10.920564 max 47.033689
+w600-1 cpu 1.352575 cycle change 1.0090705558017667 p99 10.86269 max 23.934004
+w600-2 cpu 1.547285 cycle change 119.46358636485742 p99 11.706069 max 37.608513
+w60-2 cpu 3.697471 cycle change 10.053754561526198 p99 13.7188 max 21.483469
+w60-3 cpu 3.7751349999999997 cycle change 5.104186145584893 p99 18.456933 max 52.155075
+w600-3 cpu 3.845182 cycle change 0.25239432058280703 p99 14.883159 max 37.991168
+w600-4 cpu 3.836815 cycle change -6.381852647316305 p99 14.576273 max 30.944785
+w60-4 cpu 3.555078 cycle change -1.4058080017921009 p99 16.830459 max 27.020278
+w60-5 cpu 3.5823579999999997 cycle change -5.918843717029929 p99 16.098395 max 29.536459
+w600-5 cpu 4.313098 cycle change 17.647832512914494 p99 15.208234 max 33.362038
+w600-6 cpu 3.392426 cycle change 0.5060955728089777 p99 11.041467 max 14.569582
+w60-6 cpu 3.6699200000000003 cycle change -17.773015939494602 p99 19.404447 max 29.339379
+observer-off-1 cpu 3.871571 cycle change 2.360666722683695 p99 19.289959 max 34.188116
+observer-on-1 cpu 4.122762000000001 cycle change 2.2043749380135935 p99 22.185494 max 40.103213
+observer-on-2 cpu 3.271152 cycle change -17.810408208413122 p99 20.828506 max 36.151213
+observer-off-2 cpu 3.2827409999999997 cycle change -13.384519982944939 p99 22.247801 max 42.510067
+{
+  "warmup_groups": {
+    "short": {
+      "run_medians": {
+        "samples": 6,
+        "mean": 3.2649641666666667,
+        "median": 3.5823579999999997,
+        "p95": 3.697471,
+        "p99": 3.697471,
+        "max": 3.7751349999999997
+      },
+      "spread_percent": 68.81813598752552,
+      "first_position": {
+        "samples": 3,
+        "mean": 2.889105333333333,
+        "median": 3.5823579999999997,
+        "p95": 3.5823579999999997,
+        "p99": 3.5823579999999997,
+        "max": 3.7751349999999997
+      },
+      "second_position": {
+        "samples": 3,
+        "mean": 3.6408229999999997,
+        "median": 3.6699200000000003,
+        "p95": 3.6699200000000003,
+        "p99": 3.6699200000000003,
+        "max": 3.697471
+      },
+      "max_absolute_cycle_change_percent": 17.773015939494602,
+      "stability_screen_passed": false
+    },
+    "long": {
+      "run_medians": {
+        "samples": 6,
+        "mean": 3.047896833333333,
+        "median": 3.392426,
+        "p95": 3.845182,
+        "p99": 3.845182,
+        "max": 4.313098
+      },
+      "spread_percent": 87.26860954373065,
+      "first_position": {
+        "samples": 3,
+        "mean": 2.925508666666667,
+        "median": 3.392426,
+        "p95": 3.392426,
+        "p99": 3.392426,
+        "max": 3.836815
+      },
+      "second_position": {
+        "samples": 3,
+        "mean": 3.170285,
+        "median": 3.845182,
+        "p95": 3.845182,
+        "p99": 3.845182,
+        "max": 4.313098
+      },
+      "max_absolute_cycle_change_percent": 119.46358636485742,
+      "stability_screen_passed": false
+    }
+  },
+  "warmup_pairs": [
+    {
+      "repeat": 1,
+      "long_minus_short_percent": 3.263952457698475
+    },
+    {
+      "repeat": 2,
+      "long_minus_short_percent": -58.1528834168003
+    },
+    {
+      "repeat": 3,
+      "long_minus_short_percent": 1.855483313841762
+    },
+    {
+      "repeat": 4,
+      "long_minus_short_percent": 7.92491754048716
+    },
+    {
+      "repeat": 5,
+      "long_minus_short_percent": 20.398296317676806
+    },
+    {
+      "repeat": 6,
+      "long_minus_short_percent": -7.561309238348529
+    }
+  ],
+  "observer_pairs": [
+    {
+      "repeat": 1,
+      "on_minus_off_percent": 6.488089718618122
+    },
+    {
+      "repeat": 2,
+      "on_minus_off_percent": -0.3530281554347373
+    }
+  ]
+}

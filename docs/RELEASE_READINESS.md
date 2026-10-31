@@ -61,6 +61,14 @@ with 84 matching frame fingerprints. [Evidence](../validation/2026-10-30-audio-u
 checks unavailable controls, preserved state and bounded owned payloads. It leaves
 physical device lifecycle and real-time/performance acceptance open.
 
+Increment 79 [refreshes current timing and stability](../benchmarks/2026-10-31-timing-results.md)
+at `49280e0`, with unchanged runtime code. All 18 frame-p99 targets, 30 operation
+checks and 318 declared memory checks pass; 13 maximum-frame checks fail. Both
+warmup stability screens fail, with a repeated low-frequency/preparation-time
+association. Six focused correctness groups and 35 analyzer controls pass. R6 stays
+open, and no optimization or system-setting change is adopted. See
+[retained evidence](../validation/2026-10-31-timing/RESULTS.md).
+
 “Evidence available” below applies to the stated revision and environment only.
 “Open” means missing evidence or unfinished acceptance work, not a reproduced code
 failure. Unconfirmed WM minimization and rejected historical timing runs are called

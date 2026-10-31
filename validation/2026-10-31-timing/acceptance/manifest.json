@@ -1,0 +1,716 @@
+{
+  "schema": "feature_lab_acceptance_collection_v1",
+  "source": "49280e00238ac70b1fa4702ff79c8ba430daf0a4",
+  "started_utc": "2026-10-31T12:58:15.058127+00:00",
+  "policy_sha256": "e995d3b61d82bab4a96d65c33399f0321946fde5ba0ac56c495f756dcf7d5473",
+  "environment": {
+    "DISPLAY": ":0",
+    "XDG_SESSION_TYPE": "wayland",
+    "XDG_CURRENT_DESKTOP": "Hyprland"
+  },
+  "binaries": {
+    "build/release/feature_lab": "c8c4a6db43807fee2c46b1c7d384b469c9494a6dc5fe499618ee9f9dfb6c01f4",
+    "build/release/stress_bench": "ae0d468da583e3c5dff86fda66695989f52b1b4021c14de1a821460da06d89e3"
+  },
+  "inputs": {
+    "assets/annex.etmp": "c72aac19a36bc302aafc08aa40b199d2e5a454485fced1093966204e3a65f723",
+    "assets/annex.scene": "09a411071ac13c621605b2fd50cd6552c4ef8e9cef17693918e2049e182e6cdf",
+    "assets/facility.eani": "f06c37d16a9a6f5a890f16d284e21c473bcdb96213176ba3f95f108e020c2fb2",
+    "assets/facility.etmp": "4ae3466cd15db2f4502821e76e97587b02997b515570d3d6f48e457c038a0fe6",
+    "assets/facility.scene": "6246114a536dc0ffe610008bba5956462bf3ed0b331123dd32495149584d3817",
+    "assets/fonts/ui.efnt": "ea2cbab48d4009d3084694ee25efc32bc2c9d8956d0f949158fe6375da5a0893",
+    "assets/shaders/sprite.frag": "4a028a5a146449fd7ad1aa45c991db108bf4f610315277721b21c27cae3071e3",
+    "assets/shaders/sprite.vert": "5e13542efc1e10caad5c7099bf2bdbca3d2862e70657251c0a47652dad28211b",
+    "assets/sounds/door.wav": "a15830a172172423270733aaca13749faf6f010aacde752278c8a6e6037cdba8",
+    "assets/sounds/machine.wav": "4d586c90d1f1297cf0bd5cad10306b682bc6b0637082cb756de72c3a5457a8f2",
+    "assets/sounds/music.wav": "86bbd4ad63b747b2d7ae8ed2f6f5d51f10a32edbdb749c0c536a79b3ef0412d6",
+    "assets/sounds/pickup.wav": "4c14926b81247db0cfa6da5a9f809b0ace5477227c60ff0f50911057e9650dd0",
+    "assets/textures/actors.etex": "469d54b141807ebc731804e66b0d666961f8d390f3d5434b824b2b52d057b0f9",
+    "assets/textures/checker.etex": "90882ab4bd4330f539a420184b8110bdf6a11694df3685dba5a5172b9b5427d3",
+    "assets/textures/tiles.etex": "ffd4bc9d80363928de14477568c6fefb15e4e6f90dca7f0b460053dddd849b62",
+    "assets/textures/white.etex": "542d2a042d884db2266b021b62fced04cdea9f777e7842931f3738e9cdb8f9f0",
+    "benchmarks/replays/annex.erpl": "0985c56556794cac3a119873a9a1020559f81e968c446a341a80b00a4b267793",
+    "benchmarks/replays/facility.erpl": "39754c7440f589525c91488599ba944ea44a33b78e731c769f0a23ba79aa3be7"
+  },
+  "runs": [
+    {
+      "name": "combined",
+      "repeat": 1,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--seed",
+        "1",
+        "--report",
+        "/home/zero/dev/engine_test/validation/2026-10-31-timing/acceptance/combined-1.json"
+      ],
+      "started_utc": "2026-10-31T12:58:15.067053+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -265500,
+        "/sys/class/thermal/thermal_zone1/temp": 71000
+      },
+      "report": "combined-1.json",
+      "log": "combined-1.log",
+      "exit_code": 0,
+      "wall_seconds": 9.145732609031256,
+      "finished_utc": "2026-10-31T12:58:24.214156+00:00",
+      "rss_peak_bytes": 55693312,
+      "user_seconds": 6.296911,
+      "system_seconds": 0.5673469999999999,
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -265200,
+        "/sys/class/thermal/thermal_zone1/temp": 77000
+      },
+      "report_sha256": "e782318d990b25b1856cbff192213d2d0d03a0f8e02637856a742a4e3387bb18",
+      "log_sha256": "80efe4026125aabbd4350643b19c5bb450eb670c71df45aa53a237f18859695e"
+    },
+    {
+      "name": "dense",
+      "repeat": 1,
+      "command": [
+        "build/release/stress_bench",
+        "--sprites",
+        "0",
+        "--tiles",
+        "0",
+        "--entities",
+        "0",
+        "--bodies",
+        "256",
+        "--dense",
+        "--voices",
+        "0",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--seed",
+        "1",
+        "--report",
+        "/home/zero/dev/engine_test/validation/2026-10-31-timing/acceptance/dense-1.json"
+      ],
+      "started_utc": "2026-10-31T12:58:24.215964+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -265200,
+        "/sys/class/thermal/thermal_zone1/temp": 76000
+      },
+      "report": "dense-1.json",
+      "log": "dense-1.log",
+      "exit_code": 0,
+      "wall_seconds": 5.629899494990241,
+      "finished_utc": "2026-10-31T12:58:29.848165+00:00",
+      "rss_peak_bytes": 18616320,
+      "user_seconds": 5.441372,
+      "system_seconds": 0.011805,
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -265000,
+        "/sys/class/thermal/thermal_zone1/temp": 74000
+      },
+      "report_sha256": "f3ce53e535124f5c945060658540edad606531397e536356aec5757643096356",
+      "log_sha256": "f3ce53e535124f5c945060658540edad606531397e536356aec5757643096356"
+    },
+    {
+      "name": "mixer",
+      "repeat": 1,
+      "command": [
+        "build/release/stress_bench",
+        "--sprites",
+        "0",
+        "--tiles",
+        "0",
+        "--entities",
+        "0",
+        "--bodies",
+        "0",
+        "--voices",
+        "16",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--seed",
+        "1",
+        "--report",
+        "/home/zero/dev/engine_test/validation/2026-10-31-timing/acceptance/mixer-1.json"
+      ],
+      "started_utc": "2026-10-31T12:58:29.851107+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -265000,
+        "/sys/class/thermal/thermal_zone1/temp": 74000
+      },
+      "report": "mixer-1.json",
+      "log": "mixer-1.log",
+      "exit_code": 0,
+      "wall_seconds": 0.3911296720034443,
+      "finished_utc": "2026-10-31T12:58:30.243534+00:00",
+      "rss_peak_bytes": 18616320,
+      "user_seconds": 0.36141399999999996,
+      "system_seconds": 0.002892,
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -265400,
+        "/sys/class/thermal/thermal_zone1/temp": 71000
+      },
+      "report_sha256": "1bc6e3fcb8e750364f5c25ddf6c43dd9bb36fc12d7986101c35c49be09cfb51c",
+      "log_sha256": "1bc6e3fcb8e750364f5c25ddf6c43dd9bb36fc12d7986101c35c49be09cfb51c"
+    },
+    {
+      "name": "facility",
+      "repeat": 1,
+      "command": [
+        "build/release/feature_lab",
+        "--replay",
+        "benchmarks/replays/facility.erpl",
+        "--profile-warmup",
+        "30",
+        "--profile-report",
+        "/home/zero/dev/engine_test/validation/2026-10-31-timing/acceptance/facility-1.json"
+      ],
+      "started_utc": "2026-10-31T12:58:30.246016+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -265400,
+        "/sys/class/thermal/thermal_zone1/temp": 72000
+      },
+      "report": "facility-1.json",
+      "log": "facility-1.log",
+      "exit_code": 0,
+      "wall_seconds": 7.762738434947096,
+      "finished_utc": "2026-10-31T12:58:38.009893+00:00",
+      "rss_peak_bytes": 55820288,
+      "user_seconds": 2.929736,
+      "system_seconds": 0.9938899999999999,
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264800,
+        "/sys/class/thermal/thermal_zone1/temp": 78000
+      },
+      "report_sha256": "0b4fe33006b2542c1f711e2d412ab0fdef5aa57757a631bf06b65bd86b46081f",
+      "log_sha256": "421209092ab104aa69adba2db44b6f9782a56f9cefb7c512a3448b83e96b1160"
+    },
+    {
+      "name": "annex",
+      "repeat": 1,
+      "command": [
+        "build/release/feature_lab",
+        "--replay",
+        "benchmarks/replays/annex.erpl",
+        "--profile-warmup",
+        "30",
+        "--profile-report",
+        "/home/zero/dev/engine_test/validation/2026-10-31-timing/acceptance/annex-1.json"
+      ],
+      "started_utc": "2026-10-31T12:58:38.013655+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264800,
+        "/sys/class/thermal/thermal_zone1/temp": 78000
+      },
+      "report": "annex-1.json",
+      "log": "annex-1.log",
+      "exit_code": 0,
+      "wall_seconds": 7.655956070986576,
+      "finished_utc": "2026-10-31T12:58:45.672460+00:00",
+      "rss_peak_bytes": 55971840,
+      "user_seconds": 3.323003,
+      "system_seconds": 1.151707,
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264600,
+        "/sys/class/thermal/thermal_zone1/temp": 82000
+      },
+      "report_sha256": "7f298c0688dd648587dac07d5896261c420b33f6384888ae3c174680fc16b710",
+      "log_sha256": "d9ac598793802160a12550d4d52af4b034366e7f8a38e9a4aa03b0ad20ed8d7c"
+    },
+    {
+      "name": "spikes",
+      "repeat": 1,
+      "command": [
+        "build/release/feature_lab",
+        "--spike-report",
+        "/home/zero/dev/engine_test/validation/2026-10-31-timing/acceptance/spikes-1.json"
+      ],
+      "started_utc": "2026-10-31T12:58:45.674971+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264600,
+        "/sys/class/thermal/thermal_zone1/temp": 81000
+      },
+      "report": "spikes-1.json",
+      "log": "spikes-1.log",
+      "exit_code": 0,
+      "wall_seconds": 9.190796582959592,
+      "finished_utc": "2026-10-31T12:58:54.866966+00:00",
+      "rss_peak_bytes": 56356864,
+      "user_seconds": 4.19455,
+      "system_seconds": 1.36208,
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264300,
+        "/sys/class/thermal/thermal_zone1/temp": 83000
+      },
+      "report_sha256": "9153e16e99903cc44411b542e675b2315caa3057d5b3c807c506849e891f968c",
+      "log_sha256": "e02c8c370e63d08636ecfff7c32228ae76f998b48502abcf748cc06d280b4c65"
+    },
+    {
+      "name": "combined",
+      "repeat": 2,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--seed",
+        "1",
+        "--report",
+        "/home/zero/dev/engine_test/validation/2026-10-31-timing/acceptance/combined-2.json"
+      ],
+      "started_utc": "2026-10-31T12:58:54.876584+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264300,
+        "/sys/class/thermal/thermal_zone1/temp": 83000
+      },
+      "report": "combined-2.json",
+      "log": "combined-2.log",
+      "exit_code": 0,
+      "wall_seconds": 10.00173174001975,
+      "finished_utc": "2026-10-31T12:59:04.882154+00:00",
+      "rss_peak_bytes": 55599104,
+      "user_seconds": 7.160817,
+      "system_seconds": 0.585977,
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264300,
+        "/sys/class/thermal/thermal_zone1/temp": 83000
+      },
+      "report_sha256": "45429230af02bb8daf0b38d3560e61223a257fb05135f0e086a23f149ad443d3",
+      "log_sha256": "83cdadd957eec41e18ceda18b55f0d396e45c3835a32862120c71307faa27d2d"
+    },
+    {
+      "name": "dense",
+      "repeat": 2,
+      "command": [
+        "build/release/stress_bench",
+        "--sprites",
+        "0",
+        "--tiles",
+        "0",
+        "--entities",
+        "0",
+        "--bodies",
+        "256",
+        "--dense",
+        "--voices",
+        "0",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--seed",
+        "1",
+        "--report",
+        "/home/zero/dev/engine_test/validation/2026-10-31-timing/acceptance/dense-2.json"
+      ],
+      "started_utc": "2026-10-31T12:59:04.887762+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264300,
+        "/sys/class/thermal/thermal_zone1/temp": 84000
+      },
+      "report": "dense-2.json",
+      "log": "dense-2.log",
+      "exit_code": 0,
+      "wall_seconds": 5.942533511959482,
+      "finished_utc": "2026-10-31T12:59:10.834276+00:00",
+      "rss_peak_bytes": 18616320,
+      "user_seconds": 5.730304,
+      "system_seconds": 0.01149,
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264300,
+        "/sys/class/thermal/thermal_zone1/temp": 82000
+      },
+      "report_sha256": "a190109db5e5e5c776e5e4f8823f2333ece1595167e2eef59c6118bed20cbf27",
+      "log_sha256": "a190109db5e5e5c776e5e4f8823f2333ece1595167e2eef59c6118bed20cbf27"
+    },
+    {
+      "name": "mixer",
+      "repeat": 2,
+      "command": [
+        "build/release/stress_bench",
+        "--sprites",
+        "0",
+        "--tiles",
+        "0",
+        "--entities",
+        "0",
+        "--bodies",
+        "0",
+        "--voices",
+        "16",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--seed",
+        "1",
+        "--report",
+        "/home/zero/dev/engine_test/validation/2026-10-31-timing/acceptance/mixer-2.json"
+      ],
+      "started_utc": "2026-10-31T12:59:10.836294+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264300,
+        "/sys/class/thermal/thermal_zone1/temp": 82000
+      },
+      "report": "mixer-2.json",
+      "log": "mixer-2.log",
+      "exit_code": 0,
+      "wall_seconds": 0.3881299970089458,
+      "finished_utc": "2026-10-31T12:59:11.226292+00:00",
+      "rss_peak_bytes": 18616320,
+      "user_seconds": 0.36599899999999996,
+      "system_seconds": 0.001952,
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264500,
+        "/sys/class/thermal/thermal_zone1/temp": 84000
+      },
+      "report_sha256": "51bd4f7ef502b67e43760a3c47cb077a91bc97a1fa686af951a90241fe6fd8dc",
+      "log_sha256": "51bd4f7ef502b67e43760a3c47cb077a91bc97a1fa686af951a90241fe6fd8dc"
+    },
+    {
+      "name": "facility",
+      "repeat": 2,
+      "command": [
+        "build/release/feature_lab",
+        "--replay",
+        "benchmarks/replays/facility.erpl",
+        "--profile-warmup",
+        "30",
+        "--profile-report",
+        "/home/zero/dev/engine_test/validation/2026-10-31-timing/acceptance/facility-2.json"
+      ],
+      "started_utc": "2026-10-31T12:59:11.228739+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264500,
+        "/sys/class/thermal/thermal_zone1/temp": 84000
+      },
+      "report": "facility-2.json",
+      "log": "facility-2.log",
+      "exit_code": 0,
+      "wall_seconds": 7.579525906010531,
+      "finished_utc": "2026-10-31T12:59:18.809502+00:00",
+      "rss_peak_bytes": 56119296,
+      "user_seconds": 2.558987,
+      "system_seconds": 0.9460909999999999,
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264300,
+        "/sys/class/thermal/thermal_zone1/temp": 84000
+      },
+      "report_sha256": "8677180fce65e8177c69ceae8897f9a22c1bf91d8b88b2c6beca32be635f9ab7",
+      "log_sha256": "23255122a0c8b18db8f04096ac9859781524586d51818ccfa91e3f811cdd3a0c"
+    },
+    {
+      "name": "annex",
+      "repeat": 2,
+      "command": [
+        "build/release/feature_lab",
+        "--replay",
+        "benchmarks/replays/annex.erpl",
+        "--profile-warmup",
+        "30",
+        "--profile-report",
+        "/home/zero/dev/engine_test/validation/2026-10-31-timing/acceptance/annex-2.json"
+      ],
+      "started_utc": "2026-10-31T12:59:18.811867+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264300,
+        "/sys/class/thermal/thermal_zone1/temp": 84000
+      },
+      "report": "annex-2.json",
+      "log": "annex-2.log",
+      "exit_code": 0,
+      "wall_seconds": 8.076655682001729,
+      "finished_utc": "2026-10-31T12:59:26.890039+00:00",
+      "rss_peak_bytes": 56324096,
+      "user_seconds": 2.671674,
+      "system_seconds": 0.96926,
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264200,
+        "/sys/class/thermal/thermal_zone1/temp": 84000
+      },
+      "report_sha256": "3ea3db11533f93192dd02ae763ac22e525f09f66c7c23a9461b6cdd808c78117",
+      "log_sha256": "c6be06082ad0b8fb3a46762d9402cac3f3938bb3b03e5f049ada14ec99d439d6"
+    },
+    {
+      "name": "spikes",
+      "repeat": 2,
+      "command": [
+        "build/release/feature_lab",
+        "--spike-report",
+        "/home/zero/dev/engine_test/validation/2026-10-31-timing/acceptance/spikes-2.json"
+      ],
+      "started_utc": "2026-10-31T12:59:26.894483+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264200,
+        "/sys/class/thermal/thermal_zone1/temp": 84000
+      },
+      "report": "spikes-2.json",
+      "log": "spikes-2.log",
+      "exit_code": 0,
+      "wall_seconds": 9.568588818015996,
+      "finished_utc": "2026-10-31T12:59:36.466255+00:00",
+      "rss_peak_bytes": 56397824,
+      "user_seconds": 3.120005,
+      "system_seconds": 1.085614,
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264200,
+        "/sys/class/thermal/thermal_zone1/temp": 86000
+      },
+      "report_sha256": "55e496f991bd722d68d004549b007b512ec77f4f496bef22f78a3bc4538fc8ab",
+      "log_sha256": "790cd41b75ffe83cbc7fb2a2d3c091ae7067768b58f50049c4e909ac81ecb408"
+    },
+    {
+      "name": "combined",
+      "repeat": 3,
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--seed",
+        "1",
+        "--report",
+        "/home/zero/dev/engine_test/validation/2026-10-31-timing/acceptance/combined-3.json"
+      ],
+      "started_utc": "2026-10-31T12:59:36.468912+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264200,
+        "/sys/class/thermal/thermal_zone1/temp": 88000
+      },
+      "report": "combined-3.json",
+      "log": "combined-3.log",
+      "exit_code": 0,
+      "wall_seconds": 9.502456940012053,
+      "finished_utc": "2026-10-31T12:59:45.972558+00:00",
+      "rss_peak_bytes": 55590912,
+      "user_seconds": 5.50187,
+      "system_seconds": 0.48462099999999997,
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264300,
+        "/sys/class/thermal/thermal_zone1/temp": 87000
+      },
+      "report_sha256": "92b40cf38326267f8f933f2ae6bb0d6fa5f7a7c61f87ddb5a89a10054c9906c2",
+      "log_sha256": "0f58571d627ba6412f32b0440d9723891f729916869a2a3e79a20d09b27b34fd"
+    },
+    {
+      "name": "dense",
+      "repeat": 3,
+      "command": [
+        "build/release/stress_bench",
+        "--sprites",
+        "0",
+        "--tiles",
+        "0",
+        "--entities",
+        "0",
+        "--bodies",
+        "256",
+        "--dense",
+        "--voices",
+        "0",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--seed",
+        "1",
+        "--report",
+        "/home/zero/dev/engine_test/validation/2026-10-31-timing/acceptance/dense-3.json"
+      ],
+      "started_utc": "2026-10-31T12:59:45.974692+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264300,
+        "/sys/class/thermal/thermal_zone1/temp": 87000
+      },
+      "report": "dense-3.json",
+      "log": "dense-3.log",
+      "exit_code": 0,
+      "wall_seconds": 6.20478503202321,
+      "finished_utc": "2026-10-31T12:59:52.180807+00:00",
+      "rss_peak_bytes": 18616320,
+      "user_seconds": 6.003559,
+      "system_seconds": 0.012706,
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264200,
+        "/sys/class/thermal/thermal_zone1/temp": 83000
+      },
+      "report_sha256": "6694ef18c1ab28bbbcab5e63cb0d5205c440c4b9282f88172ae91efd59b425d9",
+      "log_sha256": "6694ef18c1ab28bbbcab5e63cb0d5205c440c4b9282f88172ae91efd59b425d9"
+    },
+    {
+      "name": "mixer",
+      "repeat": 3,
+      "command": [
+        "build/release/stress_bench",
+        "--sprites",
+        "0",
+        "--tiles",
+        "0",
+        "--entities",
+        "0",
+        "--bodies",
+        "0",
+        "--voices",
+        "16",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--seed",
+        "1",
+        "--report",
+        "/home/zero/dev/engine_test/validation/2026-10-31-timing/acceptance/mixer-3.json"
+      ],
+      "started_utc": "2026-10-31T12:59:52.183335+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264200,
+        "/sys/class/thermal/thermal_zone1/temp": 83000
+      },
+      "report": "mixer-3.json",
+      "log": "mixer-3.log",
+      "exit_code": 0,
+      "wall_seconds": 0.39796166896121576,
+      "finished_utc": "2026-10-31T12:59:52.582556+00:00",
+      "rss_peak_bytes": 18616320,
+      "user_seconds": 0.367985,
+      "system_seconds": 0.0029609999999999997,
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264600,
+        "/sys/class/thermal/thermal_zone1/temp": 83000
+      },
+      "report_sha256": "ecda01c1f250c8b0fbf53b66cecfd517071e1d2f735602713af5c64c9ea7d134",
+      "log_sha256": "ecda01c1f250c8b0fbf53b66cecfd517071e1d2f735602713af5c64c9ea7d134"
+    },
+    {
+      "name": "facility",
+      "repeat": 3,
+      "command": [
+        "build/release/feature_lab",
+        "--replay",
+        "benchmarks/replays/facility.erpl",
+        "--profile-warmup",
+        "30",
+        "--profile-report",
+        "/home/zero/dev/engine_test/validation/2026-10-31-timing/acceptance/facility-3.json"
+      ],
+      "started_utc": "2026-10-31T12:59:52.584842+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264600,
+        "/sys/class/thermal/thermal_zone1/temp": 83000
+      },
+      "report": "facility-3.json",
+      "log": "facility-3.log",
+      "exit_code": 0,
+      "wall_seconds": 8.132317896001041,
+      "finished_utc": "2026-10-31T13:00:00.718556+00:00",
+      "rss_peak_bytes": 56205312,
+      "user_seconds": 2.63081,
+      "system_seconds": 0.8927999999999999,
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264200,
+        "/sys/class/thermal/thermal_zone1/temp": 86000
+      },
+      "report_sha256": "92ab0c0e1c80d5d5b674524be57baf732dd1e155881897fa036677c35af7b436",
+      "log_sha256": "cd0bb4b0c90ea43ce790a084f6571b5ff8ed0f5fb00d1cff2ec6c5294bb90567"
+    },
+    {
+      "name": "annex",
+      "repeat": 3,
+      "command": [
+        "build/release/feature_lab",
+        "--replay",
+        "benchmarks/replays/annex.erpl",
+        "--profile-warmup",
+        "30",
+        "--profile-report",
+        "/home/zero/dev/engine_test/validation/2026-10-31-timing/acceptance/annex-3.json"
+      ],
+      "started_utc": "2026-10-31T13:00:00.725672+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264200,
+        "/sys/class/thermal/thermal_zone1/temp": 88000
+      },
+      "report": "annex-3.json",
+      "log": "annex-3.log",
+      "exit_code": 0,
+      "wall_seconds": 8.734513856004924,
+      "finished_utc": "2026-10-31T13:00:09.466640+00:00",
+      "rss_peak_bytes": 55988224,
+      "user_seconds": 2.596945,
+      "system_seconds": 1.000201,
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264200,
+        "/sys/class/thermal/thermal_zone1/temp": 86000
+      },
+      "report_sha256": "712e74266939da5db592a2a9b663061d89d54988fe532799ee5b7fd48ebe0167",
+      "log_sha256": "3445b4950696cdd5dff3f408aa86f837c160609d43e40cc4cfffbc2432b049c2"
+    },
+    {
+      "name": "spikes",
+      "repeat": 3,
+      "command": [
+        "build/release/feature_lab",
+        "--spike-report",
+        "/home/zero/dev/engine_test/validation/2026-10-31-timing/acceptance/spikes-3.json"
+      ],
+      "started_utc": "2026-10-31T13:00:09.470134+00:00",
+      "temperatures_before": {
+        "/sys/class/thermal/thermal_zone0/temp": -264200,
+        "/sys/class/thermal/thermal_zone1/temp": 87000
+      },
+      "report": "spikes-3.json",
+      "log": "spikes-3.log",
+      "exit_code": 0,
+      "wall_seconds": 9.955054539022967,
+      "finished_utc": "2026-10-31T13:00:19.428126+00:00",
+      "rss_peak_bytes": 56410112,
+      "user_seconds": 3.032278,
+      "system_seconds": 1.061242,
+      "temperatures_after": {
+        "/sys/class/thermal/thermal_zone0/temp": -264200,
+        "/sys/class/thermal/thermal_zone1/temp": 86000
+      },
+      "report_sha256": "5f9eecef2db431b74035eba6bd10654eae1f743203b415880a65b97eac755e18",
+      "log_sha256": "988e241b838e03cddb6503fc811514452e391de9f5fb2e61c088c5c97051af2a"
+    }
+  ],
+  "finished_utc": "2026-10-31T13:00:19.431219+00:00"
+}

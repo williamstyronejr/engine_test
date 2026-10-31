@@ -1,0 +1,7 @@
+{
+  "schema": "feature_lab_acceptance_result_v1",
+  "source": "49280e00238ac70b1fa4702ff79c8ba430daf0a4",
+  "evidence_valid": true,
+  "automated_budgets_passed": false,
+  "release_accepted": false
+}

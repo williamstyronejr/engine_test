@@ -1,0 +1,509 @@
+{
+  "schema": "feature_lab_acceptance_policy_v1",
+  "repeats": 3,
+  "frame_p99_ms": 16.7,
+  "frame_max_ms": 16.7,
+  "operation_max_ms": 16.7,
+  "rss_peak_bytes": 268435456,
+  "stress_cpu_bytes": 9437184,
+  "stress_report_bytes": 131072,
+  "scene_bytes": 81920,
+  "collision_bytes": 32768,
+  "staging_cpu_bytes": 163840,
+  "staging_gpu_bytes": 32768,
+  "staging_combined_bytes": 163840,
+  "workloads": {
+    "combined": {
+      "kind": "stress",
+      "command": [
+        "build/release/feature_lab",
+        "--stress",
+        "--width",
+        "1920",
+        "--height",
+        "1080",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--seed",
+        "1"
+      ],
+      "report_flag": "--report",
+      "measured_frames": 1800,
+      "total_frames": 1980,
+      "workload": {
+        "sprites": 8192,
+        "tiles": 4096,
+        "entities": 1024,
+        "bodies": 128,
+        "voices": 8,
+        "dense": false,
+        "seed": "1",
+        "width": 1920,
+        "height": 1080,
+        "warmup_per_cycle": 60,
+        "frames_per_cycle": 600,
+        "cycles": 3
+      }
+    },
+    "dense": {
+      "kind": "stress",
+      "command": [
+        "build/release/stress_bench",
+        "--sprites",
+        "0",
+        "--tiles",
+        "0",
+        "--entities",
+        "0",
+        "--bodies",
+        "256",
+        "--dense",
+        "--voices",
+        "0",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--seed",
+        "1"
+      ],
+      "report_flag": "--report",
+      "measured_frames": 1800,
+      "total_frames": 1980,
+      "workload": {
+        "sprites": 0,
+        "tiles": 0,
+        "entities": 0,
+        "bodies": 256,
+        "voices": 0,
+        "dense": true,
+        "seed": "1",
+        "width": 1280,
+        "height": 720,
+        "warmup_per_cycle": 60,
+        "frames_per_cycle": 600,
+        "cycles": 3
+      }
+    },
+    "mixer": {
+      "kind": "stress",
+      "command": [
+        "build/release/stress_bench",
+        "--sprites",
+        "0",
+        "--tiles",
+        "0",
+        "--entities",
+        "0",
+        "--bodies",
+        "0",
+        "--voices",
+        "16",
+        "--frames",
+        "600",
+        "--warmup",
+        "60",
+        "--cycles",
+        "3",
+        "--seed",
+        "1"
+      ],
+      "report_flag": "--report",
+      "measured_frames": 1800,
+      "total_frames": 1980,
+      "workload": {
+        "sprites": 0,
+        "tiles": 0,
+        "entities": 0,
+        "bodies": 0,
+        "voices": 16,
+        "dense": false,
+        "seed": "1",
+        "width": 1280,
+        "height": 720,
+        "warmup_per_cycle": 60,
+        "frames_per_cycle": 600,
+        "cycles": 3
+      }
+    },
+    "facility": {
+      "kind": "replay",
+      "command": [
+        "build/release/feature_lab",
+        "--replay",
+        "benchmarks/replays/facility.erpl",
+        "--profile-warmup",
+        "30"
+      ],
+      "report_flag": "--profile-report",
+      "measured_frames": 2970,
+      "total_frames": 3000,
+      "workload": {
+        "replay_fingerprint": "410620046671088085",
+        "commands": 3000,
+        "warmup": 30,
+        "level": "FACILITY"
+      },
+      "final_hash": "3859428580428616961",
+      "ticks": 1381,
+      "totals": {
+        "window_quads": 2322687,
+        "window_draws": 50963,
+        "minimap_quads": 663508,
+        "minimap_draws": 2970,
+        "simulation_steps": 2734
+      }
+    },
+    "annex": {
+      "kind": "replay",
+      "command": [
+        "build/release/feature_lab",
+        "--replay",
+        "benchmarks/replays/annex.erpl",
+        "--profile-warmup",
+        "30"
+      ],
+      "report_flag": "--profile-report",
+      "measured_frames": 2970,
+      "total_frames": 3000,
+      "workload": {
+        "replay_fingerprint": "3265951407195932383",
+        "commands": 3000,
+        "warmup": 30,
+        "level": "ANNEX"
+      },
+      "final_hash": "16330525715750492017",
+      "ticks": 702,
+      "totals": {
+        "window_quads": 2321225,
+        "window_draws": 49474,
+        "minimap_quads": 445162,
+        "minimap_draws": 2970,
+        "simulation_steps": 1376
+      }
+    },
+    "spikes": {
+      "kind": "spikes",
+      "command": [
+        "build/release/feature_lab"
+      ],
+      "report_flag": "--spike-report",
+      "measured_frames": 3570,
+      "total_frames": 3600,
+      "workload": {
+        "name": "reload_transition_v1",
+        "seed": "1",
+        "frame_limit": 3600,
+        "warmup": 30,
+        "level": "FACILITY"
+      },
+      "final_hash": "3859428580428616961",
+      "ticks": 1381,
+      "totals": {
+        "window_quads": 2683158,
+        "window_draws": 60285,
+        "minimap_quads": 746477,
+        "minimap_draws": 3570,
+        "simulation_steps": 3434
+      },
+      "events": [
+        {
+          "frame": 120,
+          "action": "shader_reload",
+          "applied": true,
+          "before": {
+            "hash": "8285736648537457467",
+            "level": 0,
+            "shader_revision": 2,
+            "texture_revision": 1,
+            "font_revision": 2,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          },
+          "after": {
+            "hash": "8285736648537457467",
+            "level": 0,
+            "shader_revision": 3,
+            "texture_revision": 1,
+            "font_revision": 2,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          }
+        },
+        {
+          "frame": 240,
+          "action": "shader_reject",
+          "applied": false,
+          "before": {
+            "hash": "12852931625158305454",
+            "level": 0,
+            "shader_revision": 3,
+            "texture_revision": 1,
+            "font_revision": 2,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          },
+          "after": {
+            "hash": "12852931625158305454",
+            "level": 0,
+            "shader_revision": 3,
+            "texture_revision": 1,
+            "font_revision": 2,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          }
+        },
+        {
+          "frame": 360,
+          "action": "shader_recover",
+          "applied": true,
+          "before": {
+            "hash": "187988917282897297",
+            "level": 0,
+            "shader_revision": 3,
+            "texture_revision": 1,
+            "font_revision": 2,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          },
+          "after": {
+            "hash": "187988917282897297",
+            "level": 0,
+            "shader_revision": 4,
+            "texture_revision": 1,
+            "font_revision": 2,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          }
+        },
+        {
+          "frame": 480,
+          "action": "texture_reload",
+          "applied": true,
+          "before": {
+            "hash": "3919914518595750344",
+            "level": 0,
+            "shader_revision": 4,
+            "texture_revision": 1,
+            "font_revision": 2,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          },
+          "after": {
+            "hash": "3919914518595750344",
+            "level": 0,
+            "shader_revision": 4,
+            "texture_revision": 2,
+            "font_revision": 2,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          }
+        },
+        {
+          "frame": 600,
+          "action": "texture_reject",
+          "applied": false,
+          "before": {
+            "hash": "4175871848100115899",
+            "level": 0,
+            "shader_revision": 4,
+            "texture_revision": 2,
+            "font_revision": 2,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          },
+          "after": {
+            "hash": "4175871848100115899",
+            "level": 0,
+            "shader_revision": 4,
+            "texture_revision": 2,
+            "font_revision": 2,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          }
+        },
+        {
+          "frame": 720,
+          "action": "texture_recover",
+          "applied": true,
+          "before": {
+            "hash": "11204297363162925129",
+            "level": 0,
+            "shader_revision": 4,
+            "texture_revision": 2,
+            "font_revision": 2,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          },
+          "after": {
+            "hash": "11204297363162925129",
+            "level": 0,
+            "shader_revision": 4,
+            "texture_revision": 3,
+            "font_revision": 2,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          }
+        },
+        {
+          "frame": 840,
+          "action": "font_reload",
+          "applied": true,
+          "before": {
+            "hash": "7870363203063095285",
+            "level": 0,
+            "shader_revision": 4,
+            "texture_revision": 3,
+            "font_revision": 2,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          },
+          "after": {
+            "hash": "7870363203063095285",
+            "level": 0,
+            "shader_revision": 4,
+            "texture_revision": 3,
+            "font_revision": 3,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          }
+        },
+        {
+          "frame": 1382,
+          "action": "transition_reject",
+          "applied": false,
+          "before": {
+            "hash": "3859428580428616961",
+            "level": 0,
+            "shader_revision": 4,
+            "texture_revision": 3,
+            "font_revision": 3,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          },
+          "after": {
+            "hash": "3859428580428616961",
+            "level": 0,
+            "shader_revision": 4,
+            "texture_revision": 3,
+            "font_revision": 3,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          }
+        },
+        {
+          "frame": 1383,
+          "action": "transition",
+          "applied": true,
+          "before": {
+            "hash": "3859428580428616961",
+            "level": 0,
+            "shader_revision": 4,
+            "texture_revision": 3,
+            "font_revision": 3,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          },
+          "after": {
+            "hash": "11818405974479334269",
+            "level": 1,
+            "shader_revision": 4,
+            "texture_revision": 3,
+            "font_revision": 3,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          }
+        },
+        {
+          "frame": 2086,
+          "action": "transition",
+          "applied": true,
+          "before": {
+            "hash": "16330525715750492017",
+            "level": 1,
+            "shader_revision": 4,
+            "texture_revision": 3,
+            "font_revision": 3,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          },
+          "after": {
+            "hash": "9590496106973414854",
+            "level": 0,
+            "shader_revision": 4,
+            "texture_revision": 3,
+            "font_revision": 3,
+            "textures": 9,
+            "texture_bytes": 30292,
+            "targets": 1,
+            "target_bytes": 103968,
+            "font_bytes": 16384
+          }
+        }
+      ]
+    }
+  }
+}

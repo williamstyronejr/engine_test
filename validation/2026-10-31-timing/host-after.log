@@ -1,0 +1,18 @@
+ 09:05:39 up 3 days, 21:05,  2 users,  load average: 3.66, 2.93, 1.58
+3.66 2.93 1.58 6/619 1471657
+    PID COMMAND         %CPU %MEM
+1471658 ps               200  0.0
+  15666 t3code           4.9  6.5
+1469145 codex            2.2  5.2
+   5058 ghostty          1.5  0.5
+  15532 t3code           1.5  1.0
+  15686 t3code           1.0  4.8
+   1850 voxtype-osd-gtk  0.9  0.2
+  15471 t3code           0.6  2.5
+1470827 kworker/u17:1-M  0.6  0.0
+   1665 Hyprland         0.6  0.7
+1469265 kworker/u17:4+i  0.5  0.0
+   1419 avahi-daemon     0.5  0.0
+   5315 btop             0.4  0.3
+1463696 kworker/u17:0-M  0.2  0.0
+   1794 voxtype          0.2  0.1

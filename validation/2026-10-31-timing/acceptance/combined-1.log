@@ -1,0 +1,24 @@
+[platform] X11/GLX (may be XWayland)
+[graphics] Intel / Mesa Intel(R) HD Graphics 4400 (HSW GT2)
+[OpenGL] 4.6 (Core Profile) Mesa 26.2.5-arch1.1
+{
+  "schema":"feature_lab_stress_v1","workload_version":1,"mode":"opengl","label":"","complete":true,"resources_stable":true,
+  "build":{"revision":"49280e0","compiler":"GNU 16.2.1","configuration":"Release","flags":" -O3 -DNDEBUG; C++20; sanitizers=OFF"},
+  "machine":{"cpu":" Intel(R) Core(TM) i5-4300U CPU @ 1.90GHz","system":"Linux 7.2.8-9-omarchy x86_64","gl_vendor":"Intel","gl_device":"Mesa Intel(R) HD Graphics 4400 (HSW GT2)","gl_version":"4.6 (Core Profile) Mesa 26.2.5-arch1.1"},
+  "workload":{"sprites":8192,"tiles":4096,"entities":1024,"bodies":128,"voices":8,"dense":false,"seed":"1","width":1920,"height":1080,"warmup_per_cycle":60,"frames_per_cycle":600,"cycles":3},
+  "run":{"completed_cycles":3,"measured_frames":1800,"checksum":"3573445382734126645","window_width":1050,"window_height":1360,"vsync_requested":false,"vsync_disable_accepted":true,"audio_device":false,"capture_requested":false},
+  "presentation":{"mode":"immediate","swap_interval_requested":0,"request_issued":true,"present_calls":1980},
+  "totals":{"quads":18432000,"culled":3686400,"draws":5400,"visible_tiles":7372800,"collision_candidates":1396800,"contacts":0},
+  "memory":{"tracked_cpu_buffer_bytes":8072232,"report_buffer_bytes":100824,"rss_start":48218112,"rss_end":51290112,"rss_peak_at_cycle_boundary":51748864,"peak_uploaded_textures":1,"peak_uploaded_texture_bytes":16,"peak_targets":1,"peak_target_bytes":8294400,"renderer_baseline":{"coverage":"owned_buffers_and_texels_v2","observed":true,"cpu_vertex_reserved_bytes":786432,"cpu_vertex_used_bytes":0,"gpu_vertex_store_bytes":786432,"gpu_builtin_texture_bytes":32,"gpu_uploaded_texture_bytes":0,"gpu_font_texture_bytes":16384,"gpu_target_texture_bytes":0,"cpu_font_atlas_reserved_bytes":16384,"cpu_font_atlas_used_bytes":16384,"cpu_font_glyph_reserved_bytes":2048,"cpu_font_glyph_used_bytes":1408}},
+  "gpu_queries":{"supported":true,"method":"time_elapsed","counter_bits":64,"submitted":1980,"completed":1980,"pending":0,"skipped":0,"invalid":0,"failure_capacity":8,"failures_omitted":0,"failures":[]},
+  "milliseconds":{
+    "load":{"samples":3,"mean":6.206498,"median":6.598773,"p95":6.598773,"p99":6.598773,"max":7.720924},
+    "simulation":{"samples":1800,"mean":0.383555213,"median":0.370849,"p95":0.529292,"p99":0.744848,"max":3.841352},
+    "mixer":{"samples":1800,"mean":0.160871201,"median":0.146347,"p95":0.224854,"p99":0.364015,"max":4.368707},
+    "render_submit":{"samples":1800,"mean":2.47395271,"median":2.313362,"p95":3.429927,"p99":4.922187,"max":10.855718},
+    "preview_submit":{"samples":1800,"mean":0.175735861,"median":0.143928,"p95":0.347605,"p99":0.450765,"max":5.158459},
+    "present":{"samples":1800,"mean":1.27779746,"median":0.337858,"p95":4.558289,"p99":6.367759,"max":41.075888},
+    "frame":{"samples":1800,"mean":4.48936957,"median":3.717654,"p95":7.698154,"p99":11.482597,"max":43.67726},
+    "gpu_render":{"samples":1800,"mean":0.956456756,"median":0.94936,"p95":1.06648,"p99":1.11032,"max":1.58616}
+  }
+}

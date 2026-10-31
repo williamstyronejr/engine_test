@@ -1,8 +1,8 @@
 # Implementation status
 
-The latest increment (78) validates terminal audio failures and unavailable audio
-controls across repeated full gameplay/UI sessions, preserving manual recovery.
-See [retained results](../validation/2026-10-30-audio-ui-session/RESULTS.md) and
+The latest increment (79) refreshes workload timing and host-stability evidence.
+All 18 frame-p99 targets pass, but 13 maximum-frame checks and both stability
+screens fail. See [findings](../benchmarks/2026-10-31-timing-results.md) and
 [release readiness](RELEASE_READINESS.md) for the remaining gates.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
@@ -2517,10 +2517,29 @@ At documentation commit `76c2b7d`, all three Release package groups pass without
 skips. All 42 then-current evidence/documentation files match archive bytes;
 the packaged link/recipe and bounded CPU entry-point audit also passes.
 
+## Increment 79: current timing baseline and host stability
+
+- Reused the unchanged workload declaration on current GNU Release: all 18 process
+  reports are valid, all frame-p99 targets pass, and 13 maximum-frame checks fail.
+  All 30 operation timings and 318 declared memory checks pass.
+- Repeated the balanced warmup study with two CPU references and 16 traced graphics
+  attempts. Both 5% stability screens fail: 68.82% short-run spread and 87.27% long-run
+  spread. Later sampled CPU frequencies cluster near 0.798 GHz as preparation rises.
+  The cause of the sustained low-frequency state is unconfirmed.
+- All six focused Release correctness groups pass. The unchanged analyzer accepts
+  three valid controls and rejects 32 corrupted copies. All attempts and failures
+  remain; no optimization, host setting or acceptance threshold changes.
+- Runtime/example/test/build sources remain identical to `485de58`. This evidence
+  refresh does not add a compiler/sanitizer matrix or close physical/endurance gates.
+
+See [protocol](../benchmarks/TIMING_BASELINE_REFRESH.md),
+[findings](../benchmarks/2026-10-31-timing-results.md) and
+[evidence](../validation/2026-10-31-timing/RESULTS.md).
+
 ## Next increment
 
-Return to the declared workload's open frame-time failures: reproduce a bounded
-current baseline and assess host stability before choosing another optimization.
-Keep timing failures visible and require measured evidence before adopting a change.
-Physical display/input/audio acceptance, real-time endurance, broader memory
-acceptance and support/signoff remain open. Background loading stays deferred.
+Investigate the recurring low-frequency state using read-only power/thermal evidence
+before another renderer optimization trial. Distinguish observed counters from
+confirmed causes; do not change governor, power limits, fan settings or acceptance
+thresholds as an implicit fix. Physical display/input/audio, real-time endurance,
+broader memory acceptance and support/signoff remain open. Background loading stays deferred.

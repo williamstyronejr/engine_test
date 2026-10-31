@@ -1,0 +1,15 @@
+{
+  "source": "49280e00238ac70b1fa4702ff79c8ba430daf0a4",
+  "hashes": {
+    "benchmarks/TIMING_BASELINE_REFRESH.md": "a148e1c47ee8642c8e5a3362bb49e9220c4ee465672759aa4efabab55d208ee1",
+    "benchmarks/WORKLOAD_ACCEPTANCE.md": "bea7b8ba27cecfdb28be01d375f2ac8a1b8afd27b7e88ca453f1d1b7d1154070",
+    "benchmarks/STRESS_RUN_STABILITY.md": "c8b1604807db561a8bce41cef0672b77da25ad2b7d7612e8f5e01f5ca7dad408",
+    "validation/2026-10-26-workload-acceptance/collect.py": "71f9e426b425af2034b997116f0addf4c4ea8e9475e964533c3ed6eee099d716",
+    "validation/2026-10-26-workload-acceptance/policy.json": "e995d3b61d82bab4a96d65c33399f0321946fde5ba0ac56c495f756dcf7d5473",
+    "validation/2026-10-26-workload-acceptance/evaluate.py": "0e747f59091c598ab001396a20885cc4ca90f11413845d4447a6a5e51902e320",
+    "validation/2026-10-31-timing/stability/collect.py": "ca59e8e12fbffdb58de3e8d1df0367488d8659d3e2ebeb7970bc7c49f93c8f16",
+    "validation/2026-10-31-timing/stability/analyze.py": "6ef37818c0c3553af1421910289c272e7801681df95f57c20c4ea8c2e2820248",
+    "validation/2026-10-31-timing/stability/telemetry.py": "22bc020f464e3a9f973dc41cdc44112a346638aca6e97f3fc36fb2daa0721749",
+    "validation/2026-10-31-timing/stability/analyzer_controls.py": "f7d07446209c0f4f6927ac66a7ed4e4a57c05190c9d1dad03bc1b01831fa9d84"
+  }
+}

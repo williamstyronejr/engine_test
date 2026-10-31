@@ -31,6 +31,9 @@ adds gameplay/HUD, minimap, settings and diagnostics transitions, with full-fram
 fingerprint checks. The [audio failure/UI companion](docs/SESSION_VALIDATION.md#audio-failureui-companion-increment-78)
 checks terminal errors, unavailable controls and explicit audio-session recreation.
 These accelerated simulations do not establish real-time endurance.
+The [current timing refresh](benchmarks/2026-10-31-timing-results.md) passes all 18
+frame-p99 targets but retains 13 maximum-frame failures and two failed CPU-stability
+screens. No renderer optimization is adopted from this unstable baseline.
 The [warmup/order study](benchmarks/2026-10-28-stability-results.md) retains changing
 host frequency/thermal observations; neither warmup protocol establishes stability.
 [Renderer memory snapshots](docs/RENDERER_MEMORY.md) now report CPU vertex storage,
