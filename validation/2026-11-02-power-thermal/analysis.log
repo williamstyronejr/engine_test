@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/zero/dev/engine_test/validation/2026-11-02-power-thermal/analyze.py", line 112, in <module>
+    root=Path(sys.argv[1]);result=analyze(root)
+                                  ~~~~~~~^^^^^^
+  File "/home/zero/dev/engine_test/validation/2026-11-02-power-thermal/analyze.py", line 74, in analyze
+    assert reference is not None and d['mode']=='graphics'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

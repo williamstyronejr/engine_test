@@ -69,6 +69,15 @@ association. Six focused correctness groups and 35 analyzer controls pass. R6 st
 open, and no optimization or system-setting change is adopted. See
 [retained evidence](../validation/2026-10-31-timing/RESULTS.md).
 
+Increment 80 [collects read-only power/thermal evidence](../benchmarks/2026-11-02-power-thermal-results.md)
+at `fea2f57`. Six graphics workloads complete, but sustained low frequency does not
+reproduce and the cause remains unresolved. Controls remain unchanged while throttle
+counters rise; denied energy reads and invalid ACPI data limit attribution. Three
+stress groups pass. A retained analyzer mode-label error is corrected without
+rerunning measurements; 19 analysis controls then pass. No runtime/system-setting
+change or new performance acceptance follows. See
+[evidence](../validation/2026-11-02-power-thermal/RESULTS.md).
+
 “Evidence available” below applies to the stated revision and environment only.
 “Open” means missing evidence or unfinished acceptance work, not a reproduced code
 failure. Unconfirmed WM minimization and rejected historical timing runs are called

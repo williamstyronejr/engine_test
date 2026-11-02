@@ -1,0 +1,97 @@
+[
+  {
+    "name": "valid",
+    "expected_accept": true,
+    "accepted": true
+  },
+  {
+    "name": "unavailable_sensor",
+    "expected_accept": true,
+    "accepted": true
+  },
+  {
+    "name": "phase_order",
+    "expected_accept": false,
+    "accepted": false
+  },
+  {
+    "name": "unfinished",
+    "expected_accept": false,
+    "accepted": false
+  },
+  {
+    "name": "wrong_hash",
+    "expected_accept": false,
+    "accepted": false
+  },
+  {
+    "name": "time_order",
+    "expected_accept": false,
+    "accepted": false
+  },
+  {
+    "name": "missing_field",
+    "expected_accept": false,
+    "accepted": false
+  },
+  {
+    "name": "missing_error",
+    "expected_accept": false,
+    "accepted": false
+  },
+  {
+    "name": "wrong_type",
+    "expected_accept": false,
+    "accepted": false
+  },
+  {
+    "name": "source",
+    "expected_accept": false,
+    "accepted": false
+  },
+  {
+    "name": "checksum",
+    "expected_accept": false,
+    "accepted": false
+  },
+  {
+    "name": "count",
+    "expected_accept": false,
+    "accepted": false
+  },
+  {
+    "name": "partition",
+    "expected_accept": false,
+    "accepted": false
+  },
+  {
+    "name": "nesting",
+    "expected_accept": false,
+    "accepted": false
+  },
+  {
+    "name": "negative_time",
+    "expected_accept": false,
+    "accepted": false
+  },
+  {
+    "name": "missing_trace",
+    "expected_accept": false,
+    "accepted": false
+  },
+  {
+    "name": "gpu_error",
+    "expected_accept": false,
+    "accepted": false
+  },
+  {
+    "name": "presentation",
+    "expected_accept": false,
+    "accepted": false
+  },
+  {
+    "name": "resource_bytes",
+    "expected_accept": false,
+    "accepted": false
+  }
+]

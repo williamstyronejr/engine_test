@@ -1,8 +1,8 @@
 # Implementation status
 
-The latest increment (79) refreshes workload timing and host-stability evidence.
-All 18 frame-p99 targets pass, but 13 maximum-frame checks and both stability
-screens fail. See [findings](../benchmarks/2026-10-31-timing-results.md) and
+The latest increment (80) investigates the low-frequency CPU state using read-only
+power/thermal observations. The sustained state does not reproduce; its cause remains
+unresolved. See [findings](../benchmarks/2026-11-02-power-thermal-results.md) and
 [release readiness](RELEASE_READINESS.md) for the remaining gates.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
@@ -2540,10 +2540,32 @@ At documentation commit `e5d9e62`, all three Release package groups pass without
 skips. All 124 then-current evidence/documentation files match archive bytes, and
 the packaged documentation/entry-point audit passes. Timing acceptance remains failed.
 
+## Increment 80: bounded read-only power/thermal investigation
+
+- Captured 369 sweeps over 131 discovered paths through fixed before/after windows,
+  one CPU reference and six graphics runs. All workloads complete; only one of 208
+  graphics-phase policy-0 frequency samples is ≤900 MHz. No sustained state reproduced.
+- Mains, CPU limits, RAPL constraints and sampled cooling-device states stay unchanged.
+  Package throttle counters increase; firmware ACPI warnings and invalid temperatures
+  remain explicit. Denied energy reads leave consumption unmeasured. Cause unresolved.
+- Three existing Release stress groups pass. Corrected a one-line analyzer mode-label
+  error and retained its original failure; the same captured data then validates.
+  Two valid controls are accepted and 17 corrupt copies rejected. No collection retry.
+- No runtime, host setting, acceptance threshold or optimization changes. Older timing
+  and stability failures remain; this is not full runtime qualification.
+
+See [protocol](../benchmarks/POWER_THERMAL_OBSERVATION.md),
+[findings](../benchmarks/2026-11-02-power-thermal-results.md) and
+[evidence](../validation/2026-11-02-power-thermal/RESULTS.md).
+
+At documentation commit `2666cd2`, all three Release package groups pass without
+skips. All 58 then-current evidence/documentation files match archive bytes, and
+the packaged documentation/entry-point audit passes. Timing acceptance remains failed.
+
 ## Next increment
 
-Investigate the recurring low-frequency state using read-only power/thermal evidence
-before another renderer optimization trial. Distinguish observed counters from
-confirmed causes; do not change governor, power limits, fan settings or acceptance
-thresholds as an implicit fix. Physical display/input/audio, real-time endurance,
-broader memory acceptance and support/signoff remain open. Background loading stays deferred.
+Return to engine release qualification: refresh the full current 69-group runtime
+suite and prepare a concise acceptance handoff. Keep the failed timing gates and
+physical display/input/audio, real-time endurance, broader memory and support/signoff
+requirements open. Do not repeat host tuning studies without new discriminating
+evidence. Background loading stays deferred.

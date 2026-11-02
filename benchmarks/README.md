@@ -327,3 +327,7 @@ The [current timing refresh](TIMING_BASELINE_REFRESH.md) reruns the unchanged
 acceptance and warmup protocols. [Results](2026-10-31-timing-results.md) retain 13
 maximum-frame failures and both failed stability screens; the next investigation
 is read-only evidence about the recurring low-frequency state.
+
+The [power/thermal protocol](POWER_THERMAL_OBSERVATION.md) adds bounded read-only
+host observations. [Findings](2026-11-02-power-thermal-results.md) retain firmware
+warnings and inaccessible counters without claiming a cause or changing settings.

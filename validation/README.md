@@ -122,3 +122,7 @@ pass, with 84 matching complete-frame fingerprints across four builds.
 [Current timing baseline](2026-10-31-timing/RESULTS.md) retains all 18 acceptance
 attempts and the repeated balanced stability study. Thirteen maximum-frame checks
 and both stability screens fail; no optimization or system change is adopted.
+
+[Power/thermal evidence](2026-11-02-power-thermal/RESULTS.md) retains six bounded
+graphics runs, read-only host observations, a corrected analyzer schema-label error
+and explicit limits on causal attribution. No sustained low-frequency state reproduced.

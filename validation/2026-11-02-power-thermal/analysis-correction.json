@@ -1,0 +1,35 @@
+{
+  "reason": "Analyzer expected mode 'graphics'; actual established report schema uses 'opengl'. No workload or measurements rerun.",
+  "measured_source": "fea2f57",
+  "original_analyzer_sha256": "6af98e7266c950e00ea4ef3da08249c22a3eef9576cb1d93de7b3bb0914dd800",
+  "corrected_analyzer_sha256": "d85c161baa63652c6b9417b7b4145d31e7d5d70478d3ebb860092bc7ae9e66f8",
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "validation/2026-11-02-power-thermal/analyze.py",
+        "validation/2026-11-02-power-thermal"
+      ],
+      "started_utc": "2026-11-02T10:56:54.687523+00:00",
+      "seconds": 0.9659859599996707,
+      "exit_code": 0,
+      "environment": {
+        "TMPDIR": "/home/zero/.cache/engine-power-80-pvom3ine/compiler-tmp",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "validation/2026-11-02-power-thermal/controls.py"
+      ],
+      "started_utc": "2026-11-02T10:56:55.653777+00:00",
+      "seconds": 3.072097650001524,
+      "exit_code": 0,
+      "environment": {
+        "TMPDIR": "/home/zero/.cache/engine-power-80-pvom3ine/compiler-tmp",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      }
+    }
+  ]
+}
