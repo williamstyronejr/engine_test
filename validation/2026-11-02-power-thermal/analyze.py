@@ -71,7 +71,7 @@ def analyze(root):
         assert r['measured_frames']==1800 and r['completed_cycles']==3 and not r['audio_device'] and not r['capture_requested']
         if p['name']=='cpu-reference':
             assert d['mode']=='cpu';reference=d;continue
-        assert reference is not None and d['mode']=='graphics'
+        assert reference is not None and d['mode']=='opengl'
         assert r['checksum']==reference['run']['checksum']
         assert d['totals']==dict(quads=18432000,culled=3686400,draws=5400,visible_tiles=7372800,
                                 collision_candidates=reference['totals']['collision_candidates'],contacts=reference['totals']['contacts'])

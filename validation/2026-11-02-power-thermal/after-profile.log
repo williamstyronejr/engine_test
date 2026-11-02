@@ -1,0 +1,11 @@
+* performance:
+    CpuDriver:	intel_pstate
+    Degraded:   no
+
+  balanced:
+    CpuDriver:	intel_pstate
+    PlatformDriver:	placeholder
+
+  power-saver:
+    CpuDriver:	intel_pstate
+    PlatformDriver:	placeholder

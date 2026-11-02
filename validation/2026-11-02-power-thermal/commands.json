@@ -1,0 +1,312 @@
+[
+  {
+    "name": "environment",
+    "command": [
+      "bash",
+      "-c",
+      "uname -a; c++ --version; cmake --version; glxinfo -B"
+    ],
+    "source": "fea2f57824e40d35f6ba2fef2591e799bdac900c",
+    "started_utc": "2026-11-02T10:52:33.273086+00:00",
+    "seconds": 0.7482934550062055,
+    "exit_code": 0,
+    "cwd": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0Znwr9h:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-power-80-pvom3ine/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "release",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-power-80-pvom3ine/packages"
+    ],
+    "source": "fea2f57824e40d35f6ba2fef2591e799bdac900c",
+    "started_utc": "2026-11-02T10:52:34.021777+00:00",
+    "seconds": 0.4899009959990508,
+    "exit_code": 0,
+    "cwd": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0Znwr9h:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-power-80-pvom3ine/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "build",
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "--target",
+      "feature_lab",
+      "stress_bench",
+      "stress_tests",
+      "stress_graphics_tests",
+      "-j2"
+    ],
+    "source": "fea2f57824e40d35f6ba2fef2591e799bdac900c",
+    "started_utc": "2026-11-02T10:52:34.512201+00:00",
+    "seconds": 9.852332809998188,
+    "exit_code": 0,
+    "cwd": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0Znwr9h:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-power-80-pvom3ine/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "tests",
+    "command": [
+      "ctest",
+      "--preset",
+      "release",
+      "-R",
+      "^(stress_cpu|stress_graphics|stress_frame_samples)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-11-02-power-thermal/checks.xml"
+    ],
+    "source": "fea2f57824e40d35f6ba2fef2591e799bdac900c",
+    "started_utc": "2026-11-02T10:52:44.365157+00:00",
+    "seconds": 11.189990119004506,
+    "exit_code": 0,
+    "cwd": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0Znwr9h:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-power-80-pvom3ine/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "before-profile",
+    "command": [
+      "powerprofilesctl",
+      "list"
+    ],
+    "source": "fea2f57824e40d35f6ba2fef2591e799bdac900c",
+    "started_utc": "2026-11-02T10:52:55.559043+00:00",
+    "seconds": 0.2450574289978249,
+    "exit_code": 0,
+    "cwd": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0Znwr9h:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-power-80-pvom3ine/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "before-services",
+    "command": [
+      "systemctl",
+      "is-active",
+      "power-profiles-daemon",
+      "thermald",
+      "tlp",
+      "tuned"
+    ],
+    "source": "fea2f57824e40d35f6ba2fef2591e799bdac900c",
+    "started_utc": "2026-11-02T10:52:55.804544+00:00",
+    "seconds": 0.01735847900272347,
+    "exit_code": 0,
+    "cwd": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0Znwr9h:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-power-80-pvom3ine/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "before-thermal-journal",
+    "command": [
+      "journalctl",
+      "-b",
+      "-u",
+      "thermald",
+      "-u",
+      "power-profiles-daemon",
+      "--no-pager",
+      "-n",
+      "100",
+      "-o",
+      "short-iso"
+    ],
+    "source": "fea2f57824e40d35f6ba2fef2591e799bdac900c",
+    "started_utc": "2026-11-02T10:52:55.822566+00:00",
+    "seconds": 0.015830118994927034,
+    "exit_code": 0,
+    "cwd": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0Znwr9h:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-power-80-pvom3ine/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "before-kernel-journal",
+    "command": [
+      "journalctl",
+      "-k",
+      "-b",
+      "--no-pager",
+      "-o",
+      "short-iso",
+      "--grep=(thermal|throttl|power limit|pstate|PROCHOT)",
+      "-n",
+      "100"
+    ],
+    "source": "fea2f57824e40d35f6ba2fef2591e799bdac900c",
+    "started_utc": "2026-11-02T10:52:55.838963+00:00",
+    "seconds": 0.013787781994324178,
+    "exit_code": 0,
+    "cwd": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0Znwr9h:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-power-80-pvom3ine/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "collection",
+    "command": [
+      "python3",
+      "validation/2026-11-02-power-thermal/collect.py"
+    ],
+    "source": "fea2f57824e40d35f6ba2fef2591e799bdac900c",
+    "started_utc": "2026-11-02T10:52:55.853321+00:00",
+    "seconds": 186.87631125200278,
+    "exit_code": 0,
+    "cwd": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0Znwr9h:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-power-80-pvom3ine/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "after-profile",
+    "command": [
+      "powerprofilesctl",
+      "list"
+    ],
+    "source": "fea2f57824e40d35f6ba2fef2591e799bdac900c",
+    "started_utc": "2026-11-02T10:56:02.730761+00:00",
+    "seconds": 0.26254516300105024,
+    "exit_code": 0,
+    "cwd": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0Znwr9h:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-power-80-pvom3ine/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "after-services",
+    "command": [
+      "systemctl",
+      "is-active",
+      "power-profiles-daemon",
+      "thermald",
+      "tlp",
+      "tuned"
+    ],
+    "source": "fea2f57824e40d35f6ba2fef2591e799bdac900c",
+    "started_utc": "2026-11-02T10:56:02.993945+00:00",
+    "seconds": 0.013914770999690518,
+    "exit_code": 0,
+    "cwd": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0Znwr9h:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-power-80-pvom3ine/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "after-thermal-journal",
+    "command": [
+      "journalctl",
+      "-b",
+      "-u",
+      "thermald",
+      "-u",
+      "power-profiles-daemon",
+      "--no-pager",
+      "-n",
+      "100",
+      "-o",
+      "short-iso"
+    ],
+    "source": "fea2f57824e40d35f6ba2fef2591e799bdac900c",
+    "started_utc": "2026-11-02T10:56:03.008675+00:00",
+    "seconds": 0.0779221190023236,
+    "exit_code": 0,
+    "cwd": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0Znwr9h:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-power-80-pvom3ine/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "after-kernel-journal",
+    "command": [
+      "journalctl",
+      "-k",
+      "-b",
+      "--no-pager",
+      "-o",
+      "short-iso",
+      "--grep=(thermal|throttl|power limit|pstate|PROCHOT)",
+      "-n",
+      "100"
+    ],
+    "source": "fea2f57824e40d35f6ba2fef2591e799bdac900c",
+    "started_utc": "2026-11-02T10:56:03.087185+00:00",
+    "seconds": 0.025888698000926524,
+    "exit_code": 0,
+    "cwd": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0Znwr9h:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-power-80-pvom3ine/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  },
+  {
+    "name": "analysis",
+    "command": [
+      "python3",
+      "validation/2026-11-02-power-thermal/analyze.py",
+      "validation/2026-11-02-power-thermal"
+    ],
+    "source": "fea2f57824e40d35f6ba2fef2591e799bdac900c",
+    "started_utc": "2026-11-02T10:56:03.114127+00:00",
+    "seconds": 0.1684808680001879,
+    "exit_code": 1,
+    "cwd": "/home/zero/dev/engine_test",
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.codex/tmp/arg0-linux/codex-arg0Znwr9h:/home/zero/.local/share/mise/installs/codex/0.166.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-power-80-pvom3ine/compiler-tmp",
+      "DISPLAY": ":0",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    }
+  }
+]

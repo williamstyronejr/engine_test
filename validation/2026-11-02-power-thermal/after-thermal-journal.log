@@ -1,0 +1,12 @@
+2026-11-01T17:03:21-05:00 omarchy systemd[1]: Starting Thermal Daemon Service...
+2026-11-01T17:03:21-05:00 omarchy thermald[1427]: 13 CPUID levels; family:model:stepping 0x6:45:1 (6:69:1)
+2026-11-01T17:03:21-05:00 omarchy thermald[1427]: 13 CPUID levels; family:model:stepping 0x6:45:1 (6:69:1)
+2026-11-01T17:03:21-05:00 omarchy thermald[1427]: Config file /etc/thermald/thermal-conf.xml does not exist
+2026-11-01T17:03:21-05:00 omarchy thermald[1427]: Config file /etc/thermald/thermal-conf.xml does not exist
+2026-11-01T17:03:21-05:00 omarchy thermald[1427]: Config file /etc/thermald/thermal-conf.xml does not exist
+2026-11-01T17:03:21-05:00 omarchy thermald[1427]: Config file /etc/thermald/thermal-conf.xml does not exist
+2026-11-01T17:03:21-05:00 omarchy thermald[1427]: Polling mode is enabled: 4
+2026-11-01T17:03:21-05:00 omarchy thermald[1427]: Config file /etc/thermald/thermal-conf.xml does not exist
+2026-11-01T17:03:21-05:00 omarchy systemd[1]: Started Thermal Daemon Service.
+2026-11-01T17:03:22-05:00 omarchy systemd[1]: Starting Power Profiles daemon...
+2026-11-01T17:03:22-05:00 omarchy systemd[1]: Started Power Profiles daemon.
