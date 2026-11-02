@@ -116,3 +116,18 @@ physical display/input/audio, endurance, broader memory and support signoff open
 The current investigation is complete within its declared scope, not a resolution
 of those release requirements. [Raw evidence](../validation/2026-11-02-power-thermal/RESULTS.md)
 retains the original analyzer failure, corrected result and every observation.
+
+## Candidate package
+
+At documentation commit **`2666cd2`**, all three Release package groups pass
+without skips. All 58 then-current evidence/documentation files match archived
+bytes. The audit verifies 1,277 relative file links, 78 shell recipes and
+eight bounded CPU entry-point commands between two successful manifest checks.
+Allocation profilers and session tests remain excluded. These checks validate
+packaging/command correctness and do not change the failed timing decisions.
+
+The final merge receives the same three package tests and complete archive audit
+after this evidence is included. Final local records live under
+`build/power-thermal-refresh/`; package builds reuse the Release preset tree.
+
+See the [package evidence](../validation/2026-11-02-power-thermal/package-candidate/summary.json).

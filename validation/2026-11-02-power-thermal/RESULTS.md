@@ -38,3 +38,19 @@ No engine/runtime/test/build rule, system setting, benchmark limit or acceptance
 threshold changes. This is not a fresh compiler/sanitizer matrix or the full
 69-group suite. Existing timing and physical/memory/endurance/support gates remain
 open. Candidate and final-merge packages are verified separately below.
+
+## Candidate package
+
+At documentation commit **`2666cd2`**, all three Release package groups pass
+without skips. All 58 then-current evidence/documentation files match archived
+bytes. The audit verifies 1,277 relative file links, 78 shell recipes and
+eight bounded CPU entry-point commands between two successful manifest checks.
+Allocation profilers and session tests remain excluded. These checks validate
+packaging/command correctness and do not change the failed timing decisions.
+
+The final merge receives the same three package tests and complete archive audit
+after this evidence is included. Final local records live under
+`build/power-thermal-refresh/`; package builds reuse the Release preset tree.
+
+[Package status](package-feature-tests.xml), [commands](package-feature-commands.json),
+[test log](package-feature-tests.log), [archive audit](package-candidate/summary.json).

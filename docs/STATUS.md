@@ -2558,6 +2558,10 @@ See [protocol](../benchmarks/POWER_THERMAL_OBSERVATION.md),
 [findings](../benchmarks/2026-11-02-power-thermal-results.md) and
 [evidence](../validation/2026-11-02-power-thermal/RESULTS.md).
 
+At documentation commit `2666cd2`, all three Release package groups pass without
+skips. All 58 then-current evidence/documentation files match archive bytes, and
+the packaged documentation/entry-point audit passes. Timing acceptance remains failed.
+
 ## Next increment
 
 Return to engine release qualification: refresh the full current 69-group runtime
