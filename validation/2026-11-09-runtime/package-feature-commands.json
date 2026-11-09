@@ -1,0 +1,59 @@
+[
+  {
+    "command": [
+      "cmake",
+      "--preset",
+      "release",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-runtime-81-sniuyaco/candidate-packages"
+    ],
+    "source": "5327b9f9592413dff042549e52dd8be37521d94c",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-runtime-81-sniuyaco/compiler-tmp",
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/command-wrappers/bin:/home/zero/.codex/tmp/arg0-linux/codex-arg0DkcIBz:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "DISPLAY": ":0"
+    },
+    "exit_code": 0,
+    "seconds": 0.4810002450249158
+  },
+  {
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "--target",
+      "feature_lab",
+      "stress_bench",
+      "validate_assets",
+      "-j2"
+    ],
+    "source": "5327b9f9592413dff042549e52dd8be37521d94c",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-runtime-81-sniuyaco/compiler-tmp",
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/command-wrappers/bin:/home/zero/.codex/tmp/arg0-linux/codex-arg0DkcIBz:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "DISPLAY": ":0"
+    },
+    "exit_code": 0,
+    "seconds": 8.18079284101259
+  },
+  {
+    "command": [
+      "ctest",
+      "--preset",
+      "release",
+      "-R",
+      "^package_(build|relocation|graphics)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/build/runtime-qualification-refresh/package-feature-tests.xml"
+    ],
+    "source": "5327b9f9592413dff042549e52dd8be37521d94c",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-runtime-81-sniuyaco/compiler-tmp",
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/command-wrappers/bin:/home/zero/.codex/tmp/arg0-linux/codex-arg0DkcIBz:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "DISPLAY": ":0"
+    },
+    "exit_code": 0,
+    "seconds": 87.8141583300312
+  }
+]

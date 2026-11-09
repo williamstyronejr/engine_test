@@ -6,6 +6,11 @@ Feature Lab includes transactional asset reload, paused stepping, collisions,
 settings, saves, replay profiling and a relocatable release package. A CPU-only
 asset validator supports text and versioned JSON reports.
 
+The [release acceptance handoff](docs/RELEASE_HANDOFF.md) identifies the candidate,
+provides private launch instructions and lists the remaining human observations.
+The [current full runtime qualification](validation/2026-11-09-runtime/RESULTS.md)
+covers all 69 groups in GNU Debug/Release and Clang Debug.
+
 This is an early engine foundation. The full plan is in [ENGINE_PLAN.md](ENGINE_PLAN.md);
 [implementation status and feature coverage](docs/STATUS.md) distinguish working
 features from planned work. The [release-readiness audit](docs/RELEASE_READINESS.md)
@@ -992,7 +997,8 @@ broken textures produce an error and a magenta fallback. F7 provides coordinated
 CPU/GPU texture reload. `--watch-assets` automates shader/texture/font/animation/tilemap/scene/audio reload; invalid
 animation/map/scene/audio edits retain working content.
 
-The install target includes both executables, assets and documentation:
+The install target includes the game, CPU stress benchmark, asset validator, assets
+and documentation:
 
 ```sh
 cmake --install build/release --prefix "$PWD/build/package"

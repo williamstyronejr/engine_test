@@ -1,8 +1,8 @@
 # Implementation status
 
-The latest increment (80) investigates the low-frequency CPU state using read-only
-power/thermal observations. The sustained state does not reproduce; its cause remains
-unresolved. See [findings](../benchmarks/2026-11-02-power-thermal-results.md) and
+The latest increment (81) qualifies all 69 runtime groups in GNU Debug, GNU Release
+and Clang Debug and provides a [release acceptance handoff](RELEASE_HANDOFF.md).
+See [retained evidence](../validation/2026-11-09-runtime/RESULTS.md) and
 [release readiness](RELEASE_READINESS.md) for the remaining gates.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
@@ -2562,10 +2562,32 @@ At documentation commit `2666cd2`, all three Release package groups pass without
 skips. All 58 then-current evidence/documentation files match archive bytes, and
 the packaged documentation/entry-point audit passes. Timing acceptance remains failed.
 
+## Increment 81: complete current runtime qualification and handoff
+
+- All 69 runtime groups pass in GNU Debug, GNU Release and Clang Debug: 207 group
+  executions without skips. Each suite contains 36 CPU, 29 hardware and four platform
+  groups, including all three repeated-session fixtures. Package groups run separately.
+- Preset build trees are reused, reconfigured and built with two compiler jobs.
+  Commands, exact inventories, complete CTest output and XML results are retained.
+  This adds no fresh sanitizer, race-detector or offline-build qualification.
+- Added a concise candidate handoff with checksum/private-launch instructions,
+  explicit NOT RUN physical cases, expected behavior and a per-case evidence template.
+  Corrected the stale audio documentation: preferences persist, but unavailable
+  audio controls are disabled until a new output/session exists.
+- Runtime, test and build rules remain unchanged from `54a61ba`. Existing timing
+  failures, physical-device checks and remaining release signoff stay open.
+
+See [results](../validation/2026-11-09-runtime/RESULTS.md) and
+[acceptance handoff](RELEASE_HANDOFF.md).
+
+At documentation commit `5327b9f`, all three Release package groups pass without
+skips. All 29 then-current evidence/documentation files match archive bytes, and
+the packaged documentation/entry-point audit passes. Physical acceptance and timing gates remain open.
+
 ## Next increment
 
-Return to engine release qualification: refresh the full current 69-group runtime
-suite and prepare a concise acceptance handoff. Keep the failed timing gates and
-physical display/input/audio, real-time endurance, broader memory and support/signoff
-requirements open. Do not repeat host tuning studies without new discriminating
-evidence. Background loading stays deferred.
+Complete the handoff's physical display/input and audible-device cases with a human
+observer and retain case-level results. Current automated passes do not close those
+requirements. Keep R6 timing/endurance/broader-memory acceptance and R8 support/signoff
+open; require new discriminating evidence before another host-tuning or optimization
+study. Background loading remains deferred.

@@ -78,6 +78,13 @@ rerunning measurements; 19 analysis controls then pass. No runtime/system-settin
 change or new performance acceptance follows. See
 [evidence](../validation/2026-11-02-power-thermal/RESULTS.md).
 
+Increment 81 [qualifies the complete current runtime inventory](../validation/2026-11-09-runtime/RESULTS.md)
+at `4afa230`: GNU Debug/Release and Clang Debug each pass all 69 groups without skips,
+including the three repeated-session fixtures. Preset trees are reused; this is not
+a new sanitizer, TSan or offline-build run. The [acceptance handoff](RELEASE_HANDOFF.md)
+provides candidate identification, private launch and explicit remaining physical
+cases. Runtime/test/build sources are unchanged from `54a61ba`.
+
 “Evidence available” below applies to the stated revision and environment only.
 “Open” means missing evidence or unfinished acceptance work, not a reproduced code
 failure. Unconfirmed WM minimization and rejected historical timing runs are called
@@ -107,12 +114,12 @@ advertised; a second GPU is not a substitute for finishing checks on the testing
 
 | Gate | State | Required closure / evidence | Execution |
 | --- | --- | --- | --- |
-| R1: candidate compiler and sanitizer matrix | Full baseline suite at `4f60312`; new session fixture validated separately | Fresh GNU native ASan/UBSan passes all 66 runtime groups, plus two leak-enabled audio groups. The prior integrated refresh supplies full GNU Debug/Release and Clang (66 each), all 34 CPU sanitizer groups and two audio TSan groups. All pass without skips. Those prior compiler trees were reused; no fresh full cross-compiler matrix is claimed. | [Fresh native suite](../validation/2026-10-29-offline/RESULTS.md), [integrated matrix](../validation/2026-10-29-readiness/RESULTS.md), [session subset](../validation/2026-10-30-long-session/RESULTS.md). |
+| R1: candidate compiler and sanitizer matrix | Current full GNU/Clang runtime evidence; sanitizer evidence remains separately scoped | At `4afa230`, GNU Debug/Release and Clang Debug each pass all 69 runtime groups without skips. The `4f60312` fresh native ASan/UBSan record covers the earlier 66-group suite; all three added session groups have their own native sanitizer runs. No fresh full 69-group sanitizer matrix is claimed. | [Current full suites](../validation/2026-11-09-runtime/RESULTS.md), [native baseline](../validation/2026-10-29-offline/RESULTS.md), [session contracts/evidence](SESSION_VALIDATION.md). |
 | R2: concurrent audio validation | Refreshed evidence at `6d0da8f` | A new Clang TSan build passes both audio groups without reports, using null/failing sinks. This covers exercised queue, buffer-retirement and shutdown schedules, not all interleavings or uninstrumented ALSA internals. | No physical sound claim; [race results](../validation/2026-10-29-readiness/tsan-audio-tests.xml). |
 | R3: clean offline build and candidate package | Fresh archived-source evidence at `4f60312` | New full GNU Release build, 36 CPU groups and mandatory headless package validation pass inside network isolation. Three package groups, including relocated OpenGL scenarios, pass afterward in the real display session. Source/archive hashes identify the build; embedded revision is `unknown` without Git metadata. Final Git-stamped candidate packages are checked separately. | [Offline provenance and package audit](../validation/2026-10-29-offline/RESULTS.md); older `1dfba31` evidence remains historical. |
 | R4: display, input and interactive game acceptance | Open; WM minimize was unconfirmed (probe exit 2) | Finish physical scale/monitor, supported WM minimize/restore, focus, layout switching and title/settings/gameplay checks. Verify camera, clipping, rebinding, save/relaunch, level transitions and visible shader failure/recovery. Record each case, configuration and result. | Human observation and a suitable WM/monitor configuration. |
 | R5: physical sound and device lifecycle | Open | Listen to channel/gain/mute/pause/stop and gameplay cues. Exercise physical disconnect and system suspend/resume in an arranged session. Confirm continued play and useful disabled-audio diagnostics on terminal failure. Record device/backend and outcome; automatic reconnection is not implemented or required by the current contract. | Human observation and physical device access. |
-| R6: declared performance and memory acceptance | Open; declared memory checks pass, timing fails at `d4dbe22` | [Six workloads / 18 attempts](../benchmarks/2026-10-26-workload-acceptance-results.md) retain predeclared ceilings, kernel peak RSS and a storage coverage audit. All memory checks pass; one p99 and fourteen worst-frame checks exceed 16.7 ms. Investigate paired-frame causes, then repeat without discarding failures; extend interactive/audio/error/long-session coverage and physical 1080p acceptance. | Measurements are automated; physical presentation/refresh checks require observation. |
+| R6: declared performance and memory acceptance | Open; latest retained matrix at `49280e0` fails maximum-frame ceilings | All 18 frame-p99, 30 operation and 318 declared memory checks pass, but 13 maximum-frame checks fail. Both balanced warmup screens fail. Later read-only host observation does not establish a cause or performance recovery. Physical 1080p, endurance and broader memory coverage remain open. | [Timing evidence](../benchmarks/2026-10-31-timing-results.md), [host investigation](../benchmarks/2026-11-02-power-thermal-results.md); earlier failures remain retained. |
 | R7: persistence failure and compatibility boundary | Implemented syscall contract has evidence; physical durability unverified | Atomic-write failures are covered at `be16f3e`; `aa53ca4` adds ten directory cases covering full resolved ancestry before publication, faults, retry after process exit and matching read/write normalization. Existing content rejection remains unchanged. Physical power-loss/filesystem qualification requires an isolated disposable fixture if that guarantee is claimed. | [Atomic faults](ATOMIC_SAVE_VALIDATION.md) and [directory preparation](STORAGE_DIRECTORY_VALIDATION.md); no physical power-loss guarantee established. |
 | R8: release coverage and support record | Open | Close applicable R1–R7 cases, map each supported subfeature to named checks, retain manual results and unresolved failures, then publish the supported configuration and candidate artifact hash. Review scenario substitutions against the plan instead of treating one passing room or test-group count as complete coverage. | Documentation after evidence collection; unresolved scope decisions remain explicit. |
 
@@ -189,12 +196,14 @@ results separately. Do not suppress an engine report to make the aggregate pass.
 After the audio-UI session addition, the current inventory is 69
 native runtime groups (36 CPU, 29 hardware, four platform), plus three packaging
 fixtures; platform-disabled builds discover 34 CPU groups. Discovery is not execution.
-The [current refresh](../validation/2026-10-29-readiness/RESULTS.md) runs every GNU/Clang
-runtime group and CPU sanitizer group, with a focused native sanitizer subset.
+The [earlier refresh](../validation/2026-10-29-readiness/RESULTS.md) runs all then-current
+66 GNU/Clang runtime groups and 34 CPU sanitizer groups, with a focused native
+sanitizer subset.
 The [fresh follow-up](../validation/2026-10-29-offline/RESULTS.md) completes the
 then-current 66-group native sanitizer suite from archived source `4f60312`.
-The added `long_session`, `ui_session` and `audio_ui_session` groups receive targeted
-validation separately; the full 69-group suite has not been refreshed by those additions.
+The added `long_session`, `ui_session` and `audio_ui_session` groups now also run in
+the [complete 69-group GNU/Clang refresh](../validation/2026-11-09-runtime/RESULTS.md).
+Their targeted sanitizer records remain separate from that non-sanitized refresh.
 The full fresh-matrix record at `1dfba31` predates these additions; later storage and
 [allocation validation](../validation/2026-10-24-allocations/RESULTS.md) record their
 own full/focused scopes. Update counts from
