@@ -44,7 +44,8 @@ mix, so its counts do not represent wall-clock playback duration.
 
 Feature Lab logs the negative device error, releases failed output, continues
 playing silently, and retains its last observed audio statistics for the exit
-report. Preferences remain editable after failure. Initialization errors still
+report. Audio preferences are retained, while the settings panel disables unavailable
+audio controls until a new output/session is created. Initialization errors still
 report their opening/format diagnostic and may have no running-device counters.
 
 This policy follows the [ALSA PCM error/recovery documentation](https://www.alsa-project.org/alsa-doc/alsa-lib/pcm.html)

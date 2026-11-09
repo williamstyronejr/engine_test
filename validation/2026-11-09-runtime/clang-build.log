@@ -1,0 +1,26 @@
+[1/26] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/replay_profile.cpp.o
+[2/26] Stage Feature Lab assets
+[3/26] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/stress_benchmark.cpp.o
+[4/26] Linking CXX static library libfeature_lab_stress.a
+[5/26] Building CXX object CMakeFiles/diagnostics_allocations.dir/profiling/ui_allocations.cpp.o
+[6/26] Building CXX object CMakeFiles/ui_allocations.dir/profiling/ui_allocations.cpp.o
+[7/26] Building CXX object CMakeFiles/audio_allocations.dir/profiling/audio_allocations.cpp.o
+[8/26] Building CXX object CMakeFiles/ui_session_tests.dir/tests/ui_session_tests.cpp.o
+[9/26] Building CXX object CMakeFiles/audio_ui_session_tests.dir/tests/audio_ui_session_tests.cpp.o
+[10/26] Building CXX object CMakeFiles/long_session_tests.dir/tests/long_session_tests.cpp.o
+[11/26] Building CXX object CMakeFiles/gpu_timer_probe.dir/tools/gpu_timer_probe.cpp.o
+[12/26] Linking CXX executable stress_bench
+[13/26] Linking CXX executable stress_tests
+[14/26] Linking CXX executable replay_profile_tests
+[15/26] Linking CXX executable spike_profile_tests
+[16/26] Linking CXX executable feature_lab
+[17/26] Linking CXX executable feature_lab_allocations
+[18/26] Linking CXX executable diagnostics_allocations
+[19/26] Linking CXX executable ui_allocations
+[20/26] Building CXX object CMakeFiles/gpu_timer_tests.dir/tests/gpu_timer_tests.cpp.o
+[21/26] Linking CXX executable audio_allocations
+[22/26] Linking CXX executable ui_session_tests
+[23/26] Linking CXX executable audio_ui_session_tests
+[24/26] Linking CXX executable long_session_tests
+[25/26] Linking CXX executable gpu_timer_probe
+[26/26] Linking CXX executable gpu_timer_tests

@@ -126,3 +126,8 @@ and both stability screens fail; no optimization or system change is adopted.
 [Power/thermal evidence](2026-11-02-power-thermal/RESULTS.md) retains six bounded
 graphics runs, read-only host observations, a corrected analyzer schema-label error
 and explicit limits on causal attribution. No sustained low-frequency state reproduced.
+
+[Complete current runtime qualification](2026-11-09-runtime/RESULTS.md) passes all
+69 runtime groups in GNU Debug/Release and Clang Debug, including all session
+fixtures. The [release handoff](../docs/RELEASE_HANDOFF.md) keeps manual acceptance
+and failed timing requirements explicit.
