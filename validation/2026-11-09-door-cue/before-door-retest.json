@@ -1,0 +1,13 @@
+{
+  "pid": 636268,
+  "command": [
+    "/home/zero/.cache/feature-lab-acceptance-c9jn7oih/feature-lab-0.1.0-Linux-x86_64-257590d/bin/feature_lab",
+    "--user-data",
+    "/home/zero/.cache/feature-lab-acceptance-c9jn7oih/user",
+    "--level",
+    "annex",
+    "--play"
+  ],
+  "started_utc": "2026-11-09T23:06:56.730937+00:00",
+  "log": "/home/zero/dev/engine_test/build/acceptance-session/annex-audio-1.log"
+}

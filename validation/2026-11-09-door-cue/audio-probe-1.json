@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/home/zero/dev/engine_test/build/release/audio_probe",
+    "--exercise"
+  ],
+  "started_utc": "2026-11-09T23:06:35.930590+00:00",
+  "seconds": 8.296824493038002,
+  "exit_code": 0,
+  "binary_sha256": "8d802c26e8af6683060dc20f45a2f578449662e29be39223c4427749c711b6e7",
+  "source_sha256": "b62069c8d2f9a29101dd324c74938f0701cb2c2a5ce944258be43d060be5bf34",
+  "requested_device": "default",
+  "physical_result": "PENDING user listening report"
+}
