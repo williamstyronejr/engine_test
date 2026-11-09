@@ -118,5 +118,27 @@
     "followup_report": "I expected a sound when i pressed e but i just checked in the new level and after collecting the third it only played the pickup sound",
     "listening_route": "User: laptop speakers both sides",
     "clarified_utc": "2026-11-09T23:12:19.260061+00:00"
+  },
+  {
+    "case": "R5-door-02",
+    "title": "Revised door cue on laptop speakers",
+    "status": "PASS",
+    "basis": "User listening report",
+    "user_report": "I hear the sound now",
+    "recorded_utc": "2026-11-09T23:17:25.708842+00:00",
+    "observed": "Revised door cue audible after the third core in the Annex retest.",
+    "candidate": "fd93752e465c601c1391cba9c495ec995214b4c2",
+    "limits": "Current laptop speakers only; no separate sound is played when E advances levels."
+  },
+  {
+    "case": "R5-device-01",
+    "title": "Unplanned terminal audio-device failure",
+    "status": "FAIL",
+    "basis": "Retest log and user context",
+    "user_report": "No, i did close app but the pc is still running normally",
+    "recorded_utc": "2026-11-09T23:17:25.708842+00:00",
+    "observed": "After entering Facility, retest logged device_error=-5 and disabled audio. User reports no suspension, lid closure or device change. Nearby user audio-service journal has no entries.",
+    "candidate": "fd93752e465c601c1391cba9c495ec995214b4c2",
+    "limits": "Cause unresolved. Log is not timestamped per line; app closure cannot be established as the cause. No fix or physical lifecycle pass is claimed."
   }
 ]

@@ -95,8 +95,10 @@ Lab should remain usable with `AUDIO OFF`. Reconnection currently requires a new
 output/session. Record actual returned errors and counters; do not infer a physical
 result from injected errors or a null-device run.
 
-Physical speaker audibility, real disconnect/reconnect and real system
-suspend/resume remain outstanding. F10 remains partial until that evidence exists.
+The [2026-11-09 physical record](../validation/2026-11-09-door-cue/RESULTS.md) confirms
+left/right probe tones and pickup/updated door cues on laptop speakers. Other audible
+controls, real disconnect/reconnect and system suspend/resume remain outstanding.
+A later unplanned terminal error `-5` remains unexplained. F10 stays partial.
 
 
 ## Observed results — 2026-10-15
@@ -121,3 +123,13 @@ check, edit the four WAVs under `--watch-assets`, confirm live loops change whil
 volume/mute/pause controls survive, then corrupt and repair one file. Record any
 clicks and verify that already completed effects do not replay. Physical listening
 and the existing disconnect/suspend matrix remain outstanding.
+
+## Door cue listening follow-up — 2026-11-09
+
+The door opens when the third core is collected, and its cue starts at that moment.
+Pressing Interact at the exit advances levels without a separate sound. The original
+bass-only sweep was not heard on laptop speakers alongside the pickup. Revision
+`fd93752` adds a descending midrange tail while preserving the 0.4-second mono WAV,
+voice gain/pan and event. The user confirms the revised sound is audible. Seven
+focused Release checks pass; [the retained record](../validation/2026-11-09-door-cue/RESULTS.md)
+separates this pass from a later unexplained device error and other open audio cases.

@@ -1,11 +1,17 @@
 # Release candidate acceptance handoff
 
-**Candidate status: automated runtime qualification complete; release signoff open.**
-The [current evidence](../validation/2026-11-09-runtime/RESULTS.md) runs every one of
+**Candidate status: partial physical acceptance recorded; release signoff open.**
+The [full-suite baseline evidence](../validation/2026-11-09-runtime/RESULTS.md) runs every one of
 69 runtime groups in GNU Debug, GNU Release and Clang Debug. The three session
 fixtures are included in each full suite. Package checks are recorded separately.
 This refresh is not a new sanitizer, race-detector or offline-build qualification;
 those records retain their own source revisions in [release readiness](RELEASE_READINESS.md).
+
+The [physical follow-up](../validation/2026-11-09-door-cue/RESULTS.md) records eight
+user-confirmed UI/input/save cases, both level routes, laptop-speaker observations
+and a revised door cue with a successful listening retest. That asset revision has
+seven focused Release checks; the earlier full-suite evidence keeps its original
+revision. A later unplanned audio-device error `-5` remains unresolved.
 
 The tested host is Linux x86-64, Intel HD 4400, X11/GLX through XWayland, OpenGL 4.6
 Core and ALSA. Kernel, compiler and driver versions are in the current evidence.
@@ -32,14 +38,16 @@ cat "$candidate_dir/BUILD_INFO.txt"
 
 Record the artifact filename/hash and embedded revision before testing. `latest.txt`
 can change after another package build; use the chosen artifact consistently for
-the whole record. The final merge may contain later documentation than the full-suite
-revision; the evidence verifies unchanged runtime/test/build sources. Keep the
-private directory for logs and save/relaunch checks. This recipe has not been run
-as a human acceptance session by the automated qualification.
+the whole record. Match each evidence record to its stated revision. The current candidate includes
+the revised door asset; its focused checks and listening result are separate from
+the earlier full-suite baseline. Keep the private directory for logs and save/relaunch
+checks. The physical follow-up used this extraction and launch approach; its record
+identifies the exact earlier artifact and subsequent development-build retest.
 
 ## Outstanding observations
 
-All cases below remain **NOT RUN** until a person records the observed result.
+The table below defines the complete matrix. Consult the linked physical record
+for completed subsets; unrecorded cases remain **NOT RUN**.
 Use PASS, FAIL or UNAVAILABLE with a reason; absence of a failure report is not a pass.
 The detailed [platform](PLATFORM_VALIDATION.md) and [audio](AUDIO_VALIDATION.md)
 contracts remain authoritative for expected behavior.

@@ -15,5 +15,7 @@
   "source": "fd93752e465c601c1391cba9c495ec995214b4c2",
   "binary_sha256": "b3814bce8ec31dacfbca3ed40de3933d89c8a1aa96f760742304441322f530f7",
   "door_sha256": "74d2a1792b4b0935e281e9e5ed2f9e2ef3c7214c02a7a7924a078cfe1f3d1c91",
-  "physical_result": "PENDING user listening report"
+  "physical_result": "PASS: user reports I hear the sound now on laptop speakers",
+  "later_audio_device_failure": "Unexplained device_error=-5; see observations R5-device-01",
+  "report_recorded_utc": "2026-11-09T23:17:25.708842+00:00"
 }

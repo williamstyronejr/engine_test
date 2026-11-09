@@ -1,8 +1,9 @@
 # Implementation status
 
-The latest increment (81) qualifies all 69 runtime groups in GNU Debug, GNU Release
-and Clang Debug and provides a [release acceptance handoff](RELEASE_HANDOFF.md).
-See [retained evidence](../validation/2026-11-09-runtime/RESULTS.md) and
+The latest increment (82) retains physical acceptance observations and improves the
+door-opening cue after it was inaudible on laptop speakers. The user confirms the
+revised cue is audible; a later unplanned audio-device error remains unresolved.
+See [evidence](../validation/2026-11-09-door-cue/RESULTS.md) and
 [release readiness](RELEASE_READINESS.md) for the remaining gates.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
@@ -2584,10 +2585,28 @@ At documentation commit `5327b9f`, all three Release package groups pass without
 skips. All 29 then-current evidence/documentation files match archive bytes, and
 the packaged documentation/entry-point audit passes. Physical acceptance and timing gates remain open.
 
+## Increment 82: physical acceptance and audible door cue
+
+- Retained eight user-confirmed display/input/rebinding/shader/save/relaunch cases
+  on candidate `257590d`, plus logs of both completed level routes. Scope is the
+  exercised configuration; monitor mode/scale/refresh remain unrecorded.
+- Laptop-speaker listening exposed an inaudible door cue at third-core collection.
+  Software starts both pickup and door voices without rejected commands. The stock
+  door asset now has a descending midrange tail alongside its bass component.
+- Only the asset generator and `sounds/door.wav` change. The WAV format, duration,
+  byte size, event timing and mixer controls are preserved; all other regenerated
+  assets match their previous bytes. Seven focused Release groups pass without skips.
+- At `fd93752`, the user confirms the revised cue is audible. The original failure
+  remains retained. A later terminal device error `-5` is unexplained; the user
+  reports no suspend/lid/device change. It keeps R5 open rather than closing the
+  full audio lifecycle matrix. No new full compiler/sanitizer matrix is claimed.
+
+See [physical observations and validation](../validation/2026-11-09-door-cue/RESULTS.md).
+
 ## Next increment
 
-Complete the handoff's physical display/input and audible-device cases with a human
-observer and retain case-level results. Current automated passes do not close those
-requirements. Keep R6 timing/endurance/broader-memory acceptance and R8 support/signoff
-open; require new discriminating evidence before another host-tuning or optimization
-study. Background loading remains deferred.
+Investigate the retained unplanned audio-device error with targeted evidence and
+preserve its terminal-failure behavior until a cause and appropriate recovery are
+established. Continue unrecorded physical cases with a human observer. R6 timing,
+endurance and broader-memory acceptance and R8 support/signoff remain open.
+Background loading remains deferred.

@@ -1,7 +1,8 @@
 # Physical acceptance and door-cue follow-up — 2026-11-09
 
 **The original door cue failed the laptop-speaker listening check. A revised cue is
-implemented at `fd93752`; seven focused Release groups pass. Physical retest is pending.**
+implemented at `fd93752`; seven focused Release groups pass, and the user confirms
+the revised cue is audible on laptop speakers. A later audio-device failure remains open.**
 No full release signoff or new full compiler/sanitizer qualification is claimed.
 
 ## Original candidate and observations
@@ -66,15 +67,26 @@ At `fd93752`, all seven selected Release groups pass without skips: `sound`,
 [XML](focused-tests.xml), [full output](focused-full-output.log), and [runner](validate.py).
 The existing Release preset tree is reused with two compiler jobs and private disk
 scratch. These are focused checks; the earlier 207-group matrix remains scoped to
-its earlier candidate. No new formal test duplicates the generator implementation.
+its earlier candidate.
 
-## Pending listening result and remaining gates
+## Listening retest and remaining gates
 
 [The retest](retest-run.json) opens the revised Release build directly in Annex,
 using explicit repository assets and the same private controls. Its binary and door
-asset hashes are recorded. It is a development build, not a newly qualified archive.
-The user is checking whether the descending door tail is audible after the final
-pickup. **Do not mark the reported issue fixed until that observation is received.**
+asset hashes are recorded. The user confirms **“I hear the sound now”** on the same
+laptop speakers. The reported missing door cue passes this physical retest; the
+original failed observation remains retained. [The completed log](door-retest-1.log)
+also confirms Annex completion and transition to Facility.
+
+That same run later logs **`Audio device failed (device_error=-5)`** and disables
+output. The user reports **no suspend, lid closure or audio-device change** and says
+they closed the app while the PC continued running normally. The log has no per-line
+timestamps, so closure is not established as the cause. The final counters retain
+8 voices started, 4 completed, no rejected/dropped commands and `enabled=0`.
+The [nearby user audio-service journal](audio-service-context.log) has no entries;
+that does not establish healthy hardware or explain the error. R5 remains open for
+this unplanned failure and the unperformed device-lifecycle cases. No transport
+recovery policy is changed to hide the failure.
 
 Physical monitor-scale/layout/focus/minimize cases, the rest of the audible controls,
 real disconnect and suspend/resume, performance/endurance/broader memory, and support
