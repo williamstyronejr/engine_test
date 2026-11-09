@@ -2580,6 +2580,10 @@ the packaged documentation/entry-point audit passes. Timing acceptance remains f
 See [results](../validation/2026-11-09-runtime/RESULTS.md) and
 [acceptance handoff](RELEASE_HANDOFF.md).
 
+At documentation commit `5327b9f`, all three Release package groups pass without
+skips. All 29 then-current evidence/documentation files match archive bytes, and
+the packaged documentation/entry-point audit passes. Physical acceptance and timing gates remain open.
+
 ## Next increment
 
 Complete the handoff's physical display/input and audible-device cases with a human

@@ -1,0 +1,6 @@
+Feature Lab defaults: WASD/arrows move, +/- zoom, Space pause, R restart, F11 fullscreen, PageUp/PageDown scroll status, M mute, N/B music/effects volume, E nearby alarm switch, F1 settings/rebind controls, F2 diagnostics, F3 debug shapes, F5 reload shaders, F6 shader failure demo, F7 reload textures, F8 texture failure demo, F10 single step while paused, Escape close settings/quit.
+--level facility|annex --level-tour (script both levels) --watch-assets (automatic visual/gameplay asset reload) --font-demo (text gallery) --play (skip title) --verify (CPU gameplay test) --scripted --frames N --no-audio --no-vsync --screenshot FILE.ppm --assets DIRECTORY --missing-texture-demo --settings-demo --diagnostics-demo --shader-error-demo --texture-error-demo --user-data DIRECTORY --load-slot 1..3 --save-slot 1..3 (on exit)
+--seed UINT64 --record-replay FILE.erpl --replay FILE.erpl --verify-replay FILE.erpl (CPU only). Replay modes disable F1; Escape ends recording/playback.
+--profile-report FILE.json --profile-warmup N (requires --replay; unpaced, silent, default config)
+--spike-report FILE.json (scripted reload/transition profiling)
+--stress --help (configurable arena and benchmark reports)

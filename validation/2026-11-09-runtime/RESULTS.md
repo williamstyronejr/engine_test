@@ -79,3 +79,19 @@ repeat, copy the runner to a new evidence directory, update its `root` path and
 commit that declaration before running; preserve this existing record. The runner refuses existing command records
 and tracked source changes between configurations. It uses the existing debug,
 release and clang presets and installs no tools or dependencies.
+
+## Candidate package
+
+At documentation commit **`5327b9f`**, all three Release package groups pass
+without skips. All 29 then-current evidence/documentation files match archived
+bytes. The audit verifies 1,318 relative file links, 80 shell recipes and
+eight bounded CPU entry-point commands between two successful manifest checks.
+Allocation profilers and session tests remain excluded. These checks validate
+packaging and command correctness; physical acceptance and timing gates remain open.
+
+The final merge receives the same three package tests and complete archive audit
+after this evidence is included. Final local records live under
+`build/runtime-qualification-refresh/`; package builds reuse the Release preset tree.
+
+[Package status](package-feature-tests.xml), [commands](package-feature-commands.json),
+[test log](package-feature-tests.log), [archive audit](package-candidate/summary.json).
