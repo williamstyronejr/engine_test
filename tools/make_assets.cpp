@@ -181,9 +181,17 @@ engine::SoundData sound_asset(int kind) {
                 (0.8 + 0.2 * std::cos(tau * 10 * t)));
         else {
             const double envelope = std::min(t / 0.005, 1.0) * (1 - progress);
-            const double phase =
-                kind == 0 ? tau * (660 * t + 440 * t * t) : tau * (180 * t - 100 * t * t);
-            sound.samples[i] = static_cast<float>(0.6 * std::sin(phase) * envelope);
+            if (kind == 0)
+                sound.samples[i] =
+                    static_cast<float>(0.6 * std::sin(tau * (660 * t + 440 * t * t)) * envelope);
+            else {
+                // The door starts with the final pickup. Give its longer descending
+                // tail midrange content instead of relying only on a bass sweep.
+                const double body = 0.12 * std::sin(tau * (180 * t - 100 * t * t));
+                const double latch = 0.32 * std::sin(tau * (540 * t - 175 * t * t));
+                const double metal = 0.16 * std::sin(tau * (900 * t - 300 * t * t));
+                sound.samples[i] = static_cast<float>((body + latch + metal) * envelope);
+            }
         }
     }
     return sound;
