@@ -2603,6 +2603,10 @@ the packaged documentation/entry-point audit passes. Physical acceptance and tim
 
 See [physical observations and validation](../validation/2026-11-09-door-cue/RESULTS.md).
 
+At documentation commit `bc84b22`, all three Release package groups pass without
+skips. All 34 then-current evidence/documentation files match archive bytes, and
+the packaged documentation/entry-point audit passes. Physical acceptance and timing gates remain open.
+
 ## Next increment
 
 Investigate the retained unplanned audio-device error with targeted evidence and
