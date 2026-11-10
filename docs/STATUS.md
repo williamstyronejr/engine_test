@@ -2645,6 +2645,10 @@ the packaged documentation/entry-point audit passes. Physical acceptance and tim
 
 See [session evidence and limits](../validation/2026-11-10-interactive-audio/RESULTS.md).
 
+At documentation commit `14fab0a`, all three Release package groups pass without
+skips. All 22 then-current evidence/documentation files match archive bytes, and
+the packaged documentation/entry-point audit passes. Physical acceptance and timing gates remain open.
+
 ## Next increment
 
 Target a reproduction with more play time after Annex→Facility, retaining any first
