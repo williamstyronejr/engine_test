@@ -1,0 +1,59 @@
+[
+  {
+    "command": [
+      "cmake",
+      "--preset",
+      "release",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-door-cue-5zmi8agc/candidate-packages"
+    ],
+    "source": "bc84b22c4067c1161567aba28af87e9f5bfca5f4",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-door-cue-5zmi8agc/compiler-tmp",
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/command-wrappers/bin:/home/zero/.codex/tmp/arg0-linux/codex-arg0L4H1v1:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "DISPLAY": ":0"
+    },
+    "exit_code": 0,
+    "seconds": 0.3938661980209872
+  },
+  {
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "--target",
+      "feature_lab",
+      "stress_bench",
+      "validate_assets",
+      "-j2"
+    ],
+    "source": "bc84b22c4067c1161567aba28af87e9f5bfca5f4",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-door-cue-5zmi8agc/compiler-tmp",
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/command-wrappers/bin:/home/zero/.codex/tmp/arg0-linux/codex-arg0L4H1v1:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "DISPLAY": ":0"
+    },
+    "exit_code": 0,
+    "seconds": 9.072289341012947
+  },
+  {
+    "command": [
+      "ctest",
+      "--preset",
+      "release",
+      "-R",
+      "^package_(build|relocation|graphics)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/build/door-cue-refresh/package-feature-tests.xml"
+    ],
+    "source": "bc84b22c4067c1161567aba28af87e9f5bfca5f4",
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-door-cue-5zmi8agc/compiler-tmp",
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/command-wrappers/bin:/home/zero/.codex/tmp/arg0-linux/codex-arg0L4H1v1:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "DISPLAY": ":0"
+    },
+    "exit_code": 0,
+    "seconds": 74.18723031901754
+  }
+]

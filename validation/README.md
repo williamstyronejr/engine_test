@@ -131,3 +131,7 @@ and explicit limits on causal attribution. No sustained low-frequency state repr
 69 runtime groups in GNU Debug/Release and Clang Debug, including all session
 fixtures. The [release handoff](../docs/RELEASE_HANDOFF.md) keeps manual acceptance
 and failed timing requirements explicit.
+
+[Physical acceptance and door-cue follow-up](2026-11-09-door-cue/RESULTS.md) retains
+user observations, the original inaudible cue, a successful revised-cue listening
+check, seven focused Release groups and a separate unexplained device failure.

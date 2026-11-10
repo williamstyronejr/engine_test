@@ -1,0 +1,35 @@
+#include "examples/feature_lab/soundtrack.hpp"
+#include <chrono>
+#include <iostream>
+#include <thread>
+int main() {
+ const engine::AssetRoot assets("assets");
+ for (auto level : {feature_lab::Level::facility, feature_lab::Level::annex}) {
+  auto game=feature_lab::load_game(assets,level);
+  feature_lab::Soundtrack track(assets,true,"null");
+  track.locate_emitter(game);
+  feature_lab::Replay replay;
+  bool saw=false;
+  for(int step=0;step<4000 && !game.won;++step) {
+   auto input=replay.next(game);bool was=game.door_started;
+   int picked=game.update(input);track.update(game,input,picked);
+   if(!was && game.door_started) {
+    saw=true;
+    std::cout << "level=" << (level==feature_lab::Level::facility?"Facility":"Annex")
+      << " door_start_tick=" << game.ticks << " picked_same_tick=" << picked
+      << " total_collected=" << game.count() << " player_x=" << game.position.x
+      << " door_x=" << game.location(game.exit).x
+      << " door_pan=" << std::clamp((game.location(game.exit).x-game.position.x)/12,-1.0F,1.0F) << '\n';
+   }
+   if(step%10==0)std::this_thread::sleep_for(std::chrono::milliseconds(1));
+  }
+  auto end=std::chrono::steady_clock::now()+std::chrono::seconds(2);
+  while(track.stats().started<6 && std::chrono::steady_clock::now()<end)
+   std::this_thread::sleep_for(std::chrono::milliseconds(1));
+  auto s=track.stats();
+  std::cout << "won="<<game.won<<" enabled="<<track.enabled()<<" started="<<s.started
+   <<" expected=6 (two loops, three pickups, one door) dropped="<<s.dropped_plays
+   <<" rejected="<<s.queue_rejections<<'\n';
+  if(!saw || !game.won || !track.enabled() || s.started!=6 || s.dropped_plays || s.queue_rejections)return 1;
+ }
+}

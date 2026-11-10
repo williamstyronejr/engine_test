@@ -1,0 +1,144 @@
+[
+  {
+    "case": "R4-01",
+    "title": "Title readability and pointer alignment",
+    "status": "PASS",
+    "basis": "User physical observation",
+    "user_report": "all four passed",
+    "recorded_utc": "2026-11-09T22:57:56.384707+00:00",
+    "observed": "Title text readable and clicks matched buttons.",
+    "candidate": "257590d18fcab4f1f7bd650d13b25ec0ffefc9f7",
+    "limits": "Applies to the exercised current configuration; monitor mode/scale/refresh not yet recorded."
+  },
+  {
+    "case": "R4-02",
+    "title": "Physical movement",
+    "status": "PASS",
+    "basis": "User physical observation",
+    "user_report": "all four passed",
+    "recorded_utc": "2026-11-09T22:57:56.384707+00:00",
+    "observed": "New Game started; WASD/arrow movement worked.",
+    "candidate": "257590d18fcab4f1f7bd650d13b25ec0ffefc9f7",
+    "limits": "Applies to the exercised current configuration; monitor mode/scale/refresh not yet recorded."
+  },
+  {
+    "case": "R4-03",
+    "title": "Modal input release",
+    "status": "PASS",
+    "basis": "User physical observation",
+    "user_report": "all four passed",
+    "recorded_utc": "2026-11-09T22:57:56.384707+00:00",
+    "observed": "Held movement, opened F1 settings, released the movement key, closed settings; no stuck movement.",
+    "candidate": "257590d18fcab4f1f7bd650d13b25ec0ffefc9f7",
+    "limits": "Applies to the exercised current configuration; monitor mode/scale/refresh not yet recorded."
+  },
+  {
+    "case": "R4-04",
+    "title": "Fullscreen round trip",
+    "status": "PASS",
+    "basis": "User physical observation",
+    "user_report": "all four passed",
+    "recorded_utc": "2026-11-09T22:57:56.384707+00:00",
+    "observed": "Pressed F11 twice; fullscreen entry/return, layout and clicks worked.",
+    "candidate": "257590d18fcab4f1f7bd650d13b25ec0ffefc9f7",
+    "limits": "Applies to the exercised current configuration; monitor mode/scale/refresh not yet recorded."
+  },
+  {
+    "case": "R4-05",
+    "title": "Binding capture, cancel and modifier rebind",
+    "status": "PASS",
+    "basis": "User physical observation",
+    "user_report": "The first two passed need to check reload",
+    "recorded_utc": "2026-11-09T23:00:38.378513+00:00",
+    "observed": "User confirmed cancellation, binding Move Left to Ctrl+J and movement using that chord.",
+    "candidate": "257590d18fcab4f1f7bd650d13b25ec0ffefc9f7",
+    "limits": "Current session only; persistence across relaunch remains unverified."
+  },
+  {
+    "case": "R4-06",
+    "title": "Visible shader failure and recovery",
+    "status": "PASS",
+    "basis": "User physical observation",
+    "user_report": "The first two passed need to check reload",
+    "recorded_utc": "2026-11-09T23:00:38.378513+00:00",
+    "observed": "User confirmed F6 retained rendering with an error indicator and F5 cleared it.",
+    "candidate": "257590d18fcab4f1f7bd650d13b25ec0ffefc9f7",
+    "limits": "Current session only; persistence across relaunch remains unverified."
+  },
+  {
+    "case": "R4-R7-07",
+    "title": "Private save restoration after relaunch",
+    "status": "PASS",
+    "basis": "User physical observation",
+    "user_report": "works as expected",
+    "recorded_utc": "2026-11-09T23:01:56.089394+00:00",
+    "observed": "After relaunch with the same private user-data directory, Continue Saved Game in slot 1 restored the expected position and progress.",
+    "candidate": "257590d18fcab4f1f7bd650d13b25ec0ffefc9f7",
+    "limits": "One normal quit/relaunch on the current host; no crash or power-loss durability claim."
+  },
+  {
+    "case": "R4-R7-08",
+    "title": "Binding persistence after relaunch",
+    "status": "PASS",
+    "basis": "User physical observation",
+    "user_report": "works as expected",
+    "recorded_utc": "2026-11-09T23:01:56.089394+00:00",
+    "observed": "Ctrl+J still moved left after relaunch and saved-game restoration.",
+    "candidate": "257590d18fcab4f1f7bd650d13b25ec0ffefc9f7",
+    "limits": "One normal quit/relaunch on the current host; no crash or power-loss durability claim."
+  },
+  {
+    "case": "R4-09",
+    "title": "Complete gameplay through both levels",
+    "status": "PARTIAL",
+    "basis": "User report and retained game log",
+    "user_report": "all working",
+    "recorded_utc": "2026-11-09T23:06:58.732296+00:00",
+    "observed": "No gameplay issue reported. Relaunch-2 log confirms Facility exit and entry into Annex; session ends in Annex with zero collected cores and one level change.",
+    "candidate": "257590d18fcab4f1f7bd650d13b25ec0ffefc9f7",
+    "limits": "Annex completion remains pending; no full two-level pass claimed.",
+    "completion_followup": {
+      "recorded_utc": "2026-11-09T23:14:35.097085+00:00",
+      "evidence": "annex-audio-1.log",
+      "observed": "Annex run transitioned back to Facility; the later Facility state also records three cores and one door completion.",
+      "status": "PASS for route completion",
+      "limits": "No additional confirmation of every visual detail or pause/step subcase is inferred from a log."
+    }
+  },
+  {
+    "case": "R5-door-01",
+    "title": "Audible pickup and door cues",
+    "status": "FAIL",
+    "basis": "User listening report",
+    "user_report": "I hear sounds for core, but theres no sound for the door.",
+    "recorded_utc": "2026-11-09T23:09:05.486941+00:00",
+    "candidate": "257590d18fcab4f1f7bd650d13b25ec0ffefc9f7",
+    "observed": "Core pickup audible; user retried at third-core collection and still heard only pickup. Both left/right probe tones audible on laptop speakers.",
+    "limits": "Cause not established. Prior tone sequence has software success only; no physical result yet.",
+    "followup_report": "I expected a sound when i pressed e but i just checked in the new level and after collecting the third it only played the pickup sound",
+    "listening_route": "User: laptop speakers both sides",
+    "clarified_utc": "2026-11-09T23:12:19.260061+00:00"
+  },
+  {
+    "case": "R5-door-02",
+    "title": "Revised door cue on laptop speakers",
+    "status": "PASS",
+    "basis": "User listening report",
+    "user_report": "I hear the sound now",
+    "recorded_utc": "2026-11-09T23:17:25.708842+00:00",
+    "observed": "Revised door cue audible after the third core in the Annex retest.",
+    "candidate": "fd93752e465c601c1391cba9c495ec995214b4c2",
+    "limits": "Current laptop speakers only; no separate sound is played when E advances levels."
+  },
+  {
+    "case": "R5-device-01",
+    "title": "Unplanned terminal audio-device failure",
+    "status": "FAIL",
+    "basis": "Retest log and user context",
+    "user_report": "No, i did close app but the pc is still running normally",
+    "recorded_utc": "2026-11-09T23:17:25.708842+00:00",
+    "observed": "After entering Facility, retest logged device_error=-5 and disabled audio. User reports no suspension, lid closure or device change. Nearby user audio-service journal has no entries.",
+    "candidate": "fd93752e465c601c1391cba9c495ec995214b4c2",
+    "limits": "Cause unresolved. Log is not timestamped per line; app closure cannot be established as the cause. No fix or physical lifecycle pass is claimed."
+  }
+]

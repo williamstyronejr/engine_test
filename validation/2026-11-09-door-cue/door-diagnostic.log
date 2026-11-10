@@ -1,0 +1,4 @@
+level=Facility door_start_tick=1096 picked_same_tick=1 total_collected=3 player_x=21.9368 door_x=28 door_pan=0.505266
+won=1 enabled=1 started=6 expected=6 (two loops, three pickups, one door) dropped=0 rejected=0
+level=Annex door_start_tick=644 picked_same_tick=1 total_collected=3 player_x=9.96127 door_x=15 door_pan=0.419894
+won=1 enabled=1 started=6 expected=6 (two loops, three pickups, one door) dropped=0 rejected=0

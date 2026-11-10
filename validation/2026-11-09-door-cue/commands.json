@@ -1,0 +1,67 @@
+[
+  {
+    "name": "configure",
+    "command": [
+      "cmake",
+      "--preset",
+      "release",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-door-cue-5zmi8agc/packages"
+    ],
+    "source": "fd93752e465c601c1391cba9c495ec995214b4c2",
+    "exit_code": 0,
+    "seconds": 0.964835821010638,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-door-cue-5zmi8agc/compiler-tmp",
+      "DISPLAY": ":0"
+    }
+  },
+  {
+    "name": "build",
+    "command": [
+      "cmake",
+      "--build",
+      "--preset",
+      "release",
+      "--target",
+      "feature_lab",
+      "make_assets",
+      "sound_tests",
+      "audio_tests",
+      "audio_reload_tests",
+      "audio_watch_tests",
+      "audio_ui_session_tests",
+      "asset_validation_tests",
+      "validate_assets",
+      "-j2"
+    ],
+    "source": "fd93752e465c601c1391cba9c495ec995214b4c2",
+    "exit_code": 0,
+    "seconds": 8.952275291027036,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-door-cue-5zmi8agc/compiler-tmp",
+      "DISPLAY": ":0"
+    }
+  },
+  {
+    "name": "tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/release",
+      "--parallel",
+      "1",
+      "-R",
+      "^(sound|audio_transport|audio_reload|audio_watch|audio_ui_session|asset_validation|asset_validation_cli)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/build/door-cue-refresh/focused-tests.xml"
+    ],
+    "source": "fd93752e465c601c1391cba9c495ec995214b4c2",
+    "exit_code": 0,
+    "seconds": 7.437514756980818,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-door-cue-5zmi8agc/compiler-tmp",
+      "DISPLAY": ":0"
+    }
+  }
+]

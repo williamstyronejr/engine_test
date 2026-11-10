@@ -120,8 +120,10 @@ existing feature-demo flags also start directly in gameplay for reproducible tes
 
 Move the cyan robot through the facility, collect three gold cores, then reach the
 exit after its door opens. Machinery and pickups loop through atlas animations;
-the door plays once and removes its collision barrier on completion. The minimap
-shows remaining objectives and the camera view; scroll the status panel for its legend.
+the door plays once and removes its collision barrier on completion. The opening
+sound starts with the third pickup; pressing E at the exit has no separate cue. The
+minimap shows remaining objectives and the camera view; scroll the status panel for
+its legend.
 
 | Control | Action |
 | --- | --- |

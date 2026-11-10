@@ -1,0 +1,18 @@
+[listen] LEFT ONLY
+[audio probe] healthy=1 written_frames=57088 underruns=0 suspensions=0 recoveries=0 waits=144 device_error=0 started=1 stopped=0 active=1
+[listen] RIGHT ONLY
+[audio probe] healthy=1 written_frames=105216 underruns=0 suspensions=0 recoveries=0 waits=269 device_error=0 started=1 stopped=0 active=1
+[listen] CENTER / BOTH CHANNELS
+[audio probe] healthy=1 written_frames=153344 underruns=0 suspensions=0 recoveries=0 waits=394 device_error=0 started=1 stopped=0 active=1
+[listen] MUTED / SILENCE
+[audio probe] healthy=1 written_frames=201728 underruns=0 suspensions=0 recoveries=0 waits=520 device_error=0 started=1 stopped=0 active=1
+[listen] RESTORED / BOTH CHANNELS
+[audio probe] healthy=1 written_frames=250112 underruns=0 suspensions=0 recoveries=0 waits=646 device_error=0 started=1 stopped=0 active=1
+[listen] GROUP PAUSED / SILENCE
+[audio probe] healthy=1 written_frames=297984 underruns=0 suspensions=0 recoveries=0 waits=771 device_error=0 started=1 stopped=0 active=1
+[listen] GROUP RESUMED / BOTH CHANNELS
+[audio probe] healthy=1 written_frames=346112 underruns=0 suspensions=0 recoveries=0 waits=896 device_error=0 started=1 stopped=0 active=1
+[listen] STOPPED / SILENCE
+[audio probe] healthy=1 written_frames=394496 underruns=0 suspensions=0 recoveries=0 waits=1022 device_error=0 started=1 stopped=1 active=0
+[audio probe] healthy=1 written_frames=394496 underruns=0 suspensions=0 recoveries=0 waits=1022 device_error=0 started=1 stopped=1 active=0
+48 kHz stereo float PCM submitted. Physical audibility/disconnect recovery requires listener/device checks.

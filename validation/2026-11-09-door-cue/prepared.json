@@ -1,0 +1,22 @@
+{
+  "prepared_utc": "2026-11-09T22:55:08.240149+00:00",
+  "source": "257590d18fcab4f1f7bd650d13b25ec0ffefc9f7",
+  "archive": "/home/zero/dev/engine_test/build/release/dist/feature-lab-0.1.0-Linux-x86_64-257590d.tar.gz",
+  "sha256": "f13f94448658a28d20c7764b17117454bbc858e35848143e68c265c986232ce9",
+  "extracted_to": "/home/zero/.cache/feature-lab-acceptance-c9jn7oih/feature-lab-0.1.0-Linux-x86_64-257590d",
+  "user_data": "/home/zero/.cache/feature-lab-acceptance-c9jn7oih/user",
+  "command": [
+    "/home/zero/.cache/feature-lab-acceptance-c9jn7oih/feature-lab-0.1.0-Linux-x86_64-257590d/bin/feature_lab",
+    "--user-data",
+    "/home/zero/.cache/feature-lab-acceptance-c9jn7oih/user",
+    "--no-audio"
+  ],
+  "manifest_verified": true,
+  "kernel": "7.2.15-1-omarchy",
+  "session": {
+    "DISPLAY": ":0",
+    "XDG_SESSION_TYPE": "wayland",
+    "XDG_CURRENT_DESKTOP": "Hyprland"
+  },
+  "physical_acceptance": "PARTIAL: eight user-observed checks passed; remaining cases open"
+}

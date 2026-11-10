@@ -1,0 +1,100 @@
+{
+  "changed_files": [
+    "sounds/door.wav"
+  ],
+  "generated_files": [
+    {
+      "path": "annex.etmp",
+      "sha256": "c72aac19a36bc302aafc08aa40b199d2e5a454485fced1093966204e3a65f723",
+      "unchanged": true
+    },
+    {
+      "path": "annex.scene",
+      "sha256": "09a411071ac13c621605b2fd50cd6552c4ef8e9cef17693918e2049e182e6cdf",
+      "unchanged": true
+    },
+    {
+      "path": "facility.eani",
+      "sha256": "f06c37d16a9a6f5a890f16d284e21c473bcdb96213176ba3f95f108e020c2fb2",
+      "unchanged": true
+    },
+    {
+      "path": "facility.etmp",
+      "sha256": "4ae3466cd15db2f4502821e76e97587b02997b515570d3d6f48e457c038a0fe6",
+      "unchanged": true
+    },
+    {
+      "path": "facility.scene",
+      "sha256": "6246114a536dc0ffe610008bba5956462bf3ed0b331123dd32495149584d3817",
+      "unchanged": true
+    },
+    {
+      "path": "fonts/ui.efnt",
+      "sha256": "ea2cbab48d4009d3084694ee25efc32bc2c9d8956d0f949158fe6375da5a0893",
+      "unchanged": true
+    },
+    {
+      "path": "sounds/door.wav",
+      "sha256": "74d2a1792b4b0935e281e9e5ed2f9e2ef3c7214c02a7a7924a078cfe1f3d1c91",
+      "unchanged": false
+    },
+    {
+      "path": "sounds/machine.wav",
+      "sha256": "4d586c90d1f1297cf0bd5cad10306b682bc6b0637082cb756de72c3a5457a8f2",
+      "unchanged": true
+    },
+    {
+      "path": "sounds/music.wav",
+      "sha256": "86bbd4ad63b747b2d7ae8ed2f6f5d51f10a32edbdb749c0c536a79b3ef0412d6",
+      "unchanged": true
+    },
+    {
+      "path": "sounds/pickup.wav",
+      "sha256": "4c14926b81247db0cfa6da5a9f809b0ace5477227c60ff0f50911057e9650dd0",
+      "unchanged": true
+    },
+    {
+      "path": "textures/actors.etex",
+      "sha256": "469d54b141807ebc731804e66b0d666961f8d390f3d5434b824b2b52d057b0f9",
+      "unchanged": true
+    },
+    {
+      "path": "textures/checker.etex",
+      "sha256": "90882ab4bd4330f539a420184b8110bdf6a11694df3685dba5a5172b9b5427d3",
+      "unchanged": true
+    },
+    {
+      "path": "textures/tiles.etex",
+      "sha256": "ffd4bc9d80363928de14477568c6fefb15e4e6f90dca7f0b460053dddd849b62",
+      "unchanged": true
+    },
+    {
+      "path": "textures/white.etex",
+      "sha256": "542d2a042d884db2266b021b62fced04cdea9f777e7842931f3738e9cdb8f9f0",
+      "unchanged": true
+    }
+  ],
+  "clips": [
+    {
+      "asset": "original",
+      "bytes": 38444,
+      "sha256": "a15830a172172423270733aaca13749faf6f010aacde752278c8a6e6037cdba8",
+      "frames": 19200,
+      "rate": 48000,
+      "channels": 1,
+      "peak": 0.589508056640625,
+      "tail_after_pickup_rms": 0.15311408753085914
+    },
+    {
+      "asset": "revised",
+      "bytes": 38444,
+      "sha256": "74d2a1792b4b0935e281e9e5ed2f9e2ef3c7214c02a7a7924a078cfe1f3d1c91",
+      "frames": 19200,
+      "rate": 48000,
+      "channels": 1,
+      "peak": 0.485870361328125,
+      "tail_after_pickup_rms": 0.09598489968945338
+    }
+  ],
+  "physical_audibility": "PENDING user retest"
+}

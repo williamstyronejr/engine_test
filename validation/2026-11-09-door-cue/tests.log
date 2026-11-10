@@ -1,0 +1,24 @@
+Test project /home/zero/dev/engine_test/build/release
+    Start  3: asset_validation
+1/7 Test  #3: asset_validation .................   Passed    0.88 sec
+    Start  4: asset_validation_cli
+2/7 Test  #4: asset_validation_cli .............   Passed    0.68 sec
+    Start 31: sound
+3/7 Test #31: sound ............................   Passed    0.03 sec
+    Start 40: audio_ui_session
+4/7 Test #40: audio_ui_session .................   Passed    3.64 sec
+    Start 52: audio_reload
+5/7 Test #52: audio_reload .....................   Passed    0.36 sec
+    Start 53: audio_watch
+6/7 Test #53: audio_watch ......................   Passed    1.30 sec
+    Start 54: audio_transport
+7/7 Test #54: audio_transport ..................   Passed    0.31 sec
+
+100% tests passed out of 7
+
+Label Time Summary:
+cpu         =   1.59 sec*proc (3 tests)
+hardware    =   4.94 sec*proc (2 tests)
+platform    =   0.67 sec*proc (2 tests)
+
+Total Test time (real) =   7.22 sec
