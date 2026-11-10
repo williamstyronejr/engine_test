@@ -173,7 +173,9 @@ Four generated WAV assets provide stereo music, pickups, a door cue, and a loopi
 machine emitter. The emitter's gain/pan follow the player's position. Pause freezes
 both audio groups; restart stops old voices and restarts the loops. Mute keeps their
 playback positions advancing. Audio/file/queue failures leave the game playable
-with an `AUDIO OFF` indicator. Use `--no-audio` to skip sound loading and device access.
+with an `AUDIO OFF` indicator. Terminal error logs retain the failing operation and
+observed ALSA PCM state; see [audio validation](docs/AUDIO_VALIDATION.md).
+Use `--no-audio` to skip sound loading and device access.
 
 ```sh
 # Deterministic simulation scenario; no display or audio device required.

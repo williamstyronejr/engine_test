@@ -1,0 +1,94 @@
+Start testing: Nov 10 09:42 EST
+----------------------------------------------------------
+9/69 Testing: audio_recovery
+9/69 Test: audio_recovery
+Command: "/home/zero/dev/engine_test/build/sanitize-platform/audio_recovery_tests"
+Directory: /home/zero/dev/engine_test/build/sanitize-platform
+"audio_recovery" start time: Nov 10 09:42 EST
+Output:
+----------------------------------------------------------
+PASS partial_writes_waits_and_interrupts_preserve_every_stereo_sample
+PASS underruns_from_write_and_wait_prepare_without_replaying_accepted_prefix
+PASS suspend_retries_are_bounded_and_resume_preserves_pending_tail
+PASS unsupported_resume_falls_back_to_prepare_once
+PASS device_and_prepare_failures_latch_original_error_and_stop_calls
+PASS invalid_backend_write_count_is_rejected_without_advancing
+PASS identical_eio_codes_preserve_distinct_failure_operations_and_partial_progress
+PASS recovery_does_not_remix_or_advance_voice_cursors
+8 tests, 0 failed
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"audio_recovery" end time: Nov 10 09:42 EST
+"audio_recovery" time elapsed: 00:00:00
+----------------------------------------------------------
+
+52/69 Testing: audio_reload
+52/69 Test: audio_reload
+Command: "/home/zero/dev/engine_test/build/sanitize-platform/audio_reload_tests"
+Directory: /home/zero/dev/engine_test/build/sanitize-platform
+"audio_reload" start time: Nov 10 09:42 EST
+Output:
+----------------------------------------------------------
+PASS queued_chained_banks_retain_storage_until_ack_and_keep_voice_tickets
+PASS queue_rejection_and_invalid_batches_leave_bank_and_existing_voice_intact
+PASS retained_memory_budget_is_checked_before_publication
+[audio bank retained] revision=1
+sounds/door.wav: Truncated WAV at byte 0
+[audio bank retained] revision=1
+sounds/door.wav: Not a regular asset file
+[audio bank retained] revision=1
+sounds/door.wav: Asset path escapes its root
+[audio bank queued] revision=2
+[audio bank queued] revision=3
+ALSA lib pcm_file.c:445:(snd_pcm_file_write_bytes) [error.pcm] /dev/full write failed, file data may be corrupt: No space left on device
+PASS soundtrack_failures_repair_pause_settings_and_completion_are_preserved
+PASS device_failure_rejects_reload_and_shutdown_safely_releases_pending_banks
+5 tests, 0 failed
+<end of output>
+Test time =   2.19 sec
+----------------------------------------------------------
+Test Passed.
+"audio_reload" end time: Nov 10 09:42 EST
+"audio_reload" time elapsed: 00:00:02
+----------------------------------------------------------
+
+54/69 Testing: audio_transport
+54/69 Test: audio_transport
+Command: "/home/zero/dev/engine_test/build/sanitize-platform/audio_tests"
+Directory: /home/zero/dev/engine_test/build/sanitize-platform
+"audio_transport" start time: Nov 10 09:42 EST
+Output:
+----------------------------------------------------------
+ALSA lib pcm_file.c:445:(snd_pcm_file_write_bytes) [error.pcm] /dev/full write failed, file data may be corrupt: No space left on device
+ALSA lib pcm_file.c:445:(snd_pcm_file_write_bytes) [error.pcm] /dev/full write failed, file data may be corrupt: No space left on device
+PASS output_owns_clips_and_orders_controls
+PASS output_bank_bounds_foreign_handles_and_queue_pressure
+PASS feature_lab_audio_controls_restart_and_completion
+PASS settings_gain_validation_and_command_coalescing
+PASS checkpoint_restore_restarts_loops_without_historical_effects
+PASS single_step_keeps_audio_groups_paused_until_resume
+PASS title_audio_starts_paused_and_resumes_without_duplicate_voices
+[audio] Muted: Audio command rejected; playback disabled (device_error=-5 operation=write pcm_state=2 pcm_state_name=PREPARED)
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) [error.pcm] Unknown PCM engine_test_intentionally_missing_device
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) [error.pcm] Unknown PCM engine_test_intentionally_missing_device
+PASS real_alsa_write_failure_disables_output_and_retains_soundtrack_diagnostics
+PASS output_reports_device_progress_without_spurious_recoveries
+[audio] Muted: Audio open: No such file or directory
+PASS missing_audio_device_is_rejected
+10 tests, 0 failed
+<end of output>
+Test time =   3.56 sec
+----------------------------------------------------------
+Test Passed.
+"audio_transport" end time: Nov 10 09:42 EST
+"audio_transport" time elapsed: 00:00:03
+----------------------------------------------------------
+
+End testing: Nov 10 09:42 EST
+
+cpu =   0.02 sec*proc
+
+platform =   5.75 sec*proc
+

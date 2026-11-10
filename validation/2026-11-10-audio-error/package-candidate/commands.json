@@ -1,0 +1,170 @@
+[
+  {
+    "name": "manifest",
+    "command": [
+      "/home/zero/dev/engine_test/.tools/bin/cmake",
+      "-DMODE=verify",
+      "-DROOT=/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/relocated package with spaces",
+      "-P",
+      "/home/zero/dev/engine_test/cmake/PackageSmoke.cmake"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 3.380953241023235
+  },
+  {
+    "name": "game-help",
+    "command": [
+      "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/relocated package with spaces/bin/feature_lab",
+      "--help"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.0042028939933516085
+  },
+  {
+    "name": "stress-help",
+    "command": [
+      "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/relocated package with spaces/bin/feature_lab",
+      "--stress",
+      "--help"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.004290534998290241
+  },
+  {
+    "name": "validator-help",
+    "command": [
+      "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/relocated package with spaces/bin/validate_assets",
+      "--help"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.002552837016992271
+  },
+  {
+    "name": "game-verify",
+    "command": [
+      "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/relocated package with spaces/bin/feature_lab",
+      "--verify"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.04377409495646134
+  },
+  {
+    "name": "validate-all",
+    "command": [
+      "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/relocated package with spaces/bin/validate_assets"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.006608417024835944
+  },
+  {
+    "name": "validate-scene",
+    "command": [
+      "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/relocated package with spaces/bin/validate_assets",
+      "--type",
+      "scene",
+      "--file",
+      "facility.scene",
+      "--scene-budget",
+      "256"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.002592254022601992
+  },
+  {
+    "name": "validate-json",
+    "command": [
+      "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/relocated package with spaces/bin/validate_assets",
+      "--json"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 0.006608883035369217
+  },
+  {
+    "name": "stress-bench",
+    "command": [
+      "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/relocated package with spaces/bin/stress_bench",
+      "--frames",
+      "60",
+      "--warmup",
+      "10",
+      "--cycles",
+      "2",
+      "--report",
+      "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/stress.json"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 1.0310507689719088
+  },
+  {
+    "name": "manifest-after",
+    "command": [
+      "/home/zero/dev/engine_test/.tools/bin/cmake",
+      "-DMODE=verify",
+      "-DROOT=/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/relocated package with spaces",
+      "-P",
+      "/home/zero/dev/engine_test/cmake/PackageSmoke.cmake"
+    ],
+    "cwd": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp/package-doc-audit-e629wzm6/unrelated cwd",
+    "unset_environment": [
+      "DISPLAY",
+      "LD_LIBRARY_PATH",
+      "LD_PRELOAD"
+    ],
+    "exit_code": 0,
+    "seconds": 2.3247144679771736
+  }
+]

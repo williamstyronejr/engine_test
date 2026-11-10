@@ -206,9 +206,18 @@ TEST(real_alsa_write_failure_disables_output_and_retains_soundtrack_diagnostics)
         // Standard ALSA file PCM over null: /dev/full deterministically rejects writes.
         // This exercises the real worker/adapter without a physical device or config edits.
         AudioOutput audio("file:/dev/full");
+        // Poll the error directly: its acquire load publishes the immutable details,
+        // even without first observing healthy()'s separate failure flag.
+        AudioStats failure;
+        eventually([&] {
+            failure = audio.stats();
+            return failure.device_error != 0;
+        });
         eventually([&] { return !audio.healthy(); });
-        const auto failure = audio.stats();
         CHECK(failure.device_error < 0 && failure.recoveries == 0);
+        CHECK(failure.device_error_operation == AudioErrorOperation::write);
+        CHECK(failure.device_error_state >= 0 &&
+              audio_device_state_name(failure.device_error_state) != "unknown");
         CHECK(!audio.stop_all());
         CHECK(audio.stats().queue_rejections == failure.queue_rejections + 1);
         CHECK(audio.stats().device_error == failure.device_error);
@@ -226,6 +235,8 @@ TEST(real_alsa_write_failure_disables_output_and_retains_soundtrack_diagnostics)
     track.restored(game);
     track.update(game, {}, 1);
     CHECK(track.stats().device_error == failure.device_error);
+    CHECK(track.stats().device_error_operation == failure.device_error_operation);
+    CHECK(track.stats().device_error_state == failure.device_error_state);
     CHECK(track.stats().written_frames == failure.written_frames);
     CHECK(track.settings().muted);
 }
@@ -234,6 +245,10 @@ TEST(output_reports_device_progress_without_spurious_recoveries) {
     eventually([&] { return audio.stats().written_frames >= 1024; });
     const auto stats = audio.stats();
     CHECK(audio.healthy() && stats.device_error == 0);
+    CHECK(stats.device_error_operation == AudioErrorOperation::none &&
+          stats.device_error_state == -1);
+    CHECK(audio_error_operation_name(stats.device_error_operation) == "none");
+    CHECK(audio_device_state_name(-1) == "unknown" && audio_device_state_name(9999) == "unknown");
     CHECK(stats.underruns == 0 && stats.suspensions == 0 && stats.recoveries == 0);
     const auto clip = audio.register_sound({1, {.25F, -.25F}});
     CHECK(audio.play(clip));

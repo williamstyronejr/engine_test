@@ -27,6 +27,9 @@ void report(const engine::AudioOutput& audio) {
               << " written_frames=" << s.written_frames << " underruns=" << s.underruns
               << " suspensions=" << s.suspensions << " recoveries=" << s.recoveries
               << " waits=" << s.waits << " device_error=" << s.device_error
+              << " operation=" << engine::audio_error_operation_name(s.device_error_operation)
+              << " pcm_state=" << s.device_error_state
+              << " pcm_state_name=" << engine::audio_device_state_name(s.device_error_state)
               << " started=" << s.started << " stopped=" << s.stopped
               << " active=" << s.active_voices << std::endl;
 }

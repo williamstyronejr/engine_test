@@ -1,0 +1,3 @@
+[alsa trace] mono=503991.807320190 operation=open result=0 requested=0 state=0 state_name=OPEN type=NULL
+[audio probe] healthy=1 written_frames=5076480 underruns=0 suspensions=0 recoveries=0 waits=0 device_error=0 operation=none pcm_state=-1 pcm_state_name=unknown started=0 stopped=0 active=0
+48 kHz stereo float PCM submitted. Physical audibility/disconnect recovery requires listener/device checks.

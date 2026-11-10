@@ -1,0 +1,63 @@
+Linux omarchy 7.2.15-1-omarchy #1 SMP PREEMPT_DYNAMIC Mon, 02 Nov 2026 10:32:17 +0000 x86_64 GNU/Linux
+c++ (GCC) 16.2.1 20260810
+Copyright (C) 2026 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+1.2.16.1
+null
+    Discard all samples (playback) or generate zero samples (capture)
+pipewire
+    PipeWire Sound Server
+default
+    Default ALSA Output (currently PipeWire Media Server)
+hdmi:CARD=HDMI,DEV=0
+    HDA Intel HDMI, HDMI 0
+    HDMI Audio Output
+hdmi:CARD=HDMI,DEV=1
+    HDA Intel HDMI, HDMI 1
+    HDMI Audio Output
+hdmi:CARD=HDMI,DEV=2
+    HDA Intel HDMI, HDMI 2
+    HDMI Audio Output
+sysdefault:CARD=PCH
+    HDA Intel PCH, ALC288 Analog
+    Default Audio Device
+front:CARD=PCH,DEV=0
+    HDA Intel PCH, ALC288 Analog
+    Front output / input
+surround21:CARD=PCH,DEV=0
+    HDA Intel PCH, ALC288 Analog
+    2.1 Surround output to Front and Subwoofer speakers
+surround40:CARD=PCH,DEV=0
+    HDA Intel PCH, ALC288 Analog
+    4.0 Surround output to Front and Rear speakers
+surround41:CARD=PCH,DEV=0
+    HDA Intel PCH, ALC288 Analog
+    4.1 Surround output to Front, Rear and Subwoofer speakers
+surround50:CARD=PCH,DEV=0
+    HDA Intel PCH, ALC288 Analog
+    5.0 Surround output to Front, Center and Rear speakers
+surround51:CARD=PCH,DEV=0
+    HDA Intel PCH, ALC288 Analog
+    5.1 Surround output to Front, Center, Rear and Subwoofer speakers
+surround71:CARD=PCH,DEV=0
+    HDA Intel PCH, ALC288 Analog
+    7.1 Surround output to Front, Center, Side, Rear and Woofer speakers
+ 0 [HDMI           ]: HDA-Intel - HDA Intel HDMI
+                      HDA Intel HDMI at 0xc0614000 irq 49
+ 1 [PCH            ]: HDA-Intel - HDA Intel PCH
+                      HDA Intel PCH at 0xc0610000 irq 50
+pcm.!default {
+    type pipewire
+    playback_node "-1"
+    capture_node  "-1"
+    hint {
+        show on
+        description "Default ALSA Output (currently PipeWire Media Server)"
+    }
+}
+
+ctl.!default {
+    type pipewire
+}

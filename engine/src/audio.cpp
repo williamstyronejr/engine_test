@@ -53,6 +53,9 @@ struct AudioOutput::Impl {
     std::atomic<std::size_t> active{};
     std::atomic<std::uint64_t> written_frames{}, underruns{}, suspensions{}, recoveries{}, waits{};
     std::atomic<int> device_error{};
+    // Written once by the worker, published by device_error's release store.
+    AudioErrorOperation device_error_operation{};
+    int device_error_state{-1};
     std::atomic<bool> running{true}, failed{false};
     std::thread thread;
     ~Impl() {
@@ -127,7 +130,9 @@ struct AudioOutput::Impl {
             recoveries.store(transport.recoveries, std::memory_order_relaxed);
             waits.store(transport.waits, std::memory_order_relaxed);
             if (transport.error) {
-                device_error.store(transport.error, std::memory_order_relaxed);
+                device_error_operation = transport.error_operation;
+                device_error_state = static_cast<int>(snd_pcm_state(pcm));
+                device_error.store(transport.error, std::memory_order_release);
                 failed.store(true, std::memory_order_release);
                 break;
             }
@@ -309,6 +314,7 @@ bool AudioOutput::stop_all() {
 }
 AudioStats AudioOutput::stats() const {
     const auto& p = *impl_;
+    const int error = p.device_error.load(std::memory_order_acquire);
     return {p.processed.load(std::memory_order_acquire),
             p.started.load(),
             p.completed.load(),
@@ -322,7 +328,15 @@ AudioStats AudioOutput::stats() const {
             p.suspensions.load(),
             p.recoveries.load(),
             p.waits.load(),
-            p.device_error.load()};
+            error,
+            error ? p.device_error_operation : AudioErrorOperation::none,
+            error ? p.device_error_state : -1};
+}
+std::string_view audio_device_state_name(int state) {
+    if (state < SND_PCM_STATE_OPEN || state > SND_PCM_STATE_LAST)
+        return "unknown";
+    const char* name = snd_pcm_state_name(static_cast<snd_pcm_state_t>(state));
+    return name ? name : "unknown";
 }
 bool AudioOutput::healthy() const {
     return !impl_->failed.load();

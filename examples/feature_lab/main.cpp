@@ -980,7 +980,11 @@ int main(int argc, char** argv) {
                   << " underruns=" << audio_stats.underruns
                   << " suspensions=" << audio_stats.suspensions
                   << " recoveries=" << audio_stats.recoveries << " waits=" << audio_stats.waits
-                  << " device_error=" << audio_stats.device_error << '\n';
+                  << " device_error=" << audio_stats.device_error
+                  << " operation=" << audio_error_operation_name(audio_stats.device_error_operation)
+                  << " pcm_state=" << audio_stats.device_error_state
+                  << " pcm_state_name=" << audio_device_state_name(audio_stats.device_error_state)
+                  << '\n';
         if (sample_count > 0) {
             std::sort(cpu_samples.begin(),
                       cpu_samples.begin() + static_cast<std::ptrdiff_t>(sample_count));

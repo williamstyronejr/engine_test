@@ -1,0 +1,107 @@
+[
+  {
+    "name": "environment",
+    "command": [
+      "bash",
+      "-c",
+      "uname -a; c++ --version; pkg-config --modversion alsa; aplay -L; cat /proc/asound/cards; cat /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf"
+    ],
+    "source": "ce4c423d9c9a4f971f73fe09c3309b3cda19c8f0",
+    "started_utc": "2026-11-10T14:34:39.864929+00:00",
+    "seconds": 0.06561309698736295,
+    "exit_code": 0,
+    "timeout": 60,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "LD_PRELOAD": null
+    }
+  },
+  {
+    "name": "trace-build",
+    "command": [
+      "c++",
+      "-std=c++20",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-shared",
+      "-fPIC",
+      "validation/2026-11-10-audio-error/trace.cpp",
+      "-lasound",
+      "-ldl",
+      "-o",
+      "build/audio-error-refresh/alsa-trace.so"
+    ],
+    "source": "ce4c423d9c9a4f971f73fe09c3309b3cda19c8f0",
+    "started_utc": "2026-11-10T14:34:39.930937+00:00",
+    "seconds": 0.6686757339630276,
+    "exit_code": 0,
+    "timeout": 60,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "LD_PRELOAD": null
+    }
+  },
+  {
+    "name": "silent-build",
+    "command": [
+      "c++",
+      "-std=c++20",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iengine/include",
+      "validation/2026-11-10-audio-error/silent.cpp",
+      "build/release/libengine_platform.a",
+      "build/release/libengine_core.a",
+      "-lasound",
+      "-lX11",
+      "-lGLX",
+      "-lOpenGL",
+      "-pthread",
+      "-o",
+      "build/audio-error-refresh/silent"
+    ],
+    "source": "ce4c423d9c9a4f971f73fe09c3309b3cda19c8f0",
+    "started_utc": "2026-11-10T14:34:40.599971+00:00",
+    "seconds": 2.2195950789609924,
+    "exit_code": 0,
+    "timeout": 60,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "LD_PRELOAD": null
+    }
+  },
+  {
+    "name": "silent-1",
+    "command": [
+      "/home/zero/dev/engine_test/build/audio-error-refresh/silent"
+    ],
+    "source": "ce4c423d9c9a4f971f73fe09c3309b3cda19c8f0",
+    "started_utc": "2026-11-10T14:34:42.824697+00:00",
+    "seconds": 120.14762262400473,
+    "exit_code": 0,
+    "timeout": 140,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "LD_PRELOAD": "/home/zero/dev/engine_test/build/audio-error-refresh/alsa-trace.so"
+    }
+  },
+  {
+    "name": "silent-2",
+    "command": [
+      "/home/zero/dev/engine_test/build/audio-error-refresh/silent"
+    ],
+    "source": "ce4c423d9c9a4f971f73fe09c3309b3cda19c8f0",
+    "started_utc": "2026-11-10T14:36:42.972865+00:00",
+    "seconds": 120.13387480803067,
+    "exit_code": 0,
+    "timeout": 140,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "LD_PRELOAD": "/home/zero/dev/engine_test/build/audio-error-refresh/alsa-trace.so"
+    }
+  }
+]

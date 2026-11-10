@@ -42,6 +42,17 @@ independent counters, not one atomic snapshot. Accepted PCM frames do not prove
 that sound reached a speaker. The null device consumes as fast as the worker can
 mix, so its counts do not represent wall-clock playback duration.
 
+Terminal diagnostics also report `device_error_operation` (`write`, `wait`,
+`prepare`, or `invalid_write_count`) and the raw ALSA `device_error_state` plus its
+name. Before failure these are `none` and `-1`/`unknown`. The worker records the
+state immediately after the terminal transport step; it is not an atomic view of
+the failing call or proof of the underlying cause. The error's release/acquire
+publication makes its immutable operation/state available together once a stats
+snapshot observes a nonzero error. Other counters remain eventual snapshots.
+An unsupported resume that falls back to a failed prepare reports `prepare`.
+Feature Lab retains these fields after releasing failed output, and `audio_probe`
+prints them too. Recovery/retry policy is unchanged; EIO remains terminal.
+
 Feature Lab logs the negative device error, releases failed output, continues
 playing silently, and retains its last observed audio statistics for the exit
 report. Audio preferences are retained, while the settings panel disables unavailable
@@ -133,3 +144,11 @@ bass-only sweep was not heard on laptop speakers alongside the pickup. Revision
 voice gain/pan and event. The user confirms the revised sound is audible. Seven
 focused Release checks pass; [the retained record](../validation/2026-11-09-door-cue/RESULTS.md)
 separates this pass from a later unexplained device error and other open audio cases.
+
+## Terminal-error investigation — 2026-11-10
+
+Two predeclared 120-second silent default-device observations did not reproduce
+`-5`. [The record](../validation/2026-11-10-audio-error/RESULTS.md) retains the
+interposer, commands, successful observations, 20 focused validation groups and a
+known-fault CLI control. The new operation/state diagnostics prepare the next
+interactive attempt; no cause or recovery fix is established by these runs.
