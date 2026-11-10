@@ -1,0 +1,18 @@
+{
+  "pid": 788036,
+  "command": [
+    "/usr/bin/stdbuf",
+    "-oL",
+    "-eL",
+    "/home/zero/.cache/feature-lab-audio-repro-8jdntmqw/feature-lab-0.1.0-Linux-x86_64-67d7a48/bin/feature_lab",
+    "--user-data",
+    "/home/zero/.cache/feature-lab-audio-repro-8jdntmqw/user",
+    "--level",
+    "annex",
+    "--play"
+  ],
+  "source": "67d7a4877b0695c972f97f03b005d74ef61d7589",
+  "started_utc": "2026-11-10T19:38:46.301998+00:00",
+  "started_monotonic_ns": 521762885151377,
+  "status": "running"
+}

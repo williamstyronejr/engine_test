@@ -1,0 +1,50 @@
+{
+  "source": "67d7a4877b0695c972f97f03b005d74ef61d7589",
+  "exit_code": 0,
+  "elapsed_seconds": 1005.645812,
+  "rendered_frames": 60111,
+  "level_changes": 1,
+  "final_level": "FACILITY",
+  "final_level_ticks": 102,
+  "seconds_from_transition_log_to_final_session_log": 1.696541,
+  "seconds_from_transition_log_to_exit": 1.952824,
+  "audio": {
+    "enabled": "1",
+    "started": "8",
+    "completed": "4",
+    "dropped": "0",
+    "queue_rejections": "0",
+    "written_frames": "48236032",
+    "underruns": "0",
+    "suspensions": "0",
+    "recoveries": "0",
+    "waits": "125489",
+    "device_error": "0",
+    "operation": "none",
+    "pcm_state": "-1",
+    "pcm_state_name": "unknown"
+  },
+  "trace_operations": [
+    {
+      "mono": "521763.027471979",
+      "operation": "open",
+      "result": "0",
+      "requested": "0",
+      "state": "0",
+      "state_name": "OPEN",
+      "type": "IOPLUG"
+    }
+  ],
+  "audio_service_entries": 0,
+  "user_reports": [
+    {
+      "recorded_utc": "2026-11-10T19:56:06.046965+00:00",
+      "user_report": "Sounds for door and pickups working",
+      "result": "PASS for audible door and pickup cues during this run",
+      "limits": "Does not establish uninterrupted audio for the complete session or resolution of the earlier terminal device failure."
+    }
+  ],
+  "original_failure_reproduced": false,
+  "original_cause_resolved": false,
+  "timing_or_endurance_qualification": false
+}

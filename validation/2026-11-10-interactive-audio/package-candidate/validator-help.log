@@ -1,0 +1,14 @@
+Usage: validate_assets [--assets DIRECTORY] [--json]
+       validate_assets [--assets DIRECTORY] --type TYPE --file KEY [--scene-budget N] [--json]
+       validate_assets --help
+Default: validate Feature Lab's shipped assets, references and both levels.
+Single file: TYPE is scene, tilemap, animation, texture, font or sound.
+KEY is relative to the asset root. Only the chosen format is checked;
+references and gameplay are not checked. Extensions do not select the format.
+Scene budget: 0..4096, default 4096; only valid with --type scene.
+--json writes one engine_asset_validation_v1 report to stdout. Argument errors
+remain text on stderr (exit 2); content/root failures produce JSON (exit 1).
+Uses assets beside the executable or ../share/feature_lab by default.
+Read-only; no display/audio device or fallback assets. Bundle shader checks
+read sources only; OpenGL compilation and playability need runtime tests.
+Exit codes: 0 valid, 1 content/root failure, 2 invalid arguments.

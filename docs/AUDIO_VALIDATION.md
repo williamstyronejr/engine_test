@@ -152,3 +152,12 @@ Two predeclared 120-second silent default-device observations did not reproduce
 interposer, commands, successful observations, 20 focused validation groups and a
 known-fault CLI control. The new operation/state diagnostics prepare the next
 interactive attempt; no cause or recovery fix is established by these runs.
+
+## Traced interactive follow-up — 2026-11-10
+
+On packaged `67d7a48`, the user confirms door/pickup cues; the traced session exits
+normally after 1,005.646 seconds with audio enabled and no device errors. The
+[retained evidence](../validation/2026-11-10-interactive-audio/RESULTS.md) includes
+an Annex→Facility transition, but just 1.697 seconds of log time afterward. This
+successful observation neither reproduces the prior failure nor closes the broader
+audio lifecycle matrix. More destination-level play would improve that coverage.

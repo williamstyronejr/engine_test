@@ -1,0 +1,20 @@
+{
+  "command": [
+    "journalctl",
+    "--user",
+    "-u",
+    "pipewire.service",
+    "-u",
+    "pipewire-pulse.service",
+    "-u",
+    "wireplumber.service",
+    "--since",
+    "2026-11-10 19:38:46 UTC",
+    "--until",
+    "2026-11-10 19:55:31 UTC",
+    "--no-pager",
+    "-o",
+    "short-iso"
+  ],
+  "exit_code": 0
+}

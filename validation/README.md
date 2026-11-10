@@ -139,3 +139,7 @@ check, seven focused Release groups and a separate unexplained device failure.
 [Terminal audio diagnostics and investigation](2026-11-10-audio-error/RESULTS.md)
 retains two bounded silent observations without reproduction, 20 focused validation
 groups and explicit error-operation/state reporting. The original failure stays open.
+
+[Traced interactive audio follow-up](2026-11-10-interactive-audio/RESULTS.md) retains
+user-confirmed door/pickup cues and an error-free session, with explicit limits on
+post-transition duration and any inference about the earlier EIO failure.

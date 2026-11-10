@@ -97,6 +97,12 @@ At `3892d14`, all 20 focused compiler/sanitizer group executions pass, and a kno
 file-sink fault confirms operation/state reporting. Recovery policy is unchanged.
 The full-suite baseline keeps its original revision; this is focused evidence.
 
+Increment 84 [retains an interactive follow-up](../validation/2026-11-10-interactive-audio/RESULTS.md)
+on packaged `67d7a48`: door/pickup cues are confirmed audible, and the session exits
+normally after 1,005.646 seconds with no device error. Only about two seconds occur
+after the recorded Annex→Facility transition. The original EIO remains unexplained;
+no endurance, performance or complete R5 pass follows. Runtime code is unchanged.
+
 “Evidence available” below applies to the stated revision and environment only.
 “Open” means missing evidence or unfinished acceptance work, not a reproduced code
 failure. Unconfirmed WM minimization and rejected historical timing runs are called
