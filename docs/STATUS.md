@@ -1,10 +1,10 @@
 # Implementation status
 
-The latest increment (83) investigates the retained audio-device error with two
-bounded silent runs and adds terminal operation/PCM-state diagnostics. The error
-does not reproduce; its cause remains unresolved. All 20 focused compiler/sanitizer
-group executions pass. See [evidence](../validation/2026-11-10-audio-error/RESULTS.md)
-and [release readiness](RELEASE_READINESS.md) for the remaining gates.
+The latest increment (84) retains a traced interactive session with audible door
+and pickup cues confirmed by the user. It exits normally with audio enabled and
+no device error; the earlier EIO remains unexplained. See
+[evidence](../validation/2026-11-10-interactive-audio/RESULTS.md) and
+[release readiness](RELEASE_READINESS.md) for the remaining gates.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
@@ -2628,9 +2628,26 @@ At documentation commit `2e6fee4`, all three Release package groups pass without
 skips. All 50 then-current evidence/documentation files match archive bytes, and
 the packaged documentation/entry-point audit passes. Physical acceptance and timing gates remain open.
 
+## Increment 84: traced interactive audio evidence
+
+- The user confirms door and pickup sounds in packaged candidate `67d7a48`.
+  The traced session exits normally after 1,005.646 seconds with audio still enabled
+  and no device error, underruns, suspensions, dropped plays or rejected commands.
+- Logs confirm Annex completion and entry into Facility, but only 1.697 seconds
+  separate that transition from the final session log. The long total duration
+  does not imply prolonged destination-level play or endurance qualification.
+- Retained exact artifact/trace hashes, commands, private-data provenance, raw and
+  timestamped output, user observation and the empty scoped audio-service journal.
+  Archive checksums and the extracted payload remain unchanged after play.
+- Engine, assets, tests and build rules remain unchanged from `67d7a48`. No new full
+  test/performance matrix or physical device-lifecycle pass is claimed. The earlier
+  EIO failure remains unresolved.
+
+See [session evidence and limits](../validation/2026-11-10-interactive-audio/RESULTS.md).
+
 ## Next increment
 
-Reproduce the interactive audio failure with operation/state diagnostics and retain
-contemporaneous service/device evidence. Keep its cause and the physical lifecycle
-matrix open. Continue remaining manual cases with a human observer; R6 timing,
-endurance/broader-memory and R8 support/signoff remain open. Background loading is deferred.
+Target a reproduction with more play time after Annex→Facility, retaining any first
+failure's operation/state and contemporaneous service/device evidence. Keep the
+cause and physical lifecycle matrix open; R6 timing/endurance/broader memory and
+R8 support/signoff remain open. Background loading is deferred.

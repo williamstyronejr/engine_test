@@ -18,6 +18,11 @@ operation and PCM-state diagnostics for the next failure. Two bounded silent run
 do not reproduce it; 20 focused compiler/sanitizer groups pass. The cause and R5
 lifecycle acceptance remain open.
 
+The [traced interactive follow-up](../validation/2026-11-10-interactive-audio/RESULTS.md)
+confirms audible door/pickup cues and normal exit without EIO. The 16-minute-46-second
+session includes only about two seconds after Annex→Facility; the cause and broader
+lifecycle/endurance requirements remain open.
+
 The tested host is Linux x86-64, Intel HD 4400, X11/GLX through XWayland, OpenGL 4.6
 Core and ALSA. Kernel, compiler and driver versions are in the current evidence.
 This does not certify native Wayland, another GPU or an older distribution. Shipped

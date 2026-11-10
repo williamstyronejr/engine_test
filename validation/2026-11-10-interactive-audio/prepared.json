@@ -1,0 +1,38 @@
+{
+  "source": "67d7a4877b0695c972f97f03b005d74ef61d7589",
+  "archive": "/home/zero/dev/engine_test/build/release/dist/feature-lab-0.1.0-Linux-x86_64-67d7a48.tar.gz",
+  "archive_sha256": "78d16faa9449ac39fc3df528f02482bd4288d1531a210cc0d4ac29752c97a94e",
+  "extracted_to": "/home/zero/.cache/feature-lab-audio-repro-8jdntmqw/feature-lab-0.1.0-Linux-x86_64-67d7a48",
+  "user_data": "/home/zero/.cache/feature-lab-audio-repro-8jdntmqw/user",
+  "copied_user_files": [
+    {
+      "path": "config/settings.ecfg",
+      "sha256": "9ac9c3304a44de1bec507f5610dad1c97fb9f6d5a9ed15b9bbb4ec1186855eba"
+    },
+    {
+      "path": "state/slot-1.esav",
+      "sha256": "c5a228f416f9096a2305ebabf3732cad5a1538b1f400317a5b4d128538b1c17b"
+    }
+  ],
+  "command": [
+    "/usr/bin/stdbuf",
+    "-oL",
+    "-eL",
+    "/home/zero/.cache/feature-lab-audio-repro-8jdntmqw/feature-lab-0.1.0-Linux-x86_64-67d7a48/bin/feature_lab",
+    "--user-data",
+    "/home/zero/.cache/feature-lab-audio-repro-8jdntmqw/user",
+    "--level",
+    "annex",
+    "--play"
+  ],
+  "LD_PRELOAD": "/home/zero/dev/engine_test/build/audio-error-refresh/alsa-trace.so",
+  "trace_sha256": "b132f20fe1cd8a5a4a8de4033330fbba8665a0d016c4cd05ed870ad3caa07a7b",
+  "environment": {
+    "DISPLAY": ":0",
+    "XDG_SESSION_TYPE": "wayland",
+    "XDG_CURRENT_DESKTOP": "Hyprland"
+  },
+  "prepared_utc": "2026-11-10T19:38:46.214093+00:00",
+  "status": "Prepared, not yet run",
+  "observation_limits": "Line timestamps record receipt, not exact event time. Interposition and line buffering affect this diagnostic run. No physical pass is inferred."
+}
