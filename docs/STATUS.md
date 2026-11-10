@@ -2624,6 +2624,10 @@ the packaged documentation/entry-point audit passes. Physical acceptance and tim
 
 See [protocol and results](../validation/2026-11-10-audio-error/RESULTS.md).
 
+At documentation commit `2e6fee4`, all three Release package groups pass without
+skips. All 50 then-current evidence/documentation files match archive bytes, and
+the packaged documentation/entry-point audit passes. Physical acceptance and timing gates remain open.
+
 ## Next increment
 
 Reproduce the interactive audio failure with operation/state diagnostics and retain
