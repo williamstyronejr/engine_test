@@ -1,0 +1,32 @@
+[
+  {
+    "name": "probe-null",
+    "command": [
+      "/home/zero/dev/engine_test/build/release/audio_probe",
+      "--device",
+      "null"
+    ],
+    "started_utc": "2026-11-10T14:42:35.218303+00:00",
+    "seconds": 0.22436093795113266,
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "binary_sha256": "52353de96a007a4c93390e4bae63a2381b14ac48f79f66b4b0818aa0d021ae1b",
+    "LD_PRELOAD": "/home/zero/dev/engine_test/build/audio-error-refresh/alsa-trace.so"
+  },
+  {
+    "name": "probe-file-failure",
+    "command": [
+      "/home/zero/dev/engine_test/build/release/audio_probe",
+      "--device",
+      "file:/dev/full"
+    ],
+    "started_utc": "2026-11-10T14:42:35.575932+00:00",
+    "seconds": 0.09090960898902267,
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "exit_code": 1,
+    "expected_exit_code": 1,
+    "binary_sha256": "52353de96a007a4c93390e4bae63a2381b14ac48f79f66b4b0818aa0d021ae1b",
+    "LD_PRELOAD": "/home/zero/dev/engine_test/build/audio-error-refresh/alsa-trace.so"
+  }
+]

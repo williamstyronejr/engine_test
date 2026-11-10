@@ -1,10 +1,10 @@
 # Implementation status
 
-The latest increment (82) retains physical acceptance observations and improves the
-door-opening cue after it was inaudible on laptop speakers. The user confirms the
-revised cue is audible; a later unplanned audio-device error remains unresolved.
-See [evidence](../validation/2026-11-09-door-cue/RESULTS.md) and
-[release readiness](RELEASE_READINESS.md) for the remaining gates.
+The latest increment (83) investigates the retained audio-device error with two
+bounded silent runs and adds terminal operation/PCM-state diagnostics. The error
+does not reproduce; its cause remains unresolved. All 20 focused compiler/sanitizer
+group executions pass. See [evidence](../validation/2026-11-10-audio-error/RESULTS.md)
+and [release readiness](RELEASE_READINESS.md) for the remaining gates.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
@@ -2607,10 +2607,26 @@ At documentation commit `bc84b22`, all three Release package groups pass without
 skips. All 34 then-current evidence/documentation files match archive bytes, and
 the packaged documentation/entry-point audit passes. Physical acceptance and timing gates remain open.
 
+## Increment 83: terminal audio diagnostics and bounded investigation
+
+- Two predeclared 120-second silent default-PCM runs complete without EIO,
+  underruns or suspensions. The trace identifies an ALSA I/O plugin; default output
+  is configured for PipeWire. This does not reproduce or resolve the prior gameplay failure.
+- Added latched failing-operation and post-step PCM-state diagnostics, published
+  with the terminal error. Console/probe output and retained Soundtrack stats carry
+  the details; retry/reconnect policy remains unchanged.
+- Added regression coverage for distinct EIO origins, accepted partial writes,
+  terminal latching, healthy defaults and concurrent publication. All 20 focused
+  GNU Debug/Release, Clang, native ASan/UBSan and TSan group executions pass without
+  skips. Known `/dev/full` CLI failure reports write/EIO/PREPARED as expected.
+- Reused build trees; no full runtime matrix, performance, offline-build or physical
+  lifecycle pass is claimed. Diagnostic source files are retained in packages.
+
+See [protocol and results](../validation/2026-11-10-audio-error/RESULTS.md).
+
 ## Next increment
 
-Investigate the retained unplanned audio-device error with targeted evidence and
-preserve its terminal-failure behavior until a cause and appropriate recovery are
-established. Continue unrecorded physical cases with a human observer. R6 timing,
-endurance and broader-memory acceptance and R8 support/signoff remain open.
-Background loading remains deferred.
+Reproduce the interactive audio failure with operation/state diagnostics and retain
+contemporaneous service/device evidence. Keep its cause and the physical lifecycle
+matrix open. Continue remaining manual cases with a human observer; R6 timing,
+endurance/broader-memory and R8 support/signoff remain open. Background loading is deferred.

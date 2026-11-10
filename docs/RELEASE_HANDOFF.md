@@ -13,6 +13,11 @@ and a revised door cue with a successful listening retest. That asset revision h
 seven focused Release checks; the earlier full-suite evidence keeps its original
 revision. A later unplanned audio-device error `-5` remains unresolved.
 
+The [audio-error investigation](../validation/2026-11-10-audio-error/RESULTS.md) adds
+operation and PCM-state diagnostics for the next failure. Two bounded silent runs
+do not reproduce it; 20 focused compiler/sanitizer groups pass. The cause and R5
+lifecycle acceptance remain open.
+
 The tested host is Linux x86-64, Intel HD 4400, X11/GLX through XWayland, OpenGL 4.6
 Core and ALSA. Kernel, compiler and driver versions are in the current evidence.
 This does not certify native Wayland, another GPU or an older distribution. Shipped

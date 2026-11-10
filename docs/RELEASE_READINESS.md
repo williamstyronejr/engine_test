@@ -91,6 +91,12 @@ routes. At `fd93752`, a revised door WAV passes the user's laptop-speaker retest
 seven focused Release groups. A later unplanned audio-device error `-5` is retained
 with no cause established. This is not a fresh full runtime/compiler qualification.
 
+Increment 83 [investigates the audio error and adds terminal diagnostics](../validation/2026-11-10-audio-error/RESULTS.md).
+Two 120-second silent observations do not reproduce EIO; its cause stays unresolved.
+At `3892d14`, all 20 focused compiler/sanitizer group executions pass, and a known
+file-sink fault confirms operation/state reporting. Recovery policy is unchanged.
+The full-suite baseline keeps its original revision; this is focused evidence.
+
 “Evidence available” below applies to the stated revision and environment only.
 “Open” means missing evidence or unfinished acceptance work, not a reproduced code
 failure. Unconfirmed WM minimization and rejected historical timing runs are called

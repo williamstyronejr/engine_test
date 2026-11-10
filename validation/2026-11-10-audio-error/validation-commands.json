@@ -1,0 +1,391 @@
+[
+  {
+    "name": "debug-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/debug",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-audio-error-83-ek9wwdjg/packages"
+    ],
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "started_utc": "2026-11-10T14:39:49.082413+00:00",
+    "seconds": 0.5363787769456394,
+    "exit_code": 0,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null,
+      "TSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "debug-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/debug",
+      "--target",
+      "audio_recovery_tests",
+      "audio_tests",
+      "audio_reload_tests",
+      "audio_watch_tests",
+      "audio_allocations",
+      "audio_ui_session_tests",
+      "-j2"
+    ],
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "started_utc": "2026-11-10T14:39:49.619074+00:00",
+    "seconds": 51.682278994994704,
+    "exit_code": 0,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null,
+      "TSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "debug-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/debug",
+      "--parallel",
+      "1",
+      "-R",
+      "^(audio_recovery|audio_transport|audio_reload|audio_watch|audio_allocations|audio_ui_session)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-11-10-audio-error/debug-tests.xml"
+    ],
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "started_utc": "2026-11-10T14:40:41.301909+00:00",
+    "seconds": 9.68148943997221,
+    "exit_code": 0,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null,
+      "TSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "release-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/release",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-audio-error-83-ek9wwdjg/packages"
+    ],
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "started_utc": "2026-11-10T14:40:50.984748+00:00",
+    "seconds": 0.39869933103909716,
+    "exit_code": 0,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null,
+      "TSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "release-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/release",
+      "--target",
+      "audio_recovery_tests",
+      "audio_tests",
+      "audio_reload_tests",
+      "audio_watch_tests",
+      "audio_allocations",
+      "audio_ui_session_tests",
+      "feature_lab",
+      "audio_probe",
+      "-j2"
+    ],
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "started_utc": "2026-11-10T14:40:51.383786+00:00",
+    "seconds": 73.58703965001041,
+    "exit_code": 0,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null,
+      "TSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "release-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/release",
+      "--parallel",
+      "1",
+      "-R",
+      "^(audio_recovery|audio_transport|audio_reload|audio_watch|audio_allocations|audio_ui_session)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-11-10-audio-error/release-tests.xml"
+    ],
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "started_utc": "2026-11-10T14:42:04.971381+00:00",
+    "seconds": 5.024525571032427,
+    "exit_code": 0,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null,
+      "TSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "clang-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/clang",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-audio-error-83-ek9wwdjg/packages",
+      "-DCMAKE_CXX_COMPILER=clang++"
+    ],
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "started_utc": "2026-11-10T14:42:09.997682+00:00",
+    "seconds": 0.40180031600175425,
+    "exit_code": 0,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null,
+      "TSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "clang-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/clang",
+      "--target",
+      "audio_recovery_tests",
+      "audio_tests",
+      "audio_reload_tests",
+      "-j2"
+    ],
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "started_utc": "2026-11-10T14:42:10.400003+00:00",
+    "seconds": 12.214218591048848,
+    "exit_code": 0,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null,
+      "TSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "clang-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/clang",
+      "--parallel",
+      "1",
+      "-R",
+      "^(audio_recovery|audio_transport|audio_reload)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-11-10-audio-error/clang-tests.xml"
+    ],
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "started_utc": "2026-11-10T14:42:22.615031+00:00",
+    "seconds": 1.7881956119672395,
+    "exit_code": 0,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null,
+      "TSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "sanitize-platform-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/sanitize-platform",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-audio-error-83-ek9wwdjg/packages",
+      "-DENGINE_SANITIZERS=ON",
+      "-DENGINE_BUILD_PLATFORM=ON"
+    ],
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "started_utc": "2026-11-10T14:42:24.404958+00:00",
+    "seconds": 0.421488091989886,
+    "exit_code": 0,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1",
+      "TSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "sanitize-platform-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/sanitize-platform",
+      "--target",
+      "audio_recovery_tests",
+      "audio_tests",
+      "audio_reload_tests",
+      "-j2"
+    ],
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "started_utc": "2026-11-10T14:42:24.827174+00:00",
+    "seconds": 20.20399923302466,
+    "exit_code": 0,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1",
+      "TSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "sanitize-platform-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/sanitize-platform",
+      "--parallel",
+      "1",
+      "-R",
+      "^(audio_recovery|audio_transport|audio_reload)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-11-10-audio-error/sanitize-platform-tests.xml"
+    ],
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "started_utc": "2026-11-10T14:42:45.031898+00:00",
+    "seconds": 5.954538496967871,
+    "exit_code": 0,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1",
+      "TSAN_OPTIONS": null
+    }
+  },
+  {
+    "name": "readiness-tsan-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/readiness-tsan",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-audio-error-83-ek9wwdjg/packages",
+      "-DCMAKE_CXX_COMPILER=clang++",
+      "-DENGINE_SANITIZERS=OFF",
+      "-DCMAKE_CXX_FLAGS=-fsanitize=thread -fno-omit-frame-pointer",
+      "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=thread"
+    ],
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "started_utc": "2026-11-10T14:42:50.987894+00:00",
+    "seconds": 0.4335501239984296,
+    "exit_code": 0,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null,
+      "TSAN_OPTIONS": "halt_on_error=1"
+    }
+  },
+  {
+    "name": "readiness-tsan-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/readiness-tsan",
+      "--target",
+      "audio_tests",
+      "audio_reload_tests",
+      "-j2"
+    ],
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "started_utc": "2026-11-10T14:42:51.422023+00:00",
+    "seconds": 11.998103154008277,
+    "exit_code": 0,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null,
+      "TSAN_OPTIONS": "halt_on_error=1"
+    }
+  },
+  {
+    "name": "readiness-tsan-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/readiness-tsan",
+      "--parallel",
+      "1",
+      "-R",
+      "^(audio_transport|audio_reload)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-11-10-audio-error/readiness-tsan-tests.xml"
+    ],
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "started_utc": "2026-11-10T14:43:03.421158+00:00",
+    "seconds": 8.025997354998253,
+    "exit_code": 0,
+    "environment": {
+      "TMPDIR": "/home/zero/.cache/engine-audio-error-83-ek9wwdjg/compiler-tmp",
+      "DISPLAY": ":0",
+      "ASAN_OPTIONS": null,
+      "UBSAN_OPTIONS": null,
+      "TSAN_OPTIONS": "halt_on_error=1"
+    }
+  }
+]

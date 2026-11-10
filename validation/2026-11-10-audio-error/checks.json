@@ -1,0 +1,72 @@
+[
+  {
+    "config": "debug",
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "tests": 6,
+    "failures": 0,
+    "skips": 0,
+    "groups": [
+      "audio_allocations",
+      "audio_recovery",
+      "audio_reload",
+      "audio_transport",
+      "audio_ui_session",
+      "audio_watch"
+    ],
+    "exit_code": 0
+  },
+  {
+    "config": "release",
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "tests": 6,
+    "failures": 0,
+    "skips": 0,
+    "groups": [
+      "audio_allocations",
+      "audio_recovery",
+      "audio_reload",
+      "audio_transport",
+      "audio_ui_session",
+      "audio_watch"
+    ],
+    "exit_code": 0
+  },
+  {
+    "config": "clang",
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "tests": 3,
+    "failures": 0,
+    "skips": 0,
+    "groups": [
+      "audio_recovery",
+      "audio_reload",
+      "audio_transport"
+    ],
+    "exit_code": 0
+  },
+  {
+    "config": "sanitize-platform",
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "tests": 3,
+    "failures": 0,
+    "skips": 0,
+    "groups": [
+      "audio_recovery",
+      "audio_reload",
+      "audio_transport"
+    ],
+    "exit_code": 0
+  },
+  {
+    "config": "readiness-tsan",
+    "source": "3892d143e5e7b7543c4b61b82fa95d7607334fe0",
+    "tests": 2,
+    "failures": 0,
+    "skips": 0,
+    "groups": [
+      "audio_reload",
+      "audio_transport"
+    ],
+    "exit_code": 0
+  }
+]

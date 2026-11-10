@@ -135,3 +135,7 @@ and failed timing requirements explicit.
 [Physical acceptance and door-cue follow-up](2026-11-09-door-cue/RESULTS.md) retains
 user observations, the original inaudible cue, a successful revised-cue listening
 check, seven focused Release groups and a separate unexplained device failure.
+
+[Terminal audio diagnostics and investigation](2026-11-10-audio-error/RESULTS.md)
+retains two bounded silent observations without reproduction, 20 focused validation
+groups and explicit error-operation/state reporting. The original failure stays open.

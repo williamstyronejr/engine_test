@@ -1,0 +1,5 @@
+[alsa trace] mono=503992.201202938 operation=open result=0 requested=0 state=0 state_name=OPEN type=FILE
+ALSA lib pcm_file.c:445:(snd_pcm_file_write_bytes) [error.pcm] /dev/full write failed, file data may be corrupt: No space left on device
+[alsa trace] mono=503992.201642142 operation=write result=-5 requested=256 state=2 state_name=PREPARED type=FILE
+[audio probe] healthy=0 written_frames=1792 underruns=0 suspensions=0 recoveries=0 waits=0 device_error=-5 operation=write pcm_state=2 pcm_state_name=PREPARED started=0 stopped=0 active=0
+Audio device failed: -5

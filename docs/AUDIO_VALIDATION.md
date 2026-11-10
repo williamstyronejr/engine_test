@@ -144,3 +144,11 @@ bass-only sweep was not heard on laptop speakers alongside the pickup. Revision
 voice gain/pan and event. The user confirms the revised sound is audible. Seven
 focused Release checks pass; [the retained record](../validation/2026-11-09-door-cue/RESULTS.md)
 separates this pass from a later unexplained device error and other open audio cases.
+
+## Terminal-error investigation — 2026-11-10
+
+Two predeclared 120-second silent default-device observations did not reproduce
+`-5`. [The record](../validation/2026-11-10-audio-error/RESULTS.md) retains the
+interposer, commands, successful observations, 20 focused validation groups and a
+known-fault CLI control. The new operation/state diagnostics prepare the next
+interactive attempt; no cause or recovery fix is established by these runs.
