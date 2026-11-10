@@ -1,0 +1,9 @@
+{
+  "build/audio-error-refresh/silent": "6e59f40a032cfd2d18492727642313b45b53a913a3c30133772fc1b364425123",
+  "build/audio-error-refresh/alsa-trace.so": "b132f20fe1cd8a5a4a8de4033330fbba8665a0d016c4cd05ed870ad3caa07a7b",
+  "build/release/libengine_platform.a": "c48735073d6f50a7ee6f59aa28c69400286b3572735a4b440f032ecd228c2b09",
+  "build/release/libengine_core.a": "2eb97ae2de5d1f1325ea6f07fcd10598c62229931a38e6965e97e7b5546c4ec7",
+  "validation/2026-11-10-audio-error/trace.cpp": "8a17216fc481210eeb65c06683ba0f1ce0355331de3dba879240fa48c702eb32",
+  "validation/2026-11-10-audio-error/silent.cpp": "e0d93cd67277149c3dbca71dc9e6a7c7df5e42ac93cf77e997f5044348abc3b1",
+  "validation/2026-11-10-audio-error/PROTOCOL.md": "3f9dbf81f80ddc2908d43e2095e6e987becbb39f8db4b5e1b185df6b6a69b282"
+}

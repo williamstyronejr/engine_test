@@ -678,6 +678,11 @@ terminal write/wait errors latch the negative device error and reject commands.
 
 `AudioStats` additionally reports accepted `written_frames`, `underruns`,
 `suspensions`, successful `recoveries`, readiness `waits`, and `device_error`.
+Terminal diagnostics append `device_error_operation` and `device_error_state`:
+the failing transport operation and raw ALSA PCM state observed after that step.
+They default to `none` and `-1`; a nonzero error publishes immutable details with
+release/acquire ordering. The state is diagnostic context, not proof of causality.
+These are in-memory statistics and console fields, not a save/replay format change.
 Device reconnection is not automatic. Feature Lab logs errors, joins/releases the
 output, displays `AUDIO OFF`, and retains the last observed statistics after
 failure. These counters do not prove speaker output. See [audio validation and

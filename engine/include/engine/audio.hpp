@@ -12,12 +12,32 @@ struct SoundReplacement {
     SoundHandle handle;
     SoundData data;
 };
+enum class AudioErrorOperation { none, write, wait, prepare, invalid_write_count };
+constexpr std::string_view audio_error_operation_name(AudioErrorOperation operation) {
+    switch (operation) {
+    case AudioErrorOperation::none:
+        return "none";
+    case AudioErrorOperation::write:
+        return "write";
+    case AudioErrorOperation::wait:
+        return "wait";
+    case AudioErrorOperation::prepare:
+        return "prepare";
+    case AudioErrorOperation::invalid_write_count:
+        return "invalid_write_count";
+    }
+    return "unknown";
+}
+// Diagnostic ALSA state observed after a terminal call, not its atomic cause.
+std::string_view audio_device_state_name(int state);
 struct AudioStats {
     std::uint64_t processed{}, started{}, completed{}, stopped{}, dropped_plays{}, stale_controls{},
         queue_rejections{};
     std::size_t active_voices{};
     std::uint64_t written_frames{}, underruns{}, suspensions{}, recoveries{}, waits{};
     int device_error{}; // Latched negative ALSA error; zero while healthy.
+    AudioErrorOperation device_error_operation{};
+    int device_error_state{-1}; // Raw ALSA PCM state; -1 until a terminal error.
 };
 class AudioOutput {
   public:

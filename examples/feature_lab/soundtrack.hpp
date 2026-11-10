@@ -238,7 +238,10 @@ class Soundtrack {
             final_stats_ = output_->stats();
         std::cerr << "[audio] Muted: " << reason;
         if (final_stats_.device_error)
-            std::cerr << " (device_error=" << final_stats_.device_error << ')';
+            std::cerr << " (device_error=" << final_stats_.device_error << " operation="
+                      << engine::audio_error_operation_name(final_stats_.device_error_operation)
+                      << " pcm_state=" << final_stats_.device_error_state << " pcm_state_name="
+                      << engine::audio_device_state_name(final_stats_.device_error_state) << ')';
         std::cerr << '\n';
         output_.reset();
     }

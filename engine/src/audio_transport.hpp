@@ -1,4 +1,5 @@
 #pragma once
+#include "engine/audio.hpp"
 #include <array>
 #include <cerrno>
 #include <cstddef>
@@ -8,6 +9,7 @@ namespace engine::audio_detail {
 struct TransportStats {
     std::uint64_t written_frames{}, underruns{}, suspensions{}, recoveries{}, waits{};
     int error{}; // Latched negative device error; zero while healthy.
+    AudioErrorOperation error_operation{};
 };
 // Worker-owned transport state. No allocation, mixing or unbounded retry loop.
 // Device supplies nonblocking write/prepare/resume, a bounded wait, and backoff.
@@ -38,7 +40,7 @@ class BlockWriter {
         const auto result = device.write(buffer.data() + offset_ * 2, frames - offset_);
         if (result > 0) {
             if (static_cast<std::uint64_t>(result) > frames - offset_) {
-                stats_.error = -EIO; // Defensive: a backend must not exceed the requested span.
+                fail(-EIO, AudioErrorOperation::invalid_write_count);
                 return;
             }
             offset_ += static_cast<std::size_t>(result);
@@ -47,23 +49,28 @@ class BlockWriter {
             ++stats_.waits;
             const int ready = device.wait();
             if (ready < 0)
-                handle_error(device, ready);
+                handle_error(device, ready, AudioErrorOperation::wait);
         } else {
-            handle_error(device, static_cast<int>(result));
+            handle_error(device, static_cast<int>(result), AudioErrorOperation::write);
         }
     }
 
   private:
+    void fail(int error, AudioErrorOperation operation) {
+        stats_.error = error;
+        stats_.error_operation = operation;
+    }
     template <class Device> void prepare(Device& device) {
         const int result = device.prepare();
         if (result < 0)
-            stats_.error = result;
+            fail(result, AudioErrorOperation::prepare);
         else {
             suspended_ = false;
             ++stats_.recoveries;
         }
     }
-    template <class Device> void handle_error(Device& device, int error) {
+    template <class Device>
+    void handle_error(Device& device, int error, AudioErrorOperation operation) {
         if (error == -EINTR || error == -EAGAIN)
             return;
         if (error == -EPIPE) {
@@ -73,7 +80,7 @@ class BlockWriter {
             ++stats_.suspensions;
             suspended_ = true;
         } else {
-            stats_.error = error;
+            fail(error, operation);
         }
     }
     std::size_t offset_{frames};

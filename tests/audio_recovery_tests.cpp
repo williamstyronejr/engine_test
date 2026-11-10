@@ -66,6 +66,7 @@ TEST(partial_writes_waits_and_interrupts_preserve_every_stereo_sample) {
     complete(writer, device, buffer);
     CHECK(device.requested == std::vector<std::size_t>({256, 249, 249, 249, 249, 248}));
     CHECK(writer.stats().waits == 2 && writer.stats().recoveries == 0);
+    CHECK(writer.stats().error_operation == engine::AudioErrorOperation::none);
     writer.step(device, buffer);
     CHECK(device.write_calls == 6); // Completion never writes stale samples again.
 }
@@ -80,6 +81,7 @@ TEST(underruns_from_write_and_wait_prepare_without_replaying_accepted_prefix) {
         device.prepares = {0};
         complete(writer, device, samples());
         CHECK(writer.stats().underruns == 1 && writer.stats().recoveries == 1);
+        CHECK(writer.stats().error_operation == engine::AudioErrorOperation::none);
         CHECK(device.prepare_calls == 1 && device.resume_calls == 0);
     }
 }
@@ -140,6 +142,10 @@ TEST(device_and_prepare_failures_latch_original_error_and_stop_calls) {
             writer.step(device, buffer);
         CHECK(writer.stats().error == -ENODEV && !writer.needs_block());
         CHECK(writer.stats().recoveries == 0 && writer.stats().written_frames == 0);
+        const auto operation = scenario == 0   ? engine::AudioErrorOperation::write
+                               : scenario == 1 ? engine::AudioErrorOperation::wait
+                                               : engine::AudioErrorOperation::prepare;
+        CHECK(writer.stats().error_operation == operation);
         CHECK(device.write_calls == 1);
     }
 }
@@ -150,6 +156,41 @@ TEST(invalid_backend_write_count_is_rejected_without_advancing) {
     device.writes = {257};
     writer.step(device, samples());
     CHECK(writer.stats().error == -EIO && writer.stats().written_frames == 0);
+    CHECK(writer.stats().error_operation == engine::AudioErrorOperation::invalid_write_count);
+}
+TEST(identical_eio_codes_preserve_distinct_failure_operations_and_partial_progress) {
+    for (int scenario = 0; scenario < 4; ++scenario) {
+        BlockWriter writer;
+        Device device;
+        writer.begin_block();
+        device.writes = {17};
+        if (scenario == 0)
+            device.writes.push_back(-EIO);
+        else if (scenario == 1) {
+            device.writes.push_back(-EAGAIN);
+            device.waits = {-EIO};
+        } else if (scenario == 2) {
+            device.writes.push_back(-EPIPE);
+            device.prepares = {-EIO};
+        } else
+            device.writes.push_back(240); // Only 239 frames remain.
+        const auto buffer = samples();
+        writer.step(device, buffer);
+        writer.step(device, buffer);
+        const auto operation = scenario == 0   ? engine::AudioErrorOperation::write
+                               : scenario == 1 ? engine::AudioErrorOperation::wait
+                               : scenario == 2 ? engine::AudioErrorOperation::prepare
+                                               : engine::AudioErrorOperation::invalid_write_count;
+        CHECK(writer.stats().error == -EIO && writer.stats().error_operation == operation);
+        CHECK(writer.stats().written_frames == 17 && !writer.needs_block());
+        CHECK(device.accepted == std::vector<float>(buffer.begin(), buffer.begin() + 34));
+        const auto waits = device.wait_calls, prepares = device.prepare_calls;
+        for (int i = 0; i < 4; ++i)
+            writer.step(device, buffer);
+        CHECK(device.write_calls == 2 && device.wait_calls == waits &&
+              device.prepare_calls == prepares && device.resume_calls == 0);
+        CHECK(writer.stats().error_operation == operation);
+    }
 }
 TEST(recovery_does_not_remix_or_advance_voice_cursors) {
     engine::Mixer mixer;
