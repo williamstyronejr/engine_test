@@ -1,0 +1,6 @@
+Asset root: "/home/zero/.cache/engine-audio-pause-85-_dkqroh6/compiler-tmp/package-doc-audit-c_mbtdzf/relocated package with spaces/share/feature_lab"
+Validation mode: scene format (scene budget=256)
+References and gameplay are not checked.
+PASS "facility.scene"
+Asset validation: 1 check, 0 failed
+Shader compilation, rendering, audio output and route completion require runtime tests.

@@ -1,10 +1,11 @@
 # Implementation status
 
-The latest increment (84) retains a traced interactive session with audible door
-and pickup cues confirmed by the user. It exits normally with audio enabled and
-no device error; the earlier EIO remains unexplained. See
-[evidence](../validation/2026-11-10-interactive-audio/RESULTS.md) and
-[release readiness](RELEASE_READINESS.md) for the remaining gates.
+The latest increment (85) retains a longer post-transition audio observation and
+adds a short pause/resume fade. Pickup/door cues are audible, but the user reports
+a pause click and five seconds of static after Facility's last pickup. Transport
+reports no error; the pause retest, static and earlier EIO remain open. See
+[evidence](../validation/2026-11-11-audio-pause/RESULTS.md) and
+[release readiness](RELEASE_READINESS.md) for scope and remaining gates.
 It is **not completion of all six design milestones**.
 The target requirements remain in [ENGINE_PLAN.md](../ENGINE_PLAN.md).
 
@@ -2649,9 +2650,24 @@ At documentation commit `14fab0a`, all three Release package groups pass without
 skips. All 22 then-current evidence/documentation files match archive bytes, and
 the packaged documentation/entry-point audit passes. Physical acceptance and timing gates remain open.
 
+## Eighty-fifth increment validation — 2026-11-11
+
+At `fa6827f`, 20 focused groups pass without skips across GNU Debug/Release,
+Clang Debug and native ASan/UBSan. New sample-level regressions cover pause fades,
+frozen phase, initial silence, rapid/overlapping controls, block independence and
+reload continuity. Release also verifies allocation behavior and an audio/UI session.
+The reused Debug build recovers from a Ninja metadata warning; the full log is
+retained. See [the record](../validation/2026-11-11-audio-pause/RESULTS.md).
+Physical pause confirmation, five-second pickup static and the original EIO remain open.
+
+At documentation commit `1d73c73`, all three Release package groups pass without
+skips. All 54 then-current evidence/documentation files match archive bytes, and
+the packaged documentation/entry-point audit passes. Physical pause confirmation, pickup static and other release gates remain open.
+
 ## Next increment
 
-Target a reproduction with more play time after Annex→Facility, retaining any first
-failure's operation/state and contemporaneous service/device evidence. Keep the
-cause and physical lifecycle matrix open; R6 timing/endurance/broader memory and
+Physically retest the pause/resume fade, keeping the five-second Facility pickup
+static separate. A repeat of the static needs time-correlated event and audio
+capture; healthy transport counters alone do not establish clean audible output.
+The earlier EIO, physical lifecycle matrix, R6 timing/endurance/broader memory and
 R8 support/signoff remain open. Background loading is deferred.

@@ -658,12 +658,19 @@ channel; mono feeds both channels, while stereo uses balance without crossfeed.
 Voice × group × master gain multiplies samples; summed output clamps to [-1,1].
 Gain setters ramp linearly over 64 output frames and produce the same samples
 regardless of output block partitioning. New voices start at their requested gain.
-Stop, pause, and pan changes are immediate at command boundaries; seamless stop
-fades and equal-power pan are not implemented.
+Voice and group pause changes use a separate 64-frame envelope (about 1.33 ms at
+48 kHz). A previously mixed voice advances through its fade to silence, then
+freezes its sample cursor; resume fades from the current envelope value. Reversing
+a fade preserves its current level, and repeating a pause command does not extend
+it. Voice and group pauses combine: releasing one cannot override the other.
+Voices paused before their first mix remain silent at frame zero, including new
+voices in a paused group. Stop and pan changes remain immediate at command
+boundaries; seamless stop fades and equal-power pan are not implemented.
 
 Looping wraps to frame zero within the same output block with no silent gap.
-One-shot voices retire after their last frame. Pause freezes sample cursors but
-gain ramps still follow output time. Muting is master gain zero and does **not**
+One-shot voices retire after their last frame, including during a pause fade.
+Once the pause fade finishes, sample cursors freeze but gain ramps still follow
+output time. Muting is master gain zero and does **not**
 freeze cursors. Direct `Mixer` calls are thread-confined and borrow validated,
 immutable views; callers must keep those views alive until voices stop. The mono
 span convenience overload remains for simple CPU use. Production asynchronous

@@ -1,0 +1,16 @@
+{
+  "source": "fa6827f2f67c0ded371af518fef19c7d1248e13c",
+  "group_executions": {
+    "debug": 5,
+    "release": 7,
+    "clang": 4,
+    "sanitize-platform": 4
+  },
+  "total_groups": 20,
+  "all_passed": true,
+  "skipped": 0,
+  "reused_build_trees": true,
+  "ninja_metadata_warning": "Debug Ninja reported premature end of file; recovering, then rebuilt successfully. Cause not established.",
+  "physical_pause_retest": false,
+  "new_tsan_run": false
+}

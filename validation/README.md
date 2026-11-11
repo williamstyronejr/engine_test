@@ -143,3 +143,7 @@ groups and explicit error-operation/state reporting. The original failure stays 
 [Traced interactive audio follow-up](2026-11-10-interactive-audio/RESULTS.md) retains
 user-confirmed door/pickup cues and an error-free session, with explicit limits on
 post-transition duration and any inference about the earlier EIO failure.
+
+- [2026-11-11 post-transition artifacts and pause fade](2026-11-11-audio-pause/RESULTS.md):
+  audible cues, retained pickup static/pause click, healthy transport counters,
+  a short mixer fade and focused regression checks; physical retest remains open.

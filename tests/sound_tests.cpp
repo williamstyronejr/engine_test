@@ -129,12 +129,14 @@ TEST(mixer_loop_boundaries_pause_stop_and_stale_handles) {
         NEAR(out[2 * i], sound.samples[i % 3]);
     CHECK(mixer.completed() == 0 && mixer.playing(voice));
     CHECK(mixer.pause(voice, true));
+    std::array<float, 2 * Mixer::gain_ramp_frames> fade{};
+    mixer.mix(fade);
     mixer.mix(out);
     for (float value : out)
         NEAR(value, 0.0F);
     CHECK(mixer.pause(voice, false));
     mixer.mix(std::span(out).first(2));
-    NEAR(out[0], -0.25F);
+    NEAR(out[0], 0.25F / Mixer::gain_ramp_frames);
     CHECK(mixer.stop(voice));
     CHECK(!mixer.stop(voice));
     const auto replacement = mixer.play(sound.view(), {1});
@@ -164,8 +166,8 @@ TEST(mixer_stereo_pan_gains_and_group_pause) {
     NEAR(out[127], 0.1625F);
     CHECK(mixer.pause_group(AudioGroup::music, true));
     mixer.mix(out);
-    NEAR(out[0], 0.0F);
-    NEAR(out[1], 0.0625F);
+    NEAR(out[126], 0.0F);
+    NEAR(out[127], 0.0625F);
     CHECK(mixer.set_master_gain(0));
     mixer.mix(out);
     NEAR(out[127], 0.0F);
@@ -190,6 +192,111 @@ TEST(mixer_ramps_and_output_are_block_size_independent) {
     CHECK(whole == pieces);
     NEAR(whole[126], 0.08F);
     NEAR(whole[0], 0.2F * (1 - 0.8F / 64) * (1 - 0.5F / 64));
+}
+TEST(pause_and_resume_fade_stereo_without_a_hard_edge) {
+    const SoundData sound{2, {0.8F, -0.4F}};
+    for (bool group : {false, true}) {
+        Mixer mixer;
+        const auto voice = mixer.play(sound.view(), {1, 0, true});
+        const auto pause = [&](bool value) {
+            CHECK(group ? mixer.pause_group(AudioGroup::effects, value)
+                        : mixer.pause(voice, value));
+        };
+        std::array<float, 2> frame{};
+        mixer.mix(frame);
+        NEAR(frame[0], .8F);
+        pause(true);
+        auto previous = frame;
+        for (std::size_t i = 0; i < Mixer::gain_ramp_frames; ++i) {
+            mixer.mix(frame);
+            CHECK(frame[0] <= previous[0] && frame[1] >= previous[1]);
+            CHECK(std::abs(frame[0] - previous[0]) <= .8F / 64 + .000001F);
+            CHECK(std::abs(frame[1] - previous[1]) <= .4F / 64 + .000001F);
+            previous = frame;
+        }
+        NEAR(frame[0], 0);
+        NEAR(frame[1], 0);
+        mixer.mix(frame);
+        CHECK(frame[0] == 0 && frame[1] == 0);
+        pause(false);
+        for (std::size_t i = 0; i < Mixer::gain_ramp_frames; ++i) {
+            mixer.mix(frame);
+            CHECK(frame[0] >= previous[0] && frame[1] <= previous[1]);
+            CHECK(std::abs(frame[0] - previous[0]) <= .8F / 64 + .000001F);
+            previous = frame;
+        }
+        NEAR(frame[0], .8F);
+        NEAR(frame[1], -.4F);
+        CHECK(mixer.playing(voice) && mixer.started() == 1 && mixer.completed() == 0);
+    }
+}
+TEST(pause_freezes_after_fade_and_new_paused_voices_remain_silent) {
+    SoundData sound{1, std::vector<float>(512)};
+    for (std::size_t i = 0; i < sound.samples.size(); ++i)
+        sound.samples[i] = static_cast<float>(i + 1) / 1024;
+    Mixer mixer;
+    const auto voice = mixer.play(sound.view(), {1});
+    std::array<float, 128> out{};
+    mixer.mix(out); // 64 source frames before pause.
+    CHECK(mixer.pause(voice, true));
+    mixer.mix(out); // The 64-frame fade advances the source before freezing.
+    mixer.mix(out);
+    CHECK(std::all_of(out.begin(), out.end(), [](float v) { return v == 0; }));
+    CHECK(mixer.pause(voice, false));
+    mixer.mix(std::span(out).first(2));
+    NEAR(out[0], (129.0F / 1024) / 64);
+
+    Mixer paused;
+    CHECK(paused.pause_group(AudioGroup::effects, true));
+    const SoundData short_sound{1, {.4F, .8F}};
+    const auto waiting = paused.play(short_sound.view(), {1});
+    paused.mix(out);
+    CHECK(std::all_of(out.begin(), out.end(), [](float v) { return v == 0; }));
+    CHECK(paused.playing(waiting) && paused.completed() == 0);
+    CHECK(paused.pause_group(AudioGroup::effects, false));
+    paused.mix(out);
+    NEAR(out[0], .4F / 64);
+    NEAR(out[2], .8F * 2 / 64);
+    CHECK(!paused.playing(waiting) && paused.completed() == 1);
+    CHECK(paused.pause_group(AudioGroup::effects, true));
+    CHECK(paused.pause_group(AudioGroup::effects, false));
+    paused.mix(out);
+    CHECK(paused.completed() == 1 && paused.active_voices() == 0);
+}
+TEST(pause_reversal_overlap_and_repeated_commands_are_block_independent) {
+    const SoundData sound{2, {.6F, -.3F}};
+    Mixer a, b;
+    const auto x = a.play(sound.view(), {1, 0, true});
+    const auto y = b.play(sound.view(), {1, 0, true});
+    const auto render = [&](std::size_t frames) {
+        std::vector<float> whole(frames * 2), pieces(frames * 2);
+        a.mix(whole);
+        for (std::size_t i = 0; i < pieces.size(); i += 2)
+            b.mix(std::span(pieces).subspan(i, 2));
+        CHECK(whole == pieces);
+        return whole;
+    };
+    render(1);
+    CHECK(a.pause(x, true) && b.pause(y, true));
+    render(17);
+    CHECK(a.pause(x, true)); // Repeating a command must not restart its fade.
+    render(11);
+    CHECK(a.pause(x, false) && b.pause(y, false));
+    const auto rising = render(9);
+    CHECK(rising.front() > .3F && rising.front() < .6F);
+    CHECK(a.pause_group(AudioGroup::effects, true));
+    CHECK(b.pause_group(AudioGroup::effects, true));
+    CHECK(a.pause(x, true) && b.pause(y, true));
+    render(64);
+    CHECK(a.pause(x, false) && b.pause(y, false)); // Group still holds the pause.
+    const auto silent = render(128);
+    CHECK(std::all_of(silent.begin(), silent.end(), [](float v) { return v == 0; }));
+    CHECK(a.pause_group(AudioGroup::effects, false));
+    CHECK(b.pause_group(AudioGroup::effects, false));
+    const auto resumed = render(64);
+    NEAR(resumed.front(), .6F / 64);
+    NEAR(resumed[126], .6F);
+    CHECK(a.started() == 1 && b.started() == 1);
 }
 TEST(command_queue_fifo_pressure_and_voice_exhaustion) {
     using namespace audio_detail;

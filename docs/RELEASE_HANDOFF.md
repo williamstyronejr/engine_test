@@ -23,6 +23,12 @@ confirms audible door/pickup cues and normal exit without EIO. The 16-minute-46-
 session includes only about two seconds after Annex→Facility; the cause and broader
 lifecycle/endurance requirements remain open.
 
+The [longer post-transition check](../validation/2026-11-11-audio-pause/RESULTS.md)
+meets its residence target and confirms cues, but reveals a brief pause pop and
+five seconds of pickup static without a reported device failure. A short mixer
+pause/resume fade is ready for physical retest. Static and the original EIO remain
+unresolved; do not infer a clean listening pass from the healthy counters.
+
 The tested host is Linux x86-64, Intel HD 4400, X11/GLX through XWayland, OpenGL 4.6
 Core and ALSA. Kernel, compiler and driver versions are in the current evidence.
 This does not certify native Wayland, another GPU or an older distribution. Shipped

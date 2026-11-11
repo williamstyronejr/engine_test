@@ -1,0 +1,32 @@
+{
+  "pid": 977601,
+  "command": [
+    "/usr/bin/stdbuf",
+    "-oL",
+    "-eL",
+    "/home/zero/.cache/feature-lab-post-transition-y7yjmaln/feature-lab-0.1.0-Linux-x86_64-7066514/bin/feature_lab",
+    "--user-data",
+    "/home/zero/.cache/feature-lab-post-transition-y7yjmaln/user",
+    "--level",
+    "annex",
+    "--play"
+  ],
+  "source": "7066514959cd44cc6a5640777b92450a73b84ab7",
+  "status": "exited",
+  "started_utc": "2026-11-11T23:14:28.600411+00:00",
+  "started_monotonic_ns": 621105182100838,
+  "exit_code": 0,
+  "ended_utc": "2026-11-11T23:21:57.472248+00:00",
+  "ended_monotonic_ns": 621554053923454,
+  "elapsed_seconds": 448.871822616,
+  "transitions": [
+    {
+      "received_utc": "2026-11-11T23:15:17.048463+00:00",
+      "monotonic_ns": 621153630182493,
+      "line": "[level] entered=FACILITY spawn=-27,-10"
+    }
+  ],
+  "first_failure": null,
+  "first_facility_residence_seconds": 400.423740961,
+  "target_residence_observed": true
+}
