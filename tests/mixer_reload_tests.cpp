@@ -71,6 +71,34 @@ TEST(one_shot_completion_is_exactly_once_and_never_resurrected) {
     mixer.mix(last);
     CHECK(last[0] == 0 && mixer.completed() == 1 && mixer.active_voices() == 0);
 }
+TEST(replacement_preserves_in_progress_pause_and_resume_fades) {
+    const SoundData old{1, std::vector<float>(100, .2F)}, next{1, std::vector<float>(20, .4F)};
+    Mixer mixer, reference;
+    const auto a = mixer.play(old.view(), {1, 0, true});
+    const auto b = reference.play(old.view(), {1, 0, true});
+    std::array<float, 32> warm{};
+    mixer.mix(warm);
+    reference.mix(warm);
+    CHECK(mixer.pause(a, true) && reference.pause(b, true));
+    mixer.mix(warm);
+    reference.mix(warm);
+    const std::array swaps{SoundSwap{old.view(), next.view()}};
+    CHECK(mixer.replace_sounds(swaps));
+    std::array<float, 128> actual{}, expected{};
+    mixer.mix(actual);
+    reference.mix(expected);
+    for (std::size_t i = 0; i < actual.size(); ++i)
+        NEAR(actual[i], expected[i] * 2);
+    CHECK(actual[94] == 0 && actual[126] == 0);
+    CHECK(mixer.pause(a, false) && reference.pause(b, false));
+    mixer.mix(actual);
+    reference.mix(expected);
+    for (std::size_t i = 0; i < actual.size(); ++i)
+        NEAR(actual[i], expected[i] * 2);
+    CHECK(actual[0] > 0 && actual[0] < .4F);
+    NEAR(actual[126], .4F);
+    CHECK(mixer.started() == 1 && mixer.completed() == 0);
+}
 TEST(whole_batch_validation_and_simultaneous_swaps) {
     SoundData a{1, {.2F}}, b{1, {.7F}};
     Mixer mixer;

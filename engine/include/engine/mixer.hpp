@@ -39,7 +39,9 @@ inline bool playback_valid(Playback p) {
 }
 } // namespace audio_detail
 // Thread-confined. Views must remain immutable/alive through playback. mix() does
-// no allocation, locking, or I/O. Gain controls ramp over 64 output frames.
+// no allocation, locking, or I/O. Gain and pause controls ramp over 64 output
+// frames. Pausing advances a previously mixed voice through its fade, then freezes
+// its cursor. Voices paused before their first mix remain silent at frame zero.
 class Mixer {
   public:
     static constexpr std::size_t max_voices = 16, gain_ramp_frames = 64;
@@ -72,6 +74,7 @@ class Mixer {
                          options.loop,
                          false,
                          options.group};
+                refresh_pause(voice);
                 ++started_;
                 return true;
             }
@@ -125,6 +128,7 @@ class Mixer {
         if (!v)
             return false;
         v->paused = paused;
+        refresh_pause(*v);
         return true;
     }
     bool set_gain(VoiceHandle handle, float gain) {
@@ -157,6 +161,9 @@ class Mixer {
         if (!audio_detail::group_valid(group))
             return false;
         groups_[static_cast<std::size_t>(group)].paused = paused;
+        for (auto& voice : voices_)
+            if (voice.handle && voice.group == group)
+                refresh_pause(voice);
         return true;
     }
     bool playing(VoiceHandle handle) const { return find(handle) != nullptr; }
@@ -180,12 +187,14 @@ class Mixer {
                     continue;
                 const auto group = static_cast<std::size_t>(v.group);
                 const float gain = v.gain.next() * gains[group] * master;
-                if (v.paused || groups_[group].paused)
+                if (v.pause_gain.current == 0 && v.pause_gain.remaining == 0)
                     continue;
+                const float audible_gain = gain * v.pause_gain.next();
                 const auto offset = v.cursor * v.sound.channels;
-                left += v.sound.samples[offset] * gain * (1 - std::max(v.pan, 0.0F));
-                right += v.sound.samples[offset + (v.sound.channels == 2 ? 1 : 0)] * gain *
+                left += v.sound.samples[offset] * audible_gain * (1 - std::max(v.pan, 0.0F));
+                right += v.sound.samples[offset + (v.sound.channels == 2 ? 1 : 0)] * audible_gain *
                          (1 + std::min(v.pan, 0.0F));
+                v.mixed = true;
                 if (++v.cursor == v.sound.frames()) {
                     if (v.loop)
                         v.cursor = 0;
@@ -228,7 +237,19 @@ class Mixer {
         float pan{};
         bool loop{}, paused{};
         AudioGroup group{};
+        Ramp pause_gain{};
+        bool mixed{};
     };
+    void refresh_pause(Voice& voice) {
+        const bool paused = voice.paused || groups_[static_cast<std::size_t>(voice.group)].paused;
+        const float target = paused ? 0.0F : 1.0F;
+        if (voice.pause_gain.target == target)
+            return; // Repeated/overlapping pause commands must not restart the ramp.
+        if (paused && !voice.mixed)
+            voice.pause_gain = {0, 0, 0};
+        else
+            voice.pause_gain.set(target);
+    }
     Voice* find(VoiceHandle h) {
         for (auto& v : voices_)
             if (h && v.handle.serial == h.serial)
