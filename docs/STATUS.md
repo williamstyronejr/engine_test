@@ -2660,6 +2660,10 @@ The reused Debug build recovers from a Ninja metadata warning; the full log is
 retained. See [the record](../validation/2026-11-11-audio-pause/RESULTS.md).
 Physical pause confirmation, five-second pickup static and the original EIO remain open.
 
+At documentation commit `1d73c73`, all three Release package groups pass without
+skips. All 54 then-current evidence/documentation files match archive bytes, and
+the packaged documentation/entry-point audit passes. Physical pause confirmation, pickup static and other release gates remain open.
+
 ## Next increment
 
 Physically retest the pause/resume fade, keeping the five-second Facility pickup

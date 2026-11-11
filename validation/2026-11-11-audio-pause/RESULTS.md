@@ -99,3 +99,19 @@ and tests. This metadata warning is retained; its cause is not established.
 The candidate and final merged release also receive package build, relocation and
 OpenGL checks, plus the archive documentation/CPU entry-point audit. These do not
 substitute for the pending pause listening retest or resolve the pickup static.
+
+## Candidate package
+
+At documentation commit **`1d73c73`**, all three Release package groups pass
+without skips. All 54 then-current evidence/documentation files match archived
+bytes. The audit verifies 1,422 relative file links, 80 shell recipes and
+eight bounded CPU entry-point commands between two successful manifest checks.
+Allocation profilers and session tests remain excluded. These checks validate
+packaging and command correctness; physical acceptance and timing gates remain open.
+
+The final merge receives the same three package tests and complete archive audit
+after this evidence is included. Final local records live under
+`build/audio-pause-refresh/`; package builds reuse the Release preset tree.
+
+[Package status](package-feature-tests.xml), [commands](package-feature-commands.json),
+[test log](package-feature-tests.log), [archive audit](package-candidate/summary.json).
