@@ -161,3 +161,18 @@ normally after 1,005.646 seconds with audio enabled and no device errors. The
 an Annex→Facility transition, but just 1.697 seconds of log time afterward. This
 successful observation neither reproduces the prior failure nor closes the broader
 audio lifecycle matrix. More destination-level play would improve that coverage.
+
+## Pause click and pickup static — 2026-11-11
+
+The longer traced run spends 400.424 seconds after Annex→Facility, exits normally
+and reports no device error or underrun. The user hears all pickup/door cues, but
+reports a brief pause click and about five seconds of static after the final
+Facility pickup while moving. The static clears on its own. These audible failures
+remain evidence even with healthy counters; no speaker-output recording was taken.
+
+There is no intended pause sound. The mixer previously cut active voices directly
+to silence; it now uses a separate 64-frame pause/resume envelope before freezing
+playback position. New voices in paused groups stay silent. This addresses a
+reproduced sample discontinuity; a physical retest is pending. It does not resolve
+the separate static or original EIO. [Evidence and limits](../validation/2026-11-11-audio-pause/RESULTS.md)
+retain the reports, logs, regression and asset inspection.

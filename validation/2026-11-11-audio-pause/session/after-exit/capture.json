@@ -1,0 +1,55 @@
+{
+  "received_utc": "2026-11-11T23:21:57.472881+00:00",
+  "commands": [
+    {
+      "command": [
+        "journalctl",
+        "--user",
+        "-u",
+        "pipewire.service",
+        "-u",
+        "pipewire-pulse.service",
+        "-u",
+        "wireplumber.service",
+        "--since",
+        "2026-11-11 23:14:28 UTC",
+        "--until",
+        "2026-11-11 23:21:57 UTC",
+        "--no-pager",
+        "-o",
+        "short-iso"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "systemctl",
+        "--user",
+        "show",
+        "pipewire.service",
+        "pipewire-pulse.service",
+        "wireplumber.service",
+        "-p",
+        "Id",
+        "-p",
+        "ActiveState",
+        "-p",
+        "SubState",
+        "-p",
+        "MainPID",
+        "-p",
+        "ExecMainStatus"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "devices": {
+    "/proc/asound/cards": " 0 [HDMI           ]: HDA-Intel - HDA Intel HDMI\n                      HDA Intel HDMI at 0xc0614000 irq 49\n 1 [PCH            ]: HDA-Intel - HDA Intel PCH\n                      HDA Intel PCH at 0xc0610000 irq 50\n",
+    "/proc/asound/pcm": "00-03: HDMI 0 : HDMI 0 : playback 1\n00-07: HDMI 1 : HDMI 1 : playback 1\n00-08: HDMI 2 : HDMI 2 : playback 1\n01-00: ALC288 Analog : ALC288 Analog : playback 1 : capture 1\n",
+    "/proc/asound/card0/pcm3p/sub0/status": "closed\n",
+    "/proc/asound/card0/pcm7p/sub0/status": "closed\n",
+    "/proc/asound/card0/pcm8p/sub0/status": "closed\n",
+    "/proc/asound/card1/pcm0c/sub0/status": "closed\n",
+    "/proc/asound/card1/pcm0p/sub0/status": "state: RUNNING\nowner_pid   : 1551\ntrigger_time: 621472.434928698\ntstamp      : 621554.087448469\ndelay       : 496\navail       : 32272\navail_max   : 32720\n-----\nhw_ptr      : 3919376\nappl_ptr    : 3919872\n"
+  }
+}

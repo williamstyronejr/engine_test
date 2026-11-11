@@ -1,0 +1,41 @@
+{
+  "kind": "offline asset/config inspection, not a recording of the reported artifact",
+  "clips": {
+    "pickup": {
+      "sha256": "4c14926b81247db0cfa6da5a9f809b0ace5477227c60ff0f50911057e9650dd0",
+      "channels": 1,
+      "frames": 7200,
+      "seconds": 0.15,
+      "peak": 0.5771484375
+    },
+    "door": {
+      "sha256": "74d2a1792b4b0935e281e9e5ed2f9e2ef3c7214c02a7a7924a078cfe1f3d1c91",
+      "channels": 1,
+      "frames": 19200,
+      "seconds": 0.4,
+      "peak": 0.485870361328125
+    },
+    "music": {
+      "sha256": "86bbd4ad63b747b2d7ae8ed2f6f5d51f10a32edbdb749c0c536a79b3ef0412d6",
+      "channels": 2,
+      "frames": 96000,
+      "seconds": 2.0,
+      "peak": 0.17999267578125
+    },
+    "machine": {
+      "sha256": "4d586c90d1f1297cf0bd5cad10306b682bc6b0637082cb756de72c3a5457a8f2",
+      "channels": 1,
+      "frames": 48000,
+      "seconds": 1.0,
+      "peak": 0.21832275390625
+    }
+  },
+  "initial_and_final_config_sha256": "9ac9c3304a44de1bec507f5610dad1c97fb9f6d5a9ed15b9bbb4ec1186855eba",
+  "gains": {
+    "master": 1.0,
+    "music": 0.30000001192092896,
+    "effects": 0.5
+  },
+  "single_pickup_door_and_two_loops_per_channel_absolute_sum_bound": 0.4309967062472424,
+  "limits": "Bound assumes recorded gains and at most one voice of each asset. It does not exclude multiple overlapping effects, downstream distortion, transient controls or transport artifacts. No cause is assigned."
+}

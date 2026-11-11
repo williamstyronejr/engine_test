@@ -1,0 +1,10 @@
+[1/10] Building CXX object CMakeFiles/mixer_reload_tests.dir/tests/mixer_reload_tests.cpp.o
+[2/10] Building CXX object CMakeFiles/engine_platform.dir/engine/src/audio.cpp.o
+[3/10] Linking CXX static library libengine_platform.a
+[4/10] Building CXX object CMakeFiles/sound_tests.dir/tests/sound_tests.cpp.o
+[5/10] Building CXX object CMakeFiles/audio_reload_tests.dir/tests/audio_reload_tests.cpp.o
+[6/10] Linking CXX executable mixer_reload_tests
+[7/10] Linking CXX executable sound_tests
+[8/10] Linking CXX executable audio_reload_tests
+[9/10] Building CXX object CMakeFiles/audio_tests.dir/tests/audio_tests.cpp.o
+[10/10] Linking CXX executable audio_tests

@@ -1,0 +1,308 @@
+[
+  {
+    "name": "debug-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/debug",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-audio-pause-85-_dkqroh6/packages"
+    ],
+    "source": "fa6827f2f67c0ded371af518fef19c7d1248e13c",
+    "started_utc": "2026-11-11T23:28:03.340393+00:00",
+    "seconds": 0.7282228559488431,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/command-wrappers/bin:/home/zero/.codex/tmp/arg0-linux/codex-arg0N3Jcde:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-pause-85-_dkqroh6/compiler-tmp",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+      "DISPLAY": ":0"
+    }
+  },
+  {
+    "name": "debug-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/debug",
+      "--target",
+      "sound_tests",
+      "mixer_reload_tests",
+      "audio_tests",
+      "audio_reload_tests",
+      "audio_watch_tests",
+      "-j2"
+    ],
+    "source": "fa6827f2f67c0ded371af518fef19c7d1248e13c",
+    "started_utc": "2026-11-11T23:28:04.068902+00:00",
+    "seconds": 39.09397715493105,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/command-wrappers/bin:/home/zero/.codex/tmp/arg0-linux/codex-arg0N3Jcde:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-pause-85-_dkqroh6/compiler-tmp",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+      "DISPLAY": ":0"
+    }
+  },
+  {
+    "name": "debug-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/debug",
+      "-R",
+      "^(sound|mixer_reload|audio_transport|audio_reload|audio_watch)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-11-11-audio-pause/debug-tests.xml"
+    ],
+    "source": "fa6827f2f67c0ded371af518fef19c7d1248e13c",
+    "started_utc": "2026-11-11T23:28:43.163866+00:00",
+    "seconds": 2.607360671972856,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/command-wrappers/bin:/home/zero/.codex/tmp/arg0-linux/codex-arg0N3Jcde:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-pause-85-_dkqroh6/compiler-tmp",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+      "DISPLAY": ":0"
+    }
+  },
+  {
+    "name": "release-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/release",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-audio-pause-85-_dkqroh6/packages"
+    ],
+    "source": "fa6827f2f67c0ded371af518fef19c7d1248e13c",
+    "started_utc": "2026-11-11T23:28:45.771674+00:00",
+    "seconds": 0.40647409204393625,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/command-wrappers/bin:/home/zero/.codex/tmp/arg0-linux/codex-arg0N3Jcde:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-pause-85-_dkqroh6/compiler-tmp",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+      "DISPLAY": ":0"
+    }
+  },
+  {
+    "name": "release-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/release",
+      "--target",
+      "sound_tests",
+      "mixer_reload_tests",
+      "audio_tests",
+      "audio_reload_tests",
+      "audio_watch_tests",
+      "audio_allocations",
+      "audio_ui_session_tests",
+      "feature_lab",
+      "stress_bench",
+      "validate_assets",
+      "-j2"
+    ],
+    "source": "fa6827f2f67c0ded371af518fef19c7d1248e13c",
+    "started_utc": "2026-11-11T23:28:46.178574+00:00",
+    "seconds": 84.7468781049829,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/command-wrappers/bin:/home/zero/.codex/tmp/arg0-linux/codex-arg0N3Jcde:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-pause-85-_dkqroh6/compiler-tmp",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+      "DISPLAY": ":0"
+    }
+  },
+  {
+    "name": "release-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/release",
+      "-R",
+      "^(sound|mixer_reload|audio_transport|audio_reload|audio_watch|audio_allocations|audio_ui_session)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-11-11-audio-pause/release-tests.xml"
+    ],
+    "source": "fa6827f2f67c0ded371af518fef19c7d1248e13c",
+    "started_utc": "2026-11-11T23:30:10.926180+00:00",
+    "seconds": 5.062419014051557,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/command-wrappers/bin:/home/zero/.codex/tmp/arg0-linux/codex-arg0N3Jcde:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-pause-85-_dkqroh6/compiler-tmp",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+      "DISPLAY": ":0"
+    }
+  },
+  {
+    "name": "clang-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/clang",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-audio-pause-85-_dkqroh6/packages",
+      "-DCMAKE_CXX_COMPILER=clang++"
+    ],
+    "source": "fa6827f2f67c0ded371af518fef19c7d1248e13c",
+    "started_utc": "2026-11-11T23:30:15.989246+00:00",
+    "seconds": 0.4256158289499581,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/command-wrappers/bin:/home/zero/.codex/tmp/arg0-linux/codex-arg0N3Jcde:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-pause-85-_dkqroh6/compiler-tmp",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+      "DISPLAY": ":0"
+    }
+  },
+  {
+    "name": "clang-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/clang",
+      "--target",
+      "sound_tests",
+      "mixer_reload_tests",
+      "audio_tests",
+      "audio_reload_tests",
+      "-j2"
+    ],
+    "source": "fa6827f2f67c0ded371af518fef19c7d1248e13c",
+    "started_utc": "2026-11-11T23:30:16.415357+00:00",
+    "seconds": 13.677583432989195,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/command-wrappers/bin:/home/zero/.codex/tmp/arg0-linux/codex-arg0N3Jcde:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-pause-85-_dkqroh6/compiler-tmp",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+      "DISPLAY": ":0"
+    }
+  },
+  {
+    "name": "clang-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/clang",
+      "-R",
+      "^(sound|mixer_reload|audio_transport|audio_reload)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-11-11-audio-pause/clang-tests.xml"
+    ],
+    "source": "fa6827f2f67c0ded371af518fef19c7d1248e13c",
+    "started_utc": "2026-11-11T23:30:30.093979+00:00",
+    "seconds": 1.8841046389425173,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/command-wrappers/bin:/home/zero/.codex/tmp/arg0-linux/codex-arg0N3Jcde:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-pause-85-_dkqroh6/compiler-tmp",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+      "DISPLAY": ":0"
+    }
+  },
+  {
+    "name": "sanitize-platform-configure",
+    "command": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/sanitize-platform",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DENGINE_PACKAGE_TEST_ROOT=/home/zero/.cache/engine-audio-pause-85-_dkqroh6/packages",
+      "-DENGINE_SANITIZERS=ON",
+      "-DENGINE_BUILD_PLATFORM=ON"
+    ],
+    "source": "fa6827f2f67c0ded371af518fef19c7d1248e13c",
+    "started_utc": "2026-11-11T23:30:31.978784+00:00",
+    "seconds": 0.5660541569814086,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/command-wrappers/bin:/home/zero/.codex/tmp/arg0-linux/codex-arg0N3Jcde:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-pause-85-_dkqroh6/compiler-tmp",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+      "DISPLAY": ":0"
+    }
+  },
+  {
+    "name": "sanitize-platform-build",
+    "command": [
+      "cmake",
+      "--build",
+      "build/sanitize-platform",
+      "--target",
+      "sound_tests",
+      "mixer_reload_tests",
+      "audio_tests",
+      "audio_reload_tests",
+      "-j2"
+    ],
+    "source": "fa6827f2f67c0ded371af518fef19c7d1248e13c",
+    "started_utc": "2026-11-11T23:30:32.545655+00:00",
+    "seconds": 31.596633346984163,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/command-wrappers/bin:/home/zero/.codex/tmp/arg0-linux/codex-arg0N3Jcde:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-pause-85-_dkqroh6/compiler-tmp",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+      "DISPLAY": ":0"
+    }
+  },
+  {
+    "name": "sanitize-platform-tests",
+    "command": [
+      "ctest",
+      "--test-dir",
+      "build/sanitize-platform",
+      "-R",
+      "^(sound|mixer_reload|audio_transport|audio_reload)$",
+      "--output-on-failure",
+      "--output-junit",
+      "/home/zero/dev/engine_test/validation/2026-11-11-audio-pause/sanitize-platform-tests.xml"
+    ],
+    "source": "fa6827f2f67c0ded371af518fef19c7d1248e13c",
+    "started_utc": "2026-11-11T23:31:04.143105+00:00",
+    "seconds": 5.8348414660431445,
+    "exit_code": 0,
+    "environment": {
+      "PATH": "/home/zero/dev/engine_test/.tools/bin:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/command-wrappers/bin:/home/zero/.codex/tmp/arg0-linux/codex-arg0N3Jcde:/home/zero/.local/share/mise/installs/codex/0.167.0/codex-path:/home/zero/.local/share/mise/installs/claude/latest:/home/zero/.local/share/mise/installs/codex/latest/bin:/home/zero/.local/share/mise/installs/cursor-agent/latest/bin:/home/zero/.local/share/mise/installs/gh/latest/gh_2.103.3_linux_amd64/bin:/home/zero/.local/share/mise/installs/http-muse/latest:/home/zero/.local/share/mise/installs/node/26.7.0/bin:/home/zero/.local/share/mise/installs/opencode/latest/node_modules/.bin:/home/zero/.local/share/mise/shims:/usr/share/omarchy/bin:/home/zero/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/zero/.local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
+      "TMPDIR": "/home/zero/.cache/engine-audio-pause-85-_dkqroh6/compiler-tmp",
+      "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+      "DISPLAY": ":0"
+    }
+  }
+]

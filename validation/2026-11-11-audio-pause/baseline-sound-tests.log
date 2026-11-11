@@ -1,0 +1,14 @@
+PASS initial_mixer_preferences_apply_from_first_sample
+PASS wav_pcm16_and_stereo_roundtrip
+PASS wav_chunk_padding_unknown_chunks_and_order
+PASS wav_rejects_truncation_corruption_and_resource_limits
+PASS wav_resampling_uses_rational_positions_and_preserves_channels
+PASS mixer_loop_boundaries_pause_stop_and_stale_handles
+PASS mixer_stereo_pan_gains_and_group_pause
+PASS mixer_ramps_and_output_are_block_size_independent
+PASS command_queue_fifo_pressure_and_voice_exhaustion
+PASS shipped_wav_assets_decode_and_mix_together
+13 tests, 3 failed
+FAIL pause_and_resume_fade_stereo_without_a_hard_edge: tests/sound_tests.cpp:211: std::abs(frame[0] - previous[0]) <= .8F / 64 + .000001F
+FAIL pause_freezes_after_fade_and_new_paused_voices_remain_silent: tests/sound_tests.cpp:245: std::abs((out[0]) - ((129.0F / 1024) / 64)) < 0.0001
+FAIL pause_reversal_overlap_and_repeated_commands_are_block_independent: tests/sound_tests.cpp:284: rising.front() > .3F && rising.front() < .6F

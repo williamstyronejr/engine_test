@@ -1,0 +1,17 @@
+Id=pipewire.service
+ActiveState=active
+SubState=running
+MainPID=1551
+ExecMainStatus=0
+
+Id=pipewire-pulse.service
+ActiveState=active
+SubState=running
+MainPID=1554
+ExecMainStatus=0
+
+Id=wireplumber.service
+ActiveState=active
+SubState=running
+MainPID=1552
+ExecMainStatus=0

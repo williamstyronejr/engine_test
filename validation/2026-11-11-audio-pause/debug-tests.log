@@ -1,0 +1,20 @@
+Test project /home/zero/dev/engine_test/build/debug
+    Start  5: mixer_reload
+1/5 Test  #5: mixer_reload .....................   Passed    0.00 sec
+    Start 31: sound
+2/5 Test #31: sound ............................   Passed    0.07 sec
+    Start 52: audio_reload
+3/5 Test #52: audio_reload .....................   Passed    0.70 sec
+    Start 53: audio_watch
+4/5 Test #53: audio_watch ......................   Passed    0.81 sec
+    Start 54: audio_transport
+5/5 Test #54: audio_transport ..................   Passed    0.73 sec
+
+100% tests passed out of 5
+
+Label Time Summary:
+cpu         =   0.07 sec*proc (2 tests)
+hardware    =   0.81 sec*proc (1 test)
+platform    =   1.43 sec*proc (2 tests)
+
+Total Test time (real) =   2.32 sec

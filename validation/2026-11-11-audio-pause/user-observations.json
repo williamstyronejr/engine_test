@@ -1,0 +1,20 @@
+{
+  "recorded_utc": "2026-11-11T23:28:03.132612+00:00",
+  "reports": [
+    {
+      "user_report": "I heard all the pickup and door sounds. There was some static that i heard after getting the last pickup in facility Lasted maybe 5 seconds. I also notice a sound when pausing, not sure if that something you add."
+    },
+    {
+      "question": "When you paused, was the sound a brief click/pop or a longer tone/static\u2014and did you use P/Space or F1?",
+      "user_report": "Brief, pop/click. The static was when picking up."
+    },
+    {
+      "question": "During the roughly five seconds of static after Facility\u2019s last pickup, were you still moving, pausing, or standing still? Did it clear on its own?",
+      "user_report": "Moving, it stopped after about 5 seconds"
+    }
+  ],
+  "pause_key": "not specified",
+  "cue_result": "PASS: all pickup and door sounds heard",
+  "pause_artifact": "FAIL: brief pop/click reported",
+  "pickup_artifact": "FAIL: about five seconds of static after last Facility pickup while moving; cleared on its own"
+}

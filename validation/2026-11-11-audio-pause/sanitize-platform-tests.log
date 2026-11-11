@@ -1,0 +1,17 @@
+Test project /home/zero/dev/engine_test/build/sanitize-platform
+    Start  5: mixer_reload
+1/4 Test  #5: mixer_reload .....................   Passed    0.02 sec
+    Start 31: sound
+2/4 Test #31: sound ............................   Passed    0.22 sec
+    Start 52: audio_reload
+3/4 Test #52: audio_reload .....................   Passed    1.83 sec
+    Start 54: audio_transport
+4/4 Test #54: audio_transport ..................   Passed    3.53 sec
+
+100% tests passed out of 4
+
+Label Time Summary:
+cpu         =   0.24 sec*proc (2 tests)
+platform    =   5.36 sec*proc (2 tests)
+
+Total Test time (real) =   5.60 sec

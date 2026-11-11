@@ -1,0 +1,24 @@
+Test project /home/zero/dev/engine_test/build/release
+    Start  5: mixer_reload
+1/7 Test  #5: mixer_reload .....................   Passed    0.00 sec
+    Start 31: sound
+2/7 Test #31: sound ............................   Passed    0.03 sec
+    Start 37: audio_allocations
+3/7 Test #37: audio_allocations ................   Passed    0.36 sec
+    Start 40: audio_ui_session
+4/7 Test #40: audio_ui_session .................   Passed    3.35 sec
+    Start 52: audio_reload
+5/7 Test #52: audio_reload .....................   Passed    0.29 sec
+    Start 53: audio_watch
+6/7 Test #53: audio_watch ......................   Passed    0.53 sec
+    Start 54: audio_transport
+7/7 Test #54: audio_transport ..................   Passed    0.28 sec
+
+100% tests passed out of 7
+
+Label Time Summary:
+cpu         =   0.04 sec*proc (2 tests)
+hardware    =   3.88 sec*proc (2 tests)
+platform    =   0.93 sec*proc (3 tests)
+
+Total Test time (real) =   4.85 sec

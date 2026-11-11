@@ -1,0 +1,27 @@
+[1/27] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/replay_profile.cpp.o
+[2/27] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/spike_profile.cpp.o
+[3/27] Building CXX object CMakeFiles/feature_lab_stress.dir/examples/feature_lab/stress_benchmark.cpp.o
+[4/27] Stage Feature Lab assets
+[5/27] Linking CXX static library libfeature_lab_stress.a
+[6/27] Building CXX object CMakeFiles/stress_bench.dir/tools/stress_bench.cpp.o
+[7/27] Building CXX object CMakeFiles/engine_platform.dir/engine/src/audio.cpp.o
+[8/27] Building CXX object CMakeFiles/mixer_reload_tests.dir/tests/mixer_reload_tests.cpp.o
+[9/27] Linking CXX static library libengine_platform.a
+[10/27] Building CXX object CMakeFiles/sound_tests.dir/tests/sound_tests.cpp.o
+[11/27] Building CXX object CMakeFiles/feature_lab.dir/examples/feature_lab/stress_mode.cpp.o
+[12/27] Building CXX object CMakeFiles/audio_allocations.dir/profiling/audio_allocations.cpp.o
+[13/27] Building CXX object CMakeFiles/audio_allocations.dir/engine/src/audio.cpp.o
+[14/27] Building CXX object CMakeFiles/feature_lab.dir/examples/feature_lab/main.cpp.o
+[15/27] Building CXX object CMakeFiles/audio_reload_tests.dir/tests/audio_reload_tests.cpp.o
+[16/27] Building CXX object CMakeFiles/audio_ui_session_tests.dir/tests/audio_ui_session_tests.cpp.o
+[17/27] Building CXX object CMakeFiles/audio_watch_tests.dir/tests/audio_watch_tests.cpp.o
+[18/27] Linking CXX executable stress_bench
+[19/27] Linking CXX executable mixer_reload_tests
+[20/27] Linking CXX executable sound_tests
+[21/27] Linking CXX executable feature_lab
+[22/27] Linking CXX executable audio_allocations
+[23/27] Linking CXX executable audio_ui_session_tests
+[24/27] Linking CXX executable audio_reload_tests
+[25/27] Linking CXX executable audio_watch_tests
+[26/27] Building CXX object CMakeFiles/audio_tests.dir/tests/audio_tests.cpp.o
+[27/27] Linking CXX executable audio_tests

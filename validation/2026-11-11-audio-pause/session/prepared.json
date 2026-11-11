@@ -1,0 +1,39 @@
+{
+  "source": "7066514959cd44cc6a5640777b92450a73b84ab7",
+  "archive": "/home/zero/dev/engine_test/build/release/dist/feature-lab-0.1.0-Linux-x86_64-7066514.tar.gz",
+  "archive_sha256": "62add19764b21dd0dafe597e9026401da7e2a34febfd8e62814dc86f000b0cdb",
+  "extracted_to": "/home/zero/.cache/feature-lab-post-transition-y7yjmaln/feature-lab-0.1.0-Linux-x86_64-7066514",
+  "user_data": "/home/zero/.cache/feature-lab-post-transition-y7yjmaln/user",
+  "copied_from": "/home/zero/.cache/feature-lab-audio-repro-8jdntmqw/user",
+  "copied_user_files": [
+    {
+      "path": "config/settings.ecfg",
+      "sha256": "9ac9c3304a44de1bec507f5610dad1c97fb9f6d5a9ed15b9bbb4ec1186855eba"
+    },
+    {
+      "path": "state/slot-1.esav",
+      "sha256": "c5a228f416f9096a2305ebabf3732cad5a1538b1f400317a5b4d128538b1c17b"
+    }
+  ],
+  "LD_PRELOAD": "/home/zero/dev/engine_test/build/audio-error-refresh/alsa-trace.so",
+  "trace_sha256": "b132f20fe1cd8a5a4a8de4033330fbba8665a0d016c4cd05ed870ad3caa07a7b",
+  "command": [
+    "/usr/bin/stdbuf",
+    "-oL",
+    "-eL",
+    "/home/zero/.cache/feature-lab-post-transition-y7yjmaln/feature-lab-0.1.0-Linux-x86_64-7066514/bin/feature_lab",
+    "--user-data",
+    "/home/zero/.cache/feature-lab-post-transition-y7yjmaln/user",
+    "--level",
+    "annex",
+    "--play"
+  ],
+  "environment": {
+    "DISPLAY": ":0",
+    "XDG_SESSION_TYPE": "wayland",
+    "XDG_CURRENT_DESKTOP": "Hyprland"
+  },
+  "target_facility_seconds": 300,
+  "prepared_utc": "2026-11-11T23:13:52.731481+00:00",
+  "status": "Prepared, not yet run"
+}
